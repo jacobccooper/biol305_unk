@@ -1,0 +1,16 @@
+# Preface {.unnumbered}
+
+Welcome to Biology 105 at the University of Nebraska at Kearney! Material in this class was designed by Dr. Melissa Wuellner and adapted by Dr. Jacob C. Cooper for use in *R*.
+
+In this class, you will learn:
+
+1.  The basics of study design, the importance of understanding your research situation before embarking on a full study, and practice creating research frameworks based on different scenarios.
+2.  The basics of data analysis, including understanding what kind of variables are being collected, why understanding variable types are important, and basic tests to understand univariate distributions.
+3.  Basic multivariate statistics, including ANOVA, correlation, and regression, for comparing multiple different groups.
+4.  The basics of coding and working in *R* for performing statistical analyses.
+
+This site will help you navigate different homework assignments to perform the necessary *R* tests. Furthermore, this GitHub repository contains all of the homework dataframes, so you will *not* have to manually enter assignments if you use *R* to complete your assignments.
+
+Welcome to class!
+
+Dr. Jacob C. Cooper, BHS 321
