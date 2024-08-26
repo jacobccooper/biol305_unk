@@ -3,9 +3,9 @@ project:
   output-dir: docs
 
 book:
-  title: "biol827-graduate_statistics"
+  title: "Biology 305: Biostatistics"
   author: "Dr. Jacob C. Cooper & Dr. Melissa Wuellner"
-  date: "8/26/2024"
+  date: "`r format(Sys.time(), '%d %B, %Y')`"
   chapters:
     - index.qmd
     - intro.qmd
