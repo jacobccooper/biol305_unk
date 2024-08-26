@@ -10,103 +10,83 @@
     ]
   },
   {
-    "objectID": "intro.html",
-    "href": "intro.html",
-    "title": "1  Introduction",
-    "section": "",
-    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
-    "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
-    ]
-  },
-  {
     "objectID": "intro_to_r.html",
     "href": "intro_to_r.html",
-    "title": "2  Intro to R",
+    "title": "1  Intro to R",
     "section": "",
-    "text": "3 Setup\nFirst, we need to download R onto your machine. We are also going to download RStudio to assist with creating R scripts and documents.",
+    "text": "2 Setup\nFirst, we need to download R onto your machine. We are also going to download RStudio to assist with creating R scripts and documents.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Intro to *R*</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Intro to *R*</span>"
     ]
   },
   {
     "objectID": "intro_to_r.html#installing-r",
     "href": "intro_to_r.html#installing-r",
-    "title": "2  Intro to R",
-    "section": "3.1 Installing R",
-    "text": "3.1 Installing R\nFirst, navigate to the R download and install page. Download the appropriate version for your operating system (Windows, Mac, or Linux). Note that coding will be formatted slightly different for Windows than for other operating systems.\nFollow the installation steps for R, and verify that the installation was successful by searching for R on your machine. You should be presented with a coding window that looks like the following:\nR version 4.4.1 (2024-06-14) -- \"Race for Your Life\"\nCopyright (C) 2024 The R Foundation for Statistical Computing\nPlatform: aarch64-apple-darwin20\n\nR is free software and comes with ABSOLUTELY NO WARRANTY.\nYou are welcome to redistribute it under certain conditions.\nType 'license()' or 'licence()' for distribution details.\n\n  Natural language support but running in an English locale\n\nR is a collaborative project with many contributors.\nType 'contributors()' for more information and\n'citation()' on how to cite R or R packages in publications.\n\nType 'demo()' for some demos, 'help()' for on-line help, or\n'help.start()' for an HTML browser interface to help.\nType 'q()' to quit R.\n\n&gt;\nIf that screen appears, congratulations! R is properly installed. If the install was not successful, please talk to Dr. Cooper and check with your classmates as well.",
+    "title": "1  Intro to R",
+    "section": "2.1 Installing R",
+    "text": "2.1 Installing R\nFirst, navigate to the R download and install page. Download the appropriate version for your operating system (Windows, Mac, or Linux). Note that coding will be formatted slightly different for Windows than for other operating systems.\nFollow the installation steps for R, and verify that the installation was successful by searching for R on your machine. You should be presented with a coding window that looks like the following:\nR version 4.4.1 (2024-06-14) -- \"Race for Your Life\"\nCopyright (C) 2024 The R Foundation for Statistical Computing\nPlatform: aarch64-apple-darwin20\n\nR is free software and comes with ABSOLUTELY NO WARRANTY.\nYou are welcome to redistribute it under certain conditions.\nType 'license()' or 'licence()' for distribution details.\n\n  Natural language support but running in an English locale\n\nR is a collaborative project with many contributors.\nType 'contributors()' for more information and\n'citation()' on how to cite R or R packages in publications.\n\nType 'demo()' for some demos, 'help()' for on-line help, or\n'help.start()' for an HTML browser interface to help.\nType 'q()' to quit R.\n\n&gt;\nIf that screen appears, congratulations! R is properly installed. If the install was not successful, please talk to Dr. Cooper and check with your classmates as well.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Intro to *R*</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Intro to *R*</span>"
     ]
   },
   {
     "objectID": "intro_to_r.html#installing-rstudio",
     "href": "intro_to_r.html#installing-rstudio",
-    "title": "2  Intro to R",
-    "section": "3.2 Installing RStudio",
-    "text": "3.2 Installing RStudio\nRStudio is a GUI (graphics user interface) that helps make R easier to use. Furthermore, it allows you to create documents in R, including websites (such as this one), PDFs, and even presentations. This can greatly streamline the research pipeline and help you publish your results and associated code in a quick and efficient fashion.\nHead over the the RStudio download website and download “RStudio Desktop”, which is free. Be sure to pick the correct version for your machine.\nOpen RStudio on your machine. You should be presented with something like the following:\n\n\n\nRStudio start window. Note that the screen is split into four different quadrants. Top left: R documents; bottom left: R program; top right: environment window; bottom right: plots, help, and directories.\n\n\nIn RStudio, the top left window is always going to be our coding window. This is where we will type all of our code and create our documents. In the bottom left we will see R executing the code. This will show what the computer is “thinking” and will help us spot any potential issues. The top right window is the “environment”, which shows what variables and datasets are stored within the computers’ memory. (It can also show some other things, but we aren’t concerned with that at this point). The bottom right window is the “display” window. This is where plots and help windows will appear if they don’t appear in the document (top left) window itself.\nNow, we will create our first R document!",
+    "title": "1  Intro to R",
+    "section": "2.2 Installing RStudio",
+    "text": "2.2 Installing RStudio\nRStudio is a GUI (graphics user interface) that helps make R easier to use. Furthermore, it allows you to create documents in R, including websites (such as this one), PDFs, and even presentations. This can greatly streamline the research pipeline and help you publish your results and associated code in a quick and efficient fashion.\nHead over the the RStudio download website and download “RStudio Desktop”, which is free. Be sure to pick the correct version for your machine.\nOpen RStudio on your machine. You should be presented with something like the following:\n\n\n\nRStudio start window. Note that the screen is split into four different quadrants. Top left: R documents; bottom left: R program; top right: environment window; bottom right: plots, help, and directories.\n\n\nIn RStudio, the top left window is always going to be our coding window. This is where we will type all of our code and create our documents. In the bottom left we will see R executing the code. This will show what the computer is “thinking” and will help us spot any potential issues. The top right window is the “environment”, which shows what variables and datasets are stored within the computers’ memory. (It can also show some other things, but we aren’t concerned with that at this point). The bottom right window is the “display” window. This is where plots and help windows will appear if they don’t appear in the document (top left) window itself.\nNow, we will create our first R document!",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Intro to *R*</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Intro to *R*</span>"
     ]
   },
   {
     "objectID": "intro_to_r.html#setup-1",
     "href": "intro_to_r.html#setup-1",
-    "title": "2  Intro to R",
-    "section": "4.1 Setup",
-    "text": "4.1 Setup\nIn this class, we will be creating assignments in what is called RMarkdown. This is a rich-text version of R that allows us to create documents with the code embedded. In RStudio, click the “+” button in the far top left to open the New Document menu. Scroll down this list and click on R Markdown.\nA screen such as this will appear:\n\n\n\nA new file window for an RMarkdown file.\n\n\nAfter entering a title and your name and selecting document in the left hand menu, click OK.\n\n\n\nAn example of a markdown script.\n\n\nIn the image above, we can see what a “default” RMarkdown script looks like after creating the file. At the top of the document, between all of the dashes, we have the yaml header that tells R what kind of document will be created, who the author is, and tells it to use today’s date. In this class, we will be saving documents as html as they are the easiest documents to create and save. These documents will include all of your code, text, and even any plots you may create!\nPlain text in the document will be rendered as plain text in the document. (I.e., whatever you type normally will become “normal text” in the finished document). Lines preceded with # will become headers, with ## being a second level header and ### being a third level header, etc. Words can also be made italic by putting an asterisk on each side of the word (*italic*) and bold by putting two asterisks on each side (**bold**). URLs are also supported, with &lt;&gt; on each side of a URL making it clickable, and words being hyperlinked by typing [words to show](target URL).\nWe also have code “chunks” that are shown above. A code chunk can be manually typed out or inserted by pressing CTRL + ALT + I (Windows, Linux) or COMMAND + OPTION + I (Mac). Everything inside a “code chunk” will be read as R code and executed as such. Note that you can have additional commands in the R chunks, but we won’t cover that for now.",
+    "title": "1  Intro to R",
+    "section": "3.1 Setup",
+    "text": "3.1 Setup\nIn this class, we will be creating assignments in what is called RMarkdown. This is a rich-text version of R that allows us to create documents with the code embedded. In RStudio, click the “+” button in the far top left to open the New Document menu. Scroll down this list and click on R Markdown.\nA screen such as this will appear:\n\n\n\nA new file window for an RMarkdown file.\n\n\nAfter entering a title and your name and selecting document in the left hand menu, click OK.\n\n\n\nAn example of a markdown script.\n\n\nIn the image above, we can see what a “default” RMarkdown script looks like after creating the file. At the top of the document, between all of the dashes, we have the yaml header that tells R what kind of document will be created, who the author is, and tells it to use today’s date. In this class, we will be saving documents as html as they are the easiest documents to create and save. These documents will include all of your code, text, and even any plots you may create!\nPlain text in the document will be rendered as plain text in the document. (I.e., whatever you type normally will become “normal text” in the finished document). Lines preceded with # will become headers, with ## being a second level header and ### being a third level header, etc. Words can also be made italic by putting an asterisk on each side of the word (*italic*) and bold by putting two asterisks on each side (**bold**). URLs are also supported, with &lt;&gt; on each side of a URL making it clickable, and words being hyperlinked by typing [words to show](target URL).\nWe also have code “chunks” that are shown above. A code chunk can be manually typed out or inserted by pressing CTRL + ALT + I (Windows, Linux) or COMMAND + OPTION + I (Mac). Everything inside a “code chunk” will be read as R code and executed as such. Note that you can have additional commands in the R chunks, but we won’t cover that for now.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Intro to *R*</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Intro to *R*</span>"
     ]
   },
   {
     "objectID": "intro_to_r.html#using-code-chunks",
     "href": "intro_to_r.html#using-code-chunks",
-    "title": "2  Intro to R",
-    "section": "4.2 Using code chunks",
-    "text": "4.2 Using code chunks\nIn your computer, erase all information except for the yaml header between the dashes on your computer. Save your file in a folder where you want your assignment to be located. It is important you do this step up front as the computer will sometimes save in random places if you don’t specify a file location at the beginning. Don’t forget to save your work frequently!\n\n\n\nText to type in your Rmarkdown document.\n\n\nAfter typing this into the document, hit knit near the top of the upper left window. R will now create an HTML document that should look like this:\n\n\n\nThe output from the above code knitted into a document.\n\n\nWe can see now that the HTML document has the title of the document, the author’s name, the date on which the code was run, and a greyed-out box with color coded R code followed by the output. Let’s try something a little more complex. Create a new code chunk and type the following:\n\nx &lt;- 1:10\n\nThis will create a variable in R, x, that is sequentially each whole number between 1 and 10. We can see this by highlighting or typing only the letter x and running that line of code by clicking CTRL + ENTER (Windows / Linux) or COMMAND + ENTER (Mac).\n\nx\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\n\nIf you look at the top right window, you will also see the value x in the environment defined as int [1:10] 1 2 3 4 5 6 7 8 9 10. This indicates that x is integer data spanning ten positions numbered 1 to 10. Since the vector is small, it displays every number in the sequence.\n\n\n\nRStudio environment window showing saved objects. These are in the computer’s memory.\n\n\nLet’s create another vector y that is the squared values of x, such that \\(y=x^2\\). We can raise values to an exponent by using ^.\n\ny &lt;- x^2\ny\n\n [1]   1   4   9  16  25  36  49  64  81 100\n\n\nNow we have the value y in the environment that is the square of the values of x. This is a numeric vector of 10 values numbered 1 to 10 where each value corresponds to a square of the x value. We can raise things to any value however, including \\(x^x\\)!\n\nx^x\n\n [1]           1           4          27         256        3125       46656\n [7]      823543    16777216   387420489 10000000000\n\n\nAs we can see, since I didn’t “store” this value as a variable in R using &lt;-, the value is not in the environment.",
+    "title": "1  Intro to R",
+    "section": "3.2 Using code chunks",
+    "text": "3.2 Using code chunks\nIn your computer, erase all information except for the yaml header between the dashes on your computer. Save your file in a folder where you want your assignment to be located. It is important you do this step up front as the computer will sometimes save in random places if you don’t specify a file location at the beginning. Don’t forget to save your work frequently!\n\n\n\nText to type in your Rmarkdown document.\n\n\nAfter typing this into the document, hit knit near the top of the upper left window. R will now create an HTML document that should look like this:\n\n\n\nThe output from the above code knitted into a document.\n\n\nWe can see now that the HTML document has the title of the document, the author’s name, the date on which the code was run, and a greyed-out box with color coded R code followed by the output. Let’s try something a little more complex. Create a new code chunk and type the following:\n\nx &lt;- 1:10\n\nThis will create a variable in R, x, that is sequentially each whole number between 1 and 10. We can see this by highlighting or typing only the letter x and running that line of code by clicking CTRL + ENTER (Windows / Linux) or COMMAND + ENTER (Mac).\n\nx\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\n\nIf you look at the top right window, you will also see the value x in the environment defined as int [1:10] 1 2 3 4 5 6 7 8 9 10. This indicates that x is integer data spanning ten positions numbered 1 to 10. Since the vector is small, it displays every number in the sequence.\n\n\n\nRStudio environment window showing saved objects. These are in the computer’s memory.\n\n\nLet’s create another vector y that is the squared values of x, such that \\(y=x^2\\). We can raise values to an exponent by using ^.\n\ny &lt;- x^2\ny\n\n [1]   1   4   9  16  25  36  49  64  81 100\n\n\nNow we have the value y in the environment that is the square of the values of x. This is a numeric vector of 10 values numbered 1 to 10 where each value corresponds to a square of the x value. We can raise things to any value however, including \\(x^x\\)!\n\nx^x\n\n [1]           1           4          27         256        3125       46656\n [7]      823543    16777216   387420489 10000000000\n\n\nAs we can see, since I didn’t “store” this value as a variable in R using &lt;-, the value is not in the environment.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Intro to *R*</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Intro to *R*</span>"
     ]
   },
   {
     "objectID": "intro_to_r.html#plotting",
     "href": "intro_to_r.html#plotting",
-    "title": "2  Intro to R",
-    "section": "4.3 Plotting",
-    "text": "4.3 Plotting\nNow, let’s try creating a plot. This is easy in R, as we just use the command plot.\n\nplot(x = x, y = y)\n\n\n\n\n\n\n\n\nBy specifying the y and x components in plot, we can quickly generate a point plot. We can alter the visual parameters of this plot using a few different commands. I will outline these below with inline notes. Inline notes in the code can be made by using a # symbol before them, which basically tells R to ignore everything after the #. For example:\n\nprint(\"Test\")\n\n[1] \"Test\"\n\n# print(\"Test 2\")\n\nThis prints the word Test, but doesn’t print Test 2.\nNow let’s make the plot with some new visual parameters.\n\nplot(x = x, # specify x values\n     y = y, # specify y values\n     ylab = \"Y Values\", # specify Y label\n     xlab = \"X Values\", # specify X label\n     main = \"Plot Title\", # specify main title\n     pch = 19, # adjust point style\n     col = \"red\") # make points red",
+    "title": "1  Intro to R",
+    "section": "3.3 Plotting",
+    "text": "3.3 Plotting\nNow, let’s try creating a plot. This is easy in R, as we just use the command plot.\n\nplot(x = x, y = y)\n\n\n\n\n\n\n\n\nBy specifying the y and x components in plot, we can quickly generate a point plot. We can alter the visual parameters of this plot using a few different commands. I will outline these below with inline notes. Inline notes in the code can be made by using a # symbol before them, which basically tells R to ignore everything after the #. For example:\n\nprint(\"Test\")\n\n[1] \"Test\"\n\n# print(\"Test 2\")\n\nThis prints the word Test, but doesn’t print Test 2.\nNow let’s make the plot with some new visual parameters.\n\nplot(x = x, # specify x values\n     y = y, # specify y values\n     ylab = \"Y Values\", # specify Y label\n     xlab = \"X Values\", # specify X label\n     main = \"Plot Title\", # specify main title\n     pch = 19, # adjust point style\n     col = \"red\") # make points red",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Intro to *R*</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Intro to *R*</span>"
     ]
   },
   {
     "objectID": "intro_to_r.html#downloading-data",
     "href": "intro_to_r.html#downloading-data",
-    "title": "2  Intro to R",
-    "section": "5.1 Downloading data",
-    "text": "5.1 Downloading data\nNow, we need to download our first data set. These datasets are stored on GitHub.",
+    "title": "1  Intro to R",
+    "section": "4.1 Downloading data",
+    "text": "4.1 Downloading data\nNow, we need to download our first data set. These datasets are stored on GitHub.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Intro to *R*</span>"
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Intro to *R*</span>"
     ]
   },
   {
     "objectID": "summary.html",
     "href": "summary.html",
-    "title": "3  Summary",
+    "title": "2  Summary",
     "section": "",
     "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Summary</span>"
-    ]
-  },
-  {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "References",
-    "section": "",
-    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
-    "crumbs": [
-      "References"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Summary</span>"
     ]
   }
 ]
