@@ -74,7 +74,7 @@
     "href": "intro_to_r.html#downloading-data",
     "title": "1  Intro to R",
     "section": "4.1 Downloading data",
-    "text": "4.1 Downloading data\nNow, we need to download our first data set. These datasets are stored on GitHub.",
+    "text": "4.1 Downloading data\nNow, we need to download our first data set. These datasets are stored on GitHub. We are going to be looking at data from Dr. Cooper’s dissertation concerning Afrotropical bird distributions (Cooper (2021)). This website is in the data folder on this websites’ GitHub page, accessible here.\n\n# first, declare filepath\n# I will try to give you the filepath for each assignment\n# if not, check the URL pattern for the file\n\nurl.ranges &lt;- curl(\"https://raw.githubusercontent.com/jacobccooper/biol105_unk/main/datasets/lacustrine_range_size.csv\")\nranges &lt;- read_csv(url.ranges)\n\n\n\n\n\nCooper, Jacob C. 2021. “Biogeographic and Ecologic Drivers of Avian Diversity.” Doctoral {Dissertation}, Chicago, IL, USA: The University of Chicago. https://doi.org/10.6082/uchicago.3379.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Intro to *R*</span>"
     ]
@@ -87,6 +87,16 @@
     "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Summary</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Cooper, Jacob C. 2021. “Biogeographic and Ecologic\nDrivers of Avian\nDiversity.” Doctoral {Dissertation}, Chicago, IL,\nUSA: The University of Chicago. https://doi.org/10.6082/uchicago.3379.",
+    "crumbs": [
+      "References"
     ]
   }
 ]
