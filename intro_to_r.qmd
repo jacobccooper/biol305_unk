@@ -206,7 +206,7 @@ We won't have to deal with conflicts much in this class, and I'll warn you (or h
 
 ## Downloading data
 
-Now, we need to download our first data set. These datasets are stored on GitHub. We are going to be looking at data from Dr. Cooper's dissertation concerning Afrotropical bird distributions (@cooper_biogeographic_2021). This website is in the data folder on this websites' GitHub page, [accessible here](https://github.com/jacobccooper/biol105_unk/blob/main/datasets/lacustrine_range_size.csv).
+Now, we need to download our first data set. These datasets are stored on GitHub. We are going to be looking at data from Dr. Cooper's dissertation concerning Afrotropical bird distributions [@cooper_biogeographic_2021]. This website is in the data folder on this websites' GitHub page, [accessible here](https://github.com/jacobccooper/biol105_unk/blob/main/datasets/lacustrine_range_size.csv).
 
 ```{r}
 # first, declare filepath
