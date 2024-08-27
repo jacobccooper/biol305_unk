@@ -243,3 +243,4 @@ We can specify a quantile as well:
 quantile(frap_order, 0.75)
 ```
 
+We can also calculate these metrics by hand.
