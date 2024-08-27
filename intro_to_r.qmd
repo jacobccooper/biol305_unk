@@ -143,6 +143,23 @@ plot(x = x, # specify x values
      col = "red") # make points red
 ```
 
+## Tab complete
+
+*RStudio* allows for "tab-completing" while typing code. Tab-completing is a way of typing the first part of a command, variable name, or file name and hitting "tab" to show all options with that spelling. You should use tab completing because it:
+
+- reduces spelling mistakes
+- reduces filepath mistakes
+- increases the speed at which you code
+- provides help with specific functions
+
+## Help
+
+At any point in *R*, you can look up "help" for a specific function by typing `?functionname`. Try this on your computer with the following:
+
+```{r,eval = F}
+?mean
+```
+
 # Working with data
 
 Throughout this course, we are going to have to work with datasets that are from our book or other sources. Here, we are going to work through an example dataset. First, we need to install *libraries*. A *library* is a collated, pre-existing batch of code that is designed to assist with data analysis or to perform specific functions. These *libraries* make life a lot easier, and create short commands for completing relatively complex tasks.
@@ -191,12 +208,126 @@ We won't have to deal with conflicts much in this class, and I'll warn you (or h
 
 Now, we need to download our first data set. These datasets are stored on GitHub. We are going to be looking at data from Dr. Cooper's dissertation concerning Afrotropical bird distributions (@cooper_biogeographic_2021). This website is in the data folder on this websites' GitHub page, [accessible here](https://github.com/jacobccooper/biol105_unk/blob/main/datasets/lacustrine_range_size.csv).
 
-```{r,eval=F}
+```{r}
 # first, declare filepath
 # I will try to give you the filepath for each assignment
 # if not, check the URL pattern for the file
 
-url.ranges <- curl("https://raw.githubusercontent.com/jacobccooper/biol105_unk/main/datasets/lacustrine_range_size.csv")
-ranges <- read_csv(url.ranges)
+# create
+ranges.url <- curl("https://raw.githubusercontent.com/jacobccooper/biol105_unk/main/datasets/lacustrine_range_size.csv")
+# read comma separated file (csv) into R memory
+ranges <- read_csv(ranges.url)
 ```
 
+Alternatively, we can use the operator `%>%` to simplify this process. `%>%` means "take whatever you got from the previous step and *pipe* it into the next step". So, the following does the exact same thing:
+
+```{r}
+ranges <- curl("https://raw.githubusercontent.com/jacobccooper/biol105_unk/main/datasets/lacustrine_range_size.csv") %>%
+  read_csv()
+```
+
+Using the `%>%` is preferred as you can better set up a workflow and because it more closely mimics other coding languages, such as `bash`.
+
+Let's view the data to see if it worked. We can use the command `head` to view the first few rows:
+
+```{r}
+head(ranges)
+```
+
+We can perform a lot of summary statistics in *R*. Some of these we can view for multiple columns at once using `summary`.
+
+```{r}
+summary(ranges)
+```
+
+As seen above, we now have information for the following statistics for each variable:
+
+- `Min` = minimum
+- `1st Qu.` = 1st quartile
+- `Median` = middle of the dataset
+- `Mean` = average of the dataset
+- `3rd Qu.` = 3rd quartile
+- `Max.` = maximum
+
+We can also calculate some of these statistics manually to see if we are doing everything correctly. It is easiest to do this by using predefined functions in *R* (code others have written to perform a particular task) or to create our own functions in *R*. We will do both to determine the average of `combined_current_km2`.
+
+## Subsetting data
+
+First, we need to select only the column of interest. In *R*, we have two ways of subsetting data to get a particular column.
+
+- `var[rows,cols]` is a way to look at a particular object (`var` in this case) and choose a specific combination of `row` number and `column` number (`col`). This is great if you know a specific index, but it is better to use a specific name.
+ - `var[rows,"cols"]` is a way to do the above but by using a specific column name, like `combined_current_km2`.
+ - `var$colname` is a way to call the specific column name directly from the dataset.
+
+```{r}
+# using R functions
+
+ranges$combined_current_km2
+```
+
+As shown above, calling the specific column name with `$` allows us to see only the data of interest. We can also save these data as an object.
+
+```{r}
+current_combined <- ranges$combined_current_km2
+
+current_combined
+```
+
+Now that we have it as an object, specifically a numeric vector, we can perform whatever math operations we need to on the dataset.
+
+```{r}
+mean(current_combined)
+```
+
+Here, we can see the mean for the entire dataset. However, we should always round values to the same number of decimal points as the original data. We can do this with `round`.
+
+```{r}
+round(mean(current_combined),1) # round mean to one decimal
+```
+
+*Note* that the above has a nested set of commands. We can write this exact same thing as follows:
+
+```{r}
+# pipe mean through round
+mean(current_combined) %>%
+  round(1)
+```
+
+Use the method that is easiest for you to follow!
+
+We can also calculate the mean manually. The mean is $\frac{\sum_{i=1}^nx}{n}$, or the sum of all the values within a vector divided by the number of values in that vector.
+
+```{r}
+# create function
+# use curly brackets to denote function
+# our data goes in place of "x" when finally run
+our_mean <- function(x){
+  sum_x <- sum(x) # sum all values in vector
+  n <- length(x) # get length of vector
+  xbar <- sum_x/n # calcualte mean
+  return(xbar) # return the value outside the function
+}
+```
+
+Let's try it.
+
+```{r}
+our_mean(ranges$combined_current_km2)
+```
+
+As we can see, it works just the same as `mean`! We can round this as well.
+
+```{r}
+our_mean(ranges$combined_current_km2) %>%
+  round(1)
+```
+
+# Your turn!
+
+With a partner or on your own, try to do the following:
+
+1. Create an *RMarkdown document* that will save as an `.html`.
+2. Load the data, as shown here, and print the summary statistics in the document.
+3. Calculate the value of `combined_current_km2` divided by `2050_combined_km2` and print the results.
+
+Let me know if you have any issues.

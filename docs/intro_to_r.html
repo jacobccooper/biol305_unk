@@ -234,11 +234,15 @@ window.Quarto = {
   <li><a href="#setup-1" id="toc-setup-1" class="nav-link" data-scroll-target="#setup-1"><span class="header-section-number">3.1</span> Setup</a></li>
   <li><a href="#using-code-chunks" id="toc-using-code-chunks" class="nav-link" data-scroll-target="#using-code-chunks"><span class="header-section-number">3.2</span> Using code chunks</a></li>
   <li><a href="#plotting" id="toc-plotting" class="nav-link" data-scroll-target="#plotting"><span class="header-section-number">3.3</span> Plotting</a></li>
+  <li><a href="#tab-complete" id="toc-tab-complete" class="nav-link" data-scroll-target="#tab-complete"><span class="header-section-number">3.4</span> Tab complete</a></li>
+  <li><a href="#help" id="toc-help" class="nav-link" data-scroll-target="#help"><span class="header-section-number">3.5</span> Help</a></li>
   </ul></li>
   <li><a href="#working-with-data" id="toc-working-with-data" class="nav-link" data-scroll-target="#working-with-data"><span class="header-section-number">4</span> Working with data</a>
   <ul class="collapse">
   <li><a href="#downloading-data" id="toc-downloading-data" class="nav-link" data-scroll-target="#downloading-data"><span class="header-section-number">4.1</span> Downloading data</a></li>
+  <li><a href="#subsetting-data" id="toc-subsetting-data" class="nav-link" data-scroll-target="#subsetting-data"><span class="header-section-number">4.2</span> Subsetting data</a></li>
   </ul></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">5</span> Your turn!</a></li>
   </ul>
 </nav>
     </div>
@@ -429,6 +433,23 @@ Type 'q()' to quit R.
 </div>
 </div>
 </section>
+<section id="tab-complete" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="tab-complete"><span class="header-section-number">3.4</span> Tab complete</h2>
+<p><em>RStudio</em> allows for “tab-completing” while typing code. Tab-completing is a way of typing the first part of a command, variable name, or file name and hitting “tab” to show all options with that spelling. You should use tab completing because it:</p>
+<ul>
+<li>reduces spelling mistakes</li>
+<li>reduces filepath mistakes</li>
+<li>increases the speed at which you code</li>
+<li>provides help with specific functions</li>
+</ul>
+</section>
+<section id="help" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="help"><span class="header-section-number">3.5</span> Help</h2>
+<p>At any point in <em>R</em>, you can look up “help” for a specific function by typing <code>?functionname</code>. Try this on your computer with the following:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>?mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 </section>
 <section id="working-with-data" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Working with data</h1>
@@ -439,29 +460,29 @@ Type 'q()' to quit R.
 <li><code>tidyverse</code>: this package is actually a <a href="https://www.tidyverse.org/">group of packages</a> designed to help with data analysis, management, and visualization.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run this code the first time ONLY</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># does not need to be run every time you use R!</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># curl allows for internet downloads</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"curl"</span>)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># tidyverse has a bunch of packages in it!</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># great for data manipulation</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># if you ever need to update:</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co"># leaving brackets open means "update everything"</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="fu">update.packages</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run this code the first time ONLY</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># does not need to be run every time you use R!</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># curl allows for internet downloads</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"curl"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># tidyverse has a bunch of packages in it!</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># great for data manipulation</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co"># if you ever need to update:</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># leaving brackets open means "update everything"</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="fu">update.packages</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>After packages are installed, we will need to load them into our <em>R</em> environment. While we only need to <code>install.packages</code> once on our machine, we need to load libraries <em>every time we restart the program</em>!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(curl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(curl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Using libcurl 8.7.1 with LibreSSL/3.3.6</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
@@ -487,13 +508,186 @@ Type 'q()' to quit R.
 <h2 data-number="4.1" class="anchored" data-anchor-id="downloading-data"><span class="header-section-number">4.1</span> Downloading data</h2>
 <p>Now, we need to download our first data set. These datasets are stored on GitHub. We are going to be looking at data from Dr.&nbsp;Cooper’s dissertation concerning Afrotropical bird distributions (<span class="citation" data-cites="cooper_biogeographic_2021">Cooper (<a href="references.html#ref-cooper_biogeographic_2021" role="doc-biblioref">2021</a>)</span>). This website is in the data folder on this websites’ GitHub page, <a href="https://github.com/jacobccooper/biol105_unk/blob/main/datasets/lacustrine_range_size.csv">accessible here</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first, declare filepath</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># I will try to give you the filepath for each assignment</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># if not, check the URL pattern for the file</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>url.ranges <span class="ot">&lt;-</span> <span class="fu">curl</span>(<span class="st">"https://raw.githubusercontent.com/jacobccooper/biol105_unk/main/datasets/lacustrine_range_size.csv"</span>)</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>ranges <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(url.ranges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first, declare filepath</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># I will try to give you the filepath for each assignment</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># if not, check the URL pattern for the file</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>ranges.url <span class="ot">&lt;-</span> <span class="fu">curl</span>(<span class="st">"https://raw.githubusercontent.com/jacobccooper/biol105_unk/main/datasets/lacustrine_range_size.csv"</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># read comma separated file (csv) into R memory</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>ranges <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(ranges.url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 12 Columns: 10
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): species
+dbl (9): combined_current_km2, consensus_km2, bioclim_current_km2, 2050_comb...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
+</div>
+<p>Alternatively, we can use the operator <code>%&gt;%</code> to simplify this process. <code>%&gt;%</code> means “take whatever you got from the previous step and <em>pipe</em> it into the next step”. So, the following does the exact same thing:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ranges <span class="ot">&lt;-</span> <span class="fu">curl</span>(<span class="st">"https://raw.githubusercontent.com/jacobccooper/biol105_unk/main/datasets/lacustrine_range_size.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 12 Columns: 10
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): species
+dbl (9): combined_current_km2, consensus_km2, bioclim_current_km2, 2050_comb...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>Using the <code>%&gt;%</code> is preferred as you can better set up a workflow and because it more closely mimics other coding languages, such as <code>bash</code>.</p>
+<p>Let’s view the data to see if it worked. We can use the command <code>head</code> to view the first few rows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ranges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 10
+  species                combined_current_km2 consensus_km2 bioclim_current_km2
+  &lt;chr&gt;                                 &lt;dbl&gt;         &lt;dbl&gt;               &lt;dbl&gt;
+1 Batis_diops                          25209.         6694.              19241.
+2 Chamaetylas_poliophrys               68171.         1106.              68158.
+3 Cinnyris_regius                      60939.        13305.              53627.
+4 Cossypha_archeri                     27021.         6409.              11798.
+5 Cyanomitra_alinae                    78680.        34320.              63381.
+6 Graueria_vittata                      8770.          861.               8301.
+# ℹ 6 more variables: `2050_combined_km2` &lt;dbl&gt;, `2050_consensus_km2` &lt;dbl&gt;,
+#   `2070_combined_km2` &lt;dbl&gt;, `2070_consensus_km2` &lt;dbl&gt;,
+#   alltime_consensus_km2 &lt;dbl&gt;, past_stable_km2 &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>We can perform a lot of summary statistics in <em>R</em>. Some of these we can view for multiple columns at once using <code>summary</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ranges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   species          combined_current_km2 consensus_km2     bioclim_current_km2
+ Length:12          Min.   :  8770       Min.   :  861.3   Min.   :  3749     
+ Class :character   1st Qu.: 24800       1st Qu.: 4186.2   1st Qu.: 10924     
+ Mode  :character   Median : 43654       Median : 7778.1   Median : 31455     
+                    Mean   : 68052       Mean   :18161.8   Mean   : 42457     
+                    3rd Qu.: 70798       3rd Qu.:18558.7   3rd Qu.: 62835     
+                    Max.   :232377       Max.   :79306.6   Max.   :148753     
+ 2050_combined_km2 2050_consensus_km2 2070_combined_km2  2070_consensus_km2
+ Min.   :  1832    Min.   :    0.0    Min.   :   550.3   Min.   :    0.0   
+ 1st Qu.:  6562    1st Qu.:  589.5    1st Qu.:  6583.8   1st Qu.:  311.4   
+ Median : 26057    Median : 6821.9    Median : 24281.7   Median : 2714.6   
+ Mean   : 33247    Mean   :14418.4    Mean   : 31811.0   Mean   : 8250.5   
+ 3rd Qu.: 40460    3rd Qu.:18577.1    3rd Qu.: 38468.9   3rd Qu.:10034.4   
+ Max.   :132487    Max.   :79236.2    Max.   :129591.0   Max.   :53291.8   
+ alltime_consensus_km2 past_stable_km2 
+ Min.   :    0.0       Min.   :   0.0  
+ 1st Qu.:  790.9       1st Qu.:   0.0  
+ Median : 8216.8       Median :   0.0  
+ Mean   :15723.3       Mean   : 127.3  
+ 3rd Qu.:19675.0       3rd Qu.:   0.0  
+ Max.   :82310.5       Max.   :1434.8  </code></pre>
+</div>
+</div>
+<p>As seen above, we now have information for the following statistics for each variable:</p>
+<ul>
+<li><code>Min</code> = minimum</li>
+<li><code>1st Qu.</code> = 1st quartile</li>
+<li><code>Median</code> = middle of the dataset</li>
+<li><code>Mean</code> = average of the dataset</li>
+<li><code>3rd Qu.</code> = 3rd quartile</li>
+<li><code>Max.</code> = maximum</li>
+</ul>
+<p>We can also calculate some of these statistics manually to see if we are doing everything correctly. It is easiest to do this by using predefined functions in <em>R</em> (code others have written to perform a particular task) or to create our own functions in <em>R</em>. We will do both to determine the average of <code>combined_current_km2</code>.</p>
+</section>
+<section id="subsetting-data" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="subsetting-data"><span class="header-section-number">4.2</span> Subsetting data</h2>
+<p>First, we need to select only the column of interest. In <em>R</em>, we have two ways of subsetting data to get a particular column.</p>
+<ul>
+<li><code>var[rows,cols]</code> is a way to look at a particular object (<code>var</code> in this case) and choose a specific combination of <code>row</code> number and <code>column</code> number (<code>col</code>). This is great if you know a specific index, but it is better to use a specific name.</li>
+<li><code>var[rows,"cols"]</code> is a way to do the above but by using a specific column name, like <code>combined_current_km2</code>.</li>
+<li><code>var$colname</code> is a way to call the specific column name directly from the dataset.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using R functions</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>ranges<span class="sc">$</span>combined_current_km2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  25209.4  68171.2  60939.2  27021.3  78679.9   8769.9 232377.2  17401.4
+ [9]  51853.5  35455.1  23570.3 187179.1</code></pre>
+</div>
+</div>
+<p>As shown above, calling the specific column name with <code>$</code> allows us to see only the data of interest. We can also save these data as an object.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>current_combined <span class="ot">&lt;-</span> ranges<span class="sc">$</span>combined_current_km2</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>current_combined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  25209.4  68171.2  60939.2  27021.3  78679.9   8769.9 232377.2  17401.4
+ [9]  51853.5  35455.1  23570.3 187179.1</code></pre>
+</div>
+</div>
+<p>Now that we have it as an object, specifically a numeric vector, we can perform whatever math operations we need to on the dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(current_combined)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 68052.29</code></pre>
+</div>
+</div>
+<p>Here, we can see the mean for the entire dataset. However, we should always round values to the same number of decimal points as the original data. We can do this with <code>round</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(current_combined),<span class="dv">1</span>) <span class="co"># round mean to one decimal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 68052.3</code></pre>
+</div>
+</div>
+<p><em>Note</em> that the above has a nested set of commands. We can write this exact same thing as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pipe mean through round</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(current_combined) <span class="sc">%&gt;%</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 68052.3</code></pre>
+</div>
+</div>
+<p>Use the method that is easiest for you to follow!</p>
+<p>We can also calculate the mean manually. The mean is <span class="math inline">\(\frac{\sum_{i=1}^nx}{n}\)</span>, or the sum of all the values within a vector divided by the number of values in that vector.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create function</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># use curly brackets to denote function</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># our data goes in place of "x" when finally run</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>our_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  sum_x <span class="ot">&lt;-</span> <span class="fu">sum</span>(x) <span class="co"># sum all values in vector</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x) <span class="co"># get length of vector</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  xbar <span class="ot">&lt;-</span> sum_x<span class="sc">/</span>n <span class="co"># calcualte mean</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(xbar) <span class="co"># return the value outside the function</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s try it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">our_mean</span>(ranges<span class="sc">$</span>combined_current_km2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 68052.29</code></pre>
+</div>
+</div>
+<p>As we can see, it works just the same as <code>mean</code>! We can round this as well.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">our_mean</span>(ranges<span class="sc">$</span>combined_current_km2) <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 68052.3</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="your-turn" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Your turn!</h1>
+<p>With a partner or on your own, try to do the following:</p>
+<ol type="1">
+<li>Create an <em>RMarkdown document</em> that will save as an <code>.html</code>.</li>
+<li>Load the data, as shown here, and print the summary statistics in the document.</li>
+<li>Calculate the value of <code>combined_current_km2</code> divided by <code>2050_combined_km2</code> and print the results.</li>
+</ol>
+<p>Let me know if you have any issues.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -501,7 +695,6 @@ Type 'q()' to quit R.
 Cooper, Jacob C. 2021. <span>“Biogeographic and <span>Ecologic</span> <span>Drivers</span> of <span>Avian</span> <span>Diversity</span>.”</span> Doctoral {Dissertation}, Chicago, IL, USA: The University of Chicago. <a href="https://doi.org/10.6082/uchicago.3379">https://doi.org/10.6082/uchicago.3379</a>.
 </div>
 </div>
-</section>
 </section>
 
 </main> <!-- /main -->
