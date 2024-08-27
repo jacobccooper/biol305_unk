@@ -1,0 +1,245 @@
+---
+title: "Descriptive Statistics"
+author: "Dr. Jacob C. Cooper"
+format: html
+editor: visual
+---
+
+## Purposes of descriptive statistics
+
+Descriptive statistics enable researchers to quickly and easily examine the "behavior" of their datasets, identifying potential errors and allowing them to observe particular trends that may be worth further analysis. Here, we will cover how to calculate descriptive statistics for multiple different datasets, culminating in an assignment covering these topics.
+
+## Preparing *R*
+
+As with every week, we will need to load our relevant packages first. This week, we are using the following:
+
+```{r}
+# allows for internet downloading
+library(curl)
+
+# enables data management tools
+library(tidyverse)
+```
+
+## Downloading the data
+
+For the example this week, we will be using the `starbucks` dataset, describing the number of drinks purchased during particular time periods during the day.
+
+```{r}
+starbucks <- curl("https://raw.githubusercontent.com/jacobccooper/biol105_unk/main/datasets/starbucks.csv") %>%
+  read_csv()
+```
+
+## Descriptive statistics
+
+Descriptive statistics are statistics that help us understand the shape and nature of the data on hand. These include really common metrics such as *mean*, *median*, and *mode*, as well as more nuanced metrics like *quartiles* that help us understand if there is any *skew* in the dataset. (*Skew* refers to a bias in the data, where more data points lie on one side of the distribution and there is a long *tail* of data in the other direction).
+
+![Examples of skew compared to a symmetrical, non-skewed distribution. Source: machinelearningparatodos.com](images/skew.png)
+
+*Note* above that the relative position of the *mean*, *median*, and *mode* can be indicative of skew. Please also note that these values will rarely be exactly equal "in the real world", and thus you need to weigh differences against the entire dataset when assessing skew. There is a lot of nuance like this in statistics; it is not always an "exact" science, but sometimes involves judgment calls and assessments based on what you observe in the data.
+
+Using the `starbucks` dataset, we can look at some of these descriptive statistics to understand what is going on.
+
+### Mean
+
+The mean is the "average" value within a set of data, specifically, the sum of all values divided by the length of those values: $\frac{\sum_{i=1}^nx}{n}$.
+
+```{r}
+head(starbucks)
+```
+
+Here, we are specifically interested in the number of frappuccinos.
+
+```{r}
+# get vector of frappuccino number
+fraps <- starbucks$Frap_Num
+
+# get mean of vector
+mean(fraps)
+```
+
+*Note* that the above should be rounded to a whole number, since we were given the data in whole numbers!
+
+```{r}
+mean(fraps) %>%
+  round(0)
+```
+
+We already covered calculating the average manually in our previous tutorial, but we can do that here as well:
+
+```{r}
+# sum values
+# divide by n, length of vector
+# round to 0 places
+round(sum(fraps)/length(fraps),0)
+```
+
+### Median
+
+The median is also known as the 50th percentile, and is the midpoint of the data when ordered from least to greatest. If there are an even number of data points, then it is the average point between the two center points. For odd data, this is the $\frac{n+1}{2}$th observation. For even data, since we need to take an average, this is the $\frac{\frac{n}{2}+(\frac{n}{2}+1)}{2}$. You should be able to do these by hand and by using a program.
+
+```{r}
+median(fraps)
+```
+
+Now, to calculate by hand:
+
+```{r}
+length(fraps)
+```
+
+We have an odd length.
+
+```{r}
+# order gets the order
+order(fraps)
+```
+
+```{r}
+# [] tells R which elements to put where
+frap_order <- fraps[order(fraps)]
+
+frap_order
+```
+
+```{r}
+# always use parentheses
+# make sure the math maths right!
+(length(frap_order)+1)/2
+```
+
+Which is the fifth element in the vector?
+
+```{r}
+frap_order[5]
+```
+
+Now let's try it for an even numbers.
+
+```{r}
+# remove first element
+even_fraps <- fraps[-1]
+
+even_fraps_order <- even_fraps[order(even_fraps)]
+
+even_fraps_order
+```
+
+```{r}
+median(even_fraps)
+```
+
+Now, by hand: $\frac{\frac{n}{2}+(\frac{n}{2}+1)}{2}$.
+
+```{r}
+n <- length(even_fraps_order)
+
+# get n/2 position from vector
+m1 <- even_fraps_order[n/2]
+# get n/2+1 position
+m2 <- even_fraps_order[(n/2)+1]
+
+# add these values, divide by two for "midpoint"
+med <- (m1+m2)/2
+
+med
+```
+
+As we can see, these values are equal!
+
+### Mode
+
+There is no default method for finding the mode in *R*. However, websites like [Statology](https://www.statology.org/mode-in-r/) provide wraparound functions.
+
+```{r}
+# Statology function
+# define function to calculate mode
+find_mode <- function(x) {
+  # get unique values from vector
+  u <- unique(x)
+  # count number of occurrences for each value
+  tab <- tabulate(match(x, u))
+  # return the value with the highest count
+  u[tab == max(tab)]
+}
+
+find_mode(fraps)
+```
+
+We can also do this by hand, by counting the number of occurrences of each value. This can be done in a stepwise fashion using commands in the above function.
+
+```{r}
+# unique counts
+u <- unique(fraps)
+u
+```
+
+```{r}
+# which elements match
+match(fraps,u)
+```
+
+```{r}
+# count them
+tab <- match(fraps,u) %>%
+  tabulate()
+
+tab
+```
+
+Get the highest value.
+
+```{r}
+u[tab==max(tab)]
+```
+
+Notice this uses `==`. This is a logical argument that means "is equal to" or "is the same as". For example:
+
+```{r}
+2 == 2
+```
+
+These values are the same, so `TRUE` is returned.
+
+```{r}
+2 == 3
+```
+
+These values are unequal, so `FALSE` is returned. *R* will read `TRUE` as `1` and `FALSE` as `ZERO`, such that:
+
+```{r}
+sum(2==2)
+```
+
+and
+
+```{r}
+sum(2==3)
+```
+
+This allows you to find how many arguments match your condition quickly, and even allows you to subset based on these indices as well. Keep in mind you can use greater than `<`, less than `>`, greater than or equal to `<=`, less than or equal to `>=`, is equal to `==`, and is not equal to `!=` to identify numerical relationships. Other logical arguments include:
+
+-   `&`: both conditions must be `TRUE` to match (e.g., `c(10,20) & c(20,10)`). Try the following as well: `fraps < 10 & fraps > 3`.
+
+-   `&&`: and, but works with single elements and allows for better parsing. Often used with `if`. E.g., `fraps < 10 && fraps > 3`. This will not work on our multi-element `frap` vector.
+
+-   `|`: or, saying at least one condition must be true. Try: `fraps > 10 | fraps < 3`.
+
+-   `||`: or, but for a single element, like `&&` above.
+
+-   `!`: not, so "not equal to" would be `!=`.
+
+### Other quartiles
+
+We also use the 25th percentile and the 75th percentile to understand data distributions. These are calculated similar to the above, but the bottom quartile is only $\frac{1}{4}$ of the way between values and the 75th quartile is $\frac{3}{4}$ of the way between values. We can use the *R* function `quantile` to calculate these.
+
+```{r}
+quantile(frap_order)
+```
+
+We can specify a quantile as well:
+
+```{r}
+quantile(frap_order, 0.75)
+```
+

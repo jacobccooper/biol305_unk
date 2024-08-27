@@ -110,13 +110,43 @@
     ]
   },
   {
-    "objectID": "summary.html",
-    "href": "summary.html",
-    "title": "2  Summary",
+    "objectID": "descriptive_stats.html",
+    "href": "descriptive_stats.html",
+    "title": "2  Descriptive Statistics",
     "section": "",
-    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2",
+    "text": "2.1 Purposes of descriptive statistics\nDescriptive statistics enable researchers to quickly and easily examine the “behavior” of their datasets, identifying potential errors and allowing them to observe particular trends that may be worth further analysis. Here, we will cover how to calculate descriptive statistics for multiple different datasets, culminating in an assignment covering these topics.",
     "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Summary</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Descriptive Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "descriptive_stats.html#preparing-r",
+    "href": "descriptive_stats.html#preparing-r",
+    "title": "2  Descriptive Statistics",
+    "section": "2.2 Preparing R",
+    "text": "2.2 Preparing R\nAs with every week, we will need to load our relevant packages first. This week, we are using the following:\n\n# allows for internet downloading\nlibrary(curl)\n\nUsing libcurl 8.7.1 with LibreSSL/3.3.6\n\n# enables data management tools\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter()     masks stats::filter()\n✖ dplyr::lag()        masks stats::lag()\n✖ readr::parse_date() masks curl::parse_date()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Descriptive Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "descriptive_stats.html#downloading-the-data",
+    "href": "descriptive_stats.html#downloading-the-data",
+    "title": "2  Descriptive Statistics",
+    "section": "2.3 Downloading the data",
+    "text": "2.3 Downloading the data\nFor the example this week, we will be using the starbucks dataset, describing the number of drinks purchased during particular time periods during the day.\n\nstarbucks &lt;- curl(\"https://raw.githubusercontent.com/jacobccooper/biol105_unk/main/datasets/starbucks.csv\") %&gt;%\n  read_csv()\n\nRows: 9 Columns: 2\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (1): Hour\ndbl (1): Frap_Num\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Descriptive Statistics</span>"
+    ]
+  },
+  {
+    "objectID": "descriptive_stats.html#descriptive-statistics",
+    "href": "descriptive_stats.html#descriptive-statistics",
+    "title": "2  Descriptive Statistics",
+    "section": "2.4 Descriptive statistics",
+    "text": "2.4 Descriptive statistics\nDescriptive statistics are statistics that help us understand the shape and nature of the data on hand. These include really common metrics such as mean, median, and mode, as well as more nuanced metrics like quartiles that help us understand if there is any skew in the dataset. (Skew refers to a bias in the data, where more data points lie on one side of the distribution and there is a long tail of data in the other direction).\n\n\n\nExamples of skew compared to a symmetrical, non-skewed distribution. Source: machinelearningparatodos.com\n\n\nNote above that the relative position of the mean, median, and mode can be indicative of skew. Please also note that these values will rarely be exactly equal “in the real world”, and thus you need to weigh differences against the entire dataset when assessing skew. There is a lot of nuance like this in statistics; it is not always an “exact” science, but sometimes involves judgment calls and assessments based on what you observe in the data.\nUsing the starbucks dataset, we can look at some of these descriptive statistics to understand what is going on.\n\n2.4.1 Mean\nThe mean is the “average” value within a set of data, specifically, the sum of all values divided by the length of those values: \\(\\frac{\\sum_{i=1}^nx}{n}\\).\n\nhead(starbucks)\n\n# A tibble: 6 × 2\n  Hour      Frap_Num\n  &lt;chr&gt;        &lt;dbl&gt;\n1 0600-0659        2\n2 0700-0759        3\n3 0800-0859        2\n4 0900-0959        4\n5 1000-1059        8\n6 1100-1159        7\n\n\nHere, we are specifically interested in the number of frappuccinos.\n\n# get vector of frappuccino number\nfraps &lt;- starbucks$Frap_Num\n\n# get mean of vector\nmean(fraps)\n\n[1] 6.222222\n\n\nNote that the above should be rounded to a whole number, since we were given the data in whole numbers!\n\nmean(fraps) %&gt;%\n  round(0)\n\n[1] 6\n\n\nWe already covered calculating the average manually in our previous tutorial, but we can do that here as well:\n\n# sum values\n# divide by n, length of vector\n# round to 0 places\nround(sum(fraps)/length(fraps),0)\n\n[1] 6\n\n\n\n\n2.4.2 Median\nThe median is also known as the 50th percentile, and is the midpoint of the data when ordered from least to greatest. If there are an even number of data points, then it is the average point between the two center points. For odd data, this is the \\(\\frac{n+1}{2}\\)th observation. For even data, since we need to take an average, this is the \\(\\frac{\\frac{n}{2}+(\\frac{n}{2}+1)}{2}\\). You should be able to do these by hand and by using a program.\n\nmedian(fraps)\n\n[1] 4\n\n\nNow, to calculate by hand:\n\nlength(fraps)\n\n[1] 9\n\n\nWe have an odd length.\n\n# order gets the order\norder(fraps)\n\n[1] 1 3 7 2 4 6 5 9 8\n\n\n\n# [] tells R which elements to put where\nfrap_order &lt;- fraps[order(fraps)]\n\nfrap_order\n\n[1]  2  2  2  3  4  7  8 13 15\n\n\n\n# always use parentheses\n# make sure the math maths right!\n(length(frap_order)+1)/2\n\n[1] 5\n\n\nWhich is the fifth element in the vector?\n\nfrap_order[5]\n\n[1] 4\n\n\nNow let’s try it for an even numbers.\n\n# remove first element\neven_fraps &lt;- fraps[-1]\n\neven_fraps_order &lt;- even_fraps[order(even_fraps)]\n\neven_fraps_order\n\n[1]  2  2  3  4  7  8 13 15\n\n\n\nmedian(even_fraps)\n\n[1] 5.5\n\n\nNow, by hand: \\(\\frac{\\frac{n}{2}+(\\frac{n}{2}+1)}{2}\\).\n\nn &lt;- length(even_fraps_order)\n\n# get n/2 position from vector\nm1 &lt;- even_fraps_order[n/2]\n# get n/2+1 position\nm2 &lt;- even_fraps_order[(n/2)+1]\n\n# add these values, divide by two for \"midpoint\"\nmed &lt;- (m1+m2)/2\n\nmed\n\n[1] 5.5\n\n\nAs we can see, these values are equal!\n\n\n2.4.3 Mode\nThere is no default method for finding the mode in R. However, websites like Statology provide wraparound functions.\n\n# Statology function\n# define function to calculate mode\nfind_mode &lt;- function(x) {\n  # get unique values from vector\n  u &lt;- unique(x)\n  # count number of occurrences for each value\n  tab &lt;- tabulate(match(x, u))\n  # return the value with the highest count\n  u[tab == max(tab)]\n}\n\nfind_mode(fraps)\n\n[1] 2\n\n\nWe can also do this by hand, by counting the number of occurrences of each value. This can be done in a stepwise fashion using commands in the above function.\n\n# unique counts\nu &lt;- unique(fraps)\nu\n\n[1]  2  3  4  8  7 15 13\n\n\n\n# which elements match\nmatch(fraps,u)\n\n[1] 1 2 1 3 4 5 1 6 7\n\n\n\n# count them\ntab &lt;- match(fraps,u) %&gt;%\n  tabulate()\n\ntab\n\n[1] 3 1 1 1 1 1 1\n\n\nGet the highest value.\n\nu[tab==max(tab)]\n\n[1] 2\n\n\nNotice this uses ==. This is a logical argument that means “is equal to” or “is the same as”. For example:\n\n2 == 2\n\n[1] TRUE\n\n\nThese values are the same, so TRUE is returned.\n\n2 == 3\n\n[1] FALSE\n\n\nThese values are unequal, so FALSE is returned. R will read TRUE as 1 and FALSE as ZERO, such that:\n\nsum(2==2)\n\n[1] 1\n\n\nand\n\nsum(2==3)\n\n[1] 0\n\n\nThis allows you to find how many arguments match your condition quickly, and even allows you to subset based on these indices as well. Keep in mind you can use greater than &lt;, less than &gt;, greater than or equal to &lt;=, less than or equal to &gt;=, is equal to ==, and is not equal to != to identify numerical relationships. Other logical arguments include:\n\n&: both conditions must be TRUE to match (e.g., c(10,20) & c(20,10)). Try the following as well: fraps &lt; 10 & fraps &gt; 3.\n&&: and, but works with single elements and allows for better parsing. Often used with if. E.g., fraps &lt; 10 && fraps &gt; 3. This will not work on our multi-element frap vector.\n|: or, saying at least one condition must be true. Try: fraps &gt; 10 | fraps &lt; 3.\n||: or, but for a single element, like && above.\n!: not, so “not equal to” would be !=.\n\n\n\n2.4.4 Other quartiles\nWe also use the 25th percentile and the 75th percentile to understand data distributions. These are calculated similar to the above, but the bottom quartile is only \\(\\frac{1}{4}\\) of the way between values and the 75th quartile is \\(\\frac{3}{4}\\) of the way between values. We can use the R function quantile to calculate these.\n\nquantile(frap_order)\n\n  0%  25%  50%  75% 100% \n   2    2    4    8   15 \n\n\nWe can specify a quantile as well:\n\nquantile(frap_order, 0.75)\n\n75% \n  8",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Descriptive Statistics</span>"
     ]
   },
   {
@@ -124,7 +154,7 @@
     "href": "references.html",
     "title": "References",
     "section": "",
-    "text": "Cooper, Jacob C. 2021. “Biogeographic and Ecologic\nDrivers of Avian\nDiversity.” Doctoral {Dissertation}, Chicago, IL,\nUSA: The University of Chicago. https://doi.org/10.6082/uchicago.3379.",
+    "text": "Cooper, J. C. (2021). Biogeographic and Ecologic\nDrivers of Avian Diversity.\n[Online.] Available at https://doi.org/10.6082/uchicago.3379.",
     "crumbs": [
       "References"
     ]

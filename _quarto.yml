@@ -9,10 +9,11 @@ book:
   chapters:
     - index.qmd
     - intro_to_r.qmd
-    - summary.qmd
+    - descriptive_stats.qmd
     - references.qmd
 
 bibliography: references.bib
+csl: the-auk.csl
 
 format:
   html:
