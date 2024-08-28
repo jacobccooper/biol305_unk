@@ -40,6 +40,14 @@ Descriptive statistics are statistics that help us understand the shape and natu
 
 Using the `starbucks` dataset, we can look at some of these descriptive statistics to understand what is going on.
 
+### Notation
+
+As a quick reminder, we use Greek lettering for *populations* and Roman lettering for samples. For example:
+
+-   $\sigma$ is a population, but $s$ is a sample (both these variables refer to *standard deviation*).
+
+-   $\mu$ is a population, but $\bar{x}$ is a sample (both of these variables refer to the *mean*).
+
 ### Mean
 
 The mean is the "average" value within a set of data, specifically, the sum of all values divided by the length of those values: $\frac{\sum_{i=1}^nx}{n}$.
@@ -147,6 +155,69 @@ med
 
 As we can see, these values are equal!
 
+### Other quartiles and quantiles
+
+We also use the 25th percentile and the 75th percentile to understand data distributions. These are calculated similar to the above, but the bottom quartile is only $\frac{1}{4}$ of the way between values and the 75th quartile is $\frac{3}{4}$ of the way between values. We can use the *R* function `quantile` to calculate these.
+
+```{r}
+quantile(frap_order)
+```
+
+We can specify a quantile as well:
+
+```{r}
+quantile(frap_order, 0.75)
+```
+
+We can also calculate these metrics by hand. Let's do it for the even dataset, since this is more difficult.
+
+```{r}
+quantile(even_fraps_order)
+```
+
+Note that the 25th and 75th percentiles are also between two different values. These can be calculated as a quarter and three-quarters of the way between their respective values.
+
+```{r}
+# 75th percentile
+
+n <- length(even_fraps_order)
+
+# get position
+p <- 0.75*(n+1)
+
+# get lower value
+# round down
+m1 <- even_fraps_order[trunc(p)]
+
+# get upper value
+# round up
+m2 <- even_fraps_order[ceiling(p)]
+
+# position between
+# fractional portion of rank
+frac <- p-trunc(p)
+
+# calculate the offset from lowest value
+val <- (m2 - m1)*frac
+
+# get value
+m1 + val
+```
+
+Wait... why does our value differ?
+
+*R*, by default, calculates quantiles using what is called `Type 7`, in which the quantiles are calculated by $p_k = \frac{k-1}{n-1}$, where $n$ is the length of the vector and $k$ refers to the quantile being used. However, in our book and in this class, we use `Type 6` interpretation - \$p_k = \frac{k}{n + 1}. Let's try using `Type 6`:
+
+```{r}
+quantile(even_fraps_order, type = 6)
+```
+
+Now we have the same answer as we calculated by hand!
+
+This is a classic example of how things in *R* (and in statistics in general!) can depend on interpretation and are not always "hard and fast" rules.
+
+**In this class, we will be using Type 6 interpretation for the quantiles - you will have to specify this in the quantile function EVERY TIME!** If you do *not* specify Type 6, you will get the questions incorrect and you will get answers that do not agree with the book, with Excel, or what you calculate by hand.
+
 ### Mode
 
 There is no default method for finding the mode in *R*. However, websites like [Statology](https://www.statology.org/mode-in-r/) provide wraparound functions.
@@ -229,18 +300,112 @@ This allows you to find how many arguments match your condition quickly, and eve
 
 -   `!`: not, so "not equal to" would be `!=`.
 
-### Other quartiles
+### Variance
 
-We also use the 25th percentile and the 75th percentile to understand data distributions. These are calculated similar to the above, but the bottom quartile is only $\frac{1}{4}$ of the way between values and the 75th quartile is $\frac{3}{4}$ of the way between values. We can use the *R* function `quantile` to calculate these.
+When we are dealing with datasets, the variance is a measure of the total spread of the data. The variance is calculated using the following:$$\sigma^2=\frac{\sum (x_i-\bar{x})^2}{n-1}$$
 
-```{r}
-quantile(frap_order)
-```
-
-We can specify a quantile as well:
+Essentially, this means that for every value of $x$, we are finding the difference between that value and the mean and squaring it, summing all of these quared differences, and dividing them by the number of samples in the dataset minus one. Let's do this for the frappuccino dataset.
 
 ```{r}
-quantile(frap_order, 0.75)
+frap_order
 ```
 
-We can also calculate these metrics by hand.
+Now to find the differences.
+
+```{r}
+diffs <- frap_order - mean(frap_order)
+
+diffs
+```
+
+Note that *R* is calculating the same thing for the entire vector! Since these are differences from the mean, they should sum to zero.
+
+```{r}
+sum(diffs)
+```
+
+This is not quite zero due to rounding error, but is essentially zero as it is 0.0000000000000036.
+
+```{r}
+# square differences
+diffs_sq <- diffs^2
+
+diffs_sq
+```
+
+Now we have the squared differences. We need to sum these and divide by $n-1$.
+
+```{r}
+n <- length(frap_order)
+
+var_frap <- sum(diffs_sq)/(n-1)
+
+var_frap
+```
+
+Let's check this against the built-in variance function in *R*.
+
+```{r}
+var(frap_order)
+```
+
+They are identical! We can check this using a logical argument.
+
+```{r}
+var_frap == var(frap_order)
+```
+
+Seeing as this is `TRUE`, we calculated it correctly.
+
+### Standard deviation
+
+Another common measurement of spread is the standard deviation ($\sigma$). As you remember from class (or may have guessed from the notation on this site), the standard deviation is just the square root of the variance.
+
+```{r}
+sqrt(var_frap)
+```
+
+We can test this against the built in `sd` function in *R*:
+
+```{r}
+sqrt(var_frap) == sd(frap_order)
+```
+
+As you can see, we calculated this correctly!
+
+### Standard error
+
+The standard error is used to help understand the spread of data and to help estimate the accuracy of our measurements for things like the mean. The standard error is calculated thusly:
+
+$$
+SE = \frac{\sigma}{\sqrt{n}}
+$$
+
+There is not built in function for the standard error in excel, but we can write our own:
+
+```{r}
+se <- function(x){
+  n <- length(x) # calculate n
+  s <- sd(x) # calculate standard deviation
+  se_val <- s/sqrt(n)
+  return(se_val)
+}
+```
+
+Let's test this code.
+
+```{r}
+se(frap_order)
+```
+
+Our code works! And we can see exactly how the standard error is calculate. We can also adjust this code as needed for different situations, like samples.
+
+**Remember**, the standard error is used to help reflect our *confidence* in a specific measurement (*e.g.*, how certain we are of the mean, and what values we believe the mean falls between). We want our estimates to be as precise as possible with as little uncertainty as possible. Given this, does having more samples make our estimates more or less confident? Mathematically, what happens as our sample size *increases*?
+
+## Homework: Chapter 4
+
+Now that we've covered these basic statistics, it's your turn! For this week, you will be completing homework based off of Chapter 4 in your book.
+
+### Homework instructions
+
+Please create an *RMarkdown* document that will render as an `.html` file. You will submit this file to show your coding and your work. Please refer to the [Introduction to *R*](https://jacobccooper.github.io/biol105_unk/intro_to_r.html) for refreshers on how to create an `.html` document in *RMarkdown*.
