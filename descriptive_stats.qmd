@@ -82,6 +82,16 @@ We already covered calculating the average manually in our previous tutorial, bu
 round(sum(fraps)/length(fraps),0)
 ```
 
+### Range
+
+The range is the difference between the largest and smallest units in a dataset. We can use the commands `min` and `max` to calculate this.
+
+```{r}
+max(fraps) - min(fraps)
+```
+
+The range of our dataset is 13.
+
 ### Median
 
 The median is also known as the 50th percentile, and is the midpoint of the data when ordered from least to greatest. If there are an even number of data points, then it is the average point between the two center points. For odd data, this is the $\frac{n+1}{2}$th observation. For even data, since we need to take an average, this is the $\frac{\frac{n}{2}+(\frac{n}{2}+1)}{2}$. You should be able to do these by hand and by using a program.
@@ -206,7 +216,7 @@ m1 + val
 
 Wait... why does our value differ?
 
-*R*, by default, calculates quantiles using what is called `Type 7`, in which the quantiles are calculated by $p_k = \frac{k-1}{n-1}$, where $n$ is the length of the vector and $k$ refers to the quantile being used. However, in our book and in this class, we use `Type 6` interpretation - \$p_k = \frac{k}{n + 1}. Let's try using `Type 6`:
+*R*, by default, calculates quantiles using what is called `Type 7`, in which the quantiles are calculated by $p_k = \frac{k-1}{n-1}$, where $n$ is the length of the vector and $k$ refers to the quantile being used. However, in our book and in this class, we use `Type 6` interpretation - $p_k = \frac{k}{n + 1}$. Let's try using `Type 6`:
 
 ```{r}
 quantile(even_fraps_order, type = 6)
@@ -402,10 +412,112 @@ Our code works! And we can see exactly how the standard error is calculate. We c
 
 **Remember**, the standard error is used to help reflect our *confidence* in a specific measurement (*e.g.*, how certain we are of the mean, and what values we believe the mean falls between). We want our estimates to be as precise as possible with as little uncertainty as possible. Given this, does having more samples make our estimates more or less confident? Mathematically, what happens as our sample size *increases*?
 
+### Coefficient of variation
+
+The coefficient of variation, another measure of data spread and location, is calculated by the following:
+
+$$
+CV = \frac{\sigma}{\mu}
+$$
+
+We can write a function to calculate this in *R* as well.
+
+```{r}
+cv <- function(x){
+  sigma <- sd(x)
+  mu <- mean(x)
+  val <- sigma/mu
+  return(val)
+}
+
+cv(frap_order)
+```
+
+*Remember* that we will need to round values.
+
+### Outliers
+
+Outliers are any values that are outside of the 1.5 times the interquartile range. We can calculate this for our example dataset as follows:
+
+```{r}
+lowquant <- quantile(frap_order,0.25,type = 6)
+
+hiquant <- quantile(frap_order,0.75,type = 6)
+
+iqr <- hiquant - lowquant
+
+lowbound <- mean(frap_order) - (1.5*iqr)
+hibound <- mean(frap_order) + (1.5*iqr)
+
+# low outliers?
+# select elements that match
+# identify using logical "which"
+frap_order[which(frap_order < lowbound)]
+```
+
+```{r}
+# high outliers?
+# select elements that match
+# identify using logical "which"
+frap_order[which(frap_order > hibound)]
+```
+
+We have no outliers for this particular dataset.
+
 ## Homework: Chapter 4
 
 Now that we've covered these basic statistics, it's your turn! For this week, you will be completing homework based off of Chapter 4 in your book.
 
 ### Homework instructions
 
-Please create an *RMarkdown* document that will render as an `.html` file. You will submit this file to show your coding and your work. Please refer to the [Introduction to *R*](https://jacobccooper.github.io/biol105_unk/intro_to_r.html) for refreshers on how to create an `.html` document in *RMarkdown*.
+Please create an *RMarkdown* document that will render as an `.html` file. You will submit this file to show your coding and your work. Please refer to the [Introduction to *R*](https://jacobccooper.github.io/biol105_unk/intro_to_r.html) for refreshers on how to create an `.html` document in *RMarkdown*. You will need to do the following for each of these datasets:
+
+-   mean
+
+-   median
+
+-   range
+
+-   interquartile range
+
+-   variance
+
+-   standard deviation
+
+-   coefficient of variation
+
+-   standard error
+
+-   whether there are any "outliers"
+
+**Please show all of your work for full credit.**
+
+### Data for homework problems
+
+Please use the following datasets for your homework.
+
+#### Problem 4.1
+
+```{r}
+x <- c(2,5,3,7,8,3,9,3,10,4,7,4,6,11,9,
+       9,11,5,7,3,8,9,2,1,3,8,3,8,9,3)
+```
+
+#### Problem 4.2
+
+```{r}
+# beki = Belted Kingfisher (Megaceryle alcyon)
+beki <- c(48.1, 50.8, 48.8, 56.8, 57.7, 47.0,
+          56.8, 60.2, 55.8, 59.2, 52.5, 50.4,
+          48.0, 57.1, 51.8, 52.3, 47.8, 58.0,
+          53.4, 55.2, 51.0, 59.3, 61.5, 61.2,
+          57.8, 50.1, 56.0, 56.5, 55.8, 56.5,
+          56.3, 59.8, 61.8, 56.2, 57.5, 59.3,
+          62.4, 61.1, 59.9, 55.6, 56.8, 59.2)
+```
+
+#### Problem 4.3
+
+```{r}
+
+```
