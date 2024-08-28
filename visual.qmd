@@ -1,6 +1,6 @@
 ---
 title: "Diagnosing data visually"
-author: "Dr. Jacob C. cooper"
+author: "Dr. Jacob C. Cooper"
 format: html
 editor: visual
 ---
