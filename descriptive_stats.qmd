@@ -440,9 +440,9 @@ cv(frap_order)
 Outliers are any values that are outside of the 1.5 times the interquartile range. We can calculate this for our example dataset as follows:
 
 ```{r}
-lowquant <- quantile(frap_order,0.25,type = 6)
+lowquant <- quantile(frap_order,0.25,type = 6) %>% as.numeric()
 
-hiquant <- quantile(frap_order,0.75,type = 6)
+hiquant <- quantile(frap_order,0.75,type = 6) %>% as.numeric()
 
 iqr <- hiquant - lowquant
 
@@ -505,6 +505,10 @@ x <- c(2,5,3,7,8,3,9,3,10,4,7,4,6,11,9,
 
 #### Problem 4.2
 
+Dataset on culmen (top of bill) lengths in Belted Kingfishers *Megaceryle alcyon*.
+
+![Belted Kingfisher *Megaceryle alcyon*. Larry Jordan / flickr.com, Creative Commons](images/beki.jpg)
+
 ```{r}
 # beki = Belted Kingfisher (Megaceryle alcyon)
 beki <- c(48.1, 50.8, 48.8, 56.8, 57.7, 47.0,
@@ -518,6 +522,31 @@ beki <- c(48.1, 50.8, 48.8, 56.8, 57.7, 47.0,
 
 #### Problem 4.3
 
-```{r}
+Dataset on Great Tit brood sizes.
 
+![Great Tit *Parus major*. Creative commons, wikipedia.org](images/grti.jpg)
+
+```{r}
+# brood size in Great Tits (Parus major)
+# must run this whole box to get it formatted correctly
+parus_major <- matrix(nrow = 16, ncol = 2, byrow = T,
+                      data = c(1, 5,
+                               2, 10,
+                               3, 32,
+                               4, 61,
+                               5, 81,
+                               6, 95,
+                               7, 80,
+                               8, 88,
+                               9, 72,
+                               10, 67,
+                               11, 61,
+                               12, 41,
+                               13, 24,
+                               14, 1,
+                               15, 1,
+                               16, 2)) %>%
+  as.data.frame()
+
+colnames(parus_major) <- c("Brood_size", "Frequency")
 ```

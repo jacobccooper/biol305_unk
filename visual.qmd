@@ -1,0 +1,29 @@
+---
+title: "Diagnosing data visually"
+author: "Dr. Jacob C. cooper"
+format: html
+editor: visual
+---
+
+## The importance of visual inspection
+
+Inspecting data visually can give us a lot of information about whether data are normally distributed and about whether there are any major errors or issues with our dataset. It can also help us determine if data meet model assumptions, or if we need to use different tests more appropriate for our datasets.
+
+## Sample data and preparation
+
+First, we need to load our *R* libraries.
+
+```{r}
+library(curl)
+library(tidyverse)
+```
+
+Next, we can download our data sample.
+
+## Histograms
+
+## Skewness
+
+## Kurtosis
+
+## Homework: Chapter 3
