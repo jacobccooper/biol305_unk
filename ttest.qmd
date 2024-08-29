@@ -1,0 +1,18 @@
+---
+title: "Single population means testing"
+author: "Dr. Jacob C. Cooper"
+format: html
+editor: visual
+---
+
+## Introduction
+
+## *t*-distribution
+
+## *t*-tests
+
+## Wilcoxon tests
+
+## Confidence intervals
+
+## Homework: Chapter 9

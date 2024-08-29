@@ -1,0 +1,20 @@
+---
+title: "ANOVA: Part 2"
+author: "Dr. Jacob C. Cooper"
+format: html
+editor: visual
+---
+
+## Two-way ANOVA
+
+## Designs
+
+### Randomized block design
+
+### Repeated measures
+
+### Factorial ANOVA
+
+## Friedman's test
+
+## Homework: Chapter 12

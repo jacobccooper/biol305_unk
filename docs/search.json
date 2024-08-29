@@ -154,7 +154,7 @@
     "href": "descriptive_stats.html#homework-chapter-4",
     "title": "2  Descriptive Statistics",
     "section": "2.5 Homework: Chapter 4",
-    "text": "2.5 Homework: Chapter 4\nNow that we’ve covered these basic statistics, it’s your turn! For this week, you will be completing homework based off of Chapter 4 in your book.\n\n2.5.1 Homework instructions\nPlease create an RMarkdown document that will render as an .html file. You will submit this file to show your coding and your work. Please refer to the Introduction to R for refreshers on how to create an .html document in RMarkdown. You will need to do the following for each of these datasets:\n\nmean\nmedian\nrange\ninterquartile range\nvariance\nstandard deviation\ncoefficient of variation\nstandard error\nwhether there are any “outliers”\n\nPlease show all of your work for full credit.\n\n\n2.5.2 Data for homework problems\nPlease use the following datasets for your homework.\n\n2.5.2.1 Problem 4.1\n\nx &lt;- c(2,5,3,7,8,3,9,3,10,4,7,4,6,11,9,\n       9,11,5,7,3,8,9,2,1,3,8,3,8,9,3)\n\n\n\n2.5.2.2 Problem 4.2\nDataset on culmen (top of bill) lengths in Belted Kingfishers Megaceryle alcyon.\n\n\n\nBelted Kingfisher Megaceryle alcyon. Larry Jordan / flickr.com, Creative Commons\n\n\n\n# beki = Belted Kingfisher (Megaceryle alcyon)\nbeki &lt;- c(48.1, 50.8, 48.8, 56.8, 57.7, 47.0,\n          56.8, 60.2, 55.8, 59.2, 52.5, 50.4,\n          48.0, 57.1, 51.8, 52.3, 47.8, 58.0,\n          53.4, 55.2, 51.0, 59.3, 61.5, 61.2,\n          57.8, 50.1, 56.0, 56.5, 55.8, 56.5,\n          56.3, 59.8, 61.8, 56.2, 57.5, 59.3,\n          62.4, 61.1, 59.9, 55.6, 56.8, 59.2)\n\n\n\n2.5.2.3 Problem 4.3\nDataset on Great Tit brood sizes.\n\n\n\nGreat Tit Parus major. Creative commons, wikipedia.org\n\n\n\n# brood size in Great Tits (Parus major)\n# must run this whole box to get it formatted correctly\nparus_major &lt;- matrix(nrow = 16, ncol = 2, byrow = T,\n                      data = c(1, 5,\n                               2, 10,\n                               3, 32,\n                               4, 61,\n                               5, 81,\n                               6, 95,\n                               7, 80,\n                               8, 88,\n                               9, 72,\n                               10, 67,\n                               11, 61,\n                               12, 41,\n                               13, 24,\n                               14, 1,\n                               15, 1,\n                               16, 2)) %&gt;%\n  as.data.frame()\n\ncolnames(parus_major) &lt;- c(\"Brood_size\", \"Frequency\")",
+    "text": "2.5 Homework: Chapter 4\nNow that we’ve covered these basic statistics, it’s your turn! For this week, you will be completing homework based off of Chapter 4 in your book.\n\n2.5.1 Homework instructions\nPlease create an RMarkdown document that will render as an .html file. You will submit this file to show your coding and your work. Please refer to the Introduction to R for refreshers on how to create an .html document in RMarkdown. You will need to do the following for each of these datasets:\n\nmean\nmedian\nrange\ninterquartile range\nvariance\nstandard deviation\ncoefficient of variation\nstandard error\nwhether there are any “outliers”\n\nPlease show all of your work for full credit.\n\n\n2.5.2 Data for homework problems\nPlease use the following datasets for your homework.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Descriptive Statistics</span>"
     ]
@@ -217,6 +217,376 @@
     "text": "3.6 Homework: Chapter 3",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Diagnosing data visually</span>"
+    ]
+  },
+  {
+    "objectID": "normality.html",
+    "href": "normality.html",
+    "title": "4  Normality & hypothesis testing",
+    "section": "",
+    "text": "4.1 Normal distributions\nExample text.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Normality & hypothesis testing</span>"
+    ]
+  },
+  {
+    "objectID": "normality.html#hypothesis-testing",
+    "href": "normality.html#hypothesis-testing",
+    "title": "4  Normality & hypothesis testing",
+    "section": "4.2 Hypothesis testing",
+    "text": "4.2 Hypothesis testing",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Normality & hypothesis testing</span>"
+    ]
+  },
+  {
+    "objectID": "normality.html#homework-chapter-8",
+    "href": "normality.html#homework-chapter-8",
+    "title": "4  Normality & hypothesis testing",
+    "section": "4.3 Homework: Chapter 8",
+    "text": "4.3 Homework: Chapter 8",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Normality & hypothesis testing</span>"
+    ]
+  },
+  {
+    "objectID": "exam2.html",
+    "href": "exam2.html",
+    "title": "5  Exam 2 practice",
+    "section": "",
+    "text": "5.1 Exam 2\nThe following is practice for Exam 2.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Exam 2 practice</span>"
+    ]
+  },
+  {
+    "objectID": "probdist.html",
+    "href": "probdist.html",
+    "title": "6  Probability distributions",
+    "section": "",
+    "text": "6.1 Probability distributions",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Probability distributions</span>"
+    ]
+  },
+  {
+    "objectID": "probdist.html#binomial-distribution",
+    "href": "probdist.html#binomial-distribution",
+    "title": "6  Probability distributions",
+    "section": "6.2 Binomial distribution",
+    "text": "6.2 Binomial distribution",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Probability distributions</span>"
+    ]
+  },
+  {
+    "objectID": "probdist.html#poisson-distribution",
+    "href": "probdist.html#poisson-distribution",
+    "title": "6  Probability distributions",
+    "section": "6.3 Poisson distribution",
+    "text": "6.3 Poisson distribution",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Probability distributions</span>"
+    ]
+  },
+  {
+    "objectID": "probdist.html#chi-square-distribution",
+    "href": "probdist.html#chi-square-distribution",
+    "title": "6  Probability distributions",
+    "section": "6.4 Chi-square distribution",
+    "text": "6.4 Chi-square distribution",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Probability distributions</span>"
+    ]
+  },
+  {
+    "objectID": "probdist.html#fishers-exact-test",
+    "href": "probdist.html#fishers-exact-test",
+    "title": "6  Probability distributions",
+    "section": "6.5 Fisher’s exact test",
+    "text": "6.5 Fisher’s exact test",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Probability distributions</span>"
+    ]
+  },
+  {
+    "objectID": "probdist.html#homework",
+    "href": "probdist.html#homework",
+    "title": "6  Probability distributions",
+    "section": "6.6 Homework",
+    "text": "6.6 Homework\n\n6.6.1 Chapter 5\n\n\n6.6.2 Chapter 7",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Probability distributions</span>"
+    ]
+  },
+  {
+    "objectID": "ttest.html",
+    "href": "ttest.html",
+    "title": "7  Single population means testing",
+    "section": "",
+    "text": "7.1 Introduction",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Single population means testing</span>"
+    ]
+  },
+  {
+    "objectID": "ttest.html#t-distribution",
+    "href": "ttest.html#t-distribution",
+    "title": "7  Single population means testing",
+    "section": "7.2 t-distribution",
+    "text": "7.2 t-distribution",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Single population means testing</span>"
+    ]
+  },
+  {
+    "objectID": "ttest.html#t-tests",
+    "href": "ttest.html#t-tests",
+    "title": "7  Single population means testing",
+    "section": "7.3 t-tests",
+    "text": "7.3 t-tests",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Single population means testing</span>"
+    ]
+  },
+  {
+    "objectID": "ttest.html#wilcoxon-tests",
+    "href": "ttest.html#wilcoxon-tests",
+    "title": "7  Single population means testing",
+    "section": "7.4 Wilcoxon tests",
+    "text": "7.4 Wilcoxon tests",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Single population means testing</span>"
+    ]
+  },
+  {
+    "objectID": "ttest.html#confidence-intervals",
+    "href": "ttest.html#confidence-intervals",
+    "title": "7  Single population means testing",
+    "section": "7.5 Confidence intervals",
+    "text": "7.5 Confidence intervals",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Single population means testing</span>"
+    ]
+  },
+  {
+    "objectID": "ttest.html#homework-chapter-9",
+    "href": "ttest.html#homework-chapter-9",
+    "title": "7  Single population means testing",
+    "section": "7.6 Homework: Chapter 9",
+    "text": "7.6 Homework: Chapter 9",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Single population means testing</span>"
+    ]
+  },
+  {
+    "objectID": "two_ttest.html",
+    "href": "two_ttest.html",
+    "title": "8  Two sample tests",
+    "section": "",
+    "text": "8.1 Introduction",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Two sample tests</span>"
+    ]
+  },
+  {
+    "objectID": "two_ttest.html#t-tests",
+    "href": "two_ttest.html#t-tests",
+    "title": "8  Two sample tests",
+    "section": "8.2 t-tests",
+    "text": "8.2 t-tests",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Two sample tests</span>"
+    ]
+  },
+  {
+    "objectID": "two_ttest.html#mann-whitney-u-tests",
+    "href": "two_ttest.html#mann-whitney-u-tests",
+    "title": "8  Two sample tests",
+    "section": "8.3 Mann-Whitney U tests",
+    "text": "8.3 Mann-Whitney U tests",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Two sample tests</span>"
+    ]
+  },
+  {
+    "objectID": "two_ttest.html#error",
+    "href": "two_ttest.html#error",
+    "title": "8  Two sample tests",
+    "section": "8.4 Error",
+    "text": "8.4 Error",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Two sample tests</span>"
+    ]
+  },
+  {
+    "objectID": "two_ttest.html#homework-chapter-10",
+    "href": "two_ttest.html#homework-chapter-10",
+    "title": "8  Two sample tests",
+    "section": "8.5 Homework: Chapter 10",
+    "text": "8.5 Homework: Chapter 10",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Two sample tests</span>"
+    ]
+  },
+  {
+    "objectID": "anova1.html",
+    "href": "anova1.html",
+    "title": "9  ANOVA: Part 1",
+    "section": "",
+    "text": "9.1 Introduction",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ANOVA: Part 1</span>"
+    ]
+  },
+  {
+    "objectID": "anova1.html#anova-by-hand",
+    "href": "anova1.html#anova-by-hand",
+    "title": "9  ANOVA: Part 1",
+    "section": "9.2 ANOVA: By hand",
+    "text": "9.2 ANOVA: By hand",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ANOVA: Part 1</span>"
+    ]
+  },
+  {
+    "objectID": "anova1.html#anova-by-r",
+    "href": "anova1.html#anova-by-r",
+    "title": "9  ANOVA: Part 1",
+    "section": "9.3 ANOVA: By R",
+    "text": "9.3 ANOVA: By R",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ANOVA: Part 1</span>"
+    ]
+  },
+  {
+    "objectID": "anova1.html#kruskal-wallis-tests",
+    "href": "anova1.html#kruskal-wallis-tests",
+    "title": "9  ANOVA: Part 1",
+    "section": "9.4 Kruskal-Wallis tests",
+    "text": "9.4 Kruskal-Wallis tests",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ANOVA: Part 1</span>"
+    ]
+  },
+  {
+    "objectID": "anova1.html#homework-chapter-11",
+    "href": "anova1.html#homework-chapter-11",
+    "title": "9  ANOVA: Part 1",
+    "section": "9.5 Homework: Chapter 11",
+    "text": "9.5 Homework: Chapter 11",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ANOVA: Part 1</span>"
+    ]
+  },
+  {
+    "objectID": "anova2.html",
+    "href": "anova2.html",
+    "title": "10  ANOVA: Part 2",
+    "section": "",
+    "text": "10.1 Two-way ANOVA",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ANOVA: Part 2</span>"
+    ]
+  },
+  {
+    "objectID": "anova2.html#designs",
+    "href": "anova2.html#designs",
+    "title": "10  ANOVA: Part 2",
+    "section": "10.2 Designs",
+    "text": "10.2 Designs\n\n10.2.1 Randomized block design\n\n\n10.2.2 Repeated measures\n\n\n10.2.3 Factorial ANOVA",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ANOVA: Part 2</span>"
+    ]
+  },
+  {
+    "objectID": "anova2.html#friedmans-test",
+    "href": "anova2.html#friedmans-test",
+    "title": "10  ANOVA: Part 2",
+    "section": "10.3 Friedman’s test",
+    "text": "10.3 Friedman’s test",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ANOVA: Part 2</span>"
+    ]
+  },
+  {
+    "objectID": "anova2.html#homework-chapter-12",
+    "href": "anova2.html#homework-chapter-12",
+    "title": "10  ANOVA: Part 2",
+    "section": "10.4 Homework: Chapter 12",
+    "text": "10.4 Homework: Chapter 12",
+    "crumbs": [
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ANOVA: Part 2</span>"
+    ]
+  },
+  {
+    "objectID": "cor_reg.html",
+    "href": "cor_reg.html",
+    "title": "11  Correlation & regression",
+    "section": "",
+    "text": "11.1 Introduction",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Correlation & regression</span>"
+    ]
+  },
+  {
+    "objectID": "cor_reg.html#correlation",
+    "href": "cor_reg.html#correlation",
+    "title": "11  Correlation & regression",
+    "section": "11.2 Correlation",
+    "text": "11.2 Correlation\n\n11.2.1 Pearson’s\n\n\n11.2.2 Spearman’s\n\n\n11.2.3 Other non-parametric methods",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Correlation & regression</span>"
+    ]
+  },
+  {
+    "objectID": "cor_reg.html#correlation-1",
+    "href": "cor_reg.html#correlation-1",
+    "title": "11  Correlation & regression",
+    "section": "11.3 Correlation",
+    "text": "11.3 Correlation\n\n11.3.1 Parametric\n\n\n11.3.2 Non-parametric",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Correlation & regression</span>"
+    ]
+  },
+  {
+    "objectID": "cor_reg.html#homework",
+    "href": "cor_reg.html#homework",
+    "title": "11  Correlation & regression",
+    "section": "11.4 Homework",
+    "text": "11.4 Homework\n\n11.4.1 Chapter 13\n\n\n11.4.2 Chapter 14",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Correlation & regression</span>"
+    ]
+  },
+  {
+    "objectID": "final_exam.html",
+    "href": "final_exam.html",
+    "title": "12  Final exam & review",
+    "section": "",
+    "text": "12.1 Pick the test",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Final exam & review</span>"
+    ]
+  },
+  {
+    "objectID": "final_exam.html#final-review",
+    "href": "final_exam.html#final-review",
+    "title": "12  Final exam & review",
+    "section": "12.2 Final review",
+    "text": "12.2 Final review",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Final exam & review</span>"
+    ]
+  },
+  {
+    "objectID": "conclusion.html",
+    "href": "conclusion.html",
+    "title": "13  Conclusions",
+    "section": "",
+    "text": "13.1 ᏙᏓᏓᎪᎲᎢ\nᏙᏓᏓᎪᎲᎢ (pronounced doh-dah-dah-go-huh-ee) is a traditional Cherokee farewell. It does not mean goodbye, but rather reflects a parting of ways until a group of folks meet again.\nI enjoyed getting to know all of you in class, and please feel free to reach out or stop by and say hi if you are ever passing through Kearney in the future or if you need help with something biology related.\nWishing you the best,\nDr. Cooper",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Conclusions</span>"
     ]
   },
   {

@@ -1,0 +1,22 @@
+---
+title: "Probability distributions"
+author: "Dr. Jacob C. Cooper"
+format: html
+editor: visual
+---
+
+## Probability distributions
+
+## Binomial distribution
+
+## Poisson distribution
+
+## Chi-square distribution
+
+## Fisher's exact test
+
+## Homework
+
+### Chapter 5
+
+### Chapter 7

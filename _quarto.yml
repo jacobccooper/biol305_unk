@@ -11,6 +11,16 @@ book:
     - intro_to_r.qmd
     - descriptive_stats.qmd
     - visual.qmd
+    - normality.qmd
+    - exam2.qmd
+    - probdist.qmd
+    - ttest.qmd
+    - two_ttest.qmd
+    - anova1.qmd
+    - anova2.qmd
+    - cor_reg.qmd
+    - final_exam.qmd
+    - conclusion.qmd
     - references.qmd
 
 bibliography: references.bib

@@ -147,10 +147,10 @@ plot(x = x, # specify x values
 
 *RStudio* allows for "tab-completing" while typing code. Tab-completing is a way of typing the first part of a command, variable name, or file name and hitting "tab" to show all options with that spelling. You should use tab completing because it:
 
-- reduces spelling mistakes
-- reduces filepath mistakes
-- increases the speed at which you code
-- provides help with specific functions
+-   reduces spelling mistakes
+-   reduces filepath mistakes
+-   increases the speed at which you code
+-   provides help with specific functions
 
 ## Help
 
@@ -166,8 +166,8 @@ Throughout this course, we are going to have to work with datasets that are from
 
 In this class, there are two libraries that you will need *almost every week*! First, we need to install the libraries. The main libraries we need for this class are:
 
-1. `cURL`: this package allows us to download things from URLs. We will be using this to download data files. *Otherwise, you will have to enter all data by hand!*
-2. `tidyverse`: this package is actually a [group of packages](https://www.tidyverse.org/) designed to help with data analysis, management, and visualization.
+1.  `cURL`: this package allows us to download things from URLs. We will be using this to download data files. *Otherwise, you will have to enter all data by hand!*
+2.  `tidyverse`: this package is actually a [group of packages](https://www.tidyverse.org/) designed to help with data analysis, management, and visualization.
 
 ```{r, eval=FALSE}
 # run this code the first time ONLY
@@ -197,8 +197,8 @@ library(tidyverse)
 
 You should an output like the above. What this means is:
 
-1. The core packages that comprise the tidyverse loaded successfully, and version numbers for each are shown.
-2. The conflicts basically means that certain commands will not work as they used to because *R* has "re-learned" a particular word.
+1.  The core packages that comprise the tidyverse loaded successfully, and version numbers for each are shown.
+2.  The conflicts basically means that certain commands will not work as they used to because *R* has "re-learned" a particular word.
 
 To clarify the conflicts, pretend that you can only know one definition of a word at a time. You may know the word "cola" as a type of soda pop or as a drink in general. However, in Spanish, "cola" refers to a line or a tail. While we can learn both of these definitions and know which one is which because of context, a computer can't do that. In *R*, we would then have to specify which "cola" we are refferring to. We do this by listing the package before the command; in this case, `english::cola` would mean a soda pop and `spanish::cola` would refer to a line or tail. If we just type `cola`, the computer will assume one of these definitions but not even consider the other.
 
@@ -242,12 +242,12 @@ summary(ranges)
 
 As seen above, we now have information for the following statistics for each variable:
 
-- `Min` = minimum
-- `1st Qu.` = 1st quartile
-- `Median` = middle of the dataset
-- `Mean` = average of the dataset
-- `3rd Qu.` = 3rd quartile
-- `Max.` = maximum
+-   `Min` = minimum
+-   `1st Qu.` = 1st quartile
+-   `Median` = middle of the dataset
+-   `Mean` = average of the dataset
+-   `3rd Qu.` = 3rd quartile
+-   `Max.` = maximum
 
 We can also calculate some of these statistics manually to see if we are doing everything correctly. It is easiest to do this by using predefined functions in *R* (code others have written to perform a particular task) or to create our own functions in *R*. We will do both to determine the average of `combined_current_km2`.
 
@@ -255,9 +255,9 @@ We can also calculate some of these statistics manually to see if we are doing e
 
 First, we need to select only the column of interest. In *R*, we have two ways of subsetting data to get a particular column.
 
-- `var[rows,cols]` is a way to look at a particular object (`var` in this case) and choose a specific combination of `row` number and `column` number (`col`). This is great if you know a specific index, but it is better to use a specific name.
- - `var[rows,"cols"]` is a way to do the above but by using a specific column name, like `combined_current_km2`.
- - `var$colname` is a way to call the specific column name directly from the dataset.
+-   `var[rows,cols]` is a way to look at a particular object (`var` in this case) and choose a specific combination of `row` number and `column` number (`col`). This is great if you know a specific index, but it is better to use a specific name.
+-   `var[rows,"cols"]` is a way to do the above but by using a specific column name, like `combined_current_km2`.
+-   `var$colname` is a way to call the specific column name directly from the dataset.
 
 ```{r}
 # using R functions
@@ -326,8 +326,8 @@ our_mean(ranges$combined_current_km2) %>%
 
 With a partner or on your own, try to do the following:
 
-1. Create an *RMarkdown document* that will save as an `.html`.
-2. Load the data, as shown here, and print the summary statistics in the document.
-3. Calculate the value of `combined_current_km2` divided by `2050_combined_km2` and print the results.
+1.  Create an *RMarkdown document* that will save as an `.html`.
+2.  Load the data, as shown here, and print the summary statistics in the document.
+3.  Calculate the value of `combined_current_km2` divided by `2050_combined_km2` and print the results.
 
 Let me know if you have any issues.

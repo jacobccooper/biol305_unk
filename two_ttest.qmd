@@ -1,0 +1,16 @@
+---
+title: "Two sample tests"
+author: "Dr. Jacob C. Cooper"
+format: html
+editor: visual
+---
+
+## Introduction
+
+## *t*-tests
+
+## Mann-Whitney *U* tests
+
+## Error
+
+## Homework: Chapter 10

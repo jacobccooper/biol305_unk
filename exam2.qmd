@@ -1,0 +1,10 @@
+---
+title: "Exam 2 practice"
+author: "Dr. Melissa Wuellner & Dr. Jacob C. Cooper"
+format: html
+editor: visual
+---
+
+## Exam 2
+
+The following is practice for Exam 2.

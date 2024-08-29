@@ -1,0 +1,16 @@
+---
+title: "ANOVA: Part 1"
+author: "Dr. Jacob C. Cooper"
+format: html
+editor: visual
+---
+
+## Introduction
+
+## ANOVA: By hand
+
+## ANOVA: By *R*
+
+## Kruskal-Wallis tests
+
+## Homework: Chapter 11

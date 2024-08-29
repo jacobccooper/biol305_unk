@@ -1,0 +1,14 @@
+---
+title: "Normality & hypothesis testing"
+author: "Dr. Jacob C. Cooper"
+format: html
+editor: visual
+---
+
+## Normal distributions
+
+Example text.
+
+## Hypothesis testing
+
+## Homework: Chapter 8

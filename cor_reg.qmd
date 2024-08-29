@@ -1,0 +1,28 @@
+---
+title: "Correlation & regression"
+author: "Dr. Jacob C. Cooper"
+format: html
+editor: visual
+---
+
+## Introduction
+
+## Correlation
+
+### Pearson's
+
+### Spearman's
+
+### Other non-parametric methods
+
+## Correlation
+
+### Parametric
+
+### Non-parametric
+
+## Homework
+
+### Chapter 13
+
+### Chapter 14
