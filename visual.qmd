@@ -22,6 +22,8 @@ Next, we can download our data sample.
 
 ## Histograms
 
+A histogram is a frequency diagram that we can use to visually diagnose data and their distributions.
+
 ## Skewness
 
 ## Kurtosis
