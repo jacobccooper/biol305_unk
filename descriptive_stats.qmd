@@ -464,9 +464,9 @@ frap_order[which(frap_order > hibound)]
 
 We have no outliers for this particular dataset.
 
-## Homework: Chapter 4
+## Homework: Descriptive Statistics
 
-Now that we've covered these basic statistics, it's your turn! For this week, you will be completing homework based off of Chapter 4 in your book.
+Now that we've covered these basic statistics, it's your turn! For this week, you will be completing homework that involves methods from Chapter 4 in your book.
 
 ### Homework instructions
 
@@ -494,5 +494,58 @@ Please create an *RMarkdown* document that will render as an `.html` file. You w
 
 ### Data for homework problems
 
-Please use the following datasets for your homework.
+For each question, calculate the mean, median, range, interquartile range, variance, standard deviation, coefficient of variation, standard error, and whether there are any "outliers".
 
+Please also write your own short response to the *Synthesis question* posed, which will involve thinking about the data and metrics you just analyzed.
+
+#### 1: UNK Nebraskans
+
+Ever year, the university keeps track of where students are from. The following are data on the number of students admitted to UNK from the state of Nebraska:
+
+```{r}
+# create dataset in R
+nebraskans <- c(5056,5061,5276,5244,5209,
+                5262,5466,5606,5508,5540,5614)
+
+years <- 2023:2013
+
+nebraskans_years <- cbind(years,nebraskans) %>% 
+  as.data.frame()
+
+nebraskans_years
+```
+
+Using these data, please calculate the mean, median, range, interquartile range, variance, standard deviation, coefficient of variation, standard error, and whether there are any "outliers" for the number of UNK students from Nebraska.
+
+**Synthesis question**: Do you think that there are any really anomalous years? Do you feel data are similar between years? *Note* we are not looking at trends through time but whether any years are outliers.
+
+#### 2: Piracy in the Gulf of Guinea
+
+The following is a dataset looking at oceanic conditions and other variables associated with pirate attacks within the region between 2010 and 2021 (@Moura2023). Using these data, please calculate the mean, median, range, interquartile range, variance, standard deviation, coefficient of variation, standard error, and whether there are any "outliers" for distance from shore for each pirate attack (columns `Distance_from_Coast`).
+
+```{r}
+url_file <- curl("https://figshare.com/ndownloader/files/42314604")
+pirates <- url_file %>% read_csv()
+```
+
+**Synthesis question**: Do you notice any patterns in distance from shore? What may be responsible for these patterns? *Hint*: Think about what piracy entails and also what other columns are available as other variables in the above dataset.
+
+#### 3: Patient ages at presentation
+
+The following is a dataset on skin sores in different communities in Australia and Oceania, specifically looking at the amount of time that passes between skin infections (@Lydeamore2020). This file includes multiple different datasets, and focuses on data from children in the first five years of their life, on househould visits, and on data collected during targeted studies (@Lydeamore2020).
+
+```{r}
+url_file <- curl("https://doi.org/10.1371/journal.pcbi.1007838.s006")
+
+ages <- url_file %>% read_csv()
+```
+
+Let's see what this file is like real fast. We can use the command `dim` to see the `rows` and `columns`.
+
+```{r}
+dim(ages)
+```
+
+As you can see, this file has only two columns but 17,150 rows! For the column `time_difference`, please calculate the mean, median, range, interquartile range, variance, standard deviation, coefficient of variation, standard error, and whether there are any "outliers".
+
+**Synthesis question**: Folks will often think about probabilities of events being "low but never zero". What does that mean in the context of these data? What about these data make you feel like probabilities may decrease through time but never become zero?
