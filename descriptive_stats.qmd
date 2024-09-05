@@ -500,7 +500,7 @@ Please also write your own short response to the *Synthesis question* posed, whi
 
 #### 1: UNK Nebraskans
 
-Ever year, the university keeps track of where students are from. The following are data on the number of students admitted to UNK from the state of Nebraska:
+Ever year, the university keeps track of where students are from. The following are data on the number of students admitted to [UNK from the state of Nebraska](https://www.unk.edu/factbook/index.php):
 
 ```{r}
 # create dataset in R
