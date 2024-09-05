@@ -532,7 +532,7 @@ pirates <- url_file %>% read_csv()
 
 #### 3: Patient ages at presentation
 
-The following is a dataset on skin sores in different communities in Australia and Oceania, specifically looking at the amount of time that passes between skin infections [@Lydeamore2020]. This file includes multiple different datasets, and focuses on data from children in the first five years of their life, on househould visits, and on data collected during targeted studies [@Lydeamore2020].
+The following is a dataset on skin sores in different communities in Australia and Oceania, specifically looking at the amount of time that passes between skin infections [@lydeamore_estimation_2020]. This file includes multiple different datasets, and focuses on data from children in the first five years of their life, on househould visits, and on data collected during targeted studies [@Lydeamore2020].
 
 ```{r}
 url_file <- curl("https://doi.org/10.1371/journal.pcbi.1007838.s006")
