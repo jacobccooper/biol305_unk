@@ -22,10 +22,150 @@ Next, we can download our data sample.
 
 ## Histograms
 
-A histogram is a frequency diagram that we can use to visually diagnose data and their distributions.
+A histogram is a frequency diagram that we can use to visually diagnose data and their distributions. We are going to examine a histogram using a random string of data. *R* can generate random (though, actually pseudorandom) strings of data on command, pulling them from different distributions. These distributions are pseudorandom because we can't actually program *R* to be random, so it starts from a wide variety of pseudorandom points.
+
+```{r}
+# create random string from normal distribution
+x <- rnorm(n = 1000, # 1000 values
+           mean = 0,
+           sd = 1)
+
+hist(x)
+```
+
+We can up the number of bins to see this better.
+
+```{r}
+hist(x,breaks = 100)
+```
+
+We can also use the program `ggplot`, part of the `tidyverse`, to create histograms.
+
+```{r}
+# ggplot requires data frames
+x2 <- x %>% as.data.frame()
+colnames(x2) <- "x"
+
+ggplot(data = x2, aes(x = x)) +
+  geom_histogram()
+```
+
+`ggplot` is nice because we can also clean up this graph a little.
+
+```{r}
+ggplot(x2,aes(x=x)) + geom_histogram() +
+  theme_minimal()
+```
+
+We can also do a histogram of multiple values at once in *R*.
+
+```{r}
+x2$cat <- "x"
+
+y <- rnorm(n = 1000,
+           mean = 1,
+           sd = 1) %>%
+  as.data.frame()
+
+colnames(y) <- "x"
+y$cat <- "y"
+
+xy <- rbind(x2,y)
+
+head(xy)
+```
+
+```{r}
+ggplot(xy,aes(x = x, fill = cat)) +
+  geom_histogram()
+```
+
+We can also make this look a little nicer.
+
+```{r}
+ggplot(xy, aes(x = x, colour = cat)) +
+  geom_histogram(fill = "white", alpha = 0.5, # transparency
+                 position = "identity") +
+  theme_classic()
+```
+
+We can show these a little differently as well.
+
+```{r}
+ggplot(xy, aes(x = x, fill = cat))+
+  geom_histogram(position = "identity", alpha = 0.5) +
+  theme_minimal()
+```
+
+There are lots of other commands you can incorporate as well if you so choose; I recommend checking [sites like this one](http://www.sthda.com/english/wiki/ggplot2-histogram-plot-quick-start-guide-r-software-and-data-visualization).
 
 ## Skewness
 
+Skew is a measure of how much a dataset "leans" to the positive or negative directions (*i.e.*, to the "left" or to the "right"). To calculate skew, we are going to use the `moments` library.
+
+```{r}
+# don't forget to install if needed!
+library(moments)
+
+skewness(x)
+```
+
+Generally, a value between $-1$ and $+1$ for skewness is "acceptable" and not considered overly skewed. Positive values indicate "right" skew and negative values indicate a "left" skew. If something is too skewed, it may violate assumptions of normality and thus need *non-parametric* tests rather than our standard parametric tests - something we will cover later!
+
+Let's look at a skewed dataset. We are going to artificially create a skewed dataset from our `x` vector.
+
+```{r}
+# create more positive values
+x3 <- c(x,
+        x[which(x > 0)]*2,
+        x[which(x > 0)]*4,
+        x[which(x > 0)]*8)
+
+hist(x3)
+```
+
+```{r}
+skewness(x3)
+```
+
+As we can see, the above is a heavily skewed dataset with a positive ("right") skew.
+
 ## Kurtosis
+
+Kurtosis refers to how sharp or shallow the peak of the distribution is (*platykurtic* vs. *leptokurtic*). Remember - *platy*kyrtic are *plateau*kurtic, wide and broad like a plateau, and *leptokurtic* distributions are sharp. Intermediate distributions that are roughly normal are *mesokurtic*.
+
+Much like skewness, kurtosis values of $> 2$ and $< -2$ are generally considered extreme, and thus not mesokurtic. This threshold can vary a bit based on source, but for this class, we will use a threshold of $\pm 2$ for both skewness and kurtosis.
+
+Let's see the kurtosis of `x`. *Note* that when doing the equation, a normal distribution actually has a kurtosis of $3$; thus, we are doing kurtosis $-3$ to "zero" the distribution and make it comparable to skewness.
+
+```{r}
+hist(x)
+```
+
+```{r}
+# non-zeroed
+kurtosis(x)
+```
+
+```{r}
+# zeroed
+kurtosis(x)-3
+```
+
+As expected, out values drawn from a normal distribution are not overly skewed. Let's compare these to a more kurtic distribution:
+
+```{r}
+xk <- x^3
+
+kurtosis(xk)-3
+```
+
+What does this dataset look like?
+
+```{r}
+hist(xk,breaks = 100)
+```
+
+As we can see, this is a very *leptokurtic* distribution.
 
 ## Homework: Chapter 3
