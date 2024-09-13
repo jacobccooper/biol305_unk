@@ -7,6 +7,142 @@ editor: visual
 
 ## Normal distributions
 
+```{r,echo=F,error=FALSE,warning=FALSE,message=FALSE}
+library(curl)
+library(tidyverse)
+```
+
+A *standard normal distribution* is a mathematical model that describes a commonly observed phenomenon in nature. When measuring many different kinds of datasets, the data being measured often becomes something that resembles a standard normal distribution. This distribution is described by the following equation:
+
+$$f(x)=\frac{1}{\sqrt{2\pi \sigma^2}}e^\frac{(x-\mu)^2}{2\sigma^2}$$
+
+This equation is fairly well defined by the *variance* ($\sigma^2$), the overall spread of the data, and by the *standard deviation* ($\sigma$), which is defined by the square root of the variance.
+
+![A standard normal distribution, illustrating the percentage of area found within each standard deviation away from the mean. By Ainali on Wikipedia; CC-BY-SA 3.0.](images/Standard_deviation_diagram_micro.svg.png)
+
+The standard normal distribution is a *density function*, and we are interested in the "area under the curve" (AUC) to understand the relative probability of an event occurring. When looking at a normal distribution distribution, it is impossible to say the probability of a specific event occurring, but it is possible to state the probability of an event *as extreme or more extreme than the event observed* occurring. This is known as the $p$ value.
+
+### Example in nature
+
+In order to see an example of the normal distribution in nature, we are going to examine the BeeWalk survey database from the island of Great Britain [@Comont2020]. We are not interested in the bee data at present, however, but in the climatic data from when the surveys were performed.
+
+```{r}
+beewalk <- curl("https://figshare.com/ndownloader/files/44726902") %>%
+  read_csv()
+```
+
+Note that this is another massive dataset - $306,550$ rows of data!
+
+The dataset has the following columns:
+
+```{r}
+colnames(beewalk)
+```
+
+We are specifically interested in `temperature` to determine weather conditions at start. Let's see what the mean of this variable is.
+
+```{r}
+mean(beewalk$temperature)
+```
+
+Hmmm... we are getting an `NA` value, indicating that not every cell has data recorded. Let's view `summary`.
+
+```{r}
+summary(beewalk$temperature)
+```
+
+As we can see, $16,151$ rows do not have temperature recorded! We want to remove these rows, so we can remove `NA` values using `na.omit`.
+
+```{r}
+beewalk$temperature %>%
+  na.omit() %>%
+  mean() %>%
+  round(2) # don't forget to round!
+```
+
+Now we can record the mean.
+
+Let's visualize these data using a histogram.
+
+```{r}
+hist(beewalk$temperature,breaks = 5)
+```
+
+Even with only five breaks, we can see an interesting, normal-esque distribution in the data. Let's refine the bin number.
+
+```{r}
+hist(beewalk$temperature,breaks = 40)
+```
+
+With forty breaks, the pattern becomes even more clear. Let's see what a *standard normal distribution* around these data would look like.
+
+```{r}
+# save temperature vector without NA values
+temps <- beewalk$temperature %>% na.omit()
+
+mu <- mean(temps)
+t.sd <- sd(temps)
+
+# sample random values
+normal.temps <- rnorm(length(temps), # sample same size vector
+                      mean = mu,
+                      sd = t.sd)
+
+hist(normal.temps, breaks = 40)
+```
+
+As we can see, our normal approximation of temperatures is not too dissimilar from the distribution of temperatures we actually see!
+
+Let's see what kind of data we have for temperatures:
+
+```{r}
+library(moments)
+
+skewness(temps)
+```
+
+Data do not have any significant skew.
+
+```{r}
+kurtosis(temps)-3
+```
+
+Data do not show any significant kurtosis.
+
+### Effect of sampling
+
+Oftentimes, we will see things approach the normal distribution as we collect more samples. We can model this by subsampling our temperature vector.
+
+```{r}
+sub.temps <- sample(temps,
+                    size = 10,
+                    replace = FALSE)
+
+hist(sub.temps, main = "10 samples")
+```
+
+With only ten values sampled, we do not have much of a normal distribution. Let's up this to $100$ samples.
+
+```{r}
+sub.temps <- sample(temps,
+                    size = 100,
+                    replace = FALSE)
+
+hist(sub.temps, main = "100 samples",breaks = 10)
+```
+
+Now we are starting to see more of a normal distribution! Let's increase this to $1000$ temperatures.
+
+```{r}
+sub.temps <- sample(temps,
+                    size = 1000,
+                    replace = FALSE)
+
+hist(sub.temps, main = "1000 samples", breaks = 40)
+```
+
+Now the normal distribution is even more clear. As we can also see, the more we sample, the more we approach the true means and distribution of the actual dataset. Because of this, we can perform experiments and observations of small groups and subsamples and make inferences about the whole, given that most systems naturally approach statistical distributions like the normal!
+
 ## Hypothesis testing
 
 ## Homework: Chapter 8

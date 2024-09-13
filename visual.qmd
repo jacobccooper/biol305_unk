@@ -39,6 +39,10 @@ We can up the number of bins to see this better.
 hist(x,breaks = 100)
 ```
 
+The number of bins can be somewhat arbitrary, but a value should be chosen based off of what illustrates the data well. *R* will auto-select a number of bins in some cases, but you can also select a number of bins. Some assignments will ask you to choose a specific number of bins as well.
+
+### ggplot histograms
+
 We can also use the program `ggplot`, part of the `tidyverse`, to create histograms.
 
 ```{r}
