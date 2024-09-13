@@ -7,8 +7,6 @@ editor: visual
 
 ## Normal distributions
 
-Example text.
-
 ## Hypothesis testing
 
 ## Homework: Chapter 8
