@@ -20,7 +20,7 @@ This equation is fairly well defined by the *variance* ($\sigma^2$), the overall
 
 ![A standard normal distribution, illustrating the percentage of area found within each standard deviation away from the mean. By Ainali on Wikipedia; CC-BY-SA 3.0.](images/Standard_deviation_diagram_micro.svg.png)
 
-The standard normal distribution is a *density function*, and we are interested in the "area under the curve" (AUC) to understand the relative probability of an event occurring. When looking at a normal distribution distribution, it is impossible to say the probability of a specific event occurring, but it is possible to state the probability of an event *as extreme or more extreme than the event observed* occurring. This is known as the $p$ value.
+Standard normal distributions have a mean, median, and mode that are *equal*. The standard normal distribution is a *density function*, and we are interested in the "area under the curve" (AUC) to understand the relative probability of an event occurring. At the mean/median/mode, the probability on either side of the distribution is $50$%. When looking at a normal distribution distribution, it is impossible to say the probability of a specific event occurring, but it is possible to state the probability of an event *as extreme or more extreme than the event observed* occurring. This is known as the $p$ value.
 
 ### Example in nature
 
@@ -39,7 +39,7 @@ The dataset has the following columns:
 colnames(beewalk)
 ```
 
-We are specifically interested in `temperature` to determine weather conditions at start. Let's see what the mean of this variable is.
+We are specifically interested in `temperature` to determine weather conditions. Let's see what the mean of this variable is.
 
 ```{r}
 mean(beewalk$temperature)
@@ -144,5 +144,99 @@ hist(sub.temps, main = "1000 samples", breaks = 40)
 Now the normal distribution is even more clear. As we can also see, the more we sample, the more we approach the true means and distribution of the actual dataset. Because of this, we can perform experiments and observations of small groups and subsamples and make inferences about the whole, given that most systems naturally approach statistical distributions like the normal!
 
 ## Hypothesis testing
+
+Since we can define specific areas under the curve within these distributions, we can look at the percentage of area within a certain bound to determine how likely a specific outcome would be. Thus, we can begin to test what the *probability of observing an event* is within a theoretical, probabilistic space. A couple of important conceptual ideas:
+
+1.  We may not be able to know the probability of a specific event, but we can figure out the probability of events more extreme or less extreme as that event
+2.  If the most likely result is the mean, then the further we move away from the mean, the less likely an event becomes.
+3.  If we look *away* from the mean at a certain point, then the area represents the chances of getting a result *as extreme or more extreme than what we observe*. This probability is known as the $p$ value.
+
+Once we have a $p$ value, we can make statements about the event that we've seen relative to the overall nature of the dataset, but we do not have sufficient information to declare if this result is *statistically significant*.
+
+In order to determine if something is significant, we compare things to a *critical value*, known as $\alpha$. This value is traditionally defined as $0.05$, essentially stating that we deem an event as significant if $5$% or fewer of observed or predicted events are as extreme or more extreme than what we observe.
+
+#### Visualizing a $p$ value
+
+Let's say that we are looking at a dataset defined by a standard normal distribution with $\mu=0$ and $\sigma=1$. We draw a random value, $x$, with $x=1.6$. What is the probability of drawing a number this extreme or more extreme from the dataset?
+
+First, let's visualize this distribution:
+
+```{r}
+###THIS WILL TAKE A WHILE TO RUN###
+
+# create gigantic normal distribution dataset
+# will be essentially normal for plotting
+# rnorm gets random values
+x <- rnorm(100000000)
+
+# convert to data frame
+x <- as.data.frame(x)
+# rename column
+colnames(x) <- c("values")
+
+# thank you stack overflow for the following
+# Creating density plot
+p = ggplot(x, 
+           aes(x = values)
+          ) + 
+  # generic density plot, no fill
+  geom_density(fill="lightblue")
+
+# Building shaded area
+# create new plot object
+p2  <-  p + # add previous step as a "backbone"
+  # rename axes
+  geom_vline(xintercept = 1.6) +
+  xlab("Test Statistic") +
+  ylab("Frequency (Probability)") +
+  # make it neat and tidy
+  theme_classic()
+
+# plot it
+# can use ggsave function to save
+plot(p2)
+```
+
+Above, the solid black line represents $x$, with the illustrated standard normal distribution being filled in blue.
+
+Let's see how much of the area represents values *as extreme or more extreme* as our value $x$.
+
+```{r}
+### THIS WILL TAKE A WHILE TO RUN ###
+
+# Getting the values of plot
+# something I wasn't familiar with before making this!
+d  <-  ggplot_build(p)$data[[1]]
+
+# Building shaded area
+# create new plot object
+p2  <-  p + # add previous step as a "backbone"
+  # add new shaded area
+  geom_area(data = subset(d, x < 1.6), # select area
+            # define color, shading intensity, etc.
+            aes(x=x,y=y), fill = "white", alpha = 1) +
+  # add value line
+  geom_vline(xintercept = 1.6, colour = "black", 
+             linetype = "dashed",linewidth = 1) +
+  # rename axes
+  xlab("Test Statistic") +
+  ylab("Frequency (Probability)") +
+  # make it neat and tidy
+  theme_classic()
+
+# plot it
+# can use ggsave function to save
+plot(p2)
+```
+
+Now we can see that it is only a portion of the distribution that is within our $p$ value, but we don't know exactly what this area is! We can find out in one of two ways.
+
+#### Calculating a $p$ value
+
+We have two different methods for calculating a $p$ value:
+
+##### Comparing to a $z$ table
+
+##### Using *R*
 
 ## Homework: Chapter 8
