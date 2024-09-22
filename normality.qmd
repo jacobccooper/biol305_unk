@@ -239,4 +239,6 @@ We have two different methods for calculating a $p$ value:
 
 ##### Using *R*
 
+In *R*, we
+
 ## Homework: Chapter 8
