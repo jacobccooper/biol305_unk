@@ -578,7 +578,7 @@ Type 'q()' to quit R.
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># if not, check the URL pattern for the file</span></span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>ranges.url <span class="ot">&lt;-</span> <span class="fu">curl</span>(<span class="st">"https://raw.githubusercontent.com/jacobccooper/biol105_unk/main/datasets/lacustrine_range_size.csv"</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>ranges.url <span class="ot">&lt;-</span> <span class="fu">curl</span>(<span class="st">"https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/datasets/lacustrine_range_size.csv"</span>)</span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># read comma separated file (csv) into R memory</span></span>
 <span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>ranges <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(ranges.url)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -594,7 +594,7 @@ dbl (9): combined_current_km2, consensus_km2, bioclim_current_km2, 2050_comb...
 </div>
 <p>Alternatively, we can use the operator <code>%&gt;%</code> to simplify this process. <code>%&gt;%</code> means “take whatever you got from the previous step and <em>pipe</em> it into the next step”. So, the following does the exact same thing:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ranges <span class="ot">&lt;-</span> <span class="fu">curl</span>(<span class="st">"https://raw.githubusercontent.com/jacobccooper/biol105_unk/main/datasets/lacustrine_range_size.csv"</span>) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ranges <span class="ot">&lt;-</span> <span class="fu">curl</span>(<span class="st">"https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/datasets/lacustrine_range_size.csv"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 12 Columns: 10
@@ -746,11 +746,12 @@ dbl (9): combined_current_km2, consensus_km2, bioclim_current_km2, 2050_comb...
 </section>
 <section id="your-turn" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Your turn!</h1>
-<p>With a partner or on your own, try to do the following:</p>
+<p><strong>With a partner or on your own</strong>, try to do the following:</p>
 <ol type="1">
 <li>Create an <em>RMarkdown document</em> that will save as an <code>.html</code>.</li>
 <li>Load the data, as shown here, and print the summary statistics in the document.</li>
 <li>Calculate the value of <code>combined_current_km2</code> divided by <code>2050_combined_km2</code> and print the results.</li>
+<li><code>knit</code> your results, with your name(s) and date, as an HTML document.</li>
 </ol>
 <p>Let me know if you have any issues.</p>
 

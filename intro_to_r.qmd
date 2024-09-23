@@ -214,7 +214,7 @@ Now, we need to download our first data set. These datasets are stored on GitHub
 # if not, check the URL pattern for the file
 
 # create
-ranges.url <- curl("https://raw.githubusercontent.com/jacobccooper/biol105_unk/main/datasets/lacustrine_range_size.csv")
+ranges.url <- curl("https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/datasets/lacustrine_range_size.csv")
 # read comma separated file (csv) into R memory
 ranges <- read_csv(ranges.url)
 ```
@@ -222,7 +222,7 @@ ranges <- read_csv(ranges.url)
 Alternatively, we can use the operator `%>%` to simplify this process. `%>%` means "take whatever you got from the previous step and *pipe* it into the next step". So, the following does the exact same thing:
 
 ```{r}
-ranges <- curl("https://raw.githubusercontent.com/jacobccooper/biol105_unk/main/datasets/lacustrine_range_size.csv") %>%
+ranges <- curl("https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/datasets/lacustrine_range_size.csv") %>%
   read_csv()
 ```
 
@@ -324,10 +324,11 @@ our_mean(ranges$combined_current_km2) %>%
 
 # Your turn!
 
-With a partner or on your own, try to do the following:
+**With a partner or on your own**, try to do the following:
 
 1.  Create an *RMarkdown document* that will save as an `.html`.
 2.  Load the data, as shown here, and print the summary statistics in the document.
 3.  Calculate the value of `combined_current_km2` divided by `2050_combined_km2` and print the results.
+4. `knit` your results, with your name(s) and date, as an HTML document.
 
 Let me know if you have any issues.
