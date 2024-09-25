@@ -1,6 +1,6 @@
 # Preface {.unnumbered}
 
-Welcome to Biology 105 at the University of Nebraska at Kearney! Material in this class was designed by Dr. Melissa Wuellner and adapted by Dr. Jacob C. Cooper for use in *R*.
+Welcome to Biology 305 at the University of Nebraska at Kearney! Material in this class was designed by Dr. Melissa Wuellner and adapted by Dr. Jacob C. Cooper for use in *R*.
 
 In this class, you will learn:
 
