@@ -51,7 +51,7 @@ Hmmm... we are getting an `NA` value, indicating that not every cell has data re
 summary(beewalk$temperature)
 ```
 
-As we can see, $16,151$ rows do not have temperature recorded! We want to remove these rows, so we can remove `NA` values using `na.omit`.
+As we can see, $16,151$ rows do not have temperature recorded! We want to remove these `NA` rows, which we can do by using using `na.omit`.
 
 ```{r}
 beewalk$temperature %>%
@@ -62,7 +62,7 @@ beewalk$temperature %>%
 
 Now we can record the mean.
 
-Let's visualize these data using a histogram.
+Let's visualize these data using a histogram. *Note* I do not use `na.omit` as the `hist` function automatically performs this data-cleaning step!
 
 ```{r}
 hist(beewalk$temperature,breaks = 5)
@@ -96,6 +96,7 @@ As we can see, our normal approximation of temperatures is not too dissimilar fr
 Let's see what kind of data we have for temperatures:
 
 ```{r}
+# load moments library
 library(moments)
 
 skewness(temps)
@@ -237,8 +238,24 @@ We have two different methods for calculating a $p$ value:
 
 ##### Comparing to a $z$ table
 
+We can compare the $z$ value we calculate to a $z$ table, such as the one at [ztable.net](https://www.ztable.net/). On this webpage, you can scroll and find tables for positive and negative $z$ scores. *Note* that normal distributions are symmetrical, so you can also transform from negative to positive to get an idea of the area as well. Given that a normal distribution is centered at $0$, a $z$ score of $0$ will have a $p$ value of $0.50$.
+
+On the $z$ tables, you will find the tenths place for your decimal in the rows, and then go across to the columns for the hundredths place. For example, go to the website and find the $p$ value for a $z$ score of $-1.33$. You should find the cell marked $0.09176$. *Note* the website uses naked decimals, which we do not use in this class.
+
+For values that aren't on the $z$ table, we can approximate its position between different points on the $z$ table or, if it is extremely unlikely, denote that $p < 0.0001$.
+
 ##### Using *R*
 
-In *R*, we
+In *R*, we can calculate a $p$ value using the function `pnorm`. This function uses the arguments of `p` for our $p$ value, `mean` for the mean of our distribution, `sd` for the standard deviation of our distribution, and also information on whether we want to log-transform $p$ or if we are testing a specific hypothesis (lower tail, upper tail, or two-tailed). The function `pnorm` defaults to a standard normal distribution, which would be a $z$ score, but it can also perform the $z$ transformations for us if we define the mean and standard deviation.
+
+For example, if we have a $z$ score of $-1.33$:
+
+```{r}
+pnorm(-1.33)
+```
+
+As we can see, we get the same result as our $z$ table, just with more precision!
+
+There are other functions in this family as well in *R,* including `dnorm` for quantiles, `qnorm` for determining the $z$ score for a specific $p$ value, and `rnorm` for getting random values from a normal distribution with specific dimensions. For now, we will focus on `pnorm`.
 
 ## Homework: Chapter 8

@@ -329,6 +329,6 @@ our_mean(ranges$combined_current_km2) %>%
 1.  Create an *RMarkdown document* that will save as an `.html`.
 2.  Load the data, as shown here, and print the summary statistics in the document.
 3.  Calculate the value of `combined_current_km2` divided by `2050_combined_km2` and print the results.
-4. `knit` your results, with your name(s) and date, as an HTML document.
+4.  `knit` your results, with your name(s) and date, as an HTML document.
 
 Let me know if you have any issues.

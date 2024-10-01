@@ -338,7 +338,7 @@ window.Quarto = {
 <figcaption>A standard normal distribution, illustrating the percentage of area found within each standard deviation away from the mean. By Ainali on Wikipedia; CC-BY-SA 3.0.</figcaption>
 </figure>
 </div>
-<p>The standard normal distribution is a <em>density function</em>, and we are interested in the “area under the curve” (AUC) to understand the relative probability of an event occurring. When looking at a normal distribution distribution, it is impossible to say the probability of a specific event occurring, but it is possible to state the probability of an event <em>as extreme or more extreme than the event observed</em> occurring. This is known as the <span class="math inline">\(p\)</span> value.</p>
+<p>Standard normal distributions have a mean, median, and mode that are <em>equal</em>. The standard normal distribution is a <em>density function</em>, and we are interested in the “area under the curve” (AUC) to understand the relative probability of an event occurring. At the mean/median/mode, the probability on either side of the distribution is <span class="math inline">\(50\)</span>%. When looking at a normal distribution distribution, it is impossible to say the probability of a specific event occurring, but it is possible to state the probability of an event <em>as extreme or more extreme than the event observed</em> occurring. This is known as the <span class="math inline">\(p\)</span> value.</p>
 <section id="example-in-nature" class="level3" data-number="4.1.1">
 <h3 data-number="4.1.1" class="anchored" data-anchor-id="example-in-nature"><span class="header-section-number">4.1.1</span> Example in nature</h3>
 <p>In order to see an example of the normal distribution in nature, we are going to examine the BeeWalk survey database from the island of Great Britain <span class="citation" data-cites="Comont2020">(<a href="references.html#ref-Comont2020" role="doc-biblioref">Comont 2020</a>)</span>. We are not interested in the bee data at present, however, but in the climatic data from when the surveys were performed.</p>
@@ -380,7 +380,7 @@ dbl (19): RecordKey, established, Precision, Transect.lat, Transect.long, tr...
 [49] "TotalCount"          </code></pre>
 </div>
 </div>
-<p>We are specifically interested in <code>temperature</code> to determine weather conditions at start. Let’s see what the mean of this variable is.</p>
+<p>We are specifically interested in <code>temperature</code> to determine weather conditions. Let’s see what the mean of this variable is.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(beewalk<span class="sc">$</span>temperature)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -521,6 +521,109 @@ dbl (19): RecordKey, established, Precision, Transect.lat, Transect.long, tr...
 </section>
 <section id="hypothesis-testing" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">4.2</span> Hypothesis testing</h2>
+<p>Since we can define specific areas under the curve within these distributions, we can look at the percentage of area within a certain bound to determine how likely a specific outcome would be. Thus, we can begin to test what the <em>probability of observing an event</em> is within a theoretical, probabilistic space. A couple of important conceptual ideas:</p>
+<ol type="1">
+<li>We may not be able to know the probability of a specific event, but we can figure out the probability of events more extreme or less extreme as that event</li>
+<li>If the most likely result is the mean, then the further we move away from the mean, the less likely an event becomes.</li>
+<li>If we look <em>away</em> from the mean at a certain point, then the area represents the chances of getting a result <em>as extreme or more extreme than what we observe</em>. This probability is known as the <span class="math inline">\(p\)</span> value.</li>
+</ol>
+<p>Once we have a <span class="math inline">\(p\)</span> value, we can make statements about the event that we’ve seen relative to the overall nature of the dataset, but we do not have sufficient information to declare if this result is <em>statistically significant</em>.</p>
+<p>In order to determine if something is significant, we compare things to a <em>critical value</em>, known as <span class="math inline">\(\alpha\)</span>. This value is traditionally defined as <span class="math inline">\(0.05\)</span>, essentially stating that we deem an event as significant if <span class="math inline">\(5\)</span>% or fewer of observed or predicted events are as extreme or more extreme than what we observe.</p>
+<section id="visualizing-a-p-value" class="level4" data-number="4.2.0.1">
+<h4 data-number="4.2.0.1" class="anchored" data-anchor-id="visualizing-a-p-value"><span class="header-section-number">4.2.0.1</span> Visualizing a <span class="math inline">\(p\)</span> value</h4>
+<p>Let’s say that we are looking at a dataset defined by a standard normal distribution with <span class="math inline">\(\mu=0\)</span> and <span class="math inline">\(\sigma=1\)</span>. We draw a random value, <span class="math inline">\(x\)</span>, with <span class="math inline">\(x=1.6\)</span>. What is the probability of drawing a number this extreme or more extreme from the dataset?</p>
+<p>First, let’s visualize this distribution:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="do">###THIS WILL TAKE A WHILE TO RUN###</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create gigantic normal distribution dataset</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># will be essentially normal for plotting</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># rnorm gets random values</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100000000</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to data frame</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(x)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co"># rename column</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(x) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"values"</span>)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co"># thank you stack overflow for the following</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating density plot</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">ggplot</span>(x, </span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>           <span class="fu">aes</span>(<span class="at">x =</span> values)</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>          ) <span class="sc">+</span> </span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generic density plot, no fill</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill=</span><span class="st">"lightblue"</span>)</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Building shaded area</span></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a><span class="co"># create new plot object</span></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>p2  <span class="ot">&lt;-</span>  p <span class="sc">+</span> <span class="co"># add previous step as a "backbone"</span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># rename axes</span></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">1.6</span>) <span class="sc">+</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Test Statistic"</span>) <span class="sc">+</span></span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Frequency (Probability)"</span>) <span class="sc">+</span></span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make it neat and tidy</span></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a><span class="co"># plot it</span></span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a><span class="co"># can use ggsave function to save</span></span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="normality_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Above, the solid black line represents <span class="math inline">\(x\)</span>, with the illustrated standard normal distribution being filled in blue.</p>
+<p>Let’s see how much of the area represents values <em>as extreme or more extreme</em> as our value <span class="math inline">\(x\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="do">### THIS WILL TAKE A WHILE TO RUN </span><span class="al">###</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Getting the values of plot</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># something I wasn't familiar with before making this!</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>d  <span class="ot">&lt;-</span>  <span class="fu">ggplot_build</span>(p)<span class="sc">$</span>data[[<span class="dv">1</span>]]</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Building shaded area</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co"># create new plot object</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>p2  <span class="ot">&lt;-</span>  p <span class="sc">+</span> <span class="co"># add previous step as a "backbone"</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add new shaded area</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> <span class="fu">subset</span>(d, x <span class="sc">&lt;</span> <span class="fl">1.6</span>), <span class="co"># select area</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>            <span class="co"># define color, shading intensity, etc.</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y), <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add value line</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">1.6</span>, <span class="at">colour =</span> <span class="st">"black"</span>, </span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"dashed"</span>,<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># rename axes</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Test Statistic"</span>) <span class="sc">+</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Frequency (Probability)"</span>) <span class="sc">+</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make it neat and tidy</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="co"># plot it</span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="co"># can use ggsave function to save</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="normality_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now we can see that it is only a portion of the distribution that is within our <span class="math inline">\(p\)</span> value, but we don’t know exactly what this area is! We can find out in one of two ways.</p>
+</section>
+<section id="calculating-a-p-value" class="level4" data-number="4.2.0.2">
+<h4 data-number="4.2.0.2" class="anchored" data-anchor-id="calculating-a-p-value"><span class="header-section-number">4.2.0.2</span> Calculating a <span class="math inline">\(p\)</span> value</h4>
+<p>We have two different methods for calculating a <span class="math inline">\(p\)</span> value:</p>
+<section id="comparing-to-a-z-table" class="level5" data-number="4.2.0.2.1">
+<h5 data-number="4.2.0.2.1" class="anchored" data-anchor-id="comparing-to-a-z-table"><span class="header-section-number">4.2.0.2.1</span> Comparing to a <span class="math inline">\(z\)</span> table</h5>
+</section>
+<section id="using-r" class="level5" data-number="4.2.0.2.2">
+<h5 data-number="4.2.0.2.2" class="anchored" data-anchor-id="using-r"><span class="header-section-number">4.2.0.2.2</span> Using <em>R</em></h5>
+<p>In <em>R</em>, we</p>
+</section>
+</section>
 </section>
 <section id="homework-chapter-8" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="homework-chapter-8"><span class="header-section-number">4.3</span> Homework: Chapter 8</h2>

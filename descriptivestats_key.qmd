@@ -25,9 +25,8 @@ For the homework, you were to create an *RMarkdown* document rendering as an `ht
 
     -   `mean`
 
-```{=html}
 <!-- -->
-```
+
 -   median
 
     -   `median` or `summary`
@@ -127,8 +126,8 @@ key_maker <- function(x, # specify data
   iqr <- hiquant - lowquant
   
   # calculate 1.5*IQR
-  lowbound <- mean(x) - (1.5*iqr)
-  hibound <- mean(x) + (1.5*iqr)
+  lowbound <- lowquant - (1.5*iqr)
+  hibound <- hiquant + (1.5*iqr)
   
   # low outliers?
   # select elements that match

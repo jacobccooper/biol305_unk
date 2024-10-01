@@ -272,8 +272,8 @@ window.Quarto = {
 <span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>  iqr <span class="ot">&lt;-</span> hiquant <span class="sc">-</span> lowquant</span>
 <span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate 1.5*IQR</span></span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>  lowbound <span class="ot">&lt;-</span> <span class="fu">mean</span>(x) <span class="sc">-</span> (<span class="fl">1.5</span><span class="sc">*</span>iqr)</span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>  hibound <span class="ot">&lt;-</span> <span class="fu">mean</span>(x) <span class="sc">+</span> (<span class="fl">1.5</span><span class="sc">*</span>iqr)</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>  lowbound <span class="ot">&lt;-</span> lowquant <span class="sc">-</span> (<span class="fl">1.5</span><span class="sc">*</span>iqr)</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>  hibound <span class="ot">&lt;-</span> hiquant <span class="sc">+</span> (<span class="fl">1.5</span><span class="sc">*</span>iqr)</span>
 <span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>  <span class="co"># low outliers?</span></span>
 <span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># select elements that match</span></span>
@@ -383,10 +383,9 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 [1] "SE: 2.05"
 [1] "No low outliers."
 [1] "High outlier(s):"
-[1] "50 values found."
- [1] 110 100 136 120 174 205 106 106 140 680 220 257 100 101 180 105 102 130 142
-[20] 195 116 100 200 120 107 135 200 112 208 132 208 155 120 105 149 136 118 127
-[39] 150 196 212 110 157 133 116 104 110 102 100 124</code></pre>
+[1] "33 values found."
+ [1] 136 120 174 205 140 680 220 257 180 130 142 195 116 200 120 135 200 208 132
+[20] 208 155 120 149 136 118 127 150 196 212 157 133 116 124</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
@@ -436,7 +435,7 @@ dbl (1): time_difference
 [1] "SE: 0.3837967"
 [1] "No low outliers."
 [1] "High outlier(s):"
-[1] "1731 values found."</code></pre>
+[1] "1651 values found."</code></pre>
 </div>
 </div>
 <p><strong>Synthesis question</strong>: Folks will often think about probabilities of events being “low but never zero”. What does that mean in the context of these data? What about these data make you feel like probabilities may decrease through time but never become zero?</p>
