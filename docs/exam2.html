@@ -70,6 +70,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -207,7 +236,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#exam-2" id="toc-exam-2" class="nav-link active" data-scroll-target="#exam-2"><span class="header-section-number">5.1</span> Exam 2</a></li>
+  <li><a href="#exam-2-practice" id="toc-exam-2-practice" class="nav-link active" data-scroll-target="#exam-2-practice"><span class="header-section-number">5.1</span> Exam 2 Practice</a></li>
+  <li><a href="#question-1-cyclones" id="toc-question-1-cyclones" class="nav-link" data-scroll-target="#question-1-cyclones"><span class="header-section-number">5.2</span> Question 1: Cyclones</a></li>
+  <li><a href="#question-2-minnows" id="toc-question-2-minnows" class="nav-link" data-scroll-target="#question-2-minnows"><span class="header-section-number">5.3</span> Question 2: Minnows</a></li>
   </ul>
 </nav>
     </div>
@@ -239,9 +270,193 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="exam-2" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="exam-2"><span class="header-section-number">5.1</span> Exam 2</h2>
-<p>The following is practice for Exam 2.</p>
+<section id="exam-2-practice" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="exam-2-practice"><span class="header-section-number">5.1</span> Exam 2 Practice</h2>
+<p>The following is practice for the exam. Please work through these problems and be ready to discuss them in class.</p>
+</section>
+<section id="question-1-cyclones" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="question-1-cyclones"><span class="header-section-number">5.2</span> Question 1: Cyclones</h2>
+<p>Consider this short data set:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Latitude band</th>
+<th>Season</th>
+<th>Number of cyclones</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>40 - 49° S</td>
+<td>Fall</td>
+<td>370</td>
+</tr>
+<tr class="even">
+<td>40 - 49° S</td>
+<td>Winter</td>
+<td>452</td>
+</tr>
+<tr class="odd">
+<td>40 - 49° S</td>
+<td>Spring</td>
+<td>273</td>
+</tr>
+<tr class="even">
+<td>40 - 49° S</td>
+<td>Summer</td>
+<td>422</td>
+</tr>
+<tr class="odd">
+<td>50 - 59° S</td>
+<td>Fall</td>
+<td>526</td>
+</tr>
+<tr class="even">
+<td>50 - 59° S</td>
+<td>Winter</td>
+<td>624</td>
+</tr>
+<tr class="odd">
+<td>50 - 59° S</td>
+<td>Spring</td>
+<td>513</td>
+</tr>
+<tr class="even">
+<td>50 - 59° S</td>
+<td>Summer</td>
+<td>1,059</td>
+</tr>
+<tr class="odd">
+<td>60 - 69° S</td>
+<td>Fall</td>
+<td>980</td>
+</tr>
+<tr class="even">
+<td>60 - 69° S</td>
+<td>Winter</td>
+<td>1,200</td>
+</tr>
+<tr class="odd">
+<td>60 - 69° S</td>
+<td>Spring</td>
+<td>995</td>
+</tr>
+<tr class="even">
+<td>60 - 69° S</td>
+<td>Summer</td>
+<td>1,751</td>
+</tr>
+</tbody>
+</table>
+<p>All of the data was collected in the same year to determine whether the occurrences of cyclones differed by latitude and season around Antarctica. Use this data to answer the following questions.</p>
+<ol type="a">
+<li>Classify each of the three variables above as either an explanatory or a response variable. Justify your answer.</li>
+<li>Classify each of the three variables above as either a nominal, ordinal, interval, or ratio variable. Justify your answer.</li>
+<li>State the null and alternative hypotheses for this scenario. Note: there are two sets of null/alternative hypotheses.</li>
+<li>Calculate the mean, median, and mode of your response variable. Based on your results, would you expect your data to be normally distributed or not? Justify your answer.</li>
+<li>Let’s say now that you’re testing the null hypothesis that the mean number of cyclones in this one year is similar to the average year. The mean number of cyclones per year across all years of data collected is 650 with a standard deviation of 425. Calculate the z-score and make a decision regarding the null hypothesis.</li>
+</ol>
+</section>
+<section id="question-2-minnows" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="question-2-minnows"><span class="header-section-number">5.3</span> Question 2: Minnows</h2>
+<p>Consider this scenario: You have discovered a never-before-documented population of minnow in the Kearney Canal near campus. During your first sampling trip, you notice that the total length (i.e., measured from the tip of the snout to the very tip of the tail) of the fish you measure appear to be smaller than the average total length of the species as recorded among all known individuals across their range. The mean total length noted in one publication is 85 mm with a standard deviation of 4.50. Below is your data the data from 20 minnows that you captured during your first sampling trip to the Kearney Canal:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Fish ID</th>
+<th>Length (mm)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>89</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>75</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>86</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>74</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>69</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>100</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>73</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>69</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>96</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>79</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>61</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>62</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>95</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>98</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>100</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>57</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>70</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>78</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>65</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>65</td>
+</tr>
+</tbody>
+</table>
+<ol type="a">
+<li>State the null and alternative hypothesis for your study.</li>
+<li>Calculate the median, first and third quartiles, and interquartile range of your response variable. Create a boxplot. Based on your results, are there any outliers in your data? Explain.</li>
+<li>Calculate the <span class="math inline">\(z\)</span>-score for this scenario. Please show all of your work.</li>
+<li>What is the probability that, by random chance alone, you would find your observed mean or something more extreme?</li>
+<li>Assume that you set your <span class="math inline">\(\alpha\)</span> for your study prior to your data collection to <span class="math inline">\(0.05\)</span>. Based on this information and the <span class="math inline">\(p\)</span>-value you obtained for part <span class="math inline">\(c\)</span> above, is your null hypothesis supported or rejected?</li>
+</ol>
 
 
 </section>

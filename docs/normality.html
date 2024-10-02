@@ -294,7 +294,12 @@ window.Quarto = {
   <li><a href="#example-in-nature" id="toc-example-in-nature" class="nav-link" data-scroll-target="#example-in-nature"><span class="header-section-number">4.1.1</span> Example in nature</a></li>
   <li><a href="#effect-of-sampling" id="toc-effect-of-sampling" class="nav-link" data-scroll-target="#effect-of-sampling"><span class="header-section-number">4.1.2</span> Effect of sampling</a></li>
   </ul></li>
-  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing"><span class="header-section-number">4.2</span> Hypothesis testing</a></li>
+  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing"><span class="header-section-number">4.2</span> Hypothesis testing</a>
+  <ul class="collapse">
+  <li><a href="#critical-values---alpha" id="toc-critical-values---alpha" class="nav-link" data-scroll-target="#critical-values---alpha"><span class="header-section-number">4.2.1</span> Critical Values - <span class="math inline">\(\alpha\)</span></a></li>
+  <li><a href="#visualizing-a-p-value" id="toc-visualizing-a-p-value" class="nav-link" data-scroll-target="#visualizing-a-p-value"><span class="header-section-number">4.2.2</span> Visualizing a <span class="math inline">\(p\)</span> value</a></li>
+  <li><a href="#calculating-a-p-value" id="toc-calculating-a-p-value" class="nav-link" data-scroll-target="#calculating-a-p-value"><span class="header-section-number">4.2.3</span> Calculating a <span class="math inline">\(p\)</span> value</a></li>
+  </ul></li>
   <li><a href="#homework-chapter-8" id="toc-homework-chapter-8" class="nav-link" data-scroll-target="#homework-chapter-8"><span class="header-section-number">4.3</span> Homework: Chapter 8</a></li>
   </ul>
 </nav>
@@ -395,7 +400,7 @@ dbl (19): RecordKey, established, Precision, Transect.lat, Transect.long, tr...
    0.00   16.00   19.00   18.65   21.00   35.00   16151 </code></pre>
 </div>
 </div>
-<p>As we can see, <span class="math inline">\(16,151\)</span> rows do not have temperature recorded! We want to remove these rows, so we can remove <code>NA</code> values using <code>na.omit</code>.</p>
+<p>As we can see, <span class="math inline">\(16,151\)</span> rows do not have temperature recorded! We want to remove these <code>NA</code> rows, which we can do by using using <code>na.omit</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>beewalk<span class="sc">$</span>temperature <span class="sc">%&gt;%</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
@@ -406,7 +411,7 @@ dbl (19): RecordKey, established, Precision, Transect.lat, Transect.long, tr...
 </div>
 </div>
 <p>Now we can record the mean.</p>
-<p>Let’s visualize these data using a histogram.</p>
+<p>Let’s visualize these data using a histogram. <em>Note</em> I do not use <code>na.omit</code> as the <code>hist</code> function automatically performs this data-cleaning step!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(beewalk<span class="sc">$</span>temperature,<span class="at">breaks =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -453,9 +458,10 @@ dbl (19): RecordKey, established, Precision, Transect.lat, Transect.long, tr...
 <p>As we can see, our normal approximation of temperatures is not too dissimilar from the distribution of temperatures we actually see!</p>
 <p>Let’s see what kind of data we have for temperatures:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(temps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load moments library</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(temps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.02393257</code></pre>
 </div>
@@ -528,9 +534,13 @@ dbl (19): RecordKey, established, Precision, Transect.lat, Transect.long, tr...
 <li>If we look <em>away</em> from the mean at a certain point, then the area represents the chances of getting a result <em>as extreme or more extreme than what we observe</em>. This probability is known as the <span class="math inline">\(p\)</span> value.</li>
 </ol>
 <p>Once we have a <span class="math inline">\(p\)</span> value, we can make statements about the event that we’ve seen relative to the overall nature of the dataset, but we do not have sufficient information to declare if this result is <em>statistically significant</em>.</p>
+<section id="critical-values---alpha" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="critical-values---alpha"><span class="header-section-number">4.2.1</span> Critical Values - <span class="math inline">\(\alpha\)</span></h3>
 <p>In order to determine if something is significant, we compare things to a <em>critical value</em>, known as <span class="math inline">\(\alpha\)</span>. This value is traditionally defined as <span class="math inline">\(0.05\)</span>, essentially stating that we deem an event as significant if <span class="math inline">\(5\)</span>% or fewer of observed or predicted events are as extreme or more extreme than what we observe.</p>
-<section id="visualizing-a-p-value" class="level4" data-number="4.2.0.1">
-<h4 data-number="4.2.0.1" class="anchored" data-anchor-id="visualizing-a-p-value"><span class="header-section-number">4.2.0.1</span> Visualizing a <span class="math inline">\(p\)</span> value</h4>
+<p><strong>Your value should always set your</strong> <span class="math inline">\(\alpha\)</span> <strong>critical value before you do your experiments and analyses.</strong></p>
+</section>
+<section id="visualizing-a-p-value" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="visualizing-a-p-value"><span class="header-section-number">4.2.2</span> Visualizing a <span class="math inline">\(p\)</span> value</h3>
 <p>Let’s say that we are looking at a dataset defined by a standard normal distribution with <span class="math inline">\(\mu=0\)</span> and <span class="math inline">\(\sigma=1\)</span>. We draw a random value, <span class="math inline">\(x\)</span>, with <span class="math inline">\(x=1.6\)</span>. What is the probability of drawing a number this extreme or more extreme from the dataset?</p>
 <p>First, let’s visualize this distribution:</p>
 <div class="cell">
@@ -613,20 +623,33 @@ dbl (19): RecordKey, established, Precision, Transect.lat, Transect.long, tr...
 </div>
 <p>Now we can see that it is only a portion of the distribution that is within our <span class="math inline">\(p\)</span> value, but we don’t know exactly what this area is! We can find out in one of two ways.</p>
 </section>
-<section id="calculating-a-p-value" class="level4" data-number="4.2.0.2">
-<h4 data-number="4.2.0.2" class="anchored" data-anchor-id="calculating-a-p-value"><span class="header-section-number">4.2.0.2</span> Calculating a <span class="math inline">\(p\)</span> value</h4>
+<section id="calculating-a-p-value" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="calculating-a-p-value"><span class="header-section-number">4.2.3</span> Calculating a <span class="math inline">\(p\)</span> value</h3>
 <p>We have two different methods for calculating a <span class="math inline">\(p\)</span> value:</p>
-<section id="comparing-to-a-z-table" class="level5" data-number="4.2.0.2.1">
-<h5 data-number="4.2.0.2.1" class="anchored" data-anchor-id="comparing-to-a-z-table"><span class="header-section-number">4.2.0.2.1</span> Comparing to a <span class="math inline">\(z\)</span> table</h5>
+<section id="comparing-to-a-z-table" class="level4" data-number="4.2.3.1">
+<h4 data-number="4.2.3.1" class="anchored" data-anchor-id="comparing-to-a-z-table"><span class="header-section-number">4.2.3.1</span> Comparing to a <span class="math inline">\(z\)</span> table</h4>
+<p>We can compare the <span class="math inline">\(z\)</span> value we calculate to a <span class="math inline">\(z\)</span> table, such as the one at <a href="https://www.ztable.net/">ztable.net</a>. On this webpage, you can scroll and find tables for positive and negative <span class="math inline">\(z\)</span> scores. <em>Note</em> that normal distributions are symmetrical, so you can also transform from negative to positive to get an idea of the area as well. Given that a normal distribution is centered at <span class="math inline">\(0\)</span>, a <span class="math inline">\(z\)</span> score of <span class="math inline">\(0\)</span> will have a <span class="math inline">\(p\)</span> value of <span class="math inline">\(0.50\)</span>.</p>
+<p>On the <span class="math inline">\(z\)</span> tables, you will find the tenths place for your decimal in the rows, and then go across to the columns for the hundredths place. For example, go to the website and find the <span class="math inline">\(p\)</span> value for a <span class="math inline">\(z\)</span> score of <span class="math inline">\(-1.33\)</span>. You should find the cell marked <span class="math inline">\(0.09176\)</span>. <em>Note</em> the website uses naked decimals, which we do not use in this class.</p>
+<p>For values that aren’t on the <span class="math inline">\(z\)</span> table, we can approximate its position between different points on the <span class="math inline">\(z\)</span> table or, if it is extremely unlikely, denote that <span class="math inline">\(p &lt; 0.0001\)</span>.</p>
 </section>
-<section id="using-r" class="level5" data-number="4.2.0.2.2">
-<h5 data-number="4.2.0.2.2" class="anchored" data-anchor-id="using-r"><span class="header-section-number">4.2.0.2.2</span> Using <em>R</em></h5>
-<p>In <em>R</em>, we</p>
+<section id="using-r" class="level4" data-number="4.2.3.2">
+<h4 data-number="4.2.3.2" class="anchored" data-anchor-id="using-r"><span class="header-section-number">4.2.3.2</span> Using <em>R</em></h4>
+<p>In <em>R</em>, we can calculate a <span class="math inline">\(p\)</span> value using the function <code>pnorm</code>. This function uses the arguments of <code>p</code> for our <span class="math inline">\(p\)</span> value, <code>mean</code> for the mean of our distribution, <code>sd</code> for the standard deviation of our distribution, and also information on whether we want to log-transform <span class="math inline">\(p\)</span> or if we are testing a specific hypothesis (lower tail, upper tail, or two-tailed). The function <code>pnorm</code> defaults to a standard normal distribution, which would be a <span class="math inline">\(z\)</span> score, but it can also perform the <span class="math inline">\(z\)</span> transformations for us if we define the mean and standard deviation.</p>
+<p>For example, if we have a <span class="math inline">\(z\)</span> score of <span class="math inline">\(-1.33\)</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">1.33</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.09175914</code></pre>
+</div>
+</div>
+<p>As we can see, we get the same result as our <span class="math inline">\(z\)</span> table, just with more precision!</p>
+<p>There are other functions in this family as well in <em>R,</em> including <code>dnorm</code> for quantiles, <code>qnorm</code> for determining the <span class="math inline">\(z\)</span> score for a specific <span class="math inline">\(p\)</span> value, and <code>rnorm</code> for getting random values from a normal distribution with specific dimensions. For now, we will focus on <code>pnorm</code>.</p>
 </section>
 </section>
 </section>
 <section id="homework-chapter-8" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="homework-chapter-8"><span class="header-section-number">4.3</span> Homework: Chapter 8</h2>
+<p>Please complete problems 8.1, 8.2, 8.3 &amp; 8.6. Follow the directions as written in the book. Submit one <code>html</code> file, as derived from <em>RStudio</em>. For maximum clarity, create headings to separate your problems. (Remember, a header can be invoked by placing ‘<code>#</code>’ in front of a line of text. For example: the header here is written as <code># Homework: Chapter 8</code>).</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">

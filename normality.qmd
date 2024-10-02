@@ -154,9 +154,13 @@ Since we can define specific areas under the curve within these distributions, w
 
 Once we have a $p$ value, we can make statements about the event that we've seen relative to the overall nature of the dataset, but we do not have sufficient information to declare if this result is *statistically significant*.
 
+### Critical Values - $\alpha$
+
 In order to determine if something is significant, we compare things to a *critical value*, known as $\alpha$. This value is traditionally defined as $0.05$, essentially stating that we deem an event as significant if $5$% or fewer of observed or predicted events are as extreme or more extreme than what we observe.
 
-#### Visualizing a $p$ value
+**Your value should always set your** $\alpha$ **critical value before you do your experiments and analyses.**
+
+### Visualizing a $p$ value
 
 Let's say that we are looking at a dataset defined by a standard normal distribution with $\mu=0$ and $\sigma=1$. We draw a random value, $x$, with $x=1.6$. What is the probability of drawing a number this extreme or more extreme from the dataset?
 
@@ -232,11 +236,11 @@ plot(p2)
 
 Now we can see that it is only a portion of the distribution that is within our $p$ value, but we don't know exactly what this area is! We can find out in one of two ways.
 
-#### Calculating a $p$ value
+### Calculating a $p$ value
 
 We have two different methods for calculating a $p$ value:
 
-##### Comparing to a $z$ table
+#### Comparing to a $z$ table
 
 We can compare the $z$ value we calculate to a $z$ table, such as the one at [ztable.net](https://www.ztable.net/). On this webpage, you can scroll and find tables for positive and negative $z$ scores. *Note* that normal distributions are symmetrical, so you can also transform from negative to positive to get an idea of the area as well. Given that a normal distribution is centered at $0$, a $z$ score of $0$ will have a $p$ value of $0.50$.
 
@@ -244,7 +248,7 @@ On the $z$ tables, you will find the tenths place for your decimal in the rows, 
 
 For values that aren't on the $z$ table, we can approximate its position between different points on the $z$ table or, if it is extremely unlikely, denote that $p < 0.0001$.
 
-##### Using *R*
+#### Using *R*
 
 In *R*, we can calculate a $p$ value using the function `pnorm`. This function uses the arguments of `p` for our $p$ value, `mean` for the mean of our distribution, `sd` for the standard deviation of our distribution, and also information on whether we want to log-transform $p$ or if we are testing a specific hypothesis (lower tail, upper tail, or two-tailed). The function `pnorm` defaults to a standard normal distribution, which would be a $z$ score, but it can also perform the $z$ transformations for us if we define the mean and standard deviation.
 
@@ -259,3 +263,5 @@ As we can see, we get the same result as our $z$ table, just with more precision
 There are other functions in this family as well in *R,* including `dnorm` for quantiles, `qnorm` for determining the $z$ score for a specific $p$ value, and `rnorm` for getting random values from a normal distribution with specific dimensions. For now, we will focus on `pnorm`.
 
 ## Homework: Chapter 8
+
+Please complete problems 8.1, 8.2, 8.3 & 8.6. Follow the directions as written in the book. Submit one `html` file, as derived from *RStudio*. For maximum clarity, create headings to separate your problems. (Remember, a header can be invoked by placing '`#`' in front of a line of text. For example: the header here is written as `# Homework: Chapter 8`).
