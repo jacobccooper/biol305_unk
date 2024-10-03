@@ -450,8 +450,8 @@ hiquant <- quantile(frap_order,0.75,type = 6) %>% as.numeric()
 
 iqr <- hiquant - lowquant
 
-lowbound <- mean(frap_order) - (1.5*iqr)
-hibound <- mean(frap_order) + (1.5*iqr)
+lowbound <- lowquant - (1.5*iqr)
+hibound <- hiquant + (1.5*iqr)
 
 # low outliers?
 # select elements that match
@@ -521,11 +521,27 @@ nebraskans_years
 
 Using these data, please calculate the mean, median, range, interquartile range, variance, standard deviation, coefficient of variation, standard error, and whether there are any "outliers" for the number of UNK students from Nebraska.
 
+In order to do this, we will need to first select the column that denotes the number of Nebraskans from the dataset. Remember, we need to save this as an object in *R* to do the analyses. Here is a demonstration of getting the column to look at the mean, so that you can repeat this for the other questions. This relies heavily on the use of `$`, used to get the data from a specific column.
+
+```{r}
+# $ method
+nebraskans <- nebraskans_years$nebraskans
+
+nebraskans
+```
+
+Now we can get the `mean` of this vector.
+
+```{r}
+mean(nebraskans) %>%
+  round(0) # don't forget to round!
+```
+
 **Synthesis question**: Do you think that there are any really anomalous years? Do you feel data are similar between years? *Note* we are not looking at trends through time but whether any years are outliers.
 
 #### 2: Piracy in the Gulf of Guinea
 
-The following is a dataset looking at oceanic conditions and other variables associated with pirate attacks within the region between 2010 and 2021 [@Moura2023]. Using these data, please calculate the mean, median, range, interquartile range, variance, standard deviation, coefficient of variation, standard error, and whether there are any "outliers" for distance from shore for each pirate attack (columns `Distance_from_Coast`).
+The following is a dataset looking at oceanic conditions and other variables associated with pirate attacks within the region between 2010 and 2021 [@Moura2023]. Using these data, please calculate the mean, median, range, interquartile range, variance, standard deviation, coefficient of variation, standard error, and whether there are any "outliers" for distance from shore for each pirate attack (column `Distance_from_Coast`).
 
 ```{r}
 url_file <- curl("https://figshare.com/ndownloader/files/42314604")
