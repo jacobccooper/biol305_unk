@@ -176,7 +176,7 @@ hist(xk,breaks = 100)
 
 As we can see, this is a very *leptokurtic* distribution.
 
-### Cumulative distribution plot
+## Cumulative distribution plot
 
 A cumulative frequency plot shows the overall spread of the data as a cumulative line over the entire dataset. This is another way to see the spread of the data and is often complementary to a histogram.
 
