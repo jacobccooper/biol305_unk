@@ -26,10 +26,12 @@ A histogram is a frequency diagram that we can use to visually diagnose data and
 
 ```{r}
 # create random string from normal distribution
+# this step is not necessary for data analysis in homework
 x <- rnorm(n = 1000, # 1000 values
            mean = 0,
            sd = 1)
 
+# make histogram
 hist(x)
 ```
 
@@ -42,6 +44,8 @@ hist(x,breaks = 100)
 The number of bins can be somewhat arbitrary, but a value should be chosen based off of what illustrates the data well. *R* will auto-select a number of bins in some cases, but you can also select a number of bins. Some assignments will ask you to choose a specific number of bins as well.
 
 ### ggplot histograms
+
+The following is an ***optional*** workthrough on how to make really fancy plots.
 
 We can also use the program `ggplot`, part of the `tidyverse`, to create histograms.
 
@@ -171,6 +175,55 @@ hist(xk,breaks = 100)
 ```
 
 As we can see, this is a very *leptokurtic* distribution.
+
+### Cumulative distribution plot
+
+A cumulative frequency plot shows the overall spread of the data as a cumulative line over the entire dataset. This is another way to see the spread of the data and is often complementary to a histogram.
+
+The following cumulative distribution plot is based on a method from [Geeks for Geeks](https://www.geeksforgeeks.org/cumulative-frequency-graph-in-r/).
+
+```{r}
+# declaring the break points
+# make break points based on data
+# always round UP with ceiling
+range.x <- ceiling(max(x)-min(x))
+
+range.x
+range(x)
+```
+
+```{r}
+# make bins based on range
+break_points <- seq(-3,3,1)
+```
+
+```{r}
+# transforming the data
+data_transform = cut(x, break_points,
+					right=FALSE)
+# creating the frequency table
+freq_table = table(data_transform)
+
+# printing the frequency table
+print("Frequency Table")
+print(freq_table)
+```
+
+```{r}
+# calculating cumulative frequency
+cumulative_freq = c(0, cumsum(freq_table))
+print("Cumulative Frequency")
+print(cumulative_freq)
+```
+
+```{r}
+# plotting the data
+plot(break_points, cumulative_freq,
+	xlab="Data Points",
+	ylab="Cumulative Frequency")
+# creating line graph
+lines(break_points, cumulative_freq)
+```
 
 ## Homework: Chapter 3
 
