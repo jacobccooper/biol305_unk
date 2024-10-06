@@ -243,7 +243,12 @@ For example, see the following. For reference:
 y <- c(17,24,16)
 
 # force histogram to these values
-barplot(y)
+barplot(y, 
+        # axis names must be true
+        axisnames = T, 
+        # input names here
+        # each category as a separate quoted character string
+        names.arg = c("Cat 1", "Cat 2", "Cat 3"))
 ```
 
 ### Directions
