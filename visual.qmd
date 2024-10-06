@@ -194,15 +194,19 @@ range(x)
 
 ```{r}
 # make bins based on range
-break_points <- seq(-3,3,1)
+# create sequential series
+break_points <- seq(-3, # starting value, low
+                    3, # end value, high
+                    1) # increment size
 ```
 
 ```{r}
 # transforming the data
-data_transform = cut(x, break_points,
-					right=FALSE)
+data_transform = cut(x, # your data!
+                     break_points, # the breaks you defined
+					right=FALSE) # closed on the left for intervals
 # creating the frequency table
-freq_table = table(data_transform)
+freq_table = table(data_transform) # create a table
 
 # printing the frequency table
 print("Frequency Table")
