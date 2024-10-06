@@ -229,4 +229,23 @@ lines(break_points, cumulative_freq)
 
 From your book, complete problems 3.1, 3.4 & 3.5. Data for these problems are available on *Canvas* and in your book.
 
+### Helpful hint
+
+**HINT**: For 3.5, consider just making a vector of the values of interest for a histogram.
+
+For example, see the following. For reference:
+
+- `c` means "contatenate", or place things together in an object.
+
+```{r}
+# lower bounds for 100-199, 200-300
+# values denote counts in category
+y <- c(17,24,16)
+
+# force histogram to these values
+barplot(y)
+```
+
+### Directions
+
 Please complete all computer portions in an `rmarkdown` document knitted as an html. Upload any "by hand" calculations as images in the HTML or separately on *Canvas*.

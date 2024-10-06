@@ -172,10 +172,10 @@ where $e =$ the number of expected individuals and $o =$ the number of observed 
 
 Usually when we use a $\chi^2$, we are looking at count data. Let's consider the following hypothetical scenario, comparing experience with *R* between English majors (who, in this theoretical scenario, do not regularly use *R*) and Biology majors who are required to take *R* for this class:
 
-| Major     | *R* experience | No *R* experience  |
-|-----------|----------------|--------------------|
-| *English* | 2              | 8                  |
-| *Biology* | 9              | 1                  |
+| Major     | *R* experience | No *R* experience |
+|-----------|----------------|-------------------|
+| *English* | 2              | 8                 |
+| *Biology* | 9              | 1                 |
 
 Intuitively, we can see a difference, but we want to perform a statistical test to see just how likely these counts would be if both groups were equally likely to use *R*:
 
