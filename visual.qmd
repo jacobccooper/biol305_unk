@@ -192,11 +192,13 @@ range.x
 range(x)
 ```
 
+Based on this range, we need to create our bin sizes. We want our lowest bin to be below our lowest value, and our highest bin above our highest value. Here, I'm setting a step size of 1. **You will have to examine your data and determine the best break size for your datasets.**
+
 ```{r}
 # make bins based on range
 # create sequential series
 break_points <- seq(-3, # starting value, low
-                    3, # end value, high
+                    4, # end value, high
                     1) # increment size
 ```
 
