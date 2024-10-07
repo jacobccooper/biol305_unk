@@ -24,6 +24,8 @@ Next, we can download our data sample.
 
 A histogram is a frequency diagram that we can use to visually diagnose data and their distributions. We are going to examine a histogram using a random string of data. *R* can generate random (though, actually pseudorandom) strings of data on command, pulling them from different distributions. These distributions are pseudorandom because we can't actually program *R* to be random, so it starts from a wide variety of pseudorandom points.
 
+### Histograms on numeric vectors
+
 ```{r}
 # create random string from normal distribution
 # this step is not necessary for data analysis in homework
@@ -44,6 +46,29 @@ hist(x,breaks = 100)
 ```
 
 The number of bins can be somewhat arbitrary, but a value should be chosen based off of what illustrates the data well. *R* will auto-select a number of bins in some cases, but you can also select a number of bins. Some assignments will ask you to choose a specific number of bins as well.
+
+### Histograms on frequency counts
+
+Say, for example, that we have a dataset where everything is already shown as frequencies. We can create a frequency histogram using `barplot`.
+
+```{r}
+count_table <- matrix(nrow = 4, ncol = 2, byrow = T,
+                      data = c("Cat 1", 4,
+                               "Cat 2", 8,
+                               "Cat 3", 7,
+                               "Cat 4", 3)) %>%
+  as.data.frame()
+
+colnames(count_table) <- c("Category","Count")
+
+# ensure counts are numeric data
+count_table$Count <- as.numeric(count_table$Count)
+
+# manually create histogram
+barplot(count_table$Count, # response variable, counts for histogram
+        axisnames = T, # make names on plot
+        names.arg = count_table$Category) # make these the names
+```
 
 ### ggplot histograms
 
@@ -184,7 +209,7 @@ A *cumulative frequency plot* shows the overall spread of the data as a cumulati
 
 The following cumulative distribution plot is based on the method outlined in [Geeks for Geeks](https://www.geeksforgeeks.org/cumulative-frequency-graph-in-r/).
 
-### If data are not in histogram format
+### If data are not in histogram/frequency format
 
 You will need to create a frequency table to make them be in histogram format.
 
@@ -240,7 +265,7 @@ lines(break_points, # add lines to the graph, this is x
       cumulative_freq) # this is y for lines
 ```
 
-### If data are in histogram format
+### If data are in histogram/frequency format
 
 If you have a list of frequencies (say, *for river discharge over several years*), you only need to do the `cumsum` function. For example:
 
@@ -274,11 +299,10 @@ For example, see the following. For reference:
 -   `c` means "concatenate", or place things together in an object.
 
 ```{r}
-# lower bounds for 100-199, 200-300
-# values denote counts in category
+# numeric vector data for counts
 y <- c(17,24,16)
 
-# force histogram to these values
+# manually create a histogram using barplot
 barplot(y, 
         # axis names must be true
         axisnames = T, 
