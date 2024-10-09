@@ -262,7 +262,7 @@ As we can see, we get the same result as our $z$ table, just with more precision
 
 There are other functions in this family as well in *R,* including `dnorm` for quantiles, `qnorm` for determining the $z$ score for a specific $p$ value, and `rnorm` for getting random values from a normal distribution with specific dimensions. For now, we will focus on `pnorm`.
 
-## Workthrough Example
+### Workthrough Example
 
 When this class was being designed, [Hurricane Milton](https://en.wikipedia.org/wiki/Hurricane_Milton) was about to make contact with Florida. Hurricane Milton is considered one of the strongest hurricanes of all time, so we can look at historical hurricane data to determine just how powerful this storm really was. We can get information on maximum wind speeds of all recorded Atlantic hurricanes as of 2024 from Wikipedia.
 
@@ -367,8 +367,138 @@ write_csv(speedlist,path = "~/Documents/GitHub/biol105_unk/assignments/hurricane
 ```
 
 ```{r}
-
+hurricanes <- read_csv("https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/assignments/hurricane_speeds.csv")
 ```
+
+Above, we have loaded a `.csv` of one column that has all the hurricane speeds up to 2024. Hurricane Milton is the last row - the most recent hurricane. Let's separate this one out. We will use `[ , ]`, which defines `[rows,columns]` to subset data.
+
+```{r}
+milton <- hurricanes$Hurricane_Windspeed[nrow(hurricanes)]
+
+other_hurricanes <- hurricanes[-nrow(hurricanes),]
+```
+
+We want to compare the windspeed of Milton (180 mph) to the overall distribution of hurricane speeds. We can visualize this at first.
+
+```{r}
+# all hurricanes
+hist(hurricanes$Hurricane_Windspeed)
+```
+
+Windspeeds are more towards the lower end of the distribution, with strong storms being rarer.
+
+*For the sake of this class, we will assume we can use a normal distribution for these data*, but if we were doing an official study we would likely need to use a non-parametric test (we will cover these later, but they cover non-normal data).
+
+```{r}
+mu <- mean(other_hurricanes$Hurricane_Windspeed)
+
+mu
+```
+
+Hmmm... we need to use `na.omit` to be sure we do this properly.
+
+```{r}
+other_hurricanes_windspeed <- na.omit(other_hurricanes$Hurricane_Windspeed)
+
+mu <- mean(other_hurricanes_windspeed)
+mean(other_hurricanes_windspeed)
+```
+
+Next, we need the standard deviation.
+
+```{r}
+sd.hurricane <- sd(other_hurricanes_windspeed)
+
+sd.hurricane
+```
+
+Now, we can calculate our $Z$ value.
+
+```{r}
+Z <- (milton - mu)/sd.hurricane
+
+Z
+```
+
+How significant is this?
+
+```{r}
+pnorm(Z)
+```
+
+This is greater than $0.5$, so we need to do $1-p$ to figure things out.
+
+```{r}
+1 - pnorm(Z)
+```
+
+This rounds to $0.0004$, which means that this is an *extremely* strong hurricane.
+
+#### Non-normality, for those curious
+
+We can do a Shapiro-Wilk test of normality to see if this dataset is normal.
+
+```{r}
+shapiro.test(other_hurricanes_windspeed)
+```
+
+A $p < 0.05$ indicates that these data are *non-normal*.
+
+We can do a Wilcoxon-Test since these data are extremely non-normal.
+
+```{r}
+wilcox.test(other_hurricanes_windspeed,
+            milton)
+```
+
+Using non-normal corrections, we find that this is *not* an extremely strong hurricane, but it is near the upper end of what we would consider "normal" under historical conditions. Still an extremely bad hurricane!
+
+## Confidence Intervals
+
+Because we can figure out the probability of an event occurring, we can also calculate *confidence intervals*. A *confidence interval* provides a range of numbers around a value of interest that indicates where we believe the mean of a population lies and our confidence that it lies within that range. **Note** that nothing is ever 100% certain, but this helps us determine where a mean is and demonstrates our confidence in our results.
+
+Specifically, if the tails of the distribution, our $\alpha$, are $0.05$, then we have an area of $0.95$ around the mean where we do not reject results. Another perspective on this area is that we can say with $95$% certainty that a mean is within a certain area, and that if values fall within that confidence area then we do not reject the null hypothesis that the means are equal.
+
+We will cover several different ways to calculate confidence intervals, but for normal distributions, we use the following equation, with the $0.95$ confidence interval shown as an example:
+
+$$
+CI=\bar{x} \pm Z_{1-\frac{\alpha}{2}}\cdot \frac{\sigma}{\sqrt{n}}
+$$
+
+This interval gives us an idea of where the mean should lie. For example, if we are looking at the aforemention `beewalk` temperature data, we can calulate a $0.95$ confidence interval around the mean.
+
+```{r}
+temps <- na.omit(beewalk$temperature)
+
+xbar <- mean(temps)
+n <- length(temps)
+sdtemp <- sd(temps)
+# Z for 0.95 as P, so for 0.975, 0.025
+# get value from P
+Z <- qnorm(0.975)
+
+CI <- Z*(sdtemp/sqrt(n))
+
+CI
+```
+
+We have a very narrow confidence zone, because we have so many measurements. Let's round everything and present it in a good way.
+
+If I want numbers to show up *in text* in RMarkdown, I can add code to a line of plain text using the following syntax:
+
+```{r, eval = F}
+# DO NOT RUN
+# Format in plaintext
+`r xbar`
+```
+
+![This is the "coded" version of the text below. Compare the above window to the text below this image.](images/inline_code.png)
+
+Typing that into the plaintext should render as the following: `r xbar`. Then I can also type my answer as follows:
+
+The $95$% Confidence Interval for the mean for this temperature dataset is `r round(xbar,2)` $\pm$ `r round(CI,2)`.
+
+*Note* that the above is rounded to two decimal places to illustrative purposes ONLY, and should be rounded to one decimal place if it was a homework assignment because the original data has only one decimal place.
 
 ## Homework: Chapter 8
 

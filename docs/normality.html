@@ -299,8 +299,10 @@ window.Quarto = {
   <li><a href="#critical-values---alpha" id="toc-critical-values---alpha" class="nav-link" data-scroll-target="#critical-values---alpha"><span class="header-section-number">4.2.1</span> Critical Values - <span class="math inline">\(\alpha\)</span></a></li>
   <li><a href="#visualizing-a-p-value" id="toc-visualizing-a-p-value" class="nav-link" data-scroll-target="#visualizing-a-p-value"><span class="header-section-number">4.2.2</span> Visualizing a <span class="math inline">\(p\)</span> value</a></li>
   <li><a href="#calculating-a-p-value" id="toc-calculating-a-p-value" class="nav-link" data-scroll-target="#calculating-a-p-value"><span class="header-section-number">4.2.3</span> Calculating a <span class="math inline">\(p\)</span> value</a></li>
+  <li><a href="#workthrough-example" id="toc-workthrough-example" class="nav-link" data-scroll-target="#workthrough-example"><span class="header-section-number">4.2.4</span> Workthrough Example</a></li>
   </ul></li>
-  <li><a href="#homework-chapter-8" id="toc-homework-chapter-8" class="nav-link" data-scroll-target="#homework-chapter-8"><span class="header-section-number">4.3</span> Homework: Chapter 8</a></li>
+  <li><a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals"><span class="header-section-number">4.3</span> Confidence Intervals</a></li>
+  <li><a href="#homework-chapter-8" id="toc-homework-chapter-8" class="nav-link" data-scroll-target="#homework-chapter-8"><span class="header-section-number">4.4</span> Homework: Chapter 8</a></li>
   </ul>
 </nav>
     </div>
@@ -529,7 +531,7 @@ dbl (19): RecordKey, established, Precision, Transect.lat, Transect.long, tr...
 <h2 data-number="4.2" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">4.2</span> Hypothesis testing</h2>
 <p>Since we can define specific areas under the curve within these distributions, we can look at the percentage of area within a certain bound to determine how likely a specific outcome would be. Thus, we can begin to test what the <em>probability of observing an event</em> is within a theoretical, probabilistic space. A couple of important conceptual ideas:</p>
 <ol type="1">
-<li>We may not be able to know the probability of a specific event, but we can figure out the probability of events more extreme or less extreme as that event</li>
+<li>We may not be able to know the probability of a specific event, but we can figure out the probability of events more extreme or less extreme as that event.</li>
 <li>If the most likely result is the mean, then the further we move away from the mean, the less likely an event becomes.</li>
 <li>If we look <em>away</em> from the mean at a certain point, then the area represents the chances of getting a result <em>as extreme or more extreme than what we observe</em>. This probability is known as the <span class="math inline">\(p\)</span> value.</li>
 </ol>
@@ -646,9 +648,168 @@ dbl (19): RecordKey, established, Precision, Transect.lat, Transect.long, tr...
 <p>There are other functions in this family as well in <em>R,</em> including <code>dnorm</code> for quantiles, <code>qnorm</code> for determining the <span class="math inline">\(z\)</span> score for a specific <span class="math inline">\(p\)</span> value, and <code>rnorm</code> for getting random values from a normal distribution with specific dimensions. For now, we will focus on <code>pnorm</code>.</p>
 </section>
 </section>
+<section id="workthrough-example" class="level3" data-number="4.2.4">
+<h3 data-number="4.2.4" class="anchored" data-anchor-id="workthrough-example"><span class="header-section-number">4.2.4</span> Workthrough Example</h3>
+<p>When this class was being designed, <a href="https://en.wikipedia.org/wiki/Hurricane_Milton">Hurricane Milton</a> was about to make contact with Florida. Hurricane Milton is considered one of the strongest hurricanes of all time, so we can look at historical hurricane data to determine just how powerful this storm really was. We can get information on maximum wind speeds of all recorded Atlantic hurricanes as of 2024 from Wikipedia.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>hurricanes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/assignments/hurricane_speeds.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 889 Columns: 1
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (1): Hurricane_Windspeed
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>Above, we have loaded a <code>.csv</code> of one column that has all the hurricane speeds up to 2024. Hurricane Milton is the last row - the most recent hurricane. Let’s separate this one out. We will use <code>[ , ]</code>, which defines <code>[rows,columns]</code> to subset data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>milton <span class="ot">&lt;-</span> hurricanes<span class="sc">$</span>Hurricane_Windspeed[<span class="fu">nrow</span>(hurricanes)]</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>other_hurricanes <span class="ot">&lt;-</span> hurricanes[<span class="sc">-</span><span class="fu">nrow</span>(hurricanes),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We want to compare the windspeed of Milton (180 mph) to the overall distribution of hurricane speeds. We can visualize this at first.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># all hurricanes</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(hurricanes<span class="sc">$</span>Hurricane_Windspeed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="normality_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Windspeeds are more towards the lower end of the distribution, with strong storms being rarer.</p>
+<p><em>For the sake of this class, we will assume we can use a normal distribution for these data</em>, but if we were doing an official study we would likely need to use a non-parametric test (we will cover these later, but they cover non-normal data).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(other_hurricanes<span class="sc">$</span>Hurricane_Windspeed)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>mu</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+<p>Hmmm… we need to use <code>na.omit</code> to be sure we do this properly.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>other_hurricanes_windspeed <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(other_hurricanes<span class="sc">$</span>Hurricane_Windspeed)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(other_hurricanes_windspeed)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(other_hurricanes_windspeed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 102.5254</code></pre>
+</div>
+</div>
+<p>Next, we need the standard deviation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>sd.hurricane <span class="ot">&lt;-</span> <span class="fu">sd</span>(other_hurricanes_windspeed)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>sd.hurricane</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 23.08814</code></pre>
+</div>
+</div>
+<p>Now, we can calculate our <span class="math inline">\(Z\)</span> value.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> (milton <span class="sc">-</span> mu)<span class="sc">/</span>sd.hurricane</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>Z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.355603</code></pre>
+</div>
+</div>
+<p>How significant is this?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(Z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.999604</code></pre>
+</div>
+</div>
+<p>This is greater than <span class="math inline">\(0.5\)</span>, so we need to do <span class="math inline">\(1-p\)</span> to figure things out.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(Z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.000395961</code></pre>
+</div>
+</div>
+<p>This rounds to <span class="math inline">\(0.0004\)</span>, which means that this is an <em>extremely</em> strong hurricane.</p>
+<section id="non-normality-for-those-curious" class="level4" data-number="4.2.4.1">
+<h4 data-number="4.2.4.1" class="anchored" data-anchor-id="non-normality-for-those-curious"><span class="header-section-number">4.2.4.1</span> Non-normality, for those curious</h4>
+<p>We can do a Shapiro-Wilk test of normality to see if this dataset is normal.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(other_hurricanes_windspeed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  other_hurricanes_windspeed
+W = 0.88947, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>A <span class="math inline">\(p &lt; 0.05\)</span> indicates that these data are <em>non-normal</em>.</p>
+<p>We can do a Wilcoxon-Test since these data are extremely non-normal.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(other_hurricanes_windspeed,</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>            milton)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  other_hurricanes_windspeed and milton
+W = 6.5, p-value = 0.08678
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</div>
+</div>
+<p>Using non-normal corrections, we find that this is <em>not</em> an extremely strong hurricane, but it is near the upper end of what we would consider “normal” under historical conditions. Still an extremely bad hurricane!</p>
 </section>
-<section id="homework-chapter-8" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="homework-chapter-8"><span class="header-section-number">4.3</span> Homework: Chapter 8</h2>
+</section>
+</section>
+<section id="confidence-intervals" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="confidence-intervals"><span class="header-section-number">4.3</span> Confidence Intervals</h2>
+<p>Because we can figure out the probability of an event occurring, we can also calculate <em>confidence intervals</em>. A <em>confidence interval</em> provides a range of numbers around a value of interest that indicates where we believe the mean of a population lies and our confidence that it lies within that range. <strong>Note</strong> that nothing is ever 100% certain, but this helps us determine where a mean is and demonstrates our confidence in our results.</p>
+<p>Specifically, if the tails of the distribution, our <span class="math inline">\(\alpha\)</span>, are <span class="math inline">\(0.05\)</span>, then we have an area of <span class="math inline">\(0.95\)</span> around the mean where we do not reject results. Another perspective on this area is that we can say with <span class="math inline">\(95\)</span>% certainty that a mean is within a certain area, and that if values fall within that confidence area then we do not reject the null hypothesis that the means are equal.</p>
+<p>We will cover several different ways to calculate confidence intervals, but for normal distributions, we use the following equation, with the <span class="math inline">\(0.95\)</span> confidence interval shown as an example:</p>
+<p><span class="math display">\[
+CI=\bar{x} \pm Z_{1-\frac{\alpha}{2}}\cdot \frac{\sigma}{\sqrt{n}}
+\]</span></p>
+<p>This interval gives us an idea of where the mean should lie. For example, if we are looking at the aforemention <code>beewalk</code> temperature data, we can calulate a <span class="math inline">\(0.95\)</span> confidence interval around the mean.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>temps <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(beewalk<span class="sc">$</span>temperature)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(temps)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(temps)</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>sdtemp <span class="ot">&lt;-</span> <span class="fu">sd</span>(temps)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Z for 0.95 as P, so for 0.975, 0.025</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="co"># get value from P</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>)</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>CI <span class="ot">&lt;-</span> Z<span class="sc">*</span>(sdtemp<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>CI</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01458932</code></pre>
+</div>
+</div>
+<p>We have a very narrow confidence zone, because we have so many measurements. Let’s round everything and present it in a good way.</p>
+<p>If I want numbers to show up <em>in text</em> in RMarkdown, I can add code to a line of plain text using the following syntax:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT RUN</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Format in plaintext</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">r xbar</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/inline_code.png" class="img-fluid figure-img"></p>
+<figcaption>This is the “coded” version of the text below. Compare the above window to the text below this image.</figcaption>
+</figure>
+</div>
+<p>Typing that into the plaintext should render as the following: 18.645963. Then I can also type my answer as follows:</p>
+<p>The <span class="math inline">\(95\)</span>% Confidence Interval for the mean for this temperature dataset is 18.65 <span class="math inline">\(\pm\)</span> 0.01.</p>
+<p><em>Note</em> that the above is rounded to two decimal places to illustrative purposes ONLY, and should be rounded to one decimal place if it was a homework assignment because the original data has only one decimal place.</p>
+</section>
+<section id="homework-chapter-8" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="homework-chapter-8"><span class="header-section-number">4.4</span> Homework: Chapter 8</h2>
 <p>Please complete problems 8.1, 8.2, 8.3 &amp; 8.6. Follow the directions as written in the book. Submit one <code>html</code> file, as derived from <em>RStudio</em>. For maximum clarity, create headings to separate your problems. (Remember, a header can be invoked by placing ‘<code>#</code>’ in front of a line of text. For example: the header here is written as <code># Homework: Chapter 8</code>).</p>
 
 
