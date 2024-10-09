@@ -1,0 +1,26 @@
+---
+title: "Glossary"
+author: "Dr. Jacob C. Cooper"
+format: html
+editor: visual
+---
+
+## Common Commands
+
+The following are common useful commands used in *R*, with examples of their use.
+
+-   `<-` / `=` - save a value as an object
+
+```{r}
+x <- 10
+x
+```
+
+-   `c` - concatenate, place two values together
+
+```{r}
+x <- c(10,11)
+x
+```
+
+-   

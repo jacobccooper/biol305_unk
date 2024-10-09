@@ -260,6 +260,12 @@ window.Quarto = {
  <span class="menu-text">References</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -471,13 +477,13 @@ window.Quarto = {
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(xy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>             x cat
-1 -0.009109141   x
-2 -0.652823983   x
-3  0.480747553   x
-4 -0.575555063   x
-5 -0.394331728   x
-6 -0.661068620   x</code></pre>
+<pre><code>            x cat
+1 -1.66990430   x
+2 -0.17105128   x
+3 -2.14310679   x
+4 -1.19251229   x
+5 -1.93991500   x
+6 -0.04632572   x</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -539,7 +545,7 @@ window.Quarto = {
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1506651</code></pre>
+<pre><code>[1] 0.0217171</code></pre>
 </div>
 </div>
 <p>Generally, a <strong>value between</strong> <span class="math inline">\(-1\)</span> <strong>and</strong> <span class="math inline">\(+1\)</span> <strong>for skewness is “acceptable”</strong> and not considered overly skewed. Positive values indicate “right” skew and negative values indicate a “left” skew. If something is too skewed, it may violate assumptions of normality and thus need <em>non-parametric</em> tests rather than our standard parametric tests - something we will cover later!</p>
@@ -563,7 +569,7 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(x3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.257131</code></pre>
+<pre><code>[1] 2.2715</code></pre>
 </div>
 </div>
 <p>As we can see, the above is a heavily skewed dataset with a positive (“right”) skew.</p>
@@ -587,14 +593,14 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># non-zeroed</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.024145</code></pre>
+<pre><code>[1] 3.086106</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># zeroed</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(x)<span class="sc">-</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.02414541</code></pre>
+<pre><code>[1] 0.08610576</code></pre>
 </div>
 </div>
 <p>As expected, out values drawn from a normal distribution are not overly skewed. Let’s compare these to a more kurtic distribution:</p>
@@ -603,7 +609,7 @@ window.Quarto = {
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(xk)<span class="sc">-</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 24.23078</code></pre>
+<pre><code>[1] 27.8688</code></pre>
 </div>
 </div>
 <p>What does this dataset look like?</p>
@@ -638,7 +644,7 @@ window.Quarto = {
 </div>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -3.012313  3.086139</code></pre>
+<pre><code>[1] -3.474369  3.196792</code></pre>
 </div>
 </div>
 <p>Based on this range, we need to create our bin sizes. We want our lowest bin to be below our lowest value, and our highest bin above our highest value. Here, I’m setting a step size of 1. <strong>You will have to examine your data and determine the best break size for your datasets.</strong></p>
@@ -666,7 +672,7 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>data_transform
 [-3,-2) [-2,-1)  [-1,0)   [0,1)   [1,2)   [2,3)   [3,4) 
-     16     141     378     316     126      19       3 </code></pre>
+     23     132     353     347     120      23       1 </code></pre>
 </div>
 </div>
 <div class="cell">
@@ -680,7 +686,7 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cumulative_freq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        [-3,-2) [-2,-1)  [-1,0)   [0,1)   [1,2)   [2,3)   [3,4) 
-      0      16     157     535     851     977     996     999 </code></pre>
+      0      23     155     508     855     975     998     999 </code></pre>
 </div>
 </div>
 <div class="cell">
