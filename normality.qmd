@@ -148,7 +148,7 @@ Now the normal distribution is even more clear. As we can also see, the more we 
 
 Since we can define specific areas under the curve within these distributions, we can look at the percentage of area within a certain bound to determine how likely a specific outcome would be. Thus, we can begin to test what the *probability of observing an event* is within a theoretical, probabilistic space. A couple of important conceptual ideas:
 
-1.  We may not be able to know the probability of a specific event, but we can figure out the probability of events more extreme or less extreme as that event
+1.  We may not be able to know the probability of a specific event, but we can figure out the probability of events more extreme or less extreme as that event.
 2.  If the most likely result is the mean, then the further we move away from the mean, the less likely an event becomes.
 3.  If we look *away* from the mean at a certain point, then the area represents the chances of getting a result *as extreme or more extreme than what we observe*. This probability is known as the $p$ value.
 
@@ -261,6 +261,114 @@ pnorm(-1.33)
 As we can see, we get the same result as our $z$ table, just with more precision!
 
 There are other functions in this family as well in *R,* including `dnorm` for quantiles, `qnorm` for determining the $z$ score for a specific $p$ value, and `rnorm` for getting random values from a normal distribution with specific dimensions. For now, we will focus on `pnorm`.
+
+## Workthrough Example
+
+When this class was being designed, [Hurricane Milton](https://en.wikipedia.org/wiki/Hurricane_Milton) was about to make contact with Florida. Hurricane Milton is considered one of the strongest hurricanes of all time, so we can look at historical hurricane data to determine just how powerful this storm really was. We can get information on maximum wind speeds of all recorded Atlantic hurricanes as of 2024 from Wikipedia.
+
+```{r, eval = F, echo = F}
+# https://stackoverflow.com/questions/59481608/how-to-remove-the-characters-from-a-string-and-leave-only-the-numbers-in-r
+
+# cocatenating wikipedia files.
+hurricanes1 <- list.files("~/Downloads/",pattern = "List_of_Category_1_Atlantic*")
+
+speedlist_cat1 <- NULL
+for(j in 1:length(hurricanes1)){
+  test <- read_csv(paste0("~/Downloads/", hurricanes1[j]))
+  test <- test[-1,] # remove extra header
+  for(i in 1:nrow(test)){
+    speed <- test$`Peak intensity...3`[i]
+    speed2 <- strsplit(speed," ")[[1]][1]
+    speed2 <- gsub("\\D+", "", speed2)
+    speedlist_cat1 <- c(speedlist_cat1,speed2)
+  }
+}
+
+speedlist_cat1 <- as.numeric(speedlist_cat1)
+
+# cocatenating wikipedia files.
+hurricanes2 <- list.files("~/Downloads/",pattern = "List_of_Category_2_Atlantic*")
+
+speedlist_cat2 <- NULL
+for(j in 1:length(hurricanes2)){
+  test <- read_csv(paste0("~/Downloads/", hurricanes2[j]))
+  test <- test[-1,] # remove extra header
+  for(i in 1:nrow(test)){
+    speed <- test$`Peak intensity...3`[i]
+    speed2 <- strsplit(speed," ")[[1]][1]
+    speed2 <- gsub("\\D+", "", speed2)
+    speedlist_cat2 <- c(speedlist_cat2,speed2)
+  }
+}
+
+speedlist_cat2 <- as.numeric(speedlist_cat2)
+
+# cocatenating wikipedia files.
+hurricanes3 <- list.files("~/Downloads/",pattern = "List_of_Category_3_Atlantic*")
+
+speedlist_cat3 <- NULL
+for(j in 1:length(hurricanes3)){
+  test <- read_csv(paste0("~/Downloads/", hurricanes3[j]))
+  test <- test[-1,] # remove extra header
+  for(i in 1:nrow(test)){
+    speed <- test$`Peak intensity...3`[i]
+    speed2 <- strsplit(speed," ")[[1]][1]
+    speed2 <- gsub("\\D+", "", speed2)
+    speedlist_cat3 <- c(speedlist_cat3,speed2)
+  }
+}
+
+speedlist_cat3 <- as.numeric(speedlist_cat3)
+speedlist_cat3 <- na.omit(speedlist_cat3) %>%
+  as.numeric()
+
+# cocatenating wikipedia files.
+hurricanes4 <- list.files("~/Downloads/",pattern = "List_of_Category_4_Atlantic*")
+
+speedlist_cat4 <- NULL
+for(j in 1:1){
+  test <- read_csv(paste0("~/Downloads/", hurricanes4[j]))
+  test <- test[-1,] # remove extra header
+  for(i in 1:nrow(test)){
+    speed <- test$`Peak intensity...3`[i]
+    speed2 <- strsplit(speed," ")[[1]][1]
+    speed2 <- gsub("\\D+", "", speed2)
+    speedlist_cat4 <- c(speedlist_cat4,speed2)
+  }
+}
+
+speedlist_cat4 <- as.numeric(speedlist_cat4)
+
+# cocatenating wikipedia files.
+hurricanes5 <- list.files("~/Downloads/",pattern = "List_of_Category_5_Atlantic*")
+
+speedlist_cat5 <- NULL
+for(j in 1:1){
+  test <- read_csv(paste0("~/Downloads/", hurricanes5[j]))
+  test <- test[-1,] # remove extra header
+  for(i in 1:nrow(test)){
+    speed <- test$`Peak intensity...4`[i]
+    speed2 <- strsplit(speed," ")[[1]][1]
+    speed2 <- gsub("\\D+", "", speed2)
+    speedlist_cat5 <- c(speedlist_cat5,speed2)
+  }
+}
+
+speedlist_cat5 <- as.numeric(speedlist_cat5)
+
+speedlist <- c(speedlist_cat1,speedlist_cat2,speedlist_cat3,
+               speedlist_cat4,speedlist_cat5)
+
+speedlist <- as.data.frame(speedlist)
+
+colnames(speedlist) <- "Hurricane_Windspeed"
+
+write_csv(speedlist,path = "~/Documents/GitHub/biol105_unk/assignments/hurricane_speeds.csv")
+```
+
+```{r}
+
+```
 
 ## Homework: Chapter 8
 
