@@ -115,6 +115,9 @@ Data do not show any significant kurtosis.
 Oftentimes, we will see things approach the normal distribution as we collect more samples. We can model this by subsampling our temperature vector.
 
 ```{r}
+# make reproducible
+set.seed(1839)
+
 sub.temps <- sample(temps,
                     size = 10,
                     replace = FALSE)
@@ -144,6 +147,31 @@ hist(sub.temps, main = "1000 samples", breaks = 40)
 
 Now the normal distribution is even more clear. As we can also see, the more we sample, the more we approach the true means and distribution of the actual dataset. Because of this, we can perform experiments and observations of small groups and subsamples and make inferences about the whole, given that most systems naturally approach statistical distributions like the normal!
 
+### Testing if data are normal
+
+There are two major methods we can use to see if data are normally distributed.
+
+#### QQ Plots
+
+Another way to see if data are normal is to use a [QQ plot](https://www.statology.org/q-q-plot-r/). These plots data quantiles to theoretical quantiles to see how well they align, with a perfectly normal distribution having a completely linear QQ plot. Let's look at these with our `beewalk` data.
+
+```{r}
+qqnorm(temps)
+```
+
+As we can see above, the data are roughly linear, which means are data are very normal. The "stairsteps" are from the accuracy in measuring temperature, which was likely rounded and thus created a distribution that is not completely continuous.
+
+#### Shapiro-Wilk test
+
+Another way to test for normality is to use a Shapiro-Wilk test of normality. We will not get into the specific of this distribution, but this tests the null hypothesis that data originated in a normal distribution, with the alternative hypothesis that the data originated in a non-normal distribution. You will read next about the specifics of hypothesis testing, but this test uses an $\alpha = 0.05$, and we *reject the null hypothesis* if our $p < \alpha$, with $p$ representing the probability of observing something as extreme or more extreme than the result we observe. Our `temps` dataset is too large, as `shapiro.test` requires vectors of $< 5000$. Let's take a random sample and try again.
+
+```{r}
+sample(temps, 200) %>%
+  shapiro.test()
+```
+
+For our subsets of temperature, we find that the temperature is normally distributed. **Note** that having all $5000$ temperatures included makes this test find a "non-normal" result, likely from the same stairstepping phenomenon from rounding that we discussed before, which may result in [model overfitting](https://en.wikipedia.org/wiki/Overfitting) to the rounded data.
+
 ## Hypothesis testing
 
 Since we can define specific areas under the curve within these distributions, we can look at the percentage of area within a certain bound to determine how likely a specific outcome would be. Thus, we can begin to test what the *probability of observing an event* is within a theoretical, probabilistic space. A couple of important conceptual ideas:
@@ -160,7 +188,15 @@ In order to determine if something is significant, we compare things to a *criti
 
 **Your value should always set your** $\alpha$ **critical value before you do your experiments and analyses.**
 
-### Visualizing a $p$ value
+Our critical value of $\alpha$ represents our criterion for *rejecting the null hypothesis*. We set our $\alpha$ to try to minimize the chances of error.
+
+**Type I Error** is also known as a **false-positive**, and is when we **reject the null hypothesis when the null is true**.
+
+**Type II Error** is also known as a **false-negative**, and is when we **support the null hypothesis when the null is false**.
+
+By setting an $\alpha$, we are creating a threshold of probability at which point we can say, with confidence, that results are different.
+
+### Introduction to $p$ values
 
 Let's say that we are looking at a dataset defined by a standard normal distribution with $\mu=0$ and $\sigma=1$. We draw a random value, $x$, with $x=1.6$. What is the probability of drawing a number this extreme or more extreme from the dataset?
 
@@ -234,9 +270,97 @@ p2  <-  p + # add previous step as a "backbone"
 plot(p2)
 ```
 
-Now we can see that it is only a portion of the distribution that is within our $p$ value, but we don't know exactly what this area is! We can find out in one of two ways.
+Now we can see that it is only a portion of the distribution *as extreme or more extreme* than the value we placed on the graph. The area of this region is our $p$ value. This represents the *probability of an event as extreme or more extreme occurring* given the random variation observed in the dataset or in the distribution approximating the dataset. This is the value we compare to $\alpha$ - our threshold for rejecting the null hypothesis - to determine whether or not we are going to reject the null hypothesis.
 
-### Calculating a $p$ value
+Let's look at the above graph again, but let's visualize a two-tailed $\alpha$ around the mean with a $95$% confidence interval. First, we need to get the $Z$ scores for our $\alpha=0.05$, which we calculate by taking $\frac{\alpha}{2}$ to account for the two tails. (Two tails essentially meaning we reject the null mean if we see things *greater than* or *less than* our expected value to a significant extent). We can calculate $Z$ scores using `qnorm`.
+
+```{r}
+low_alpha <- qnorm(0.025) # looks left
+hi_alpha <- qnorm(0.975) # looks left
+
+print(paste0("Our Z scores are: ", 
+             round(low_alpha,2), 
+             " & ", 
+             round(hi_alpha,2)))
+```
+
+The above values make sense, given the distribution is symmetrical. Our above dashed line is as $Z = 1.6$, which means we should have a $p = 0.05$, so the dashed line should be *closer* to the mean than our cutoffs.
+
+```{r}
+### THIS WILL TAKE A WHILE TO RUN ###
+
+# Getting the values of plot
+# something I wasn't familiar with before making this!
+d  <-  ggplot_build(p)$data[[1]]
+
+# Building shaded area
+# create new plot object
+p2  <-  p + # add previous step as a "backbone"
+  # add new shaded area
+  geom_area(data = subset(d, x < 1.6), # select area
+            # define color, shading intensity, etc.
+            aes(x=x,y=y), fill = "white", alpha = 1) +
+  # add value line
+  geom_vline(xintercept = 1.6, colour = "black", 
+             linetype = "dashed",linewidth = 1) +
+  geom_vline(xintercept = low_alpha, colour = "red", 
+             linetype = "solid",linewidth = 1) +
+  geom_vline(xintercept = hi_alpha, colour = "red", 
+             linetype = "solid",linewidth = 1) +
+  # rename axes
+  xlab("Test Statistic") +
+  ylab("Frequency (Probability)") +
+  # make it neat and tidy
+  theme_classic()
+
+# plot it
+# can use ggsave function to save
+plot(p2)
+```
+
+Exactly as we calculated, we see that our $p < \alpha$ and thus we do not see an area (in blue) less than the area that would be further than the mean as defined by the red lines.
+
+### Calculating a $Z$ score
+
+When we are trying to compare our data to a normal distribution, we need to calculate a $Z$ score for us to perform the comparison. A $Z$ score is essentially a measurement of the number of standard deviations we are away from the mean on a standard normal distribution. The equation for a $Z$ score is:
+
+$$
+Z = \frac{\bar{x}-\mu}{\frac{\sigma}{\sqrt{n}}}
+$$
+
+Where $\bar{x}$ is either a sample mean or a sample value, $\mu$ is the population mean, $\sigma$ is the population standard deviation and $n$ is the number of individuals in your sample ($1$ if comparing to a single value).
+
+We can calculate this in *R* using the following function:
+
+```{r}
+zscore <- function(xbar, mu, sd.x, n = 1){
+  z <- (xbar - mu)/(sd.x/sqrt(n))
+  return(z)
+}
+```
+
+**NOTE** that is the above isn't working for you, *you have a mistake somewhere in your code*. Try comparing - character by character - what is listed above to what you have.
+
+Let's work through an example, where we have a sample mean of $62$ with $5$ samples compared to a sample mean of $65$ with a standard deviation of $3.5$.
+
+```{r}
+Z <- zscore(xbar = 62, # sample mean
+            mu = 65, # population mean
+            sd.x = 3.5, # population standard deviation
+            n = 5) # number in sample
+
+print(Z)
+```
+
+Now, we can calculate the $p$ value for this $Z$ score.
+
+```{r}
+pnorm(Z)
+```
+
+After rounding, we get $p = 0.03$, a $p$ that is significant if for a one-tailed $\alpha = 0.05$ but insignificant for a two-tailed $\alpha = 0.05$.
+
+### Calculated the $p$ value
 
 We have two different methods for calculating a $p$ value:
 
