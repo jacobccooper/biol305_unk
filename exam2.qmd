@@ -63,6 +63,8 @@ Consider this scenario: You have discovered a never-before-documented population
 | 19      | 65          |
 | 20      | 65          |
 
+***HINT***: Try combining numbers using the `c` command. See the [Glossary](https://jacobccooper.github.io/biol305_unk/glossary.html) for more information!
+
 a)  State the null and alternative hypothesis for your study.
 b)  Calculate the median, first and third quartiles, and interquartile range of your response variable. Create a boxplot. Based on your results, are there any outliers in your data? Explain.
 c)  Calculate the $z$-score for this scenario. Please show all of your work.

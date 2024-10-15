@@ -247,6 +247,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#common-commands" id="toc-common-commands" class="nav-link active" data-scroll-target="#common-commands"><span class="header-section-number">14.1</span> Common Commands</a></li>
+  <li><a href="#basic-statistics" id="toc-basic-statistics" class="nav-link" data-scroll-target="#basic-statistics"><span class="header-section-number">14.2</span> Basic statistics</a></li>
   </ul>
 </nav>
     </div>
@@ -301,9 +302,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 10 11</code></pre>
 </div>
 </div>
+</section>
+<section id="basic-statistics" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="basic-statistics"><span class="header-section-number">14.2</span> Basic statistics</h2>
+<p>For these examples, we will create a random vector of number to demonstrate how they work.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
-<li></li>
+<li><code>mean</code> - get the mean / average of a set of data</li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.03533576</code></pre>
+</div>
+</div>
 
 
 </section>

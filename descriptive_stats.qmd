@@ -449,7 +449,17 @@ lowquant <- quantile(frap_order,0.25,type = 6) %>% as.numeric()
 hiquant <- quantile(frap_order,0.75,type = 6) %>% as.numeric()
 
 iqr <- hiquant - lowquant
+```
 
+We can also calculate the interquartile range using `IQR`. **Remember**, you must use `type = 6`!
+
+```{r}
+iqr <- IQR(frap_order, type = 6)
+```
+
+Now, to calculate the "whiskers".
+
+```{r}
 lowbound <- lowquant - (1.5*iqr)
 hibound <- hiquant + (1.5*iqr)
 

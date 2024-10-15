@@ -23,4 +23,16 @@ x <- c(10,11)
 x
 ```
 
--   
+## Basic statistics
+
+For these examples, we will create a random vector of number to demonstrate how they work.
+
+```{r}
+x <- rnorm(1000)
+```
+
+-   `mean` - get the mean / average of a set of data
+
+```{r}
+mean(x)
+```
