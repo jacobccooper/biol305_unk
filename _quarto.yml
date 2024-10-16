@@ -21,15 +21,15 @@ book:
     - cor_reg.qmd
     - final_exam.qmd
     - conclusion.qmd
-    - references.qmd
     - glossary.qmd
+    - references.qmd
 
 bibliography: references.bib
 csl: the-auk.csl
 
 format:
   html:
-    theme: cosmo
+    theme: flatly
   pdf:
     documentclass: scrreprt
 

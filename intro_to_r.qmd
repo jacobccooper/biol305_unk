@@ -169,6 +169,8 @@ In this class, there are two libraries that you will need *almost every week*! F
 1.  `cURL`: this package allows us to download things from URLs. We will be using this to download data files. *Otherwise, you will have to enter all data by hand!*
 2.  `tidyverse`: this package is actually a [group of packages](https://www.tidyverse.org/) designed to help with data analysis, management, and visualization.
 
+**NOTE: If you leave the install prompts in your RMarkdown document, *it will not knit!***
+
 ```{r, eval=FALSE}
 # run this code the first time ONLY
 # does not need to be run every time you use R!

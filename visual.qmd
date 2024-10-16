@@ -26,6 +26,8 @@ A histogram is a frequency diagram that we can use to visually diagnose data and
 
 ### Histograms on numeric vectors
 
+The following is how to create default histograms on data. If you need to create custom bin sizes, please see the notes under *Cumulative frequency plots* for data that are not already in frequency format.
+
 ```{r}
 # create random string from normal distribution
 # this step is not necessary for data analysis in homework
