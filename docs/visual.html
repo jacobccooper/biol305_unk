@@ -284,19 +284,20 @@ window.Quarto = {
   <li><a href="#histograms-on-frequency-counts" id="toc-histograms-on-frequency-counts" class="nav-link" data-scroll-target="#histograms-on-frequency-counts"><span class="header-section-number">3.3.2</span> Histograms on frequency counts</a></li>
   <li><a href="#ggplot-histograms" id="toc-ggplot-histograms" class="nav-link" data-scroll-target="#ggplot-histograms"><span class="header-section-number">3.3.3</span> ggplot histograms</a></li>
   </ul></li>
-  <li><a href="#skewness" id="toc-skewness" class="nav-link" data-scroll-target="#skewness"><span class="header-section-number">3.4</span> Skewness</a></li>
-  <li><a href="#kurtosis" id="toc-kurtosis" class="nav-link" data-scroll-target="#kurtosis"><span class="header-section-number">3.5</span> Kurtosis</a></li>
-  <li><a href="#cumulative-frequency-plot" id="toc-cumulative-frequency-plot" class="nav-link" data-scroll-target="#cumulative-frequency-plot"><span class="header-section-number">3.6</span> Cumulative frequency plot</a>
+  <li><a href="#boxplots" id="toc-boxplots" class="nav-link" data-scroll-target="#boxplots"><span class="header-section-number">3.4</span> Boxplots</a></li>
+  <li><a href="#skewness" id="toc-skewness" class="nav-link" data-scroll-target="#skewness"><span class="header-section-number">3.5</span> Skewness</a></li>
+  <li><a href="#kurtosis" id="toc-kurtosis" class="nav-link" data-scroll-target="#kurtosis"><span class="header-section-number">3.6</span> Kurtosis</a></li>
+  <li><a href="#cumulative-frequency-plot" id="toc-cumulative-frequency-plot" class="nav-link" data-scroll-target="#cumulative-frequency-plot"><span class="header-section-number">3.7</span> Cumulative frequency plot</a>
   <ul class="collapse">
-  <li><a href="#if-data-are-not-in-histogramfrequency-format" id="toc-if-data-are-not-in-histogramfrequency-format" class="nav-link" data-scroll-target="#if-data-are-not-in-histogramfrequency-format"><span class="header-section-number">3.6.1</span> If data are not in histogram/frequency format</a></li>
-  <li><a href="#if-data-are-in-histogramfrequency-format" id="toc-if-data-are-in-histogramfrequency-format" class="nav-link" data-scroll-target="#if-data-are-in-histogramfrequency-format"><span class="header-section-number">3.6.2</span> If data are in histogram/frequency format</a></li>
+  <li><a href="#if-data-are-not-in-histogramfrequency-format" id="toc-if-data-are-not-in-histogramfrequency-format" class="nav-link" data-scroll-target="#if-data-are-not-in-histogramfrequency-format"><span class="header-section-number">3.7.1</span> If data are not in histogram/frequency format</a></li>
+  <li><a href="#if-data-are-in-histogramfrequency-format" id="toc-if-data-are-in-histogramfrequency-format" class="nav-link" data-scroll-target="#if-data-are-in-histogramfrequency-format"><span class="header-section-number">3.7.2</span> If data are in histogram/frequency format</a></li>
   </ul></li>
-  <li><a href="#homework-chapter-3" id="toc-homework-chapter-3" class="nav-link" data-scroll-target="#homework-chapter-3"><span class="header-section-number">3.7</span> Homework: Chapter 3</a>
+  <li><a href="#homework-chapter-3" id="toc-homework-chapter-3" class="nav-link" data-scroll-target="#homework-chapter-3"><span class="header-section-number">3.8</span> Homework: Chapter 3</a>
   <ul class="collapse">
-  <li><a href="#helpful-hint" id="toc-helpful-hint" class="nav-link" data-scroll-target="#helpful-hint"><span class="header-section-number">3.7.1</span> Helpful hint</a></li>
-  <li><a href="#directions" id="toc-directions" class="nav-link" data-scroll-target="#directions"><span class="header-section-number">3.7.2</span> Directions</a></li>
+  <li><a href="#helpful-hint" id="toc-helpful-hint" class="nav-link" data-scroll-target="#helpful-hint"><span class="header-section-number">3.8.1</span> Helpful hint</a></li>
+  <li><a href="#directions" id="toc-directions" class="nav-link" data-scroll-target="#directions"><span class="header-section-number">3.8.2</span> Directions</a></li>
   </ul></li>
-  <li><a href="#addendum" id="toc-addendum" class="nav-link" data-scroll-target="#addendum"><span class="header-section-number">3.8</span> Addendum</a></li>
+  <li><a href="#addendum" id="toc-addendum" class="nav-link" data-scroll-target="#addendum"><span class="header-section-number">3.9</span> Addendum</a></li>
   </ul>
 </nav>
     </div>
@@ -478,13 +479,13 @@ window.Quarto = {
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(xy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           x cat
-1 -0.2548436   x
-2 -0.9636706   x
-3  0.5830092   x
-4 -0.6417868   x
-5  0.9904860   x
-6 -1.9923258   x</code></pre>
+<pre><code>            x cat
+1 -0.30813189   x
+2 -1.57894828   x
+3  0.89798746   x
+4  0.10002839   x
+5  0.08592434   x
+6 -1.31915008   x</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -537,28 +538,26 @@ window.Quarto = {
 <p>There are lots of other commands you can incorporate as well if you so choose; I recommend checking <a href="http://www.sthda.com/english/wiki/ggplot2-histogram-plot-quick-start-guide-r-software-and-data-visualization">sites like this one</a>.</p>
 </section>
 </section>
-<section id="skewness" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="skewness"><span class="header-section-number">3.4</span> Skewness</h2>
-<p>Skew is a measure of how much a dataset “leans” to the positive or negative directions (<em>i.e.</em>, to the “left” or to the “right”). To calculate skew, we are going to use the <code>moments</code> library.</p>
+<section id="boxplots" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="boxplots"><span class="header-section-number">3.4</span> Boxplots</h2>
+<p>We can also create boxplots to visualize the spread of the data. Boxplots include a bar for the median, a box representing the interquartile range between the 25th and 75th percentiles, and whiskers that extend <span class="math inline">\(1.5 \cdot IQR\)</span> beyond the 25th and 75th percentiles. We can create a boxplot using the command <code>boxplot</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># don't forget to install if needed!</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.03164611</code></pre>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using pre-declared variable x</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visual_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
-<p>Generally, a <strong>value between</strong> <span class="math inline">\(-1\)</span> <strong>and</strong> <span class="math inline">\(+1\)</span> <strong>for skewness is “acceptable”</strong> and not considered overly skewed. Positive values indicate “right” skew and negative values indicate a “left” skew. If something is too skewed, it may violate assumptions of normality and thus need <em>non-parametric</em> tests rather than our standard parametric tests - something we will cover later!</p>
-<p>Let’s look at a skewed dataset. We are going to artificially create a skewed dataset from our <code>x</code> vector.</p>
+</div>
+<p>We can set the axis limits manually as well.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create more positive values</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="fu">c</span>(x,</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        x[<span class="fu">which</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>)]<span class="sc">*</span><span class="dv">2</span>,</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        x[<span class="fu">which</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>)]<span class="sc">*</span><span class="dv">4</span>,</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        x[<span class="fu">which</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>)]<span class="sc">*</span><span class="dv">8</span>)</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(x, <span class="co"># what to plot</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>), <span class="co"># set y limits</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">pch =</span> <span class="dv">19</span>) <span class="co"># make dots solid</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -567,21 +566,30 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(x3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.268777</code></pre>
-</div>
-</div>
-<p>As we can see, the above is a heavily skewed dataset with a positive (“right”) skew.</p>
+<p>On the above plot, <em>outliers</em> for the dataset are shown as dots beyond the ends of the “whiskers”.</p>
 </section>
-<section id="kurtosis" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="kurtosis"><span class="header-section-number">3.5</span> Kurtosis</h2>
-<p>Kurtosis refers to how sharp or shallow the peak of the distribution is (<em>platykurtic</em> vs.&nbsp;<em>leptokurtic</em>). Remember - <em>platy</em>kyrtic are <em>plateau</em>kurtic, wide and broad like a plateau, and <em>leptokurtic</em> distributions are sharp. Intermediate distributions that are roughly normal are <em>mesokurtic</em>.</p>
-<p>Much like skewness, <strong>kurtosis values of</strong> <span class="math inline">\(&gt; 2\)</span> <strong>and</strong> <span class="math inline">\(&lt; -2\)</span> <strong>are generally considered extreme</strong>, and thus not mesokurtic. This threshold can vary a bit based on source, but for this class, we will use a threshold of <span class="math inline">\(\pm 2\)</span> for both skewness and kurtosis.</p>
-<p>Let’s see the kurtosis of <code>x</code>. <strong><em>Note</em></strong> that when doing the equation, a normal distribution actually has a kurtosis of <span class="math inline">\(3\)</span>; <strong>thus, we are doing kurtosis</strong> <span class="math inline">\(-3\)</span> <strong>to “zero” the distribution and make it comparable to skewness</strong>.</p>
+<section id="skewness" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="skewness"><span class="header-section-number">3.5</span> Skewness</h2>
+<p>Skew is a measure of how much a dataset “leans” to the positive or negative directions (<em>i.e.</em>, to the “left” or to the “right”). To calculate skew, we are going to use the <code>moments</code> library.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># don't forget to install if needed!</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.06967415</code></pre>
+</div>
+</div>
+<p>Generally, a <strong>value between</strong> <span class="math inline">\(-1\)</span> <strong>and</strong> <span class="math inline">\(+1\)</span> <strong>for skewness is “acceptable”</strong> and not considered overly skewed. Positive values indicate “right” skew and negative values indicate a “left” skew. If something is too skewed, it may violate assumptions of normality and thus need <em>non-parametric</em> tests rather than our standard parametric tests - something we will cover later!</p>
+<p>Let’s look at a skewed dataset. We are going to artificially create a skewed dataset from our <code>x</code> vector.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create more positive values</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="fu">c</span>(x,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>        x[<span class="fu">which</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>)]<span class="sc">*</span><span class="dv">2</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>        x[<span class="fu">which</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>)]<span class="sc">*</span><span class="dv">4</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        x[<span class="fu">which</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>)]<span class="sc">*</span><span class="dv">8</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -591,145 +599,137 @@ window.Quarto = {
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># non-zeroed</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(x3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.918877</code></pre>
+<pre><code>[1] 2.013397</code></pre>
+</div>
+</div>
+<p>As we can see, the above is a heavily skewed dataset with a positive (“right”) skew.</p>
+</section>
+<section id="kurtosis" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="kurtosis"><span class="header-section-number">3.6</span> Kurtosis</h2>
+<p>Kurtosis refers to how sharp or shallow the peak of the distribution is (<em>platykurtic</em> vs.&nbsp;<em>leptokurtic</em>). Remember - <em>platy</em>kyrtic are <em>plateau</em>kurtic, wide and broad like a plateau, and <em>leptokurtic</em> distributions are sharp. Intermediate distributions that are roughly normal are <em>mesokurtic</em>.</p>
+<p>Much like skewness, <strong>kurtosis values of</strong> <span class="math inline">\(&gt; 2\)</span> <strong>and</strong> <span class="math inline">\(&lt; -2\)</span> <strong>are generally considered extreme</strong>, and thus not mesokurtic. This threshold can vary a bit based on source, but for this class, we will use a threshold of <span class="math inline">\(\pm 2\)</span> for both skewness and kurtosis.</p>
+<p>Let’s see the kurtosis of <code>x</code>. <strong><em>Note</em></strong> that when doing the equation, a normal distribution actually has a kurtosis of <span class="math inline">\(3\)</span>; <strong>thus, we are doing kurtosis</strong> <span class="math inline">\(-3\)</span> <strong>to “zero” the distribution and make it comparable to skewness</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visual_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># zeroed</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(x)<span class="sc">-</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># non-zeroed</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.08112349</code></pre>
+<pre><code>[1] 2.842156</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># zeroed</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(x)<span class="sc">-</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.1578435</code></pre>
 </div>
 </div>
 <p>As expected, out values drawn from a normal distribution are not overly skewed. Let’s compare these to a more kurtic distribution:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>xk <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">3</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(xk)<span class="sc">-</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>xk <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">3</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(xk)<span class="sc">-</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 26.03878</code></pre>
+<pre><code>[1] 78.73949</code></pre>
 </div>
 </div>
 <p>What does this dataset look like?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(xk,<span class="at">breaks =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(xk,<span class="at">breaks =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="visual_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="visual_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>As we can see, this is a very <em>leptokurtic</em> distribution.</p>
 </section>
-<section id="cumulative-frequency-plot" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="cumulative-frequency-plot"><span class="header-section-number">3.6</span> Cumulative frequency plot</h2>
+<section id="cumulative-frequency-plot" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="cumulative-frequency-plot"><span class="header-section-number">3.7</span> Cumulative frequency plot</h2>
 <p>A <em>cumulative frequency plot</em> shows the overall spread of the data as a cumulative line over the entire dataset. This is another way to see the spread of the data and is often complementary to a histogram.</p>
 <p>The following cumulative distribution plot is based on the method outlined in <a href="https://www.geeksforgeeks.org/cumulative-frequency-graph-in-r/">Geeks for Geeks</a>.</p>
-<section id="if-data-are-not-in-histogramfrequency-format" class="level3" data-number="3.6.1">
-<h3 data-number="3.6.1" class="anchored" data-anchor-id="if-data-are-not-in-histogramfrequency-format"><span class="header-section-number">3.6.1</span> If data are not in histogram/frequency format</h3>
+<section id="if-data-are-not-in-histogramfrequency-format" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="if-data-are-not-in-histogramfrequency-format"><span class="header-section-number">3.7.1</span> If data are not in histogram/frequency format</h3>
 <p>You will need to create a frequency table to make them be in histogram format.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># declaring the break points</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># make break points based on data</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># always round UP with ceiling</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>range.x <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(<span class="fu">max</span>(x)<span class="sc">-</span><span class="fu">min</span>(x))</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>range.x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># declaring the break points</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># make break points based on data</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># always round UP with ceiling</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>range.x <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(<span class="fu">max</span>(x)<span class="sc">-</span><span class="fu">min</span>(x))</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>range.x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -2.838812  3.279240</code></pre>
+<pre><code>[1] -3.997687  2.781922</code></pre>
 </div>
 </div>
 <p>Based on this range, we need to create our bin sizes. We want our lowest bin to be below our lowest value, and our highest bin above our highest value. Here, I’m setting a step size of 1. <strong>You will have to examine your data and determine the best break size for your datasets.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make bins based on range</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># create sequential series</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>break_points <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="co"># starting value, low</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>                    <span class="dv">4</span>, <span class="co"># end value, high</span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>                    <span class="dv">1</span>) <span class="co"># increment size</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make bins based on range</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co"># create sequential series</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>break_points <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="co"># starting value, low</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>                    <span class="dv">4</span>, <span class="co"># end value, high</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>                    <span class="dv">1</span>) <span class="co"># increment size</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transforming the data</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>data_transform <span class="ot">=</span> <span class="fu">cut</span>(x, <span class="co"># your data!</span></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>                     break_points, <span class="co"># the breaks you defined</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">right=</span><span class="cn">FALSE</span>) <span class="co"># closed on the left for intervals</span></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># creating the frequency table</span></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>freq_table <span class="ot">=</span> <span class="fu">table</span>(data_transform) <span class="co"># create a table</span></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co"># printing the frequency table</span></span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Frequency Table"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transforming the data</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>data_transform <span class="ot">=</span> <span class="fu">cut</span>(x, <span class="co"># your data!</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>                     break_points, <span class="co"># the breaks you defined</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">right=</span><span class="cn">FALSE</span>) <span class="co"># closed on the left for intervals</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co"># creating the frequency table</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>freq_table <span class="ot">=</span> <span class="fu">table</span>(data_transform) <span class="co"># create a table</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="co"># printing the frequency table</span></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Frequency Table"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Frequency Table"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(freq_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(freq_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>data_transform
 [-3,-2) [-2,-1)  [-1,0)   [0,1)   [1,2)   [2,3)   [3,4) 
-     24     145     328     352     129      20       2 </code></pre>
+     22     143     325     340     144      24       0 </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculating cumulative frequency</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>cumulative_freq <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="co"># start at 0, no points</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">cumsum</span>(freq_table)) <span class="co"># get the cumulative frequency!</span></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Cumulative Frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculating cumulative frequency</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>cumulative_freq <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="co"># start at 0, no points</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">cumsum</span>(freq_table)) <span class="co"># get the cumulative frequency!</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Cumulative Frequency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Cumulative Frequency"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cumulative_freq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cumulative_freq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        [-3,-2) [-2,-1)  [-1,0)   [0,1)   [1,2)   [2,3)   [3,4) 
-      0      24     169     497     849     978     998    1000 </code></pre>
+      0      22     165     490     830     974     998     998 </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plotting the data</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(break_points, <span class="co"># x axis is break_points</span></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>     cumulative_freq, <span class="co"># y axis is cumulative frequency</span></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab=</span><span class="st">"Data Distribution"</span>, <span class="co"># x axis label</span></span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab=</span><span class="st">"Cumulative Frequency"</span>) <span class="co"># y axis label</span></span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="co"># creating line graph</span></span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(break_points, <span class="co"># add lines to the graph, this is x</span></span>
-<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>      cumulative_freq) <span class="co"># this is y for lines</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="visual_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="if-data-are-in-histogramfrequency-format" class="level3" data-number="3.6.2">
-<h3 data-number="3.6.2" class="anchored" data-anchor-id="if-data-are-in-histogramfrequency-format"><span class="header-section-number">3.6.2</span> If data are in histogram/frequency format</h3>
-<p>If you have a list of frequencies (say, <em>for river discharge over several years</em>), you only need to do the <code>cumsum</code> function. For example:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span> ,<span class="dv">2</span> ,<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">16</span>, <span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>sum_y <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(y)</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  1  2  4  8 16  8  4  2  1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sum_y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  1  3  7 15 31 39 43 45 46</code></pre>
-</div>
-</div>
-<p>Now we can see we have out cumulative sums. Let’s plot these. <strong>NOTE</strong> that this method will <em>not</em> have the x variables match the dataset you started with, it will only plot the curve based on the number of values given.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(sum_y), <span class="co"># get length of sum_y, make x index</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> sum_y, <span class="co"># plot cumulative sums</span></span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>) <span class="co"># make a line plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plotting the data</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(break_points, <span class="co"># x axis is break_points</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>     cumulative_freq, <span class="co"># y axis is cumulative frequency</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab=</span><span class="st">"Data Distribution"</span>, <span class="co"># x axis label</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab=</span><span class="st">"Cumulative Frequency"</span>) <span class="co"># y axis label</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="co"># creating line graph</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(break_points, <span class="co"># add lines to the graph, this is x</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>      cumulative_freq) <span class="co"># this is y for lines</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -739,44 +739,75 @@ window.Quarto = {
 </div>
 </div>
 </section>
+<section id="if-data-are-in-histogramfrequency-format" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="if-data-are-in-histogramfrequency-format"><span class="header-section-number">3.7.2</span> If data are in histogram/frequency format</h3>
+<p>If you have a list of frequencies (say, <em>for river discharge over several years</em>), you only need to do the <code>cumsum</code> function. For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span> ,<span class="dv">2</span> ,<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">16</span>, <span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>sum_y <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(y)</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  1  2  4  8 16  8  4  2  1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sum_y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  1  3  7 15 31 39 43 45 46</code></pre>
+</div>
+</div>
+<p>Now we can see we have out cumulative sums. Let’s plot these. <strong>NOTE</strong> that this method will <em>not</em> have the x variables match the dataset you started with, it will only plot the curve based on the number of values given.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(sum_y), <span class="co"># get length of sum_y, make x index</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> sum_y, <span class="co"># plot cumulative sums</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>) <span class="co"># make a line plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="visual_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="homework-chapter-3" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="homework-chapter-3"><span class="header-section-number">3.7</span> Homework: Chapter 3</h2>
+</section>
+<section id="homework-chapter-3" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="homework-chapter-3"><span class="header-section-number">3.8</span> Homework: Chapter 3</h2>
 <p>From your book, complete problems 3.1, 3.4 &amp; 3.5. Data for these problems are available on <em>Canvas</em> and in your book.</p>
-<section id="helpful-hint" class="level3" data-number="3.7.1">
-<h3 data-number="3.7.1" class="anchored" data-anchor-id="helpful-hint"><span class="header-section-number">3.7.1</span> Helpful hint</h3>
+<section id="helpful-hint" class="level3" data-number="3.8.1">
+<h3 data-number="3.8.1" class="anchored" data-anchor-id="helpful-hint"><span class="header-section-number">3.8.1</span> Helpful hint</h3>
 <p><strong>HINT</strong>: For 3.5, consider just making a vector of the values of interest for a histogram.</p>
 <p>For example, see the following. For reference:</p>
 <ul>
 <li><code>c</code> means “concatenate”, or place things together in an object.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># numeric vector data for counts</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>,<span class="dv">24</span>,<span class="dv">16</span>)</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co"># manually create a histogram using barplot</span></span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(y, </span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># axis names must be true</span></span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">axisnames =</span> T, </span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># input names here</span></span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># each category as a separate quoted character string</span></span>
-<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">names.arg =</span> <span class="fu">c</span>(<span class="st">"Cat 1"</span>, <span class="st">"Cat 2"</span>, <span class="st">"Cat 3"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># numeric vector data for counts</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>,<span class="dv">24</span>,<span class="dv">16</span>)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co"># manually create a histogram using barplot</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(y, </span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># axis names must be true</span></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">axisnames =</span> T, </span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># input names here</span></span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># each category as a separate quoted character string</span></span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">names.arg =</span> <span class="fu">c</span>(<span class="st">"Cat 1"</span>, <span class="st">"Cat 2"</span>, <span class="st">"Cat 3"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="visual_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="visual_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="directions" class="level3" data-number="3.7.2">
-<h3 data-number="3.7.2" class="anchored" data-anchor-id="directions"><span class="header-section-number">3.7.2</span> Directions</h3>
+<section id="directions" class="level3" data-number="3.8.2">
+<h3 data-number="3.8.2" class="anchored" data-anchor-id="directions"><span class="header-section-number">3.8.2</span> Directions</h3>
 <p>Please complete all computer portions in an <code>rmarkdown</code> document knitted as an html. Upload any “by hand” calculations as images in the HTML or separately on <em>Canvas</em>.</p>
 </section>
 </section>
-<section id="addendum" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="addendum"><span class="header-section-number">3.8</span> Addendum</h2>
+<section id="addendum" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="addendum"><span class="header-section-number">3.9</span> Addendum</h2>
 <p>With thanks to Hernan Vargas &amp; Riley Grieser for help in formatting this page. Additional comments provided by BIOL 305 classes.</p>
 
 

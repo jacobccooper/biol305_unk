@@ -136,6 +136,26 @@ ggplot(xy, aes(x = x, fill = cat))+
 
 There are lots of other commands you can incorporate as well if you so choose; I recommend checking [sites like this one](http://www.sthda.com/english/wiki/ggplot2-histogram-plot-quick-start-guide-r-software-and-data-visualization).
 
+## Boxplots
+
+We can also create boxplots to visualize the spread of the data. Boxplots include a bar for the median, a box representing the interquartile range between the 25th and 75th percentiles, and whiskers that extend $1.5 \cdot IQR$ beyond the 25th and 75th percentiles. We can create a boxplot using the command `boxplot`.
+
+```{r}
+# using pre-declared variable x
+
+boxplot(x)
+```
+
+We can set the axis limits manually as well.
+
+```{r}
+boxplot(x, # what to plot
+        ylim = c(-4, 4), # set y limits
+        pch = 19) # make dots solid
+```
+
+On the above plot, *outliers* for the dataset are shown as dots beyond the ends of the "whiskers".
+
 ## Skewness
 
 Skew is a measure of how much a dataset "leans" to the positive or negative directions (*i.e.*, to the "left" or to the "right"). To calculate skew, we are going to use the `moments` library.
