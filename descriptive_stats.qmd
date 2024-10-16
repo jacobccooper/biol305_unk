@@ -237,15 +237,21 @@ This is a classic example of how things in *R* (and in statistics in general!) c
 There is no default method for finding the mode in *R*. However, websites like [Statology](https://www.statology.org/mode-in-r/) provide wraparound functions.
 
 ```{r}
-# Statology function
+# Based on Statology function
 # define function to calculate mode
 find_mode <- function(x) {
   # get unique values from vector
   u <- unique(x)
   # count number of occurrences for each value
   tab <- tabulate(match(x, u))
-  # return the value with the highest count
-  u[tab == max(tab)]
+  
+  # if no mode, say so
+  if(length(x)==length(u[tab == max(tab)])){
+    print("No mode.")
+  }else{
+    # return the value with the highest count
+    u[tab == max(tab)]
+  }
 }
 
 find_mode(fraps)
