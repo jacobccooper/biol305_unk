@@ -7,6 +7,10 @@ editor: visual
 
 ## Probability distributions
 
+```{r,echo=FALSE,message=F}
+library(tidyverse)
+```
+
 We rely on multiple different probability distributions to help us understand what probable outcomes are for a specific scenario. All of the tests that we are performing are comparing our results to what we would expect under perfectly random scenarios. For example, if we are flipping a coin, we are interested in whether the the observation we have of the flips on our coin matches our expectation given the probability of getting heads or tails on a perfectly fair coin. While it is possible to get all heads or all tails on a coin flip, it is highly unlikely and may lead us to believe we have an unfair coin. The more trails we perform, the more confident we can be that out coin is atypical.
 
 We perform similar comparisons for other distributions. If we are comparing sets of events, we can look at the probability of those events occurring if events are occurring randomly. If we are comparing counts, we can compare our counts to our expectation of counts if events or subjects are distributed randomly throughout the matrix or whether two sets of counts are likely under the same sets of assumptions.
@@ -35,6 +39,8 @@ In *R*, the binomial distribution is represented by the following functions:
 
 -   `rbinom`: generates random values according to a binomial.
 
+### Binomial examples
+
 Let's see what this looks like. Let's consider a scenario where we flip a coin 10 times and get 9 heads. How likely is this outcome?
 
 ```{r}
@@ -50,7 +56,7 @@ round(x,4)
 So, our real $p$ is:
 
 ```{r}
-1-round(x,4)
+1 - round(x,4)
 ```
 
 Again, the trailing zero is missing. Given that $p < \alpha$, we *reject the null hypothesis* that this is a fair coin.
@@ -62,10 +68,14 @@ How does this distribution look?
 # start at 0 for no heads
 x <- 0:10
 # cumulative probability to left of outcome
-y <- pbinom(x,size = 10, prob = 0.5, lower.tail = T)
+y <- pbinom(x,
+            size = 10, 
+            prob = 0.5, 
+            lower.tail = T)
 
 # cumulative probability of results to the left
-plot(x,y,
+plot(x,
+     y,
      type="l") # line plot
 ```
 
@@ -75,7 +85,9 @@ What about if we always have $p$ less than $0.5$ to reflect two tails?
 # any value greater than 0.5 is subtracted from 1
 y[y > 0.5] <- 1 - y[y > 0.5]
 
-plot(x,y,type="l")
+plot(x,
+     y,
+     type="l")
 ```
 
 What if we do this with a bigger dataset, like for $50$ flips?
@@ -85,15 +97,66 @@ What if we do this with a bigger dataset, like for $50$ flips?
 # start at 0 for no heads
 x <- 0:50
 # cumulative probability to left of outcome
-y <- pbinom(x,size = length(x), prob = 0.5, lower.tail = T)
+y <- pbinom(x,
+            size = length(x), 
+            prob = 0.5, 
+            lower.tail = T)
 
 # any value greater than 0.5 is subtracted from 1
 y[y > 0.5] <- 1 - y[y > 0.5]
 
-plot(x,y,type="l")
+plot(x,
+     y,
+     type="l")
 ```
 
 As we increase the number of flips, we can see that the probability of success forms a *normal distribution* centered on the outcome given the default probability. Thus, as we deviate from our *expected outcome* (initial probability multiple by the number of trials), then our results become less likely.
+
+### Binomial exact tests
+
+We can perform exact binomial tests by using the *R* function `binom.test`. This is a built in function within *R*. This test requires the following arguments:
+
+-   `x`: number of successes (success = outcome of interest)
+
+-   `n`: number of trials (number of events)
+
+-   `p`: probability of success in a typical situation (*i.e.*, for a fair coin, this is $50$%)
+
+-   `alternative`: the hypothesis to be tested, whether `two.sided`, `greater`, or `less`.
+
+-   `conf.level` is the *confidence level* to be returned; default is $95$%.
+
+Let's say you flip a coin ten times, randomly assigning one side as a "success" and one side as a "failure". We do ten flips, and get 3 "successes". How likely is this outcome?
+
+```{r}
+binom.test(x = 3,   # three successes
+           n = 10,  # ten flips
+           p = 0.5) # 50% chance on fair coin
+```
+
+Now let's say we do 1000 flips, and we get 300 successes.
+
+```{r}
+binom.test(x = 300,
+           n = 1000,
+           p = 0.5)
+```
+
+As we can see, both of these return a confidence interval among other things. If we save the object, we can access these "slots" of data using the `$` character.
+
+```{r}
+binom_result <- binom.test(x = 3,
+                           n = 10,
+                           p = 0.5)
+
+binom_result$p.value %>% round(2)
+```
+
+```{r}
+binom_result$conf.int
+```
+
+This test is easily implemented, but always double check and make sure you are setting it up correctly.
 
 ## Poisson distribution
 
@@ -102,6 +165,8 @@ The *Poisson distribution* is used to reflect random count data. Specifically, t
 $$
 p(x)=\frac{\lambda^{x}e^{-\lambda}}{x!}
 $$
+
+### Poisson example
 
 The Poisson is represented by the following functions in *R* which closely resemble the functions for the normal and binomial distributions:
 
@@ -126,6 +191,81 @@ plot(x,y,type="l")
 ```
 
 As we can see, the probability of rare events is high, whereas the probability quickly decreases as the number of successes increases.
+
+### Poisson test
+
+Much like the Binomial Distribution and its `binom.test`, we can use `poisson.test` to analyze data via a Poisson Distribution. This command uses the arguments:
+
+-   `x`: number of events of interest
+
+-   `T`: time base (if for an event count)
+
+-   `r`: hypothesized rate or ratio
+
+-   `alternative` and `conf.level` are the same as for `binom.test`
+
+We will not often use the `poisson.test` in this class, but it is good to be aware of.
+
+## Cumulative Probabilities
+
+With both the Binomial and the Poisson, we can calculate cumulative probabilities. Both of these require the density (`d`) versions of the arguments.
+
+### Binomial cumulative
+
+Let's say we have ten trials with three successes and a base probability of $0.5$. We can calculate the probability to the *left* by using the following:
+
+```{r}
+pbinom(q = 3,
+       size = 10,
+       prob = 0.5)
+```
+
+As we can see, this is \~17.19%. Now let's try using `dbinom`. This command gives us the value at an individual bin, given that it is a more discrete distribution for these smaller sample sizes.
+
+```{r}
+dbinom(x = 0:3, 
+       size = 10, 
+       prob = 0.5)
+```
+
+Above, we can see the probability of each number of successes three and fewer, for 0, 1, 2, and 3. Let's sum these probabilities.
+
+```{r}
+dbinom(x = 0:3, 
+       size = 10, 
+       prob = 0.5) %>%
+  sum()
+```
+
+As we can see, we get the same value as for `pbinom`! We can use this method for finding very specific answers, like what is the probability of getting between 3 and 6 successes in ten trials?
+
+```{r}
+dbinom(x = 3:6,
+       size = 10,
+       prob = 0.5) %>% 
+  sum() %>% 
+  round(4)
+```
+
+The probability of getting one of these outcomes is 77.34%.
+
+### Poisson cumulative probability
+
+Likewise, we can use `ppois` to get the $p$ value and `dpois` to get the distribution function of specific outcomes. So, let's say we have a scenario with a $\lambda = 0.5$ and we are looking at the probability of 2 successes or greater. In this case, we have an infinite series, which we can't calculate. However, we can calculate the probability of what it *isn't* and then subtract from 1. In this case, we are looking for the probability of *not* having 0 or 1 successes.
+
+```{r}
+dpois(x = 0:1,
+      lambda = 0.5)
+```
+
+Now, let's sum this and subtract it from 1.
+
+```{r}
+1 - dpois(x = 0:1, lambda = 0.5) %>% 
+  sum()
+```
+
+The probability is only about 9%.
 
 ## $\chi^2$-squared distribution
 
@@ -168,25 +308,150 @@ $$
 
 where $e =$ the number of expected individuals and $o =$ the number of observed individuals in each category. Since we are squaring these values, we will only have positive values, and thus this will **always be a one-tailed test**.
 
-### $\chi^2$ estimations in *R*
+There are multiple types of $\chi^2$ test, including the following we will cover here:
 
-Usually when we use a $\chi^2$, we are looking at count data. Let's consider the following hypothetical scenario, comparing experience with *R* between English majors (who, in this theoretical scenario, do not regularly use *R*) and Biology majors who are required to take *R* for this class:
+-   $\chi^2$ Goodness-of-fit test
 
-| Major     | *R* experience | No *R* experience |
-|-----------|----------------|-------------------|
-| *English* | 2              | 8                 |
-| *Biology* | 9              | 1                 |
+-   $\chi^2$ test of independence
 
-Intuitively, we can see a difference, but we want to perform a statistical test to see just how likely these counts would be if both groups were equally likely to use *R*:
+### $\chi^2$ Goodness-of-fit test
+
+### $\chi^2$ test of independence
+
+Usually when we use a $\chi^2$, we are looking at count data. Let's consider the following hypothetical scenario, comparing experience with *R* between non-biology majors (who, in this theoretical scenario, do not regularly use *R*) and Biology majors who are required to take *R* for this class:
+
+| Major         | *R* experience | No *R* experience |
+|---------------|----------------|-------------------|
+| *Non-biology* | 3              | 7                 |
+| *Biology*     | 9              | 1                 |
+
+: The above table of counts is also known as a **contingency table**. Intuitively, we can see a difference, but we want to perform a statistical test to see just how likely these counts would be if both groups were equally likely. We can calculate this both "by hand" and using built in *R* functions.
+
+#### $\chi^2$ estimations by hand
+
+First, we can enter the data into *R*.
 
 ```{r}
-chisq.test(x = c(2,8),
-           y = c(9,1))
+data <- matrix(data = c(3,7,9,1), nrow = 2, ncol = 2, byrow = T)
+
+colnames(data) <- c("R", "No R")
+rownames(data) <- c("Non-biology", "Biology")
+
+data
 ```
 
-Here we get $p = 1$, which reflects a one-tailed interpretation.
+Next, we need the *observed - expected* values. We determine expected values either through probability ($0.5 \cdot n$ for equal probability for two categories) or via calculating the the expected values (see later section on *expected counts*). In this case, since we are looking at equally likely in each cell, we have an expected matrix as follows:
 
-### Calculating $\chi^2$ by hand
+```{r}
+# total datapoints
+N <- sum(data)
+
+expected <- matrix(data = c(0.25*N,0.25*N,0.25*N,0.25*N), nrow = 2, ncol = 2, byrow = T)
+
+colnames(expected) <- c("R", "No R")
+rownames(expected) <- c("Non-biology", "Biology")
+
+expected
+```
+
+Now we need to find our *observed - expected*.
+
+```{r}
+o_e <- data - expected
+
+o_e
+```
+
+***Note*** that in *R* we can add and subtract matrices, so there's no reason to reformat these data!
+
+Now, we can square these data.
+
+```{r}
+o_e2 <- o_e^2
+
+o_e2
+```
+
+Next, we take these and divide them by the expected values and then sum those values.
+
+```{r}
+chi_matrix <- o_e2/expected
+
+chi_matrix
+```
+
+```{r}
+sum(chi_matrix)
+```
+
+Here, we get a $\chi^2$ value of 8. We can use our handy family functions to determine the probability of this event:
+
+```{r}
+pchisq(8, df = 1, lower.tail = F)
+```
+
+Here, we get a $p$ value of 0.005.
+
+Alternatively, we can calculate this using *expected counts*. For many situations, we don't know what the baseline probability *should* be, so we calculate the expected counts based on what we do know. Expected counts are calculated as follows:
+
+$$
+Exp(x)=\frac{\Sigma(row_x)\cdot\Sigma(col_x)}{N}
+$$
+
+where $N$ is the sum of all individuals in the table. For the above example, this would look like this:
+
+```{r}
+data_colsums <- colSums(data)
+data_rowsums <- rowSums(data)
+N <- sum(data)
+
+expected <- matrix(data = c(data_colsums[1]*data_rowsums[1],
+                            data_colsums[2]*data_rowsums[1],
+                            data_colsums[1]*data_rowsums[2],
+                            data_colsums[2]*data_rowsums[2]),
+                   nrow = 2, ncol = 2, byrow = T)
+
+# divide by total number
+expected <- expected/N
+
+colnames(expected) <- colnames(data)
+rownames(expected) <- rownames(data)
+
+expected
+```
+
+Here, we can see our expected number are not quite 50/50! this will give us a different result than our previous iteration.
+
+#### $\chi^2$ estimations in *R*
+
+We can calculate this in *R* by entering in the entire table and using `chisq.test`.
+
+```{r}
+data <- matrix(data = c(3,7,9,1), nrow = 2, ncol = 2, byrow = T)
+
+colnames(data) <- c("R", "No R")
+rownames(data) <- c("Non-biology", "Biology")
+
+data
+```
+
+```{r}
+chisq.test(data, correct = F)
+```
+
+Here, we get $p = 0.006$, which is significant with $\alpha = 0.05$.
+
+**Note** that these values are slightly different. they will be even more different if `correct` is set to `TRUE`. By default, *R*, uses a [Yate's correction for continuity](https://en.wikipedia.org/wiki/Yates's_correction_for_continuity). This accounts for error introduced by comparing the discrete values to a continuous distribution.
+
+```{r}
+chisq.test(data)
+```
+
+Applying this correction *lowers* the degrees of freedom, and increases the $p$ value, thus making it harder to get $p < \alpha$.
+
+**Note that the Yate's correction is only applied for 2 x 2 contingency tables.**
+
+Given the slight differences in calculation between by hand and what the functions of *R* are performing, *it's important to always show your work*.
 
 ## Fisher's exact test
 

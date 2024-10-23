@@ -277,19 +277,32 @@ window.Quarto = {
    
   <ul>
   <li><a href="#probability-distributions" id="toc-probability-distributions" class="nav-link active" data-scroll-target="#probability-distributions"><span class="header-section-number">6.1</span> Probability distributions</a></li>
-  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution"><span class="header-section-number">6.2</span> Binomial distribution</a></li>
-  <li><a href="#poisson-distribution" id="toc-poisson-distribution" class="nav-link" data-scroll-target="#poisson-distribution"><span class="header-section-number">6.3</span> Poisson distribution</a></li>
-  <li><a href="#chi2-squared-distribution" id="toc-chi2-squared-distribution" class="nav-link" data-scroll-target="#chi2-squared-distribution"><span class="header-section-number">6.4</span> <span class="math inline">\(\chi^2\)</span>-squared distribution</a>
+  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution"><span class="header-section-number">6.2</span> Binomial distribution</a>
   <ul class="collapse">
-  <li><a href="#calculating-the-test-statistic" id="toc-calculating-the-test-statistic" class="nav-link" data-scroll-target="#calculating-the-test-statistic"><span class="header-section-number">6.4.1</span> Calculating the test statistic</a></li>
-  <li><a href="#chi2-estimations-in-r" id="toc-chi2-estimations-in-r" class="nav-link" data-scroll-target="#chi2-estimations-in-r"><span class="header-section-number">6.4.2</span> <span class="math inline">\(\chi^2\)</span> estimations in <em>R</em></a></li>
-  <li><a href="#calculating-chi2-by-hand" id="toc-calculating-chi2-by-hand" class="nav-link" data-scroll-target="#calculating-chi2-by-hand"><span class="header-section-number">6.4.3</span> Calculating <span class="math inline">\(\chi^2\)</span> by hand</a></li>
+  <li><a href="#binomial-examples" id="toc-binomial-examples" class="nav-link" data-scroll-target="#binomial-examples"><span class="header-section-number">6.2.1</span> Binomial examples</a></li>
+  <li><a href="#binomial-exact-tests" id="toc-binomial-exact-tests" class="nav-link" data-scroll-target="#binomial-exact-tests"><span class="header-section-number">6.2.2</span> Binomial exact tests</a></li>
   </ul></li>
-  <li><a href="#fishers-exact-test" id="toc-fishers-exact-test" class="nav-link" data-scroll-target="#fishers-exact-test"><span class="header-section-number">6.5</span> Fisher’s exact test</a></li>
-  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework"><span class="header-section-number">6.6</span> Homework</a>
+  <li><a href="#poisson-distribution" id="toc-poisson-distribution" class="nav-link" data-scroll-target="#poisson-distribution"><span class="header-section-number">6.3</span> Poisson distribution</a>
   <ul class="collapse">
-  <li><a href="#chapter-5" id="toc-chapter-5" class="nav-link" data-scroll-target="#chapter-5"><span class="header-section-number">6.6.1</span> Chapter 5</a></li>
-  <li><a href="#chapter-7" id="toc-chapter-7" class="nav-link" data-scroll-target="#chapter-7"><span class="header-section-number">6.6.2</span> Chapter 7</a></li>
+  <li><a href="#poisson-example" id="toc-poisson-example" class="nav-link" data-scroll-target="#poisson-example"><span class="header-section-number">6.3.1</span> Poisson example</a></li>
+  <li><a href="#poisson-test" id="toc-poisson-test" class="nav-link" data-scroll-target="#poisson-test"><span class="header-section-number">6.3.2</span> Poisson test</a></li>
+  </ul></li>
+  <li><a href="#cumulative-probabilities" id="toc-cumulative-probabilities" class="nav-link" data-scroll-target="#cumulative-probabilities"><span class="header-section-number">6.4</span> Cumulative Probabilities</a>
+  <ul class="collapse">
+  <li><a href="#binomial-cumulative" id="toc-binomial-cumulative" class="nav-link" data-scroll-target="#binomial-cumulative"><span class="header-section-number">6.4.1</span> Binomial cumulative</a></li>
+  <li><a href="#poisson-cumulative-probability" id="toc-poisson-cumulative-probability" class="nav-link" data-scroll-target="#poisson-cumulative-probability"><span class="header-section-number">6.4.2</span> Poisson cumulative probability</a></li>
+  </ul></li>
+  <li><a href="#chi2-squared-distribution" id="toc-chi2-squared-distribution" class="nav-link" data-scroll-target="#chi2-squared-distribution"><span class="header-section-number">6.5</span> <span class="math inline">\(\chi^2\)</span>-squared distribution</a>
+  <ul class="collapse">
+  <li><a href="#calculating-the-test-statistic" id="toc-calculating-the-test-statistic" class="nav-link" data-scroll-target="#calculating-the-test-statistic"><span class="header-section-number">6.5.1</span> Calculating the test statistic</a></li>
+  <li><a href="#chi2-estimations-by-hand" id="toc-chi2-estimations-by-hand" class="nav-link" data-scroll-target="#chi2-estimations-by-hand"><span class="header-section-number">6.5.2</span> <span class="math inline">\(\chi^2\)</span> estimations by hand</a></li>
+  <li><a href="#chi2-estimations-in-r" id="toc-chi2-estimations-in-r" class="nav-link" data-scroll-target="#chi2-estimations-in-r"><span class="header-section-number">6.5.3</span> <span class="math inline">\(\chi^2\)</span> estimations in <em>R</em></a></li>
+  </ul></li>
+  <li><a href="#fishers-exact-test" id="toc-fishers-exact-test" class="nav-link" data-scroll-target="#fishers-exact-test"><span class="header-section-number">6.6</span> Fisher’s exact test</a></li>
+  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework"><span class="header-section-number">6.7</span> Homework</a>
+  <ul class="collapse">
+  <li><a href="#chapter-5" id="toc-chapter-5" class="nav-link" data-scroll-target="#chapter-5"><span class="header-section-number">6.7.1</span> Chapter 5</a></li>
+  <li><a href="#chapter-7" id="toc-chapter-7" class="nav-link" data-scroll-target="#chapter-7"><span class="header-section-number">6.7.2</span> Chapter 7</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -343,6 +356,8 @@ p(x)=\binom{n}{x}p^{x}(1-p)^{n-x}
 <li><p><code>qbinom</code>: the value at which a specific probability is found (the <em>quantile function</em>)</p></li>
 <li><p><code>rbinom</code>: generates random values according to a binomial.</p></li>
 </ul>
+<section id="binomial-examples" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="binomial-examples"><span class="header-section-number">6.2.1</span> Binomial examples</h3>
 <p>Let’s see what this looks like. Let’s consider a scenario where we flip a coin 10 times and get 9 heads. How likely is this outcome?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">9</span>, <span class="co"># number successes, 9 heads</span></span>
@@ -357,7 +372,7 @@ p(x)=\binom{n}{x}p^{x}(1-p)^{n-x}
 <p><strong>NOTE</strong> that the trailing <span class="math inline">\(0\)</span> is dropped, such that the real answer is <span class="math inline">\(0.9990\)</span>. However, we mentioned before that the <span class="math inline">\(p\)</span> value should be the probability of a result as extreme or more extreme, meaning that it should <em>always</em> be less than <span class="math inline">\(0.5\)</span>. If we are reporting a value of <em>greater</em> than <span class="math inline">\(0.5\)</span>, then we are comparing to the upper tail of the distribution. For a one-tailed <span class="math inline">\(\alpha\)</span> of <span class="math inline">\(0.05\)</span>, this would mean that we are looking for a value <em>greater than</em> <span class="math inline">\(0.95\)</span> (<span class="math inline">\(1-\alpha\)</span>).</p>
 <p>So, our real <span class="math inline">\(p\)</span> is:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">round</span>(x,<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">round</span>(x,<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.001</code></pre>
 </div>
@@ -369,15 +384,19 @@ p(x)=\binom{n}{x}p^{x}(1-p)^{n-x}
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># start at 0 for no heads</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># cumulative probability to left of outcome</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">pbinom</span>(x,<span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>, <span class="at">lower.tail =</span> T)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># cumulative probability of results to the left</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">type=</span><span class="st">"l"</span>) <span class="co"># line plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">pbinom</span>(x,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">10</span>, </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">prob =</span> <span class="fl">0.5</span>, </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">lower.tail =</span> T)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># cumulative probability of results to the left</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>     y,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">type=</span><span class="st">"l"</span>) <span class="co"># line plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="probdist_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="probdist_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -387,11 +406,13 @@ p(x)=\binom{n}{x}p^{x}(1-p)^{n-x}
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># any value greater than 0.5 is subtracted from 1</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>y[y <span class="sc">&gt;</span> <span class="fl">0.5</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> y[y <span class="sc">&gt;</span> <span class="fl">0.5</span>]</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">type=</span><span class="st">"l"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>     y,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">type=</span><span class="st">"l"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="probdist_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="probdist_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -402,21 +423,96 @@ p(x)=\binom{n}{x}p^{x}(1-p)^{n-x}
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># start at 0 for no heads</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">50</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># cumulative probability to left of outcome</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">pbinom</span>(x,<span class="at">size =</span> <span class="fu">length</span>(x), <span class="at">prob =</span> <span class="fl">0.5</span>, <span class="at">lower.tail =</span> T)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># any value greater than 0.5 is subtracted from 1</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>y[y <span class="sc">&gt;</span> <span class="fl">0.5</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> y[y <span class="sc">&gt;</span> <span class="fl">0.5</span>]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">pbinom</span>(x,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="fu">length</span>(x), </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">prob =</span> <span class="fl">0.5</span>, </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">lower.tail =</span> T)</span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">type=</span><span class="st">"l"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># any value greater than 0.5 is subtracted from 1</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>y[y <span class="sc">&gt;</span> <span class="fl">0.5</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> y[y <span class="sc">&gt;</span> <span class="fl">0.5</span>]</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>     y,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">type=</span><span class="st">"l"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="probdist_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="probdist_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>As we increase the number of flips, we can see that the probability of success forms a <em>normal distribution</em> centered on the outcome given the default probability. Thus, as we deviate from our <em>expected outcome</em> (initial probability multiple by the number of trials), then our results become less likely.</p>
+</section>
+<section id="binomial-exact-tests" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="binomial-exact-tests"><span class="header-section-number">6.2.2</span> Binomial exact tests</h3>
+<p>We can perform exact binomial tests by using the <em>R</em> function <code>binom.test</code>. This is a built in function within <em>R</em>. This test requires the following arguments:</p>
+<ul>
+<li><p><code>x</code>: number of successes (success = outcome of interest)</p></li>
+<li><p><code>n</code>: number of trials (number of events)</p></li>
+<li><p><code>p</code>: probability of success in a typical situation (<em>i.e.</em>, for a fair coin, this is <span class="math inline">\(50\)</span>%)</p></li>
+<li><p><code>alternative</code>: the hypothesis to be tested, whether <code>two.sided</code>, <code>greater</code>, or <code>less</code>.</p></li>
+<li><p><code>conf.level</code> is the <em>confidence level</em> to be returned; default is <span class="math inline">\(95\)</span>%.</p></li>
+</ul>
+<p>Let’s say you flip a coin ten times, randomly assigning one side as a “success” and one side as a “failure”. We do ten flips, and get 3 “successes”. How likely is this outcome?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">binom.test</span>(<span class="at">x =</span> <span class="dv">3</span>,   <span class="co"># three successes</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">n =</span> <span class="dv">10</span>,  <span class="co"># ten flips</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">p =</span> <span class="fl">0.5</span>) <span class="co"># 50% chance on fair coin</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Exact binomial test
+
+data:  3 and 10
+number of successes = 3, number of trials = 10, p-value = 0.3438
+alternative hypothesis: true probability of success is not equal to 0.5
+95 percent confidence interval:
+ 0.06673951 0.65245285
+sample estimates:
+probability of success 
+                   0.3 </code></pre>
+</div>
+</div>
+<p>Now let’s say we do 1000 flips, and we get 300 successes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">binom.test</span>(<span class="at">x =</span> <span class="dv">300</span>,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">n =</span> <span class="dv">1000</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">p =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Exact binomial test
+
+data:  300 and 1000
+number of successes = 300, number of trials = 1000, p-value &lt; 2.2e-16
+alternative hypothesis: true probability of success is not equal to 0.5
+95 percent confidence interval:
+ 0.2717211 0.3294617
+sample estimates:
+probability of success 
+                   0.3 </code></pre>
+</div>
+</div>
+<p>As we can see, both of these return a confidence interval among other things. If we save the object, we can access these “slots” of data using the <code>$</code> character.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>binom_result <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="at">x =</span> <span class="dv">3</span>,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">n =</span> <span class="dv">10</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">p =</span> <span class="fl">0.5</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>binom_result<span class="sc">$</span>p.value <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.34</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>binom_result<span class="sc">$</span>conf.int</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.06673951 0.65245285
+attr(,"conf.level")
+[1] 0.95</code></pre>
+</div>
+</div>
+<p>This test is easily implemented, but always double check and make sure you are setting it up correctly.</p>
+</section>
 </section>
 <section id="poisson-distribution" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="poisson-distribution"><span class="header-section-number">6.3</span> Poisson distribution</h2>
@@ -424,6 +520,8 @@ p(x)=\binom{n}{x}p^{x}(1-p)^{n-x}
 <p><span class="math display">\[
 p(x)=\frac{\lambda^{x}e^{-\lambda}}{x!}
 \]</span></p>
+<section id="poisson-example" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="poisson-example"><span class="header-section-number">6.3.1</span> Poisson example</h3>
 <p>The Poisson is represented by the following functions in <em>R</em> which closely resemble the functions for the normal and binomial distributions:</p>
 <ul>
 <li><p><code>dpois</code>: the log density function</p></li>
@@ -433,25 +531,104 @@ p(x)=\frac{\lambda^{x}e^{-\lambda}}{x!}
 </ul>
 <p>Let’s look at the probability of <span class="math inline">\(0\)</span> to <span class="math inline">\(10\)</span> successes when we have our <span class="math inline">\(\lambda=1\)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ppois</span>(x,<span class="at">lambda =</span> <span class="dv">1</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># any value greater than 0.5 is subtracted from 1</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>y[y <span class="sc">&gt;</span> <span class="fl">0.5</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> y[y <span class="sc">&gt;</span> <span class="fl">0.5</span>]</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">type=</span><span class="st">"l"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ppois</span>(x,<span class="at">lambda =</span> <span class="dv">1</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># any value greater than 0.5 is subtracted from 1</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>y[y <span class="sc">&gt;</span> <span class="fl">0.5</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> y[y <span class="sc">&gt;</span> <span class="fl">0.5</span>]</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">type=</span><span class="st">"l"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="probdist_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="probdist_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>As we can see, the probability of rare events is high, whereas the probability quickly decreases as the number of successes increases.</p>
 </section>
-<section id="chi2-squared-distribution" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="chi2-squared-distribution"><span class="header-section-number">6.4</span> <span class="math inline">\(\chi^2\)</span>-squared distribution</h2>
+<section id="poisson-test" class="level3" data-number="6.3.2">
+<h3 data-number="6.3.2" class="anchored" data-anchor-id="poisson-test"><span class="header-section-number">6.3.2</span> Poisson test</h3>
+<p>Much like the Binomial Distribution and its <code>binom.test</code>, we can use <code>poisson.test</code> to analyze data via a Poisson Distribution. This command uses the arguments:</p>
+<ul>
+<li><p><code>x</code>: number of events of interest</p></li>
+<li><p><code>T</code>: time base (if for an event count)</p></li>
+<li><p><code>r</code>: hypothesized rate or ratio</p></li>
+<li><p><code>alternative</code> and <code>conf.level</code> are the same as for <code>binom.test</code></p></li>
+</ul>
+<p>We will not often use the <code>poisson.test</code> in this class, but it is good to be aware of.</p>
+</section>
+</section>
+<section id="cumulative-probabilities" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="cumulative-probabilities"><span class="header-section-number">6.4</span> Cumulative Probabilities</h2>
+<p>With both the Binomial and the Poisson, we can calculate cumulative probabilities. Both of these require the density (<code>d</code>) versions of the arguments.</p>
+<section id="binomial-cumulative" class="level3" data-number="6.4.1">
+<h3 data-number="6.4.1" class="anchored" data-anchor-id="binomial-cumulative"><span class="header-section-number">6.4.1</span> Binomial cumulative</h3>
+<p>Let’s say we have ten trials with three successes and a base probability of <span class="math inline">\(0.5\)</span>. We can calculate the probability to the <em>left</em> by using the following:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="at">q =</span> <span class="dv">3</span>,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="dv">10</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.171875</code></pre>
+</div>
+</div>
+<p>As we can see, this is ~17.19%. Now let’s try using <code>dbinom</code>. This command gives us the value at an individual bin, given that it is a more discrete distribution for these smaller sample sizes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>, </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="dv">10</span>, </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0009765625 0.0097656250 0.0439453125 0.1171875000</code></pre>
+</div>
+</div>
+<p>Above, we can see the probability of each number of successes three and fewer, for 0, 1, 2, and 3. Let’s sum these probabilities.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>, </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="dv">10</span>, </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">prob =</span> <span class="fl">0.5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.171875</code></pre>
+</div>
+</div>
+<p>As we can see, we get the same value as for <code>pbinom</code>! We can use this method for finding very specific answers, like what is the probability of getting between 3 and 6 successes in ten trials?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">6</span>,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="dv">10</span>,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">prob =</span> <span class="fl">0.5</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7734</code></pre>
+</div>
+</div>
+<p>The probability of getting one of these outcomes is 77.34%.</p>
+</section>
+<section id="poisson-cumulative-probability" class="level3" data-number="6.4.2">
+<h3 data-number="6.4.2" class="anchored" data-anchor-id="poisson-cumulative-probability"><span class="header-section-number">6.4.2</span> Poisson cumulative probability</h3>
+<p>Likewise, we can use <code>ppois</code> to get the <span class="math inline">\(p\)</span> value and <code>dpois</code> to get the distribution function of specific outcomes. So, let’s say we have a scenario with a <span class="math inline">\(\lambda = 0.5\)</span> and we are looking at the probability of 2 successes or greater. In this case, we have an infinite series, which we can’t calculate. However, we can calculate the probability of what it <em>isn’t</em> and then subtract from 1. In this case, we are looking for the probability of <em>not</em> having 0 or 1 successes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dpois</span>(<span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>,</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">lambda =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6065307 0.3032653</code></pre>
+</div>
+</div>
+<p>Now, let’s sum this and subtract it from 1.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">dpois</span>(<span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">lambda =</span> <span class="fl">0.5</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.09020401</code></pre>
+</div>
+</div>
+<p>The probability is only about 9%.</p>
+</section>
+</section>
+<section id="chi2-squared-distribution" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="chi2-squared-distribution"><span class="header-section-number">6.5</span> <span class="math inline">\(\chi^2\)</span>-squared distribution</h2>
 <p><span class="math inline">\(\chi^2\)</span>-squared (pronounced “<em>kai</em>”, and spelled “<em>chi</em>”) is a distribution used to understand if count data between different categories matches our expectation. For example, if we are looking at students in the class and comparing major vs.&nbsp;number of books read, we would expect <em>no association</em>, however we may find an association for a major such as English which required reading more literature. The <span class="math inline">\(\chi^2\)</span> introduces a new term <em>degrees of freedom</em> (<span class="math inline">\(df\)</span>) which reflects the number of individuals in the study. For many tests, <span class="math inline">\(df\)</span> are needed to reflect how a distribution changes with respect the number of individuals (and amount of variation possible) within a dataset. The equation for the <span class="math inline">\(\chi^2\)</span> is as follows, with the <span class="math inline">\(\chi^2\)</span> being a special case of the <em>gamma</em> (<span class="math inline">\(\gamma\)</span> or <span class="math inline">\(\Gamma\)</span>) distribution that is affected by the <span class="math inline">\(df\)</span>, which is defined as the number of rows minus one multiplied by the number of columns minus one <span class="math inline">\(df = (rows-1)(cols-1)\)</span>:</p>
 <p><span class="math display">\[
 f_n(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^\frac{n}{2-1}e^\frac{-x}{2}
@@ -465,34 +642,32 @@ f_n(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^\frac{n}{2-1}e^\frac{-x}{2}
 </ul>
 <p>We can view these probabilities as well:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">pchisq</span>(x, <span class="at">df =</span> <span class="dv">9</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># any value greater than 0.5 is subtracted from 1</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>y[y <span class="sc">&gt;</span> <span class="fl">0.5</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> y[y <span class="sc">&gt;</span> <span class="fl">0.5</span>]</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">type=</span><span class="st">"l"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">pchisq</span>(x, <span class="at">df =</span> <span class="dv">9</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># any value greater than 0.5 is subtracted from 1</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>y[y <span class="sc">&gt;</span> <span class="fl">0.5</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> y[y <span class="sc">&gt;</span> <span class="fl">0.5</span>]</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">type=</span><span class="st">"l"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="probdist_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="probdist_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<section id="calculating-the-test-statistic" class="level3" data-number="6.4.1">
-<h3 data-number="6.4.1" class="anchored" data-anchor-id="calculating-the-test-statistic"><span class="header-section-number">6.4.1</span> Calculating the test statistic</h3>
+<section id="calculating-the-test-statistic" class="level3" data-number="6.5.1">
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="calculating-the-test-statistic"><span class="header-section-number">6.5.1</span> Calculating the test statistic</h3>
 <p>We evaluate <span class="math inline">\(\chi^2\)</span> tests by calculating a <span class="math inline">\(\chi^2\)</span> value based on our data and comparing it to an expected <span class="math inline">\(\chi^2\)</span> distribution. This <em>test statistic</em> can be evaluated by looking at a <span class="math inline">\(\chi^2\)</span> table or by using <em>R</em>. <strong>Note</strong> that you need to know the degrees of freedom in order to properly evaluate a <span class="math inline">\(\chi^2\)</span> test. We calculate our test statistic as follows:</p>
 <p><span class="math display">\[
 \chi^2=\Sigma\frac{(o-e)^2}{e}
 \]</span></p>
 <p>where <span class="math inline">\(e =\)</span> the number of expected individuals and <span class="math inline">\(o =\)</span> the number of observed individuals in each category. Since we are squaring these values, we will only have positive values, and thus this will <strong>always be a one-tailed test</strong>.</p>
-</section>
-<section id="chi2-estimations-in-r" class="level3" data-number="6.4.2">
-<h3 data-number="6.4.2" class="anchored" data-anchor-id="chi2-estimations-in-r"><span class="header-section-number">6.4.2</span> <span class="math inline">\(\chi^2\)</span> estimations in <em>R</em></h3>
-<p>Usually when we use a <span class="math inline">\(\chi^2\)</span>, we are looking at count data. Let’s consider the following hypothetical scenario, comparing experience with <em>R</em> between English majors (who, in this theoretical scenario, do not regularly use <em>R</em>) and Biology majors who are required to take <em>R</em> for this class:</p>
+<p>Usually when we use a <span class="math inline">\(\chi^2\)</span>, we are looking at count data. Let’s consider the following hypothetical scenario, comparing experience with <em>R</em> between non-biology majors (who, in this theoretical scenario, do not regularly use <em>R</em>) and Biology majors who are required to take <em>R</em> for this class:</p>
 <table class="caption-top table">
+<caption>The above table of counts is also known as a <strong>contingency table</strong>. Intuitively, we can see a difference, but we want to perform a statistical test to see just how likely these counts would be if both groups were equally likely. We can calculate this both “by hand” and using built in <em>R</em> functions.</caption>
 <thead>
 <tr class="header">
 <th>Major</th>
@@ -502,9 +677,9 @@ f_n(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^\frac{n}{2-1}e^\frac{-x}{2}
 </thead>
 <tbody>
 <tr class="odd">
-<td><em>English</em></td>
-<td>2</td>
-<td>8</td>
+<td><em>Non-biology</em></td>
+<td>3</td>
+<td>7</td>
 </tr>
 <tr class="even">
 <td><em>Biology</em></td>
@@ -513,39 +688,149 @@ f_n(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^\frac{n}{2-1}e^\frac{-x}{2}
 </tr>
 </tbody>
 </table>
-<p>Intuitively, we can see a difference, but we want to perform a statistical test to see just how likely these counts would be if both groups were equally likely to use <em>R</em>:</p>
+</section>
+<section id="chi2-estimations-by-hand" class="level3" data-number="6.5.2">
+<h3 data-number="6.5.2" class="anchored" data-anchor-id="chi2-estimations-by-hand"><span class="header-section-number">6.5.2</span> <span class="math inline">\(\chi^2\)</span> estimations by hand</h3>
+<p>First, we can enter the data into <em>R</em>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">8</span>),</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">1</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"R"</span>, <span class="st">"No R"</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Non-biology"</span>, <span class="st">"Biology"</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            R No R
+Non-biology 3    7
+Biology     9    1</code></pre>
+</div>
+</div>
+<p>Next, we need the <em>observed - expected</em> values. We determine expected values either through probability (<span class="math inline">\(0.5 \cdot n\)</span> for equal probability) or via calculating the the expected values (see later section on <em>expected counts</em>). In this case, since we are looking at equally likely in each cell, we have an expected matrix as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># total datapoints</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">sum</span>(data)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>expected <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="fl">0.25</span><span class="sc">*</span>N,<span class="fl">0.25</span><span class="sc">*</span>N,<span class="fl">0.25</span><span class="sc">*</span>N,<span class="fl">0.25</span><span class="sc">*</span>N), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(expected) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"R"</span>, <span class="st">"No R"</span>)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(expected) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Non-biology"</span>, <span class="st">"Biology"</span>)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>expected</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            R No R
+Non-biology 5    5
+Biology     5    5</code></pre>
+</div>
+</div>
+<p>Now we need to find our <em>observed - expected</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>o_e <span class="ot">&lt;-</span> data <span class="sc">-</span> expected</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>o_e</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             R No R
+Non-biology -2    2
+Biology      4   -4</code></pre>
+</div>
+</div>
+<p><strong><em>Note</em></strong> that in <em>R</em> we can add and subtract matrices, so there’s no reason to reformat these data!</p>
+<p>Now, we can square these data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>o_e2 <span class="ot">&lt;-</span> o_e<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>o_e2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             R No R
+Non-biology  4    4
+Biology     16   16</code></pre>
+</div>
+</div>
+<p>Next, we take these and divide them by the expected values and then sum those values.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>chi_matrix <span class="ot">&lt;-</span> o_e2<span class="sc">/</span>expected</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>chi_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              R No R
+Non-biology 0.8  0.8
+Biology     3.2  3.2</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(chi_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+</div>
+<p>Here, we get a <span class="math inline">\(\chi^2\)</span> value of 8. We can use our handy family functions to determine the probability of this event:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="dv">8</span>, <span class="at">df =</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.004677735</code></pre>
+</div>
+</div>
+<p>Here, we get a <span class="math inline">\(p\)</span> value of 0.005.</p>
+</section>
+<section id="chi2-estimations-in-r" class="level3" data-number="6.5.3">
+<h3 data-number="6.5.3" class="anchored" data-anchor-id="chi2-estimations-in-r"><span class="header-section-number">6.5.3</span> <span class="math inline">\(\chi^2\)</span> estimations in <em>R</em></h3>
+<p>We can calculate this in <em>R</em> by entering in the entire table and using <code>chisq.test</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">1</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"R"</span>, <span class="st">"No R"</span>)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Non-biology"</span>, <span class="st">"Biology"</span>)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            R No R
+Non-biology 3    7
+Biology     9    1</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(data, <span class="at">correct =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning in chisq.test(x = c(2, 8), y = c(9, 1)): Chi-squared approximation may
-be incorrect</code></pre>
+<pre><code>Warning in chisq.test(data, correct = F): Chi-squared approximation may be
+incorrect</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  data
+X-squared = 7.5, df = 1, p-value = 0.00617</code></pre>
+</div>
+</div>
+<p>Here, we get <span class="math inline">\(p = 0.006\)</span>, which is significant with <span class="math inline">\(\alpha = 0.05\)</span>.</p>
+<p><strong>Note</strong> that these values are slightly different. they will be even more different if <code>correct</code> is set to <code>TRUE</code>. By default, <em>R</em>, uses a <a href="https://en.wikipedia.org/wiki/Yates's_correction_for_continuity">Yate’s correction for continuity</a>. This accounts for error introduced by comparing the discrete values to a continuous distribution.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in chisq.test(data): Chi-squared approximation may be incorrect</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test with Yates' continuity correction
 
-data:  c(2, 8) and c(9, 1)
-X-squared = 0, df = 1, p-value = 1</code></pre>
+data:  data
+X-squared = 5.2083, df = 1, p-value = 0.02248</code></pre>
 </div>
 </div>
-<p>Here we get <span class="math inline">\(p = 1\)</span>, which reflects a one-tailed interpretation.</p>
-</section>
-<section id="calculating-chi2-by-hand" class="level3" data-number="6.4.3">
-<h3 data-number="6.4.3" class="anchored" data-anchor-id="calculating-chi2-by-hand"><span class="header-section-number">6.4.3</span> Calculating <span class="math inline">\(\chi^2\)</span> by hand</h3>
+<p>Applying this correction <em>lowers</em> the degrees of freedom, and increases the <span class="math inline">\(p\)</span> value, thus making it harder to get <span class="math inline">\(p &lt; \alpha\)</span>.</p>
+<p><strong>Note that the Yate’s correction is only applied for 2 x 2 contingency tables.</strong></p>
 </section>
 </section>
-<section id="fishers-exact-test" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="fishers-exact-test"><span class="header-section-number">6.5</span> Fisher’s exact test</h2>
+<section id="fishers-exact-test" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="fishers-exact-test"><span class="header-section-number">6.6</span> Fisher’s exact test</h2>
 <p>To be completed; involves calculations on smaller datasets.</p>
 </section>
-<section id="homework" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="homework"><span class="header-section-number">6.6</span> Homework</h2>
-<section id="chapter-5" class="level3" data-number="6.6.1">
-<h3 data-number="6.6.1" class="anchored" data-anchor-id="chapter-5"><span class="header-section-number">6.6.1</span> Chapter 5</h3>
+<section id="homework" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="homework"><span class="header-section-number">6.7</span> Homework</h2>
+<section id="chapter-5" class="level3" data-number="6.7.1">
+<h3 data-number="6.7.1" class="anchored" data-anchor-id="chapter-5"><span class="header-section-number">6.7.1</span> Chapter 5</h3>
 </section>
-<section id="chapter-7" class="level3" data-number="6.6.2">
-<h3 data-number="6.6.2" class="anchored" data-anchor-id="chapter-7"><span class="header-section-number">6.6.2</span> Chapter 7</h3>
+<section id="chapter-7" class="level3" data-number="6.7.2">
+<h3 data-number="6.7.2" class="anchored" data-anchor-id="chapter-7"><span class="header-section-number">6.7.2</span> Chapter 7</h3>
 
 
 </section>

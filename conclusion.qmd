@@ -5,7 +5,9 @@ format: html
 editor: visual
 ---
 
-Parting thoughts about the course.
+## Parting thoughts
+
+In this class, we have covered two major things: (1) the basics of statistics for biological research and (2) the basics of using *R* to solve different computational problems. It is my hope that this class helps you both become a better researcher and also a more efficient researcher and student by using code to help you with your future projects.
 
 ## ᏙᏓᏓᎪᎲᎢ
 
