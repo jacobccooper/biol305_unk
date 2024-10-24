@@ -1,5 +1,5 @@
 ---
-title: "Single population means testing"
+title: "Testing means with $t$-tests"
 author: "Dr. Jacob C. Cooper"
 format: html
 editor: visual

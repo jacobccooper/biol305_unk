@@ -16,6 +16,22 @@ x <- 10
 x
 ```
 
+-   `%>%` - "pipe" a command or output into another command. Required `tidyverse` to run, and you can use the shortcut `CTRL SHIFT M` on Windows or Mac.
+
+```{r}
+# make repeatable
+set.seed(930)
+
+# random string
+x <- rnorm(20)
+
+x %>% 
+  # pass to summary
+  summary() %>% 
+  # pass summary through round
+  round(2)
+```
+
 -   `c` - concatenate, place two values together
 
 ```{r}

@@ -184,7 +184,7 @@
     "href": "visual.html#histograms",
     "title": "3  Diagnosing data visually",
     "section": "3.3 Histograms",
-    "text": "3.3 Histograms\nA histogram is a frequency diagram that we can use to visually diagnose data and their distributions. We are going to examine a histogram using a random string of data. R can generate random (though, actually pseudorandom) strings of data on command, pulling them from different distributions. These distributions are pseudorandom because we can’t actually program R to be random, so it starts from a wide variety of pseudorandom points.\n\n3.3.1 Histograms on numeric vectors\nThe following is how to create default histograms on data. If you need to create custom bin sizes, please see the notes under Cumulative frequency plots for data that are not already in frequency format.\n\n# create random string from normal distribution\n# this step is not necessary for data analysis in homework\nx &lt;- rnorm(n = 1000, # 1000 values\n           mean = 0,\n           sd = 1)\n\n# make histogram\nhist(x)\n\n\n\n\n\n\n\n\nNOTE that a histogram can only be made on a vector of values. If you try to make a histogram on a data frame, you will get an error and it will not work. You have to specify which column you wish to use with the $ operator. (For example, for dataframe xy with columns x and y, you would use hist(xy$y)).\nWe can up the number of bins to see this better.\n\nhist(x,breaks = 100)\n\n\n\n\n\n\n\n\nThe number of bins can be somewhat arbitrary, but a value should be chosen based off of what illustrates the data well. R will auto-select a number of bins in some cases, but you can also select a number of bins. Some assignments will ask you to choose a specific number of bins as well.\n\n\n3.3.2 Histograms on frequency counts\nSay, for example, that we have a dataset where everything is already shown as frequencies. We can create a frequency histogram using barplot.\n\ncount_table &lt;- matrix(nrow = 4, ncol = 2, byrow = T,\n                      data = c(\"Cat 1\", 4,\n                               \"Cat 2\", 8,\n                               \"Cat 3\", 7,\n                               \"Cat 4\", 3)) %&gt;%\n  as.data.frame()\n\ncolnames(count_table) &lt;- c(\"Category\",\"Count\")\n\n# ensure counts are numeric data\ncount_table$Count &lt;- as.numeric(count_table$Count)\n\n# manually create histogram\nbarplot(count_table$Count, # response variable, counts for histogram\n        axisnames = T, # make names on plot\n        names.arg = count_table$Category) # make these the names\n\n\n\n\n\n\n\n\n\n\n3.3.3 ggplot histograms\nThe following is an optional workthrough on how to make really fancy plots.\nWe can also use the program ggplot, part of the tidyverse, to create histograms.\n\n# ggplot requires data frames\nx2 &lt;- x %&gt;% as.data.frame()\ncolnames(x2) &lt;- \"x\"\n\nggplot(data = x2, aes(x = x)) +\n  geom_histogram()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\nggplot is nice because we can also clean up this graph a little.\n\nggplot(x2,aes(x=x)) + geom_histogram() +\n  theme_minimal()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\nWe can also do a histogram of multiple values at once in R.\n\nx2$cat &lt;- \"x\"\n\ny &lt;- rnorm(n = 1000,\n           mean = 1,\n           sd = 1) %&gt;%\n  as.data.frame()\n\ncolnames(y) &lt;- \"x\"\ny$cat &lt;- \"y\"\n\nxy &lt;- rbind(x2,y)\n\nhead(xy)\n\n            x cat\n1 -0.27484144   x\n2 -1.44352876   x\n3 -2.21300969   x\n4  1.16487648   x\n5  1.39935265   x\n6 -0.05405096   x\n\n\n\nggplot(xy,aes(x = x, fill = cat)) +\n  geom_histogram()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\nWe can also make this look a little nicer.\n\nggplot(xy, aes(x = x, colour = cat)) +\n  geom_histogram(fill = \"white\", alpha = 0.5, # transparency\n                 position = \"identity\") +\n  theme_classic()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\nWe can show these a little differently as well.\n\nggplot(xy, aes(x = x, fill = cat))+\n  geom_histogram(position = \"identity\", alpha = 0.5) +\n  theme_minimal()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\nThere are lots of other commands you can incorporate as well if you so choose; I recommend checking sites like this one.",
+    "text": "3.3 Histograms\nA histogram is a frequency diagram that we can use to visually diagnose data and their distributions. We are going to examine a histogram using a random string of data. R can generate random (though, actually pseudorandom) strings of data on command, pulling them from different distributions. These distributions are pseudorandom because we can’t actually program R to be random, so it starts from a wide variety of pseudorandom points.\n\n3.3.1 Histograms on numeric vectors\nThe following is how to create default histograms on data. If you need to create custom bin sizes, please see the notes under Cumulative frequency plots for data that are not already in frequency format.\n\n# create random string from normal distribution\n# this step is not necessary for data analysis in homework\nx &lt;- rnorm(n = 1000, # 1000 values\n           mean = 0,\n           sd = 1)\n\n# make histogram\nhist(x)\n\n\n\n\n\n\n\n\nNOTE that a histogram can only be made on a vector of values. If you try to make a histogram on a data frame, you will get an error and it will not work. You have to specify which column you wish to use with the $ operator. (For example, for dataframe xy with columns x and y, you would use hist(xy$y)).\nWe can up the number of bins to see this better.\n\nhist(x,breaks = 100)\n\n\n\n\n\n\n\n\nThe number of bins can be somewhat arbitrary, but a value should be chosen based off of what illustrates the data well. R will auto-select a number of bins in some cases, but you can also select a number of bins. Some assignments will ask you to choose a specific number of bins as well.\n\n\n3.3.2 Histograms on frequency counts\nSay, for example, that we have a dataset where everything is already shown as frequencies. We can create a frequency histogram using barplot.\n\ncount_table &lt;- matrix(nrow = 4, ncol = 2, byrow = T,\n                      data = c(\"Cat 1\", 4,\n                               \"Cat 2\", 8,\n                               \"Cat 3\", 7,\n                               \"Cat 4\", 3)) %&gt;%\n  as.data.frame()\n\ncolnames(count_table) &lt;- c(\"Category\",\"Count\")\n\n# ensure counts are numeric data\ncount_table$Count &lt;- as.numeric(count_table$Count)\n\n# manually create histogram\nbarplot(count_table$Count, # response variable, counts for histogram\n        axisnames = T, # make names on plot\n        names.arg = count_table$Category) # make these the names\n\n\n\n\n\n\n\n\n\n\n3.3.3 ggplot histograms\nThe following is an optional workthrough on how to make really fancy plots.\nWe can also use the program ggplot, part of the tidyverse, to create histograms.\n\n# ggplot requires data frames\nx2 &lt;- x %&gt;% as.data.frame()\ncolnames(x2) &lt;- \"x\"\n\nggplot(data = x2, aes(x = x)) +\n  geom_histogram()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\nggplot is nice because we can also clean up this graph a little.\n\nggplot(x2,aes(x=x)) + geom_histogram() +\n  theme_minimal()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\nWe can also do a histogram of multiple values at once in R.\n\nx2$cat &lt;- \"x\"\n\ny &lt;- rnorm(n = 1000,\n           mean = 1,\n           sd = 1) %&gt;%\n  as.data.frame()\n\ncolnames(y) &lt;- \"x\"\ny$cat &lt;- \"y\"\n\nxy &lt;- rbind(x2,y)\n\nhead(xy)\n\n           x cat\n1 -1.3992702   x\n2  1.0577343   x\n3 -0.8517227   x\n4  1.2989241   x\n5  0.5871506   x\n6 -1.6908835   x\n\n\n\nggplot(xy,aes(x = x, fill = cat)) +\n  geom_histogram()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\nWe can also make this look a little nicer.\n\nggplot(xy, aes(x = x, colour = cat)) +\n  geom_histogram(fill = \"white\", alpha = 0.5, # transparency\n                 position = \"identity\") +\n  theme_classic()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\nWe can show these a little differently as well.\n\nggplot(xy, aes(x = x, fill = cat))+\n  geom_histogram(position = \"identity\", alpha = 0.5) +\n  theme_minimal()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\nThere are lots of other commands you can incorporate as well if you so choose; I recommend checking sites like this one.",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Diagnosing data visually</span>"
     ]
@@ -204,7 +204,7 @@
     "href": "visual.html#skewness",
     "title": "3  Diagnosing data visually",
     "section": "3.5 Skewness",
-    "text": "3.5 Skewness\nSkew is a measure of how much a dataset “leans” to the positive or negative directions (i.e., to the “left” or to the “right”). To calculate skew, we are going to use the moments library.\n\n# don't forget to install if needed!\nlibrary(moments)\n\nskewness(x)\n\n[1] -0.09906326\n\n\nGenerally, a value between \\(-1\\) and \\(+1\\) for skewness is “acceptable” and not considered overly skewed. Positive values indicate “right” skew and negative values indicate a “left” skew. If something is too skewed, it may violate assumptions of normality and thus need non-parametric tests rather than our standard parametric tests - something we will cover later!\nLet’s look at a skewed dataset. We are going to artificially create a skewed dataset from our x vector.\n\n# create more positive values\nx3 &lt;- c(x,\n        x[which(x &gt; 0)]*2,\n        x[which(x &gt; 0)]*4,\n        x[which(x &gt; 0)]*8)\n\nhist(x3)\n\n\n\n\n\n\n\n\n\nskewness(x3)\n\n[1] 2.063077\n\n\nAs we can see, the above is a heavily skewed dataset with a positive (“right”) skew.",
+    "text": "3.5 Skewness\nSkew is a measure of how much a dataset “leans” to the positive or negative directions (i.e., to the “left” or to the “right”). To calculate skew, we are going to use the moments library.\n\n# don't forget to install if needed!\nlibrary(moments)\n\nskewness(x)\n\n[1] 0.1424032\n\n\nGenerally, a value between \\(-1\\) and \\(+1\\) for skewness is “acceptable” and not considered overly skewed. Positive values indicate “right” skew and negative values indicate a “left” skew. If something is too skewed, it may violate assumptions of normality and thus need non-parametric tests rather than our standard parametric tests - something we will cover later!\nLet’s look at a skewed dataset. We are going to artificially create a skewed dataset from our x vector.\n\n# create more positive values\nx3 &lt;- c(x,\n        x[which(x &gt; 0)]*2,\n        x[which(x &gt; 0)]*4,\n        x[which(x &gt; 0)]*8)\n\nhist(x3)\n\n\n\n\n\n\n\n\n\nskewness(x3)\n\n[1] 2.318359\n\n\nAs we can see, the above is a heavily skewed dataset with a positive (“right”) skew.",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Diagnosing data visually</span>"
     ]
@@ -214,7 +214,7 @@
     "href": "visual.html#kurtosis",
     "title": "3  Diagnosing data visually",
     "section": "3.6 Kurtosis",
-    "text": "3.6 Kurtosis\nKurtosis refers to how sharp or shallow the peak of the distribution is (platykurtic vs. leptokurtic). Remember - platykyrtic are plateaukurtic, wide and broad like a plateau, and leptokurtic distributions are sharp. Intermediate distributions that are roughly normal are mesokurtic.\nMuch like skewness, kurtosis values of \\(&gt; 2\\) and \\(&lt; -2\\) are generally considered extreme, and thus not mesokurtic. This threshold can vary a bit based on source, but for this class, we will use a threshold of \\(\\pm 2\\) for both skewness and kurtosis.\nLet’s see the kurtosis of x. Note that when doing the equation, a normal distribution actually has a kurtosis of \\(3\\); thus, we are doing kurtosis \\(-3\\) to “zero” the distribution and make it comparable to skewness.\n\nhist(x)\n\n\n\n\n\n\n\n\n\n# non-zeroed\nkurtosis(x)\n\n[1] 2.791201\n\n\n\n# zeroed\nkurtosis(x)-3\n\n[1] -0.2087991\n\n\nAs expected, out values drawn from a normal distribution are not overly skewed. Let’s compare these to a more kurtic distribution:\n\nxk &lt;- x^3\n\nkurtosis(xk)-3\n\n[1] 20.15355\n\n\nWhat does this dataset look like?\n\nhist(xk,breaks = 100)\n\n\n\n\n\n\n\n\nAs we can see, this is a very leptokurtic distribution.",
+    "text": "3.6 Kurtosis\nKurtosis refers to how sharp or shallow the peak of the distribution is (platykurtic vs. leptokurtic). Remember - platykyrtic are plateaukurtic, wide and broad like a plateau, and leptokurtic distributions are sharp. Intermediate distributions that are roughly normal are mesokurtic.\nMuch like skewness, kurtosis values of \\(&gt; 2\\) and \\(&lt; -2\\) are generally considered extreme, and thus not mesokurtic. This threshold can vary a bit based on source, but for this class, we will use a threshold of \\(\\pm 2\\) for both skewness and kurtosis.\nLet’s see the kurtosis of x. Note that when doing the equation, a normal distribution actually has a kurtosis of \\(3\\); thus, we are doing kurtosis \\(-3\\) to “zero” the distribution and make it comparable to skewness.\n\nhist(x)\n\n\n\n\n\n\n\n\n\n# non-zeroed\nkurtosis(x)\n\n[1] 3.10033\n\n\n\n# zeroed\nkurtosis(x)-3\n\n[1] 0.1003295\n\n\nAs expected, out values drawn from a normal distribution are not overly skewed. Let’s compare these to a more kurtic distribution:\n\nxk &lt;- x^3\n\nkurtosis(xk)-3\n\n[1] 37.04126\n\n\nWhat does this dataset look like?\n\nhist(xk,breaks = 100)\n\n\n\n\n\n\n\n\nAs we can see, this is a very leptokurtic distribution.",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Diagnosing data visually</span>"
     ]
@@ -224,7 +224,7 @@
     "href": "visual.html#cumulative-frequency-plot",
     "title": "3  Diagnosing data visually",
     "section": "3.7 Cumulative frequency plot",
-    "text": "3.7 Cumulative frequency plot\nA cumulative frequency plot shows the overall spread of the data as a cumulative line over the entire dataset. This is another way to see the spread of the data and is often complementary to a histogram.\nThe following cumulative distribution plot is based on the method outlined in Geeks for Geeks.\n\n3.7.1 If data are not in histogram/frequency format\nYou will need to create a frequency table to make them be in histogram format.\n\n# declaring the break points\n# make break points based on data\n# always round UP with ceiling\nrange.x &lt;- ceiling(max(x)-min(x))\n\nrange.x\n\n[1] 7\n\nrange(x)\n\n[1] -2.918502  3.269354\n\n\nBased on this range, we need to create our bin sizes. We want our lowest bin to be below our lowest value, and our highest bin above our highest value. Here, I’m setting a step size of 1. You will have to examine your data and determine the best break size for your datasets.\n\n# make bins based on range\n# create sequential series\nbreak_points &lt;- seq(-3, # starting value, low\n                    4, # end value, high\n                    1) # increment size\n\n\n# transforming the data\ndata_transform = cut(x, # your data!\n                     break_points, # the breaks you defined\n                    right=FALSE) # closed on the left for intervals\n# creating the frequency table\nfreq_table = table(data_transform) # create a table\n\n# printing the frequency table\nprint(\"Frequency Table\")\n\n[1] \"Frequency Table\"\n\nprint(freq_table)\n\ndata_transform\n[-3,-2) [-2,-1)  [-1,0)   [0,1)   [1,2)   [2,3)   [3,4) \n     30     133     327     348     142      19       1 \n\n\n\n# calculating cumulative frequency\ncumulative_freq = c(0, # start at 0, no points\n                    cumsum(freq_table)) # get the cumulative frequency!\nprint(\"Cumulative Frequency\")\n\n[1] \"Cumulative Frequency\"\n\nprint(cumulative_freq)\n\n        [-3,-2) [-2,-1)  [-1,0)   [0,1)   [1,2)   [2,3)   [3,4) \n      0      30     163     490     838     980     999    1000 \n\n\n\n# plotting the data\nplot(break_points, # x axis is break_points\n     cumulative_freq, # y axis is cumulative frequency\n    xlab=\"Data Distribution\", # x axis label\n    ylab=\"Cumulative Frequency\") # y axis label\n# creating line graph\nlines(break_points, # add lines to the graph, this is x\n      cumulative_freq) # this is y for lines\n\n\n\n\n\n\n\n\n\n\n3.7.2 If data are in histogram/frequency format\nIf you have a list of frequencies (say, for river discharge over several years), you only need to do the cumsum function. For example:\n\ny &lt;- c(1 ,2 ,4, 8, 16, 8, 4, 2, 1)\n\nsum_y &lt;- cumsum(y)\n\nprint(y)\n\n[1]  1  2  4  8 16  8  4  2  1\n\nprint(sum_y)\n\n[1]  1  3  7 15 31 39 43 45 46\n\n\nNow we can see we have out cumulative sums. Let’s plot these. NOTE that this method will not have the x variables match the dataset you started with, it will only plot the curve based on the number of values given.\n\nplot(x = 1:length(sum_y), # get length of sum_y, make x index\n     y = sum_y, # plot cumulative sums\n     type = \"l\") # make a line plot",
+    "text": "3.7 Cumulative frequency plot\nA cumulative frequency plot shows the overall spread of the data as a cumulative line over the entire dataset. This is another way to see the spread of the data and is often complementary to a histogram.\nThe following cumulative distribution plot is based on the method outlined in Geeks for Geeks.\n\n3.7.1 If data are not in histogram/frequency format\nYou will need to create a frequency table to make them be in histogram format.\n\n# declaring the break points\n# make break points based on data\n# always round UP with ceiling\nrange.x &lt;- ceiling(max(x)-min(x))\n\nrange.x\n\n[1] 7\n\nrange(x)\n\n[1] -3.725019  2.999235\n\n\nBased on this range, we need to create our bin sizes. We want our lowest bin to be below our lowest value, and our highest bin above our highest value. Here, I’m setting a step size of 1. You will have to examine your data and determine the best break size for your datasets.\n\n# make bins based on range\n# create sequential series\nbreak_points &lt;- seq(-3, # starting value, low\n                    4, # end value, high\n                    1) # increment size\n\n\n# transforming the data\ndata_transform = cut(x, # your data!\n                     break_points, # the breaks you defined\n                    right=FALSE) # closed on the left for intervals\n# creating the frequency table\nfreq_table = table(data_transform) # create a table\n\n# printing the frequency table\nprint(\"Frequency Table\")\n\n[1] \"Frequency Table\"\n\nprint(freq_table)\n\ndata_transform\n[-3,-2) [-2,-1)  [-1,0)   [0,1)   [1,2)   [2,3)   [3,4) \n     12     148     340     342     131      26       0 \n\n\n\n# calculating cumulative frequency\ncumulative_freq = c(0, # start at 0, no points\n                    cumsum(freq_table)) # get the cumulative frequency!\nprint(\"Cumulative Frequency\")\n\n[1] \"Cumulative Frequency\"\n\nprint(cumulative_freq)\n\n        [-3,-2) [-2,-1)  [-1,0)   [0,1)   [1,2)   [2,3)   [3,4) \n      0      12     160     500     842     973     999     999 \n\n\n\n# plotting the data\nplot(break_points, # x axis is break_points\n     cumulative_freq, # y axis is cumulative frequency\n    xlab=\"Data Distribution\", # x axis label\n    ylab=\"Cumulative Frequency\") # y axis label\n# creating line graph\nlines(break_points, # add lines to the graph, this is x\n      cumulative_freq) # this is y for lines\n\n\n\n\n\n\n\n\n\n\n3.7.2 If data are in histogram/frequency format\nIf you have a list of frequencies (say, for river discharge over several years), you only need to do the cumsum function. For example:\n\ny &lt;- c(1 ,2 ,4, 8, 16, 8, 4, 2, 1)\n\nsum_y &lt;- cumsum(y)\n\nprint(y)\n\n[1]  1  2  4  8 16  8  4  2  1\n\nprint(sum_y)\n\n[1]  1  3  7 15 31 39 43 45 46\n\n\nNow we can see we have out cumulative sums. Let’s plot these. NOTE that this method will not have the x variables match the dataset you started with, it will only plot the curve based on the number of values given.\n\nplot(x = 1:length(sum_y), # get length of sum_y, make x index\n     y = sum_y, # plot cumulative sums\n     type = \"l\") # make a line plot",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Diagnosing data visually</span>"
     ]
@@ -402,311 +402,271 @@
   {
     "objectID": "ttest.html",
     "href": "ttest.html",
-    "title": "7  Single population means testing",
+    "title": "7  Testing means with \\(t\\)-tests",
     "section": "",
     "text": "7.1 Introduction\nPreviously, we talked about normal distributions as a method for comparing samples to overall populations or comparing individuals to overall populations. However, sample sizes can introduce some error, and oftentimes we may not have access to an entire population. In these situations, we need a better test that can account for this changing error and the effect of different sample sizes. This is especially important when comparing two samples to each other. We may find a small sample from one population and a small sample for another, and we want to determine if these came from the same overall population as effectively as possible.\nThe distribution that we commonly refer to as a \\(t\\)-distribution is also sometimes known as a “Student’s \\(t\\)-distribution” as it was first published by a man with the pseudonym of “Student”. Student was in fact William Sealy Gossett, an employee of the Guinness corporation who was barred from publishing things by his employer to ensure that trade secrets were not made known to their competitors. Knowing that his work regarding statistics was important, Gossett opted to publish his research anyway under his pseudonym.",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Single population means testing</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Testing means with $t$-tests</span>"
+    ]
+  },
+  {
+    "objectID": "ttest.html#dataset",
+    "href": "ttest.html#dataset",
+    "title": "7  Testing means with \\(t\\)-tests",
+    "section": "7.2 Dataset",
+    "text": "7.2 Dataset\nFor all of the examples on this page, we will be using a dataset on the morphology of canine teeth for identification of predators killing livestock (Courtenay 2019).\n\ncanines &lt;- read_csv(\"https://figshare.com/ndownloader/files/15070175\")\n\nWe want to set up some of these columns as “factors” to make it easier to process and parse in R. We will look at the column OA for these examples. Unfortunately, it is unclear what exactly OA stands for since this paper is not published at the present time.\n\ncanines$Sample &lt;- as.factor(canines$Sample)\n\n# we will be examining the column \"OA\"\n\ncanines$OA &lt;- as.numeric(canines$OA)\n\nsummary(canines)\n\n  Sample        WIS              WIM              WIB         \n Dog :34   Min.   :0.1323   Min.   :0.1020   Min.   :0.03402  \n Fox :41   1st Qu.:0.5274   1st Qu.:0.3184   1st Qu.:0.11271  \n Wolf:28   Median :1.1759   Median :0.6678   Median :0.25861  \n           Mean   :1.6292   Mean   :1.0233   Mean   :0.44871  \n           3rd Qu.:2.4822   3rd Qu.:1.5194   3rd Qu.:0.74075  \n           Max.   :4.8575   Max.   :3.2423   Max.   :1.51721  \n       D                 RDC               LDC                OA       \n Min.   :0.005485   Min.   :0.05739   Min.   :0.02905   Min.   :100.7  \n 1st Qu.:0.034092   1st Qu.:0.28896   1st Qu.:0.22290   1st Qu.:139.2  \n Median :0.182371   Median :0.61777   Median :0.55985   Median :149.9  \n Mean   :0.250188   Mean   :0.88071   Mean   :0.84615   Mean   :148.4  \n 3rd Qu.:0.361658   3rd Qu.:1.26417   3rd Qu.:1.26754   3rd Qu.:158.0  \n Max.   :1.697461   Max.   :3.02282   Max.   :3.20533   Max.   :171.5",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Testing means with $t$-tests</span>"
     ]
   },
   {
     "objectID": "ttest.html#t-distribution",
     "href": "ttest.html#t-distribution",
-    "title": "7  Single population means testing",
+    "title": "7  Testing means with \\(t\\)-tests",
     "section": "7.3 \\(t\\)-distribution",
     "text": "7.3 \\(t\\)-distribution\nFor these scenarios where we are testing a single sample mean from one or more samples we use a \\(t\\)-distributions. A \\(t\\)-distribution is a specially altered normal distribution that has been adjusted to account for the number of individuals being sampled. Specifically, a \\(t\\)-distributions with infinite degrees of freedom is the same as a normal distribution, and our degrees of freedom help create a more platykurtic distribution to account for error and uncertainty. The distribution can be calculated as follows:\n\\[\nt = \\frac{\\Gamma(\\frac{v+1}{2})}{\\sqrt{\\pi \\nu}\\Gamma(\\frac{\\nu}{2})}(1+\\frac{t^2}{\\nu})^{-\\frac{(v+1)}{2}}\n\\]\nThese \\(t\\)-distributions can be visualized as follows:\n\n\n\nIkamusumeFan - Wikipedia\n\n\nFor all \\(t\\)-tests, we calculate the degrees of freedom based on the number of samples. If comparing values to a single sample, we use \\(df = n -1\\). If we are comparing two sample means, then we have \\(df = n_1 + n_2 -2\\).\nImportantly, we are testing to see if the means of the two distributions are equal in a \\(t\\)-test. Thus, our hypotheses are as follows:\n\\(H_0: \\mu_1 = \\mu_2\\) or \\(H_0: \\mu_1 - \\mu_2 = 0\\)\n\\(H_A: \\mu_1 \\ne \\mu_2\\) or \\(H_A: \\mu_1 - \\mu_2 \\ne 0\\)\nWhen asked about hypotheses, remember the above as the statistical hypotheses that are being directly tested.\nIn R, we have the following functions to help with \\(t\\) distributions:\n\ndt: density function of a \\(t\\)-distribution\npt: finding our \\(p\\) value from a specific \\(t\\) in a \\(t\\)-distribution\nqt: finding a particular \\(t\\) from a specific \\(p\\) in a \\(t\\)-distribution\nrt: random values from a \\(t\\)-distribution\n\nAll of the above arguments required the degrees of freedom to be declared. Unlike the normal distribution functions, these can not be adjusted for your data; tests must be performed using t.test.",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Single population means testing</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Testing means with $t$-tests</span>"
     ]
   },
   {
     "objectID": "ttest.html#t-tests",
     "href": "ttest.html#t-tests",
-    "title": "7  Single population means testing",
+    "title": "7  Testing means with \\(t\\)-tests",
     "section": "7.4 \\(t\\)-tests",
     "text": "7.4 \\(t\\)-tests\nWe have three major types of \\(t\\)-tests:\n\nOne-sample \\(t\\)-tests: a single sample is being compared to a value, or vice versa\nTwo-sample \\(t\\)-tests: two samples are being compared to one another to see if they come from the same population\nPaired \\(t\\)-tests: before-and-after measurements of the same individuals are being compared. This is necessary to account for a repeat in the individuals being measured, and different potential baselines at initiation. In this case, we are looking to see if the difference between before and after is equal to zero.\n\nWe also have what we call a “true” \\(t\\)-test and “Welch’s” \\(t\\)-test. The formula for a “true” \\(t\\) is as follows:\n\\[\nt = \\frac{\\bar{x}_1 - \\bar{x}_2}{s_p\\sqrt{\\frac{1}{n_1}+\\frac{1}{n_2}}}\n\\]\nWhere \\(s_p\\) is based on the “pooled variance” between the samples. This can be calculated as follows:\n\\[\ns_p = \\sqrt{\\frac{(n_1-1)(s_1^2)+(n_2-1)(s_2^2)}{n_1+n_2 -2}}\n\\]\nWhereas the equation for a “Welch’s” \\(t\\) is:\n\\[\nt = \\frac{\\bar{x}_1 - \\bar{x}_2}{\\sqrt{\\frac{s_1^2}{n_1}+\\frac{s_2^2}{n_2}}}\n\\]\nWelch’s \\(t\\) also varies with respect to the degrees of freedom, calculated by:\n\\[\ndf = \\frac{\\frac{s_1^2}{n_1}+\\frac{s_2^2}{n_2}}{\\frac{(\\frac{s_1^2}{n_1})^2}{n_1-1}+\\frac{(\\frac{s_2^2}{n_2})^2}{n_2-1}}\n\\]\nOK, so why the difference?\nA \\(t\\)-test works well under a certain set of assumptions, include equal variance between samples and roughly equal sample sizes. A Welch’s \\(t\\)-test is better for scenarios with unequal variance and small sample sizes. If sample sizes and variances are equal, the two \\(t\\)-tests should perform the same.\nBecause of this, some argue that “Welch’s” should be the default \\(t\\)-test, and in R, Welch’s is the default \\(t\\)-test. If you want to specify a “regular” \\(t\\)-value, you will have to set the option var.equal = TRUE. (The default is var.equal = FALSE).\n\n7.4.1 One-sample \\(t\\)-tests\nLet’s look at the values of all of the dog samples in our canines dataset.\n\ndogs &lt;- canines %&gt;%\n  filter(Sample == \"Dog\") %&gt;%\n  select(Sample, OA)\n\nxbar &lt;- mean(dogs$OA)\nsd_dog &lt;- sd(dogs$OA)\nn &lt;- nrow(dogs)\n\nNow we have stored all of our information on our dog dataset. Let’s say that the overall populations of dogs a mean OA score of \\(143\\) with a \\(\\sigma = 1.5\\). Is our sample different than the overall population?\n\nt.test(x = dogs$OA,\n       alternative = \"two.sided\",\n       mu = 143)\n\n\n    One Sample t-test\n\ndata:  dogs$OA\nt = -0.74339, df = 33, p-value = 0.4625\nalternative hypothesis: true mean is not equal to 143\n95 percent confidence interval:\n 138.4667 145.1070\nsample estimates:\nmean of x \n 141.7869 \n\n\nAs we can see above, we fail to reject the null hypothesis that our sample is different than the overall mean for dogs.\n\n\n7.4.2 Two-sample \\(t\\)-tests\nNow let’s say we want to compare foxes and dogs to each other. Since we have all of our data in the same data frame, we will have to subset our data to ensure we are doing this properly.\n\n# already got dogs\ndog_oa &lt;- dogs$OA\n\nfoxes &lt;- canines %&gt;%\n  filter(Sample == \"Fox\") %&gt;%\n  select(Sample, OA)\n\nfox_oa &lt;- foxes$OA\n\nNow, we are ready for the test!\n\nt.test(dog_oa, fox_oa)\n\n\n    Welch Two Sample t-test\n\ndata:  dog_oa and fox_oa\nt = -6.3399, df = 72.766, p-value = 1.717e-08\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -19.62289 -10.23599\nsample estimates:\nmean of x mean of y \n 141.7869  156.7163 \n\n\nAs we can see, the dogs and the foxes significantly differ in their OA measurement, so we reject the null hypothesis that \\(\\mu_{dog} = \\mu_{fox}\\).\n\n\n7.4.3 Paired \\(t\\)-tests\nI will do a highly simplified version of a paired \\(t\\)-test here just for demonstrations sake. Remember that you want to used paired tests when we are looking at the same individuals at different points in time.\n\n# create two random distributions\n# DEMONSTRATION ONLY\n\n# make repeatable\nset.seed(867)\n\nt1 &lt;- rnorm(20,0,1)\nt2 &lt;- rnorm(20,2,1)\n\nNow we can compare these using paired = TRUE.\n\nt.test(t1, t2, paired = TRUE)\n\n\n    Paired t-test\n\ndata:  t1 and t2\nt = -7.5663, df = 19, p-value = 3.796e-07\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n -3.107787 -1.760973\nsample estimates:\nmean difference \n       -2.43438 \n\n\nAs we can see, we reject the null hypothesis that these distributions are equal in this case. Let’s see how this changes though if we set paired = FALSE.\n\nt.test(t1, t2)\n\n\n    Welch Two Sample t-test\n\ndata:  t1 and t2\nt = -8.1501, df = 37.48, p-value = 8.03e-10\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -3.039333 -1.829428\nsample estimates:\n  mean of x   mean of y \n-0.07258938  2.36179080 \n\n\nThis value differs because, in a paired test, we are looking to see if the difference between the distributions is \\(0\\), while in the independent (standard) test we are comparing the overall distributions of the samples.",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Single population means testing</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Testing means with $t$-tests</span>"
     ]
   },
   {
     "objectID": "ttest.html#wilcoxon-tests",
     "href": "ttest.html#wilcoxon-tests",
-    "title": "7  Single population means testing",
+    "title": "7  Testing means with \\(t\\)-tests",
     "section": "7.5 Wilcoxon tests",
     "text": "7.5 Wilcoxon tests\nWhen data (and the differences among data) are non-normal, they violate the assumptions of a \\(t\\)-test. In these cases, we have to do a Wilcoxon test (also called a Wilcoxon signed rank test). In R, the command wilcox.test also includes the Mann-Whitney \\(U\\) test for unpaired data and the standard Wilcoxon test \\(W\\) for paired data.\n\n7.5.1 Mann-Whitney \\(U\\)\nFor this test, we would perform the following procedures to figure out our statistics:\n\nRank the pooled dataset from smallest to largest, and number all numbers by their ranks\nSum the ranks for the first column and the second column\nCompute \\(U_1\\) and \\(U_2\\), comparing the smallest value to a Mann-Whitney \\(U\\) table.\n\nThe equations for these statistics are as follows, where \\(R\\) represents the sum of the ranks for that sample:\n\\[\nU_1 = n_1n_2+\\frac{n_1(n_1+1)}{2}-R_1\n\\]\n\\[\nU_2 = n_1n_2 + \\frac{n_2(n_2+1)}{2} - R_2\n\\]\nIn R, this looks like so:\n\nwilcox.test(t1, t2, paired = FALSE)\n\n\n    Wilcoxon rank sum exact test\n\ndata:  t1 and t2\nW = 11, p-value = 2.829e-09\nalternative hypothesis: true location shift is not equal to 0\n\n\n\n\n7.5.2 Wilcoxon signed rank test\nFor paired samples, we want to do the Wilcoxon signed rank test. This is performed by:\n\nFinding the difference between sampling events for each sampling unit.\nOrder the differences based on their absolute value\nFind the sum of the positive ranks and the negative ranks\nThe smaller of the values is your \\(W\\) statistic.\n\nIn R, this test looks as follows:\n\nwilcox.test(t1, t2, paired = TRUE)\n\n\n    Wilcoxon signed rank exact test\n\ndata:  t1 and t2\nV = 0, p-value = 1.907e-06\nalternative hypothesis: true location shift is not equal to 0",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Single population means testing</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Testing means with $t$-tests</span>"
     ]
   },
   {
     "objectID": "ttest.html#confidence-intervals",
     "href": "ttest.html#confidence-intervals",
-    "title": "7  Single population means testing",
+    "title": "7  Testing means with \\(t\\)-tests",
     "section": "7.6 Confidence intervals",
     "text": "7.6 Confidence intervals\nIn \\(t\\) tests, we are looking at the difference between the means. Oftentimes, we are looking at a confidence interval for the difference between these means. This can be determined by:\n\\[\n(\\bar{x}_1-\\bar{x}_2) \\pm t_{crit}\\sqrt{\\frac{s_p^2}{n_1}+\\frac{s_p^2}{n_2}}\n\\]\nThis is very similar to the CI we calculated with the \\(Z\\) statistic. Remember that we can use the following function to find our desired \\(t\\), which requires degrees of freedom to work:\n\nqt(0.975, df = 10)\n\n[1] 2.228139",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Single population means testing</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Testing means with $t$-tests</span>"
     ]
   },
   {
     "objectID": "ttest.html#homework-chapter-9",
     "href": "ttest.html#homework-chapter-9",
-    "title": "7  Single population means testing",
+    "title": "7  Testing means with \\(t\\)-tests",
     "section": "7.7 Homework: Chapter 9",
     "text": "7.7 Homework: Chapter 9\n\n\n\n\nCourtenay, L. (2019). Measurements on Canid Tooth Scores. https://doi.org/10.6084/m9.figshare.8081108.v1",
     "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Single population means testing</span>"
-    ]
-  },
-  {
-    "objectID": "two_ttest.html",
-    "href": "two_ttest.html",
-    "title": "8  Two sample tests",
-    "section": "",
-    "text": "8.1 Introduction",
-    "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Two sample tests</span>"
-    ]
-  },
-  {
-    "objectID": "two_ttest.html#t-tests",
-    "href": "two_ttest.html#t-tests",
-    "title": "8  Two sample tests",
-    "section": "8.2 t-tests",
-    "text": "8.2 t-tests",
-    "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Two sample tests</span>"
-    ]
-  },
-  {
-    "objectID": "two_ttest.html#mann-whitney-u-tests",
-    "href": "two_ttest.html#mann-whitney-u-tests",
-    "title": "8  Two sample tests",
-    "section": "8.3 Mann-Whitney U tests",
-    "text": "8.3 Mann-Whitney U tests",
-    "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Two sample tests</span>"
-    ]
-  },
-  {
-    "objectID": "two_ttest.html#error",
-    "href": "two_ttest.html#error",
-    "title": "8  Two sample tests",
-    "section": "8.4 Error",
-    "text": "8.4 Error",
-    "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Two sample tests</span>"
-    ]
-  },
-  {
-    "objectID": "two_ttest.html#homework-chapter-10",
-    "href": "two_ttest.html#homework-chapter-10",
-    "title": "8  Two sample tests",
-    "section": "8.5 Homework: Chapter 10",
-    "text": "8.5 Homework: Chapter 10",
-    "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Two sample tests</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Testing means with $t$-tests</span>"
     ]
   },
   {
     "objectID": "anova1.html",
     "href": "anova1.html",
-    "title": "9  ANOVA: Part 1",
+    "title": "8  ANOVA: Part 1",
     "section": "",
-    "text": "9.1 Introduction",
+    "text": "8.1 Introduction",
     "crumbs": [
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ANOVA: Part 1</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>ANOVA: Part 1</span>"
     ]
   },
   {
     "objectID": "anova1.html#anova-by-hand",
     "href": "anova1.html#anova-by-hand",
-    "title": "9  ANOVA: Part 1",
-    "section": "9.2 ANOVA: By hand",
-    "text": "9.2 ANOVA: By hand",
+    "title": "8  ANOVA: Part 1",
+    "section": "8.2 ANOVA: By hand",
+    "text": "8.2 ANOVA: By hand",
     "crumbs": [
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ANOVA: Part 1</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>ANOVA: Part 1</span>"
     ]
   },
   {
     "objectID": "anova1.html#anova-by-r",
     "href": "anova1.html#anova-by-r",
-    "title": "9  ANOVA: Part 1",
-    "section": "9.3 ANOVA: By R",
-    "text": "9.3 ANOVA: By R",
+    "title": "8  ANOVA: Part 1",
+    "section": "8.3 ANOVA: By R",
+    "text": "8.3 ANOVA: By R",
     "crumbs": [
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ANOVA: Part 1</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>ANOVA: Part 1</span>"
     ]
   },
   {
     "objectID": "anova1.html#kruskal-wallis-tests",
     "href": "anova1.html#kruskal-wallis-tests",
-    "title": "9  ANOVA: Part 1",
-    "section": "9.4 Kruskal-Wallis tests",
-    "text": "9.4 Kruskal-Wallis tests",
+    "title": "8  ANOVA: Part 1",
+    "section": "8.4 Kruskal-Wallis tests",
+    "text": "8.4 Kruskal-Wallis tests",
     "crumbs": [
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ANOVA: Part 1</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>ANOVA: Part 1</span>"
     ]
   },
   {
     "objectID": "anova1.html#homework-chapter-11",
     "href": "anova1.html#homework-chapter-11",
-    "title": "9  ANOVA: Part 1",
-    "section": "9.5 Homework: Chapter 11",
-    "text": "9.5 Homework: Chapter 11",
+    "title": "8  ANOVA: Part 1",
+    "section": "8.5 Homework: Chapter 11",
+    "text": "8.5 Homework: Chapter 11",
     "crumbs": [
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ANOVA: Part 1</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>ANOVA: Part 1</span>"
     ]
   },
   {
     "objectID": "anova2.html",
     "href": "anova2.html",
-    "title": "10  ANOVA: Part 2",
+    "title": "9  ANOVA: Part 2",
     "section": "",
-    "text": "10.1 Two-way ANOVA",
+    "text": "9.1 Two-way ANOVA",
     "crumbs": [
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ANOVA: Part 2</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ANOVA: Part 2</span>"
     ]
   },
   {
     "objectID": "anova2.html#designs",
     "href": "anova2.html#designs",
-    "title": "10  ANOVA: Part 2",
-    "section": "10.2 Designs",
-    "text": "10.2 Designs\n\n10.2.1 Randomized block design\n\n\n10.2.2 Repeated measures\n\n\n10.2.3 Factorial ANOVA",
+    "title": "9  ANOVA: Part 2",
+    "section": "9.2 Designs",
+    "text": "9.2 Designs\n\n9.2.1 Randomized block design\n\n\n9.2.2 Repeated measures\n\n\n9.2.3 Factorial ANOVA",
     "crumbs": [
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ANOVA: Part 2</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ANOVA: Part 2</span>"
     ]
   },
   {
     "objectID": "anova2.html#friedmans-test",
     "href": "anova2.html#friedmans-test",
-    "title": "10  ANOVA: Part 2",
-    "section": "10.3 Friedman’s test",
-    "text": "10.3 Friedman’s test",
+    "title": "9  ANOVA: Part 2",
+    "section": "9.3 Friedman’s test",
+    "text": "9.3 Friedman’s test",
     "crumbs": [
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ANOVA: Part 2</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ANOVA: Part 2</span>"
     ]
   },
   {
     "objectID": "anova2.html#homework-chapter-12",
     "href": "anova2.html#homework-chapter-12",
-    "title": "10  ANOVA: Part 2",
-    "section": "10.4 Homework: Chapter 12",
-    "text": "10.4 Homework: Chapter 12",
+    "title": "9  ANOVA: Part 2",
+    "section": "9.4 Homework: Chapter 12",
+    "text": "9.4 Homework: Chapter 12",
     "crumbs": [
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>ANOVA: Part 2</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>ANOVA: Part 2</span>"
     ]
   },
   {
     "objectID": "cor_reg.html",
     "href": "cor_reg.html",
-    "title": "11  Correlation & regression",
+    "title": "10  Correlation & regression",
     "section": "",
-    "text": "11.1 Introduction",
+    "text": "10.1 Introduction",
     "crumbs": [
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Correlation & regression</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Correlation & regression</span>"
     ]
   },
   {
     "objectID": "cor_reg.html#correlation",
     "href": "cor_reg.html#correlation",
-    "title": "11  Correlation & regression",
-    "section": "11.2 Correlation",
-    "text": "11.2 Correlation\n\n11.2.1 Pearson’s\n\n\n11.2.2 Spearman’s\n\n\n11.2.3 Other non-parametric methods",
+    "title": "10  Correlation & regression",
+    "section": "10.2 Correlation",
+    "text": "10.2 Correlation\n\n10.2.1 Pearson’s\n\n\n10.2.2 Spearman’s\n\n\n10.2.3 Other non-parametric methods",
     "crumbs": [
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Correlation & regression</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Correlation & regression</span>"
     ]
   },
   {
     "objectID": "cor_reg.html#correlation-1",
     "href": "cor_reg.html#correlation-1",
-    "title": "11  Correlation & regression",
-    "section": "11.3 Correlation",
-    "text": "11.3 Correlation\n\n11.3.1 Parametric\n\n\n11.3.2 Non-parametric",
+    "title": "10  Correlation & regression",
+    "section": "10.3 Correlation",
+    "text": "10.3 Correlation\n\n10.3.1 Parametric\n\n\n10.3.2 Non-parametric",
     "crumbs": [
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Correlation & regression</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Correlation & regression</span>"
     ]
   },
   {
     "objectID": "cor_reg.html#homework",
     "href": "cor_reg.html#homework",
-    "title": "11  Correlation & regression",
-    "section": "11.4 Homework",
-    "text": "11.4 Homework\n\n11.4.1 Chapter 13\n\n\n11.4.2 Chapter 14",
+    "title": "10  Correlation & regression",
+    "section": "10.4 Homework",
+    "text": "10.4 Homework\n\n10.4.1 Chapter 13\n\n\n10.4.2 Chapter 14",
     "crumbs": [
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Correlation & regression</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Correlation & regression</span>"
     ]
   },
   {
     "objectID": "final_exam.html",
     "href": "final_exam.html",
-    "title": "12  Final exam & review",
+    "title": "11  Final exam & review",
     "section": "",
-    "text": "12.1 Pick the test",
+    "text": "11.1 Pick the test",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Final exam & review</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Final exam & review</span>"
     ]
   },
   {
     "objectID": "final_exam.html#final-review",
     "href": "final_exam.html#final-review",
-    "title": "12  Final exam & review",
-    "section": "12.2 Final review",
-    "text": "12.2 Final review",
+    "title": "11  Final exam & review",
+    "section": "11.2 Final review",
+    "text": "11.2 Final review",
     "crumbs": [
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Final exam & review</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Final exam & review</span>"
     ]
   },
   {
     "objectID": "conclusion.html",
     "href": "conclusion.html",
-    "title": "13  Conclusions",
+    "title": "12  Conclusions",
     "section": "",
-    "text": "13.1 Parting thoughts\nIn this class, we have covered two major things: (1) the basics of statistics for biological research and (2) the basics of using R to solve different computational problems. It is my hope that this class helps you both become a better researcher and also a more efficient researcher and student by using code to help you with your future projects.",
+    "text": "12.1 Parting thoughts\nIn this class, we have covered two major things: (1) the basics of statistics for biological research and (2) the basics of using R to solve different computational problems. It is my hope that this class helps you both become a better researcher and also a more efficient researcher and student by using code to help you with your future projects.",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Conclusions</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Conclusions</span>"
     ]
   },
   {
     "objectID": "conclusion.html#ꮩꮣꮣꭺꮂꭲ",
     "href": "conclusion.html#ꮩꮣꮣꭺꮂꭲ",
-    "title": "13  Conclusions",
-    "section": "13.2 ᏙᏓᏓᎪᎲᎢ",
-    "text": "13.2 ᏙᏓᏓᎪᎲᎢ\nᏙᏓᏓᎪᎲᎢ (pronounced doh-dah-dah-go-huh-ee) is a traditional Cherokee farewell. It does not mean goodbye, but rather reflects a parting of ways until a group of folks meet again.\nI enjoyed getting to know all of you in class, and please feel free to reach out or stop by and say hi if you are ever passing through Kearney in the future or if you need help with something biology related.\nWishing you the best,\nDr. Cooper",
+    "title": "12  Conclusions",
+    "section": "12.2 ᏙᏓᏓᎪᎲᎢ",
+    "text": "12.2 ᏙᏓᏓᎪᎲᎢ\nᏙᏓᏓᎪᎲᎢ (pronounced doh-dah-dah-go-huh-ee) is a traditional Cherokee farewell. It does not mean goodbye, but rather reflects a parting of ways until a group of folks meet again.\nI enjoyed getting to know all of you in class, and please feel free to reach out or stop by and say hi if you are ever passing through Kearney in the future or if you need help with something biology related.\nWishing you the best,\nDr. Cooper",
     "crumbs": [
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Conclusions</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Conclusions</span>"
     ]
   },
   {
     "objectID": "glossary.html",
     "href": "glossary.html",
-    "title": "14  Glossary",
+    "title": "13  Glossary",
     "section": "",
-    "text": "14.1 Common Commands\nThe following are common useful commands used in R, with examples of their use.\nx &lt;- 10\nx\n\n[1] 10\nx &lt;- c(10,11)\nx\n\n[1] 10 11",
+    "text": "13.1 Common Commands\nThe following are common useful commands used in R, with examples of their use.\nx &lt;- 10\nx\n\n[1] 10\nx &lt;- c(10,11)\nx\n\n[1] 10 11",
     "crumbs": [
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Glossary</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Glossary</span>"
     ]
   },
   {
     "objectID": "glossary.html#common-commands",
     "href": "glossary.html#common-commands",
-    "title": "14  Glossary",
+    "title": "13  Glossary",
     "section": "",
     "text": "&lt;- / = - save a value as an object\n\n\n\nc - concatenate, place two values together",
     "crumbs": [
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Glossary</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Glossary</span>"
     ]
   },
   {
     "objectID": "glossary.html#basic-statistics",
     "href": "glossary.html#basic-statistics",
-    "title": "14  Glossary",
-    "section": "14.2 Basic statistics",
-    "text": "14.2 Basic statistics\nFor these examples, we will create a random vector of number to demonstrate how they work.\n\nx &lt;- rnorm(1000)\n\n\nmean - get the mean / average of a set of data\n\n\nmean(x)\n\n[1] -0.002472411",
+    "title": "13  Glossary",
+    "section": "13.2 Basic statistics",
+    "text": "13.2 Basic statistics\nFor these examples, we will create a random vector of number to demonstrate how they work.\n\nx &lt;- rnorm(1000)\n\n\nmean - get the mean / average of a set of data\n\n\nmean(x)\n\n[1] 0.04129798",
     "crumbs": [
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Glossary</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Glossary</span>"
     ]
   },
   {
@@ -714,19 +674,9 @@
     "href": "references.html",
     "title": "References",
     "section": "",
-    "text": "Comont, R. (2020). BeeWalk dataset 2008-23.\nhttps://doi.org/10.6084/m9.figshare.12280547.v4\n\n\nCooper, J. C. (2021). Biogeographic and Ecologic\nDrivers of Avian Diversity.\n[Online.] Available at https://doi.org/10.6082/uchicago.3379.\n\n\nLydeamore, M. J., P. T. Campbell, D. J. Price, Y. Wu, A. J. Marcato, W.\nCuningham, J. R. Carapetis, R. M. Andrews, M. I. McDonald, J. McVernon,\nS. Y. C. Tong, and J. M. McCaw (2020a). Patient\nages at presentation. https://doi.org/10.1371/journal.pcbi.1007838.s006\n\n\nLydeamore, M. J., P. T. Campbell, D. J. Price, Y. Wu, A. J. Marcato, W.\nCuningham, J. R. Carapetis, R. M. Andrews, M. I. McDonald, J. McVernon,\nS. Y. C. Tong, and J. M. McCaw (2020b). Estimation of the\nforce of infection and infectious period of skin sores in remote\nAustralian communities using interval-censored data.\nPLOS Computational Biology 16:e1007838.\n\n\nMoura, R., N. P. Santos, and A. Rocha (2023). Processed csv file of the piracy dataset.\nhttps://doi.org/10.6084/m9.figshare.24119643.v1",
+    "text": "Comont, R. (2020). BeeWalk dataset 2008-23.\nhttps://doi.org/10.6084/m9.figshare.12280547.v4\n\n\nCooper, J. C. (2021). Biogeographic and Ecologic\nDrivers of Avian Diversity.\n[Online.] Available at https://doi.org/10.6082/uchicago.3379.\n\n\nCourtenay, L. (2019). Measurements on Canid Tooth\nScores. https://doi.org/10.6084/m9.figshare.8081108.v1\n\n\nLydeamore, M. J., P. T. Campbell, D. J. Price, Y. Wu, A. J. Marcato, W.\nCuningham, J. R. Carapetis, R. M. Andrews, M. I. McDonald, J. McVernon,\nS. Y. C. Tong, and J. M. McCaw (2020a). Patient\nages at presentation. https://doi.org/10.1371/journal.pcbi.1007838.s006\n\n\nLydeamore, M. J., P. T. Campbell, D. J. Price, Y. Wu, A. J. Marcato, W.\nCuningham, J. R. Carapetis, R. M. Andrews, M. I. McDonald, J. McVernon,\nS. Y. C. Tong, and J. M. McCaw (2020b). Estimation of the\nforce of infection and infectious period of skin sores in remote\nAustralian communities using interval-censored data.\nPLOS Computational Biology 16:e1007838.\n\n\nMoura, R., N. P. Santos, and A. Rocha (2023). Processed csv file of the piracy dataset.\nhttps://doi.org/10.6084/m9.figshare.24119643.v1",
     "crumbs": [
       "References"
-    ]
-  },
-  {
-    "objectID": "ttest.html#dataset",
-    "href": "ttest.html#dataset",
-    "title": "7  Single population means testing",
-    "section": "7.2 Dataset",
-    "text": "7.2 Dataset\nFor all of the examples on this page, we will be using a dataset on the morphology of canine teeth for identification of predators killing livestock (Courtenay 2019).\n\ncanines &lt;- read_csv(\"https://figshare.com/ndownloader/files/15070175\")\n\nWe want to set up some of these columns as “factors” to make it easier to process and parse in R. We will look at the column OA for these examples. Unfortunately, it is unclear what exactly OA stands for since this paper is not published at the present time.\n\ncanines$Sample &lt;- as.factor(canines$Sample)\n\n# we will be examining the column \"OA\"\n\ncanines$OA &lt;- as.numeric(canines$OA)\n\nsummary(canines)\n\n  Sample        WIS              WIM              WIB         \n Dog :34   Min.   :0.1323   Min.   :0.1020   Min.   :0.03402  \n Fox :41   1st Qu.:0.5274   1st Qu.:0.3184   1st Qu.:0.11271  \n Wolf:28   Median :1.1759   Median :0.6678   Median :0.25861  \n           Mean   :1.6292   Mean   :1.0233   Mean   :0.44871  \n           3rd Qu.:2.4822   3rd Qu.:1.5194   3rd Qu.:0.74075  \n           Max.   :4.8575   Max.   :3.2423   Max.   :1.51721  \n       D                 RDC               LDC                OA       \n Min.   :0.005485   Min.   :0.05739   Min.   :0.02905   Min.   :100.7  \n 1st Qu.:0.034092   1st Qu.:0.28896   1st Qu.:0.22290   1st Qu.:139.2  \n Median :0.182371   Median :0.61777   Median :0.55985   Median :149.9  \n Mean   :0.250188   Mean   :0.88071   Mean   :0.84615   Mean   :148.4  \n 3rd Qu.:0.361658   3rd Qu.:1.26417   3rd Qu.:1.26754   3rd Qu.:158.0  \n Max.   :1.697461   Max.   :3.02282   Max.   :3.20533   Max.   :171.5",
-    "crumbs": [
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Single population means testing</span>"
     ]
   }
 ]

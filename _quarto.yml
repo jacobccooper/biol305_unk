@@ -15,7 +15,6 @@ book:
     - exam2.qmd
     - probdist.qmd
     - ttest.qmd
-    - two_ttest.qmd
     - anova1.qmd
     - anova2.qmd
     - cor_reg.qmd

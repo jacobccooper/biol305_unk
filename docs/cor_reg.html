@@ -8,7 +8,7 @@
 
 <meta name="author" content="Dr.&nbsp;Jacob C. Cooper">
 
-<title>11&nbsp; Correlation &amp; regression – Biology 305: Biostatistics</title>
+<title>10&nbsp; Correlation &amp; regression – Biology 305: Biostatistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -70,6 +70,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -82,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cor_reg.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cor_reg.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -152,49 +181,43 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Single population means testing</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./two_ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Two sample tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Testing means with <span class="math inline">\(t\)</span>-tests</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">ANOVA: Part 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">ANOVA: Part 1</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ANOVA: Part 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">ANOVA: Part 2</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cor_reg.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./final_exam.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Final exam &amp; review</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Final exam &amp; review</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./conclusion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Conclusions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Conclusions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -213,22 +236,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">11.1</span> Introduction</a></li>
-  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="header-section-number">11.2</span> Correlation</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">10.1</span> Introduction</a></li>
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="header-section-number">10.2</span> Correlation</a>
   <ul class="collapse">
-  <li><a href="#pearsons" id="toc-pearsons" class="nav-link" data-scroll-target="#pearsons"><span class="header-section-number">11.2.1</span> Pearson’s</a></li>
-  <li><a href="#spearmans" id="toc-spearmans" class="nav-link" data-scroll-target="#spearmans"><span class="header-section-number">11.2.2</span> Spearman’s</a></li>
-  <li><a href="#other-non-parametric-methods" id="toc-other-non-parametric-methods" class="nav-link" data-scroll-target="#other-non-parametric-methods"><span class="header-section-number">11.2.3</span> Other non-parametric methods</a></li>
+  <li><a href="#pearsons" id="toc-pearsons" class="nav-link" data-scroll-target="#pearsons"><span class="header-section-number">10.2.1</span> Pearson’s</a></li>
+  <li><a href="#spearmans" id="toc-spearmans" class="nav-link" data-scroll-target="#spearmans"><span class="header-section-number">10.2.2</span> Spearman’s</a></li>
+  <li><a href="#other-non-parametric-methods" id="toc-other-non-parametric-methods" class="nav-link" data-scroll-target="#other-non-parametric-methods"><span class="header-section-number">10.2.3</span> Other non-parametric methods</a></li>
   </ul></li>
-  <li><a href="#correlation-1" id="toc-correlation-1" class="nav-link" data-scroll-target="#correlation-1"><span class="header-section-number">11.3</span> Correlation</a>
+  <li><a href="#correlation-1" id="toc-correlation-1" class="nav-link" data-scroll-target="#correlation-1"><span class="header-section-number">10.3</span> Correlation</a>
   <ul class="collapse">
-  <li><a href="#parametric" id="toc-parametric" class="nav-link" data-scroll-target="#parametric"><span class="header-section-number">11.3.1</span> Parametric</a></li>
-  <li><a href="#non-parametric" id="toc-non-parametric" class="nav-link" data-scroll-target="#non-parametric"><span class="header-section-number">11.3.2</span> Non-parametric</a></li>
+  <li><a href="#parametric" id="toc-parametric" class="nav-link" data-scroll-target="#parametric"><span class="header-section-number">10.3.1</span> Parametric</a></li>
+  <li><a href="#non-parametric" id="toc-non-parametric" class="nav-link" data-scroll-target="#non-parametric"><span class="header-section-number">10.3.2</span> Non-parametric</a></li>
   </ul></li>
-  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework"><span class="header-section-number">11.4</span> Homework</a>
+  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework"><span class="header-section-number">10.4</span> Homework</a>
   <ul class="collapse">
-  <li><a href="#chapter-13" id="toc-chapter-13" class="nav-link" data-scroll-target="#chapter-13"><span class="header-section-number">11.4.1</span> Chapter 13</a></li>
-  <li><a href="#chapter-14" id="toc-chapter-14" class="nav-link" data-scroll-target="#chapter-14"><span class="header-section-number">11.4.2</span> Chapter 14</a></li>
+  <li><a href="#chapter-13" id="toc-chapter-13" class="nav-link" data-scroll-target="#chapter-13"><span class="header-section-number">10.4.1</span> Chapter 13</a></li>
+  <li><a href="#chapter-14" id="toc-chapter-14" class="nav-link" data-scroll-target="#chapter-14"><span class="header-section-number">10.4.2</span> Chapter 14</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -238,7 +261,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></h1>
 </div>
 
 
@@ -261,37 +284,37 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">11.1</span> Introduction</h2>
+<section id="introduction" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">10.1</span> Introduction</h2>
 </section>
-<section id="correlation" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="correlation"><span class="header-section-number">11.2</span> Correlation</h2>
-<section id="pearsons" class="level3" data-number="11.2.1">
-<h3 data-number="11.2.1" class="anchored" data-anchor-id="pearsons"><span class="header-section-number">11.2.1</span> Pearson’s</h3>
+<section id="correlation" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="correlation"><span class="header-section-number">10.2</span> Correlation</h2>
+<section id="pearsons" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="pearsons"><span class="header-section-number">10.2.1</span> Pearson’s</h3>
 </section>
-<section id="spearmans" class="level3" data-number="11.2.2">
-<h3 data-number="11.2.2" class="anchored" data-anchor-id="spearmans"><span class="header-section-number">11.2.2</span> Spearman’s</h3>
+<section id="spearmans" class="level3" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="spearmans"><span class="header-section-number">10.2.2</span> Spearman’s</h3>
 </section>
-<section id="other-non-parametric-methods" class="level3" data-number="11.2.3">
-<h3 data-number="11.2.3" class="anchored" data-anchor-id="other-non-parametric-methods"><span class="header-section-number">11.2.3</span> Other non-parametric methods</h3>
-</section>
-</section>
-<section id="correlation-1" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="correlation-1"><span class="header-section-number">11.3</span> Correlation</h2>
-<section id="parametric" class="level3" data-number="11.3.1">
-<h3 data-number="11.3.1" class="anchored" data-anchor-id="parametric"><span class="header-section-number">11.3.1</span> Parametric</h3>
-</section>
-<section id="non-parametric" class="level3" data-number="11.3.2">
-<h3 data-number="11.3.2" class="anchored" data-anchor-id="non-parametric"><span class="header-section-number">11.3.2</span> Non-parametric</h3>
+<section id="other-non-parametric-methods" class="level3" data-number="10.2.3">
+<h3 data-number="10.2.3" class="anchored" data-anchor-id="other-non-parametric-methods"><span class="header-section-number">10.2.3</span> Other non-parametric methods</h3>
 </section>
 </section>
-<section id="homework" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="homework"><span class="header-section-number">11.4</span> Homework</h2>
-<section id="chapter-13" class="level3" data-number="11.4.1">
-<h3 data-number="11.4.1" class="anchored" data-anchor-id="chapter-13"><span class="header-section-number">11.4.1</span> Chapter 13</h3>
+<section id="correlation-1" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="correlation-1"><span class="header-section-number">10.3</span> Correlation</h2>
+<section id="parametric" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="parametric"><span class="header-section-number">10.3.1</span> Parametric</h3>
 </section>
-<section id="chapter-14" class="level3" data-number="11.4.2">
-<h3 data-number="11.4.2" class="anchored" data-anchor-id="chapter-14"><span class="header-section-number">11.4.2</span> Chapter 14</h3>
+<section id="non-parametric" class="level3" data-number="10.3.2">
+<h3 data-number="10.3.2" class="anchored" data-anchor-id="non-parametric"><span class="header-section-number">10.3.2</span> Non-parametric</h3>
+</section>
+</section>
+<section id="homework" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="homework"><span class="header-section-number">10.4</span> Homework</h2>
+<section id="chapter-13" class="level3" data-number="10.4.1">
+<h3 data-number="10.4.1" class="anchored" data-anchor-id="chapter-13"><span class="header-section-number">10.4.1</span> Chapter 13</h3>
+</section>
+<section id="chapter-14" class="level3" data-number="10.4.2">
+<h3 data-number="10.4.2" class="anchored" data-anchor-id="chapter-14"><span class="header-section-number">10.4.2</span> Chapter 14</h3>
 
 
 </section>
@@ -721,12 +744,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./anova2.html" class="pagination-link" aria-label="ANOVA: Part 2">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ANOVA: Part 2</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">ANOVA: Part 2</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./final_exam.html" class="pagination-link" aria-label="Final exam &amp; review">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Final exam &amp; review</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Final exam &amp; review</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
