@@ -506,8 +506,11 @@ mean of x mean of y
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create two random distributions</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># DEMONSTRATION ONLY</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>t2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>,<span class="dv">2</span>,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># make repeatable</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">867</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>t2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>,<span class="dv">2</span>,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we can compare these using <code>paired = TRUE</code>.</p>
 <div class="cell">
@@ -517,13 +520,13 @@ mean of x mean of y
     Paired t-test
 
 data:  t1 and t2
-t = -5.4922, df = 19, p-value = 2.68e-05
+t = -7.5663, df = 19, p-value = 3.796e-07
 alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- -2.493403 -1.117374
+ -3.107787 -1.760973
 sample estimates:
 mean difference 
-      -1.805389 </code></pre>
+       -2.43438 </code></pre>
 </div>
 </div>
 <p>As we can see, we reject the null hypothesis that these distributions are equal in this case. Let’s see how this changes though if we set <code>paired = FALSE</code>.</p>
@@ -534,13 +537,13 @@ mean difference
     Welch Two Sample t-test
 
 data:  t1 and t2
-t = -5.3295, df = 28.467, p-value = 1.073e-05
+t = -8.1501, df = 37.48, p-value = 8.03e-10
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -2.498778 -1.111999
+ -3.039333 -1.829428
 sample estimates:
-mean of x mean of y 
-0.2657863 2.0711750 </code></pre>
+  mean of x   mean of y 
+-0.07258938  2.36179080 </code></pre>
 </div>
 </div>
 <p>This value differs because, in a paired test, we are looking to see if the difference between the distributions is <span class="math inline">\(0\)</span>, while in the independent (standard) test we are comparing the overall distributions of the samples.</p>
@@ -572,7 +575,7 @@ U_2 = n_1n_2 + \frac{n_2(n_2+1)}{2} - R_2
     Wilcoxon rank sum exact test
 
 data:  t1 and t2
-W = 52, p-value = 2.138e-05
+W = 11, p-value = 2.829e-09
 alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
@@ -594,7 +597,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
     Wilcoxon signed rank exact test
 
 data:  t1 and t2
-V = 9, p-value = 6.294e-05
+V = 0, p-value = 1.907e-06
 alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>

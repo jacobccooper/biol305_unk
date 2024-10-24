@@ -164,6 +164,9 @@ I will do a highly simplified version of a paired $t$-test here just for demonst
 # create two random distributions
 # DEMONSTRATION ONLY
 
+# make repeatable
+set.seed(867)
+
 t1 <- rnorm(20,0,1)
 t2 <- rnorm(20,2,1)
 ```
