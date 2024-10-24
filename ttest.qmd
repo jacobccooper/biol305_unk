@@ -11,6 +11,30 @@ Previously, we talked about normal distributions as a method for comparing sampl
 
 The distribution that we commonly refer to as a $t$-distribution is also sometimes known as a "Student's $t$-distribution" as it was first published by a man with the pseudonym of "Student". Student was in fact [William Sealy Gossett](https://en.wikipedia.org/wiki/William_Sealy_Gosset), an employee of the Guinness corporation who was barred from publishing things by his employer to ensure that trade secrets were not made known to their competitors. Knowing that his work regarding statistics was important, Gossett opted to publish his research anyway under his pseudonym.
 
+## Dataset
+
+For all of the examples on this page, we will be using a dataset on the morphology of canine teeth for identification of predators killing livestock [@Courtenay2019].
+
+```{r,echo=FALSE,message=FALSE}
+library(tidyverse)
+```
+
+```{r,message = FALSE}
+canines <- read_csv("https://figshare.com/ndownloader/files/15070175")
+```
+
+We want to set up some of these columns as "factors" to make it easier to process and parse in *R*. We will look at the column `OA` for these examples. Unfortunately, it is unclear what exactly `OA` stands for since this paper is not published at the present time.
+
+```{r}
+canines$Sample <- as.factor(canines$Sample)
+
+# we will be examining the column "OA"
+
+canines$OA <- as.numeric(canines$OA)
+
+summary(canines)
+```
+
 ## $t$-distribution
 
 For these scenarios where we are testing a single sample mean from one or more samples we use a $t$-distributions. A $t$-distribution is a specially altered normal distribution that has been adjusted to account for the number of individuals being sampled. Specifically, a $t$-distributions with infinite degrees of freedom is the same as a normal distribution, and our degrees of freedom help create a more platykurtic distribution to account for error and uncertainty. The distribution can be calculated as follows:
@@ -23,10 +47,196 @@ These $t$-distributions can be visualized as follows:
 
 ![IkamusumeFan - Wikipedia](images/clipboard-563860681.png)
 
+For all $t$-tests, we calculate the degrees of freedom based on the number of samples. If comparing values to a single sample, we use $df = n -1$. If we are comparing two sample means, then we have $df = n_1 + n_2 -2$.
+
+Importantly, we are testing to see if the means of the two distributions are equal in a $t$-test. Thus, our hypotheses are as follows:
+
+$H_0: \mu_1 = \mu_2$ ***or*** $H_0: \mu_1 - \mu_2 = 0$
+
+$H_A: \mu_1 \ne \mu_2$ ***or*** $H_A: \mu_1 - \mu_2 \ne 0$
+
+When asked about hypotheses, remember the above as the statistical hypotheses that are being directly tested.
+
+In *R*, we have the following functions to help with $t$ distributions:
+
+-   `dt`: density function of a $t$-distribution
+
+-   `pt`: finding our $p$ value from a specific $t$ in a $t$-distribution
+
+-   `qt`: finding a particular $t$ from a specific $p$ in a $t$-distribution
+
+-   `rt`: random values from a $t$-distribution
+
+All of the above arguments required the degrees of freedom to be declared. Unlike the normal distribution functions, these can not be adjusted for your data; tests must be performed using `t.test`.
+
 ## $t$-tests
+
+We have three major types of $t$-tests:
+
+-   **One-sample** $t$**-tests**: a single sample is being compared to a value, or *vice versa*
+
+-   **Two-sample** $t$**-tests**: two samples are being compared to one another to see if they come from the same population
+
+-   **Paired** $t$**-tests**: before-and-after measurements of the same individuals are being compared. This is necessary to account for a repeat in the individuals being measured, and different potential baselines at initiation. In this case, we are looking to see if the difference between before and after is equal to zero.
+
+We also have what we call a "true" $t$-test and "Welch's" $t$-test. The formula for a "true" $t$ is as follows:
+
+$$
+t = \frac{\bar{x}_1 - \bar{x}_2}{s_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}
+$$
+
+Where $s_p$ is based on the "pooled variance" between the samples. This can be calculated as follows:
+
+$$
+s_p = \sqrt{\frac{(n_1-1)(s_1^2)+(n_2-1)(s_2^2)}{n_1+n_2 -2}}
+$$
+
+Whereas the equation for a "Welch's" $t$ is:
+
+$$
+t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}
+$$
+
+Welch's $t$ also varies with respect to the degrees of freedom, calculated by:
+
+$$
+df = \frac{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}{\frac{(\frac{s_1^2}{n_1})^2}{n_1-1}+\frac{(\frac{s_2^2}{n_2})^2}{n_2-1}}
+$$
+
+**OK, so why the difference?**
+
+A $t$-test works well under a certain set of assumptions, include *equal variance* between samples and roughly equal *sample sizes*. A Welch's $t$-test is better for scenarios with *unequal variance* and *small sample sizes*. If sample sizes and variances are equal, the two $t$-tests should perform the same.
+
+Because of this, some argue that "Welch's" should be the default $t$-test, and **in *R*, Welch's *is* the default** $t$**-test**. If you want to specify a "regular" $t$-value, you will have to set the option `var.equal = TRUE`. (The default is `var.equal = FALSE`).
+
+### One-sample $t$-tests
+
+Let's look at the values of all of the dog samples in our `canines` dataset.
+
+```{r}
+dogs <- canines %>%
+  filter(Sample == "Dog") %>%
+  select(Sample, OA)
+
+xbar <- mean(dogs$OA)
+sd_dog <- sd(dogs$OA)
+n <- nrow(dogs)
+```
+
+Now we have stored all of our information on our dog dataset. Let's say that the overall populations of dogs a mean OA score of $143$ with a $\sigma = 1.5$. Is our sample different than the overall population?
+
+```{r}
+t.test(x = dogs$OA,
+       alternative = "two.sided",
+       mu = 143)
+```
+
+As we can see above, we fail to reject the null hypothesis that our sample is different than the overall mean for dogs.
+
+### Two-sample $t$-tests
+
+Now let's say we want to compare foxes and dogs to each other. Since we have all of our data in the same data frame, we will have to *subset* our data to ensure we are doing this properly.
+
+```{r}
+# already got dogs
+dog_oa <- dogs$OA
+
+foxes <- canines %>%
+  filter(Sample == "Fox") %>%
+  select(Sample, OA)
+
+fox_oa <- foxes$OA
+```
+
+Now, we are ready for the test!
+
+```{r}
+t.test(dog_oa, fox_oa)
+```
+
+As we can see, the dogs and the foxes significantly differ in their `OA` measurement, so we reject the null hypothesis that $\mu_{dog} = \mu_{fox}$.
+
+### Paired $t$-tests
+
+I will do a highly simplified version of a paired $t$-test here just for demonstrations sake. Remember that you want to used paired tests when we are looking at the *same individuals* at different points in time.
+
+```{r}
+# create two random distributions
+# DEMONSTRATION ONLY
+
+t1 <- rnorm(20,0,1)
+t2 <- rnorm(20,2,1)
+```
+
+Now we can compare these using `paired = TRUE`.
+
+```{r}
+t.test(t1, t2, paired = TRUE)
+```
+
+As we can see, we reject the null hypothesis that these distributions are equal in this case. Let's see how this changes though if we set `paired = FALSE`.
+
+```{r}
+t.test(t1, t2)
+```
+
+This value differs because, in a paired test, we are looking to see if the difference between the distributions is $0$, while in the independent (standard) test we are comparing the overall distributions of the samples.
 
 ## Wilcoxon tests
 
+When data (and the differences among data) are non-normal, they violate the assumptions of a $t$-test. In these cases, we have to do a Wilcoxon test (also called a Wilcoxon signed rank test). In *R*, the command `wilcox.test` also includes the Mann-Whitney $U$ test for unpaired data and the standard Wilcoxon test $W$ for paired data.
+
+### Mann-Whitney $U$
+
+For this test, we would perform the following procedures to figure out our statistics:
+
+1.  Rank the pooled dataset from smallest to largest, and number all numbers by their ranks
+2.  Sum the ranks for the first column and the second column
+3.  Compute $U_1$ and $U_2$, comparing the smallest value to a Mann-Whitney $U$ table.
+
+The equations for these statistics are as follows, where $R$ represents the sum of the ranks for that sample:
+
+$$
+U_1 = n_1n_2+\frac{n_1(n_1+1)}{2}-R_1
+$$
+
+$$
+U_2 = n_1n_2 + \frac{n_2(n_2+1)}{2} - R_2
+$$
+
+In *R*, this looks like so:
+
+```{r}
+wilcox.test(t1, t2, paired = FALSE)
+```
+
+### Wilcoxon signed rank test
+
+For paired samples, we want to do the Wilcoxon signed rank test. This is performed by:
+
+1.  Finding the difference between sampling events for each sampling unit.
+2.  Order the differences based on their *absolute value*
+3.  Find the sum of the *positive ranks* and the *negative ranks*
+4.  The *smaller* of the values is your $W$ statistic.
+
+In *R*, this test looks as follows:
+
+```{r}
+wilcox.test(t1, t2, paired = TRUE)
+```
+
 ## Confidence intervals
+
+In $t$ tests, we are looking at the difference between the means. Oftentimes, we are looking at a confidence interval for the difference between these means. This can be determined by:
+
+$$
+(\bar{x}_1-\bar{x}_2) \pm t_{crit}\sqrt{\frac{s_p^2}{n_1}+\frac{s_p^2}{n_2}}
+$$
+
+This is very similar to the CI we calculated with the $Z$ statistic. **Remember** that we can use the following function to find our desired $t$, which requires degrees of freedom to work:
+
+```{r}
+qt(0.975, df = 10)
+```
 
 ## Homework: Chapter 9

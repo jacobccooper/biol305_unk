@@ -21,7 +21,60 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -243,11 +296,21 @@ window.Quarto = {
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">7.1</span> Introduction</a></li>
-  <li><a href="#t-distribution" id="toc-t-distribution" class="nav-link" data-scroll-target="#t-distribution"><span class="header-section-number">7.2</span> <span class="math inline">\(t\)</span>-distribution</a></li>
-  <li><a href="#t-tests" id="toc-t-tests" class="nav-link" data-scroll-target="#t-tests"><span class="header-section-number">7.3</span> <span class="math inline">\(t\)</span>-tests</a></li>
-  <li><a href="#wilcoxon-tests" id="toc-wilcoxon-tests" class="nav-link" data-scroll-target="#wilcoxon-tests"><span class="header-section-number">7.4</span> Wilcoxon tests</a></li>
-  <li><a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals"><span class="header-section-number">7.5</span> Confidence intervals</a></li>
-  <li><a href="#homework-chapter-9" id="toc-homework-chapter-9" class="nav-link" data-scroll-target="#homework-chapter-9"><span class="header-section-number">7.6</span> Homework: Chapter 9</a></li>
+  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset"><span class="header-section-number">7.2</span> Dataset</a></li>
+  <li><a href="#t-distribution" id="toc-t-distribution" class="nav-link" data-scroll-target="#t-distribution"><span class="header-section-number">7.3</span> <span class="math inline">\(t\)</span>-distribution</a></li>
+  <li><a href="#t-tests" id="toc-t-tests" class="nav-link" data-scroll-target="#t-tests"><span class="header-section-number">7.4</span> <span class="math inline">\(t\)</span>-tests</a>
+  <ul class="collapse">
+  <li><a href="#one-sample-t-tests" id="toc-one-sample-t-tests" class="nav-link" data-scroll-target="#one-sample-t-tests"><span class="header-section-number">7.4.1</span> One-sample <span class="math inline">\(t\)</span>-tests</a></li>
+  <li><a href="#two-sample-t-tests" id="toc-two-sample-t-tests" class="nav-link" data-scroll-target="#two-sample-t-tests"><span class="header-section-number">7.4.2</span> Two-sample <span class="math inline">\(t\)</span>-tests</a></li>
+  <li><a href="#paired-t-tests" id="toc-paired-t-tests" class="nav-link" data-scroll-target="#paired-t-tests"><span class="header-section-number">7.4.3</span> Paired <span class="math inline">\(t\)</span>-tests</a></li>
+  </ul></li>
+  <li><a href="#wilcoxon-tests" id="toc-wilcoxon-tests" class="nav-link" data-scroll-target="#wilcoxon-tests"><span class="header-section-number">7.5</span> Wilcoxon tests</a>
+  <ul class="collapse">
+  <li><a href="#mann-whitney-u" id="toc-mann-whitney-u" class="nav-link" data-scroll-target="#mann-whitney-u"><span class="header-section-number">7.5.1</span> Mann-Whitney <span class="math inline">\(U\)</span></a></li>
+  <li><a href="#wilcoxon-signed-rank-test" id="toc-wilcoxon-signed-rank-test" class="nav-link" data-scroll-target="#wilcoxon-signed-rank-test"><span class="header-section-number">7.5.2</span> Wilcoxon signed rank test</a></li>
+  </ul></li>
+  <li><a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals"><span class="header-section-number">7.6</span> Confidence intervals</a></li>
+  <li><a href="#homework-chapter-9" id="toc-homework-chapter-9" class="nav-link" data-scroll-target="#homework-chapter-9"><span class="header-section-number">7.7</span> Homework: Chapter 9</a></li>
   </ul>
 </nav>
     </div>
@@ -284,8 +347,41 @@ window.Quarto = {
 <p>Previously, we talked about normal distributions as a method for comparing samples to overall populations or comparing individuals to overall populations. However, sample sizes can introduce some error, and oftentimes we may not have access to an entire population. In these situations, we need a better test that can account for this changing error and the effect of different sample sizes. This is especially important when comparing two samples to each other. We may find a small sample from one population and a small sample for another, and we want to determine if these came from the same overall population as effectively as possible.</p>
 <p>The distribution that we commonly refer to as a <span class="math inline">\(t\)</span>-distribution is also sometimes known as a “Student’s <span class="math inline">\(t\)</span>-distribution” as it was first published by a man with the pseudonym of “Student”. Student was in fact <a href="https://en.wikipedia.org/wiki/William_Sealy_Gosset">William Sealy Gossett</a>, an employee of the Guinness corporation who was barred from publishing things by his employer to ensure that trade secrets were not made known to their competitors. Knowing that his work regarding statistics was important, Gossett opted to publish his research anyway under his pseudonym.</p>
 </section>
-<section id="t-distribution" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="t-distribution"><span class="header-section-number">7.2</span> <span class="math inline">\(t\)</span>-distribution</h2>
+<section id="dataset" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="dataset"><span class="header-section-number">7.2</span> Dataset</h2>
+<p>For all of the examples on this page, we will be using a dataset on the morphology of canine teeth for identification of predators killing livestock <span class="citation" data-cites="Courtenay2019">(<a href="references.html#ref-Courtenay2019" role="doc-biblioref">Courtenay 2019</a>)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>canines <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://figshare.com/ndownloader/files/15070175"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We want to set up some of these columns as “factors” to make it easier to process and parse in <em>R</em>. We will look at the column <code>OA</code> for these examples. Unfortunately, it is unclear what exactly <code>OA</code> stands for since this paper is not published at the present time.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>canines<span class="sc">$</span>Sample <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(canines<span class="sc">$</span>Sample)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># we will be examining the column "OA"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>canines<span class="sc">$</span>OA <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(canines<span class="sc">$</span>OA)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(canines)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sample        WIS              WIM              WIB         
+ Dog :34   Min.   :0.1323   Min.   :0.1020   Min.   :0.03402  
+ Fox :41   1st Qu.:0.5274   1st Qu.:0.3184   1st Qu.:0.11271  
+ Wolf:28   Median :1.1759   Median :0.6678   Median :0.25861  
+           Mean   :1.6292   Mean   :1.0233   Mean   :0.44871  
+           3rd Qu.:2.4822   3rd Qu.:1.5194   3rd Qu.:0.74075  
+           Max.   :4.8575   Max.   :3.2423   Max.   :1.51721  
+       D                 RDC               LDC                OA       
+ Min.   :0.005485   Min.   :0.05739   Min.   :0.02905   Min.   :100.7  
+ 1st Qu.:0.034092   1st Qu.:0.28896   1st Qu.:0.22290   1st Qu.:139.2  
+ Median :0.182371   Median :0.61777   Median :0.55985   Median :149.9  
+ Mean   :0.250188   Mean   :0.88071   Mean   :0.84615   Mean   :148.4  
+ 3rd Qu.:0.361658   3rd Qu.:1.26417   3rd Qu.:1.26754   3rd Qu.:158.0  
+ Max.   :1.697461   Max.   :3.02282   Max.   :3.20533   Max.   :171.5  </code></pre>
+</div>
+</div>
+</section>
+<section id="t-distribution" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="t-distribution"><span class="header-section-number">7.3</span> <span class="math inline">\(t\)</span>-distribution</h2>
 <p>For these scenarios where we are testing a single sample mean from one or more samples we use a <span class="math inline">\(t\)</span>-distributions. A <span class="math inline">\(t\)</span>-distribution is a specially altered normal distribution that has been adjusted to account for the number of individuals being sampled. Specifically, a <span class="math inline">\(t\)</span>-distributions with infinite degrees of freedom is the same as a normal distribution, and our degrees of freedom help create a more platykurtic distribution to account for error and uncertainty. The distribution can be calculated as follows:</p>
 <p><span class="math display">\[
 t = \frac{\Gamma(\frac{v+1}{2})}{\sqrt{\pi \nu}\Gamma(\frac{\nu}{2})}(1+\frac{t^2}{\nu})^{-\frac{(v+1)}{2}}
@@ -297,20 +393,236 @@ t = \frac{\Gamma(\frac{v+1}{2})}{\sqrt{\pi \nu}\Gamma(\frac{\nu}{2})}(1+\frac{t^
 <figcaption>IkamusumeFan - Wikipedia</figcaption>
 </figure>
 </div>
+<p>For all <span class="math inline">\(t\)</span>-tests, we calculate the degrees of freedom based on the number of samples. If comparing values to a single sample, we use <span class="math inline">\(df = n -1\)</span>. If we are comparing two sample means, then we have <span class="math inline">\(df = n_1 + n_2 -2\)</span>.</p>
+<p>Importantly, we are testing to see if the means of the two distributions are equal in a <span class="math inline">\(t\)</span>-test. Thus, our hypotheses are as follows:</p>
+<p><span class="math inline">\(H_0: \mu_1 = \mu_2\)</span> <strong><em>or</em></strong> <span class="math inline">\(H_0: \mu_1 - \mu_2 = 0\)</span></p>
+<p><span class="math inline">\(H_A: \mu_1 \ne \mu_2\)</span> <strong><em>or</em></strong> <span class="math inline">\(H_A: \mu_1 - \mu_2 \ne 0\)</span></p>
+<p>When asked about hypotheses, remember the above as the statistical hypotheses that are being directly tested.</p>
+<p>In <em>R</em>, we have the following functions to help with <span class="math inline">\(t\)</span> distributions:</p>
+<ul>
+<li><p><code>dt</code>: density function of a <span class="math inline">\(t\)</span>-distribution</p></li>
+<li><p><code>pt</code>: finding our <span class="math inline">\(p\)</span> value from a specific <span class="math inline">\(t\)</span> in a <span class="math inline">\(t\)</span>-distribution</p></li>
+<li><p><code>qt</code>: finding a particular <span class="math inline">\(t\)</span> from a specific <span class="math inline">\(p\)</span> in a <span class="math inline">\(t\)</span>-distribution</p></li>
+<li><p><code>rt</code>: random values from a <span class="math inline">\(t\)</span>-distribution</p></li>
+</ul>
+<p>All of the above arguments required the degrees of freedom to be declared. Unlike the normal distribution functions, these can not be adjusted for your data; tests must be performed using <code>t.test</code>.</p>
 </section>
-<section id="t-tests" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="t-tests"><span class="header-section-number">7.3</span> <span class="math inline">\(t\)</span>-tests</h2>
+<section id="t-tests" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="t-tests"><span class="header-section-number">7.4</span> <span class="math inline">\(t\)</span>-tests</h2>
+<p>We have three major types of <span class="math inline">\(t\)</span>-tests:</p>
+<ul>
+<li><p><strong>One-sample</strong> <span class="math inline">\(t\)</span><strong>-tests</strong>: a single sample is being compared to a value, or <em>vice versa</em></p></li>
+<li><p><strong>Two-sample</strong> <span class="math inline">\(t\)</span><strong>-tests</strong>: two samples are being compared to one another to see if they come from the same population</p></li>
+<li><p><strong>Paired</strong> <span class="math inline">\(t\)</span><strong>-tests</strong>: before-and-after measurements of the same individuals are being compared. This is necessary to account for a repeat in the individuals being measured, and different potential baselines at initiation. In this case, we are looking to see if the difference between before and after is equal to zero.</p></li>
+</ul>
+<p>We also have what we call a “true” <span class="math inline">\(t\)</span>-test and “Welch’s” <span class="math inline">\(t\)</span>-test. The formula for a “true” <span class="math inline">\(t\)</span> is as follows:</p>
+<p><span class="math display">\[
+t = \frac{\bar{x}_1 - \bar{x}_2}{s_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}
+\]</span></p>
+<p>Where <span class="math inline">\(s_p\)</span> is based on the “pooled variance” between the samples. This can be calculated as follows:</p>
+<p><span class="math display">\[
+s_p = \sqrt{\frac{(n_1-1)(s_1^2)+(n_2-1)(s_2^2)}{n_1+n_2 -2}}
+\]</span></p>
+<p>Whereas the equation for a “Welch’s” <span class="math inline">\(t\)</span> is:</p>
+<p><span class="math display">\[
+t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}
+\]</span></p>
+<p>Welch’s <span class="math inline">\(t\)</span> also varies with respect to the degrees of freedom, calculated by:</p>
+<p><span class="math display">\[
+df = \frac{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}{\frac{(\frac{s_1^2}{n_1})^2}{n_1-1}+\frac{(\frac{s_2^2}{n_2})^2}{n_2-1}}
+\]</span></p>
+<p><strong>OK, so why the difference?</strong></p>
+<p>A <span class="math inline">\(t\)</span>-test works well under a certain set of assumptions, include <em>equal variance</em> between samples and roughly equal <em>sample sizes</em>. A Welch’s <span class="math inline">\(t\)</span>-test is better for scenarios with <em>unequal variance</em> and <em>small sample sizes</em>. If sample sizes and variances are equal, the two <span class="math inline">\(t\)</span>-tests should perform the same.</p>
+<p>Because of this, some argue that “Welch’s” should be the default <span class="math inline">\(t\)</span>-test, and <strong>in <em>R</em>, Welch’s <em>is</em> the default</strong> <span class="math inline">\(t\)</span><strong>-test</strong>. If you want to specify a “regular” <span class="math inline">\(t\)</span>-value, you will have to set the option <code>var.equal = TRUE</code>. (The default is <code>var.equal = FALSE</code>).</p>
+<section id="one-sample-t-tests" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="one-sample-t-tests"><span class="header-section-number">7.4.1</span> One-sample <span class="math inline">\(t\)</span>-tests</h3>
+<p>Let’s look at the values of all of the dog samples in our <code>canines</code> dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dogs <span class="ot">&lt;-</span> canines <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Sample <span class="sc">==</span> <span class="st">"Dog"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Sample, OA)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(dogs<span class="sc">$</span>OA)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>sd_dog <span class="ot">&lt;-</span> <span class="fu">sd</span>(dogs<span class="sc">$</span>OA)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(dogs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we have stored all of our information on our dog dataset. Let’s say that the overall populations of dogs a mean OA score of <span class="math inline">\(143\)</span> with a <span class="math inline">\(\sigma = 1.5\)</span>. Is our sample different than the overall population?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">x =</span> dogs<span class="sc">$</span>OA,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">alternative =</span> <span class="st">"two.sided"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">mu =</span> <span class="dv">143</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  dogs$OA
+t = -0.74339, df = 33, p-value = 0.4625
+alternative hypothesis: true mean is not equal to 143
+95 percent confidence interval:
+ 138.4667 145.1070
+sample estimates:
+mean of x 
+ 141.7869 </code></pre>
+</div>
+</div>
+<p>As we can see above, we fail to reject the null hypothesis that our sample is different than the overall mean for dogs.</p>
 </section>
-<section id="wilcoxon-tests" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="wilcoxon-tests"><span class="header-section-number">7.4</span> Wilcoxon tests</h2>
+<section id="two-sample-t-tests" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="two-sample-t-tests"><span class="header-section-number">7.4.2</span> Two-sample <span class="math inline">\(t\)</span>-tests</h3>
+<p>Now let’s say we want to compare foxes and dogs to each other. Since we have all of our data in the same data frame, we will have to <em>subset</em> our data to ensure we are doing this properly.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># already got dogs</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>dog_oa <span class="ot">&lt;-</span> dogs<span class="sc">$</span>OA</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>foxes <span class="ot">&lt;-</span> canines <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Sample <span class="sc">==</span> <span class="st">"Fox"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Sample, OA)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>fox_oa <span class="ot">&lt;-</span> foxes<span class="sc">$</span>OA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, we are ready for the test!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(dog_oa, fox_oa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  dog_oa and fox_oa
+t = -6.3399, df = 72.766, p-value = 1.717e-08
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -19.62289 -10.23599
+sample estimates:
+mean of x mean of y 
+ 141.7869  156.7163 </code></pre>
+</div>
+</div>
+<p>As we can see, the dogs and the foxes significantly differ in their <code>OA</code> measurement, so we reject the null hypothesis that <span class="math inline">\(\mu_{dog} = \mu_{fox}\)</span>.</p>
 </section>
-<section id="confidence-intervals" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="confidence-intervals"><span class="header-section-number">7.5</span> Confidence intervals</h2>
+<section id="paired-t-tests" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="paired-t-tests"><span class="header-section-number">7.4.3</span> Paired <span class="math inline">\(t\)</span>-tests</h3>
+<p>I will do a highly simplified version of a paired <span class="math inline">\(t\)</span>-test here just for demonstrations sake. Remember that you want to used paired tests when we are looking at the <em>same individuals</em> at different points in time.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create two random distributions</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># DEMONSTRATION ONLY</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>t2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>,<span class="dv">2</span>,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we can compare these using <code>paired = TRUE</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(t1, t2, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Paired t-test
+
+data:  t1 and t2
+t = -5.4922, df = 19, p-value = 2.68e-05
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -2.493403 -1.117374
+sample estimates:
+mean difference 
+      -1.805389 </code></pre>
+</div>
+</div>
+<p>As we can see, we reject the null hypothesis that these distributions are equal in this case. Let’s see how this changes though if we set <code>paired = FALSE</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(t1, t2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  t1 and t2
+t = -5.3295, df = 28.467, p-value = 1.073e-05
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -2.498778 -1.111999
+sample estimates:
+mean of x mean of y 
+0.2657863 2.0711750 </code></pre>
+</div>
+</div>
+<p>This value differs because, in a paired test, we are looking to see if the difference between the distributions is <span class="math inline">\(0\)</span>, while in the independent (standard) test we are comparing the overall distributions of the samples.</p>
 </section>
-<section id="homework-chapter-9" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="homework-chapter-9"><span class="header-section-number">7.6</span> Homework: Chapter 9</h2>
+</section>
+<section id="wilcoxon-tests" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="wilcoxon-tests"><span class="header-section-number">7.5</span> Wilcoxon tests</h2>
+<p>When data (and the differences among data) are non-normal, they violate the assumptions of a <span class="math inline">\(t\)</span>-test. In these cases, we have to do a Wilcoxon test (also called a Wilcoxon signed rank test). In <em>R</em>, the command <code>wilcox.test</code> also includes the Mann-Whitney <span class="math inline">\(U\)</span> test for unpaired data and the standard Wilcoxon test <span class="math inline">\(W\)</span> for paired data.</p>
+<section id="mann-whitney-u" class="level3" data-number="7.5.1">
+<h3 data-number="7.5.1" class="anchored" data-anchor-id="mann-whitney-u"><span class="header-section-number">7.5.1</span> Mann-Whitney <span class="math inline">\(U\)</span></h3>
+<p>For this test, we would perform the following procedures to figure out our statistics:</p>
+<ol type="1">
+<li>Rank the pooled dataset from smallest to largest, and number all numbers by their ranks</li>
+<li>Sum the ranks for the first column and the second column</li>
+<li>Compute <span class="math inline">\(U_1\)</span> and <span class="math inline">\(U_2\)</span>, comparing the smallest value to a Mann-Whitney <span class="math inline">\(U\)</span> table.</li>
+</ol>
+<p>The equations for these statistics are as follows, where <span class="math inline">\(R\)</span> represents the sum of the ranks for that sample:</p>
+<p><span class="math display">\[
+U_1 = n_1n_2+\frac{n_1(n_1+1)}{2}-R_1
+\]</span></p>
+<p><span class="math display">\[
+U_2 = n_1n_2 + \frac{n_2(n_2+1)}{2} - R_2
+\]</span></p>
+<p>In <em>R</em>, this looks like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(t1, t2, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum exact test
+
+data:  t1 and t2
+W = 52, p-value = 2.138e-05
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</div>
+</div>
+</section>
+<section id="wilcoxon-signed-rank-test" class="level3" data-number="7.5.2">
+<h3 data-number="7.5.2" class="anchored" data-anchor-id="wilcoxon-signed-rank-test"><span class="header-section-number">7.5.2</span> Wilcoxon signed rank test</h3>
+<p>For paired samples, we want to do the Wilcoxon signed rank test. This is performed by:</p>
+<ol type="1">
+<li>Finding the difference between sampling events for each sampling unit.</li>
+<li>Order the differences based on their <em>absolute value</em></li>
+<li>Find the sum of the <em>positive ranks</em> and the <em>negative ranks</em></li>
+<li>The <em>smaller</em> of the values is your <span class="math inline">\(W\)</span> statistic.</li>
+</ol>
+<p>In <em>R</em>, this test looks as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(t1, t2, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon signed rank exact test
+
+data:  t1 and t2
+V = 9, p-value = 6.294e-05
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="confidence-intervals" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="confidence-intervals"><span class="header-section-number">7.6</span> Confidence intervals</h2>
+<p>In <span class="math inline">\(t\)</span> tests, we are looking at the difference between the means. Oftentimes, we are looking at a confidence interval for the difference between these means. This can be determined by:</p>
+<p><span class="math display">\[
+(\bar{x}_1-\bar{x}_2) \pm t_{crit}\sqrt{\frac{s_p^2}{n_1}+\frac{s_p^2}{n_2}}
+\]</span></p>
+<p>This is very similar to the CI we calculated with the <span class="math inline">\(Z\)</span> statistic. <strong>Remember</strong> that we can use the following function to find our desired <span class="math inline">\(t\)</span>, which requires degrees of freedom to work:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.228139</code></pre>
+</div>
+</div>
+</section>
+<section id="homework-chapter-9" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="homework-chapter-9"><span class="header-section-number">7.7</span> Homework: Chapter 9</h2>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Courtenay2019" class="csl-entry" role="listitem">
+Courtenay, L. (2019). <span class="nocase">Measurements on Canid Tooth Scores</span>. https://doi.org/<a href="https://doi.org/10.6084/m9.figshare.8081108.v1">10.6084/m9.figshare.8081108.v1</a>
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
