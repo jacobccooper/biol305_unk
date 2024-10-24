@@ -404,7 +404,7 @@
     "href": "ttest.html",
     "title": "7  Single population means testing",
     "section": "",
-    "text": "7.1 Introduction",
+    "text": "7.1 Introduction\nPreviously, we talked about normal distributions as a method for comparing samples to overall populations or comparing individuals to overall populations. However, sample sizes can introduce some error, and oftentimes we may not have access to an entire population. In these situations, we need a better test that can account for this changing error and the effect of different sample sizes. This is especially important when comparing two samples to each other. We may find a small sample from one population and a small sample for another, and we want to determine if these came from the same overall population as effectively as possible.\nThe distribution that we commonly refer to as a \\(t\\)-distribution is also sometimes known as a “Student’s \\(t\\)-distribution” as it was first published by a man with the pseudonym of “Student”. Student was in fact William Sealy Gossett, an employee of the Guinness corporation who was barred from publishing things by his employer to ensure that trade secrets were not made known to their competitors. Knowing that his work regarding statistics was important, Gossett opted to publish his research anyway under his pseudonym.",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Single population means testing</span>"
     ]
@@ -413,8 +413,8 @@
     "objectID": "ttest.html#t-distribution",
     "href": "ttest.html#t-distribution",
     "title": "7  Single population means testing",
-    "section": "7.2 t-distribution",
-    "text": "7.2 t-distribution",
+    "section": "7.2 \\(t\\)-distribution",
+    "text": "7.2 \\(t\\)-distribution\nFor these scenarios where we are testing a single sample mean from one or more samples we use a \\(t\\)-distributions. A \\(t\\)-distribution is a specially altered normal distribution that has been adjusted to account for the number of individuals being sampled. Specifically, a \\(t\\)-distributions with infinite degrees of freedom is the same as a normal distribution, and our degrees of freedom help create a more platykurtic distribution to account for error and uncertainty. The distribution can be calculated as follows:\n\\[\nt = \\frac{\\Gamma(\\frac{v+1}{2})}{\\sqrt{\\pi \\nu}\\Gamma(\\frac{\\nu}{2})}(1+\\frac{t^2}{\\nu})^{-\\frac{(v+1)}{2}}\n\\]\nThese \\(t\\)-distributions can be visualized as follows:\n\n\n\nIkamusumeFan - Wikipedia",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Single population means testing</span>"
     ]
@@ -423,8 +423,8 @@
     "objectID": "ttest.html#t-tests",
     "href": "ttest.html#t-tests",
     "title": "7  Single population means testing",
-    "section": "7.3 t-tests",
-    "text": "7.3 t-tests",
+    "section": "7.3 \\(t\\)-tests",
+    "text": "7.3 \\(t\\)-tests",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Single population means testing</span>"
     ]

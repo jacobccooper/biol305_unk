@@ -70,6 +70,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -214,8 +243,8 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">7.1</span> Introduction</a></li>
-  <li><a href="#t-distribution" id="toc-t-distribution" class="nav-link" data-scroll-target="#t-distribution"><span class="header-section-number">7.2</span> <em>t</em>-distribution</a></li>
-  <li><a href="#t-tests" id="toc-t-tests" class="nav-link" data-scroll-target="#t-tests"><span class="header-section-number">7.3</span> <em>t</em>-tests</a></li>
+  <li><a href="#t-distribution" id="toc-t-distribution" class="nav-link" data-scroll-target="#t-distribution"><span class="header-section-number">7.2</span> <span class="math inline">\(t\)</span>-distribution</a></li>
+  <li><a href="#t-tests" id="toc-t-tests" class="nav-link" data-scroll-target="#t-tests"><span class="header-section-number">7.3</span> <span class="math inline">\(t\)</span>-tests</a></li>
   <li><a href="#wilcoxon-tests" id="toc-wilcoxon-tests" class="nav-link" data-scroll-target="#wilcoxon-tests"><span class="header-section-number">7.4</span> Wilcoxon tests</a></li>
   <li><a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals"><span class="header-section-number">7.5</span> Confidence intervals</a></li>
   <li><a href="#homework-chapter-9" id="toc-homework-chapter-9" class="nav-link" data-scroll-target="#homework-chapter-9"><span class="header-section-number">7.6</span> Homework: Chapter 9</a></li>
@@ -252,12 +281,25 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="introduction" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">7.1</span> Introduction</h2>
+<p>Previously, we talked about normal distributions as a method for comparing samples to overall populations or comparing individuals to overall populations. However, sample sizes can introduce some error, and oftentimes we may not have access to an entire population. In these situations, we need a better test that can account for this changing error and the effect of different sample sizes. This is especially important when comparing two samples to each other. We may find a small sample from one population and a small sample for another, and we want to determine if these came from the same overall population as effectively as possible.</p>
+<p>The distribution that we commonly refer to as a <span class="math inline">\(t\)</span>-distribution is also sometimes known as a “Student’s <span class="math inline">\(t\)</span>-distribution” as it was first published by a man with the pseudonym of “Student”. Student was in fact <a href="https://en.wikipedia.org/wiki/William_Sealy_Gosset">William Sealy Gossett</a>, an employee of the Guinness corporation who was barred from publishing things by his employer to ensure that trade secrets were not made known to their competitors. Knowing that his work regarding statistics was important, Gossett opted to publish his research anyway under his pseudonym.</p>
 </section>
 <section id="t-distribution" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="t-distribution"><span class="header-section-number">7.2</span> <em>t</em>-distribution</h2>
+<h2 data-number="7.2" class="anchored" data-anchor-id="t-distribution"><span class="header-section-number">7.2</span> <span class="math inline">\(t\)</span>-distribution</h2>
+<p>For these scenarios where we are testing a single sample mean from one or more samples we use a <span class="math inline">\(t\)</span>-distributions. A <span class="math inline">\(t\)</span>-distribution is a specially altered normal distribution that has been adjusted to account for the number of individuals being sampled. Specifically, a <span class="math inline">\(t\)</span>-distributions with infinite degrees of freedom is the same as a normal distribution, and our degrees of freedom help create a more platykurtic distribution to account for error and uncertainty. The distribution can be calculated as follows:</p>
+<p><span class="math display">\[
+t = \frac{\Gamma(\frac{v+1}{2})}{\sqrt{\pi \nu}\Gamma(\frac{\nu}{2})}(1+\frac{t^2}{\nu})^{-\frac{(v+1)}{2}}
+\]</span></p>
+<p>These <span class="math inline">\(t\)</span>-distributions can be visualized as follows:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-563860681.png" class="img-fluid figure-img"></p>
+<figcaption>IkamusumeFan - Wikipedia</figcaption>
+</figure>
+</div>
 </section>
 <section id="t-tests" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="t-tests"><span class="header-section-number">7.3</span> <em>t</em>-tests</h2>
+<h2 data-number="7.3" class="anchored" data-anchor-id="t-tests"><span class="header-section-number">7.3</span> <span class="math inline">\(t\)</span>-tests</h2>
 </section>
 <section id="wilcoxon-tests" class="level2" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="wilcoxon-tests"><span class="header-section-number">7.4</span> Wilcoxon tests</h2>
