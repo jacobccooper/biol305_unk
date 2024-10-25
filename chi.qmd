@@ -1,0 +1,315 @@
+---
+title: "χ2 (Chi-squared) tests"
+author: "Dr. Jacob C. Cooper"
+format: html
+editor: visual
+---
+
+## $\chi^2$-squared distribution
+
+$\chi^2$-squared (pronounced "*kai*", and spelled "*chi*") is a distribution used to understand if count data between different categories matches our expectation. For example, if we are looking at students in the class and comparing major vs. number of books read, we would expect *no association*, however we may find an association for a major such as English which required reading more literature. The $\chi^2$ introduces a new term *degrees of freedom* ($df$) which reflects the number of individuals in the study. For many tests, $df$ are needed to reflect how a distribution changes with respect the number of individuals (and amount of variation possible) within a dataset. The equation for the $\chi^2$ is as follows, with the $\chi^2$ being a special case of the *gamma* ($\gamma$ or $\Gamma$) distribution that is affected by the $df$, which is defined as the number of rows minus one multiplied by the number of columns minus one $df = (rows-1)(cols-1)$:
+
+$$
+f_n(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^\frac{n}{2-1}e^\frac{-x}{2}
+$$
+
+The $\chi^2$-squared distribution is also represented by the following functions, which perform the same things as the previous outlined equivalents for Poisson and binomial:
+
+-   `dchisq`
+
+-   `pchisq`
+
+-   `qchisq`
+
+-   `rchisq`
+
+We can view these probabilities as well:
+
+```{r}
+x <- 0:10
+
+y <- pchisq(x, df = 9)
+
+# any value greater than 0.5 is subtracted from 1
+y[y > 0.5] <- 1 - y[y > 0.5]
+
+plot(x,y,type="l")
+```
+
+### Calculating the test statistic
+
+We evaluate $\chi^2$ tests by calculating a $\chi^2$ value based on our data and comparing it to an expected $\chi^2$ distribution. This *test statistic* can be evaluated by looking at a $\chi^2$ table or by using *R*. **Note** that you need to know the degrees of freedom in order to properly evaluate a $\chi^2$ test. We calculate our test statistic as follows:
+
+$$
+\chi^2=\Sigma\frac{(o-e)^2}{e}
+$$
+
+where $e =$ the number of expected individuals and $o =$ the number of observed individuals in each category. Since we are squaring these values, we will only have positive values, and thus this will **always be a one-tailed test**.
+
+There are multiple types of $\chi^2$ test, including the following we will cover here:
+
+-   $\chi^2$ Goodness-of-fit test
+
+-   $\chi^2$ test of independence
+
+### $\chi^2$ goodness-of-fit test
+
+A $\chi^2$ goodness-of-fit test looks at a vector of data, or counts in different categories, and asks if the observed frequencies vary from the expected frequencies.
+
+#### $\chi^2$ estimate by hand
+
+Let's say, for example, we have the following dataset:
+
+| Hour  | No. Drinks Sold |
+|-------|-----------------|
+| 6-7   | 3               |
+| 7-8   | 8               |
+| 8-9   | 15              |
+| 9-10  | 7               |
+| 10-12 | 5               |
+| 12-13 | 20              |
+| 13-14 | 18              |
+| 14-15 | 8               |
+| 15-16 | 10              |
+| 16-17 | 12              |
+
+Now, we can ask if the *probability* of selling drinks is the same across all time periods.
+
+```{r}
+drinks <- c(3, 8, 15, 7, 5, 20, 18, 8, 10, 12)
+```
+
+We can get the expected counts by assuming an equal probability for each time period; thus, $Exp(x)=\frac{N}{categories}$.
+
+```{r}
+# sum all values for total number
+N <- sum(drinks)
+
+# get length of vector for categories
+cats <- length(drinks)
+
+# repeat calculation same number of times as length
+exp_drinks <- rep(N/cats, cats)
+
+exp_drinks
+```
+
+Now, we can do out $\chi^2$ calculation.
+
+```{r}
+chi_vals <- ((drinks - exp_drinks)^2)/exp_drinks
+
+chi_vals
+```
+
+```{r}
+sum(chi_vals)
+```
+
+And now, to get the probability.
+
+```{r}
+pchisq(sum(chi_vals), # chi stat
+       df = length(chi_vals) - 1, # degrees of freedom
+       lower.tail = FALSE) # looking RIGHT
+```
+
+Here, we get $p = 0.002$, indicating that there is not an equal probability for selling drinks at different times of day.
+
+#### $\chi^2$ estimation by code
+
+We can use the test `chisq.test` to perform this analysis as well.
+
+```{r}
+chisq.test(drinks)
+```
+
+As we can see, these values are exactly the same as we just calculated by hand! ***Note*** that we can define the probability `p` if we want, otherwise it defaults to `p = rep(1/length(x), length(x))`.
+
+### $\chi^2$ test of independence
+
+Usually when we use a $\chi^2$, we are looking at count data. Let's consider the following hypothetical scenario, comparing experience with *R* between non-biology majors (who, in this theoretical scenario, do not regularly use *R*) and Biology majors who are required to take *R* for this class:
+
+| Major         | *R* experience | No *R* experience |
+|---------------|----------------|-------------------|
+| *Non-biology* | 3              | 7                 |
+| *Biology*     | 9              | 1                 |
+
+: The above table of counts is also known as a **contingency table**. Intuitively, we can see a difference, but we want to perform a statistical test to see just how likely these counts would be if both groups were equally likely. We can calculate this both "by hand" and using built in *R* functions.
+
+#### $\chi^2$ estimations by hand
+
+First, we can enter the data into *R*.
+
+```{r}
+data <- matrix(data = c(3,7,9,1), nrow = 2, ncol = 2, byrow = T)
+
+colnames(data) <- c("R", "No R")
+rownames(data) <- c("Non-biology", "Biology")
+
+data
+```
+
+Next, we need the *observed - expected* values. We determine expected values either through probability ($0.5 \cdot n$ for equal probability for two categories) or via calculating the the expected values (see later section on *expected counts*). In this case, since we are looking at equally likely in each cell, we have an expected matrix as follows:
+
+```{r}
+# total datapoints
+N <- sum(data)
+
+expected <- matrix(data = c(0.25*N,0.25*N,0.25*N,0.25*N), nrow = 2, ncol = 2, byrow = T)
+
+colnames(expected) <- c("R", "No R")
+rownames(expected) <- c("Non-biology", "Biology")
+
+expected
+```
+
+Now we need to find our *observed - expected*.
+
+```{r}
+o_e <- data - expected
+
+o_e
+```
+
+***Note*** that in *R* we can add and subtract matrices, so there's no reason to reformat these data!
+
+Now, we can square these data.
+
+```{r}
+o_e2 <- o_e^2
+
+o_e2
+```
+
+Next, we take these and divide them by the expected values and then sum those values.
+
+```{r}
+chi_matrix <- o_e2/expected
+
+chi_matrix
+```
+
+```{r}
+sum(chi_matrix)
+```
+
+Here, we get a $\chi^2$ value of 8. We can use our handy family functions to determine the probability of this event:
+
+```{r}
+pchisq(8, df = 1, lower.tail = F)
+```
+
+Here, we get a $p$ value of 0.005.
+
+Alternatively, we can calculate this using *expected counts*. For many situations, we don't know what the baseline probability *should* be, so we calculate the expected counts based on what we do know. Expected counts are calculated as follows:
+
+$$
+Exp(x)=\frac{\Sigma(row_x)\cdot\Sigma(col_x)}{N}
+$$
+
+where $N$ is the sum of all individuals in the table. For the above example, this would look like this:
+
+```{r}
+data_colsums <- colSums(data)
+data_rowsums <- rowSums(data)
+N <- sum(data)
+
+expected <- matrix(data = c(data_colsums[1]*data_rowsums[1],
+                            data_colsums[2]*data_rowsums[1],
+                            data_colsums[1]*data_rowsums[2],
+                            data_colsums[2]*data_rowsums[2]),
+                   nrow = 2, ncol = 2, byrow = T)
+
+# divide by total number
+expected <- expected/N
+
+colnames(expected) <- colnames(data)
+rownames(expected) <- rownames(data)
+
+expected
+```
+
+Here, we can see our expected number are not quite 50/50! this will give us a different result than our previous iteration.
+
+```{r}
+e_o2 <- ((data - expected)^2)/expected
+
+sum(e_o2)
+```
+
+Now we have a $\chi^2$ of 7.5 - which, as we will see below, is the exact same value as we get for an uncorrected `chisq.test` from *R*'s default output.
+
+#### $\chi^2$ estimations in *R*
+
+We can calculate this in *R* by entering in the entire table and using `chisq.test`.
+
+```{r}
+data <- matrix(data = c(3,7,9,1), nrow = 2, ncol = 2, byrow = T)
+
+colnames(data) <- c("R", "No R")
+rownames(data) <- c("Non-biology", "Biology")
+
+data
+```
+
+```{r}
+chisq.test(data, correct = F)
+```
+
+Here, we get $p = 0.006$, which is significant with $\alpha = 0.05$.
+
+**Note** that these values are slightly different. they will be even more different if `correct` is set to `TRUE`. By default, *R*, uses a [Yate's correction for continuity](https://en.wikipedia.org/wiki/Yates's_correction_for_continuity). This accounts for error introduced by comparing the discrete values to a continuous distribution.
+
+```{r}
+chisq.test(data)
+```
+
+Applying this correction *lowers* the degrees of freedom, and increases the $p$ value, thus making it harder to get $p < \alpha$.
+
+**Note that the Yate's correction is only applied for 2 x 2 contingency tables.**
+
+Given the slight differences in calculation between by hand and what the functions of *R* are performing, *it's important to always show your work*.
+
+## Fisher's exact test
+
+$\chi^2$ tests don't work in scenarios where we have very small count sizes, such as a count size of 1. For these situations with small sample sizes and very small count sizes, we use Fisher's exact test. This test gives us the $p$ value directly - no need to use a table of any kind! Let's say we have a $2x2$ contingency table, as follows:
+
+|     |     |
+|-----|-----|
+| $a$ | $b$ |
+| $c$ | $d$ |
+
+Where row totals are $a+b$ and $c + d$ and column totals are $a + c$ and $b + d$, and $n = a + b + c + d$. We can calculate $p$ as follows:
+
+$$
+p = \frac{(a+b)!(c+d)!(a+c)!(b+d)!}{a!b!c!d!n!}
+$$
+
+In *R*, we can use the command `fisher.test` to perform these calculations. For example, we have the following contingency table, looking at the number of undergrads and graduate students in introductory and graduate level statistics courses:
+
+|                 | Undergrad | Graduate |
+|-----------------|-----------|----------|
+| **Intro Stats** | 8         | 1        |
+| **Grad Stats**  | 3         | 5        |
+
+```{r}
+stats_students = matrix(data = c(8,1,3,5),
+                        byrow = T, ncol = 2, nrow = 2)
+
+stats_students
+```
+
+```{r}
+fisher.test(stats_students)
+```
+
+In this situation, $p = 0.05$ when rounded, so we would fail to reject but note that this is borderline.
+
+### Chapter 7
+
+Complete problems 7.1, 7.2, 7.3, 7.5, and 7.7 as written in your text books. For these problems, please also state your *null* and *alternative* hypotheses, as well as a conclusion as to whether you *support* or *reject* the null.
+
+Next, do problems 7.9 and 7.11. For these two problems, pick which test is best and then perform said test. State your hypothesis and make a conclusion with respect to your $p$ value.
+
+Be sure to submit your homework as a knitted `html` document.

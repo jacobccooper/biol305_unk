@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ttest.html" rel="next">
+<link href="./chi.html" rel="next">
 <link href="./exam2.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -214,44 +214,50 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./chi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">χ2 (Chi-squared) tests</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Testing means with <span class="math inline">\(t\)</span>-tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Testing means with <span class="math inline">\(t\)</span>-tests</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">ANOVA: Part 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">ANOVA: Part 1</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">ANOVA: Part 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ANOVA: Part 2</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cor_reg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./final_exam.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Final exam &amp; review</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Final exam &amp; review</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./conclusion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Conclusions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Conclusions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -286,17 +292,9 @@ window.Quarto = {
   <li><a href="#binomial-cumulative" id="toc-binomial-cumulative" class="nav-link" data-scroll-target="#binomial-cumulative"><span class="header-section-number">6.4.1</span> Binomial cumulative</a></li>
   <li><a href="#poisson-cumulative-probability" id="toc-poisson-cumulative-probability" class="nav-link" data-scroll-target="#poisson-cumulative-probability"><span class="header-section-number">6.4.2</span> Poisson cumulative probability</a></li>
   </ul></li>
-  <li><a href="#chi2-squared-distribution" id="toc-chi2-squared-distribution" class="nav-link" data-scroll-target="#chi2-squared-distribution"><span class="header-section-number">6.5</span> <span class="math inline">\(\chi^2\)</span>-squared distribution</a>
+  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework"><span class="header-section-number">6.5</span> Homework</a>
   <ul class="collapse">
-  <li><a href="#calculating-the-test-statistic" id="toc-calculating-the-test-statistic" class="nav-link" data-scroll-target="#calculating-the-test-statistic"><span class="header-section-number">6.5.1</span> Calculating the test statistic</a></li>
-  <li><a href="#chi2-goodness-of-fit-test" id="toc-chi2-goodness-of-fit-test" class="nav-link" data-scroll-target="#chi2-goodness-of-fit-test"><span class="header-section-number">6.5.2</span> <span class="math inline">\(\chi^2\)</span> goodness-of-fit test</a></li>
-  <li><a href="#chi2-test-of-independence" id="toc-chi2-test-of-independence" class="nav-link" data-scroll-target="#chi2-test-of-independence"><span class="header-section-number">6.5.3</span> <span class="math inline">\(\chi^2\)</span> test of independence</a></li>
-  </ul></li>
-  <li><a href="#fishers-exact-test" id="toc-fishers-exact-test" class="nav-link" data-scroll-target="#fishers-exact-test"><span class="header-section-number">6.6</span> Fisher’s exact test</a></li>
-  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework"><span class="header-section-number">6.7</span> Homework</a>
-  <ul class="collapse">
-  <li><a href="#chapter-5" id="toc-chapter-5" class="nav-link" data-scroll-target="#chapter-5"><span class="header-section-number">6.7.1</span> Chapter 5</a></li>
-  <li><a href="#chapter-7" id="toc-chapter-7" class="nav-link" data-scroll-target="#chapter-7"><span class="header-section-number">6.7.2</span> Chapter 7</a></li>
+  <li><a href="#chapter-5" id="toc-chapter-5" class="nav-link" data-scroll-target="#chapter-5"><span class="header-section-number">6.5.1</span> Chapter 5</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -621,447 +619,12 @@ p(x)=\frac{\lambda^{x}e^{-\lambda}}{x!}
 <p>The probability is only about 9%.</p>
 </section>
 </section>
-<section id="chi2-squared-distribution" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="chi2-squared-distribution"><span class="header-section-number">6.5</span> <span class="math inline">\(\chi^2\)</span>-squared distribution</h2>
-<p><span class="math inline">\(\chi^2\)</span>-squared (pronounced “<em>kai</em>”, and spelled “<em>chi</em>”) is a distribution used to understand if count data between different categories matches our expectation. For example, if we are looking at students in the class and comparing major vs.&nbsp;number of books read, we would expect <em>no association</em>, however we may find an association for a major such as English which required reading more literature. The <span class="math inline">\(\chi^2\)</span> introduces a new term <em>degrees of freedom</em> (<span class="math inline">\(df\)</span>) which reflects the number of individuals in the study. For many tests, <span class="math inline">\(df\)</span> are needed to reflect how a distribution changes with respect the number of individuals (and amount of variation possible) within a dataset. The equation for the <span class="math inline">\(\chi^2\)</span> is as follows, with the <span class="math inline">\(\chi^2\)</span> being a special case of the <em>gamma</em> (<span class="math inline">\(\gamma\)</span> or <span class="math inline">\(\Gamma\)</span>) distribution that is affected by the <span class="math inline">\(df\)</span>, which is defined as the number of rows minus one multiplied by the number of columns minus one <span class="math inline">\(df = (rows-1)(cols-1)\)</span>:</p>
-<p><span class="math display">\[
-f_n(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^\frac{n}{2-1}e^\frac{-x}{2}
-\]</span></p>
-<p>The <span class="math inline">\(\chi^2\)</span>-squared distribution is also represented by the following functions, which perform the same things as the previous outlined equivalents for Poisson and binomial:</p>
-<ul>
-<li><p><code>dchisq</code></p></li>
-<li><p><code>pchisq</code></p></li>
-<li><p><code>qchisq</code></p></li>
-<li><p><code>rchisq</code></p></li>
-</ul>
-<p>We can view these probabilities as well:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">pchisq</span>(x, <span class="at">df =</span> <span class="dv">9</span>)</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># any value greater than 0.5 is subtracted from 1</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>y[y <span class="sc">&gt;</span> <span class="fl">0.5</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> y[y <span class="sc">&gt;</span> <span class="fl">0.5</span>]</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">type=</span><span class="st">"l"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="probdist_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<section id="calculating-the-test-statistic" class="level3" data-number="6.5.1">
-<h3 data-number="6.5.1" class="anchored" data-anchor-id="calculating-the-test-statistic"><span class="header-section-number">6.5.1</span> Calculating the test statistic</h3>
-<p>We evaluate <span class="math inline">\(\chi^2\)</span> tests by calculating a <span class="math inline">\(\chi^2\)</span> value based on our data and comparing it to an expected <span class="math inline">\(\chi^2\)</span> distribution. This <em>test statistic</em> can be evaluated by looking at a <span class="math inline">\(\chi^2\)</span> table or by using <em>R</em>. <strong>Note</strong> that you need to know the degrees of freedom in order to properly evaluate a <span class="math inline">\(\chi^2\)</span> test. We calculate our test statistic as follows:</p>
-<p><span class="math display">\[
-\chi^2=\Sigma\frac{(o-e)^2}{e}
-\]</span></p>
-<p>where <span class="math inline">\(e =\)</span> the number of expected individuals and <span class="math inline">\(o =\)</span> the number of observed individuals in each category. Since we are squaring these values, we will only have positive values, and thus this will <strong>always be a one-tailed test</strong>.</p>
-<p>There are multiple types of <span class="math inline">\(\chi^2\)</span> test, including the following we will cover here:</p>
-<ul>
-<li><p><span class="math inline">\(\chi^2\)</span> Goodness-of-fit test</p></li>
-<li><p><span class="math inline">\(\chi^2\)</span> test of independence</p></li>
-</ul>
-</section>
-<section id="chi2-goodness-of-fit-test" class="level3" data-number="6.5.2">
-<h3 data-number="6.5.2" class="anchored" data-anchor-id="chi2-goodness-of-fit-test"><span class="header-section-number">6.5.2</span> <span class="math inline">\(\chi^2\)</span> goodness-of-fit test</h3>
-<p>A <span class="math inline">\(\chi^2\)</span> goodness-of-fit test looks at a vector of data, or counts in different categories, and asks if the observed frequencies vary from the expected frequencies.</p>
-<section id="chi2-estimate-by-hand" class="level4" data-number="6.5.2.1">
-<h4 data-number="6.5.2.1" class="anchored" data-anchor-id="chi2-estimate-by-hand"><span class="header-section-number">6.5.2.1</span> <span class="math inline">\(\chi^2\)</span> estimate by hand</h4>
-<p>Let’s say, for example, we have the following dataset:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Hour</th>
-<th>No.&nbsp;Drinks Sold</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>6-7</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td>7-8</td>
-<td>8</td>
-</tr>
-<tr class="odd">
-<td>8-9</td>
-<td>15</td>
-</tr>
-<tr class="even">
-<td>9-10</td>
-<td>7</td>
-</tr>
-<tr class="odd">
-<td>10-12</td>
-<td>5</td>
-</tr>
-<tr class="even">
-<td>12-13</td>
-<td>20</td>
-</tr>
-<tr class="odd">
-<td>13-14</td>
-<td>18</td>
-</tr>
-<tr class="even">
-<td>14-15</td>
-<td>8</td>
-</tr>
-<tr class="odd">
-<td>15-16</td>
-<td>10</td>
-</tr>
-<tr class="even">
-<td>16-17</td>
-<td>12</td>
-</tr>
-</tbody>
-</table>
-<p>Now, we can ask if the <em>probability</em> of selling drinks is the same across all time periods.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>drinks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">15</span>, <span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We can get the expected counts by assuming an equal probability for each time period; thus, <span class="math inline">\(Exp(x)=\frac{N}{categories}\)</span>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sum all values for total number</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">sum</span>(drinks)</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># get length of vector for categories</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>cats <span class="ot">&lt;-</span> <span class="fu">length</span>(drinks)</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co"># repeat calculation same number of times as length</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>exp_drinks <span class="ot">&lt;-</span> <span class="fu">rep</span>(N<span class="sc">/</span>cats, cats)</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>exp_drinks</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] 10.6 10.6 10.6 10.6 10.6 10.6 10.6 10.6 10.6 10.6</code></pre>
-</div>
-</div>
-<p>Now, we can do out <span class="math inline">\(\chi^2\)</span> calculation.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>chi_vals <span class="ot">&lt;-</span> ((drinks <span class="sc">-</span> exp_drinks)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>exp_drinks</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>chi_vals</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] 5.44905660 0.63773585 1.82641509 1.22264151 2.95849057 8.33584906
- [7] 5.16603774 0.63773585 0.03396226 0.18490566</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(chi_vals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 26.45283</code></pre>
-</div>
-</div>
-<p>And now, to get the probability.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="fu">sum</span>(chi_vals), <span class="co"># chi stat</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">df =</span> <span class="fu">length</span>(chi_vals) <span class="sc">-</span> <span class="dv">1</span>, <span class="co"># degrees of freedom</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) <span class="co"># looking RIGHT</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.001721825</code></pre>
-</div>
-</div>
-<p>Here, we get <span class="math inline">\(p = 0.002\)</span>, indicating that there is not an equal probability for selling drinks at different times of day.</p>
-</section>
-<section id="chi2-estimation-by-code" class="level4" data-number="6.5.2.2">
-<h4 data-number="6.5.2.2" class="anchored" data-anchor-id="chi2-estimation-by-code"><span class="header-section-number">6.5.2.2</span> <span class="math inline">\(\chi^2\)</span> estimation by code</h4>
-<p>We can use the test <code>chisq.test</code> to perform this analysis as well.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(drinks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Chi-squared test for given probabilities
-
-data:  drinks
-X-squared = 26.453, df = 9, p-value = 0.001722</code></pre>
-</div>
-</div>
-<p>As we can see, these values are exactly the same as we just calculated by hand! <strong><em>Note</em></strong> that we can define the probability <code>p</code> if we want, otherwise it defaults to <code>p = rep(1/length(x), length(x))</code>.</p>
-</section>
-</section>
-<section id="chi2-test-of-independence" class="level3" data-number="6.5.3">
-<h3 data-number="6.5.3" class="anchored" data-anchor-id="chi2-test-of-independence"><span class="header-section-number">6.5.3</span> <span class="math inline">\(\chi^2\)</span> test of independence</h3>
-<p>Usually when we use a <span class="math inline">\(\chi^2\)</span>, we are looking at count data. Let’s consider the following hypothetical scenario, comparing experience with <em>R</em> between non-biology majors (who, in this theoretical scenario, do not regularly use <em>R</em>) and Biology majors who are required to take <em>R</em> for this class:</p>
-<table class="caption-top table">
-<caption>The above table of counts is also known as a <strong>contingency table</strong>. Intuitively, we can see a difference, but we want to perform a statistical test to see just how likely these counts would be if both groups were equally likely. We can calculate this both “by hand” and using built in <em>R</em> functions.</caption>
-<thead>
-<tr class="header">
-<th>Major</th>
-<th><em>R</em> experience</th>
-<th>No <em>R</em> experience</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><em>Non-biology</em></td>
-<td>3</td>
-<td>7</td>
-</tr>
-<tr class="even">
-<td><em>Biology</em></td>
-<td>9</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<section id="chi2-estimations-by-hand" class="level4" data-number="6.5.3.1">
-<h4 data-number="6.5.3.1" class="anchored" data-anchor-id="chi2-estimations-by-hand"><span class="header-section-number">6.5.3.1</span> <span class="math inline">\(\chi^2\)</span> estimations by hand</h4>
-<p>First, we can enter the data into <em>R</em>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">1</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"R"</span>, <span class="st">"No R"</span>)</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Non-biology"</span>, <span class="st">"Biology"</span>)</span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            R No R
-Non-biology 3    7
-Biology     9    1</code></pre>
-</div>
-</div>
-<p>Next, we need the <em>observed - expected</em> values. We determine expected values either through probability (<span class="math inline">\(0.5 \cdot n\)</span> for equal probability for two categories) or via calculating the the expected values (see later section on <em>expected counts</em>). In this case, since we are looking at equally likely in each cell, we have an expected matrix as follows:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># total datapoints</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">sum</span>(data)</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>expected <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="fl">0.25</span><span class="sc">*</span>N,<span class="fl">0.25</span><span class="sc">*</span>N,<span class="fl">0.25</span><span class="sc">*</span>N,<span class="fl">0.25</span><span class="sc">*</span>N), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(expected) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"R"</span>, <span class="st">"No R"</span>)</span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(expected) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Non-biology"</span>, <span class="st">"Biology"</span>)</span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>expected</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            R No R
-Non-biology 5    5
-Biology     5    5</code></pre>
-</div>
-</div>
-<p>Now we need to find our <em>observed - expected</em>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>o_e <span class="ot">&lt;-</span> data <span class="sc">-</span> expected</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>o_e</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>             R No R
-Non-biology -2    2
-Biology      4   -4</code></pre>
-</div>
-</div>
-<p><strong><em>Note</em></strong> that in <em>R</em> we can add and subtract matrices, so there’s no reason to reformat these data!</p>
-<p>Now, we can square these data.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>o_e2 <span class="ot">&lt;-</span> o_e<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>o_e2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>             R No R
-Non-biology  4    4
-Biology     16   16</code></pre>
-</div>
-</div>
-<p>Next, we take these and divide them by the expected values and then sum those values.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>chi_matrix <span class="ot">&lt;-</span> o_e2<span class="sc">/</span>expected</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>chi_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>              R No R
-Non-biology 0.8  0.8
-Biology     3.2  3.2</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(chi_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 8</code></pre>
-</div>
-</div>
-<p>Here, we get a <span class="math inline">\(\chi^2\)</span> value of 8. We can use our handy family functions to determine the probability of this event:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="dv">8</span>, <span class="at">df =</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.004677735</code></pre>
-</div>
-</div>
-<p>Here, we get a <span class="math inline">\(p\)</span> value of 0.005.</p>
-<p>Alternatively, we can calculate this using <em>expected counts</em>. For many situations, we don’t know what the baseline probability <em>should</em> be, so we calculate the expected counts based on what we do know. Expected counts are calculated as follows:</p>
-<p><span class="math display">\[
-Exp(x)=\frac{\Sigma(row_x)\cdot\Sigma(col_x)}{N}
-\]</span></p>
-<p>where <span class="math inline">\(N\)</span> is the sum of all individuals in the table. For the above example, this would look like this:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>data_colsums <span class="ot">&lt;-</span> <span class="fu">colSums</span>(data)</span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>data_rowsums <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(data)</span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">sum</span>(data)</span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>expected <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(data_colsums[<span class="dv">1</span>]<span class="sc">*</span>data_rowsums[<span class="dv">1</span>],</span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>                            data_colsums[<span class="dv">2</span>]<span class="sc">*</span>data_rowsums[<span class="dv">1</span>],</span>
-<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>                            data_colsums[<span class="dv">1</span>]<span class="sc">*</span>data_rowsums[<span class="dv">2</span>],</span>
-<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>                            data_colsums[<span class="dv">2</span>]<span class="sc">*</span>data_rowsums[<span class="dv">2</span>]),</span>
-<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
-<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a><span class="co"># divide by total number</span></span>
-<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a>expected <span class="ot">&lt;-</span> expected<span class="sc">/</span>N</span>
-<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(expected) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(data)</span>
-<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(expected) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(data)</span>
-<span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-17"><a href="#cb55-17" aria-hidden="true" tabindex="-1"></a>expected</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            R No R
-Non-biology 6    4
-Biology     6    4</code></pre>
-</div>
-</div>
-<p>Here, we can see our expected number are not quite 50/50! this will give us a different result than our previous iteration.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>e_o2 <span class="ot">&lt;-</span> ((data <span class="sc">-</span> expected)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>expected</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(e_o2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 7.5</code></pre>
-</div>
-</div>
-<p>Now we have a <span class="math inline">\(\chi^2\)</span> of 7.5 - which, as we will see below, is the exact same value as we get for an uncorrected <code>chisq.test</code> from <em>R</em>’s default output.</p>
-</section>
-<section id="chi2-estimations-in-r" class="level4" data-number="6.5.3.2">
-<h4 data-number="6.5.3.2" class="anchored" data-anchor-id="chi2-estimations-in-r"><span class="header-section-number">6.5.3.2</span> <span class="math inline">\(\chi^2\)</span> estimations in <em>R</em></h4>
-<p>We can calculate this in <em>R</em> by entering in the entire table and using <code>chisq.test</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">1</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"R"</span>, <span class="st">"No R"</span>)</span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Non-biology"</span>, <span class="st">"Biology"</span>)</span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            R No R
-Non-biology 3    7
-Biology     9    1</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(data, <span class="at">correct =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in chisq.test(data, correct = F): Chi-squared approximation may be
-incorrect</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Pearson's Chi-squared test
-
-data:  data
-X-squared = 7.5, df = 1, p-value = 0.00617</code></pre>
-</div>
-</div>
-<p>Here, we get <span class="math inline">\(p = 0.006\)</span>, which is significant with <span class="math inline">\(\alpha = 0.05\)</span>.</p>
-<p><strong>Note</strong> that these values are slightly different. they will be even more different if <code>correct</code> is set to <code>TRUE</code>. By default, <em>R</em>, uses a <a href="https://en.wikipedia.org/wiki/Yates's_correction_for_continuity">Yate’s correction for continuity</a>. This accounts for error introduced by comparing the discrete values to a continuous distribution.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in chisq.test(data): Chi-squared approximation may be incorrect</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Pearson's Chi-squared test with Yates' continuity correction
-
-data:  data
-X-squared = 5.2083, df = 1, p-value = 0.02248</code></pre>
-</div>
-</div>
-<p>Applying this correction <em>lowers</em> the degrees of freedom, and increases the <span class="math inline">\(p\)</span> value, thus making it harder to get <span class="math inline">\(p &lt; \alpha\)</span>.</p>
-<p><strong>Note that the Yate’s correction is only applied for 2 x 2 contingency tables.</strong></p>
-<p>Given the slight differences in calculation between by hand and what the functions of <em>R</em> are performing, <em>it’s important to always show your work</em>.</p>
-</section>
-</section>
-</section>
-<section id="fishers-exact-test" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="fishers-exact-test"><span class="header-section-number">6.6</span> Fisher’s exact test</h2>
-<p><span class="math inline">\(\chi^2\)</span> tests don’t work in scenarios where we have very small count sizes, such as a count size of 1. For these situations with small sample sizes and very small count sizes, we use Fisher’s exact test. This test gives us the <span class="math inline">\(p\)</span> value directly - no need to use a table of any kind! Let’s say we have a <span class="math inline">\(2x2\)</span> contingency table, as follows:</p>
-<table class="caption-top table">
-<tbody>
-<tr class="odd">
-<td><span class="math inline">\(a\)</span></td>
-<td><span class="math inline">\(b\)</span></td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(c\)</span></td>
-<td><span class="math inline">\(d\)</span></td>
-</tr>
-</tbody>
-</table>
-<p>Where row totals are <span class="math inline">\(a+b\)</span> and <span class="math inline">\(c + d\)</span> and column totals are <span class="math inline">\(a + c\)</span> and <span class="math inline">\(b + d\)</span>, and <span class="math inline">\(n = a + b + c + d\)</span>. We can calculate <span class="math inline">\(p\)</span> as follows:</p>
-<p><span class="math display">\[
-p = \frac{(a+b)!(c+d)!(a+c)!(b+d)!}{a!b!c!d!n!}
-\]</span></p>
-<p>In <em>R</em>, we can use the command <code>fisher.test</code> to perform these calculations. For example, we have the following contingency table, looking at the number of undergrads and graduate students in introductory and graduate level statistics courses:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th>Undergrad</th>
-<th>Graduate</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Intro Stats</strong></td>
-<td>8</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td><strong>Grad Stats</strong></td>
-<td>3</td>
-<td>5</td>
-</tr>
-</tbody>
-</table>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>stats_students <span class="ot">=</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>),</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">byrow =</span> T, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">2</span>)</span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>stats_students</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2]
-[1,]    8    1
-[2,]    3    5</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(stats_students)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Fisher's Exact Test for Count Data
-
-data:  stats_students
-p-value = 0.04977
-alternative hypothesis: true odds ratio is not equal to 1
-95 percent confidence interval:
-   0.7934527 703.0167380
-sample estimates:
-odds ratio 
-  11.10917 </code></pre>
-</div>
-</div>
-<p>In this situation, <span class="math inline">\(p = 0.05\)</span> when rounded, so we would fail to reject but note that this is borderline.</p>
-</section>
-<section id="homework" class="level2" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="homework"><span class="header-section-number">6.7</span> Homework</h2>
-<section id="chapter-5" class="level3" data-number="6.7.1">
-<h3 data-number="6.7.1" class="anchored" data-anchor-id="chapter-5"><span class="header-section-number">6.7.1</span> Chapter 5</h3>
-<p>Complete problems 5.1, 5.2, 5.3, 5.5, 5.6, 5.11, 5.12, 5.13, 5.14, and 5.20 as written in your textbook. Be sure to show your work, and submit your assignment as a knitted <code>html</code> document.</p>
-</section>
-<section id="chapter-7" class="level3" data-number="6.7.2">
-<h3 data-number="6.7.2" class="anchored" data-anchor-id="chapter-7"><span class="header-section-number">6.7.2</span> Chapter 7</h3>
-<p>Complete problems 7.1, 7.2, 7.3, 7.5, and 7.7 as written in your text books. For these problems, please also state your <em>null</em> and <em>alternative</em> hypotheses, as well as a conclusion as to whether you <em>support</em> or <em>reject</em> the null.</p>
-<p>Next, do problems 7.9 and 7.11. For these two problems, pick which test is best and then perform said test. State your hypothesis and make a conclusion with respect to your <span class="math inline">\(p\)</span> value.</p>
-<p>Be sure to submit your homework as a knitted <code>html</code> document.</p>
+<section id="homework" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="homework"><span class="header-section-number">6.5</span> Homework</h2>
+<section id="chapter-5" class="level3" data-number="6.5.1">
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="chapter-5"><span class="header-section-number">6.5.1</span> Chapter 5</h3>
+<p>Complete problems 5.1, 5.2, 5.3, 5.5, 5.6, 5.11, 5.12, 5.13, 5.14, and 5.20 as written in your textbook.</p>
+<p>Be sure to show your work, and submit your assignment as a knitted <code>html</code> document.</p>
 
 
 </section>
@@ -1495,8 +1058,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ttest.html" class="pagination-link" aria-label="Testing means with $t$-tests">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Testing means with <span class="math inline">\(t\)</span>-tests</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./chi.html" class="pagination-link" aria-label="χ2 (Chi-squared) tests">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">χ2 (Chi-squared) tests</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

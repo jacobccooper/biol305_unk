@@ -7,6 +7,10 @@ editor: visual
 
 ## Common Commands
 
+```{r, echo = F, eval = T, message = F}
+library(tidyverse)
+```
+
 The following are common useful commands used in *R*, with examples of their use.
 
 -   `<-` / `=` - save a value as an object

@@ -233,44 +233,50 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./chi.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">χ2 (Chi-squared) tests</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Testing means with <span class="math inline">\(t\)</span>-tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Testing means with <span class="math inline">\(t\)</span>-tests</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">ANOVA: Part 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">ANOVA: Part 1</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">ANOVA: Part 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ANOVA: Part 2</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cor_reg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./final_exam.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Final exam &amp; review</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Final exam &amp; review</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./conclusion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Conclusions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Conclusions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Glossary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -350,7 +356,7 @@ window.Quarto = {
 <p>Standard normal distributions have a mean, median, and mode that are <em>equal</em>. The standard normal distribution is a <em>density function</em>, and we are interested in the “area under the curve” (AUC) to understand the relative probability of an event occurring. At the mean/median/mode, the probability on either side of the distribution is <span class="math inline">\(50\)</span>%. When looking at a normal distribution distribution, it is impossible to say the probability of a specific event occurring, but it is possible to state the probability of an event <em>as extreme or more extreme than the event observed</em> occurring. This is known as the <span class="math inline">\(p\)</span> value.</p>
 <section id="example-in-nature" class="level3" data-number="4.1.1">
 <h3 data-number="4.1.1" class="anchored" data-anchor-id="example-in-nature"><span class="header-section-number">4.1.1</span> Example in nature</h3>
-<p>In order to see an example of the normal distribution in nature, we are going to examine the BeeWalk survey database from the island of Great Britain <span class="citation" data-cites="Comont2020">(<a href="references.html#ref-Comont2020" role="doc-biblioref">Comont 2020</a>)</span>. We are not interested in the bee data at present, however, but in the climatic data from when the surveys were performed.</p>
+<p>In order to see an example of the normal distribution in nature, we are going to examine the BeeWalk survey database from the island of Great Britain <span class="citation" data-cites="Comont2020">(<a href="#ref-Comont2020" role="doc-biblioref">Comont 2020</a>)</span>. We are not interested in the bee data at present, however, but in the climatic data from when the surveys were performed.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>beewalk <span class="ot">&lt;-</span> <span class="fu">curl</span>(<span class="st">"https://figshare.com/ndownloader/files/44726902"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -946,7 +952,7 @@ CI=\bar{x} \pm Z_{1-\frac{\alpha}{2}}\cdot \frac{\sigma}{\sqrt{n}}
 <p>Please complete problems 8.1, 8.2, 8.3 &amp; 8.6. Follow the directions as written in the book. Submit one <code>html</code> file, as derived from <em>RStudio</em>. For maximum clarity, create headings to separate your problems. (Remember, a header can be invoked by placing ‘<code>#</code>’ in front of a line of text. For example: the header here is written as <code># Homework: Chapter 8</code>).</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-Comont2020" class="csl-entry" role="listitem">
 Comont, R. (2020). <span class="nocase">BeeWalk dataset 2008-23</span>. https://doi.org/<a href="https://doi.org/10.6084/m9.figshare.12280547.v4">10.6084/m9.figshare.12280547.v4</a>
 </div>

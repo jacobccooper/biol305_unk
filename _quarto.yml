@@ -14,6 +14,7 @@ book:
     - normality.qmd
     - exam2.qmd
     - probdist.qmd
+    - chi.qmd
     - ttest.qmd
     - anova1.qmd
     - anova2.qmd
