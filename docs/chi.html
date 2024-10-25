@@ -496,12 +496,12 @@ X-squared = 26.453, df = 9, p-value = 0.001722</code></pre>
 <tr class="odd">
 <td><em>Non-biology</em></td>
 <td>3</td>
-<td>7</td>
+<td>10</td>
 </tr>
 <tr class="even">
 <td><em>Biology</em></td>
 <td>9</td>
-<td>1</td>
+<td>2</td>
 </tr>
 </tbody>
 </table>
@@ -509,7 +509,7 @@ X-squared = 26.453, df = 9, p-value = 0.001722</code></pre>
 <h4 data-number="7.1.3.1" class="anchored" data-anchor-id="chi2-estimations-by-hand"><span class="header-section-number">7.1.3.1</span> <span class="math inline">\(\chi^2\)</span> estimations by hand</h4>
 <p>First, we can enter the data into <em>R</em>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">1</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">10</span>,<span class="dv">9</span>,<span class="dv">2</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"R"</span>, <span class="st">"No R"</span>)</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Non-biology"</span>, <span class="st">"Biology"</span>)</span>
@@ -517,8 +517,8 @@ X-squared = 26.453, df = 9, p-value = 0.001722</code></pre>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            R No R
-Non-biology 3    7
-Biology     9    1</code></pre>
+Non-biology 3   10
+Biology     9    2</code></pre>
 </div>
 </div>
 <p>Next, we need the <em>observed - expected</em> values. We determine expected values either through probability (<span class="math inline">\(0.5 \cdot n\)</span> for equal probability for two categories) or via calculating the the expected values (see later section on <em>expected counts</em>). In this case, since we are looking at equally likely in each cell, we have an expected matrix as follows:</p>
@@ -534,8 +534,8 @@ Biology     9    1</code></pre>
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>expected</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            R No R
-Non-biology 5    5
-Biology     5    5</code></pre>
+Non-biology 6    6
+Biology     6    6</code></pre>
 </div>
 </div>
 <p>Now we need to find our <em>observed - expected</em>.</p>
@@ -545,8 +545,8 @@ Biology     5    5</code></pre>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>o_e</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             R No R
-Non-biology -2    2
-Biology      4   -4</code></pre>
+Non-biology -3    4
+Biology      3   -4</code></pre>
 </div>
 </div>
 <p><strong><em>Note</em></strong> that in <em>R</em> we can add and subtract matrices, so there’s no reason to reformat these data!</p>
@@ -556,9 +556,9 @@ Biology      4   -4</code></pre>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>o_e2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>             R No R
-Non-biology  4    4
-Biology     16   16</code></pre>
+<pre><code>            R No R
+Non-biology 9   16
+Biology     9   16</code></pre>
 </div>
 </div>
 <p>Next, we take these and divide them by the expected values and then sum those values.</p>
@@ -567,25 +567,25 @@ Biology     16   16</code></pre>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>chi_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>              R No R
-Non-biology 0.8  0.8
-Biology     3.2  3.2</code></pre>
+<pre><code>              R     No R
+Non-biology 1.5 2.666667
+Biology     1.5 2.666667</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(chi_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 8</code></pre>
+<pre><code>[1] 8.333333</code></pre>
 </div>
 </div>
-<p>Here, we get a <span class="math inline">\(\chi^2\)</span> value of 8. We can use our handy family functions to determine the probability of this event:</p>
+<p>Here, we get a <span class="math inline">\(\chi^2\)</span> value of 8.3333333. We can use our handy family functions to determine the probability of this event:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="dv">8</span>, <span class="at">df =</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="fu">sum</span>(chi_matrix), <span class="at">df =</span> <span class="dv">1</span>, <span class="at">lower.tail =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.004677735</code></pre>
+<pre><code>[1] 0.003892417</code></pre>
 </div>
 </div>
-<p>Here, we get a <span class="math inline">\(p\)</span> value of 0.005.</p>
+<p>Here, we get a <span class="math inline">\(p\)</span> value of 0.004.</p>
 <p>Alternatively, we can calculate this using <em>expected counts</em>. For many situations, we don’t know what the baseline probability <em>should</em> be, so we calculate the expected counts based on what we do know. Expected counts are calculated as follows:</p>
 <p><span class="math display">\[
 Exp(x)=\frac{\Sigma(row_x)\cdot\Sigma(col_x)}{N}
@@ -610,9 +610,9 @@ Exp(x)=\frac{\Sigma(row_x)\cdot\Sigma(col_x)}{N}
 <span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>expected</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            R No R
-Non-biology 6    4
-Biology     6    4</code></pre>
+<pre><code>              R No R
+Non-biology 6.5  6.5
+Biology     5.5  5.5</code></pre>
 </div>
 </div>
 <p>Here, we can see our expected number are not quite 50/50! this will give us a different result than our previous iteration.</p>
@@ -621,54 +621,44 @@ Biology     6    4</code></pre>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(e_o2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 7.5</code></pre>
+<pre><code>[1] 8.223776</code></pre>
 </div>
 </div>
-<p>Now we have a <span class="math inline">\(\chi^2\)</span> of 7.5 - which, as we will see below, is the exact same value as we get for an uncorrected <code>chisq.test</code> from <em>R</em>’s default output.</p>
+<p>Now we have a <span class="math inline">\(\chi^2\)</span> of 8.22 - which, as we will see below, is the exact same value as we get for an uncorrected <code>chisq.test</code> from <em>R</em>’s default output.</p>
 </section>
 <section id="chi2-estimations-in-r" class="level4" data-number="7.1.3.2">
 <h4 data-number="7.1.3.2" class="anchored" data-anchor-id="chi2-estimations-in-r"><span class="header-section-number">7.1.3.2</span> <span class="math inline">\(\chi^2\)</span> estimations in <em>R</em></h4>
 <p>We can calculate this in <em>R</em> by entering in the entire table and using <code>chisq.test</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">1</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"R"</span>, <span class="st">"No R"</span>)</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Non-biology"</span>, <span class="st">"Biology"</span>)</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            R No R
-Non-biology 3    7
-Biology     9    1</code></pre>
+Non-biology 3   10
+Biology     9    2</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(data, <span class="at">correct =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in chisq.test(data, correct = F): Chi-squared approximation may be
-incorrect</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>chi_data <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(data, <span class="at">correct =</span> F)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>chi_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
 
 data:  data
-X-squared = 7.5, df = 1, p-value = 0.00617</code></pre>
+X-squared = 8.2238, df = 1, p-value = 0.004135</code></pre>
 </div>
 </div>
-<p>Here, we get <span class="math inline">\(p = 0.006\)</span>, which is significant with <span class="math inline">\(\alpha = 0.05\)</span>.</p>
+<p>Here, we get $p = $0.004, which is significant with <span class="math inline">\(\alpha = 0.05\)</span>.</p>
 <p><strong>Note</strong> that these values are slightly different. they will be even more different if <code>correct</code> is set to <code>TRUE</code>. By default, <em>R</em>, uses a <a href="https://en.wikipedia.org/wiki/Yates's_correction_for_continuity">Yate’s correction for continuity</a>. This accounts for error introduced by comparing the discrete values to a continuous distribution.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in chisq.test(data): Chi-squared approximation may be incorrect</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test with Yates' continuity correction
 
 data:  data
-X-squared = 5.2083, df = 1, p-value = 0.02248</code></pre>
+X-squared = 6.042, df = 1, p-value = 0.01397</code></pre>
 </div>
 </div>
 <p>Applying this correction <em>lowers</em> the degrees of freedom, and increases the <span class="math inline">\(p\)</span> value, thus making it harder to get <span class="math inline">\(p &lt; \alpha\)</span>.</p>
@@ -719,10 +709,10 @@ p = \frac{(a+b)!(c+d)!(a+c)!(b+d)!}{a!b!c!d!n!}
 </tbody>
 </table>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>stats_students <span class="ot">=</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>),</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">byrow =</span> T, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">2</span>)</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>stats_students</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>stats_students <span class="ot">=</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>),</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">byrow =</span> T, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>stats_students</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2]
 [1,]    8    1
@@ -730,7 +720,7 @@ p = \frac{(a+b)!(c+d)!(a+c)!(b+d)!}{a!b!c!d!n!}
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(stats_students)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(stats_students)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Fisher's Exact Test for Count Data

@@ -132,8 +132,8 @@ Usually when we use a $\chi^2$, we are looking at count data. Let's consider the
 
 | Major         | *R* experience | No *R* experience |
 |---------------|----------------|-------------------|
-| *Non-biology* | 3              | 7                 |
-| *Biology*     | 9              | 1                 |
+| *Non-biology* | 3              | 10                |
+| *Biology*     | 9              | 2                 |
 
 : The above table of counts is also known as a **contingency table**. Intuitively, we can see a difference, but we want to perform a statistical test to see just how likely these counts would be if both groups were equally likely. We can calculate this both "by hand" and using built in *R* functions.
 
@@ -142,7 +142,7 @@ Usually when we use a $\chi^2$, we are looking at count data. Let's consider the
 First, we can enter the data into *R*.
 
 ```{r}
-data <- matrix(data = c(3,7,9,1), nrow = 2, ncol = 2, byrow = T)
+data <- matrix(data = c(3,10,9,2), nrow = 2, ncol = 2, byrow = T)
 
 colnames(data) <- c("R", "No R")
 rownames(data) <- c("Non-biology", "Biology")
@@ -194,13 +194,13 @@ chi_matrix
 sum(chi_matrix)
 ```
 
-Here, we get a $\chi^2$ value of 8. We can use our handy family functions to determine the probability of this event:
+Here, we get a $\chi^2$ value of `r sum(chi_matrix)`. We can use our handy family functions to determine the probability of this event:
 
 ```{r}
-pchisq(8, df = 1, lower.tail = F)
+pchisq(sum(chi_matrix), df = 1, lower.tail = F)
 ```
 
-Here, we get a $p$ value of 0.005.
+Here, we get a $p$ value of `r round(pchisq(sum(chi_matrix), df = 1, lower.tail = F),3)`.
 
 Alternatively, we can calculate this using *expected counts*. For many situations, we don't know what the baseline probability *should* be, so we calculate the expected counts based on what we do know. Expected counts are calculated as follows:
 
@@ -238,26 +238,23 @@ e_o2 <- ((data - expected)^2)/expected
 sum(e_o2)
 ```
 
-Now we have a $\chi^2$ of 7.5 - which, as we will see below, is the exact same value as we get for an uncorrected `chisq.test` from *R*'s default output.
+Now we have a $\chi^2$ of `r round(sum(e_o2),2)` - which, as we will see below, is the exact same value as we get for an uncorrected `chisq.test` from *R*'s default output.
 
 #### $\chi^2$ estimations in *R*
 
 We can calculate this in *R* by entering in the entire table and using `chisq.test`.
 
 ```{r}
-data <- matrix(data = c(3,7,9,1), nrow = 2, ncol = 2, byrow = T)
-
-colnames(data) <- c("R", "No R")
-rownames(data) <- c("Non-biology", "Biology")
-
 data
 ```
 
 ```{r}
-chisq.test(data, correct = F)
+chi_data <- chisq.test(data, correct = F)
+
+chi_data
 ```
 
-Here, we get $p = 0.006$, which is significant with $\alpha = 0.05$.
+Here, we get $p = $`r round(chi_data$p.value,3)`, which is significant with $\alpha = 0.05$.
 
 **Note** that these values are slightly different. they will be even more different if `correct` is set to `TRUE`. By default, *R*, uses a [Yate's correction for continuity](https://en.wikipedia.org/wiki/Yates's_correction_for_continuity). This accounts for error introduced by comparing the discrete values to a continuous distribution.
 
