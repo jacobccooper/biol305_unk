@@ -966,7 +966,7 @@ CV = \frac{\sigma}{\mu}
 </section>
 <section id="piracy-in-the-gulf-of-guinea" class="level4" data-number="2.5.2.2">
 <h4 data-number="2.5.2.2" class="anchored" data-anchor-id="piracy-in-the-gulf-of-guinea"><span class="header-section-number">2.5.2.2</span> 2: Piracy in the Gulf of Guinea</h4>
-<p>The following is a dataset looking at oceanic conditions and other variables associated with pirate attacks within the region between 2010 and 2021 <span class="citation" data-cites="Moura2023">(<a href="#ref-Moura2023" role="doc-biblioref">Moura et al. 2023</a>)</span>. Using these data, please calculate the mean, median, range, interquartile range, variance, standard deviation, coefficient of variation, standard error, and whether there are any “outliers” for distance from shore for each pirate attack (column <code>Distance_from_Coast</code>).</p>
+<p>The following is a dataset looking at oceanic conditions and other variables associated with pirate attacks within the region between 2010 and 2021 <span class="citation" data-cites="Moura2023">(<a href="references.html#ref-Moura2023" role="doc-biblioref">Moura et al. 2023</a>)</span>. Using these data, please calculate the mean, median, range, interquartile range, variance, standard deviation, coefficient of variation, standard error, and whether there are any “outliers” for distance from shore for each pirate attack (column <code>Distance_from_Coast</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>pirates <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://figshare.com/ndownloader/files/42314604"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -986,7 +986,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </section>
 <section id="patient-ages-at-presentation" class="level4" data-number="2.5.2.3">
 <h4 data-number="2.5.2.3" class="anchored" data-anchor-id="patient-ages-at-presentation"><span class="header-section-number">2.5.2.3</span> 3: Patient ages at presentation</h4>
-<p>The following is a dataset on skin sores in different communities in Australia and Oceania, specifically looking at the amount of time that passes between skin infections <span class="citation" data-cites="lydeamore_estimation_2020">(<a href="#ref-lydeamore_estimation_2020" role="doc-biblioref">Lydeamore et al. 2020a</a>)</span>. This file includes multiple different datasets, and focuses on data from children in the first five years of their life, on househould visits, and on data collected during targeted studies <span class="citation" data-cites="Lydeamore2020">(<a href="#ref-Lydeamore2020" role="doc-biblioref">Lydeamore et al. 2020b</a>)</span>.</p>
+<p>The following is a dataset on skin sores in different communities in Australia and Oceania, specifically looking at the amount of time that passes between skin infections <span class="citation" data-cites="lydeamore_estimation_2020">(<a href="references.html#ref-lydeamore_estimation_2020" role="doc-biblioref">Lydeamore et al. 2020a</a>)</span>. This file includes multiple different datasets, and focuses on data from children in the first five years of their life, on househould visits, and on data collected during targeted studies <span class="citation" data-cites="Lydeamore2020">(<a href="references.html#ref-Lydeamore2020" role="doc-biblioref">Lydeamore et al. 2020b</a>)</span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://doi.org/10.1371/journal.pcbi.1007838.s006"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -1011,7 +1011,7 @@ dbl (1): time_difference
 <p><strong>Synthesis question</strong>: Folks will often think about probabilities of events being “low but never zero”. What does that mean in the context of these data? What about these data make you feel like probabilities may decrease through time but never become zero?</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-Lydeamore2020" class="csl-entry" role="listitem">
 Lydeamore, M. J., P. T. Campbell, D. J. Price, Y. Wu, A. J. Marcato, W. Cuningham, J. R. Carapetis, R. M. Andrews, M. I. McDonald, J. McVernon, S. Y. C. Tong, and J. M. McCaw (2020b). <span class="nocase">Patient ages at presentation.</span> https://doi.org/<a href="https://doi.org/10.1371/journal.pcbi.1007838.s006">10.1371/journal.pcbi.1007838.s006</a>
 </div>

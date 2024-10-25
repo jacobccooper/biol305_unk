@@ -479,13 +479,13 @@ window.Quarto = {
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(xy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           x cat
-1  0.4967492   x
-2 -0.5402971   x
-3 -0.4943657   x
-4  0.3665434   x
-5  0.4406356   x
-6 -0.8027160   x</code></pre>
+<pre><code>            x cat
+1  0.72409742   x
+2  1.35841773   x
+3  1.13821938   x
+4 -0.34692767   x
+5 -0.06186526   x
+6  0.40325559   x</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -577,7 +577,7 @@ window.Quarto = {
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.01000893</code></pre>
+<pre><code>[1] 0.002085201</code></pre>
 </div>
 </div>
 <p>Generally, a <strong>value between</strong> <span class="math inline">\(-1\)</span> <strong>and</strong> <span class="math inline">\(+1\)</span> <strong>for skewness is “acceptable”</strong> and not considered overly skewed. Positive values indicate “right” skew and negative values indicate a “left” skew. If something is too skewed, it may violate assumptions of normality and thus need <em>non-parametric</em> tests rather than our standard parametric tests - something we will cover later!</p>
@@ -601,7 +601,7 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(x3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.174246</code></pre>
+<pre><code>[1] 2.125796</code></pre>
 </div>
 </div>
 <p>As we can see, the above is a heavily skewed dataset with a positive (“right”) skew.</p>
@@ -625,14 +625,14 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># non-zeroed</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.060549</code></pre>
+<pre><code>[1] 2.898536</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># zeroed</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(x)<span class="sc">-</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.06054927</code></pre>
+<pre><code>[1] -0.1014637</code></pre>
 </div>
 </div>
 <p>As expected, out values drawn from a normal distribution are not overly skewed. Let’s compare these to a more kurtic distribution:</p>
@@ -641,7 +641,7 @@ window.Quarto = {
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(xk)<span class="sc">-</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 24.75394</code></pre>
+<pre><code>[1] 35.66092</code></pre>
 </div>
 </div>
 <p>What does this dataset look like?</p>
@@ -676,7 +676,7 @@ window.Quarto = {
 </div>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -3.457002  3.103195</code></pre>
+<pre><code>[1] -3.313068  3.045090</code></pre>
 </div>
 </div>
 <p>Based on this range, we need to create our bin sizes. We want our lowest bin to be below our lowest value, and our highest bin above our highest value. Here, I’m setting a step size of 1. <strong>You will have to examine your data and determine the best break size for your datasets.</strong></p>
@@ -704,7 +704,7 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>data_transform
 [-3,-2) [-2,-1)  [-1,0)   [0,1)   [1,2)   [2,3)   [3,4) 
-     26     140     350     321     130      27       2 </code></pre>
+     14     146     350     344     129      14       1 </code></pre>
 </div>
 </div>
 <div class="cell">
@@ -718,7 +718,7 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cumulative_freq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        [-3,-2) [-2,-1)  [-1,0)   [0,1)   [1,2)   [2,3)   [3,4) 
-      0      26     166     516     837     967     994     996 </code></pre>
+      0      14     160     510     854     983     997     998 </code></pre>
 </div>
 </div>
 <div class="cell">
