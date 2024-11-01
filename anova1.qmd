@@ -7,6 +7,87 @@ editor: visual
 
 ## Introduction
 
+When we are comparing multiple (2+) populations, we perform what is called an *analysis of variance* - or an ANOVA. We opt for this different method because we are trying to minimize error. As you'll recall, we use $\alpha$ to minimize our chances of making an error and coming to an incorrect conclusion regarding our data. In our previous tests ($t$-tests) we are comparing the means between two different populations, such that $H_0: \mu_1 = \mu_2$. When comparing multiple populations, comparing the means in this direct fashion can increase the probability of introducing error into a system. Consider the following:
+
+```{r,message=FALSE}
+library(tidyverse)
+library(plyr)
+```
+
+```{r}
+set.seed(8675309)
+
+for(i in 1:100){
+  x <- rnorm(10)
+  if(i == 1){
+    data <- x %>% as.data.frame()
+    colnames(data) <- "Data"
+    data$Group <- paste0("x",i)
+  }else{
+    newdat <- x %>% as.data.frame()
+    colnames(newdat) <- "Data"
+    newdat$Group <- paste0("x",i)
+    data <- rbind(data,newdat)
+  }
+}
+
+# summarize by group
+gg_data <- ddply(data, "Group", summarise,
+                 N = length(Data),
+                 mean = mean(Data),
+                 sd = sd(Data),
+                 se = sd / sqrt(N))
+
+ggplot(gg_data, aes(x = Group, y = mean, group = Group)) +
+  geom_point() +
+  geom_errorbar(data = gg_data, aes(ymin = mean - 2*se, ymax = mean+2*se,
+                                    color = Group), width = 0.1) +
+  geom_hline(yintercept = 0, col = "black", linewidth = 0.5) +
+  ylim(c(-1.5,1.5)) +
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 90, vjust = 0.5, size = 5))
+```
+
+As we can see above, with just ten random samples and 100 sampling events, we get some datasets that do not have the mean included within the interquartile range, and thus have means that would be statistically different than what we draw. As we increase the number of draws, we get closer to the mean:
+
+```{r}
+set.seed(8675309)
+
+for(i in 1:100){
+  x <- rnorm(100)
+  if(i == 1){
+    data <- x %>% as.data.frame()
+    colnames(data) <- "Data"
+    data$Group <- paste0("x",i)
+  }else{
+    newdat <- x %>% as.data.frame()
+    colnames(newdat) <- "Data"
+    newdat$Group <- paste0("x",i)
+    data <- rbind(data,newdat)
+  }
+}
+
+# summarize by group
+gg_data <- ddply(data, "Group", summarise,
+                 N = length(Data),
+                 mean = mean(Data),
+                 sd = sd(Data),
+                 se = sd / sqrt(N))
+
+ggplot(gg_data, aes(x = Group, y = mean, group = Group)) +
+  geom_point() +
+  geom_errorbar(data = gg_data, aes(ymin = mean - 2*se, ymax = mean+2*se,
+                                    color = Group), width = 0.1) +
+  geom_hline(yintercept = 0, col = "black", linewidth = 0.5) +
+  ylim(c(-1.5,1.5)) +
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 90, vjust = 0.5, size = 5))
+```
+
+As we can see, even with 100 sample, we still have some chances of having groups that are different! Thus, when comparing multiple groups, we use the variances to see if groups come from the same distribution rather than the mean.
+
 ## ANOVA: By hand
 
 ## ANOVA: By *R*
