@@ -245,3 +245,7 @@ qt(0.975, df = 10)
 ## Homework: Chapter 9
 
 For Chapter 9, complete problems 9.1, 9.3, 9.4, 9.5, 9.6, 9.7, 9.8, 9.9, and 9.10.  For problems 9.3 - 9.8, be sure to state the null and alternative hypotheses and whether the test is one- or two-tailed.
+
+## Homework: Chapter 10
+
+Two-sample means are practiced in Chapter 10. Please see *Canvas* for more information.

@@ -15,6 +15,9 @@ library(plyr)
 ```
 
 ```{r}
+# This creates a reproducible example
+# rnorm creates random datasets
+
 set.seed(8675309)
 
 for(i in 1:100){
@@ -86,11 +89,171 @@ ggplot(gg_data, aes(x = Group, y = mean, group = Group)) +
         axis.text.x = element_text(angle = 90, vjust = 0.5, size = 5))
 ```
 
-As we can see, even with 100 sample, we still have some chances of having groups that are different! Thus, when comparing multiple groups, we use the variances to see if groups come from the same distribution rather than the mean.
+As we can see, even with 100 sample, we still have some chances of having groups that are different! When we do pairwise comparisons, we are compounding the error and the possibility of coming to an incorrect conclusion. Thus, when comparing multiple groups, we use the variances to see if groups come from the same distribution rather than the mean.
 
 ## ANOVA: By hand
 
+For this workthrough, we will use the following example dataset:
+
+```{r}
+set.seed(8675309)
+
+for(i in 1:4){
+  x <- rnorm(10)
+  if(i == 1){
+    x <- rnorm(10, mean = 2)
+    data <- x %>% as.data.frame()
+    colnames(data) <- "Data"
+    data$Group <- paste0("x",i)
+  }else{
+    newdat <- x %>% as.data.frame()
+    colnames(newdat) <- "Data"
+    newdat$Group <- paste0("x",i)
+    data <- rbind(data,newdat)
+  }
+}
+
+# split into "typical" table
+expanded_data <- NULL
+expanded_data$x1 <- data$Data[which(data$Group=="x1")]
+expanded_data$x2 <- data$Data[which(data$Group=="x2")]
+expanded_data$x3 <- data$Data[which(data$Group=="x3")]
+expanded_data$x4 <- data$Data[which(data$Group=="x4")]
+
+expanded_data <- expanded_data %>%
+  as.data.frame()
+
+# summarize by group
+gg_data <- ddply(data, "Group", summarise,
+                 N = length(Data),
+                 mean = mean(Data),
+                 sd = sd(Data),
+                 se = sd / sqrt(N))
+
+ggplot(gg_data, aes(x = Group, y = mean, group = Group)) +
+  geom_point() +
+  geom_errorbar(data = gg_data, aes(ymin = mean - 2*se, ymax = mean+2*se,
+                                    color = Group), width = 0.1) +
+  geom_hline(yintercept = 0, col = "black", linewidth = 0.5) +
+  ylim(c(-3,3)) +
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 90, vjust = 0.5, size = 5))
+```
+
+```{r}
+expanded_data
+```
+
+Above, we can see the made-up dataset where it appears as though one population differs from the other populations in our measurements. Let's calculate an ANOVA and find out if this is the case!
+
+**NOTE** throughout this process that I am trying to name variables in a straightforward fashion so as not to lose my way.
+
+### Calculate group means and Grand Mean
+
+```{r}
+group_means <- colMeans(expanded_data)
+
+n <- 0
+
+for(i in 1:ncol(expanded_data)){
+  # account for unequal row length, if exists
+  sample <- expanded_data[,i] %>% 
+    as.numeric() %>%
+    na.omit()
+  n <- n + length(sample)
+}
+
+grand_mean <- sum(colSums(expanded_data))/n
+```
+
+### Total sum of squares
+
+Take the deviation of each data point from the grand mean and square it.
+
+```{r}
+grand_deviates_squared <- (expanded_data - grand_mean)^2
+
+ss_total <- rowSums(grand_deviates_squared) %>%
+  sum()
+```
+
+### Within-group sum of squares
+
+For each data point, calculate its deviation from its own mean, squaring these deviations and then summing them together.
+
+```{r}
+group_deviates <- expanded_data
+
+for(i in 1:ncol(group_deviates)){
+  dat <- group_deviates[,i]
+  mu <- mean(dat)
+  dev.dat <- (dat - mu)^2
+  group_deviates[,i] <- dev.dat
+}
+
+ss_within <- colSums(group_deviates) %>% sum()
+```
+
+### Among-group sum of squares
+
+```{r}
+ss_among <- ss_total - ss_within
+```
+
+### Calculate degrees of freedom
+
+Our degrees of freedom for the "between" group is the number of categories minus one ($K-1$).
+
+```{r}
+ss_among_df <- ncol(expanded_data) - 1
+```
+
+Our degrees of freedom for the within group are the number of total samples minus the number of categories ($N - K$).
+
+```{r}
+ss_within_df <- n - ncol(expanded_data)
+```
+
+Our degrees of freedom for the total sum of squares is the number of samples minus one ($N-1$).
+
+```{r}
+ss_total_df <- n - 1
+```
+
+### Calculate mean squares
+
+```{r}
+ms_among <- ss_among/ss_among_df
+```
+
+```{r}
+ms_within <- ss_within/ss_within_df
+```
+
+### Get $F$ statistic
+
+```{r}
+f_stat <- ms_among/ms_within
+```
+
+### Get $p$ value
+
+```{r}
+pf(f_stat, df1 = ss_among_df, df2 = ss_within_df, lower.tail = F)
+```
+
+As we can see, it is very unlikely that these are the same population.
+
 ## ANOVA: By *R*
+
+For this, we need to use the dataframe where we have all data in a single column and all ID's in the other columns.
+
+```{r}
+data_aov <- aov(Data ~ Group, data = data)
+
+summary(data_aov)
+```
 
 ## Kruskal-Wallis tests
 
