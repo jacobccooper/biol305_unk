@@ -240,7 +240,10 @@ f_stat <- ms_among/ms_within
 ### Get $p$ value
 
 ```{r}
-pf(f_stat, df1 = ss_among_df, df2 = ss_within_df, lower.tail = F)
+pf(f_stat, 
+   df1 = ss_among_df, 
+   df2 = ss_within_df, 
+   lower.tail = F)
 ```
 
 As we can see, it is very unlikely that these are the same population.
