@@ -11,7 +11,12 @@ When we are comparing multiple (2+) populations, we perform what is called an *a
 
 ```{r,message=FALSE}
 library(tidyverse)
+
+# needed for summarizing data
 library(plyr)
+
+# needed for better Tukey tests
+library(agricolae)
 ```
 
 ```{r}
@@ -142,7 +147,7 @@ ggplot(gg_data, aes(x = Group, y = mean, group = Group)) +
 ```
 
 ```{r}
-expanded_data
+expanded_data %>% round(2)
 ```
 
 Above, we can see the made-up dataset where it appears as though one population differs from the other populations in our measurements. Let's calculate an ANOVA and find out if this is the case!
@@ -151,9 +156,20 @@ Above, we can see the made-up dataset where it appears as though one population 
 
 ### Calculate group means and Grand Mean
 
+Let us assume we have a dataset, $x$, that is $k$ columns and $n$ rows, with $N$ data points in the entire data frame. We first want to take the column means for each group $k$, such that we have $\bar{x}_k$. We also need to find the mean of the entire dataset, $\bar{x}_n$. We can calculate this by taking $\frac{\Sigma x}{n}$, which we have to calculate by column as follows.
+
 ```{r}
+# calculate the mean of each group
+# each group is in a single column
 group_means <- colMeans(expanded_data)
 
+# rounding to two decimal places
+group_means %>% round(2)
+```
+
+Next, we need to calculate the number of total entries in the dataset. We have written a function to accomplish this incase some rows have different numbers of entries from others.
+
+```{r}
 n <- 0
 
 for(i in 1:ncol(expanded_data)){
@@ -164,41 +180,86 @@ for(i in 1:ncol(expanded_data)){
   n <- n + length(sample)
 }
 
-grand_mean <- sum(colSums(expanded_data))/n
+n
+```
+
+Next, we can calculate the `grand_mean` of all of the data.
+
+```{r}
+# sum up all the data
+dataset_sum <- colSums(expanded_data) %>%
+  sum()
+
+# divide by the number of data points
+grand_mean <- dataset_sum/n
+
+# display mean
+grand_mean %>% round(2)
 ```
 
 ### Total sum of squares
 
-Take the deviation of each data point from the grand mean and square it.
+To calculate the *total sum of squares* (TSS), we need to take the deviations (differences) of each point from the grand mean $\bar{x}_n$, square them, and them take the sum of them.
 
 ```{r}
+# calculate deviates
+# can calculate across all table at once
 grand_deviates_squared <- (expanded_data - grand_mean)^2
 
+# round output for here
+grand_deviates_squared %>% round(2)
+```
+
+
+```{r}
+# calculate the sum of all the deviates
 ss_total <- rowSums(grand_deviates_squared) %>%
   sum()
+
+ss_total %>% round(2)
 ```
 
 ### Within-group sum of squares
 
-For each data point, calculate its deviation from its own mean, squaring these deviations and then summing them together.
+For each data point, we need to calculate its deviation from its own group mean, squaring these deviations and then summing them together. We can't calcualte this quite as elegantly as the aforementioned data, but we can write a function that will operate across the table and create a new dataset on our behalf.
 
 ```{r}
+# replicate dataset
+# replace columns with deviate data
 group_deviates <- expanded_data
 
+# loop through each column
 for(i in 1:ncol(group_deviates)){
+  # get the data in each group
   dat <- group_deviates[,i]
+  # calculate the group mean
   mu <- mean(dat)
+  # calculate the group deviates
   dev.dat <- (dat - mu)^2
+  # save into table
   group_deviates[,i] <- dev.dat
 }
 
-ss_within <- colSums(group_deviates) %>% sum()
+group_deviates %>% round(2)
+```
+
+
+```{r}
+# calculate sum of data table
+ss_within <- colSums(group_deviates) %>% 
+  sum()
+
+ss_within %>% round(2)
 ```
 
 ### Among-group sum of squares
 
+The total sum of squares is equal to the among groups sum of squares and the within groups sum of squares added together; thus, we can solve this part with some easy arithmetic.
+
 ```{r}
 ss_among <- ss_total - ss_within
+
+ss_among %>% round(2)
 ```
 
 ### Calculate degrees of freedom
@@ -207,37 +268,55 @@ Our degrees of freedom for the "between" group is the number of categories minus
 
 ```{r}
 ss_among_df <- ncol(expanded_data) - 1
+
+ss_among_df
 ```
 
 Our degrees of freedom for the within group are the number of total samples minus the number of categories ($N - K$).
 
 ```{r}
 ss_within_df <- n - ncol(expanded_data)
+
+ss_within_df
 ```
 
 Our degrees of freedom for the total sum of squares is the number of samples minus one ($N-1$).
 
 ```{r}
 ss_total_df <- n - 1
+
+ss_total_df
 ```
 
 ### Calculate mean squares
 
+For each category (among and within), the mean square is equal to the sum of squares divided by the degrees of freedom.
+
 ```{r}
 ms_among <- ss_among/ss_among_df
+
+ms_among %>% round(2)
 ```
 
 ```{r}
 ms_within <- ss_within/ss_within_df
+
+ms_within %>% round(2)
 ```
 
 ### Get $F$ statistic
 
+We divide the sum of squares among data point by the sum of squares within data points to obtain our $F$ statistic.
+
 ```{r}
 f_stat <- ms_among/ms_within
+
+f_stat %>% round(2)
 ```
 
 ### Get $p$ value
+
+We can use the function `pf` to calculate the $p$ value for any given $F$. *Note* that this function requires two different degrees of freedom to work correctly, **and we are always looking right** since this is a unidirectional distribution.
 
 ```{r}
 pf(f_stat, 
@@ -246,17 +325,177 @@ pf(f_stat,
    lower.tail = F)
 ```
 
-As we can see, it is very unlikely that these are the same population.
+Given how small our $p$ value is, we want to round this to $p<0.0001$. As we can see, it is very unlikely that these are the same population.
 
 ## ANOVA: By *R*
 
-For this, we need to use the dataframe where we have all data in a single column and all ID's in the other columns.
+For this, we need to use the dataframe where we have all data in a single column and all ID's in the other columns. We then show how we want the ANOVA to operate across the data using the `~` symbol.
 
 ```{r}
 data_aov <- aov(Data ~ Group, data = data)
 
 summary(data_aov)
 ```
+
+As we can see, all these values match what we did by hand above!
+
+## Post-hoc Tukey test
+
+ANOVA tells us *if* a test is different, but it doesn't tell us *which* test is different. To do this, we have to perform a Tukey test.
+
+### Tukey test by hand
+
+To do this by hand, we will need a lot of data from our aforementioned ANOVA test.
+
+We need to calculate pairwise differences between each set of means.
+
+```{r}
+# calculate all pairwise differences
+pairwise_mean_diffs <- dist(group_means)
+
+pairwise_mean_diffs %>% round(2)
+```
+
+Next, we need a critical $Q$ value against which we can compare. For Tukey, our degrees of freedom are the same as the degrees of freedom for $SS_{within}$: $N - K$.
+
+```{r}
+# set p value
+tukey_q <- qtukey(p = 0.95,
+                  # get length of mean comparisons
+                  nmeans = ncol(expanded_data),
+                  df = ss_within_df)
+
+tukey_q %>% round(2)
+```
+
+We need to multiply $Q$ by the pooled variance.This is the same as the average of the variances for each group.
+
+```{r}
+var_data <- 0
+
+# calculate pooled variance
+for(i in 1:ncol(expanded_data)){
+  var_data <- var_data + var(expanded_data[,i])
+}
+
+pooled_var_dat <- sqrt(var_data/n)
+
+pooled_var_dat %>% round(2)
+```
+
+We can calculate the Tukey critical value by multiplying the pooled variance by $Q$.
+
+```{r}
+tukey_critical <- tukey_q*pooled_var_dat
+
+tukey_critical %>% round(2)
+```
+
+Remember, we are comparing to the actual value, not the rounded value.
+
+Which mean differences are difference compared to our critical value?
+
+```{r}
+pairwise_mean_diffs[pairwise_mean_diffs < tukey_critical] <- 0
+
+pairwise_mean_diffs
+```
+
+As we can see above, three differences cross our threshold - all associated with `x1`.
+
+When we graph things, we want to label this group as different. We will cover this a little later in the tutorial.
+
+### Tukey test in *R*
+
+Tukey tests in the *R* program are a bit more straightforward.
+
+```{r}
+TukeyHSD(data_aov)
+```
+
+As we can see above, only three comparisons have a *p* value of $< 0.05$, and thus only those three are significantly different. All involve `x1`.
+
+We can also use `HSD.test` to get more specific results:
+
+```{r}
+HSD.test(data_aov,
+         # what to group by?
+         "Group",
+         # significance level?
+         alpha = 0.05, 
+         # are data unbalanced
+         unbalanced = FALSE,
+         # show answer?
+         console = TRUE)
+```
+
+This output is nice because it labels groups based on which groups belong together! **This will be important for plotting, and is cumbersome if you have a lot of means.**
+
+## Plotting our ANOVA results
+
+When we plot our ANOVAs, we want to show which mean is different from all of the others. Below, I will show the full pipeline for performing an ANOVA on a dataset and plotting the data at the end using out `data` object.
+
+```{r}
+data_aov <- aov(Data ~ Group,data)
+
+summary(data_aov)
+```
+
+Now, we need to summarize things based on our `plyr` function.
+
+```{r}
+# summarize by group
+gg_data <- ddply(data, "Group", summarise,
+                 N = length(Data),
+                 mean = mean(Data),
+                 sd = sd(Data),
+                 se = sd / sqrt(N))
+```
+
+Now, we can use the aforementioned Tukey results to assign to groups. We do have to create this part by hand, unfortunately.
+
+```{r}
+# note first group must be EXACT MATCH to your gg_data object
+sig.labels <- data.frame(Group = c("x1", "x2", "x3", "x4"),
+                         # significance of groups
+                         significance = c("A", "B", "B", "B"))
+```
+
+Now we can plot our data and add the labels!
+
+```{r}
+ggplot(gg_data, # plot summary data
+       # Define plotting - x by group, y is mean, grouping by group
+       aes(x = Group, y = mean, group = Group)) +
+  # add points to plot for y values
+  geom_point() +
+  # add error bars around points
+  geom_errorbar(data = gg_data, 
+                # define error bars
+                aes(ymin = mean - 2*se, ymax = mean+2*se,
+                    # define color, size
+                                    color = Group), width = 0.1) +
+  # add line at average for the main group
+  # this is not always known - nor requires!
+  geom_hline(yintercept = 0, col = "black", linewidth = 0.5) +
+  # set vertical limits for plot
+  ylim(c(-3,3)) +
+  # make it a classic theme - more legible
+  theme_classic() +
+  # add text to plot
+  geom_text(data = sig.labels,
+            # define where labels should go
+            aes(x = Group, 
+                # define height of label
+                y = -2, 
+                # what are the labels?
+                label = paste0(significance))) +
+  # remove legend - not needed here
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 90, vjust = 0.5, size = 5))
+```
+
+**Note** that I place the labels below here, but they could also be placed above. You have to position them based on your own judgment.
 
 ## Kruskal-Wallis tests
 
