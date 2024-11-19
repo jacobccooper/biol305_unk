@@ -210,7 +210,6 @@ grand_deviates_squared <- (expanded_data - grand_mean)^2
 grand_deviates_squared %>% round(2)
 ```
 
-
 ```{r}
 # calculate the sum of all the deviates
 ss_total <- rowSums(grand_deviates_squared) %>%
@@ -242,7 +241,6 @@ for(i in 1:ncol(group_deviates)){
 
 group_deviates %>% round(2)
 ```
-
 
 ```{r}
 # calculate sum of data table
@@ -607,7 +605,7 @@ x3_sum <- sum(data$ranks[which(data$Group=="x3")])
 x4_sum <- sum(data$ranks[which(data$Group=="x4")])
 ```
 
-Now, we need to calculate our test statistic. The test statistic is $H$, with $H = \frac{12}{N(N+1)} \cdot \Sigma \frac{R_j^2}{n_j}-3(N+1)$. In this equation, $R$ is the sum of the ranks for a given category. This follows a $\chi^2$ distribution with $k-1$ degrees of freedom, with $k$ referring to categories.
+Now, we need to calculate our test statistic. The test statistic is $H$, with: $$H = \frac{12}{N(N+1)} \cdot \Sigma \frac{R_j^2}{n_j}-3(N+1)$$In this equation, $R$ is the sum of the ranks for a given category. This follows a $\chi^2$ distribution with $k-1$ degrees of freedom, with $k$ referring to categories.
 
 For these, we need to know what $n$ is for each category.
 
@@ -685,7 +683,7 @@ As we can see, the above gives us our group designations under the `$group` sect
 
 Your homework is to complete problems 11.1, 11.2, 11.3, and 11.4. The first two will require ANOVA, and the last two will require Kruskal-Wallis tests. For each pair of tests, you must also complete the problem by hand in addition to using the default *R* methods. For *all* problems:
 
-- State your hypothesis in words
-- State your hypothesis mathematically (hint: $\mu$)
-- **Answer in complete sentences** and don't forget to round your answers.
-- If you reject the null hypothesis, you must plot the results and label them to show which means are different.
+-   State your hypothesis in words
+-   State your hypothesis mathematically (hint: $\mu$)
+-   **Answer in complete sentences** and don't forget to round your answers.
+-   If you reject the null hypothesis, you must plot the results and label them to show which means are different.
