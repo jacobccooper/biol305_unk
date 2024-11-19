@@ -418,15 +418,17 @@ As we can see above, only three comparisons have a *p* value of $< 0.05$, and th
 We can also use `HSD.test` to get more specific results:
 
 ```{r}
-HSD.test(data_aov,
-         # what to group by?
-         "Group",
-         # significance level?
-         alpha = 0.05, 
-         # are data unbalanced
-         unbalanced = FALSE,
-         # show answer?
-         console = TRUE)
+tukey_data_aov <- HSD.test(data_aov,
+                           # what to group by?
+                           "Group",
+                           # significance level?
+                           alpha = 0.05, 
+                           # are data unbalanced
+                           unbalanced = FALSE,
+                           # show answer?
+                           console = TRUE)
+
+print(tukey_data_aov)
 ```
 
 This output is nice because it labels groups based on which groups belong together! **This will be important for plotting, and is cumbersome if you have a lot of means.**
@@ -452,16 +454,29 @@ gg_data <- ddply(data, "Group", summarise,
                  se = sd / sqrt(N))
 ```
 
-Now, we can use the aforementioned Tukey results to assign to groups. We do have to create this part by hand, unfortunately.
+Now, we can use the aforementioned Tukey results to assign to groups. Because `agricolae` functions define the groups in a `$groups` slot, we can pull out these data and perform some minimal transformations to make them ready to plot. *This will save us a lot of time and hassle*.
 
 ```{r}
 # note first group must be EXACT MATCH to your gg_data object
-sig.labels <- data.frame(Group = c("x1", "x2", "x3", "x4"),
-                         # significance of groups
-                         significance = c("A", "B", "B", "B"))
+# groups are saved in the Tukey object
+# this is true for Tukey later as well
+
+# pull out the groups slot from tukey
+# same for Kruskal later on!
+sig.labels <- tukey_data_aov$groups %>%
+  # convert to a data.frame
+  as.data.frame() %>%
+  # create a new column - place rownames into the column
+  # converts to a format better for ggplot
+  mutate(Group = rownames(tukey_data_aov$groups)) %>%
+  # rename column to prevent confusion
+  # specify dplyr; default function may be from plyr and not work
+  dplyr::rename(significance = groups)
+
+sig.labels
 ```
 
-Now we can plot our data and add the labels!
+Note that in the above, the row labels and the column `Group` are identical. We moved these data into a column to make it easier to use `ggplot`. If you want letters to be different - capitalized or something else - you will have to do this yourself. Now we can plot our data and add the labels!
 
 ```{r}
 ggplot(gg_data, # plot summary data
@@ -484,19 +499,193 @@ ggplot(gg_data, # plot summary data
   theme_classic() +
   # add text to plot
   geom_text(data = sig.labels,
+            # make bold
+            fontface = "bold",
             # define where labels should go
             aes(x = Group, 
                 # define height of label
                 y = -2, 
                 # what are the labels?
                 label = paste0(significance))) +
+  xlab("Group Name") +
+  ylab("Mean") +
   # remove legend - not needed here
   theme(legend.position = "none",
-        axis.text.x = element_text(angle = 90, vjust = 0.5, size = 5))
+        # make label text vertical, easier to read
+        axis.text.x = element_text(angle = 90, 
+                                   # vertical offset of text
+                                   vjust = 0.5, 
+                                   # text size
+                                   size = 12))
 ```
 
 **Note** that I place the labels below here, but they could also be placed above. You have to position them based on your own judgment.
 
+**Addendum:** if you see a mean labeled `a` and `b`, it would be statistically indistinguishable from means labeled `a` and means labeled `b`, despite means with only an `a` or a `b` being different from each other.
+
 ## Kruskal-Wallis tests
 
+The Kruskal-Wallis test is the non-parametric version of an ANOVA. To demonstrate this, we will be creating a non-normal distribution by pulling random values from a *uniform* distribution, using the random uniform function `runif`. **Note** we are rounding the data here to make it more similar to non-normal datasets you may encounter, and to increase the probability of ties.
+
+```{r}
+set.seed(8675309)
+
+for(i in 1:4){
+  x <- runif(10, min = -1, max = 1) %>%
+    round(2)
+  if(i == 1){
+    x <- runif(10, min = 1, max = 2) %>%
+      round(2)
+    data <- x %>% as.data.frame()
+    colnames(data) <- "Data"
+    data$Group <- paste0("x",i)
+  }else{
+    newdat <- x %>% as.data.frame()
+    colnames(newdat) <- "Data"
+    newdat$Group <- paste0("x",i)
+    data <- rbind(data,newdat)
+  }
+}
+
+# split into "typical" table
+expanded_data <- NULL
+expanded_data$x1 <- data$Data[which(data$Group=="x1")]
+expanded_data$x2 <- data$Data[which(data$Group=="x2")]
+expanded_data$x3 <- data$Data[which(data$Group=="x3")]
+expanded_data$x4 <- data$Data[which(data$Group=="x4")]
+
+expanded_data <- expanded_data %>%
+  as.data.frame()
+
+# summarize by group
+gg_data <- ddply(data, "Group", summarise,
+                 N = length(Data),
+                 mean = mean(Data),
+                 sd = sd(Data),
+                 se = sd / sqrt(N))
+
+ggplot(gg_data, aes(x = Group, y = mean, group = Group)) +
+  geom_point() +
+  geom_errorbar(data = gg_data, aes(ymin = mean - 2*se, ymax = mean+2*se,
+                                    color = Group), width = 0.1) +
+  geom_hline(yintercept = 0, col = "black", linewidth = 0.5) +
+  ylim(c(-3,3)) +
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 90, vjust = 0.5, size = 5))
+```
+
+We can confirm these data are non-normal with Shapiro-Wilk tests and histograms. Demonstrating with the first column only:
+
+```{r}
+hist(data[,1])
+```
+
+```{r}
+shapiro.test(data[,1])
+```
+
+The above histogram appears non-normal, and the Shapiro-Wilk also indicates this is non-normal.
+
+### By hand
+
+First, we need to order all the data in the entire dataset. **This is easiest to do if we use the dataset with all data in a single column.**
+
+```{r}
+data$ranks <- rank(data$Data, ties.method = "average")
+
+# view first couple of rows
+head(data)
+```
+
+Now, we need to calculate the sum of the ranks for each category. The below function will take the sum of the ranks for the rows which match the condition of having the group be `x1`.
+
+```{r}
+x1_sum <- sum(data$ranks[which(data$Group=="x1")])
+x2_sum <- sum(data$ranks[which(data$Group=="x2")])
+x3_sum <- sum(data$ranks[which(data$Group=="x3")])
+x4_sum <- sum(data$ranks[which(data$Group=="x4")])
+```
+
+Now, we need to calculate our test statistic. The test statistic is $H$, with $H = \frac{12}{N(N+1)} \cdot \Sigma \frac{R_j^2}{n_j}-3(N+1)$. In this equation, $R$ is the sum of the ranks for a given category. This follows a $\chi^2$ distribution with $k-1$ degrees of freedom, with $k$ referring to categories.
+
+For these, we need to know what $n$ is for each category.
+
+```{r}
+n1 <- length(data$ranks[which(data$Group=="x1")])
+n2 <- length(data$ranks[which(data$Group=="x2")])
+n3 <- length(data$ranks[which(data$Group=="x3")])
+n4 <- length(data$ranks[which(data$Group=="x4")])
+```
+
+Next, we can calculate the sums of the $\frac{R^2}{n}$ term.
+
+```{r}
+r2_sum <- sum(x1_sum^2/n,
+              x2_sum^2,n,
+              x3_sum^2/n,
+              x4_sum^2/n)
+```
+
+Now, we can calculate $H$.
+
+```{r}
+N <- sum(n1, n2, n3, n4)
+
+H <- ((12/(N*(N+1)))*r2_sum)-(3*(N+1))
+
+H %>% round(2)
+```
+
+Now, we can evaluate this with a $\chi^2$ $p$ value.
+
+```{r}
+pchisq(q = H, 
+       df = ncol(data)-1, 
+       # remember, looking right!
+       lower.tail = FALSE)
+```
+
+As we can see, the probability is extremely low with $p < 0.0001$. One distribution is different, and we can proceed with Tukey tests.
+
+### Using *R*
+
+We can also use *R* for this test.
+
+```{r}
+kruskal_data <- kruskal.test(Data ~ Group, data)
+
+print(kruskal_data)
+```
+
+This test is similar, but not quite the same, as what we calculated above. The package `agricolae` provides a more in-depth Kruskal-Wallis test that gives us more metadata. We have to use the wrapper `with` to get this to work properly, per the help page.
+
+```{r}
+# use "with", defining your dataset first
+data_kruskal <- with(data,
+                     # define parameters for Kruskal-Wallis test
+                     # First, variable of interest
+                     kruskal(Data,
+                             # second, grouping variable
+                             Group,
+                             # do you want group designations returned?
+                             group = TRUE,
+                             # what is this being done on?
+                             # must match dataset name in "with"!!!
+                             main = "data"))
+
+# display results
+# summary WILL NOT show the right thing
+print(data_kruskal)
+```
+
+As we can see, the above gives us our group designations under the `$group` section. This is what we need to be able to plot things, as with ANOVA above. I do not repeat those steps here.
+
 ## Homework: Chapter 11
+
+Your homework is to complete problems 11.1, 11.2, 11.3, and 11.4. The first two will require ANOVA, and the last two will require Kruskal-Wallis tests. For each pair of tests, you must also complete the problem by hand in addition to using the default *R* methods. For *all* problems:
+
+- State your hypothesis in words
+- State your hypothesis mathematically (hint: $\mu$)
+- **Answer in complete sentences** and don't forget to round your answers.
+- If you reject the null hypothesis, you must plot the results and label them to show which means are different.
