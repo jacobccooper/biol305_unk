@@ -348,6 +348,13 @@ To do this by hand, we will need a lot of data from our aforementioned ANOVA tes
 We need to calculate pairwise differences between each set of means.
 
 ```{r}
+x1_mean <- mean(data$Data[data$Group == "x1"])
+x2_mean <- mean(data$Data[data$Group == "x2"])
+x3_mean <- mean(data$Data[data$Group == "x3"])
+x4_mean <- mean(data$Data[data$Group == "x4"])
+
+group_means <- c(x1_mean, x2_mean, x3_mean, x4_mean)
+
 # calculate all pairwise differences
 pairwise_mean_diffs <- dist(group_means)
 
@@ -359,7 +366,7 @@ Next, we need a critical $Q$ value against which we can compare. For Tukey, our 
 ```{r}
 # set p value
 tukey_q <- qtukey(p = 0.95,
-                  # get length of mean comparisons
+                  # get length of categories / columns
                   nmeans = ncol(expanded_data),
                   df = ss_within_df)
 

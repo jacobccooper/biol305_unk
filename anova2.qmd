@@ -7,9 +7,69 @@ editor: visual
 
 ## Two-way ANOVA
 
+Previously, we discussed one-way ANOVAs, where we are looking at a single factor split across three or more groups and trying to determine if the means of these groups are equal (*i.e.*, $H_0: \mu_1=\mu_2=...\mu_i$). ANOVA specifically allows us to analyze the variance of these different groups to ascertain which factors are most responsible for the variation we observe in the data. Because of the way ANOVA operates, we can actually test multiple different combinations of variables simultaneously in what we call a *two-way ANOVA*.
+
+Don't forget to load your required packages - `tidyverse`, `plyr`, and `agricolae`!
+
+```{r, message = F, echo = F}
+library(agricolae)
+library(plyr)
+library(tidyverse)
+```
+
 ## Designs
 
+There are several different designs for two-way ANOVAs, and we will cover some of the most common designed here.
+
 ### Randomized block design
+
+Randomized block designs look at combinations of variables that could be affecting the results. More specifically, we are looking at two *strata* or *factors* and their effects on a *continuous* response variable. (As a random aside, Bíldudalur is home to one of my wife's favorite places to visit: The Icelandic Sea Monster Museum and Coffee Shop).
+
+```{r}
+set.seed(8675309)
+
+# average fish size in relation to location in Iceland and food used
+
+location <- c("Tálknafjörður", "Bíldudalur", "þingeyri")
+
+food <- c("SuperFood", "Gigachad Fish Food", "MegaFish Flakes")
+
+fish_sizes <- c(10.1,12.6,11.2,
+                9.4,11.0,10.1,
+                12.3,15.4,11.9)
+
+data_expanded <- matrix(data = fish_sizes, ncol = 3, byrow = TRUE)
+
+rownames(data_expanded) <- location
+
+colnames(data_expanded) <- food
+
+data_expanded
+```
+
+*Note* that this table is in the format that we most often see, but we need to reshape these data to make it easier for us to perform our analyses. I created the data here as a matrix with named columns and rows; the following code may need to be adjusted if you do things differently.
+
+```{r}
+# expand to "long" format
+data <- data_expanded %>%
+  # convert to data frame
+  as.data.frame() %>%
+  # create new column to account for row names
+  # may not be needed, depending on your data format
+  mutate(Location = rownames(data_expanded)) %>%
+  # !by column for aggregating
+  # names_to = what to name column aggregation
+  # values_to = what the measurements should be called
+  pivot_longer(!Location, names_to = "Food", values_to = "Size")
+
+data
+```
+
+Now we can do our ANOVA.
+
+```{r}
+data_aov <- aov()
+```
 
 ### Repeated measures
 

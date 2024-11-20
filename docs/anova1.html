@@ -748,22 +748,29 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>To do this by hand, we will need a lot of data from our aforementioned ANOVA test.</p>
 <p>We need to calculate pairwise differences between each set of means.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate all pairwise differences</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>pairwise_mean_diffs <span class="ot">&lt;-</span> <span class="fu">dist</span>(group_means)</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>pairwise_mean_diffs <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>x1_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Data[data<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">"x1"</span>])</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>x2_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Data[data<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">"x2"</span>])</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>x3_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Data[data<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">"x3"</span>])</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>x4_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Data[data<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">"x4"</span>])</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>group_means <span class="ot">&lt;-</span> <span class="fu">c</span>(x1_mean, x2_mean, x3_mean, x4_mean)</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate all pairwise differences</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>pairwise_mean_diffs <span class="ot">&lt;-</span> <span class="fu">dist</span>(group_means)</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>pairwise_mean_diffs <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     x1   x2   x3
-x2 1.48          
-x3 1.54 0.06     
-x4 2.05 0.57 0.51</code></pre>
+<pre><code>     1    2    3
+2 1.48          
+3 1.54 0.06     
+4 2.05 0.57 0.51</code></pre>
 </div>
 </div>
 <p>Next, we need a critical <span class="math inline">\(Q\)</span> value against which we can compare. For Tukey, our degrees of freedom are the same as the degrees of freedom for <span class="math inline">\(SS_{within}\)</span>: <span class="math inline">\(N - K\)</span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set p value</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>tukey_q <span class="ot">&lt;-</span> <span class="fu">qtukey</span>(<span class="at">p =</span> <span class="fl">0.95</span>,</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>                  <span class="co"># get length of mean comparisons</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>                  <span class="co"># get length of categories / columns</span></span>
 <span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">nmeans =</span> <span class="fu">ncol</span>(expanded_data),</span>
 <span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">df =</span> ss_within_df)</span>
 <span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
@@ -804,10 +811,10 @@ x4 2.05 0.57 0.51</code></pre>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>pairwise_mean_diffs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>         x1       x2       x3
-x2 1.477866                  
-x3 1.542282 0.000000         
-x4 2.051068 0.000000 0.000000</code></pre>
+<pre><code>         1        2        3
+2 1.477866                  
+3 1.542282 0.000000         
+4 2.051068 0.000000 0.000000</code></pre>
 </div>
 </div>
 <p>As we can see above, three differences cross our threshold - all associated with <code>x1</code>.</p>
