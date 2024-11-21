@@ -68,7 +68,43 @@ data
 Now we can do our ANOVA.
 
 ```{r}
-data_aov <- aov()
+data_aov <- aov(Size ~ Location + Food, data)
+
+summary(data_aov)
+```
+
+As we can see above, both `Location` and `Food` have a significant effect on the size of the fish in our study. Now, we need to figure out the groupings and plot our results.
+
+```{r}
+tukey_data_aov <- HSD.test(data_aov,
+                           c("Location", "Food"),
+                           alpha = 0.05,
+                           unbalanced = FALSE,
+                           console = TRUE)
+```
+
+*Note* that in this situation, every single combination is treated as an individual mean. **This is not what we want for plotting**, as we want to compare each variable independently, *if they are significant*. We only want to look at the interaction if the interaction is significant - and if it's not a singular measure! We did not look at the interaction above, but we will later; interaction is shown with `:` separating values.
+
+```{r}
+location_aov <- aov(Size ~ Location, data)
+
+tukey_location_aov <- HSD.test(location_aov,
+                           c("Location", "Food"),
+                           alpha = 0.05,
+                           unbalanced = FALSE,
+                           console = TRUE)
+
+food_aov <- aov(Size ~ Food, data)
+```
+
+As we can see, we got all our groups. Now we just need to figure out how all of this plots!
+
+```{r}
+gg_data <- ddply(data, "Group", summarise,
+                 N = length(Data),
+                 mean = mean(Data),
+                 sd = sd(Data),
+                 se = sd / sqrt(N))
 ```
 
 ### Repeated measures
