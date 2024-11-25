@@ -324,7 +324,14 @@ window.Quarto = {
 <section id="two-way-anova" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="two-way-anova"><span class="header-section-number">10.1</span> Two-way ANOVA</h2>
 <p>Previously, we discussed one-way ANOVAs, where we are looking at a single factor split across three or more groups and trying to determine if the means of these groups are equal (<em>i.e.</em>, <span class="math inline">\(H_0: \mu_1=\mu_2=...\mu_i\)</span>). ANOVA specifically allows us to analyze the variance of these different groups to ascertain which factors are most responsible for the variation we observe in the data. Because of the way ANOVA operates, we can actually test multiple different combinations of variables simultaneously in what we call a <em>two-way ANOVA</em>.</p>
-<p>Don’t forget to load your required packages - <code>tidyverse</code>, <code>plyr</code>, and <code>agricolae</code>!</p>
+<p>Don’t forget to load your required packages - some we have used before, like <code>agricolae</code>, <code>plyr</code>, and <code>tidyverse</code>, but others are new for this section: <code>multcomp</code> and <code>nlme</code>! As a reminder, these packages are designed for the following:</p>
+<ul>
+<li><code>agricolae</code>: originally written as a Master’s thesis at the Universidad Nacional de Ingeniería (Lima, Perú), this package is designed to help with agricultural research.</li>
+<li><code>plyr</code>: tools for common problems, including splitting data, applying functions across data, and combining datasets together.</li>
+<li><code>tidyverse</code>: one we are already familiar with; a wrapper for installing <code>ggplot2</code>, <code>dplyr</code>, <code>tidyr</code>, <code>readr</code>, <code>purrr</code>, <code>tibble</code>, <code>stringr</code>, and <code>forcats</code>.</li>
+<li><code>multcomp</code>: more in depth and better <strong>MULT</strong>iple <strong>COMP</strong>arisons via linear models and related models.</li>
+<li><code>nlme</code>: a package for fitting Gaussian and <strong>n</strong>on-<strong>l</strong>inear <strong>m</strong>ixed-<strong>e</strong>ffect models.</li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agricolae)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plyr)</span>
@@ -1066,7 +1073,8 @@ Friedman chi-squared = 9.9166, df = 9, p-value = 0.3573</code></pre>
 </section>
 <section id="homework-chapter-12" class="level2" data-number="10.4">
 <h2 data-number="10.4" class="anchored" data-anchor-id="homework-chapter-12"><span class="header-section-number">10.4</span> Homework: Chapter 12</h2>
-<p>To be updated.</p>
+<p>For problems 12.1, 12.2, 12.3, 12.4, and 12.5, state your hypotheses in sentence form and mathematically. Then, identify the appropriate ANOVA and perform the analysis. If you reject the null, complete a Tukey test and plot your results, showing letters denoting each group. <strong>Note</strong> that 12.4 requires a Friedman’s test, but all other problems require some form of ANOVA.</p>
+<p>Next, for problems 12.7, 12.8, and 12.9, identify the appropriate test and justify your reasoning. State the null and alternative hypothesis in word form and mathematically, and perform your analysis. If you perform an ANOVA <em>and</em> you reject the null hypothesis, plot your results and label the groups by letter.</p>
 
 
 </section>

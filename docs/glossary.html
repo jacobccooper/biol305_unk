@@ -278,6 +278,11 @@ window.Quarto = {
   <ul>
   <li><a href="#common-commands" id="toc-common-commands" class="nav-link active" data-scroll-target="#common-commands"><span class="header-section-number">14.1</span> Common Commands</a></li>
   <li><a href="#basic-statistics" id="toc-basic-statistics" class="nav-link" data-scroll-target="#basic-statistics"><span class="header-section-number">14.2</span> Basic statistics</a></li>
+  <li><a href="#picking-the-test" id="toc-picking-the-test" class="nav-link" data-scroll-target="#picking-the-test"><span class="header-section-number">14.3</span> Picking the test</a>
+  <ul class="collapse">
+  <li><a href="#categorical-explanatory-variables" id="toc-categorical-explanatory-variables" class="nav-link" data-scroll-target="#categorical-explanatory-variables"><span class="header-section-number">14.3.1</span> Categorical explanatory variables</a></li>
+  <li><a href="#continuous-explanatory-variables" id="toc-continuous-explanatory-variables" class="nav-link" data-scroll-target="#continuous-explanatory-variables"><span class="header-section-number">14.3.2</span> Continuous explanatory variables</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -368,8 +373,38 @@ window.Quarto = {
 <pre><code>[1] 0.04962364</code></pre>
 </div>
 </div>
+</section>
+<section id="picking-the-test" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="picking-the-test"><span class="header-section-number">14.3</span> Picking the test</h2>
+<p>For a step by step click-through, see below:</p>
+<p>Is the explanatory variable categorical or continuous?</p>
+<section id="categorical-explanatory-variables" class="level3" data-number="14.3.1">
+<h3 data-number="14.3.1" class="anchored" data-anchor-id="categorical-explanatory-variables"><span class="header-section-number">14.3.1</span> Categorical explanatory variables</h3>
+<p>Is the response variable categorical or continuous?</p>
+<section id="categorical-explanatory-response-variables" class="level4" data-number="14.3.1.1">
+<h4 data-number="14.3.1.1" class="anchored" data-anchor-id="categorical-explanatory-response-variables"><span class="header-section-number">14.3.1.1</span> Categorical explanatory &amp; response variables</h4>
+<p>When both variables are categorical, we are looking at <span class="math inline">\(\chi^2\)</span> tests where we are comparing counts of individuals from the two different categories. Our major types of tests are:</p>
+<ul>
+<li><p><span class="math inline">\(\chi^2\)</span> goodness-of-fit tests - looking at data or counts for different categories and asking if what we <em>observe</em> is the same as what we <em>expect</em></p></li>
+<li><p><span class="math inline">\(\chi^2\)</span> tests of independence -</p></li>
+<li><p>Fisher’s exact test</p></li>
+</ul>
+</section>
+<section id="categorical-explanatory-and-continuous-response-variables" class="level4" data-number="14.3.1.2">
+<h4 data-number="14.3.1.2" class="anchored" data-anchor-id="categorical-explanatory-and-continuous-response-variables"><span class="header-section-number">14.3.1.2</span> Categorical explanatory and continuous response variables</h4>
+</section>
+</section>
+<section id="continuous-explanatory-variables" class="level3" data-number="14.3.2">
+<h3 data-number="14.3.2" class="anchored" data-anchor-id="continuous-explanatory-variables"><span class="header-section-number">14.3.2</span> Continuous explanatory variables</h3>
+<section id="continuous-explanatory-variables-and-categorical-response-variables" class="level4" data-number="14.3.2.1">
+<h4 data-number="14.3.2.1" class="anchored" data-anchor-id="continuous-explanatory-variables-and-categorical-response-variables"><span class="header-section-number">14.3.2.1</span> Continuous explanatory variables and categorical response variables</h4>
+</section>
+<section id="continuous-explanatory-response-variables" class="level4" data-number="14.3.2.2">
+<h4 data-number="14.3.2.2" class="anchored" data-anchor-id="continuous-explanatory-response-variables"><span class="header-section-number">14.3.2.2</span> Continuous explanatory &amp; response variables</h4>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->

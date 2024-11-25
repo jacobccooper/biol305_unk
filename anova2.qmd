@@ -9,7 +9,13 @@ editor: visual
 
 Previously, we discussed one-way ANOVAs, where we are looking at a single factor split across three or more groups and trying to determine if the means of these groups are equal (*i.e.*, $H_0: \mu_1=\mu_2=...\mu_i$). ANOVA specifically allows us to analyze the variance of these different groups to ascertain which factors are most responsible for the variation we observe in the data. Because of the way ANOVA operates, we can actually test multiple different combinations of variables simultaneously in what we call a *two-way ANOVA*.
 
-Don't forget to load your required packages - `tidyverse`, `plyr`, and `agricolae`!
+Don't forget to load your required packages - some we have used before, like `agricolae`, `plyr`, and `tidyverse`, but others are new for this section: `multcomp` and `nlme`! As a reminder, these packages are designed for the following:
+
+-   `agricolae`: originally written as a Master's thesis at the Universidad Nacional de Ingeniería (Lima, Perú), this package is designed to help with agricultural research.
+-   `plyr`: tools for common problems, including splitting data, applying functions across data, and combining datasets together.
+-   `tidyverse`: one we are already familiar with; a wrapper for installing `ggplot2`, `dplyr`, `tidyr`, `readr`, `purrr`, `tibble`, `stringr`, and `forcats`.
+-   `multcomp`: more in depth and better **MULT**iple **COMP**arisons via linear models and related models.
+-   `nlme`: a package for fitting Gaussian and **n**on-**l**inear **m**ixed-**e**ffect models.
 
 ```{r, message = F}
 library(agricolae)
@@ -457,4 +463,6 @@ print(friedman_long_data)
 
 ## Homework: Chapter 12
 
-To be updated.
+For problems 12.1, 12.2, 12.3, 12.4, and 12.5, state your hypotheses in sentence form and mathematically. Then, identify the appropriate ANOVA and perform the analysis. If you reject the null, complete a Tukey test and plot your results, showing letters denoting each group. **Note** that 12.4 requires a Friedman's test, but all other problems require some form of ANOVA.
+
+Next, for problems 12.7, 12.8, and 12.9, identify the appropriate test and justify your reasoning. State the null and alternative hypothesis in word form and mathematically, and perform your analysis. If you perform an ANOVA *and* you reject the null hypothesis, plot your results and label the groups by letter.

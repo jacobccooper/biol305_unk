@@ -56,3 +56,31 @@ x <- rnorm(1000)
 ```{r}
 mean(x)
 ```
+
+## Picking the test
+
+For a step by step click-through, see below:
+
+Is the explanatory variable categorical or continuous?
+
+### Categorical explanatory variables
+
+Is the response variable categorical or continuous?
+
+#### Categorical explanatory & response variables
+
+When both variables are categorical, we are looking at $\chi^2$ tests where we are comparing counts of individuals from the two different categories. Our major types of tests are:
+
+-   $\chi^2$ goodness-of-fit tests - looking at data or counts for different categories and asking if what we *observe* is the same as what we *expect*
+
+-   $\chi^2$ tests of independence -
+
+-   Fisher's exact test
+
+#### Categorical explanatory and continuous response variables
+
+### Continuous explanatory variables
+
+#### Continuous explanatory variables and categorical response variables
+
+#### Continuous explanatory & response variables

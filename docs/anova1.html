@@ -354,27 +354,27 @@ window.Quarto = {
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(i <span class="sc">==</span> <span class="dv">1</span>){</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="st">"Data"</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="st">"Response"</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>Explanatory <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    newdat <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(newdat) <span class="ot">&lt;-</span> <span class="st">"Data"</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    newdat<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(newdat) <span class="ot">&lt;-</span> <span class="st">"Response"</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    newdat<span class="sc">$</span>Explanatory <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(data,newdat)</span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize by group</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>gg_data <span class="ot">&lt;-</span> <span class="fu">ddply</span>(data, <span class="st">"Group"</span>, summarise,</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>                 <span class="at">N =</span> <span class="fu">length</span>(Data),</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>                 <span class="at">mean =</span> <span class="fu">mean</span>(Data),</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sd =</span> <span class="fu">sd</span>(Data),</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> <span class="fu">ddply</span>(data, <span class="st">"Explanatory"</span>, summarise,</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>                 <span class="at">N =</span> <span class="fu">length</span>(Response),</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>                 <span class="at">mean =</span> <span class="fu">mean</span>(Response),</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sd =</span> <span class="fu">sd</span>(Response),</span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>                 <span class="at">se =</span> sd <span class="sc">/</span> <span class="fu">sqrt</span>(N))</span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gg_data, <span class="fu">aes</span>(<span class="at">x =</span> Group, <span class="at">y =</span> mean, <span class="at">group =</span> Group)) <span class="sc">+</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summary_data, <span class="fu">aes</span>(<span class="at">x =</span> Explanatory, <span class="at">y =</span> mean, <span class="at">group =</span> Explanatory)) <span class="sc">+</span></span>
 <span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data =</span> gg_data, <span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>se, <span class="at">ymax =</span> mean<span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>se,</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">color =</span> Group), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data =</span> summary_data, <span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>se, <span class="at">ymax =</span> mean<span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>se,</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">color =</span> Explanatory), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>,<span class="fl">1.5</span>)) <span class="sc">+</span></span>
 <span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
@@ -396,27 +396,27 @@ window.Quarto = {
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(i <span class="sc">==</span> <span class="dv">1</span>){</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="st">"Data"</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="st">"Response"</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>Explanatory <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    newdat <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(newdat) <span class="ot">&lt;-</span> <span class="st">"Data"</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    newdat<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(newdat) <span class="ot">&lt;-</span> <span class="st">"Response"</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    newdat<span class="sc">$</span>Explanatory <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(data,newdat)</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize by group</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>gg_data <span class="ot">&lt;-</span> <span class="fu">ddply</span>(data, <span class="st">"Group"</span>, summarise,</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                 <span class="at">N =</span> <span class="fu">length</span>(Data),</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                 <span class="at">mean =</span> <span class="fu">mean</span>(Data),</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sd =</span> <span class="fu">sd</span>(Data),</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> <span class="fu">ddply</span>(data, <span class="st">"Explanatory"</span>, summarise,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                 <span class="at">N =</span> <span class="fu">length</span>(Response),</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                 <span class="at">mean =</span> <span class="fu">mean</span>(Response),</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sd =</span> <span class="fu">sd</span>(Response),</span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>                 <span class="at">se =</span> sd <span class="sc">/</span> <span class="fu">sqrt</span>(N))</span>
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gg_data, <span class="fu">aes</span>(<span class="at">x =</span> Group, <span class="at">y =</span> mean, <span class="at">group =</span> Group)) <span class="sc">+</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summary_data, <span class="fu">aes</span>(<span class="at">x =</span> Explanatory, <span class="at">y =</span> mean, <span class="at">group =</span> Explanatory)) <span class="sc">+</span></span>
 <span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data =</span> gg_data, <span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>se, <span class="at">ymax =</span> mean<span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>se,</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">color =</span> Group), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data =</span> summary_data, <span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>se, <span class="at">ymax =</span> mean<span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>se,</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">color =</span> Explanatory), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
 <span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>,<span class="fl">1.5</span>)) <span class="sc">+</span></span>
 <span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
@@ -443,37 +443,37 @@ window.Quarto = {
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(i <span class="sc">==</span> <span class="dv">1</span>){</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">2</span>)</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="st">"Data"</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="st">"Response"</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>Explanatory <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    newdat <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(newdat) <span class="ot">&lt;-</span> <span class="st">"Data"</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    newdat<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(newdat) <span class="ot">&lt;-</span> <span class="st">"Response"</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    newdat<span class="sc">$</span>Explanatory <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(data,newdat)</span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># split into "typical" table</span></span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>expanded_data <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x1 <span class="ot">&lt;-</span> data<span class="sc">$</span>Data[<span class="fu">which</span>(data<span class="sc">$</span>Group<span class="sc">==</span><span class="st">"x1"</span>)]</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x2 <span class="ot">&lt;-</span> data<span class="sc">$</span>Data[<span class="fu">which</span>(data<span class="sc">$</span>Group<span class="sc">==</span><span class="st">"x2"</span>)]</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x3 <span class="ot">&lt;-</span> data<span class="sc">$</span>Data[<span class="fu">which</span>(data<span class="sc">$</span>Group<span class="sc">==</span><span class="st">"x3"</span>)]</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x4 <span class="ot">&lt;-</span> data<span class="sc">$</span>Data[<span class="fu">which</span>(data<span class="sc">$</span>Group<span class="sc">==</span><span class="st">"x4"</span>)]</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x1 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x1"</span>)]</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x2 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x2"</span>)]</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x3 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x3"</span>)]</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x4 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x4"</span>)]</span>
 <span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>expanded_data <span class="ot">&lt;-</span> expanded_data <span class="sc">%&gt;%</span></span>
 <span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
 <span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize by group</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>gg_data <span class="ot">&lt;-</span> <span class="fu">ddply</span>(data, <span class="st">"Group"</span>, summarise,</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>                 <span class="at">N =</span> <span class="fu">length</span>(Data),</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>                 <span class="at">mean =</span> <span class="fu">mean</span>(Data),</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sd =</span> <span class="fu">sd</span>(Data),</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> <span class="fu">ddply</span>(data, <span class="st">"Explanatory"</span>, summarise,</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>                 <span class="at">N =</span> <span class="fu">length</span>(Response),</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>                 <span class="at">mean =</span> <span class="fu">mean</span>(Response),</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sd =</span> <span class="fu">sd</span>(Response),</span>
 <span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>                 <span class="at">se =</span> sd <span class="sc">/</span> <span class="fu">sqrt</span>(N))</span>
 <span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gg_data, <span class="fu">aes</span>(<span class="at">x =</span> Group, <span class="at">y =</span> mean, <span class="at">group =</span> Group)) <span class="sc">+</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summary_data, <span class="fu">aes</span>(<span class="at">x =</span> Explanatory, <span class="at">y =</span> mean, <span class="at">group =</span> Explanatory)) <span class="sc">+</span></span>
 <span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data =</span> gg_data, <span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>se, <span class="at">ymax =</span> mean<span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>se,</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">color =</span> Group), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data =</span> summary_data, <span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>se, <span class="at">ymax =</span> mean<span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>se,</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">color =</span> Explanatory), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
 <span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>)) <span class="sc">+</span></span>
 <span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
@@ -727,12 +727,12 @@ window.Quarto = {
 <h2 data-number="9.3" class="anchored" data-anchor-id="anova-by-r"><span class="header-section-number">9.3</span> ANOVA: By <em>R</em></h2>
 <p>For this, we need to use the dataframe where we have all data in a single column and all ID’s in the other columns. We then show how we want the ANOVA to operate across the data using the <code>~</code> symbol.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>data_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Data <span class="sc">~</span> Group, <span class="at">data =</span> data)</span>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>data_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> Explanatory, <span class="at">data =</span> data)</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-Group        3  23.40   7.801   11.54 1.89e-05 ***
+Explanatory  3  23.40   7.801   11.54 1.89e-05 ***
 Residuals   36  24.33   0.676                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
@@ -748,10 +748,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>To do this by hand, we will need a lot of data from our aforementioned ANOVA test.</p>
 <p>We need to calculate pairwise differences between each set of means.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>x1_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Data[data<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">"x1"</span>])</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>x2_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Data[data<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">"x2"</span>])</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>x3_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Data[data<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">"x3"</span>])</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>x4_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Data[data<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">"x4"</span>])</span>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>x1_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Response[data<span class="sc">$</span>Explanatory <span class="sc">==</span> <span class="st">"x1"</span>])</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>x2_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Response[data<span class="sc">$</span>Explanatory <span class="sc">==</span> <span class="st">"x2"</span>])</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>x3_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Response[data<span class="sc">$</span>Explanatory <span class="sc">==</span> <span class="st">"x3"</span>])</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>x4_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Response[data<span class="sc">$</span>Explanatory <span class="sc">==</span> <span class="st">"x4"</span>])</span>
 <span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>group_means <span class="ot">&lt;-</span> <span class="fu">c</span>(x1_mean, x2_mean, x3_mean, x4_mean)</span>
 <span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
@@ -829,9 +829,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <pre><code>  Tukey multiple comparisons of means
     95% family-wise confidence level
 
-Fit: aov(formula = Data ~ Group, data = data)
+Fit: aov(formula = Response ~ Explanatory, data = data)
 
-$Group
+$Explanatory
              diff       lwr        upr     p adj
 x2-x1 -1.47786579 -2.468021 -0.4877106 0.0015554
 x3-x1 -1.54228164 -2.532437 -0.5521265 0.0009388
@@ -846,7 +846,7 @@ x4-x3 -0.50878604 -1.498941  0.4813691 0.5173399</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>tukey_data_aov <span class="ot">&lt;-</span> <span class="fu">HSD.test</span>(data_aov,</span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>                           <span class="co"># what to group by?</span></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"Group"</span>,</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"Explanatory"</span>,</span>
 <span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>                           <span class="co"># significance level?</span></span>
 <span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">alpha =</span> <span class="fl">0.05</span>, </span>
 <span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>                           <span class="co"># are data unbalanced</span></span>
@@ -855,15 +855,15 @@ x4-x3 -0.50878604 -1.498941  0.4813691 0.5173399</code></pre>
 <span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">console =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Study: data_aov ~ "Group"
+Study: data_aov ~ "Explanatory"
 
-HSD Test for Data 
+HSD Test for Response 
 
 Mean Square Error:  0.6758192 
 
-Group,  means
+Explanatory,  means
 
-         Data       std  r        se        Min      Max        Q25         Q50
+     Response       std  r        se        Min      Max        Q25         Q50
 x1  1.7620153 1.0505466 10 0.2599652  0.4504476 3.972459  1.1175485  1.44911720
 x2  0.2841495 0.7532422 10 0.2599652 -0.4729986 1.985826 -0.3497379  0.21347543
 x3  0.2197337 0.7019368 10 0.2599652 -0.6150452 1.574903 -0.2436023 -0.04493909
@@ -881,7 +881,7 @@ Minimun Significant Difference: 0.9901551
 
 Treatments with the same letter are not significantly different.
 
-         Data groups
+     Response groups
 x1  1.7620153      a
 x2  0.2841495      b
 x3  0.2197337      b
@@ -894,11 +894,11 @@ x4 -0.2890524      b</code></pre>
   0.6758192 36 0.4942115 166.3422 0.9901551
 
 $parameters
-   test name.t ntr StudentizedRange alpha
-  Tukey  Group   4         3.808798  0.05
+   test      name.t ntr StudentizedRange alpha
+  Tukey Explanatory   4         3.808798  0.05
 
 $means
-         Data       std  r        se        Min      Max        Q25         Q50
+     Response       std  r        se        Min      Max        Q25         Q50
 x1  1.7620153 1.0505466 10 0.2599652  0.4504476 3.972459  1.1175485  1.44911720
 x2  0.2841495 0.7532422 10 0.2599652 -0.4729986 1.985826 -0.3497379  0.21347543
 x3  0.2197337 0.7019368 10 0.2599652 -0.6150452 1.574903 -0.2436023 -0.04493909
@@ -913,7 +913,7 @@ $comparison
 NULL
 
 $groups
-         Data groups
+     Response groups
 x1  1.7620153      a
 x2  0.2841495      b
 x3  0.2197337      b
@@ -930,12 +930,12 @@ attr(,"class")
 <h2 data-number="9.5" class="anchored" data-anchor-id="plotting-our-anova-results"><span class="header-section-number">9.5</span> Plotting our ANOVA results</h2>
 <p>When we plot our ANOVAs, we want to show which mean is different from all of the others. Below, I will show the full pipeline for performing an ANOVA on a dataset and plotting the data at the end using out <code>data</code> object.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>data_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Data <span class="sc">~</span> Group,data)</span>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>data_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> Explanatory,data)</span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-Group        3  23.40   7.801   11.54 1.89e-05 ***
+Explanatory  3  23.40   7.801   11.54 1.89e-05 ***
 Residuals   36  24.33   0.676                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
@@ -944,52 +944,59 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Now, we need to summarize things based on our <code>plyr</code> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize by group</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>gg_data <span class="ot">&lt;-</span> <span class="fu">ddply</span>(data, <span class="st">"Group"</span>, summarise,</span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">N =</span> <span class="fu">length</span>(Data),</span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">mean =</span> <span class="fu">mean</span>(Data),</span>
-<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sd =</span> <span class="fu">sd</span>(Data),</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> <span class="fu">ddply</span>(data, <span class="st">"Explanatory"</span>, summarise,</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">N =</span> <span class="fu">length</span>(Response),</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">mean =</span> <span class="fu">mean</span>(Response),</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sd =</span> <span class="fu">sd</span>(Response),</span>
 <span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">se =</span> sd <span class="sc">/</span> <span class="fu">sqrt</span>(N))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, we can use the aforementioned Tukey results to assign to groups. Because <code>agricolae</code> functions define the groups in a <code>$groups</code> slot, we can pull out these data and perform some minimal transformations to make them ready to plot. <em>This will save us a lot of time and hassle</em>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note first group must be EXACT MATCH to your gg_data object</span></span>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note first group must be EXACT MATCH to your summary_data object</span></span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="co"># groups are saved in the Tukey object</span></span>
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this is true for Tukey later as well</span></span>
 <span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="co"># pull out the groups slot from tukey</span></span>
-<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="co"># same for Kruskal later on!</span></span>
-<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>sig.labels <span class="ot">&lt;-</span> tukey_data_aov<span class="sc">$</span>groups <span class="sc">%&gt;%</span></span>
-<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert to a data.frame</span></span>
-<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create a new column - place rownames into the column</span></span>
-<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># converts to a format better for ggplot</span></span>
-<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Group =</span> <span class="fu">rownames</span>(tukey_data_aov<span class="sc">$</span>groups)) <span class="sc">%&gt;%</span></span>
-<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># rename column to prevent confusion</span></span>
-<span id="cb58-14"><a href="#cb58-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># specify dplyr; default function may be from plyr and not work</span></span>
-<span id="cb58-15"><a href="#cb58-15" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">significance =</span> groups)</span>
-<span id="cb58-16"><a href="#cb58-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-17"><a href="#cb58-17" aria-hidden="true" tabindex="-1"></a>sig.labels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="co"># the following is a function that will make the significant label table</span></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>sig.label.maker <span class="ot">&lt;-</span> <span class="cf">function</span>(tukey_test, group_name){</span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>  sig.labels <span class="ot">&lt;-</span> tukey_test<span class="sc">$</span>groups <span class="sc">%&gt;%</span> </span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert to a data.frame</span></span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create a new column - place rownames into the column</span></span>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># converts to a format better for ggplot</span></span>
+<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Explanatorys =</span> <span class="fu">rownames</span>(tukey_test<span class="sc">$</span>groups)) <span class="sc">%&gt;%</span></span>
+<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># rename column to prevent confusion</span></span>
+<span id="cb58-14"><a href="#cb58-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># specify dplyr; default function may be from plyr and not work</span></span>
+<span id="cb58-15"><a href="#cb58-15" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">significance =</span> groups)</span>
+<span id="cb58-16"><a href="#cb58-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(sig.labels)[<span class="fu">which</span>(<span class="fu">colnames</span>(sig.labels) <span class="sc">==</span> <span class="st">"Explanatorys"</span>)] <span class="ot">&lt;-</span> group_name</span>
+<span id="cb58-17"><a href="#cb58-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sig.labels)</span>
+<span id="cb58-18"><a href="#cb58-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb58-19"><a href="#cb58-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-20"><a href="#cb58-20" aria-hidden="true" tabindex="-1"></a><span class="co"># pull out the groups slot from tukey</span></span>
+<span id="cb58-21"><a href="#cb58-21" aria-hidden="true" tabindex="-1"></a><span class="co"># same for Kruskal later on!</span></span>
+<span id="cb58-22"><a href="#cb58-22" aria-hidden="true" tabindex="-1"></a>sig.labels <span class="ot">&lt;-</span> <span class="fu">sig.label.maker</span>(tukey_data_aov, <span class="st">"Explanatory"</span>)</span>
+<span id="cb58-23"><a href="#cb58-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-24"><a href="#cb58-24" aria-hidden="true" tabindex="-1"></a>sig.labels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>         Data significance Group
-x1  1.7620153            a    x1
-x2  0.2841495            b    x2
-x3  0.2197337            b    x3
-x4 -0.2890524            b    x4</code></pre>
+<pre><code>     Response significance Explanatory
+x1  1.7620153            a          x1
+x2  0.2841495            b          x2
+x3  0.2197337            b          x3
+x4 -0.2890524            b          x4</code></pre>
 </div>
 </div>
-<p>Note that in the above, the row labels and the column <code>Group</code> are identical. We moved these data into a column to make it easier to use <code>ggplot</code>. If you want letters to be different - capitalized or something else - you will have to do this yourself. Now we can plot our data and add the labels!</p>
+<p>Note that in the above, the row labels and the column <code>Explanatory</code> are identical. We moved these data into a column to make it easier to use <code>ggplot</code>. If you want letters to be different - capitalized or something else - you will have to do this yourself. Now we can plot our data and add the labels!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gg_data, <span class="co"># plot summary data</span></span>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summary_data, <span class="co"># plot summary data</span></span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Define plotting - x by group, y is mean, grouping by group</span></span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Group, <span class="at">y =</span> mean, <span class="at">group =</span> Group)) <span class="sc">+</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Explanatory, <span class="at">y =</span> mean, <span class="at">group =</span> Explanatory)) <span class="sc">+</span></span>
 <span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add points to plot for y values</span></span>
 <span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add error bars around points</span></span>
-<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data =</span> gg_data, </span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data =</span> summary_data, </span>
 <span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>                <span class="co"># define error bars</span></span>
 <span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>se, <span class="at">ymax =</span> mean<span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>se,</span>
 <span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># define color, size</span></span>
-<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">color =</span> Group), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">color =</span> Explanatory), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
 <span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add line at average for the main group</span></span>
 <span id="cb60-13"><a href="#cb60-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># this is not always known - nor requires!</span></span>
 <span id="cb60-14"><a href="#cb60-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
@@ -1002,12 +1009,12 @@ x4 -0.2890524            b    x4</code></pre>
 <span id="cb60-21"><a href="#cb60-21" aria-hidden="true" tabindex="-1"></a>            <span class="co"># make bold</span></span>
 <span id="cb60-22"><a href="#cb60-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
 <span id="cb60-23"><a href="#cb60-23" aria-hidden="true" tabindex="-1"></a>            <span class="co"># define where labels should go</span></span>
-<span id="cb60-24"><a href="#cb60-24" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> Group, </span>
+<span id="cb60-24"><a href="#cb60-24" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> Explanatory, </span>
 <span id="cb60-25"><a href="#cb60-25" aria-hidden="true" tabindex="-1"></a>                <span class="co"># define height of label</span></span>
 <span id="cb60-26"><a href="#cb60-26" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="sc">-</span><span class="dv">2</span>, </span>
 <span id="cb60-27"><a href="#cb60-27" aria-hidden="true" tabindex="-1"></a>                <span class="co"># what are the labels?</span></span>
 <span id="cb60-28"><a href="#cb60-28" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="fu">paste0</span>(significance))) <span class="sc">+</span></span>
-<span id="cb60-29"><a href="#cb60-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Group Name"</span>) <span class="sc">+</span></span>
+<span id="cb60-29"><a href="#cb60-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Explanatory Name"</span>) <span class="sc">+</span></span>
 <span id="cb60-30"><a href="#cb60-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Mean"</span>) <span class="sc">+</span></span>
 <span id="cb60-31"><a href="#cb60-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove legend - not needed here</span></span>
 <span id="cb60-32"><a href="#cb60-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
@@ -1041,37 +1048,37 @@ x4 -0.2890524            b    x4</code></pre>
 <span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">round</span>(<span class="dv">2</span>)</span>
 <span id="cb61-9"><a href="#cb61-9" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb61-10"><a href="#cb61-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="st">"Data"</span></span>
-<span id="cb61-11"><a href="#cb61-11" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
+<span id="cb61-10"><a href="#cb61-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="st">"Response"</span></span>
+<span id="cb61-11"><a href="#cb61-11" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>Explanatory <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
 <span id="cb61-12"><a href="#cb61-12" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
 <span id="cb61-13"><a href="#cb61-13" aria-hidden="true" tabindex="-1"></a>    newdat <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb61-14"><a href="#cb61-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(newdat) <span class="ot">&lt;-</span> <span class="st">"Data"</span></span>
-<span id="cb61-15"><a href="#cb61-15" aria-hidden="true" tabindex="-1"></a>    newdat<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
+<span id="cb61-14"><a href="#cb61-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(newdat) <span class="ot">&lt;-</span> <span class="st">"Response"</span></span>
+<span id="cb61-15"><a href="#cb61-15" aria-hidden="true" tabindex="-1"></a>    newdat<span class="sc">$</span>Explanatory <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
 <span id="cb61-16"><a href="#cb61-16" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(data,newdat)</span>
 <span id="cb61-17"><a href="#cb61-17" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb61-18"><a href="#cb61-18" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb61-19"><a href="#cb61-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb61-20"><a href="#cb61-20" aria-hidden="true" tabindex="-1"></a><span class="co"># split into "typical" table</span></span>
 <span id="cb61-21"><a href="#cb61-21" aria-hidden="true" tabindex="-1"></a>expanded_data <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb61-22"><a href="#cb61-22" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x1 <span class="ot">&lt;-</span> data<span class="sc">$</span>Data[<span class="fu">which</span>(data<span class="sc">$</span>Group<span class="sc">==</span><span class="st">"x1"</span>)]</span>
-<span id="cb61-23"><a href="#cb61-23" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x2 <span class="ot">&lt;-</span> data<span class="sc">$</span>Data[<span class="fu">which</span>(data<span class="sc">$</span>Group<span class="sc">==</span><span class="st">"x2"</span>)]</span>
-<span id="cb61-24"><a href="#cb61-24" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x3 <span class="ot">&lt;-</span> data<span class="sc">$</span>Data[<span class="fu">which</span>(data<span class="sc">$</span>Group<span class="sc">==</span><span class="st">"x3"</span>)]</span>
-<span id="cb61-25"><a href="#cb61-25" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x4 <span class="ot">&lt;-</span> data<span class="sc">$</span>Data[<span class="fu">which</span>(data<span class="sc">$</span>Group<span class="sc">==</span><span class="st">"x4"</span>)]</span>
+<span id="cb61-22"><a href="#cb61-22" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x1 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x1"</span>)]</span>
+<span id="cb61-23"><a href="#cb61-23" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x2 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x2"</span>)]</span>
+<span id="cb61-24"><a href="#cb61-24" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x3 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x3"</span>)]</span>
+<span id="cb61-25"><a href="#cb61-25" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x4 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x4"</span>)]</span>
 <span id="cb61-26"><a href="#cb61-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb61-27"><a href="#cb61-27" aria-hidden="true" tabindex="-1"></a>expanded_data <span class="ot">&lt;-</span> expanded_data <span class="sc">%&gt;%</span></span>
 <span id="cb61-28"><a href="#cb61-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
 <span id="cb61-29"><a href="#cb61-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb61-30"><a href="#cb61-30" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize by group</span></span>
-<span id="cb61-31"><a href="#cb61-31" aria-hidden="true" tabindex="-1"></a>gg_data <span class="ot">&lt;-</span> <span class="fu">ddply</span>(data, <span class="st">"Group"</span>, summarise,</span>
-<span id="cb61-32"><a href="#cb61-32" aria-hidden="true" tabindex="-1"></a>                 <span class="at">N =</span> <span class="fu">length</span>(Data),</span>
-<span id="cb61-33"><a href="#cb61-33" aria-hidden="true" tabindex="-1"></a>                 <span class="at">mean =</span> <span class="fu">mean</span>(Data),</span>
-<span id="cb61-34"><a href="#cb61-34" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sd =</span> <span class="fu">sd</span>(Data),</span>
+<span id="cb61-31"><a href="#cb61-31" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> <span class="fu">ddply</span>(data, <span class="st">"Explanatory"</span>, summarise,</span>
+<span id="cb61-32"><a href="#cb61-32" aria-hidden="true" tabindex="-1"></a>                 <span class="at">N =</span> <span class="fu">length</span>(Response),</span>
+<span id="cb61-33"><a href="#cb61-33" aria-hidden="true" tabindex="-1"></a>                 <span class="at">mean =</span> <span class="fu">mean</span>(Response),</span>
+<span id="cb61-34"><a href="#cb61-34" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sd =</span> <span class="fu">sd</span>(Response),</span>
 <span id="cb61-35"><a href="#cb61-35" aria-hidden="true" tabindex="-1"></a>                 <span class="at">se =</span> sd <span class="sc">/</span> <span class="fu">sqrt</span>(N))</span>
 <span id="cb61-36"><a href="#cb61-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb61-37"><a href="#cb61-37" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gg_data, <span class="fu">aes</span>(<span class="at">x =</span> Group, <span class="at">y =</span> mean, <span class="at">group =</span> Group)) <span class="sc">+</span></span>
+<span id="cb61-37"><a href="#cb61-37" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summary_data, <span class="fu">aes</span>(<span class="at">x =</span> Explanatory, <span class="at">y =</span> mean, <span class="at">group =</span> Explanatory)) <span class="sc">+</span></span>
 <span id="cb61-38"><a href="#cb61-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb61-39"><a href="#cb61-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data =</span> gg_data, <span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>se, <span class="at">ymax =</span> mean<span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>se,</span>
-<span id="cb61-40"><a href="#cb61-40" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">color =</span> Group), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb61-39"><a href="#cb61-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data =</span> summary_data, <span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>se, <span class="at">ymax =</span> mean<span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>se,</span>
+<span id="cb61-40"><a href="#cb61-40" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">color =</span> Explanatory), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
 <span id="cb61-41"><a href="#cb61-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb61-42"><a href="#cb61-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>)) <span class="sc">+</span></span>
 <span id="cb61-43"><a href="#cb61-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
@@ -1111,34 +1118,34 @@ W = 0.93404, p-value = 0.02187</code></pre>
 <h3 data-number="9.6.1" class="anchored" data-anchor-id="by-hand"><span class="header-section-number">9.6.1</span> By hand</h3>
 <p>First, we need to order all the data in the entire dataset. <strong>This is easiest to do if we use the dataset with all data in a single column.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>ranks <span class="ot">&lt;-</span> <span class="fu">rank</span>(data<span class="sc">$</span>Data, <span class="at">ties.method =</span> <span class="st">"average"</span>)</span>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>ranks <span class="ot">&lt;-</span> <span class="fu">rank</span>(data<span class="sc">$</span>Response, <span class="at">ties.method =</span> <span class="st">"average"</span>)</span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="co"># view first couple of rows</span></span>
 <span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Data Group ranks
-1 1.84    x1    39
-2 1.58    x1    34
-3 1.51    x1    33
-4 1.26    x1    32
-5 1.75    x1    37
-6 1.92    x1    40</code></pre>
+<pre><code>  Response Explanatory ranks
+1     1.84          x1    39
+2     1.58          x1    34
+3     1.51          x1    33
+4     1.26          x1    32
+5     1.75          x1    37
+6     1.92          x1    40</code></pre>
 </div>
 </div>
 <p>Now, we need to calculate the sum of the ranks for each category. The below function will take the sum of the ranks for the rows which match the condition of having the group be <code>x1</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>x1_sum <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Group<span class="sc">==</span><span class="st">"x1"</span>)])</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>x2_sum <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Group<span class="sc">==</span><span class="st">"x2"</span>)])</span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>x3_sum <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Group<span class="sc">==</span><span class="st">"x3"</span>)])</span>
-<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>x4_sum <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Group<span class="sc">==</span><span class="st">"x4"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>x1_sum <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x1"</span>)])</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>x2_sum <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x2"</span>)])</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>x3_sum <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x3"</span>)])</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>x4_sum <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x4"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, we need to calculate our test statistic. The test statistic is <span class="math inline">\(H\)</span>, with: <span class="math display">\[H = \frac{12}{N(N+1)} \cdot \Sigma \frac{R_j^2}{n_j}-3(N+1)\]</span>In this equation, <span class="math inline">\(R\)</span> is the sum of the ranks for a given category. This follows a <span class="math inline">\(\chi^2\)</span> distribution with <span class="math inline">\(k-1\)</span> degrees of freedom, with <span class="math inline">\(k\)</span> referring to categories.</p>
 <p>For these, we need to know what <span class="math inline">\(n\)</span> is for each category.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="fu">length</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Group<span class="sc">==</span><span class="st">"x1"</span>)])</span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="fu">length</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Group<span class="sc">==</span><span class="st">"x2"</span>)])</span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>n3 <span class="ot">&lt;-</span> <span class="fu">length</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Group<span class="sc">==</span><span class="st">"x3"</span>)])</span>
-<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>n4 <span class="ot">&lt;-</span> <span class="fu">length</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Group<span class="sc">==</span><span class="st">"x4"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="fu">length</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x1"</span>)])</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="fu">length</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x2"</span>)])</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>n3 <span class="ot">&lt;-</span> <span class="fu">length</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x3"</span>)])</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>n4 <span class="ot">&lt;-</span> <span class="fu">length</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x4"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next, we can calculate the sums of the <span class="math inline">\(\frac{R^2}{n}\)</span> term.</p>
 <div class="cell">
@@ -1174,14 +1181,14 @@ W = 0.93404, p-value = 0.02187</code></pre>
 <h3 data-number="9.6.2" class="anchored" data-anchor-id="using-r"><span class="header-section-number">9.6.2</span> Using <em>R</em></h3>
 <p>We can also use <em>R</em> for this test.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>kruskal_data <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(Data <span class="sc">~</span> Group, data)</span>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>kruskal_data <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(Response <span class="sc">~</span> Explanatory, data)</span>
 <span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(kruskal_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Kruskal-Wallis rank sum test
 
-data:  Data by Group
+data:  Response by Explanatory
 Kruskal-Wallis chi-squared = 22.149, df = 3, p-value = 6.073e-05</code></pre>
 </div>
 </div>
@@ -1191,9 +1198,9 @@ Kruskal-Wallis chi-squared = 22.149, df = 3, p-value = 6.073e-05</code></pre>
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>data_kruskal <span class="ot">&lt;-</span> <span class="fu">with</span>(data,</span>
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>                     <span class="co"># define parameters for Kruskal-Wallis test</span></span>
 <span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>                     <span class="co"># First, variable of interest</span></span>
-<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">kruskal</span>(Data,</span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">kruskal</span>(Response,</span>
 <span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a>                             <span class="co"># second, grouping variable</span></span>
-<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a>                             Group,</span>
+<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a>                             Explanatory,</span>
 <span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a>                             <span class="co"># do you want group designations returned?</span></span>
 <span id="cb76-9"><a href="#cb76-9" aria-hidden="true" tabindex="-1"></a>                             <span class="at">group =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb76-10"><a href="#cb76-10" aria-hidden="true" tabindex="-1"></a>                             <span class="co"># what is this being done on?</span></span>
@@ -1209,25 +1216,25 @@ Kruskal-Wallis chi-squared = 22.149, df = 3, p-value = 6.073e-05</code></pre>
   22.14917  3 6.07312e-05 2.028094 7.252228
 
 $parameters
-            test p.ajusted name.t ntr alpha
-  Kruskal-Wallis      none  Group   4  0.05
+            test p.ajusted      name.t ntr alpha
+  Kruskal-Wallis      none Explanatory   4  0.05
 
 $means
-     Data  rank       std  r   Min  Max     Q25    Q50    Q75
-x1  1.633 35.50 0.2415252 10  1.21 1.92  1.5275  1.720 1.8025
-x2 -0.075 14.20 0.6424130 10 -0.88 0.69 -0.6325 -0.105 0.5575
-x3  0.020 16.15 0.5327080 10 -0.63 0.95 -0.3250 -0.110 0.3775
-x4  0.045 16.15 0.6774011 10 -0.92 0.95 -0.3500 -0.135 0.6475
+   Response  rank       std  r   Min  Max     Q25    Q50    Q75
+x1    1.633 35.50 0.2415252 10  1.21 1.92  1.5275  1.720 1.8025
+x2   -0.075 14.20 0.6424130 10 -0.88 0.69 -0.6325 -0.105 0.5575
+x3    0.020 16.15 0.5327080 10 -0.63 0.95 -0.3250 -0.110 0.3775
+x4    0.045 16.15 0.6774011 10 -0.92 0.95 -0.3500 -0.135 0.6475
 
 $comparison
 NULL
 
 $groups
-    Data groups
-x1 35.50      a
-x3 16.15      b
-x4 16.15      b
-x2 14.20      b
+   Response groups
+x1    35.50      a
+x3    16.15      b
+x4    16.15      b
+x2    14.20      b
 
 attr(,"class")
 [1] "group"</code></pre>
