@@ -83,10 +83,10 @@ data <- data_expanded %>%
 data
 ```
 
-Now we can do our ANOVA.
+Now we can do our ANOVA. ***Note*** that I put `factor` around the blocking variable.
 
 ```{r}
-data_aov <- aov(Size ~ Location + Food, data)
+data_aov <- aov(Size ~ Food + factor(Location), data)
 
 summary(data_aov)
 ```
@@ -466,3 +466,5 @@ print(friedman_long_data)
 For problems 12.1, 12.2, 12.3, 12.4, and 12.5, state your hypotheses in sentence form and mathematically. Then, identify the appropriate ANOVA and perform the analysis. If you reject the null, complete a Tukey test and plot your results, showing letters denoting each group. **Note** that 12.4 requires a Friedman's test, but all other problems require some form of ANOVA.
 
 Next, for problems 12.7, 12.8, and 12.9, identify the appropriate test and justify your reasoning. State the null and alternative hypothesis in word form and mathematically, and perform your analysis. If you perform an ANOVA *and* you reject the null hypothesis, plot your results and label the groups by letter.
+
+**Remember, only plot the results if you reject your *primary hypothesis*.**

@@ -411,16 +411,16 @@ Bíldudalur          9.4               11.0            10.1
 9 Þingeyri      MegaFish Flakes     11.9</code></pre>
 </div>
 </div>
-<p>Now we can do our ANOVA.</p>
+<p>Now we can do our ANOVA. <strong><em>Note</em></strong> that I put <code>factor</code> around the blocking variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Size <span class="sc">~</span> Location <span class="sc">+</span> Food, data)</span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Size <span class="sc">~</span> Food <span class="sc">+</span> <span class="fu">factor</span>(Location), data)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)  
-Location     2 14.096   7.048  13.744 0.0161 *
-Food         2  9.716   4.858   9.473 0.0304 *
-Residuals    4  2.051   0.513                 
+<pre><code>                 Df Sum Sq Mean Sq F value Pr(&gt;F)  
+Food              2  9.716   4.858   9.473 0.0304 *
+factor(Location)  2 14.096   7.048  13.744 0.0161 *
+Residuals         4  2.051   0.513                 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -435,19 +435,19 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <pre><code>  Tukey multiple comparisons of means
     95% family-wise confidence level
 
-Fit: aov(formula = Size ~ Location + Food, data = data)
-
-$Location
-                             diff        lwr      upr     p adj
-Tálknafjörður-Bíldudalur 1.133333 -0.9504631 3.217130 0.2426762
-Þingeyri-Bíldudalur      3.033333  0.9495369 5.117130 0.0143435
-Þingeyri-Tálknafjörður   1.900000 -0.1837965 3.983796 0.0661651
+Fit: aov(formula = Size ~ Food + factor(Location), data = data)
 
 $Food
                                          diff       lwr        upr     p adj
 MegaFish Flakes-Gigachad Fish Food -1.9333333 -4.017130  0.1504631 0.0628249
 SuperFood-Gigachad Fish Food       -2.4000000 -4.483796 -0.3162035 0.0318454
-SuperFood-MegaFish Flakes          -0.4666667 -2.550463  1.6171298 0.7239212</code></pre>
+SuperFood-MegaFish Flakes          -0.4666667 -2.550463  1.6171298 0.7239212
+
+$`factor(Location)`
+                             diff        lwr      upr     p adj
+Tálknafjörður-Bíldudalur 1.133333 -0.9504631 3.217130 0.2426762
+Þingeyri-Bíldudalur      3.033333  0.9495369 5.117130 0.0143435
+Þingeyri-Tálknafjörður   1.900000 -0.1837965 3.983796 0.0661651</code></pre>
 </div>
 </div>
 <p>Note above that we have the different factors that we are analyzing - location and food - and we have to look at these means independently. Unfortunately, we do have to assess the means ourselves.</p>
@@ -1075,6 +1075,7 @@ Friedman chi-squared = 9.9166, df = 9, p-value = 0.3573</code></pre>
 <h2 data-number="10.4" class="anchored" data-anchor-id="homework-chapter-12"><span class="header-section-number">10.4</span> Homework: Chapter 12</h2>
 <p>For problems 12.1, 12.2, 12.3, 12.4, and 12.5, state your hypotheses in sentence form and mathematically. Then, identify the appropriate ANOVA and perform the analysis. If you reject the null, complete a Tukey test and plot your results, showing letters denoting each group. <strong>Note</strong> that 12.4 requires a Friedman’s test, but all other problems require some form of ANOVA.</p>
 <p>Next, for problems 12.7, 12.8, and 12.9, identify the appropriate test and justify your reasoning. State the null and alternative hypothesis in word form and mathematically, and perform your analysis. If you perform an ANOVA <em>and</em> you reject the null hypothesis, plot your results and label the groups by letter.</p>
+<p><strong>Remember, only plot the results if you reject your <em>primary hypothesis</em>.</strong></p>
 
 
 </section>
