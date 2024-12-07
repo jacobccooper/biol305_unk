@@ -25,42 +25,41 @@ library(tidyverse)
 # NEW PACKAGES NEEDED
 library(multcomp)
 library(nlme)
+library(PMCMRplus)
 ```
 
 ## Designs
 
 There are several different designs for two-way ANOVAs, and we will cover some of the most common designed here.
 
+For these examples, we are going to randomly generated examples. I will refer to the variables as `Response` and `Explanatory` for simplicity's sake.
+
 ### Randomized block design
 
-Randomized block designs look at combinations of variables that could be affecting the results. More specifically, we are looking at two *strata* or *factors* and their effects on a *continuous* response variable. (As a random aside, Bíldudalur is home to one of my wife's favorite places to visit: The Icelandic Sea Monster Museum and Coffee Shop).
-
-Quick pronunciation guide to these locations: the letter "ð" (*eth*) is pronounced like a light "*th*" in English, or like a "*d*" in Spain Spanish like in the last "d" in *Madrid*. Accents indicate a letter gets more emphasis, while umlauts (*i.e.*, ö) indicate a slightly different pronunciation and tone, and often indicate that vowels should be pronounced separately and not together (*i.e.*, "naïve" in English). The letter "þ" (*thorn*) is the letter for a hard "*th*" sound, as in "*thorn*" ("*þorn*"). þ was a letter in the English alphabet, and was used extensively in words like *the* (*þe*), but the letter was obsoleted by the printing press. German printers, who don't have a "*th*" in their language, did not have *þ* on their presses. Before the invention of *th* for the sound, the printers would substitute *y* as an approximation. Hence, when you see "*Ye Olde Shoppe*", this should actually be "*Þe Olde Shoppe*" and thus pronounced like "*the*". While this letter was lost in English, it still exists in Icelandic. Hence, the locations below are approximately pronounced as:
-
--   Tálknafjörður - *TALK-na-fyorther*
-
--   Bíldudalur - *BEEL-du-da-lur*
-
--   Þingeyri - *Thin-ghey-rey*
+Randomized block designs look at combinations of variables that could be affecting the results. More specifically, we are looking at two *strata* or *factors* and their effects on a *continuous* response variable.
 
 ```{r}
 set.seed(8675309)
 
-# average fish size in relation to location in Iceland and food used
+# random example
 
-location <- c("Tálknafjörður", "Bíldudalur", "Þingeyri")
+# Blocking variable
+Blocking_Variable <- c("Group 1", "Group 2", "Group 3")
 
-food <- c("SuperFood", "Gigachad Fish Food", "MegaFish Flakes")
+# explanatory variables
+# these are your columns
+# these are your primary hypothesis
+Explanatory_1 <- c(10.1, 9.4, 11.1)
+Explanatory_2 <- c(12, 13.0, 15.4)
+Explanatory_3 <- c(11.2, 10.1, 11.9)
 
-fish_sizes <- c(10.1,12.6,11.2,
-                9.4,11.0,10.1,
-                12.3,15.4,11.9)
-
-data_expanded <- matrix(data = fish_sizes, ncol = 3, byrow = TRUE)
-
-rownames(data_expanded) <- location
-
-colnames(data_expanded) <- food
+# create "data table" as we normally see it
+# combine all columns
+data_expanded <- cbind(Blocking_Variable,
+                       Explanatory_1,
+                       Explanatory_2,
+                       Explanatory_3) %>% 
+  as.data.frame() # create data frame
 
 data_expanded
 ```
@@ -69,16 +68,13 @@ data_expanded
 
 ```{r}
 # expand to "long" format
+# if not done earlier, convert to data frame
+
 data <- data_expanded %>%
-  # convert to data frame
-  as.data.frame() %>%
-  # create new column to account for row names
-  # may not be needed, depending on your data format
-  mutate(Location = rownames(data_expanded)) %>%
   # !by column for aggregating
   # names_to = what to name column aggregation
   # values_to = what the measurements should be called
-  pivot_longer(!Location, names_to = "Food", values_to = "Size")
+  pivot_longer(!Blocking_Variable, names_to = "Explanatory_Variables", values_to = "Measurements")
 
 data
 ```
@@ -86,14 +82,20 @@ data
 Now we can do our ANOVA. ***Note*** that I put `factor` around the blocking variable.
 
 ```{r}
-data_aov <- aov(Size ~ Food + factor(Location), data)
+# mark block by factor
+# best to always use
+data_aov <- aov(Measurements ~ Explanatory_Variables + factor(Blocking_Variable), data)
 
 summary(data_aov)
 ```
 
-As we can see above, both `Location` and `Food` have a significant effect on the size of the fish in our study. Now, we need to figure out the groupings and plot our results.
+In this particular example, the blocking variable does not significantly differ, however the explanatory variable does differ.
 
-Unfortunately, the `agricolae` function `HSD.test` does not work as well for these multi-directional ANOVAs.
+**Remember, the columns represent your *primary hypothesis*. You will only plot your results if your *primary hypothesis is significant!***
+
+Given that our primary null hypothesis is rejected (that is to say, not all means are equal), we need to plot our results.
+
+To determine which mean(s) differ, we will use a Tukey Test. Unfortunately, the `agricolae` function `HSD.test` does not work as well for these multi-directional ANOVAs, so we need to use `TukeyHSD`.
 
 ```{r}
 tukey_data_aov <- TukeyHSD(data_aov)
@@ -101,72 +103,81 @@ tukey_data_aov <- TukeyHSD(data_aov)
 tukey_data_aov
 ```
 
-Note above that we have the different factors that we are analyzing - location and food - and we have to look at these means independently. Unfortunately, we do have to assess the means ourselves.
+As we can see above, each pairwise comparison is given a $p$ value for the level of difference. We need to manually label these groups based on these $p$ values, with groups being considered different if $p < 0.05$. We can do this as follows, but unfortunately, we need to do it by hand since we don't have a short-form code (*yet*) for this conversion.
 
 ```{r}
-sig_levels_locations <- matrix(data = c("Tálknafjörður", "AB",
-                                        "Bíldudalur", "A",
-                                        "Þingeyri", "B"), 
-                               byrow = T, ncol = 2) %>% as.data.frame()
+# change Explanatory_Variables to your data
+Treatments <- unique(data$Explanatory_Variables)
 
-# make labels match!
-colnames(sig_levels_locations) <- c("Location", "significance")
+sig_labels <- Treatments %>% 
+  as.data.frame() %>% 
+  mutate(Significance = rep(NA, length(Treatments)))
 
-sig_levels_food <- matrix(data = c("MegaFish Flakes", "AB",
-                                   "Gigachad Fish Food", "A",
-                                   "SuperFood", "B"),
-                          byrow = T, ncol = 2) %>% as.data.frame()
+# Change Explanatory_Variables to your data
+colnames(sig_labels) <- c("Explanatory_Variables", # MUST BE SAME AS DATA
+                          "Significance")
 
-# make labels match!
-colnames(sig_levels_food) <- c("Food", "significance")
+tukey_data_aov$Explanatory_Variables
 ```
+
+**NOTE** that I am going to have to adjust column names and variable names a few times. Based on the above, we can see that `Explanatory_3` and `Explanatory_1` are not different from each other, but everything else is in a different group relative to each other. We can label these by hand.
+
+```{r}
+sig_labels$Significance <- c("A", "B", "A")
+
+sig_labels
+```
+
+As we can see above, now only `Explanatory_2` is given a different letter category.
 
 Now, we can plot these different factors.
 
 ```{r}
 # summarize by group
-gg_data_location <- ddply(data, "Location", summarise,
-                          N = length(Size),
-                          mean = mean(Size),
-                          sd = sd(Size),
+# slight adjustment from previous
+summary_data <- ddply(data, "Explanatory_Variables", summarise,
+                          N = length(as.numeric(Measurements)),
+                          mean = mean(as.numeric(Measurements)),
+                          sd = sd(as.numeric(Measurements)),
                           se = sd / sqrt(N))
 
-gg_data_food <- ddply(data, "Food", summarise,
-                      N = length(Size),
-                      mean = mean(Size),
-                      sd = sd(Size),
-                      se = sd / sqrt(N))
+summary_data
 ```
 
 ```{r}
-# Location
+# SET Y LIMITS
+# change based on observed data
+ylims <- c(0, 20)
 
-ggplot(gg_data_location, # plot summary data
+# set label height, can change before plotting function
+label_height <- 4
+
+ggplot(summary_data, # plot summary data
        # Define plotting - x by group, y is mean, grouping by group
-       aes(x = Location, y = mean, group = Location)) +
+       aes(x = Explanatory_Variables, y = mean)) +
   # add points to plot for y values
   geom_point() +
   # add error bars around points
-  geom_errorbar(data = gg_data_location, 
+  geom_errorbar(data = summary_data, 
                 # define error bars
-                aes(ymin = mean - 2*se, ymax = mean+2*se,
-                    # define color, size
-                                    color = Location), width = 0.1) +
+                aes(ymin = mean - 2*se, ymax = mean+2*se), 
+                # width of bar
+                width = 0.1) +
   # set vertical limits for plot
-  ylim(c(0,20)) +
+  ylim(ylims) +
   # make it a classic theme - more legible
   theme_classic() +
   # add text to plot
-  geom_text(data = sig_levels_locations,
+  geom_text(data = sig_labels,
             # make bold
             fontface = "bold",
             # define where labels should go
-            aes(x = Location, 
+            aes(x = Explanatory_Variables, 
                 # define height of label
                 y = 4, 
                 # what are the labels?
-                label = paste0(significance))) +
-  xlab("Location") +
+                label = paste0(Significance))) +
+  xlab("Treatment") +
   ylab("Mean") +
   # remove legend - not needed here
   theme(legend.position = "none",
@@ -177,111 +188,66 @@ ggplot(gg_data_location, # plot summary data
                                    # text size
                                    size = 12))
 ```
-
-Now let's look at Food:
-
-```{r}
-# Food
-
-ggplot(gg_data_food, # plot summary data
-       # Define plotting - x by group, y is mean, grouping by group
-       aes(x = Food, y = mean, group = Food)) +
-  # add points to plot for y values
-  geom_point() +
-  # add error bars around points
-  geom_errorbar(data = gg_data_food, 
-                # define error bars
-                aes(ymin = mean - 2*se, ymax = mean+2*se,
-                    # define color, size
-                                    color = Food), width = 0.1) +
-  # set vertical limits for plot
-  ylim(c(0,20)) +
-  # make it a classic theme - more legible
-  theme_classic() +
-  # add text to plot
-  geom_text(data = sig_levels_food,
-            # make bold
-            fontface = "bold",
-            # define where labels should go
-            aes(x = Food, 
-                # define height of label
-                y = 4, 
-                # what are the labels?
-                label = paste0(significance))) +
-  xlab("Food") +
-  ylab("Mean") +
-  # remove legend - not needed here
-  theme(legend.position = "none",
-        # make label text vertical, easier to read
-        axis.text.x = element_text(angle = 90, 
-                                   # vertical offset of text
-                                   vjust = 0.5, 
-                                   # text size
-                                   size = 12))
-```
-
-AS we can see, we were able to perform an ANOVA on both variables and plot the significant results for both using the data from `aov` and `TukeyHSD`.
 
 ### Repeated measures
 
 Now, we are going to do a *repeated measures ANOVA*, where we have the same individuals being measured multiple times. Consider the following imaginary dataset:
 
 ```{r}
-visits <- c(paste("Visit", 1:3)) %>%
-  as.data.frame()
+Visit_1 <- c(5.5,6.2,5.8)
+Visit_2 <- c(4.6,5.4,5.2)
+Visit_3 <- c(3.8,4.0,3.9)
 
-colnames(visits) <- "Visit"
+Individuals <- c(paste0("Individual"," ",1:3))
 
-locations <- location %>%
-  as.data.frame()
+data <- cbind(Individuals, 
+                   Visit_1,
+                   Visit_2,
+                   Visit_3) %>%
+  as.data.frame() %>% 
+  pivot_longer(!Individuals,
+               names_to = "Visits",
+               values_to = "Measurements")
 
-colnames(locations) <- "Locations"
-
-base_data <- cbind(locations, visits) %>%
-  expand(Locations, Visit)
-
-Enzyme <- c(5.5,6.2,7.1,4.6,5.2,5.8,4.1,5.2,5.9)
-
-repeated_data <- cbind(base_data, Enzyme)
-
-repeated_data
+data
 ```
 
 We need to perform the ANOVA again, but we need to account for the factor of which locations are repeated.
 
 ```{r}
-repeated_aov <- aov(Enzyme ~ factor(Visit) + Error(factor(Locations)), repeated_data)
+repeated_aov <- aov(Measurements ~ factor(Visits) + Error(factor(Individuals)), data)
 
 summary(repeated_aov)
 ```
 
-Unfortunately, because of the model this is, we cannot perform a Tukey Test on the "object" that is created from this ANOVA analysis. We can, however, approach this from a different direction and get our Tukey results ([thanks to Henrik on StackOverflow!](https://stats.stackexchange.com/questions/14078/post-hoc-test-after-anova-with-repeated-measures-using-r)). **For this to work, we need to install the package**
+Unfortunately, because of the model this is, we cannot perform a Tukey Test on the "object" that is created from this ANOVA analysis. We can, however, approach this from a different direction and get our Tukey results ([thanks to Henrik on StackOverflow!](https://stats.stackexchange.com/questions/14078/post-hoc-test-after-anova-with-repeated-measures-using-r)). **For this to work, we need to install the packages `nlme` and `multcomp`.**
 
 ```{r}
 # ensure data is proper format
-repeated_data$Locations <- as.factor(repeated_data$Locations)
-repeated_data$Visit <- as.factor(repeated_data$Visit)
+data$Individuals <- as.factor(data$Individuals)
+data$Visits <- as.factor(data$Visits)
+data$Measurements <- as.numeric(data$Measurements)
 
 # fit a linear mixed-effects model
 # similar to ANOVA
 
-lme_repeated_data <- lme(Enzyme ~ Visit, 
-                         data = repeated_data, 
+lme_data <- lme(Measurements ~ Visits, 
+                         data = data, 
                          # define repeated section
-                         random = ~1|Locations)
+                         random = ~1|Individuals)
 
 # perform ANOVA on model
-anova(lme_repeated_data)
+anova(lme_data)
 ```
 
 As we can see above, we can get the ANOVA results from this linear mixed-effects model fit to the dataset. Now, we need to know post-hoc which sets are different:
 
 ```{r}
-lme_repeated_data %>%
+lme_data %>%
   # "general linear hypothesis"
   # define a comparison to make
   # can add corrections like test = adjusted (type = "bonferroni")
-  glht(linfct = mcp(Visit = "Tukey")) %>%
+  glht(linfct = mcp(Visits = "Tukey")) %>%
   # return a summary of the above
   summary()
 ```
@@ -289,16 +255,15 @@ lme_repeated_data %>%
 We can see that every visit is different.
 
 ```{r}
-sig_levels_repeated <- matrix(data = c("Visit 1", "A",
-                                        "Visit 2", "B",
-                                        "Visit 3", "C"), 
-                               byrow = T, ncol = 2) %>% as.data.frame() %>%
-  cbind(locations)
+# manually labeling
+
+sig_levels_repeated <- matrix(data = c("Visit_1", "A",
+                                       "Visit_2", "B",
+                                       "Visit_3", "C"), 
+                              byrow = T, ncol = 2) %>% as.data.frame()
 
 # make labels match!
-colnames(sig_levels_repeated) <- c("Visit", "significance","Locations")
-
-sig_levels_repeated$Visit <- as.factor(sig_levels_repeated$Visit)
+colnames(sig_levels_repeated) <- c("Visits", "Significance")
 ```
 
 Let's plot these. *Note* that we are not summarizing these the same way, since things are varying based on individual as well.
@@ -306,14 +271,25 @@ Let's plot these. *Note* that we are not summarizing these the same way, since t
 *Note*: For reasons I am not certain, you need to put the locations and then `ggplot` uses these colors to define everything. I really don't know why this is happening, so if you have a solution, let me know.
 
 ```{r}
-ggplot(repeated_data,
-       aes(x = Visit, y = Enzyme, colour = Locations)) +
-  geom_point(size = 5) +
+summary_data <- ddply(data, "Visits", summarise,
+                          N = length(as.numeric(Measurements)),
+                          mean = mean(as.numeric(Measurements)),
+                          sd = sd(as.numeric(Measurements)),
+                          se = sd / sqrt(N))
+
+```
+
+```{r}
+ggplot(summary_data,
+       aes(x = Visits, y = mean)) +
+  geom_point() +
+  geom_errorbar(data = summary_data, 
+                # define error bars
+                aes(ymin = mean - 2*se, ymax = mean+2*se), 
+                # width of bar
+                width = 0.1) +
   # set vertical limits for plot
   ylim(c(0,10)) +
-  # offset points
-  # show which are overlapping
-  geom_jitter(width = 0.1) +
   # make it a classic theme - more legible
   theme_classic() +
   # add text to plot
@@ -321,13 +297,13 @@ ggplot(repeated_data,
             # make bold
             fontface = "bold",
             # define where labels should go
-            aes(x = Visit, 
+            aes(x = Visits, 
                 # define height of label
                 y = 2, 
                 # what are the labels?
-                label = paste0(significance))) +
+                label = paste0(Significance))) +
   xlab("Visits") +
-  ylab("Enzyme Measurement") +
+  ylab("Measurement") +
   # remove legend - not needed here
   theme(legend.position = "none",
         # make label text vertical, easier to read
@@ -349,29 +325,25 @@ Sometimes when we running a model, we want to look for *interactive effects*. In
 ```{r}
 set.seed(8675309)
 
-# average fish size in relation to location in Iceland and food used
-
-location <- c("Tálknafjörður", "Bíldudalur", "Þingeyri")
-
-food <- c("SuperFood", "Gigachad Fish Food", "MegaFish Flakes")
-
-fish_sizes <- c(9.1,8.7,9.6,
-                9.4,9.5,8.3,
-                8.7,12,9.2)
-
-data_expanded <- matrix(data = fish_sizes, ncol = 3, byrow = TRUE)
-
-rownames(data_expanded) <- location
-
-colnames(data_expanded) <- food
+# we are using data from the randomized black ANOVA again
 
 data_expanded
 ```
 
 ```{r}
+### YOU DO NOT NEED TO DO THIS
+### CREATING DATA FOR EXAMPLE
+
+data_expanded$Explanatory_1 <- as.numeric(data_expanded$Explanatory_1)
+data_expanded$Explanatory_2 <- as.numeric(data_expanded$Explanatory_2)
+data_expanded$Explanatory_3 <- as.numeric(data_expanded$Explanatory_3)
+
 # create some pseudorandom data
-data_expanded2 <- data_expanded - 0.75
-data_expanded3 <- data_expanded*1.05
+# [,-1] excludes first column - group data
+data_expanded2 <- cbind(Blocking_Variable,
+                        data_expanded[,-1] - 0.75)
+data_expanded3 <- cbind(Blocking_Variable,
+                        data_expanded[,-1]*1.05)
 
 data_expanded <- rbind(data_expanded,
                        data_expanded2,
@@ -381,30 +353,32 @@ data_expanded <- rbind(data_expanded,
 data <- data_expanded %>%
   # convert to data frame
   as.data.frame() %>%
-  # create new column to account for row names
-  # may not be needed, depending on your data format
-  mutate(Location = rownames(data_expanded)) %>%
   # !by column for aggregating
   # names_to = what to name column aggregation
   # values_to = what the measurements should be called
-  pivot_longer(!Location, names_to = "Food", values_to = "Size")
+  pivot_longer(!Blocking_Variable, names_to = "Treatments", values_to = "Measurements")
 
-interactive_aov <- aov(Size ~ Food + Location + Food*Location, data)
+# specifying factor to be safe
+
+interactive_aov <- aov(Measurements ~ factor(Treatments) + 
+                         factor(Blocking_Variable) + 
+                         factor(Treatments)*factor(Blocking_Variable), 
+                       data)
 
 summary(interactive_aov)
 ```
 
-As we can see above, there is a significant effect of `Food`, `Location`, and an *extreme* effect of `Food` interacting with `Location` in the above dataset.
-
-When plotting and performing Tukey tests, you only need to focus on the primary hypotheses for situations like the above. **Note** however, that Tukey gives us our differences and $p$ values for each set of tests and comparisons:
+As we can see above, we have very significant effects for `Treatment` and `Blocking_Variable`, but a less significant effect for the interaction between the two. **Remember - we only need to plot our primary hypothesis**. **Note** however, that Tukey gives us our differences and $p$ values for each set of tests and comparisons:
 
 ```{r}
 TukeyHSD(interactive_aov)
 ```
 
+I do not plot this here, but it would be similar to the other parts of this test.
+
 ## Friedman's test
 
-### By hand
+### Using *R*
 
 Friedman's test is a non-parametric alternative to a two-way ANOVA, so as you would guess, it can be painful to implement. We will use an altered version of the same test we've used before:
 
@@ -412,54 +386,60 @@ Friedman's test is a non-parametric alternative to a two-way ANOVA, so as you wo
 # set seed - make reproducible
 set.seed(8675309)
 
+### DO NOT NEED TO REPEAT THIS
+### CREATING DATA FOR EXAMPLE 
+
 # new set of foods - this time, ten of them
-food <- c(paste("Food",1:10)) %>%
+Treatments <- c(paste("Treatment",1:10)) %>%
   as.factor()
 
 # pre-created data frame of locations from earlier
-locations2 <- c(paste("Location", 1:10)) %>%
+Blocking_Factor <- c(paste("Block", 1:10)) %>%
   as.factor()
 
-long_data <- crossing(locations2, food)
+long_data <- crossing(Blocking_Factor, Treatments)
 
-long_data$Sizes <- c(runif(n = nrow(long_data) - nrow(long_data)/length(unique(long_data$locations2)),
-                           min = 9, max = 12),
-                     runif(n = nrow(long_data)/length(unique(long_data$locations2)),
-                           min = 11, max = 15)) %>%
-  round(1)
+long_data$Measurements <- NA
+
+for(i in 1:length(unique(long_data$Treatments))){
+  subset_rows <- which(long_data$Treatments==long_data$Treatments[i])
+  long_data$Measurements[subset_rows] <- runif(n = length(subset_rows),
+                                               min = i-2, max = i+2) %>% 
+    round(1)
+}
 
 long_data
 ```
 
 Now that we have our expanded and randomized table, we can get started with our test.
 
-First, we have to rank our measurement of interest, averaging the ties.
-
-```{r}
-long_data$ranks <- rank(long_data$Sizes, ties.method = "average")
-
-long_data
-```
-
 Our calculation for the Friedman's test statistic $Q$ (not to be confused with Tukey's $q$!) is: $$Q = \frac{12}{nk(k+1)} \cdot \Sigma R_j^2 - 3n(k+1)$$
 
 where $n$ is the total number of individuals in each sample in the dataset, $k$ is the number of groups, and $R_j^2$ is the sum of the ranks.
 
-***NOTE***: This section is incomplete, as my by hand answers are varying from what I am calculating using `friedman.test`. Until I resolve the reasons for this difference, this will remain blank.
-
-### Using *R*
-
-As some of you may have guess, this is easier.
+**In this class, we will do this in *R*.**
 
 ```{r}
-friedman_long_data <- friedman.test(y = long_data$Sizes,
-                                    groups = long_data$food,
-                                    blocks = long_data$locations2)
+friedman_long_data <- friedman.test(y = long_data$Measurements,
+                                    groups = long_data$Treatments,
+                                    blocks = long_data$Blocking_Factor)
 
 print(friedman_long_data)
 ```
 
 *Note* you will get a different answer if you are switching the blocks and the groups.
+
+We can use the following, from package `PMCMRplus`, to find the adjacent and non-adjacent groups.
+
+```{r}
+# find differences
+frdAllPairsConoverTest(y = long_data$Measurements,
+                       groups = long_data$Treatments,
+                       blocks = long_data$Blocking_Factor, 
+                       p.adjust.method = "bonf")
+```
+
+As we can see, some pairs are inseparable and others are separable. We can now plot as for the other problems.
 
 ## Homework: Chapter 12
 

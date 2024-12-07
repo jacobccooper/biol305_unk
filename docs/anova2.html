@@ -286,8 +286,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#friedmans-test" id="toc-friedmans-test" class="nav-link" data-scroll-target="#friedmans-test"><span class="header-section-number">10.3</span> Friedman’s test</a>
   <ul class="collapse">
-  <li><a href="#by-hand" id="toc-by-hand" class="nav-link" data-scroll-target="#by-hand"><span class="header-section-number">10.3.1</span> By hand</a></li>
-  <li><a href="#using-r" id="toc-using-r" class="nav-link" data-scroll-target="#using-r"><span class="header-section-number">10.3.2</span> Using <em>R</em></a></li>
+  <li><a href="#using-r" id="toc-using-r" class="nav-link" data-scroll-target="#using-r"><span class="header-section-number">10.3.1</span> Using <em>R</em></a></li>
   </ul></li>
   <li><a href="#homework-chapter-12" id="toc-homework-chapter-12" class="nav-link" data-scroll-target="#homework-chapter-12"><span class="header-section-number">10.4</span> Homework: Chapter 12</a></li>
   </ul>
@@ -339,94 +338,95 @@ window.Quarto = {
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># NEW PACKAGES NEEDED</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(multcomp)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(PMCMRplus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="designs" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="designs"><span class="header-section-number">10.2</span> Designs</h2>
 <p>There are several different designs for two-way ANOVAs, and we will cover some of the most common designed here.</p>
+<p>For these examples, we are going to randomly generated examples. I will refer to the variables as <code>Response</code> and <code>Explanatory</code> for simplicity’s sake.</p>
 <section id="randomized-block-design" class="level3" data-number="10.2.1">
 <h3 data-number="10.2.1" class="anchored" data-anchor-id="randomized-block-design"><span class="header-section-number">10.2.1</span> Randomized block design</h3>
-<p>Randomized block designs look at combinations of variables that could be affecting the results. More specifically, we are looking at two <em>strata</em> or <em>factors</em> and their effects on a <em>continuous</em> response variable. (As a random aside, Bíldudalur is home to one of my wife’s favorite places to visit: The Icelandic Sea Monster Museum and Coffee Shop).</p>
-<p>Quick pronunciation guide to these locations: the letter “ð” (<em>eth</em>) is pronounced like a light “<em>th</em>” in English, or like a “<em>d</em>” in Spain Spanish like in the last “d” in <em>Madrid</em>. Accents indicate a letter gets more emphasis, while umlauts (<em>i.e.</em>, ö) indicate a slightly different pronunciation and tone, and often indicate that vowels should be pronounced separately and not together (<em>i.e.</em>, “naïve” in English). The letter “þ” (<em>thorn</em>) is the letter for a hard “<em>th</em>” sound, as in “<em>thorn</em>” (“<em>þorn</em>”). þ was a letter in the English alphabet, and was used extensively in words like <em>the</em> (<em>þe</em>), but the letter was obsoleted by the printing press. German printers, who don’t have a “<em>th</em>” in their language, did not have <em>þ</em> on their presses. Before the invention of <em>th</em> for the sound, the printers would substitute <em>y</em> as an approximation. Hence, when you see “<em>Ye Olde Shoppe</em>”, this should actually be “<em>Þe Olde Shoppe</em>” and thus pronounced like “<em>the</em>”. While this letter was lost in English, it still exists in Icelandic. Hence, the locations below are approximately pronounced as:</p>
-<ul>
-<li><p>Tálknafjörður - <em>TALK-na-fyorther</em></p></li>
-<li><p>Bíldudalur - <em>BEEL-du-da-lur</em></p></li>
-<li><p>Þingeyri - <em>Thin-ghey-rey</em></p></li>
-</ul>
+<p>Randomized block designs look at combinations of variables that could be affecting the results. More specifically, we are looking at two <em>strata</em> or <em>factors</em> and their effects on a <em>continuous</em> response variable.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">8675309</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># average fish size in relation to location in Iceland and food used</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># random example</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>location <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Tálknafjörður"</span>, <span class="st">"Bíldudalur"</span>, <span class="st">"Þingeyri"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>food <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"SuperFood"</span>, <span class="st">"Gigachad Fish Food"</span>, <span class="st">"MegaFish Flakes"</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>fish_sizes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.1</span>,<span class="fl">12.6</span>,<span class="fl">11.2</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                <span class="fl">9.4</span>,<span class="fl">11.0</span>,<span class="fl">10.1</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                <span class="fl">12.3</span>,<span class="fl">15.4</span>,<span class="fl">11.9</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>data_expanded <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> fish_sizes, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Blocking variable</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>Blocking_Variable <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Group 1"</span>, <span class="st">"Group 2"</span>, <span class="st">"Group 3"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># explanatory variables</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># these are your columns</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># these are your primary hypothesis</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>Explanatory_1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.1</span>, <span class="fl">9.4</span>, <span class="fl">11.1</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>Explanatory_2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="fl">13.0</span>, <span class="fl">15.4</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>Explanatory_3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">11.2</span>, <span class="fl">10.1</span>, <span class="fl">11.9</span>)</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data_expanded) <span class="ot">&lt;-</span> location</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data_expanded) <span class="ot">&lt;-</span> food</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>data_expanded</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># create "data table" as we normally see it</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># combine all columns</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>data_expanded <span class="ot">&lt;-</span> <span class="fu">cbind</span>(Blocking_Variable,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>                       Explanatory_1,</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>                       Explanatory_2,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>                       Explanatory_3) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="co"># create data frame</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>data_expanded</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>              SuperFood Gigachad Fish Food MegaFish Flakes
-Tálknafjörður      10.1               12.6            11.2
-Bíldudalur          9.4               11.0            10.1
-Þingeyri           12.3               15.4            11.9</code></pre>
+<pre><code>  Blocking_Variable Explanatory_1 Explanatory_2 Explanatory_3
+1           Group 1          10.1            12          11.2
+2           Group 2           9.4            13          10.1
+3           Group 3          11.1          15.4          11.9</code></pre>
 </div>
 </div>
 <p><em>Note</em> that this table is in the format that we most often see, but we need to reshape these data to make it easier for us to perform our analyses. I created the data here as a matrix with named columns and rows; the following code may need to be adjusted if you do things differently.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># expand to "long" format</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data_expanded <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert to data frame</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create new column to account for row names</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># may not be needed, depending on your data format</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Location =</span> <span class="fu">rownames</span>(data_expanded)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># !by column for aggregating</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># names_to = what to name column aggregation</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># values_to = what the measurements should be called</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>Location, <span class="at">names_to =</span> <span class="st">"Food"</span>, <span class="at">values_to =</span> <span class="st">"Size"</span>)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># if not done earlier, convert to data frame</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data_expanded <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># !by column for aggregating</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># names_to = what to name column aggregation</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># values_to = what the measurements should be called</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>Blocking_Variable, <span class="at">names_to =</span> <span class="st">"Explanatory_Variables"</span>, <span class="at">values_to =</span> <span class="st">"Measurements"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 3
-  Location      Food                Size
-  &lt;chr&gt;         &lt;chr&gt;              &lt;dbl&gt;
-1 Tálknafjörður SuperFood           10.1
-2 Tálknafjörður Gigachad Fish Food  12.6
-3 Tálknafjörður MegaFish Flakes     11.2
-4 Bíldudalur    SuperFood            9.4
-5 Bíldudalur    Gigachad Fish Food  11  
-6 Bíldudalur    MegaFish Flakes     10.1
-7 Þingeyri      SuperFood           12.3
-8 Þingeyri      Gigachad Fish Food  15.4
-9 Þingeyri      MegaFish Flakes     11.9</code></pre>
+  Blocking_Variable Explanatory_Variables Measurements
+  &lt;chr&gt;             &lt;chr&gt;                 &lt;chr&gt;       
+1 Group 1           Explanatory_1         10.1        
+2 Group 1           Explanatory_2         12          
+3 Group 1           Explanatory_3         11.2        
+4 Group 2           Explanatory_1         9.4         
+5 Group 2           Explanatory_2         13          
+6 Group 2           Explanatory_3         10.1        
+7 Group 3           Explanatory_1         11.1        
+8 Group 3           Explanatory_2         15.4        
+9 Group 3           Explanatory_3         11.9        </code></pre>
 </div>
 </div>
 <p>Now we can do our ANOVA. <strong><em>Note</em></strong> that I put <code>factor</code> around the blocking variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Size <span class="sc">~</span> Food <span class="sc">+</span> <span class="fu">factor</span>(Location), data)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mark block by factor</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># best to always use</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>data_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Measurements <span class="sc">~</span> Explanatory_Variables <span class="sc">+</span> <span class="fu">factor</span>(Blocking_Variable), data)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                 Df Sum Sq Mean Sq F value Pr(&gt;F)  
-Food              2  9.716   4.858   9.473 0.0304 *
-factor(Location)  2 14.096   7.048  13.744 0.0161 *
-Residuals         4  2.051   0.513                 
+<pre><code>                          Df Sum Sq Mean Sq F value Pr(&gt;F)  
+Explanatory_Variables      2 17.182   8.591  14.412 0.0149 *
+factor(Blocking_Variable)  2  6.829   3.414   5.728 0.0670 .
+Residuals                  4  2.384   0.596                 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<p>As we can see above, both <code>Location</code> and <code>Food</code> have a significant effect on the size of the fish in our study. Now, we need to figure out the groupings and plot our results.</p>
-<p>Unfortunately, the <code>agricolae</code> function <code>HSD.test</code> does not work as well for these multi-directional ANOVAs.</p>
+<p>In this particular example, the blocking variable does not significantly differ, however the explanatory variable does differ.</p>
+<p><strong>Remember, the columns represent your <em>primary hypothesis</em>. You will only plot your results if your <em>primary hypothesis is significant!</em></strong></p>
+<p>Given that our primary null hypothesis is rejected (that is to say, not all means are equal), we need to plot our results.</p>
+<p>To determine which mean(s) differ, we will use a Tukey Test. Unfortunately, the <code>agricolae</code> function <code>HSD.test</code> does not work as well for these multi-directional ANOVAs, so we need to use <code>TukeyHSD</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tukey_data_aov <span class="ot">&lt;-</span> <span class="fu">TukeyHSD</span>(data_aov)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -435,139 +435,116 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <pre><code>  Tukey multiple comparisons of means
     95% family-wise confidence level
 
-Fit: aov(formula = Size ~ Food + factor(Location), data = data)
+Fit: aov(formula = Measurements ~ Explanatory_Variables + factor(Blocking_Variable), data = data)
 
-$Food
-                                         diff       lwr        upr     p adj
-MegaFish Flakes-Gigachad Fish Food -1.9333333 -4.017130  0.1504631 0.0628249
-SuperFood-Gigachad Fish Food       -2.4000000 -4.483796 -0.3162035 0.0318454
-SuperFood-MegaFish Flakes          -0.4666667 -2.550463  1.6171298 0.7239212
+$Explanatory_Variables
+                                  diff       lwr        upr     p adj
+Explanatory_2-Explanatory_1  3.2666667  1.019919  5.5134144 0.0144034
+Explanatory_3-Explanatory_1  0.8666667 -1.380081  3.1134144 0.4333834
+Explanatory_3-Explanatory_2 -2.4000000 -4.646748 -0.1532523 0.0406301
 
-$`factor(Location)`
-                             diff        lwr      upr     p adj
-Tálknafjörður-Bíldudalur 1.133333 -0.9504631 3.217130 0.2426762
-Þingeyri-Bíldudalur      3.033333  0.9495369 5.117130 0.0143435
-Þingeyri-Tálknafjörður   1.900000 -0.1837965 3.983796 0.0661651</code></pre>
+$`factor(Blocking_Variable)`
+                      diff        lwr      upr     p adj
+Group 2-Group 1 -0.2666667 -2.5134144 1.980081 0.9082398
+Group 3-Group 1  1.7000000 -0.5467477 3.946748 0.1118461
+Group 3-Group 2  1.9666667 -0.2800810 4.213414 0.0745795</code></pre>
 </div>
 </div>
-<p>Note above that we have the different factors that we are analyzing - location and food - and we have to look at these means independently. Unfortunately, we do have to assess the means ourselves.</p>
+<p>As we can see above, each pairwise comparison is given a <span class="math inline">\(p\)</span> value for the level of difference. We need to manually label these groups based on these <span class="math inline">\(p\)</span> values, with groups being considered different if <span class="math inline">\(p &lt; 0.05\)</span>. We can do this as follows, but unfortunately, we need to do it by hand since we don’t have a short-form code (<em>yet</em>) for this conversion.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sig_levels_locations <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="st">"Tálknafjörður"</span>, <span class="st">"AB"</span>,</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Bíldudalur"</span>, <span class="st">"A"</span>,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Þingeyri"</span>, <span class="st">"B"</span>), </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">byrow =</span> T, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># make labels match!</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(sig_levels_locations) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Location"</span>, <span class="st">"significance"</span>)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>sig_levels_food <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="st">"MegaFish Flakes"</span>, <span class="st">"AB"</span>,</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Gigachad Fish Food"</span>, <span class="st">"A"</span>,</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"SuperFood"</span>, <span class="st">"B"</span>),</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>                          <span class="at">byrow =</span> T, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co"># make labels match!</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(sig_levels_food) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Food"</span>, <span class="st">"significance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change Explanatory_Variables to your data</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>Treatments <span class="ot">&lt;-</span> <span class="fu">unique</span>(data<span class="sc">$</span>Explanatory_Variables)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>sig_labels <span class="ot">&lt;-</span> Treatments <span class="sc">%&gt;%</span> </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Significance =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(Treatments)))</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Change Explanatory_Variables to your data</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(sig_labels) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Explanatory_Variables"</span>, <span class="co"># MUST BE SAME AS DATA</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"Significance"</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>tukey_data_aov<span class="sc">$</span>Explanatory_Variables</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                  diff       lwr        upr      p adj
+Explanatory_2-Explanatory_1  3.2666667  1.019919  5.5134144 0.01440339
+Explanatory_3-Explanatory_1  0.8666667 -1.380081  3.1134144 0.43338343
+Explanatory_3-Explanatory_2 -2.4000000 -4.646748 -0.1532523 0.04063012</code></pre>
 </div>
+</div>
+<p><strong>NOTE</strong> that I am going to have to adjust column names and variable names a few times. Based on the above, we can see that <code>Explanatory_3</code> and <code>Explanatory_1</code> are not different from each other, but everything else is in a different group relative to each other. We can label these by hand.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sig_labels<span class="sc">$</span>Significance <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>sig_labels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Explanatory_Variables Significance
+1         Explanatory_1            A
+2         Explanatory_2            B
+3         Explanatory_3            A</code></pre>
+</div>
+</div>
+<p>As we can see above, now only <code>Explanatory_2</code> is given a different letter category.</p>
 <p>Now, we can plot these different factors.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize by group</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>gg_data_location <span class="ot">&lt;-</span> <span class="fu">ddply</span>(data, <span class="st">"Location"</span>, summarise,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">N =</span> <span class="fu">length</span>(Size),</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">mean =</span> <span class="fu">mean</span>(Size),</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">sd =</span> <span class="fu">sd</span>(Size),</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">se =</span> sd <span class="sc">/</span> <span class="fu">sqrt</span>(N))</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>gg_data_food <span class="ot">&lt;-</span> <span class="fu">ddply</span>(data, <span class="st">"Food"</span>, summarise,</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>                      <span class="at">N =</span> <span class="fu">length</span>(Size),</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                      <span class="at">mean =</span> <span class="fu">mean</span>(Size),</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>                      <span class="at">sd =</span> <span class="fu">sd</span>(Size),</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>                      <span class="at">se =</span> sd <span class="sc">/</span> <span class="fu">sqrt</span>(N))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize by group</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># slight adjustment from previous</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> <span class="fu">ddply</span>(data, <span class="st">"Explanatory_Variables"</span>, summarise,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">N =</span> <span class="fu">length</span>(<span class="fu">as.numeric</span>(Measurements)),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">mean =</span> <span class="fu">mean</span>(<span class="fu">as.numeric</span>(Measurements)),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">sd =</span> <span class="fu">sd</span>(<span class="fu">as.numeric</span>(Measurements)),</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">se =</span> sd <span class="sc">/</span> <span class="fu">sqrt</span>(N))</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>summary_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Explanatory_Variables N     mean        sd        se
+1         Explanatory_1 3 10.20000 0.8544004 0.4932883
+2         Explanatory_2 3 13.46667 1.7473790 1.0088497
+3         Explanatory_3 3 11.06667 0.9073772 0.5238745</code></pre>
+</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Location</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gg_data_location, <span class="co"># plot summary data</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Define plotting - x by group, y is mean, grouping by group</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Location, <span class="at">y =</span> mean, <span class="at">group =</span> Location)) <span class="sc">+</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add points to plot for y values</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add error bars around points</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data =</span> gg_data_location, </span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>                <span class="co"># define error bars</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>se, <span class="at">ymax =</span> mean<span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>se,</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># define color, size</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">color =</span> Location), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set vertical limits for plot</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make it a classic theme - more legible</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add text to plot</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> sig_levels_locations,</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>            <span class="co"># make bold</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>            <span class="co"># define where labels should go</span></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> Location, </span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>                <span class="co"># define height of label</span></span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="dv">4</span>, </span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>                <span class="co"># what are the labels?</span></span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="fu">paste0</span>(significance))) <span class="sc">+</span></span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Location"</span>) <span class="sc">+</span></span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Mean"</span>) <span class="sc">+</span></span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove legend - not needed here</span></span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># make label text vertical, easier to read</span></span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, </span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>                                   <span class="co"># vertical offset of text</span></span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">vjust =</span> <span class="fl">0.5</span>, </span>
-<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>                                   <span class="co"># text size</span></span>
-<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">size =</span> <span class="dv">12</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="anova2_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Now let’s look at Food:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Food</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gg_data_food, <span class="co"># plot summary data</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Define plotting - x by group, y is mean, grouping by group</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Food, <span class="at">y =</span> mean, <span class="at">group =</span> Food)) <span class="sc">+</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add points to plot for y values</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add error bars around points</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data =</span> gg_data_food, </span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>                <span class="co"># define error bars</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>se, <span class="at">ymax =</span> mean<span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>se,</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># define color, size</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">color =</span> Food), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set vertical limits for plot</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make it a classic theme - more legible</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add text to plot</span></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> sig_levels_food,</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>            <span class="co"># make bold</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>            <span class="co"># define where labels should go</span></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> Food, </span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>                <span class="co"># define height of label</span></span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="dv">4</span>, </span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>                <span class="co"># what are the labels?</span></span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="fu">paste0</span>(significance))) <span class="sc">+</span></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Food"</span>) <span class="sc">+</span></span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Mean"</span>) <span class="sc">+</span></span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove legend - not needed here</span></span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># make label text vertical, easier to read</span></span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, </span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>                                   <span class="co"># vertical offset of text</span></span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">vjust =</span> <span class="fl">0.5</span>, </span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>                                   <span class="co"># text size</span></span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">size =</span> <span class="dv">12</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SET Y LIMITS</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># change based on observed data</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ylims <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># set label height, can change before plotting function</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>label_height <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summary_data, <span class="co"># plot summary data</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Define plotting - x by group, y is mean, grouping by group</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Explanatory_Variables, <span class="at">y =</span> mean)) <span class="sc">+</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add points to plot for y values</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add error bars around points</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data =</span> summary_data, </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>                <span class="co"># define error bars</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>se, <span class="at">ymax =</span> mean<span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>se), </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>                <span class="co"># width of bar</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set vertical limits for plot</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(ylims) <span class="sc">+</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make it a classic theme - more legible</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add text to plot</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> sig_labels,</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>            <span class="co"># make bold</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>            <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>            <span class="co"># define where labels should go</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> Explanatory_Variables, </span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>                <span class="co"># define height of label</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="dv">4</span>, </span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>                <span class="co"># what are the labels?</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="fu">paste0</span>(Significance))) <span class="sc">+</span></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Treatment"</span>) <span class="sc">+</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Mean"</span>) <span class="sc">+</span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove legend - not needed here</span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>        <span class="co"># make label text vertical, easier to read</span></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, </span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>                                   <span class="co"># vertical offset of text</span></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">vjust =</span> <span class="fl">0.5</span>, </span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>                                   <span class="co"># text size</span></span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">size =</span> <span class="dv">12</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -576,93 +553,93 @@ Tálknafjörður-Bíldudalur 1.133333 -0.9504631 3.217130 0.2426762
 </div>
 </div>
 </div>
-<p>AS we can see, we were able to perform an ANOVA on both variables and plot the significant results for both using the data from <code>aov</code> and <code>TukeyHSD</code>.</p>
 </section>
 <section id="repeated-measures" class="level3" data-number="10.2.2">
 <h3 data-number="10.2.2" class="anchored" data-anchor-id="repeated-measures"><span class="header-section-number">10.2.2</span> Repeated measures</h3>
 <p>Now, we are going to do a <em>repeated measures ANOVA</em>, where we have the same individuals being measured multiple times. Consider the following imaginary dataset:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>visits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="st">"Visit"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(visits) <span class="ot">&lt;-</span> <span class="st">"Visit"</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>locations <span class="ot">&lt;-</span> location <span class="sc">%&gt;%</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(locations) <span class="ot">&lt;-</span> <span class="st">"Locations"</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>base_data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(locations, visits) <span class="sc">%&gt;%</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand</span>(Locations, Visit)</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>Enzyme <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">5.5</span>,<span class="fl">6.2</span>,<span class="fl">7.1</span>,<span class="fl">4.6</span>,<span class="fl">5.2</span>,<span class="fl">5.8</span>,<span class="fl">4.1</span>,<span class="fl">5.2</span>,<span class="fl">5.9</span>)</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>repeated_data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(base_data, Enzyme)</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>repeated_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Visit_1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">5.5</span>,<span class="fl">6.2</span>,<span class="fl">5.8</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>Visit_2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">4.6</span>,<span class="fl">5.4</span>,<span class="fl">5.2</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>Visit_3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">3.8</span>,<span class="fl">4.0</span>,<span class="fl">3.9</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>Individuals <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste0</span>(<span class="st">"Individual"</span>,<span class="st">" "</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(Individuals, </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>                   Visit_1,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>                   Visit_2,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                   Visit_3) <span class="sc">%&gt;%</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>Individuals,</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Visits"</span>,</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"Measurements"</span>)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      Locations   Visit Enzyme
-1    Bíldudalur Visit 1    5.5
-2    Bíldudalur Visit 2    6.2
-3    Bíldudalur Visit 3    7.1
-4 Tálknafjörður Visit 1    4.6
-5 Tálknafjörður Visit 2    5.2
-6 Tálknafjörður Visit 3    5.8
-7      Þingeyri Visit 1    4.1
-8      Þingeyri Visit 2    5.2
-9      Þingeyri Visit 3    5.9</code></pre>
+<pre><code># A tibble: 9 × 3
+  Individuals  Visits  Measurements
+  &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;       
+1 Individual 1 Visit_1 5.5         
+2 Individual 1 Visit_2 4.6         
+3 Individual 1 Visit_3 3.8         
+4 Individual 2 Visit_1 6.2         
+5 Individual 2 Visit_2 5.4         
+6 Individual 2 Visit_3 4           
+7 Individual 3 Visit_1 5.8         
+8 Individual 3 Visit_2 5.2         
+9 Individual 3 Visit_3 3.9         </code></pre>
 </div>
 </div>
 <p>We need to perform the ANOVA again, but we need to account for the factor of which locations are repeated.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>repeated_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Enzyme <span class="sc">~</span> <span class="fu">factor</span>(Visit) <span class="sc">+</span> <span class="fu">Error</span>(<span class="fu">factor</span>(Locations)), repeated_data)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(repeated_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>repeated_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Measurements <span class="sc">~</span> <span class="fu">factor</span>(Visits) <span class="sc">+</span> <span class="fu">Error</span>(<span class="fu">factor</span>(Individuals)), data)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(repeated_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Error: factor(Locations)
+Error: factor(Individuals)
           Df Sum Sq Mean Sq F value Pr(&gt;F)
-Residuals  2  2.596   1.298               
+Residuals  2 0.4867  0.2433               
 
 Error: Within
-              Df Sum Sq Mean Sq F value  Pr(&gt;F)   
-factor(Visit)  2  3.529  1.7644   56.71 0.00116 **
-Residuals      4  0.124  0.0311                   
+               Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+factor(Visits)  2  5.687  2.8433   89.79 0.000475 ***
+Residuals       4  0.127  0.0317                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<p>Unfortunately, because of the model this is, we cannot perform a Tukey Test on the “object” that is created from this ANOVA analysis. We can, however, approach this from a different direction and get our Tukey results (<a href="https://stats.stackexchange.com/questions/14078/post-hoc-test-after-anova-with-repeated-measures-using-r">thanks to Henrik on StackOverflow!</a>). <strong>For this to work, we need to install the package</strong></p>
+<p>Unfortunately, because of the model this is, we cannot perform a Tukey Test on the “object” that is created from this ANOVA analysis. We can, however, approach this from a different direction and get our Tukey results (<a href="https://stats.stackexchange.com/questions/14078/post-hoc-test-after-anova-with-repeated-measures-using-r">thanks to Henrik on StackOverflow!</a>). <strong>For this to work, we need to install the packages <code>nlme</code> and <code>multcomp</code>.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ensure data is proper format</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>repeated_data<span class="sc">$</span>Locations <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(repeated_data<span class="sc">$</span>Locations)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>repeated_data<span class="sc">$</span>Visit <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(repeated_data<span class="sc">$</span>Visit)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># fit a linear mixed-effects model</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># similar to ANOVA</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>lme_repeated_data <span class="ot">&lt;-</span> <span class="fu">lme</span>(Enzyme <span class="sc">~</span> Visit, </span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> repeated_data, </span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>                         <span class="co"># define repeated section</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>                         <span class="at">random =</span> <span class="sc">~</span><span class="dv">1</span><span class="sc">|</span>Locations)</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co"># perform ANOVA on model</span></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lme_repeated_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ensure data is proper format</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Individuals <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data<span class="sc">$</span>Individuals)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Visits <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(data<span class="sc">$</span>Visits)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Measurements <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(data<span class="sc">$</span>Measurements)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># fit a linear mixed-effects model</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># similar to ANOVA</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>lme_data <span class="ot">&lt;-</span> <span class="fu">lme</span>(Measurements <span class="sc">~</span> Visits, </span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> data, </span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>                         <span class="co"># define repeated section</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>                         <span class="at">random =</span> <span class="sc">~</span><span class="dv">1</span><span class="sc">|</span>Individuals)</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="co"># perform ANOVA on model</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lme_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            numDF denDF   F-value p-value
-(Intercept)     1     4 210.63055  0.0001
-Visit           2     4  56.71423  0.0012</code></pre>
+<pre><code>            numDF denDF  F-value p-value
+(Intercept)     1     4 900.1633  &lt;.0001
+Visits          2     4  89.7895   5e-04</code></pre>
 </div>
 </div>
 <p>As we can see above, we can get the ANOVA results from this linear mixed-effects model fit to the dataset. Now, we need to know post-hoc which sets are different:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>lme_repeated_data <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># "general linear hypothesis"</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># define a comparison to make</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># can add corrections like test = adjusted (type = "bonferroni")</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glht</span>(<span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="at">Visit =</span> <span class="st">"Tukey"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return a summary of the above</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>lme_data <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># "general linear hypothesis"</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># define a comparison to make</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># can add corrections like test = adjusted (type = "bonferroni")</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glht</span>(<span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="at">Visits =</span> <span class="st">"Tukey"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return a summary of the above</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      Simultaneous Tests for General Linear Hypotheses
@@ -670,14 +647,14 @@ Visit           2     4  56.71423  0.0012</code></pre>
 Multiple Comparisons of Means: Tukey Contrasts
 
 
-Fit: lme.formula(fixed = Enzyme ~ Visit, data = repeated_data, random = ~1 | 
-    Locations)
+Fit: lme.formula(fixed = Measurements ~ Visits, data = data, random = ~1 | 
+    Individuals)
 
 Linear Hypotheses:
                        Estimate Std. Error z value Pr(&gt;|z|)    
-Visit 2 - Visit 1 == 0   0.8000     0.1440   5.555   &lt;1e-06 ***
-Visit 3 - Visit 1 == 0   1.5333     0.1440  10.647   &lt;1e-06 ***
-Visit 3 - Visit 2 == 0   0.7333     0.1440   5.092   &lt;1e-06 ***
+Visit_2 - Visit_1 == 0  -0.7667     0.1453  -5.277   &lt;1e-06 ***
+Visit_3 - Visit_1 == 0  -1.9333     0.1453 -13.306   &lt;1e-06 ***
+Visit_3 - Visit_2 == 0  -1.1667     0.1453  -8.030   &lt;1e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 (Adjusted p values reported -- single-step method)</code></pre>
@@ -685,54 +662,62 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 </div>
 <p>We can see that every visit is different.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sig_levels_repeated <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="st">"Visit 1"</span>, <span class="st">"A"</span>,</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Visit 2"</span>, <span class="st">"B"</span>,</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"Visit 3"</span>, <span class="st">"C"</span>), </span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">byrow =</span> T, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(locations)</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># make labels match!</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(sig_levels_repeated) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Visit"</span>, <span class="st">"significance"</span>,<span class="st">"Locations"</span>)</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>sig_levels_repeated<span class="sc">$</span>Visit <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(sig_levels_repeated<span class="sc">$</span>Visit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># manually labeling</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>sig_levels_repeated <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="st">"Visit_1"</span>, <span class="st">"A"</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"Visit_2"</span>, <span class="st">"B"</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"Visit_3"</span>, <span class="st">"C"</span>), </span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">byrow =</span> T, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># make labels match!</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(sig_levels_repeated) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Visits"</span>, <span class="st">"Significance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s plot these. <em>Note</em> that we are not summarizing these the same way, since things are varying based on individual as well.</p>
 <p><em>Note</em>: For reasons I am not certain, you need to put the locations and then <code>ggplot</code> uses these colors to define everything. I really don’t know why this is happening, so if you have a solution, let me know.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(repeated_data,</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Visit, <span class="at">y =</span> Enzyme, <span class="at">colour =</span> Locations)) <span class="sc">+</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set vertical limits for plot</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># offset points</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># show which are overlapping</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make it a classic theme - more legible</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add text to plot</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> sig_levels_repeated,</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>            <span class="co"># make bold</span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>            <span class="co"># define where labels should go</span></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> Visit, </span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>                <span class="co"># define height of label</span></span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="dv">2</span>, </span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>                <span class="co"># what are the labels?</span></span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="fu">paste0</span>(significance))) <span class="sc">+</span></span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Visits"</span>) <span class="sc">+</span></span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Enzyme Measurement"</span>) <span class="sc">+</span></span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove legend - not needed here</span></span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># make label text vertical, easier to read</span></span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, </span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>                                   <span class="co"># vertical offset of text</span></span>
-<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">vjust =</span> <span class="fl">0.5</span>, </span>
-<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>                                   <span class="co"># text size</span></span>
-<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">size =</span> <span class="dv">12</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> <span class="fu">ddply</span>(data, <span class="st">"Visits"</span>, summarise,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">N =</span> <span class="fu">length</span>(<span class="fu">as.numeric</span>(Measurements)),</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">mean =</span> <span class="fu">mean</span>(<span class="fu">as.numeric</span>(Measurements)),</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">sd =</span> <span class="fu">sd</span>(<span class="fu">as.numeric</span>(Measurements)),</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">se =</span> sd <span class="sc">/</span> <span class="fu">sqrt</span>(N))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summary_data,</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Visits, <span class="at">y =</span> mean)) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data =</span> summary_data, </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                <span class="co"># define error bars</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>se, <span class="at">ymax =</span> mean<span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>se), </span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>                <span class="co"># width of bar</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set vertical limits for plot</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make it a classic theme - more legible</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add text to plot</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> sig_levels_repeated,</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>            <span class="co"># make bold</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>            <span class="co"># define where labels should go</span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> Visits, </span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>                <span class="co"># define height of label</span></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> <span class="dv">2</span>, </span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>                <span class="co"># what are the labels?</span></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="fu">paste0</span>(Significance))) <span class="sc">+</span></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Visits"</span>) <span class="sc">+</span></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Measurement"</span>) <span class="sc">+</span></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove legend - not needed here</span></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># make label text vertical, easier to read</span></span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, </span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>                                   <span class="co"># vertical offset of text</span></span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">vjust =</span> <span class="fl">0.5</span>, </span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>                                   <span class="co"># text size</span></span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">size =</span> <span class="dv">12</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="anova2_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="anova2_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -746,329 +731,280 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 <h3 data-number="10.2.4" class="anchored" data-anchor-id="anova-with-interaction"><span class="header-section-number">10.2.4</span> ANOVA with interaction</h3>
 <p>Sometimes when we running a model, we want to look for <em>interactive effects</em>. Interactive effects are situations where one (or both) variables on their own do not effect the data, but there is a cumulative effect between variables that effects things. Let’s look at an example, based on our initial example but with the data altered.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">8675309</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># average fish size in relation to location in Iceland and food used</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>location <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Tálknafjörður"</span>, <span class="st">"Bíldudalur"</span>, <span class="st">"Þingeyri"</span>)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>food <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"SuperFood"</span>, <span class="st">"Gigachad Fish Food"</span>, <span class="st">"MegaFish Flakes"</span>)</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>fish_sizes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">9.1</span>,<span class="fl">8.7</span>,<span class="fl">9.6</span>,</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>                <span class="fl">9.4</span>,<span class="fl">9.5</span>,<span class="fl">8.3</span>,</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>                <span class="fl">8.7</span>,<span class="dv">12</span>,<span class="fl">9.2</span>)</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>data_expanded <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> fish_sizes, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(data_expanded) <span class="ot">&lt;-</span> location</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data_expanded) <span class="ot">&lt;-</span> food</span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>data_expanded</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">8675309</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># we are using data from the randomized black ANOVA again</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>data_expanded</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>              SuperFood Gigachad Fish Food MegaFish Flakes
-Tálknafjörður       9.1                8.7             9.6
-Bíldudalur          9.4                9.5             8.3
-Þingeyri            8.7               12.0             9.2</code></pre>
+<pre><code>  Blocking_Variable Explanatory_1 Explanatory_2 Explanatory_3
+1           Group 1          10.1            12          11.2
+2           Group 2           9.4            13          10.1
+3           Group 3          11.1          15.4          11.9</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create some pseudorandom data</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>data_expanded2 <span class="ot">&lt;-</span> data_expanded <span class="sc">-</span> <span class="fl">0.75</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>data_expanded3 <span class="ot">&lt;-</span> data_expanded<span class="sc">*</span><span class="fl">1.05</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>data_expanded <span class="ot">&lt;-</span> <span class="fu">rbind</span>(data_expanded,</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                       data_expanded2,</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                       data_expanded3)</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co"># expand to "long" format</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data_expanded <span class="sc">%&gt;%</span></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert to data frame</span></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create new column to account for row names</span></span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># may not be needed, depending on your data format</span></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Location =</span> <span class="fu">rownames</span>(data_expanded)) <span class="sc">%&gt;%</span></span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># !by column for aggregating</span></span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># names_to = what to name column aggregation</span></span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># values_to = what the measurements should be called</span></span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>Location, <span class="at">names_to =</span> <span class="st">"Food"</span>, <span class="at">values_to =</span> <span class="st">"Size"</span>)</span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>interactive_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Size <span class="sc">~</span> Food <span class="sc">+</span> Location <span class="sc">+</span> Food<span class="sc">*</span>Location, data)</span>
-<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(interactive_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="do">### YOU DO NOT NEED TO DO THIS</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="do">### CREATING DATA FOR EXAMPLE</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>data_expanded<span class="sc">$</span>Explanatory_1 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(data_expanded<span class="sc">$</span>Explanatory_1)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>data_expanded<span class="sc">$</span>Explanatory_2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(data_expanded<span class="sc">$</span>Explanatory_2)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>data_expanded<span class="sc">$</span>Explanatory_3 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(data_expanded<span class="sc">$</span>Explanatory_3)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co"># create some pseudorandom data</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co"># [,-1] excludes first column - group data</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>data_expanded2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(Blocking_Variable,</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>                        data_expanded[,<span class="sc">-</span><span class="dv">1</span>] <span class="sc">-</span> <span class="fl">0.75</span>)</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>data_expanded3 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(Blocking_Variable,</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>                        data_expanded[,<span class="sc">-</span><span class="dv">1</span>]<span class="sc">*</span><span class="fl">1.05</span>)</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>data_expanded <span class="ot">&lt;-</span> <span class="fu">rbind</span>(data_expanded,</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>                       data_expanded2,</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>                       data_expanded3)</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="co"># expand to "long" format</span></span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data_expanded <span class="sc">%&gt;%</span></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert to data frame</span></span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># !by column for aggregating</span></span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># names_to = what to name column aggregation</span></span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># values_to = what the measurements should be called</span></span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>Blocking_Variable, <span class="at">names_to =</span> <span class="st">"Treatments"</span>, <span class="at">values_to =</span> <span class="st">"Measurements"</span>)</span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a><span class="co"># specifying factor to be safe</span></span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>interactive_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Measurements <span class="sc">~</span> <span class="fu">factor</span>(Treatments) <span class="sc">+</span> </span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">factor</span>(Blocking_Variable) <span class="sc">+</span> </span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">factor</span>(Treatments)<span class="sc">*</span><span class="fu">factor</span>(Blocking_Variable), </span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a>                       data)</span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(interactive_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-Food           2  6.415   3.208    8.46  0.00257 ** 
-Location       2  4.679   2.339    6.17  0.00911 ** 
-Food:Location  4 17.213   4.303   11.35 8.93e-05 ***
-Residuals     18  6.825   0.379                     
+<pre><code>                                             Df Sum Sq Mean Sq F value   Pr(&gt;F)
+factor(Treatments)                            2  53.28  26.640  59.680 1.14e-08
+factor(Blocking_Variable)                     2  21.18  10.588  23.719 9.01e-06
+factor(Treatments):factor(Blocking_Variable)  4   7.39   1.848   4.141    0.015
+Residuals                                    18   8.03   0.446                 
+                                                
+factor(Treatments)                           ***
+factor(Blocking_Variable)                    ***
+factor(Treatments):factor(Blocking_Variable) *  
+Residuals                                       
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<p>As we can see above, there is a significant effect of <code>Food</code>, <code>Location</code>, and an <em>extreme</em> effect of <code>Food</code> interacting with <code>Location</code> in the above dataset.</p>
-<p>When plotting and performing Tukey tests, you only need to focus on the primary hypotheses for situations like the above. <strong>Note</strong> however, that Tukey gives us our differences and <span class="math inline">\(p\)</span> values for each set of tests and comparisons:</p>
+<p>As we can see above, we have very significant effects for <code>Treatment</code> and <code>Blocking_Variable</code>, but a less significant effect for the interaction between the two. <strong>Remember - we only need to plot our primary hypothesis</strong>. <strong>Note</strong> however, that Tukey gives us our differences and <span class="math inline">\(p\)</span> values for each set of tests and comparisons:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(interactive_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(interactive_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Tukey multiple comparisons of means
     95% family-wise confidence level
 
-Fit: aov(formula = Size ~ Food + Location + Food * Location, data = data)
+Fit: aov(formula = Measurements ~ factor(Treatments) + factor(Blocking_Variable) + factor(Treatments) * factor(Blocking_Variable), data = data)
 
-$Food
-                                          diff       lwr        upr     p adj
-MegaFish Flakes-Gigachad Fish Food -1.05055556 -1.791382 -0.3097287 0.0052962
-SuperFood-Gigachad Fish Food       -1.01666667 -1.757494 -0.2758398 0.0068267
-SuperFood-MegaFish Flakes           0.03388889 -0.706938  0.7747158 0.9925169
+$`factor(Treatments)`
+                                  diff         lwr       upr     p adj
+Explanatory_2-Explanatory_1  3.3211111  2.51730768  4.124915 0.0000000
+Explanatory_3-Explanatory_1  0.8811111  0.07730768  1.684915 0.0304521
+Explanatory_3-Explanatory_2 -2.4400000 -3.24380343 -1.636197 0.0000011
 
-$Location
-                               diff        lwr       upr     p adj
-Tálknafjörður-Bíldudalur 0.06777778 -0.6730491 0.8086046 0.9704410
-Þingeyri-Bíldudalur      0.91500000  0.1741731 1.6558269 0.0144978
-Þingeyri-Tálknafjörður   0.84722222  0.1063954 1.5880491 0.0237052
+$`factor(Blocking_Variable)`
+                      diff        lwr       upr     p adj
+Group 2-Group 1 -0.2711111 -1.0749145 0.5326923 0.6710682
+Group 3-Group 1  1.7283333  0.9245299 2.5321368 0.0000928
+Group 3-Group 2  1.9994444  1.1956410 2.8032479 0.0000159
 
-$`Food:Location`
-                                                                        diff
-MegaFish Flakes:Bíldudalur-Gigachad Fish Food:Bíldudalur       -1.220000e+00
-SuperFood:Bíldudalur-Gigachad Fish Food:Bíldudalur             -1.016667e-01
-Gigachad Fish Food:Tálknafjörður-Gigachad Fish Food:Bíldudalur -8.133333e-01
-MegaFish Flakes:Tálknafjörður-Gigachad Fish Food:Bíldudalur     1.016667e-01
-SuperFood:Tálknafjörður-Gigachad Fish Food:Bíldudalur          -4.066667e-01
-Gigachad Fish Food:Þingeyri-Gigachad Fish Food:Bíldudalur       2.541667e+00
-MegaFish Flakes:Þingeyri-Gigachad Fish Food:Bíldudalur         -3.050000e-01
-SuperFood:Þingeyri-Gigachad Fish Food:Bíldudalur               -8.133333e-01
-SuperFood:Bíldudalur-MegaFish Flakes:Bíldudalur                 1.118333e+00
-Gigachad Fish Food:Tálknafjörður-MegaFish Flakes:Bíldudalur     4.066667e-01
-MegaFish Flakes:Tálknafjörður-MegaFish Flakes:Bíldudalur        1.321667e+00
-SuperFood:Tálknafjörður-MegaFish Flakes:Bíldudalur              8.133333e-01
-Gigachad Fish Food:Þingeyri-MegaFish Flakes:Bíldudalur          3.761667e+00
-MegaFish Flakes:Þingeyri-MegaFish Flakes:Bíldudalur             9.150000e-01
-SuperFood:Þingeyri-MegaFish Flakes:Bíldudalur                   4.066667e-01
-Gigachad Fish Food:Tálknafjörður-SuperFood:Bíldudalur          -7.116667e-01
-MegaFish Flakes:Tálknafjörður-SuperFood:Bíldudalur              2.033333e-01
-SuperFood:Tálknafjörður-SuperFood:Bíldudalur                   -3.050000e-01
-Gigachad Fish Food:Þingeyri-SuperFood:Bíldudalur                2.643333e+00
-MegaFish Flakes:Þingeyri-SuperFood:Bíldudalur                  -2.033333e-01
-SuperFood:Þingeyri-SuperFood:Bíldudalur                        -7.116667e-01
-MegaFish Flakes:Tálknafjörður-Gigachad Fish Food:Tálknafjörður  9.150000e-01
-SuperFood:Tálknafjörður-Gigachad Fish Food:Tálknafjörður        4.066667e-01
-Gigachad Fish Food:Þingeyri-Gigachad Fish Food:Tálknafjörður    3.355000e+00
-MegaFish Flakes:Þingeyri-Gigachad Fish Food:Tálknafjörður       5.083333e-01
-SuperFood:Þingeyri-Gigachad Fish Food:Tálknafjörður            -3.552714e-15
-SuperFood:Tálknafjörður-MegaFish Flakes:Tálknafjörður          -5.083333e-01
-Gigachad Fish Food:Þingeyri-MegaFish Flakes:Tálknafjörður       2.440000e+00
-MegaFish Flakes:Þingeyri-MegaFish Flakes:Tálknafjörður         -4.066667e-01
-SuperFood:Þingeyri-MegaFish Flakes:Tálknafjörður               -9.150000e-01
-Gigachad Fish Food:Þingeyri-SuperFood:Tálknafjörður             2.948333e+00
-MegaFish Flakes:Þingeyri-SuperFood:Tálknafjörður                1.016667e-01
-SuperFood:Þingeyri-SuperFood:Tálknafjörður                     -4.066667e-01
-MegaFish Flakes:Þingeyri-Gigachad Fish Food:Þingeyri           -2.846667e+00
-SuperFood:Þingeyri-Gigachad Fish Food:Þingeyri                 -3.355000e+00
-SuperFood:Þingeyri-MegaFish Flakes:Þingeyri                    -5.083333e-01
-                                                                      lwr
-MegaFish Flakes:Bíldudalur-Gigachad Fish Food:Bíldudalur       -2.9816349
-SuperFood:Bíldudalur-Gigachad Fish Food:Bíldudalur             -1.8633016
-Gigachad Fish Food:Tálknafjörður-Gigachad Fish Food:Bíldudalur -2.5749683
-MegaFish Flakes:Tálknafjörður-Gigachad Fish Food:Bíldudalur    -1.6599683
-SuperFood:Tálknafjörður-Gigachad Fish Food:Bíldudalur          -2.1683016
-Gigachad Fish Food:Þingeyri-Gigachad Fish Food:Bíldudalur       0.7800317
-MegaFish Flakes:Þingeyri-Gigachad Fish Food:Bíldudalur         -2.0666349
-SuperFood:Þingeyri-Gigachad Fish Food:Bíldudalur               -2.5749683
-SuperFood:Bíldudalur-MegaFish Flakes:Bíldudalur                -0.6433016
-Gigachad Fish Food:Tálknafjörður-MegaFish Flakes:Bíldudalur    -1.3549683
-MegaFish Flakes:Tálknafjörður-MegaFish Flakes:Bíldudalur       -0.4399683
-SuperFood:Tálknafjörður-MegaFish Flakes:Bíldudalur             -0.9483016
-Gigachad Fish Food:Þingeyri-MegaFish Flakes:Bíldudalur          2.0000317
-MegaFish Flakes:Þingeyri-MegaFish Flakes:Bíldudalur            -0.8466349
-SuperFood:Þingeyri-MegaFish Flakes:Bíldudalur                  -1.3549683
-Gigachad Fish Food:Tálknafjörður-SuperFood:Bíldudalur          -2.4733016
-MegaFish Flakes:Tálknafjörður-SuperFood:Bíldudalur             -1.5583016
-SuperFood:Tálknafjörður-SuperFood:Bíldudalur                   -2.0666349
-Gigachad Fish Food:Þingeyri-SuperFood:Bíldudalur                0.8816984
-MegaFish Flakes:Þingeyri-SuperFood:Bíldudalur                  -1.9649683
-SuperFood:Þingeyri-SuperFood:Bíldudalur                        -2.4733016
-MegaFish Flakes:Tálknafjörður-Gigachad Fish Food:Tálknafjörður -0.8466349
-SuperFood:Tálknafjörður-Gigachad Fish Food:Tálknafjörður       -1.3549683
-Gigachad Fish Food:Þingeyri-Gigachad Fish Food:Tálknafjörður    1.5933651
-MegaFish Flakes:Þingeyri-Gigachad Fish Food:Tálknafjörður      -1.2533016
-SuperFood:Þingeyri-Gigachad Fish Food:Tálknafjörður            -1.7616349
-SuperFood:Tálknafjörður-MegaFish Flakes:Tálknafjörður          -2.2699683
-Gigachad Fish Food:Þingeyri-MegaFish Flakes:Tálknafjörður       0.6783651
-MegaFish Flakes:Þingeyri-MegaFish Flakes:Tálknafjörður         -2.1683016
-SuperFood:Þingeyri-MegaFish Flakes:Tálknafjörður               -2.6766349
-Gigachad Fish Food:Þingeyri-SuperFood:Tálknafjörður             1.1866984
-MegaFish Flakes:Þingeyri-SuperFood:Tálknafjörður               -1.6599683
-SuperFood:Þingeyri-SuperFood:Tálknafjörður                     -2.1683016
-MegaFish Flakes:Þingeyri-Gigachad Fish Food:Þingeyri           -4.6083016
-SuperFood:Þingeyri-Gigachad Fish Food:Þingeyri                 -5.1166349
-SuperFood:Þingeyri-MegaFish Flakes:Þingeyri                    -2.2699683
-                                                                      upr
-MegaFish Flakes:Bíldudalur-Gigachad Fish Food:Bíldudalur        0.5416349
-SuperFood:Bíldudalur-Gigachad Fish Food:Bíldudalur              1.6599683
-Gigachad Fish Food:Tálknafjörður-Gigachad Fish Food:Bíldudalur  0.9483016
-MegaFish Flakes:Tálknafjörður-Gigachad Fish Food:Bíldudalur     1.8633016
-SuperFood:Tálknafjörður-Gigachad Fish Food:Bíldudalur           1.3549683
-Gigachad Fish Food:Þingeyri-Gigachad Fish Food:Bíldudalur       4.3033016
-MegaFish Flakes:Þingeyri-Gigachad Fish Food:Bíldudalur          1.4566349
-SuperFood:Þingeyri-Gigachad Fish Food:Bíldudalur                0.9483016
-SuperFood:Bíldudalur-MegaFish Flakes:Bíldudalur                 2.8799683
-Gigachad Fish Food:Tálknafjörður-MegaFish Flakes:Bíldudalur     2.1683016
-MegaFish Flakes:Tálknafjörður-MegaFish Flakes:Bíldudalur        3.0833016
-SuperFood:Tálknafjörður-MegaFish Flakes:Bíldudalur              2.5749683
-Gigachad Fish Food:Þingeyri-MegaFish Flakes:Bíldudalur          5.5233016
-MegaFish Flakes:Þingeyri-MegaFish Flakes:Bíldudalur             2.6766349
-SuperFood:Þingeyri-MegaFish Flakes:Bíldudalur                   2.1683016
-Gigachad Fish Food:Tálknafjörður-SuperFood:Bíldudalur           1.0499683
-MegaFish Flakes:Tálknafjörður-SuperFood:Bíldudalur              1.9649683
-SuperFood:Tálknafjörður-SuperFood:Bíldudalur                    1.4566349
-Gigachad Fish Food:Þingeyri-SuperFood:Bíldudalur                4.4049683
-MegaFish Flakes:Þingeyri-SuperFood:Bíldudalur                   1.5583016
-SuperFood:Þingeyri-SuperFood:Bíldudalur                         1.0499683
-MegaFish Flakes:Tálknafjörður-Gigachad Fish Food:Tálknafjörður  2.6766349
-SuperFood:Tálknafjörður-Gigachad Fish Food:Tálknafjörður        2.1683016
-Gigachad Fish Food:Þingeyri-Gigachad Fish Food:Tálknafjörður    5.1166349
-MegaFish Flakes:Þingeyri-Gigachad Fish Food:Tálknafjörður       2.2699683
-SuperFood:Þingeyri-Gigachad Fish Food:Tálknafjörður             1.7616349
-SuperFood:Tálknafjörður-MegaFish Flakes:Tálknafjörður           1.2533016
-Gigachad Fish Food:Þingeyri-MegaFish Flakes:Tálknafjörður       4.2016349
-MegaFish Flakes:Þingeyri-MegaFish Flakes:Tálknafjörður          1.3549683
-SuperFood:Þingeyri-MegaFish Flakes:Tálknafjörður                0.8466349
-Gigachad Fish Food:Þingeyri-SuperFood:Tálknafjörður             4.7099683
-MegaFish Flakes:Þingeyri-SuperFood:Tálknafjörður                1.8633016
-SuperFood:Þingeyri-SuperFood:Tálknafjörður                      1.3549683
-MegaFish Flakes:Þingeyri-Gigachad Fish Food:Þingeyri           -1.0850317
-SuperFood:Þingeyri-Gigachad Fish Food:Þingeyri                 -1.5933651
-SuperFood:Þingeyri-MegaFish Flakes:Þingeyri                     1.2533016
-                                                                   p adj
-MegaFish Flakes:Bíldudalur-Gigachad Fish Food:Bíldudalur       0.3273591
-SuperFood:Bíldudalur-Gigachad Fish Food:Bíldudalur             0.9999999
-Gigachad Fish Food:Tálknafjörður-Gigachad Fish Food:Bíldudalur 0.7840013
-MegaFish Flakes:Tálknafjörður-Gigachad Fish Food:Bíldudalur    0.9999999
-SuperFood:Tálknafjörður-Gigachad Fish Food:Bíldudalur          0.9950539
-Gigachad Fish Food:Þingeyri-Gigachad Fish Food:Bíldudalur      0.0020914
-MegaFish Flakes:Þingeyri-Gigachad Fish Food:Bíldudalur         0.9993270
-SuperFood:Þingeyri-Gigachad Fish Food:Bíldudalur               0.7840013
-SuperFood:Bíldudalur-MegaFish Flakes:Bíldudalur                0.4313167
-Gigachad Fish Food:Tálknafjörður-MegaFish Flakes:Bíldudalur    0.9950539
-MegaFish Flakes:Tálknafjörður-MegaFish Flakes:Bíldudalur       0.2409453
-SuperFood:Tálknafjörður-MegaFish Flakes:Bíldudalur             0.7840013
-Gigachad Fish Food:Þingeyri-MegaFish Flakes:Bíldudalur         0.0000181
-MegaFish Flakes:Þingeyri-MegaFish Flakes:Bíldudalur            0.6700590
-SuperFood:Þingeyri-MegaFish Flakes:Bíldudalur                  0.9950539
-Gigachad Fish Food:Tálknafjörður-SuperFood:Bíldudalur          0.8777549
-MegaFish Flakes:Tálknafjörður-SuperFood:Bíldudalur             0.9999670
-SuperFood:Tálknafjörður-SuperFood:Bíldudalur                   0.9993270
-Gigachad Fish Food:Þingeyri-SuperFood:Bíldudalur               0.0013790
-MegaFish Flakes:Þingeyri-SuperFood:Bíldudalur                  0.9999670
-SuperFood:Þingeyri-SuperFood:Bíldudalur                        0.8777549
-MegaFish Flakes:Tálknafjörður-Gigachad Fish Food:Tálknafjörður 0.6700590
-SuperFood:Tálknafjörður-Gigachad Fish Food:Tálknafjörður       0.9950539
-Gigachad Fish Food:Þingeyri-Gigachad Fish Food:Tálknafjörður   0.0000822
-MegaFish Flakes:Þingeyri-Gigachad Fish Food:Tálknafjörður      0.9797033
-SuperFood:Þingeyri-Gigachad Fish Food:Tálknafjörður            1.0000000
-SuperFood:Tálknafjörður-MegaFish Flakes:Tálknafjörður          0.9797033
-Gigachad Fish Food:Þingeyri-MegaFish Flakes:Tálknafjörður      0.0031774
-MegaFish Flakes:Þingeyri-MegaFish Flakes:Tálknafjörður         0.9950539
-SuperFood:Þingeyri-MegaFish Flakes:Tálknafjörður               0.6700590
-Gigachad Fish Food:Þingeyri-SuperFood:Tálknafjörður            0.0004021
-MegaFish Flakes:Þingeyri-SuperFood:Tálknafjörður               0.9999999
-SuperFood:Þingeyri-SuperFood:Tálknafjörður                     0.9950539
-MegaFish Flakes:Þingeyri-Gigachad Fish Food:Þingeyri           0.0006044
-SuperFood:Þingeyri-Gigachad Fish Food:Þingeyri                 0.0000822
-SuperFood:Þingeyri-MegaFish Flakes:Þingeyri                    0.9797033</code></pre>
+$`factor(Treatments):factor(Blocking_Variable)`
+                                                     diff         lwr
+Explanatory_2:Group 1-Explanatory_1:Group 1  1.931667e+00  0.02027781
+Explanatory_3:Group 1-Explanatory_1:Group 1  1.118333e+00 -0.79305553
+Explanatory_1:Group 2-Explanatory_1:Group 1 -7.116667e-01 -2.62305553
+Explanatory_2:Group 2-Explanatory_1:Group 1  2.948333e+00  1.03694447
+Explanatory_3:Group 2-Explanatory_1:Group 1 -1.776357e-15 -1.91138886
+Explanatory_1:Group 3-Explanatory_1:Group 1  1.016667e+00 -0.89472219
+Explanatory_2:Group 3-Explanatory_1:Group 1  5.388333e+00  3.47694447
+Explanatory_3:Group 3-Explanatory_1:Group 1  1.830000e+00 -0.08138886
+Explanatory_3:Group 1-Explanatory_2:Group 1 -8.133333e-01 -2.72472219
+Explanatory_1:Group 2-Explanatory_2:Group 1 -2.643333e+00 -4.55472219
+Explanatory_2:Group 2-Explanatory_2:Group 1  1.016667e+00 -0.89472219
+Explanatory_3:Group 2-Explanatory_2:Group 1 -1.931667e+00 -3.84305553
+Explanatory_1:Group 3-Explanatory_2:Group 1 -9.150000e-01 -2.82638886
+Explanatory_2:Group 3-Explanatory_2:Group 1  3.456667e+00  1.54527781
+Explanatory_3:Group 3-Explanatory_2:Group 1 -1.016667e-01 -2.01305553
+Explanatory_1:Group 2-Explanatory_3:Group 1 -1.830000e+00 -3.74138886
+Explanatory_2:Group 2-Explanatory_3:Group 1  1.830000e+00 -0.08138886
+Explanatory_3:Group 2-Explanatory_3:Group 1 -1.118333e+00 -3.02972219
+Explanatory_1:Group 3-Explanatory_3:Group 1 -1.016667e-01 -2.01305553
+Explanatory_2:Group 3-Explanatory_3:Group 1  4.270000e+00  2.35861114
+Explanatory_3:Group 3-Explanatory_3:Group 1  7.116667e-01 -1.19972219
+Explanatory_2:Group 2-Explanatory_1:Group 2  3.660000e+00  1.74861114
+Explanatory_3:Group 2-Explanatory_1:Group 2  7.116667e-01 -1.19972219
+Explanatory_1:Group 3-Explanatory_1:Group 2  1.728333e+00 -0.18305553
+Explanatory_2:Group 3-Explanatory_1:Group 2  6.100000e+00  4.18861114
+Explanatory_3:Group 3-Explanatory_1:Group 2  2.541667e+00  0.63027781
+Explanatory_3:Group 2-Explanatory_2:Group 2 -2.948333e+00 -4.85972219
+Explanatory_1:Group 3-Explanatory_2:Group 2 -1.931667e+00 -3.84305553
+Explanatory_2:Group 3-Explanatory_2:Group 2  2.440000e+00  0.52861114
+Explanatory_3:Group 3-Explanatory_2:Group 2 -1.118333e+00 -3.02972219
+Explanatory_1:Group 3-Explanatory_3:Group 2  1.016667e+00 -0.89472219
+Explanatory_2:Group 3-Explanatory_3:Group 2  5.388333e+00  3.47694447
+Explanatory_3:Group 3-Explanatory_3:Group 2  1.830000e+00 -0.08138886
+Explanatory_2:Group 3-Explanatory_1:Group 3  4.371667e+00  2.46027781
+Explanatory_3:Group 3-Explanatory_1:Group 3  8.133333e-01 -1.09805553
+Explanatory_3:Group 3-Explanatory_2:Group 3 -3.558333e+00 -5.46972219
+                                                    upr     p adj
+Explanatory_2:Group 1-Explanatory_1:Group 1  3.84305553 0.0464895
+Explanatory_3:Group 1-Explanatory_1:Group 1  3.02972219 0.5317567
+Explanatory_1:Group 2-Explanatory_1:Group 1  1.19972219 0.9173224
+Explanatory_2:Group 2-Explanatory_1:Group 1  4.85972219 0.0010200
+Explanatory_3:Group 2-Explanatory_1:Group 1  1.91138886 1.0000000
+Explanatory_1:Group 3-Explanatory_1:Group 1  2.92805553 0.6439270
+Explanatory_2:Group 3-Explanatory_1:Group 1  7.29972219 0.0000003
+Explanatory_3:Group 3-Explanatory_1:Group 1  3.74138886 0.0667267
+Explanatory_3:Group 1-Explanatory_2:Group 1  1.09805553 0.8457970
+Explanatory_1:Group 2-Explanatory_2:Group 1 -0.73194447 0.0032271
+Explanatory_2:Group 2-Explanatory_2:Group 1  2.92805553 0.6439270
+Explanatory_3:Group 2-Explanatory_2:Group 1 -0.02027781 0.0464895
+Explanatory_1:Group 3-Explanatory_2:Group 1  0.99638886 0.7519790
+Explanatory_2:Group 3-Explanatory_2:Group 1  5.36805553 0.0001577
+Explanatory_3:Group 3-Explanatory_2:Group 1  1.80972219 0.9999999
+Explanatory_1:Group 2-Explanatory_3:Group 1  0.08138886 0.0667267
+Explanatory_2:Group 2-Explanatory_3:Group 1  3.74138886 0.0667267
+Explanatory_3:Group 2-Explanatory_3:Group 1  0.79305553 0.5317567
+Explanatory_1:Group 3-Explanatory_3:Group 1  1.80972219 0.9999999
+Explanatory_2:Group 3-Explanatory_3:Group 1  6.18138886 0.0000097
+Explanatory_3:Group 3-Explanatory_3:Group 1  2.62305553 0.9173224
+Explanatory_2:Group 2-Explanatory_1:Group 2  5.57138886 0.0000766
+Explanatory_3:Group 2-Explanatory_1:Group 2  2.62305553 0.9173224
+Explanatory_1:Group 3-Explanatory_1:Group 2  3.63972219 0.0947841
+Explanatory_2:Group 3-Explanatory_1:Group 2  8.01138886 0.0000000
+Explanatory_3:Group 3-Explanatory_1:Group 2  4.45305553 0.0047491
+Explanatory_3:Group 2-Explanatory_2:Group 2 -1.03694447 0.0010200
+Explanatory_1:Group 3-Explanatory_2:Group 2 -0.02027781 0.0464895
+Explanatory_2:Group 3-Explanatory_2:Group 2  4.35138886 0.0069891
+Explanatory_3:Group 3-Explanatory_2:Group 2  0.79305553 0.5317567
+Explanatory_1:Group 3-Explanatory_3:Group 2  2.92805553 0.6439270
+Explanatory_2:Group 3-Explanatory_3:Group 2  7.29972219 0.0000003
+Explanatory_3:Group 3-Explanatory_3:Group 2  3.74138886 0.0667267
+Explanatory_2:Group 3-Explanatory_1:Group 3  6.28305553 0.0000070
+Explanatory_3:Group 3-Explanatory_1:Group 3  2.72472219 0.8457970
+Explanatory_3:Group 3-Explanatory_2:Group 3 -1.64694447 0.0001097</code></pre>
 </div>
 </div>
+<p>I do not plot this here, but it would be similar to the other parts of this test.</p>
 </section>
 </section>
 <section id="friedmans-test" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="friedmans-test"><span class="header-section-number">10.3</span> Friedman’s test</h2>
-<section id="by-hand" class="level3" data-number="10.3.1">
-<h3 data-number="10.3.1" class="anchored" data-anchor-id="by-hand"><span class="header-section-number">10.3.1</span> By hand</h3>
+<section id="using-r" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="using-r"><span class="header-section-number">10.3.1</span> Using <em>R</em></h3>
 <p>Friedman’s test is a non-parametric alternative to a two-way ANOVA, so as you would guess, it can be painful to implement. We will use an altered version of the same test we’ve used before:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set seed - make reproducible</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">8675309</span>)</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># new set of foods - this time, ten of them</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>food <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="st">"Food"</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.factor</span>()</span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co"># pre-created data frame of locations from earlier</span></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>locations2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="st">"Location"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.factor</span>()</span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>long_data <span class="ot">&lt;-</span> <span class="fu">crossing</span>(locations2, food)</span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>long_data<span class="sc">$</span>Sizes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">runif</span>(<span class="at">n =</span> <span class="fu">nrow</span>(long_data) <span class="sc">-</span> <span class="fu">nrow</span>(long_data)<span class="sc">/</span><span class="fu">length</span>(<span class="fu">unique</span>(long_data<span class="sc">$</span>locations2)),</span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>                           <span class="at">min =</span> <span class="dv">9</span>, <span class="at">max =</span> <span class="dv">12</span>),</span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">runif</span>(<span class="at">n =</span> <span class="fu">nrow</span>(long_data)<span class="sc">/</span><span class="fu">length</span>(<span class="fu">unique</span>(long_data<span class="sc">$</span>locations2)),</span>
-<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>                           <span class="at">min =</span> <span class="dv">11</span>, <span class="at">max =</span> <span class="dv">15</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">1</span>)</span>
-<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>long_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set seed - make reproducible</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">8675309</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="do">### DO NOT NEED TO REPEAT THIS</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="do">### CREATING DATA FOR EXAMPLE </span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="co"># new set of foods - this time, ten of them</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>Treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="st">"Treatment"</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.factor</span>()</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="co"># pre-created data frame of locations from earlier</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>Blocking_Factor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="st">"Block"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.factor</span>()</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>long_data <span class="ot">&lt;-</span> <span class="fu">crossing</span>(Blocking_Factor, Treatments)</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>long_data<span class="sc">$</span>Measurements <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(<span class="fu">unique</span>(long_data<span class="sc">$</span>Treatments))){</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>  subset_rows <span class="ot">&lt;-</span> <span class="fu">which</span>(long_data<span class="sc">$</span>Treatments<span class="sc">==</span>long_data<span class="sc">$</span>Treatments[i])</span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>  long_data<span class="sc">$</span>Measurements[subset_rows] <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="fu">length</span>(subset_rows),</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">min =</span> i<span class="dv">-2</span>, <span class="at">max =</span> i<span class="sc">+</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="dv">1</span>)</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>long_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 100 × 3
-   locations2 food    Sizes
-   &lt;fct&gt;      &lt;fct&gt;   &lt;dbl&gt;
- 1 Location 1 Food 1    9.5
- 2 Location 1 Food 10  10.4
- 3 Location 1 Food 2   11.3
- 4 Location 1 Food 3   11.3
- 5 Location 1 Food 4    9.8
- 6 Location 1 Food 5   11  
- 7 Location 1 Food 6   11.9
- 8 Location 1 Food 7   11.5
- 9 Location 1 Food 8   11.6
-10 Location 1 Food 9   10.3
+   Blocking_Factor Treatments   Measurements
+   &lt;fct&gt;           &lt;fct&gt;               &lt;dbl&gt;
+ 1 Block 1         Treatment 1          -0.4
+ 2 Block 1         Treatment 10          3.4
+ 3 Block 1         Treatment 2           1.2
+ 4 Block 1         Treatment 3           5.9
+ 5 Block 1         Treatment 4           6.9
+ 6 Block 1         Treatment 5           7  
+ 7 Block 1         Treatment 6           7.6
+ 8 Block 1         Treatment 7           7.6
+ 9 Block 1         Treatment 8           8.1
+10 Block 1         Treatment 9           9.8
 # ℹ 90 more rows</code></pre>
 </div>
 </div>
 <p>Now that we have our expanded and randomized table, we can get started with our test.</p>
-<p>First, we have to rank our measurement of interest, averaging the ties.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>long_data<span class="sc">$</span>ranks <span class="ot">&lt;-</span> <span class="fu">rank</span>(long_data<span class="sc">$</span>Sizes, <span class="at">ties.method =</span> <span class="st">"average"</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>long_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 100 × 4
-   locations2 food    Sizes ranks
-   &lt;fct&gt;      &lt;fct&gt;   &lt;dbl&gt; &lt;dbl&gt;
- 1 Location 1 Food 1    9.5   9.5
- 2 Location 1 Food 10  10.4  42.5
- 3 Location 1 Food 2   11.3  66.5
- 4 Location 1 Food 3   11.3  66.5
- 5 Location 1 Food 4    9.8  18.5
- 6 Location 1 Food 5   11    54.5
- 7 Location 1 Food 6   11.9  92  
- 8 Location 1 Food 7   11.5  76.5
- 9 Location 1 Food 8   11.6  83  
-10 Location 1 Food 9   10.3  38  
-# ℹ 90 more rows</code></pre>
-</div>
-</div>
 <p>Our calculation for the Friedman’s test statistic <span class="math inline">\(Q\)</span> (not to be confused with Tukey’s <span class="math inline">\(q\)</span>!) is: <span class="math display">\[Q = \frac{12}{nk(k+1)} \cdot \Sigma R_j^2 - 3n(k+1)\]</span></p>
 <p>where <span class="math inline">\(n\)</span> is the total number of individuals in each sample in the dataset, <span class="math inline">\(k\)</span> is the number of groups, and <span class="math inline">\(R_j^2\)</span> is the sum of the ranks.</p>
-<p><strong><em>NOTE</em></strong>: This section is incomplete, as my by hand answers are varying from what I am calculating using <code>friedman.test</code>. Until I resolve the reasons for this difference, this will remain blank.</p>
-</section>
-<section id="using-r" class="level3" data-number="10.3.2">
-<h3 data-number="10.3.2" class="anchored" data-anchor-id="using-r"><span class="header-section-number">10.3.2</span> Using <em>R</em></h3>
-<p>As some of you may have guess, this is easier.</p>
+<p><strong>In this class, we will do this in <em>R</em>.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>friedman_long_data <span class="ot">&lt;-</span> <span class="fu">friedman.test</span>(<span class="at">y =</span> long_data<span class="sc">$</span>Sizes,</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">groups =</span> long_data<span class="sc">$</span>food,</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">blocks =</span> long_data<span class="sc">$</span>locations2)</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(friedman_long_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>friedman_long_data <span class="ot">&lt;-</span> <span class="fu">friedman.test</span>(<span class="at">y =</span> long_data<span class="sc">$</span>Measurements,</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">groups =</span> long_data<span class="sc">$</span>Treatments,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">blocks =</span> long_data<span class="sc">$</span>Blocking_Factor)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(friedman_long_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Friedman rank sum test
 
-data:  long_data$Sizes, long_data$food and long_data$locations2
-Friedman chi-squared = 9.9166, df = 9, p-value = 0.3573</code></pre>
+data:  long_data$Measurements, long_data$Treatments and long_data$Blocking_Factor
+Friedman chi-squared = 79.983, df = 9, p-value = 1.629e-13</code></pre>
 </div>
 </div>
 <p><em>Note</em> you will get a different answer if you are switching the blocks and the groups.</p>
+<p>We can use the following, from package <code>PMCMRplus</code>, to find the adjacent and non-adjacent groups.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find differences</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">frdAllPairsConoverTest</span>(<span class="at">y =</span> long_data<span class="sc">$</span>Measurements,</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">groups =</span> long_data<span class="sc">$</span>Treatments,</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">blocks =</span> long_data<span class="sc">$</span>Blocking_Factor, </span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">p.adjust.method =</span> <span class="st">"bonf"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+    Pairwise comparisons using Conover's all-pairs test for a two-way balanced complete block design</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>data: y, groups and blocks</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Treatment 1 Treatment 10 Treatment 2 Treatment 3 Treatment 4
+Treatment 10 1.00000     -            -           -           -          
+Treatment 2  1.00000     1.00000      -           -           -          
+Treatment 3  0.00094     0.10167      0.80301     -           -          
+Treatment 4  3.8e-09     1.6e-06      3.4e-05     0.19031     -          
+Treatment 5  3.2e-11     1.6e-08      4.0e-07     0.00637     1.00000    
+Treatment 6  &lt; 2e-16     9.2e-16      2.5e-14     1.5e-09     0.00042    
+Treatment 7  &lt; 2e-16     &lt; 2e-16      3.6e-16     2.0e-11     9.3e-06    
+Treatment 8  &lt; 2e-16     &lt; 2e-16      &lt; 2e-16     6.1e-15     3.8e-09    
+Treatment 9  &lt; 2e-16     &lt; 2e-16      &lt; 2e-16     &lt; 2e-16     1.1e-12    
+             Treatment 5 Treatment 6 Treatment 7 Treatment 8
+Treatment 10 -           -           -           -          
+Treatment 2  -           -           -           -          
+Treatment 3  -           -           -           -          
+Treatment 4  -           -           -           -          
+Treatment 5  -           -           -           -          
+Treatment 6  0.01886     -           -           -          
+Treatment 7  0.00063     1.00000     -           -          
+Treatment 8  4.0e-07     0.34617     1.00000     -          
+Treatment 9  1.4e-10     0.00094     0.02676     1.00000    </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+P value adjustment method: bonferroni</code></pre>
+</div>
+</div>
+<p>As we can see, some pairs are inseparable and others are separable. We can now plot as for the other problems.</p>
 </section>
 </section>
 <section id="homework-chapter-12" class="level2" data-number="10.4">
