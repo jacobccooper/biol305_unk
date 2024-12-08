@@ -5,21 +5,202 @@ format: html
 editor: visual
 ---
 
+```{r}
+# load required libraries
+
+library(tidyverse)
+```
+
 ## Introduction
 
+When we are comparing *two continuous variables*, we use two forms of tests: *correlation* to understand *if* there is a relationship between two variables, and *linear regression* to determine *what* that relationships is.
+
+**Remember** - "if" is always correlation, and "what is it" is always linear regression when choosing a test for an exam.
+
 ## Correlation
+
+Correlation - denoted by $\rho$ ("rho") and not to be confused with $p$ - is a measure of how closely related to continuous variables appear to be. This can vary from a purely negative relationship to a purely positive relationship, such that $-1 \le \rho \le 1$ with $\rho = 0$ indicating a random relationship between data.
+
+We can visualize these as follows:
+
+```{r}
+### ILLUSTRATIVE PURPOSES ONLY
+
+# create two random uniform distributions
+y <- runif(10)
+x <- runif(10)
+```
+
+For example, two things compared to themselves have a $\rho = 1$.
+
+```{r}
+plot(y, y, pch = 19)
+```
+
+```{r}
+cor(y, y)
+```
+
+As we can see above, the correlation is 1.
+
+Plotting by the negative will be a correlation of -1.
+
+```{r}
+plot(y, -y, pch = 19)
+```
+
+```{r}
+cor(y, -y)
+```
+
+Lastly, two random variables plotted against each other should have $\rho \approx 0$.
+
+```{r}
+plot(y, x, 
+     pch = 19, 
+     asp = 1) # aspect ratio
+```
+
+```{r}
+cor(y, x) %>% 
+  round(2)
+```
 
 ### Pearson's
 
+Pearson's correlation coefficient is our value for *parametric tests*. We often denote our correlation coefficient as $r$ and not $\rho$ for this particular test. It is calculated as follows:
+
+$$
+r = \frac{\Sigma xy - (\frac{\Sigma x \Sigma y}{n})}{\sqrt{(\Sigma x^2 - \frac{(\Sigma x)^2}{n}})(\Sigma y^2 - \frac{(\Sigma y)^2}{n})}
+$$
+
+where $x$ is variable 1, $y$ is variable 2, and $n$ is the total number of data point pairs.
+
+In this class, we will be using *R* to calculate $r$, which is done using the command `cor`. To ensure we are using the correct method, we need to set `method = "pearson"`.
+
+```{r}
+set.seed(8675309)
+
+### EXAMPLE DATA
+x <- c(1,2,5,3,4,5,8,7,9,6,10,12,15,20,25)
+y <- c(2,5,4,3,8,6,4,2,8,9,15,13,10,18,19)
+
+plot(x, y, pch = 19)
+```
+
+```{r}
+cor(x, y, method = "pearson") %>% 
+  round(2)
+```
+
+As we can see, these data are fairly positively correlated. As `x` increases, so does `y`. But how *significant* is this relationship?
+
+Well, we can calculate two things - the *amount of variation explained*, which is $r^2$, and the *significance of the relationships*, which is determined via a $t$ test and the equation $t=r \sqrt{\frac{n-2}{1-r^2}}$. This is a two-tailed distribution, with $df = n-2$.
+
+We can write a function to perform all of these options:
+
+```{r}
+biol305_cor <- function(x, y, method){
+  r <- cor(x, y, method = method)
+  
+  n <- length(x)
+  
+  t_val <- r*sqrt((n-2)/(1-r^2))
+  
+  p <- pt(t_val, df = n - 2)
+  if(p > 0.5){p <- 1 - p}
+  
+  if(p > 0.005){p <- round(p, 2)}
+  if(p > 0.0005){p <- round(p, 3)}
+  if(p > 0.00005){p <- round(p, 4)}
+  if(p < 0.00005){p <- "< 0.0001"}
+  
+  print(paste0("Correlation: ", round(r, 2)))
+  print(paste0("Degrees of freedom: ", n - 2))
+  print(paste0("t value: ", round(t_val, 2)))
+  print(paste0("P value: ", p))
+}
+```
+
+Let's test our function.
+
+```{r}
+biol305_cor(x, y, method = "pearson")
+```
+
+There we go! Our function printed out everything that we need.
+
 ### Spearman's
+
+Spearman's correlation is one of the non-parametric methods for our correlation tests. We can use this for ranked data or for non-parametric datasets. We do this the exact same way, except we change `method = "spearman"`.
 
 ### Other non-parametric methods
 
-## Correlation
+To be expanded upon, but not necessary for the class at present.
+
+## Regression
+
+Regression is used when we want to know *what* the relationship is between two variables. Regression operates similar to ANOVA and correlation, providing us with the nature of the relationship, the strength of the relationship, and gives us values for calculating the relationship. **For this class, we are only focusing on linear regression for relationships between linear variables**.
+
+The equation for a regression line is often written as $y_i = \alpha + \beta x_i + e_i$, where $\alpha$ is the $y$ intercept, $\beta$ is the slope, and $e$ is the error around each point. We will not perform regression calculations by hand in this class.
 
 ### Parametric
 
+We will use out previous established `x` and `y` datasets that are strongly positively correlated for this example. The equation for calculating a linear relationship is `lm`, which stands for "linear model". This uses equations like ANOVA, but can also use two vectors of data.
+
+```{r}
+xy_linear <- lm(y ~ x)
+
+summary(xy_linear)
+```
+
+As we can see, this returned an ANOVA table to use that tells us the value and significance of our *intercept* as well as the value and significance of the the slope (here, shown as `x`; it will always show the explanatory variable in this slot for the name).
+
+Looking at the above, we can see that the slope is not significantly non-zero with a $p = 0.12$, but that the slope is significantly non-zero with $p < 0.0001$. We also have our $R^2$ values returned, which is similar to the $r$ we got for correlation. Indeed, our correlation was $r = 0.86$, with $r^2 = 0.74$, which is very similar to the `Multiple R-squared` shown in the above ANOVA table.
+
+*R* has a built in function within `ggplot` that will add a linear model to our plot and will show error regions as well. First, we need to make sure our data are in a `data.frame`.
+
+```{r}
+data <- data.frame(x, y)
+
+data
+```
+
+Next, we can plot the data in `ggplot`.
+
+```{r}
+ggplot(data, aes(x = x, y = y)) +
+  geom_point() +
+  stat_smooth(method = "lm") + 
+  theme_minimal()
+```
+
+Just like that, we have created a plot of our linear regression. **Note** that you should always plot the lines only within the extent of the data; this is harder to do in other programs, but *R* does it for us!
+
+*R* can also allow us to predict different values using our linear model:
+
+```{r}
+# must be in data frame format
+test_data <- data.frame(1:25)
+
+colnames(test_data) <- "x" # must be same as explanatory in data
+
+predict(xy_linear, test_data)
+```
+
+Let's visualize these points for illustration's sake.
+
+```{r}
+plot(x, y, pch = 19)
+points(1:25, as.numeric(predict(xy_linear, test_data)),
+       pch = 19, col = "red")
+```
+
+As we can see above, our points follow the line from the plot. By using this format, however, we can make predictions of value for any point we want.
+
 ### Non-parametric
+
+We are not doing non-parametric linear regression in this class.
 
 ## Homework
 

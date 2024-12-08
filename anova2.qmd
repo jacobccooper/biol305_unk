@@ -16,6 +16,7 @@ Don't forget to load your required packages - some we have used before, like `ag
 -   `tidyverse`: one we are already familiar with; a wrapper for installing `ggplot2`, `dplyr`, `tidyr`, `readr`, `purrr`, `tibble`, `stringr`, and `forcats`.
 -   `multcomp`: more in depth and better **MULT**iple **COMP**arisons via linear models and related models.
 -   `nlme`: a package for fitting Gaussian and **n**on-**l**inear **m**ixed-**e**ffect models.
+- `PMCMRplus`: a math package with post-hoc tests for Friedman's test
 
 ```{r, message = F}
 library(agricolae)
@@ -23,6 +24,7 @@ library(plyr)
 library(tidyverse)
 
 # NEW PACKAGES NEEDED
+# Don't forget to install these on your machine
 library(multcomp)
 library(nlme)
 library(PMCMRplus)
@@ -227,7 +229,11 @@ Unfortunately, because of the model this is, we cannot perform a Tukey Test on t
 data$Individuals <- as.factor(data$Individuals)
 data$Visits <- as.factor(data$Visits)
 data$Measurements <- as.numeric(data$Measurements)
+```
 
+The next part of the code fits a *linear model* to the data. A linear model, which we will cover later in the class, is mathematically very similar to an ANOVa. However, we can data from this model and extract the ANOVA data to understand more about the interactions. We need to use a linear model for this to account with the relationships between the two.
+
+```{r}
 # fit a linear mixed-effects model
 # similar to ANOVA
 

@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -249,7 +283,7 @@ window.Quarto = {
   <li><a href="#spearmans" id="toc-spearmans" class="nav-link" data-scroll-target="#spearmans"><span class="header-section-number">11.2.2</span> Spearman’s</a></li>
   <li><a href="#other-non-parametric-methods" id="toc-other-non-parametric-methods" class="nav-link" data-scroll-target="#other-non-parametric-methods"><span class="header-section-number">11.2.3</span> Other non-parametric methods</a></li>
   </ul></li>
-  <li><a href="#correlation-1" id="toc-correlation-1" class="nav-link" data-scroll-target="#correlation-1"><span class="header-section-number">11.3</span> Correlation</a>
+  <li><a href="#regression" id="toc-regression" class="nav-link" data-scroll-target="#regression"><span class="header-section-number">11.3</span> Regression</a>
   <ul class="collapse">
   <li><a href="#parametric" id="toc-parametric" class="nav-link" data-scroll-target="#parametric"><span class="header-section-number">11.3.1</span> Parametric</a></li>
   <li><a href="#non-parametric" id="toc-non-parametric" class="nav-link" data-scroll-target="#non-parametric"><span class="header-section-number">11.3.2</span> Non-parametric</a></li>
@@ -290,28 +324,284 @@ window.Quarto = {
 </header>
 
 
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load required libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
 <section id="introduction" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">11.1</span> Introduction</h2>
+<p>When we are comparing <em>two continuous variables</em>, we use two forms of tests: <em>correlation</em> to understand <em>if</em> there is a relationship between two variables, and <em>linear regression</em> to determine <em>what</em> that relationships is.</p>
+<p><strong>Remember</strong> - “if” is always correlation, and “what is it” is always linear regression when choosing a test for an exam.</p>
 </section>
 <section id="correlation" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="correlation"><span class="header-section-number">11.2</span> Correlation</h2>
+<p>Correlation - denoted by <span class="math inline">\(\rho\)</span> (“rho”) and not to be confused with <span class="math inline">\(p\)</span> - is a measure of how closely related to continuous variables appear to be. This can vary from a purely negative relationship to a purely positive relationship, such that <span class="math inline">\(-1 \le \rho \le 1\)</span> with <span class="math inline">\(\rho = 0\)</span> indicating a random relationship between data.</p>
+<p>We can visualize these as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">### ILLUSTRATIVE PURPOSES ONLY</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create two random uniform distributions</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For example, two things compared to themselves have a <span class="math inline">\(\rho = 1\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y, y, <span class="at">pch =</span> <span class="dv">19</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cor_reg_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(y, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<p>As we can see above, the correlation is 1.</p>
+<p>Plotting by the negative will be a correlation of -1.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y, <span class="sc">-</span>y, <span class="at">pch =</span> <span class="dv">19</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cor_reg_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(y, <span class="sc">-</span>y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1</code></pre>
+</div>
+</div>
+<p>Lastly, two random variables plotted against each other should have <span class="math inline">\(\rho \approx 0\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(y, x, </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">19</span>, </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">asp =</span> <span class="dv">1</span>) <span class="co"># aspect ratio</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cor_reg_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(y, x) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4</code></pre>
+</div>
+</div>
 <section id="pearsons" class="level3" data-number="11.2.1">
 <h3 data-number="11.2.1" class="anchored" data-anchor-id="pearsons"><span class="header-section-number">11.2.1</span> Pearson’s</h3>
+<p>Pearson’s correlation coefficient is our value for <em>parametric tests</em>. We often denote our correlation coefficient as <span class="math inline">\(r\)</span> and not <span class="math inline">\(\rho\)</span> for this particular test. It is calculated as follows:</p>
+<p><span class="math display">\[
+r = \frac{\Sigma xy - (\frac{\Sigma x \Sigma y}{n})}{\sqrt{(\Sigma x^2 - \frac{(\Sigma x)^2}{n}})(\Sigma y^2 - \frac{(\Sigma y)^2}{n})}
+\]</span></p>
+<p>where <span class="math inline">\(x\)</span> is variable 1, <span class="math inline">\(y\)</span> is variable 2, and <span class="math inline">\(n\)</span> is the total number of data point pairs.</p>
+<p>In this class, we will be using <em>R</em> to calculate <span class="math inline">\(r\)</span>, which is done using the command <code>cor</code>. To ensure we are using the correct method, we need to set <code>method = "pearson"</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">8675309</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="do">### EXAMPLE DATA</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">6</span>,<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">15</span>,<span class="dv">20</span>,<span class="dv">25</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">8</span>,<span class="dv">6</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">15</span>,<span class="dv">13</span>,<span class="dv">10</span>,<span class="dv">18</span>,<span class="dv">19</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">pch =</span> <span class="dv">19</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cor_reg_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(x, y, <span class="at">method =</span> <span class="st">"pearson"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.86</code></pre>
+</div>
+</div>
+<p>As we can see, these data are fairly positively correlated. As <code>x</code> increases, so does <code>y</code>. But how <em>significant</em> is this relationship?</p>
+<p>Well, we can calculate two things - the <em>amount of variation explained</em>, which is <span class="math inline">\(r^2\)</span>, and the <em>significance of the relationships</em>, which is determined via a <span class="math inline">\(t\)</span> test and the equation <span class="math inline">\(t=r \sqrt{\frac{n-2}{1-r^2}}\)</span>. This is a two-tailed distribution, with <span class="math inline">\(df = n-2\)</span>.</p>
+<p>We can write a function to perform all of these options:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>biol305_cor <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, method){</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  r <span class="ot">&lt;-</span> <span class="fu">cor</span>(x, y, <span class="at">method =</span> method)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  t_val <span class="ot">&lt;-</span> r<span class="sc">*</span><span class="fu">sqrt</span>((n<span class="dv">-2</span>)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>r<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">pt</span>(t_val, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">2</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(p <span class="sc">&gt;</span> <span class="fl">0.5</span>){p <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> p}</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(p <span class="sc">&gt;</span> <span class="fl">0.005</span>){p <span class="ot">&lt;-</span> <span class="fu">round</span>(p, <span class="dv">2</span>)}</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(p <span class="sc">&gt;</span> <span class="fl">0.0005</span>){p <span class="ot">&lt;-</span> <span class="fu">round</span>(p, <span class="dv">3</span>)}</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(p <span class="sc">&gt;</span> <span class="fl">0.00005</span>){p <span class="ot">&lt;-</span> <span class="fu">round</span>(p, <span class="dv">4</span>)}</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(p <span class="sc">&lt;</span> <span class="fl">0.00005</span>){p <span class="ot">&lt;-</span> <span class="st">"&lt; 0.0001"</span>}</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Correlation: "</span>, <span class="fu">round</span>(r, <span class="dv">2</span>)))</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Degrees of freedom: "</span>, n <span class="sc">-</span> <span class="dv">2</span>))</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"t value: "</span>, <span class="fu">round</span>(t_val, <span class="dv">2</span>)))</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"P value: "</span>, p))</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s test our function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biol305_cor</span>(x, y, <span class="at">method =</span> <span class="st">"pearson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Correlation: 0.86"
+[1] "Degrees of freedom: 13"
+[1] "t value: 6.09"
+[1] "P value: &lt; 0.0001"</code></pre>
+</div>
+</div>
+<p>There we go! Our function printed out everything that we need.</p>
 </section>
 <section id="spearmans" class="level3" data-number="11.2.2">
 <h3 data-number="11.2.2" class="anchored" data-anchor-id="spearmans"><span class="header-section-number">11.2.2</span> Spearman’s</h3>
+<p>Spearman’s correlation is one of the non-parametric methods for our correlation tests. We can use this for ranked data or for non-parametric datasets. We do this the exact same way, except we change <code>method = "spearman"</code>.</p>
 </section>
 <section id="other-non-parametric-methods" class="level3" data-number="11.2.3">
 <h3 data-number="11.2.3" class="anchored" data-anchor-id="other-non-parametric-methods"><span class="header-section-number">11.2.3</span> Other non-parametric methods</h3>
+<p>To be expanded upon, but not necessary for the class at present.</p>
 </section>
 </section>
-<section id="correlation-1" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="correlation-1"><span class="header-section-number">11.3</span> Correlation</h2>
+<section id="regression" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="regression"><span class="header-section-number">11.3</span> Regression</h2>
+<p>Regression is used when we want to know <em>what</em> the relationship is between two variables. Regression operates similar to ANOVA and correlation, providing us with the nature of the relationship, the strength of the relationship, and gives us values for calculating the relationship. <strong>For this class, we are only focusing on linear regression for relationships between linear variables</strong>.</p>
+<p>The equation for a regression line is often written as <span class="math inline">\(y_i = \alpha + \beta x_i + e_i\)</span>, where <span class="math inline">\(\alpha\)</span> is the <span class="math inline">\(y\)</span> intercept, <span class="math inline">\(\beta\)</span> is the slope, and <span class="math inline">\(e\)</span> is the error around each point. We will not perform regression calculations by hand in this class.</p>
 <section id="parametric" class="level3" data-number="11.3.1">
 <h3 data-number="11.3.1" class="anchored" data-anchor-id="parametric"><span class="header-section-number">11.3.1</span> Parametric</h3>
+<p>We will use out previous established <code>x</code> and <code>y</code> datasets that are strongly positively correlated for this example. The equation for calculating a linear relationship is <code>lm</code>, which stands for “linear model”. This uses equations like ANOVA, but can also use two vectors of data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>xy_linear <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(xy_linear)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ x)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.1189 -1.4838 -0.5423  1.9757  5.7460 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   2.1370     1.2825   1.666     0.12    
+x             0.7117     0.1169   6.086 3.87e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.964 on 13 degrees of freedom
+Multiple R-squared:  0.7402,    Adjusted R-squared:  0.7202 
+F-statistic: 37.04 on 1 and 13 DF,  p-value: 3.867e-05</code></pre>
+</div>
+</div>
+<p>As we can see, this returned an ANOVA table to use that tells us the value and significance of our <em>intercept</em> as well as the value and significance of the the slope (here, shown as <code>x</code>; it will always show the explanatory variable in this slot for the name).</p>
+<p>Looking at the above, we can see that the slope is not significantly non-zero with a <span class="math inline">\(p = 0.12\)</span>, but that the slope is significantly non-zero with <span class="math inline">\(p &lt; 0.0001\)</span>. We also have our <span class="math inline">\(R^2\)</span> values returned, which is similar to the <span class="math inline">\(r\)</span> we got for correlation. Indeed, our correlation was <span class="math inline">\(r = 0.86\)</span>, with <span class="math inline">\(r^2 = 0.74\)</span>, which is very similar to the <code>Multiple R-squared</code> shown in the above ANOVA table.</p>
+<p><em>R</em> has a built in function within <code>ggplot</code> that will add a linear model to our plot and will show error regions as well. First, we need to make sure our data are in a <code>data.frame</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, y)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    x  y
+1   1  2
+2   2  5
+3   5  4
+4   3  3
+5   4  8
+6   5  6
+7   8  4
+8   7  2
+9   9  8
+10  6  9
+11 10 15
+12 12 13
+13 15 10
+14 20 18
+15 25 19</code></pre>
+</div>
+</div>
+<p>Next, we can plot the data in <code>ggplot</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span> </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cor_reg_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Just like that, we have created a plot of our linear regression. <strong>Note</strong> that you should always plot the lines only within the extent of the data; this is harder to do in other programs, but <em>R</em> does it for us!</p>
+<p><em>R</em> can also allow us to predict different values using our linear model:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># must be in data frame format</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(test_data) <span class="ot">&lt;-</span> <span class="st">"x"</span> <span class="co"># must be same as explanatory in data</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(xy_linear, test_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        1         2         3         4         5         6         7         8 
+ 2.848692  3.560399  4.272105  4.983811  5.695517  6.407223  7.118929  7.830635 
+        9        10        11        12        13        14        15        16 
+ 8.542341  9.254047  9.965753 10.677460 11.389166 12.100872 12.812578 13.524284 
+       17        18        19        20        21        22        23        24 
+14.235990 14.947696 15.659402 16.371108 17.082814 17.794521 18.506227 19.217933 
+       25 
+19.929639 </code></pre>
+</div>
+</div>
+<p>Let’s visualize these points for illustration’s sake.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">pch =</span> <span class="dv">19</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="fu">as.numeric</span>(<span class="fu">predict</span>(xy_linear, test_data)),</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="cor_reg_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As we can see above, our points follow the line from the plot. By using this format, however, we can make predictions of value for any point we want.</p>
 </section>
 <section id="non-parametric" class="level3" data-number="11.3.2">
 <h3 data-number="11.3.2" class="anchored" data-anchor-id="non-parametric"><span class="header-section-number">11.3.2</span> Non-parametric</h3>
+<p>We are not doing non-parametric linear regression in this class.</p>
 </section>
 </section>
 <section id="homework" class="level2" data-number="11.4">
