@@ -409,7 +409,7 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(y, x) <span class="sc">%&gt;%</span> </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4</code></pre>
+<pre><code>[1] -0.27</code></pre>
 </div>
 </div>
 <section id="pearsons" class="level3" data-number="11.2.1">
@@ -447,34 +447,66 @@ r = \frac{\Sigma xy - (\frac{\Sigma x \Sigma y}{n})}{\sqrt{(\Sigma x^2 - \frac{(
 <p>Well, we can calculate two things - the <em>amount of variation explained</em>, which is <span class="math inline">\(r^2\)</span>, and the <em>significance of the relationships</em>, which is determined via a <span class="math inline">\(t\)</span> test and the equation <span class="math inline">\(t=r \sqrt{\frac{n-2}{1-r^2}}\)</span>. This is a two-tailed distribution, with <span class="math inline">\(df = n-2\)</span>.</p>
 <p>We can write a function to perform all of these options:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>biol305_cor <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, method){</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  r <span class="ot">&lt;-</span> <span class="fu">cor</span>(x, y, <span class="at">method =</span> method)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  t_val <span class="ot">&lt;-</span> r<span class="sc">*</span><span class="fu">sqrt</span>((n<span class="dv">-2</span>)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>r<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">pt</span>(t_val, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">2</span>)</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(p <span class="sc">&gt;</span> <span class="fl">0.5</span>){p <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> p}</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(p <span class="sc">&gt;</span> <span class="fl">0.005</span>){p <span class="ot">&lt;-</span> <span class="fu">round</span>(p, <span class="dv">2</span>)}</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(p <span class="sc">&gt;</span> <span class="fl">0.0005</span>){p <span class="ot">&lt;-</span> <span class="fu">round</span>(p, <span class="dv">3</span>)}</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(p <span class="sc">&gt;</span> <span class="fl">0.00005</span>){p <span class="ot">&lt;-</span> <span class="fu">round</span>(p, <span class="dv">4</span>)}</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(p <span class="sc">&lt;</span> <span class="fl">0.00005</span>){p <span class="ot">&lt;-</span> <span class="st">"&lt; 0.0001"</span>}</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Correlation: "</span>, <span class="fu">round</span>(r, <span class="dv">2</span>)))</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Degrees of freedom: "</span>, n <span class="sc">-</span> <span class="dv">2</span>))</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"t value: "</span>, <span class="fu">round</span>(t_val, <span class="dv">2</span>)))</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"P value: "</span>, p))</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>biol305_cor <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">x=</span><span class="cn">NA</span>, <span class="at">y=</span><span class="cn">NA</span>, <span class="at">method =</span> <span class="st">"pearson"</span>){</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.data.frame</span>(x)<span class="sc">==</span>T){</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">ncol</span>(x)<span class="sc">==</span><span class="dv">2</span>){</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>      r <span class="ot">&lt;-</span> <span class="fu">cor</span>(x[,<span class="dv">1</span>], x[,<span class="dv">2</span>], <span class="at">method =</span> method)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span>{</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>      r <span class="ot">&lt;-</span> <span class="fu">cor</span>(x, <span class="at">method =</span> method)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    r2 <span class="ot">&lt;-</span> r</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    r[r<span class="sc">==</span><span class="dv">1</span><span class="sc">|</span>r<span class="sc">==-</span><span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    n <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span><span class="fu">nrow</span>(x)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    r <span class="ot">&lt;-</span> <span class="fu">cor</span>(x, y, <span class="at">method =</span> method)</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    n <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span><span class="fu">length</span>(x)</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  t_val <span class="ot">&lt;-</span> r<span class="sc">*</span><span class="fu">sqrt</span>((n<span class="dv">-2</span>)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>r<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">pt</span>(t_val, <span class="at">df =</span> n <span class="sc">-</span> <span class="dv">2</span>)</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>  p[p <span class="sc">&gt;</span> <span class="fl">0.5</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> p[p <span class="sc">&gt;</span> <span class="fl">0.5</span>]</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  p[p <span class="sc">&gt;</span> <span class="fl">0.005</span>] <span class="ot">&lt;-</span> <span class="fu">round</span>(p[p <span class="sc">&gt;</span> <span class="fl">0.005</span>],<span class="dv">2</span>)</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>  p[p <span class="sc">&gt;</span> <span class="fl">0.0005</span>] <span class="ot">&lt;-</span> <span class="fu">round</span>(p[p <span class="sc">&gt;</span> <span class="fl">0.0005</span>],<span class="dv">3</span>)</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>  p[p <span class="sc">&gt;</span> <span class="fl">0.00005</span>] <span class="ot">&lt;-</span> <span class="fu">round</span>(p[p <span class="sc">&gt;</span> <span class="fl">0.00005</span>],<span class="dv">4</span>)</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>  p[p <span class="sc">&lt;</span> <span class="fl">0.00005</span>] <span class="ot">&lt;-</span> <span class="st">"&lt; 0.0001"</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.data.frame</span>(x)<span class="sc">==</span>T){</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"Correlation:"</span>)</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">round</span>(r, <span class="dv">2</span>))</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">ncol</span>(x) <span class="sc">==</span> <span class="dv">2</span>){</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>      <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Degrees of freedom: "</span>, n <span class="sc">-</span> <span class="dv">2</span>))</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>      <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"t value: "</span>, <span class="fu">round</span>(t_val, <span class="dv">2</span>)))</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>      <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"P value: "</span>, p))</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">ncol</span>(x) <span class="sc">&gt;</span> <span class="dv">2</span>){</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>      <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Degrees of freedom: "</span>, n <span class="sc">-</span> <span class="dv">2</span>))</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>      <span class="fu">print</span>(<span class="st">""</span>)</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>      <span class="fu">print</span>(<span class="st">"t value: "</span>)</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>      <span class="fu">print</span>(<span class="fu">round</span>(t_val, <span class="dv">2</span>))</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>      <span class="fu">print</span>(<span class="st">""</span>)</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>      <span class="fu">print</span>(<span class="st">"P value: "</span>)</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>      <span class="fu">print</span>(p)</span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Correlation: "</span>, <span class="fu">round</span>(r, <span class="dv">2</span>)))</span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Degrees of freedom: "</span>, n <span class="sc">-</span> <span class="dv">2</span>))</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"t value: "</span>, <span class="fu">round</span>(t_val, <span class="dv">2</span>)))</span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"P value: "</span>, p))</span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s test our function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biol305_cor</span>(x, y, <span class="at">method =</span> <span class="st">"pearson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Correlation: 0.86"
-[1] "Degrees of freedom: 13"
-[1] "t value: 6.09"
+[1] "Degrees of freedom: 28"
+[1] "t value: 8.93"
 [1] "P value: &lt; 0.0001"</code></pre>
 </div>
 </div>
