@@ -51,12 +51,6 @@ For discrete explanatory variables, we are often looking at categorical treatmen
 
 ### Continuous response variable
 
-### Discrete response variable
-
-If our response variable *and* our explanatory variable are discrete (i.e., categorical or nominal), then we are doing a $\chi^2$ **test**. This tests looks at counts in different categories. For example, looking at proportions of men and women who do and do not smoke would be a classic $\chi^2$ test.
-
-### Continuous response variable
-
 For a continuous response variable, we need to ask ourselves how many categories we are dealing with.
 
 -   If we are dealing with **two categories** or **two measurements from the same individual**, we are using a $t$**-test**.
@@ -72,3 +66,7 @@ If we are simply comparing multiple groups, we are performing a one-way ANOVA. W
 **Remember to label ANOVA plots with letters to indicate the separate groups**.
 
 If we have multiple response variables, we can use a MANOVA; we do not cover that in this class.
+
+### Discrete response variable
+
+If our response variable *and* our explanatory variable are discrete (i.e., categorical or nominal), then we are doing a $\chi^2$ **test**. This tests looks at counts in different categories. For example, looking at proportions of men and women who do and do not smoke would be a classic $\chi^2$ test.
