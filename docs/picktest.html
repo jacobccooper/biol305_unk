@@ -250,16 +250,12 @@ window.Quarto = {
   <ul>
   <li><a href="#picking-the-test" id="toc-picking-the-test" class="nav-link active" data-scroll-target="#picking-the-test"><span class="header-section-number">12.1</span> Picking the test</a></li>
   <li><a href="#exceptions" id="toc-exceptions" class="nav-link" data-scroll-target="#exceptions"><span class="header-section-number">12.2</span> Exceptions</a></li>
-  <li><a href="#explanatory-variable" id="toc-explanatory-variable" class="nav-link" data-scroll-target="#explanatory-variable"><span class="header-section-number">12.3</span> Explanatory Variable</a></li>
-  <li><a href="#continuous-explanatory-variable" id="toc-continuous-explanatory-variable" class="nav-link" data-scroll-target="#continuous-explanatory-variable"><span class="header-section-number">12.4</span> Continuous explanatory variable</a>
+  <li><a href="#overview-of-picking-the-test" id="toc-overview-of-picking-the-test" class="nav-link" data-scroll-target="#overview-of-picking-the-test"><span class="header-section-number">12.3</span> Overview of picking the test</a></li>
+  <li><a href="#another-method---checklist" id="toc-another-method---checklist" class="nav-link" data-scroll-target="#another-method---checklist"><span class="header-section-number">12.4</span> Another method - checklist</a>
   <ul class="collapse">
-  <li><a href="#continuous-response-variable" id="toc-continuous-response-variable" class="nav-link" data-scroll-target="#continuous-response-variable"><span class="header-section-number">12.4.1</span> Continuous response variable</a></li>
-  <li><a href="#discrete-response-variable" id="toc-discrete-response-variable" class="nav-link" data-scroll-target="#discrete-response-variable"><span class="header-section-number">12.4.2</span> Discrete response variable</a></li>
-  </ul></li>
-  <li><a href="#discrete-explanatory-variable" id="toc-discrete-explanatory-variable" class="nav-link" data-scroll-target="#discrete-explanatory-variable"><span class="header-section-number">12.5</span> Discrete explanatory variable</a>
-  <ul class="collapse">
-  <li><a href="#continuous-response-variable-1" id="toc-continuous-response-variable-1" class="nav-link" data-scroll-target="#continuous-response-variable-1"><span class="header-section-number">12.5.1</span> Continuous response variable</a></li>
-  <li><a href="#discrete-response-variable-1" id="toc-discrete-response-variable-1" class="nav-link" data-scroll-target="#discrete-response-variable-1"><span class="header-section-number">12.5.2</span> Discrete response variable</a></li>
+  <li><a href="#explanatory-variable" id="toc-explanatory-variable" class="nav-link" data-scroll-target="#explanatory-variable"><span class="header-section-number">12.4.1</span> Explanatory Variable</a></li>
+  <li><a href="#continuous-explanatory-variable" id="toc-continuous-explanatory-variable" class="nav-link" data-scroll-target="#continuous-explanatory-variable"><span class="header-section-number">12.4.2</span> Continuous explanatory variable</a></li>
+  <li><a href="#discrete-explanatory-variable" id="toc-discrete-explanatory-variable" class="nav-link" data-scroll-target="#discrete-explanatory-variable"><span class="header-section-number">12.4.3</span> Discrete explanatory variable</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -305,15 +301,136 @@ window.Quarto = {
 <li><p><strong>Poisson test</strong> - if we are looking at the probability of obtaining certain counts over events - specifically, looking at the probability of <em>rare</em> events - we will use a Poisson. You can do this with <code>poisson.test</code>.</p></li>
 </ul>
 </section>
-<section id="explanatory-variable" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="explanatory-variable"><span class="header-section-number">12.3</span> Explanatory Variable</h2>
+<section id="overview-of-picking-the-test" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="overview-of-picking-the-test"><span class="header-section-number">12.3</span> Overview of picking the test</h2>
+<p>Below is an overview of picking basic statistical tests. There are more complex tests, but these are the main ones to consider for exams in this course.</p>
+<table class="caption-top table">
+<caption>Which test to pick for which combinations of variables.</caption>
+<colgroup>
+<col style="width: 8%">
+<col style="width: 65%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Categorical Explanatory</th>
+<th>Continuous Explanatory</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Categorical Response</strong></td>
+<td><ul>
+<li><p><span class="math inline">\(\chi^2\)</span> tests, especially if count data for category</p>
+<ul>
+<li>Yate’s correction auto-applied for 2x2 tables</li>
+</ul></li>
+<li><p>Fisher test is a 2x2 table</p></li>
+<li><p>Null is that counts match a known proportion (goodness-of-fit) or counts match each other (independence)</p></li>
+</ul></td>
+<td><ul>
+<li><p>Logistic regression, modeling categorical responses across continuous variables.</p>
+<ul>
+<li>Not covered in BIOL 305 at present</li>
+</ul></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><strong>Continuous Response</strong></td>
+<td><ul>
+<li><p>Single mean to population</p>
+<ul>
+<li><p>This is a <span class="math inline">\(Z\)</span>-score comparison, <strong>when the population parameters are known</strong></p>
+<ul>
+<li><span class="math inline">\(H_0: \bar{x} = \mu\)</span></li>
+</ul></li>
+<li><p>Almost always better to resort to <span class="math inline">\(t\)</span>-test comparison if unsure is a population - <span class="math inline">\(t\)</span> approaches a <span class="math inline">\(Z\)</span> as <span class="math inline">\(df \rightarrow \infty\)</span></p>
+<ul>
+<li><span class="math inline">\(H_0: \mu_1 = \mu_2\)</span></li>
+</ul></li>
+</ul></li>
+<li><p>Two measurements</p>
+<ul>
+<li><p><strong>Remember - all</strong> <span class="math inline">\(t\)</span><strong>-tests default to Welch’s in <em>R</em>, assuming unequal variance</strong></p>
+<ul>
+<li><p>When <span class="math inline">\(\sigma^2_1 = \sigma^2_2\)</span>, Welch’s <span class="math inline">\(t\)</span>-test is the same as a standard <span class="math inline">\(t\)</span>-test</p></li>
+<li><p>Usually better to use Welch’s, but justify reasoning</p></li>
+</ul></li>
+<li><p>One-sample <span class="math inline">\(t\)</span>-test, comparing the two groups</p>
+<ul>
+<li><span class="math inline">\(H_0: \mu_1 = \mu_2\)</span></li>
+</ul></li>
+</ul></li>
+<li><p>Two samples</p>
+<ul>
+<li><p>Two-sample <span class="math inline">\(t\)</span>-test, comparing the two samples</p>
+<ul>
+<li><span class="math inline">\(H_0: \mu_1 = \mu_2\)</span></li>
+</ul></li>
+</ul></li>
+<li><p>Paired samples</p>
+<ul>
+<li><p>Special case - used when there are repeated measurements of the same sampling units</p>
+<ul>
+<li><p>Need to set <code>paired = TRUE</code></p></li>
+<li><p><span class="math inline">\(H_0: \mu_d = 0\)</span></p></li>
+</ul></li>
+</ul></li>
+<li><p><span class="math inline">\(\ge\)</span> 3 samples</p>
+<ul>
+<li><p>ANOVA - analysis of variance across multiple samples, computing variance within samples and between samples</p>
+<ul>
+<li><p>For all ANOVA, <span class="math inline">\(H_0: \mu_1 = \mu_2 = ... \mu_i\)</span></p></li>
+<li><p>Single type of measurement is a one-way ANOVA</p></li>
+<li><p>When things are “blocked” into categories - like litters - that are unique per row, use a randomized block ANOVA (remember to put <code>factor()</code> around anything you are worried won’t be read as categorical!)</p>
+<ul>
+<li><code>aov(response ~ explanatory + block, data)</code></li>
+</ul></li>
+<li><p>When things are individuals being repeatedly measured, use a repeated measures ANOVA (mathematically like randomized block ANOVA)</p>
+<ul>
+<li><code>aov(response ~ explanatory + individual, data)</code></li>
+</ul></li>
+<li><p>When we are looking at more than one variable at once, you are doing an interactive ANOVA</p>
+<ul>
+<li><code>aov(response ~ explanatory1 + explanatory2 + explanatory1*explanatory2)</code></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></td>
+<td><ul>
+<li><p>When looking at <em>if</em> there is a relationship, use correlation</p>
+<ul>
+<li><p><span class="math inline">\(H_0: \rho = 0\)</span></p></li>
+<li><p>Evaluated using a <span class="math inline">\(t\)</span> statistic</p></li>
+</ul></li>
+<li><p>When looking at <em>what</em> the relationship is, use linear regression</p>
+<ul>
+<li><p>Line formula is <span class="math inline">\(y = \beta x + \alpha + \epsilon_i\)</span></p></li>
+<li><p>Very similar to your high-school <span class="math inline">\(y = mx +b\)</span></p></li>
+<li><p><span class="math inline">\(H_0: \beta = 0\)</span></p></li>
+</ul></li>
+<li><p>Remember - linear regression works like an ANOVA, and has similar outputs</p>
+<ul>
+<li>Check the ANOVA page for more information!</li>
+</ul></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="another-method---checklist" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="another-method---checklist"><span class="header-section-number">12.4</span> Another method - checklist</h2>
+<p>Feel free to go through the following headings to also help you pick a test.</p>
+<section id="explanatory-variable" class="level3" data-number="12.4.1">
+<h3 data-number="12.4.1" class="anchored" data-anchor-id="explanatory-variable"><span class="header-section-number">12.4.1</span> Explanatory Variable</h3>
 <p>The explanatory variable is continuous and numeric. Pick this one for a continuous measurement variable, for example, such as Longitude, concentration, or other ratio or integer data.</p>
 <p>The explanatory variable is discontinuous and categorical. In these cases, the explanatory variable is a condition, like a control and a treatment.</p>
 </section>
-<section id="continuous-explanatory-variable" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="continuous-explanatory-variable"><span class="header-section-number">12.4</span> Continuous explanatory variable</h2>
-<section id="continuous-response-variable" class="level3" data-number="12.4.1">
-<h3 data-number="12.4.1" class="anchored" data-anchor-id="continuous-response-variable"><span class="header-section-number">12.4.1</span> Continuous response variable</h3>
+<section id="continuous-explanatory-variable" class="level3" data-number="12.4.2">
+<h3 data-number="12.4.2" class="anchored" data-anchor-id="continuous-explanatory-variable"><span class="header-section-number">12.4.2</span> Continuous explanatory variable</h3>
+<section id="continuous-response-variable" class="level4" data-number="12.4.2.1">
+<h4 data-number="12.4.2.1" class="anchored" data-anchor-id="continuous-response-variable"><span class="header-section-number">12.4.2.1</span> Continuous response variable</h4>
 <p>If you have a continuous response variable, then you need to see what the question is asking:</p>
 <ul>
 <li><strong>Is there a relationship?</strong></li>
@@ -325,16 +442,16 @@ window.Quarto = {
 <p>If you are asking <em>what</em> the relationship is or looking to be able to <em>predict</em> a value based on what you know, you are doing a <strong>linear regression</strong>. Note there are other kinds of regression, but in this class, we focus on linear regression.</p>
 <p>If we have multiple response variables, we can do multiple regression, which we do not cover here.</p>
 </section>
-<section id="discrete-response-variable" class="level3" data-number="12.4.2">
-<h3 data-number="12.4.2" class="anchored" data-anchor-id="discrete-response-variable"><span class="header-section-number">12.4.2</span> Discrete response variable</h3>
+<section id="discrete-response-variable" class="level4" data-number="12.4.2.2">
+<h4 data-number="12.4.2.2" class="anchored" data-anchor-id="discrete-response-variable"><span class="header-section-number">12.4.2.2</span> Discrete response variable</h4>
 <p>If you are looking at a discrete response variable, such as a state of 1 or 0 in response to a certain amount of stimulus, then you are doing a <strong>logistic regression</strong>. We did not cover this analysis in this class.</p>
 </section>
 </section>
-<section id="discrete-explanatory-variable" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="discrete-explanatory-variable"><span class="header-section-number">12.5</span> Discrete explanatory variable</h2>
+<section id="discrete-explanatory-variable" class="level3" data-number="12.4.3">
+<h3 data-number="12.4.3" class="anchored" data-anchor-id="discrete-explanatory-variable"><span class="header-section-number">12.4.3</span> Discrete explanatory variable</h3>
 <p>For discrete explanatory variables, we are often looking at categorical treatments or distinct groups, like species or geographic locations.</p>
-<section id="continuous-response-variable-1" class="level3" data-number="12.5.1">
-<h3 data-number="12.5.1" class="anchored" data-anchor-id="continuous-response-variable-1"><span class="header-section-number">12.5.1</span> Continuous response variable</h3>
+<section id="continuous-response-variable-1" class="level4" data-number="12.4.3.1">
+<h4 data-number="12.4.3.1" class="anchored" data-anchor-id="continuous-response-variable-1"><span class="header-section-number">12.4.3.1</span> Continuous response variable</h4>
 <p>For a continuous response variable, we need to ask ourselves how many categories we are dealing with.</p>
 <ul>
 <li>If we are dealing with <strong>two categories</strong> or <strong>two measurements from the same individual</strong>, we are using a <span class="math inline">\(t\)</span><strong>-test</strong>.</li>
@@ -348,11 +465,12 @@ window.Quarto = {
 <p><strong>Remember to label ANOVA plots with letters to indicate the separate groups</strong>.</p>
 <p>If we have multiple response variables, we can use a MANOVA; we do not cover that in this class.</p>
 </section>
-<section id="discrete-response-variable-1" class="level3" data-number="12.5.2">
-<h3 data-number="12.5.2" class="anchored" data-anchor-id="discrete-response-variable-1"><span class="header-section-number">12.5.2</span> Discrete response variable</h3>
+<section id="discrete-response-variable-1" class="level4" data-number="12.4.3.2">
+<h4 data-number="12.4.3.2" class="anchored" data-anchor-id="discrete-response-variable-1"><span class="header-section-number">12.4.3.2</span> Discrete response variable</h4>
 <p>If our response variable <em>and</em> our explanatory variable are discrete (i.e., categorical or nominal), then we are doing a <span class="math inline">\(\chi^2\)</span> <strong>test</strong>. This tests looks at counts in different categories. For example, looking at proportions of men and women who do and do not smoke would be a classic <span class="math inline">\(\chi^2\)</span> test.</p>
 
 
+</section>
 </section>
 </section>
 
