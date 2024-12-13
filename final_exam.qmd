@@ -5,6 +5,96 @@ format: html
 editor: visual
 ---
 
-## Pick the test
+## Introduction
 
-## Final review
+These are questions that are posed as they would be on a final. Please complete each part of each question; we will review the answers. The following data are either imaginary or pulled from publicly available sources like [Wikipedia](https://wikipedia.org).
+
+```{r, R.options=F}
+library(tidyverse)
+```
+
+## Happiness
+
+You decide to ask your friends to rate their happiness on a scale of 0-100 before and after you bother them to ask how happy they are, thereby inciting an existential crises within each of them. You predict that asking this question will decrease the happiness they are feeling at that moment. These data are ranked data, but assume they are parametric given the size of the scale being used.
+
+```{r}
+before_asking <- c(96,80,86,92,100,92,95,91,87)
+after_asking <- c(72,53,90,85,90,86,83,79,62)
+
+happiness <- cbind(before_asking, after_asking) %>% 
+  as.data.frame()
+
+happiness
+```
+
+### What are the null and statistical hypotheses of this study?
+
+### What statistical test should be used for this test? Justify your answer, and be specific.
+
+### Calculate the appropriate test statistic, showing *all* or your work.
+
+### Assume that $\alpha = 0.05$. State your final conclusion from the survey.
+
+## Running and grades
+
+You hear that going running is good for your grades. You decide to look and see if the amount of time people spend running is related to their grades. You obtain the following data:
+
+```{r}
+run_time <- c(20,25,22,50,30,10,6)
+grade <- c(94,84,95,72,88,90,85)
+
+run_grades <- cbind(run_time, grade) %>% 
+  as.data.frame()
+
+run_grades
+```
+
+### What is the appropriate analysis for this question?
+
+### Perform the test. What is the *test statistic*?
+
+### State your conclusion about this scenario, using $\alpha = 0.05$.
+
+## Fosbury Flop
+
+High-jumpers use the "Fosbury Flop" because it improves their performance by allowing their center of mass to pass *under* the high-jump bar while their bodies pass *over* the bar. Below are jump heights (in meters) for world records from before the Fosbury Flop was widely used and after the Fosbury Flop was widely used. Does the flop significantly improve athlete performace?
+
+```{r}
+pre_flop <- c(2.09,2.12,2.15,2.18,2.17,2.28,2.29)
+post_flop <- c(2.30,2.33,2.39,2.34,2.42,2.45,2.44)
+
+jump_heights <- cbind(pre_flop, post_flop) %>% 
+  as.data.frame()
+
+jump_heights
+```
+
+### What is the appropriate test for this analysis? Justify your answer, and be specific.
+
+### Perform the test. What is the *test statistic*?
+
+### State your conclusion about this scenario. Set $\alpha = 0.05$.
+
+## Sandhills, Stonehills
+
+You decide to look at concentrations of Greater Prairie-Chickens *Tympanuchus cupido* in fields a set amount of years after control burns. The following table shows the count of prairie-chickens in each field from the year of the burn until 5 years after the burn. Conditions are lettered to ensure sorting is performed correctly.
+
+```{r}
+Location <- c(rep("Sandhills", 4), rep("Stonehills", 4))
+a_burn_year <- c(1,0,3,2,1,0,0,2)
+b_one_year_post_burn <- c(3,5,7,6,5,3,2,5)
+c_five_years_post_burn <- c(20,21,15,8,8,7,10,8)
+
+prairie_chickens <- cbind(Location, a_burn_year, b_one_year_post_burn, c_five_years_post_burn) %>% 
+  as.data.frame()
+
+prairie_chickens
+```
+
+### What is the appropriate test?
+
+### What is / are the explanatory variables?
+
+### Perform the appropriate test. Make a graph if necessary.
+
+### State your conclusions about this test. Set $\alpha = 0.05$.
