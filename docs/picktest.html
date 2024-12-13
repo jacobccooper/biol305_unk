@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Dr.&nbsp;Jacob C. Cooper &amp; Dr.&nbsp;Melissa Wuellner">
+<meta name="author" content="Dr.&nbsp;Jacob C. Cooper">
 
-<title>Biology 305: Biostatistics</title>
+<title>12&nbsp; Pick the test – Biology 305: Biostatistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./intro_to_r.html" rel="next">
+<link href="./final_exam.html" rel="next">
+<link href="./cor_reg.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -110,7 +111,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./picktest.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Pick the test</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -137,7 +138,7 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -209,7 +210,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./picktest.html" class="sidebar-item-text sidebar-link">
+  <a href="./picktest.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Pick the test</span></span></a>
   </div>
 </li>
@@ -247,7 +248,20 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#picking-the-test" id="toc-picking-the-test" class="nav-link active" data-scroll-target="#picking-the-test"><span class="header-section-number">12.1</span> Picking the test</a></li>
+  <li><a href="#exceptions" id="toc-exceptions" class="nav-link" data-scroll-target="#exceptions"><span class="header-section-number">12.2</span> Exceptions</a></li>
+  <li><a href="#explanatory-variable" id="toc-explanatory-variable" class="nav-link" data-scroll-target="#explanatory-variable"><span class="header-section-number">12.3</span> Explanatory Variable</a></li>
+  <li><a href="#continuous-explanatory-variable" id="toc-continuous-explanatory-variable" class="nav-link" data-scroll-target="#continuous-explanatory-variable"><span class="header-section-number">12.4</span> Continuous explanatory variable</a>
+  <ul class="collapse">
+  <li><a href="#continuous-response-variable" id="toc-continuous-response-variable" class="nav-link" data-scroll-target="#continuous-response-variable"><span class="header-section-number">12.4.1</span> Continuous response variable</a></li>
+  <li><a href="#discrete-response-variable" id="toc-discrete-response-variable" class="nav-link" data-scroll-target="#discrete-response-variable"><span class="header-section-number">12.4.2</span> Discrete response variable</a></li>
+  </ul></li>
+  <li><a href="#discrete-explanatory-variable" id="toc-discrete-explanatory-variable" class="nav-link" data-scroll-target="#discrete-explanatory-variable"><span class="header-section-number">12.5</span> Discrete explanatory variable</a>
+  <ul class="collapse">
+  <li><a href="#continuous-response-variable-1" id="toc-continuous-response-variable-1" class="nav-link" data-scroll-target="#continuous-response-variable-1"><span class="header-section-number">12.5.1</span> Continuous response variable</a></li>
+  <li><a href="#discrete-response-variable-1" id="toc-discrete-response-variable-1" class="nav-link" data-scroll-target="#discrete-response-variable-1"><span class="header-section-number">12.5.2</span> Discrete response variable</a></li>
+  <li><a href="#continuous-response-variable-2" id="toc-continuous-response-variable-2" class="nav-link" data-scroll-target="#continuous-response-variable-2"><span class="header-section-number">12.5.3</span> Continuous response variable</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -256,7 +270,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Biology 305: Biostatistics</h1>
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Pick the test</span></h1>
 </div>
 
 
@@ -266,16 +280,10 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Dr.&nbsp;Jacob C. Cooper &amp; Dr.&nbsp;Melissa Wuellner </p>
+             <p>Dr.&nbsp;Jacob C. Cooper </p>
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
-    </div>
-  </div>
   
     
   </div>
@@ -285,21 +293,71 @@ window.Quarto = {
 </header>
 
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<p>Welcome to Biology 305 at the University of Nebraska at Kearney! Material in this class was designed by Dr.&nbsp;Melissa Wuellner and adapted by Dr.&nbsp;Jacob C. Cooper for use in <em>R</em>.</p>
-<p>In this class, you will learn:</p>
-<ol type="1">
-<li>The basics of study design, the importance of understanding your research situation before embarking on a full study, and practice creating research frameworks based on different scenarios.</li>
-<li>The basics of data analysis, including understanding what kind of variables are being collected, why understanding variable types are important, and basic tests to understand univariate distributions.</li>
-<li>Basic multivariate statistics, including ANOVA, correlation, and regression, for comparing multiple different groups.</li>
-<li>The basics of coding and working in <em>R</em> for performing statistical analyses.</li>
-</ol>
-<p>This site will help you navigate different homework assignments to perform the necessary <em>R</em> tests. Furthermore, this GitHub repository contains all of the homework dataframes, so you will <em>not</em> have to manually enter assignments if you use <em>R</em> to complete your assignments.</p>
-<p>Welcome to class!</p>
-<p>Dr.&nbsp;Jacob C. Cooper, BHS 321</p>
+<section id="picking-the-test" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="picking-the-test"><span class="header-section-number">12.1</span> Picking the test</h2>
+<p>A major component of the final will be picking the correct test to run on some data. Here, I cover the specific ways in which you can determine what test to use.</p>
+<p>Please use this web page as an <em>interactive</em> way to pick the test.</p>
+</section>
+<section id="exceptions" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="exceptions"><span class="header-section-number">12.2</span> Exceptions</h2>
+<p>Below is a walk through for the most common statistical analyses, but keep in mind there are a few “less common” ones that we are using as well:</p>
+<ul>
+<li><p><strong>Binomial test</strong> - if we are looking at something with discrete outcomes - like coin tosses, die rolls, etc. - we are doing a binomial test to determine the probability of a specific outcome. You can do this with <code>binom.test</code>.</p></li>
+<li><p><strong>Poisson test</strong> - if we are looking at the probability of obtaining certain counts over events - specifically, looking at the probability of <em>rare</em> events - we will use a Poisson. You can do this with <code>poisson.test</code>.</p></li>
+</ul>
+</section>
+<section id="explanatory-variable" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="explanatory-variable"><span class="header-section-number">12.3</span> Explanatory Variable</h2>
+<p>The explanatory variable is continuous and numeric. Pick this one for a continuous measurement variable, for example, such as Longitude, concentration, or other ratio or integer data.</p>
+<p>The explanatory variable is discontinuous and categorical. In these cases, the explanatory variable is a condition, like a control and a treatment.</p>
+</section>
+<section id="continuous-explanatory-variable" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="continuous-explanatory-variable"><span class="header-section-number">12.4</span> Continuous explanatory variable</h2>
+<section id="continuous-response-variable" class="level3" data-number="12.4.1">
+<h3 data-number="12.4.1" class="anchored" data-anchor-id="continuous-response-variable"><span class="header-section-number">12.4.1</span> Continuous response variable</h3>
+<p>If you have a continuous response variable, then you need to see what the question is asking:</p>
+<ul>
+<li><strong>Is there a relationship?</strong></li>
+</ul>
+<p>If you are looking at a problem and it is simply asking <em>if</em> there is a relationship, you are looking at a <strong>correlation analysis</strong>.</p>
+<ul>
+<li><strong>What is the relationship?</strong></li>
+</ul>
+<p>If you are asking <em>what</em> the relationship is or looking to be able to <em>predict</em> a value based on what you know, you are doing a <strong>linear regression</strong>. Note there are other kinds of regression, but in this class, we focus on linear regression.</p>
+<p>If we have multiple response variables, we can do multiple regression, which we do not cover here.</p>
+</section>
+<section id="discrete-response-variable" class="level3" data-number="12.4.2">
+<h3 data-number="12.4.2" class="anchored" data-anchor-id="discrete-response-variable"><span class="header-section-number">12.4.2</span> Discrete response variable</h3>
+<p>If you are looking at a discrete response variable, such as a state of 1 or 0 in response to a certain amount of stimulus, then you are doing a <strong>logistic regression</strong>. We did not cover this analysis in this class.</p>
+</section>
+</section>
+<section id="discrete-explanatory-variable" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="discrete-explanatory-variable"><span class="header-section-number">12.5</span> Discrete explanatory variable</h2>
+<p>For discrete explanatory variables, we are often looking at categorical treatments or distinct groups, like species or geographic locations.</p>
+<section id="continuous-response-variable-1" class="level3" data-number="12.5.1">
+<h3 data-number="12.5.1" class="anchored" data-anchor-id="continuous-response-variable-1"><span class="header-section-number">12.5.1</span> Continuous response variable</h3>
+</section>
+<section id="discrete-response-variable-1" class="level3" data-number="12.5.2">
+<h3 data-number="12.5.2" class="anchored" data-anchor-id="discrete-response-variable-1"><span class="header-section-number">12.5.2</span> Discrete response variable</h3>
+<p>If our response variable <em>and</em> our explanatory variable are discrete (i.e., categorical or nominal), then we are doing a <span class="math inline">\(\chi^2\)</span> <strong>test</strong>. This tests looks at counts in different categories. For example, looking at proportions of men and women who do and do not smoke would be a classic <span class="math inline">\(\chi^2\)</span> test.</p>
+</section>
+<section id="continuous-response-variable-2" class="level3" data-number="12.5.3">
+<h3 data-number="12.5.3" class="anchored" data-anchor-id="continuous-response-variable-2"><span class="header-section-number">12.5.3</span> Continuous response variable</h3>
+<p>For a continuous response variable, we need to ask ourselves how many categories we are dealing with.</p>
+<ul>
+<li>If we are dealing with <strong>two categories</strong> or <strong>two measurements from the same individual</strong>, we are using a <span class="math inline">\(t\)</span><strong>-test</strong>.</li>
+</ul>
+<p>Make sure you check the <em>t</em>-test page to understand what kind of <em>t</em>-test is being performed. For repeated measurements from the same individuals or populations under different conditions, we have the <strong>paired <em>t</em>-test</strong><em>.</em> Otherwise, we have the <strong>Welch’s <em>t</em>-test</strong> as the default in <em>R</em>. <em>NOTE</em> that the default assumes unequal variance; you must set <code>var.equal = TRUE</code> to perform a <strong>“true” <em>t</em>-test</strong>. Make sure you familiarize yourself with <em>why</em> our code is assuming variances are unequal.</p>
+<p>If we <em>know</em> what the population is, we will use a <span class="math inline">\(Z\)</span>-score, but bear in mind that we will almost always use a <span class="math inline">\(t\)</span>-test to account for error. A <span class="math inline">\(t\)</span>-test with infinite degrees of freedom is the same as a <span class="math inline">\(Z\)</span>-score, so it is better to default to a <span class="math inline">\(t\)</span>-test.</p>
+<ul>
+<li>If we have <strong>three or more</strong> <strong>categories or treatments</strong> then we need to perform an <strong>ANOVA</strong>.</li>
+</ul>
+<p>If we are simply comparing multiple groups, we are performing a one-way ANOVA. We also need to make sure we aren’t doing some sort of factorial ANOVA, repeated-measures ANOVA, or interactive ANOVA. Please read the ANOVA page to ensure you are using the correct format.</p>
+<p><strong>Remember to label ANOVA plots with letters to indicate the separate groups</strong>.</p>
+<p>If we have multiple response variables, we can use a MANOVA; we do not cover that in this class.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -725,10 +783,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./cor_reg.html" class="pagination-link" aria-label="Correlation &amp; regression">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./intro_to_r.html" class="pagination-link" aria-label="Intro to *R*">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro to <em>R</em></span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./final_exam.html" class="pagination-link" aria-label="Final exam &amp; review">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Final exam &amp; review</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

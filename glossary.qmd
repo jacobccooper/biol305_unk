@@ -1,5 +1,5 @@
 ---
-title: "Glossary"
+title: "Functions & Glossary"
 author: "Dr. Jacob C. Cooper"
 format: html
 editor: visual

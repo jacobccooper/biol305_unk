@@ -1,0 +1,74 @@
+---
+title: "Pick the test"
+author: "Dr. Jacob C. Cooper"
+format: html
+editor: visual
+---
+
+## Picking the test
+
+A major component of the final will be picking the correct test to run on some data. Here, I cover the specific ways in which you can determine what test to use.
+
+Please use this web page as an *interactive* way to pick the test.
+
+## Exceptions
+
+Below is a walk through for the most common statistical analyses, but keep in mind there are a few "less common" ones that we are using as well:
+
+-   **Binomial test** - if we are looking at something with discrete outcomes - like coin tosses, die rolls, etc. - we are doing a binomial test to determine the probability of a specific outcome. You can do this with `binom.test`.
+
+-   **Poisson test** - if we are looking at the probability of obtaining certain counts over events - specifically, looking at the probability of *rare* events - we will use a Poisson. You can do this with `poisson.test`.
+
+## Explanatory Variable
+
+The explanatory variable is continuous and numeric. Pick this one for a continuous measurement variable, for example, such as Longitude, concentration, or other ratio or integer data.
+
+The explanatory variable is discontinuous and categorical. In these cases, the explanatory variable is a condition, like a control and a treatment.
+
+## Continuous explanatory variable
+
+### Continuous response variable
+
+If you have a continuous response variable, then you need to see what the question is asking:
+
+-   **Is there a relationship?**
+
+If you are looking at a problem and it is simply asking *if* there is a relationship, you are looking at a **correlation analysis**.
+
+-   **What is the relationship?**
+
+If you are asking *what* the relationship is or looking to be able to *predict* a value based on what you know, you are doing a **linear regression**. Note there are other kinds of regression, but in this class, we focus on linear regression.
+
+If we have multiple response variables, we can do multiple regression, which we do not cover here.
+
+### Discrete response variable
+
+If you are looking at a discrete response variable, such as a state of 1 or 0 in response to a certain amount of stimulus, then you are doing a **logistic regression**. We did not cover this analysis in this class.
+
+## Discrete explanatory variable
+
+For discrete explanatory variables, we are often looking at categorical treatments or distinct groups, like species or geographic locations.
+
+### Continuous response variable
+
+### Discrete response variable
+
+If our response variable *and* our explanatory variable are discrete (i.e., categorical or nominal), then we are doing a $\chi^2$ **test**. This tests looks at counts in different categories. For example, looking at proportions of men and women who do and do not smoke would be a classic $\chi^2$ test.
+
+### Continuous response variable
+
+For a continuous response variable, we need to ask ourselves how many categories we are dealing with.
+
+-   If we are dealing with **two categories** or **two measurements from the same individual**, we are using a $t$**-test**.
+
+Make sure you check the *t*-test page to understand what kind of *t*-test is being performed. For repeated measurements from the same individuals or populations under different conditions, we have the **paired *t*-test***.* Otherwise, we have the **Welch's *t*-test** as the default in *R*. *NOTE* that the default assumes unequal variance; you must set `var.equal = TRUE` to perform a **"true" *t*-test**. Make sure you familiarize yourself with *why* our code is assuming variances are unequal.
+
+If we *know* what the population is, we will use a $Z$-score, but bear in mind that we will almost always use a $t$-test to account for error. A $t$-test with infinite degrees of freedom is the same as a $Z$-score, so it is better to default to a $t$-test.
+
+-   If we have **three or more** **categories or treatments** then we need to perform an **ANOVA**.
+
+If we are simply comparing multiple groups, we are performing a one-way ANOVA. We also need to make sure we aren't doing some sort of factorial ANOVA, repeated-measures ANOVA, or interactive ANOVA. Please read the ANOVA page to ensure you are using the correct format.
+
+**Remember to label ANOVA plots with letters to indicate the separate groups**.
+
+If we have multiple response variables, we can use a MANOVA; we do not cover that in this class.
