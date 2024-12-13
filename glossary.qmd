@@ -9,6 +9,7 @@ editor: visual
 
 ```{r, echo = F, eval = T, message = F}
 library(tidyverse)
+library(agricolae)
 ```
 
 The following are common useful commands used in *R*, with examples of their use.
@@ -57,30 +58,271 @@ x <- rnorm(1000)
 mean(x)
 ```
 
-## Picking the test
+## Custom functions from class and elsewhere
 
-For a step by step click-through, see below:
+The following functions are those developed for this class or adapted from code posted to sources like StackOverflow.
 
-Is the explanatory variable categorical or continuous?
+### Basic stats
 
-### Categorical explanatory variables
+For these basic stats, we are using the following example data:
 
-Is the response variable categorical or continuous?
+```{r}
+### EXAMPLE DATA ###
+x <- c(1,2,3,5,5,4,6,8,7,9,5)
+```
 
-#### Categorical explanatory & response variables
+#### Mode calculations
 
-When both variables are categorical, we are looking at $\chi^2$ tests where we are comparing counts of individuals from the two different categories. Our major types of tests are:
+```{r}
+# Based on Statology function
+# define function to calculate mode
+# works on vectors of data
+find_mode <- function(x) {
+  # get unique values from vector
+  u <- unique(x)
+  # count number of occurrences for each value
+  tab <- tabulate(match(x, u))
+  
+  # if no mode, say so
+  if(length(x)==length(u[tab == max(tab)])){
+    print("No mode.")
+  }else{
+    # return the value with the highest count
+    u[tab == max(tab)]
+  }
+}
 
--   $\chi^2$ goodness-of-fit tests - looking at data or counts for different categories and asking if what we *observe* is the same as what we *expect*
+find_mode(x)
+```
 
--   $\chi^2$ tests of independence -
+#### Standard error
 
--   Fisher's exact test
+```{r}
+se <- function(x){
+  n <- length(x) # calculate n
+  s <- sd(x) # calculate standard deviation
+  se_val <- s/sqrt(n)
+  return(se_val)
+}
 
-#### Categorical explanatory and continuous response variables
+se(x)
+```
 
-### Continuous explanatory variables
+#### Coefficient of variation
 
-#### Continuous explanatory variables and categorical response variables
+```{r}
+cv <- function(x){
+  sigma <- sd(x)
+  mu <- mean(x)
+  val <- sigma/mu
+  return(val)
+}
 
-#### Continuous explanatory & response variables
+cv(x)
+```
+
+### Normal distributions
+
+#### $Z$ score
+
+Remember - in the $Z$-score code below, if no $n$ is specified, then it will default to $n = 1$.
+
+```{r}
+zscore <- function(xbar, mu, sd.x, n = 1){
+  z <- (xbar - mu)/(sd.x/sqrt(n))
+  return(z)
+}
+
+zscore(xbar = 62,
+       mu = 65,
+       sd.x = 3.5,
+       n = 5)
+```
+
+### ANOVA
+
+The following example data are going to be used to illustrate these functions.
+
+```{r}
+#### EXAMPLE DATA ####
+set.seed(8675309)
+
+for(i in 1:4){
+  x <- rnorm(10)
+  if(i == 1){
+    x <- rnorm(10, mean = 2)
+    data <- x %>% as.data.frame()
+    colnames(data) <- "Response"
+    data$Explanatory <- paste0("x",i)
+  }else{
+    newdat <- x %>% as.data.frame()
+    colnames(newdat) <- "Response"
+    newdat$Explanatory <- paste0("x",i)
+    data <- rbind(data,newdat)
+  }
+}
+
+# split into "typical" table
+expanded_data <- NULL
+expanded_data$x1 <- data$Response[which(data$Explanatory=="x1")]
+expanded_data$x2 <- data$Response[which(data$Explanatory=="x2")]
+expanded_data$x3 <- data$Response[which(data$Explanatory=="x3")]
+expanded_data$x4 <- data$Response[which(data$Explanatory=="x4")]
+
+expanded_data <- expanded_data %>%
+  as.data.frame()
+```
+
+The above is a *one-way ANOVA*. As a reminder, we would calculate the test as follows:
+
+```{r}
+# pivot longer does not work for one-way ANOVA, requires blocking factor
+# can rbind things with same colnames to make longer
+
+example_aov <- aov(Response ~ Explanatory, data)
+
+summary(example_aov)
+```
+
+Above, we can see a significant result of the ANOVA. We can follow this up with a Tukey test. **This requires the package `agricolae`!** Check the ANOVA pages, however, as not all ANOVA can use this `agricolae` shortcut method.
+
+```{r}
+example_tukey <- HSD.test(example_aov,
+                          # what to group by?
+                          "Explanatory",
+                          # significance level?
+                          alpha = 0.05, 
+                          # are data unbalanced
+                          unbalanced = FALSE,
+                          # show answer?
+                          console = TRUE)
+```
+
+#### Summarize data (for plotting)
+
+Remember - you need to change `"Explanatory"` to your explanatory variable (in quotes!) and you need to change `Response` to your response column (no quotes!). The following requires `plyr` to work, but the function itself should call up `plyr` if you do not yet have it loaded.
+
+```{r}
+# summarize by group
+summary_data <- function(data, explanatory){
+  require(plyr)
+  ddply(data, paste(explanatory), summarise,
+                 N = length(Response),
+                 mean = mean(Response),
+                 sd = sd(Response),
+                 se = sd / sqrt(N))
+}
+
+example_summary <- summary_data(data = data, explanatory = "Explanatory")
+
+example_summary
+```
+
+#### Significant label maker
+
+This command requires a Tukey HSD object from `agricolae`. You can manually create a table like this for some other scenarios; see relevant pages for documentation.
+
+```{r}
+# note first group must be EXACT MATCH to your summary_data object
+# groups are saved in the Tukey object
+# this is true for Tukey later as well
+
+# the following is a function that will make the significant label table
+sig.label.maker <- function(tukey_test, group_name){
+  sig.labels <- tukey_test$groups %>% 
+    # convert to a data.frame
+    as.data.frame() %>%
+    # create a new column - place rownames into the column
+    # converts to a format better for ggplot
+    mutate(Explanatorys = rownames(tukey_test$groups)) %>%
+    # rename column to prevent confusion
+    # specify dplyr; default function may be from plyr and not work
+    dplyr::rename(Significance = groups)
+  colnames(sig.labels)[which(colnames(sig.labels) == "Explanatorys")] <- group_name
+  return(sig.labels)
+}
+
+# Function requires explanatory groups in quotes
+sig_labels <- sig.label.maker(example_tukey, "Explanatory")
+
+sig_labels
+```
+
+#### ANOVA plotter
+
+The following function plots ANOVAS if you have a `summary_data` object and a `sig_labels` object, as shown above. **This does not work on ANOVA with interactive components**.
+
+```{r}
+anova_plotter <- function(summary_data, explanatory, 
+                          response, sig_labels,
+                          y_lim=NA, label_height=NA, 
+                          y_lab=NA, x_lab=NA){
+  require(tidyverse)
+  
+  plot_data_1 <- summary_data[,c(explanatory, response, "se")]
+  plot_data_2 <- sig_labels[,c(explanatory,"Significance")]
+  
+  colnames(plot_data_1) <- c("explanatory", "response", "se")
+  colnames(plot_data_2) <- c("explanatory", "Significance")
+  
+  plot_data <- plot_data_1 %>% 
+    full_join(plot_data_2, by = "explanatory")
+  
+  if(is.na(y_lim)){
+    if(min(plot_data$response) < 0){
+      y_lim <- c(min(plot_data$response) - 
+          4*max(plot_data$se),
+        max(plot_data$response) + 
+          4*max(plot_data$se))
+    }else{
+      y_lim <- c(0,max(plot_data$response) + 
+                                4*max(plot_data$se))
+    }
+  }
+  if(is.na(label_height)){label_height <- 0.25*max(y_lim)}
+  if(is.na(y_lab)){y_lab <- "Response"}
+  if(is.na(x_lab)){x_lab <- "Treatment"}
+  
+  plot_1 <- ggplot(plot_data,
+         aes(x = explanatory, y = response)) +
+    geom_point() +
+    geom_errorbar(data = plot_data,
+                  aes(ymin = response - 2*se,
+                      ymax = response + 2*se,
+                      width = 0.1)) +
+    ylim(y_lim) +
+    theme_classic() + 
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 90, vjust = 0.5, size = 5)) +
+  geom_text(data = plot_data,
+            # make bold
+            fontface = "bold",
+            # define where labels should go
+            aes(x = explanatory, 
+                # define height of label
+                y = label_height, 
+                # what are the labels?
+                label = paste0(Significance))) +
+  xlab(x_lab) +
+  ylab(y_lab)
+  
+  print(plot_1)
+}
+
+anova_plotter(summary_data = example_summary,
+              explanatory = "Explanatory",
+              response = "mean", # from summary_data table! What is to be plotted
+              sig_labels = sig_labels)
+```
+
+Note that in the above, the default label height is not working for us. We can adjust this with `label_height`.
+
+```{r}
+anova_plotter(summary_data = example_summary,
+              explanatory = "Explanatory",
+              response = "mean", # from summary_data table! What is to be plotted
+              sig_labels = sig_labels,
+              label_height = -1)
+```
+
+Much better!
