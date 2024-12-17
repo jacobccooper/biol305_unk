@@ -320,7 +320,7 @@ ggplot(summary_data,
                                    size = 12))
 ```
 
-### Factorial ANOVA
+### Similar ANOVA
 
 Mathematically, a factorial ANOVA is the same as a randomized block ANOVA; please see that section for information on how to run this test.
 
