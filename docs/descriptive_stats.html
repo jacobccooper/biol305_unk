@@ -369,7 +369,7 @@ window.Quarto = {
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
 ✔ purrr     1.0.2     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
@@ -444,7 +444,7 @@ dbl (1): Frap_Num
 </div>
 <p><em>Note</em> that the above should be rounded to a whole number, since we were given the data in whole numbers!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(fraps) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(fraps) <span class="sc">|&gt;</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 6</code></pre>
@@ -676,7 +676,7 @@ dbl (1): Frap_Num
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># count them</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">match</span>(fraps,u) <span class="sc">%&gt;%</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">match</span>(fraps,u) <span class="sc">|&gt;</span></span>
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabulate</span>()</span>
 <span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>tab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -862,9 +862,9 @@ CV = \frac{\sigma}{\mu}
 <h3 data-number="2.4.11" class="anchored" data-anchor-id="outliers"><span class="header-section-number">2.4.11</span> Outliers</h3>
 <p>Outliers are any values that are outside of the 1.5 times the interquartile range. We can calculate this for our example dataset as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>lowquant <span class="ot">&lt;-</span> <span class="fu">quantile</span>(frap_order,<span class="fl">0.25</span>,<span class="at">type =</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>()</span>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>lowquant <span class="ot">&lt;-</span> <span class="fu">quantile</span>(frap_order,<span class="fl">0.25</span>,<span class="at">type =</span> <span class="dv">6</span>) <span class="sc">|&gt;</span> <span class="fu">as.numeric</span>()</span>
 <span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>hiquant <span class="ot">&lt;-</span> <span class="fu">quantile</span>(frap_order,<span class="fl">0.75</span>,<span class="at">type =</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>()</span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>hiquant <span class="ot">&lt;-</span> <span class="fu">quantile</span>(frap_order,<span class="fl">0.75</span>,<span class="at">type =</span> <span class="dv">6</span>) <span class="sc">|&gt;</span> <span class="fu">as.numeric</span>()</span>
 <span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a>iqr <span class="ot">&lt;-</span> hiquant <span class="sc">-</span> lowquant</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -930,7 +930,7 @@ CV = \frac{\sigma}{\mu}
 <span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="dv">2023</span><span class="sc">:</span><span class="dv">2013</span></span>
 <span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-7"><a href="#cb92-7" aria-hidden="true" tabindex="-1"></a>nebraskans_years <span class="ot">&lt;-</span> <span class="fu">cbind</span>(years,nebraskans) <span class="sc">%&gt;%</span> </span>
+<span id="cb92-7"><a href="#cb92-7" aria-hidden="true" tabindex="-1"></a>nebraskans_years <span class="ot">&lt;-</span> <span class="fu">cbind</span>(years,nebraskans) <span class="sc">|&gt;</span> </span>
 <span id="cb92-8"><a href="#cb92-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
 <span id="cb92-9"><a href="#cb92-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb92-10"><a href="#cb92-10" aria-hidden="true" tabindex="-1"></a>nebraskans_years</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -962,7 +962,7 @@ CV = \frac{\sigma}{\mu}
 </div>
 <p>Now we can get the <code>mean</code> of this vector.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(nebraskans) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(nebraskans) <span class="sc">|&gt;</span></span>
 <span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">0</span>) <span class="co"># don't forget to round!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5349</code></pre>

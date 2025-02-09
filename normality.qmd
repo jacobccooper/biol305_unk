@@ -27,7 +27,7 @@ Standard normal distributions have a mean, median, and mode that are *equal*. Th
 In order to see an example of the normal distribution in nature, we are going to examine the BeeWalk survey database from the island of Great Britain [@Comont2020]. We are not interested in the bee data at present, however, but in the climatic data from when the surveys were performed.
 
 ```{r}
-beewalk <- curl("https://figshare.com/ndownloader/files/44726902") %>%
+beewalk <- curl("https://figshare.com/ndownloader/files/44726902") |>
   read_csv()
 ```
 
@@ -54,9 +54,9 @@ summary(beewalk$temperature)
 As we can see, $16,151$ rows do not have temperature recorded! We want to remove these `NA` rows, which we can do by using using `na.omit`.
 
 ```{r}
-beewalk$temperature %>%
-  na.omit() %>%
-  mean() %>%
+beewalk$temperature |>
+  na.omit() |>
+  mean() |>
   round(2) # don't forget to round!
 ```
 
@@ -78,7 +78,7 @@ With forty breaks, the pattern becomes even more clear. Let's see what a *standa
 
 ```{r}
 # save temperature vector without NA values
-temps <- beewalk$temperature %>% na.omit()
+temps <- beewalk$temperature |> na.omit()
 
 mu <- mean(temps)
 t.sd <- sd(temps)
@@ -166,7 +166,7 @@ As we can see above, the data are roughly linear, which means are data are very 
 Another way to test for normality is to use a Shapiro-Wilk test of normality. We will not get into the specific of this distribution, but this tests the null hypothesis that data originated in a normal distribution, with the alternative hypothesis that the data originated in a non-normal distribution. You will read next about the specifics of hypothesis testing, but this test uses an $\alpha = 0.05$, and we *reject the null hypothesis* if our $p < \alpha$, with $p$ representing the probability of observing something as extreme or more extreme than the result we observe. Our `temps` dataset is too large, as `shapiro.test` requires vectors of $< 5000$. Let's take a random sample and try again.
 
 ```{r}
-sample(temps, 200) %>%
+sample(temps, 200) |>
   shapiro.test()
 ```
 
@@ -443,7 +443,7 @@ for(j in 1:length(hurricanes3)){
 }
 
 speedlist_cat3 <- as.numeric(speedlist_cat3)
-speedlist_cat3 <- na.omit(speedlist_cat3) %>%
+speedlist_cat3 <- na.omit(speedlist_cat3) |>
   as.numeric()
 
 # cocatenating wikipedia files.
@@ -618,9 +618,15 @@ If I want numbers to show up *in text* in RMarkdown, I can add code to a line of
 
 ![This is the "coded" version of the text below. Compare the above window to the text below this image.](images/inline_code.png)
 
-Typing that into the plaintext should render as the following: `r xbar`. Then I can also type my answer as follows:
+Typing that into the plain text should render as the following: `r xbar`. Then I can also type my answer as follows:
 
-The $95$% Confidence Interval for the mean for this temperature dataset is `r round(xbar,2)` $\pm$ `r round(CI,2)`.
+The $95$% Confidence Interval for the mean for this temperature dataset is:
+
+```{r}
+print(paste(round(xbar, 2),
+      "+/-",
+      round(CI, 2)))
+```
 
 *Note* that the above is rounded to two decimal places to illustrative purposes ONLY, and should be rounded to one decimal place if it was a homework assignment because the original data has only one decimal place.
 

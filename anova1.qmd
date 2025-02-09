@@ -28,11 +28,11 @@ set.seed(8675309)
 for(i in 1:100){
   x <- rnorm(10)
   if(i == 1){
-    data <- x %>% as.data.frame()
+    data <- x |> as.data.frame()
     colnames(data) <- "Response"
     data$Explanatory <- paste0("x",i)
   }else{
-    newdat <- x %>% as.data.frame()
+    newdat <- x |> as.data.frame()
     colnames(newdat) <- "Response"
     newdat$Explanatory <- paste0("x",i)
     data <- rbind(data,newdat)
@@ -65,11 +65,11 @@ set.seed(8675309)
 for(i in 1:100){
   x <- rnorm(100)
   if(i == 1){
-    data <- x %>% as.data.frame()
+    data <- x |> as.data.frame()
     colnames(data) <- "Response"
     data$Explanatory <- paste0("x",i)
   }else{
-    newdat <- x %>% as.data.frame()
+    newdat <- x |> as.data.frame()
     colnames(newdat) <- "Response"
     newdat$Explanatory <- paste0("x",i)
     data <- rbind(data,newdat)
@@ -107,11 +107,11 @@ for(i in 1:4){
   x <- rnorm(10)
   if(i == 1){
     x <- rnorm(10, mean = 2)
-    data <- x %>% as.data.frame()
+    data <- x |> as.data.frame()
     colnames(data) <- "Response"
     data$Explanatory <- paste0("x",i)
   }else{
-    newdat <- x %>% as.data.frame()
+    newdat <- x |> as.data.frame()
     colnames(newdat) <- "Response"
     newdat$Explanatory <- paste0("x",i)
     data <- rbind(data,newdat)
@@ -125,7 +125,7 @@ expanded_data$x2 <- data$Response[which(data$Explanatory=="x2")]
 expanded_data$x3 <- data$Response[which(data$Explanatory=="x3")]
 expanded_data$x4 <- data$Response[which(data$Explanatory=="x4")]
 
-expanded_data <- expanded_data %>%
+expanded_data <- expanded_data |>
   as.data.frame()
 
 # summarize by group
@@ -147,7 +147,7 @@ ggplot(summary_data, aes(x = Explanatory, y = mean, group = Explanatory)) +
 ```
 
 ```{r}
-expanded_data %>% round(2)
+expanded_data |> round(2)
 ```
 
 Above, we can see the made-up dataset where it appears as though one population differs from the other populations in our measurements. Let's calculate an ANOVA and find out if this is the case!
@@ -164,7 +164,7 @@ Let us assume we have a dataset, $x$, that is $k$ columns and $n$ rows, with $N$
 group_means <- colMeans(expanded_data)
 
 # rounding to two decimal places
-group_means %>% round(2)
+group_means |> round(2)
 ```
 
 Next, we need to calculate the number of total entries in the dataset. We have written a function to accomplish this incase some rows have different numbers of entries from others.
@@ -174,8 +174,8 @@ n <- 0
 
 for(i in 1:ncol(expanded_data)){
   # account for unequal row length, if exists
-  sample <- expanded_data[,i] %>% 
-    as.numeric() %>%
+  sample <- expanded_data[,i] |> 
+    as.numeric() |>
     na.omit()
   n <- n + length(sample)
 }
@@ -187,14 +187,14 @@ Next, we can calculate the `grand_mean` of all of the data.
 
 ```{r}
 # sum up all the data
-dataset_sum <- colSums(expanded_data) %>%
+dataset_sum <- colSums(expanded_data) |>
   sum()
 
 # divide by the number of data points
 grand_mean <- dataset_sum/n
 
 # display mean
-grand_mean %>% round(2)
+grand_mean |> round(2)
 ```
 
 ### Total sum of squares
@@ -207,15 +207,15 @@ To calculate the *total sum of squares* (TSS), we need to take the deviations (d
 grand_deviates_squared <- (expanded_data - grand_mean)^2
 
 # round output for here
-grand_deviates_squared %>% round(2)
+grand_deviates_squared |> round(2)
 ```
 
 ```{r}
 # calculate the sum of all the deviates
-ss_total <- rowSums(grand_deviates_squared) %>%
+ss_total <- rowSums(grand_deviates_squared) |>
   sum()
 
-ss_total %>% round(2)
+ss_total |> round(2)
 ```
 
 ### Within-group sum of squares
@@ -239,15 +239,15 @@ for(i in 1:ncol(group_deviates)){
   group_deviates[,i] <- dev.dat
 }
 
-group_deviates %>% round(2)
+group_deviates |> round(2)
 ```
 
 ```{r}
 # calculate sum of data table
-ss_within <- colSums(group_deviates) %>% 
+ss_within <- colSums(group_deviates) |> 
   sum()
 
-ss_within %>% round(2)
+ss_within |> round(2)
 ```
 
 ### Among-group sum of squares
@@ -257,7 +257,7 @@ The total sum of squares is equal to the among groups sum of squares and the wit
 ```{r}
 ss_among <- ss_total - ss_within
 
-ss_among %>% round(2)
+ss_among |> round(2)
 ```
 
 ### Calculate degrees of freedom
@@ -293,13 +293,13 @@ For each category (among and within), the mean square is equal to the sum of squ
 ```{r}
 ms_among <- ss_among/ss_among_df
 
-ms_among %>% round(2)
+ms_among |> round(2)
 ```
 
 ```{r}
 ms_within <- ss_within/ss_within_df
 
-ms_within %>% round(2)
+ms_within |> round(2)
 ```
 
 ### Get $F$ statistic
@@ -309,7 +309,7 @@ We divide the sum of squares among data point by the sum of squares within data 
 ```{r}
 f_stat <- ms_among/ms_within
 
-f_stat %>% round(2)
+f_stat |> round(2)
 ```
 
 ### Get $p$ value
@@ -358,7 +358,7 @@ group_means <- c(x1_mean, x2_mean, x3_mean, x4_mean)
 # calculate all pairwise differences
 pairwise_mean_diffs <- dist(group_means)
 
-pairwise_mean_diffs %>% round(2)
+pairwise_mean_diffs |> round(2)
 ```
 
 Next, we need a critical $Q$ value against which we can compare. For Tukey, our degrees of freedom are the same as the degrees of freedom for $SS_{within}$: $N - K$.
@@ -370,7 +370,7 @@ tukey_q <- qtukey(p = 0.95,
                   nmeans = ncol(expanded_data),
                   df = ss_within_df)
 
-tukey_q %>% round(2)
+tukey_q |> round(2)
 ```
 
 We need to multiply $Q$ by the pooled variance.This is the same as the average of the variances for each group.
@@ -385,7 +385,7 @@ for(i in 1:ncol(expanded_data)){
 
 pooled_var_dat <- sqrt(var_data/n)
 
-pooled_var_dat %>% round(2)
+pooled_var_dat |> round(2)
 ```
 
 We can calculate the Tukey critical value by multiplying the pooled variance by $Q$.
@@ -393,7 +393,7 @@ We can calculate the Tukey critical value by multiplying the pooled variance by 
 ```{r}
 tukey_critical <- tukey_q*pooled_var_dat
 
-tukey_critical %>% round(2)
+tukey_critical |> round(2)
 ```
 
 Remember, we are comparing to the actual value, not the rounded value.
@@ -468,12 +468,12 @@ Now, we can use the aforementioned Tukey results to assign to groups. Because `a
 
 # the following is a function that will make the significant label table
 sig.label.maker <- function(tukey_test, group_name){
-  sig.labels <- tukey_test$groups %>% 
+  sig.labels <- tukey_test$groups |> 
     # convert to a data.frame
-    as.data.frame() %>%
+    as.data.frame() |>
     # create a new column - place rownames into the column
     # converts to a format better for ggplot
-    mutate(Explanatorys = rownames(tukey_test$groups)) %>%
+    mutate(Explanatorys = rownames(tukey_test$groups)) |>
     # rename column to prevent confusion
     # specify dplyr; default function may be from plyr and not work
     dplyr::rename(significance = groups)
@@ -543,16 +543,16 @@ The Kruskal-Wallis test is the non-parametric version of an ANOVA. To demonstrat
 set.seed(8675309)
 
 for(i in 1:4){
-  x <- runif(10, min = -1, max = 1) %>%
+  x <- runif(10, min = -1, max = 1) |>
     round(2)
   if(i == 1){
-    x <- runif(10, min = 1, max = 2) %>%
+    x <- runif(10, min = 1, max = 2) |>
       round(2)
-    data <- x %>% as.data.frame()
+    data <- x |> as.data.frame()
     colnames(data) <- "Response"
     data$Explanatory <- paste0("x",i)
   }else{
-    newdat <- x %>% as.data.frame()
+    newdat <- x |> as.data.frame()
     colnames(newdat) <- "Response"
     newdat$Explanatory <- paste0("x",i)
     data <- rbind(data,newdat)
@@ -566,7 +566,7 @@ expanded_data$x2 <- data$Response[which(data$Explanatory=="x2")]
 expanded_data$x3 <- data$Response[which(data$Explanatory=="x3")]
 expanded_data$x4 <- data$Response[which(data$Explanatory=="x4")]
 
-expanded_data <- expanded_data %>%
+expanded_data <- expanded_data |>
   as.data.frame()
 
 # summarize by group
@@ -646,7 +646,7 @@ N <- sum(n1, n2, n3, n4)
 
 H <- ((12/(N*(N+1)))*r2_sum)-(3*(N+1))
 
-H %>% round(2)
+H |> round(2)
 ```
 
 Now, we can evaluate this with a $\chi^2$ $p$ value.

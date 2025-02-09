@@ -335,7 +335,7 @@ window.Quarto = {
 </div>
 </div>
 <ul>
-<li><code>%&gt;%</code> - “pipe” a command or output into another command. Required <code>tidyverse</code> to run, and you can use the shortcut <code>CTRL SHIFT M</code> on Windows or Mac.</li>
+<li><code>|&gt;</code> - “pipe” a command or output into another command. You can use the shortcut <code>CTRL SHIFT M</code> on Windows or Mac.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make repeatable</span></span>
@@ -344,9 +344,9 @@ window.Quarto = {
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># random string</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>)</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span> </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>x <span class="sc">|&gt;</span> </span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pass to summary</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># pass summary through round</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -483,11 +483,11 @@ window.Quarto = {
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(i <span class="sc">==</span> <span class="dv">1</span>){</span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">2</span>)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> x <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
 <span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="st">"Response"</span></span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>Explanatory <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
 <span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    newdat <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    newdat <span class="ot">&lt;-</span> x <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
 <span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(newdat) <span class="ot">&lt;-</span> <span class="st">"Response"</span></span>
 <span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    newdat<span class="sc">$</span>Explanatory <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
 <span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(data,newdat)</span>
@@ -501,7 +501,7 @@ window.Quarto = {
 <span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x3 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x3"</span>)]</span>
 <span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x4 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x4"</span>)]</span>
 <span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>expanded_data <span class="ot">&lt;-</span> expanded_data <span class="sc">%&gt;%</span></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>expanded_data <span class="ot">&lt;-</span> expanded_data <span class="sc">|&gt;</span></span>
 <span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The above is a <em>one-way ANOVA</em>. As a reminder, we would calculate the test as follows:</p>
@@ -630,12 +630,12 @@ Attaching package: 'plyr'</code></pre>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co"># the following is a function that will make the significant label table</span></span>
 <span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>sig.label.maker <span class="ot">&lt;-</span> <span class="cf">function</span>(tukey_test, group_name){</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  sig.labels <span class="ot">&lt;-</span> tukey_test<span class="sc">$</span>groups <span class="sc">%&gt;%</span> </span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  sig.labels <span class="ot">&lt;-</span> tukey_test<span class="sc">$</span>groups <span class="sc">|&gt;</span> </span>
 <span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert to a data.frame</span></span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span></span>
 <span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create a new column - place rownames into the column</span></span>
 <span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># converts to a format better for ggplot</span></span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Explanatorys =</span> <span class="fu">rownames</span>(tukey_test<span class="sc">$</span>groups)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Explanatorys =</span> <span class="fu">rownames</span>(tukey_test<span class="sc">$</span>groups)) <span class="sc">|&gt;</span></span>
 <span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># rename column to prevent confusion</span></span>
 <span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># specify dplyr; default function may be from plyr and not work</span></span>
 <span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">Significance =</span> groups)</span>
@@ -672,7 +672,7 @@ x4 -0.2890524            b          x4</code></pre>
 <span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(plot_data_1) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"explanatory"</span>, <span class="st">"response"</span>, <span class="st">"se"</span>)</span>
 <span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(plot_data_2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"explanatory"</span>, <span class="st">"Significance"</span>)</span>
 <span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>  plot_data <span class="ot">&lt;-</span> plot_data_1 <span class="sc">%&gt;%</span> </span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>  plot_data <span class="ot">&lt;-</span> plot_data_1 <span class="sc">|&gt;</span> </span>
 <span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">full_join</span>(plot_data_2, <span class="at">by =</span> <span class="st">"explanatory"</span>)</span>
 <span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.na</span>(y_lim)){</span>

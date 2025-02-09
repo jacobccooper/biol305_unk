@@ -62,7 +62,7 @@ plot(y, x,
 ```
 
 ```{r}
-cor(y, x) %>% 
+cor(y, x) |> 
   round(2)
 ```
 
@@ -89,7 +89,7 @@ plot(x, y, pch = 19)
 ```
 
 ```{r}
-cor(x, y, method = "pearson") %>% 
+cor(x, y, method = "pearson") |> 
   round(2)
 ```
 

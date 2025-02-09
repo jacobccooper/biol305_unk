@@ -21,7 +21,7 @@ x <- 10
 x
 ```
 
--   `%>%` - "pipe" a command or output into another command. Required `tidyverse` to run, and you can use the shortcut `CTRL SHIFT M` on Windows or Mac.
+-   `|>` - "pipe" a command or output into another command. You can use the shortcut `CTRL SHIFT M` on Windows or Mac.
 
 ```{r}
 # make repeatable
@@ -30,9 +30,9 @@ set.seed(930)
 # random string
 x <- rnorm(20)
 
-x %>% 
+x |> 
   # pass to summary
-  summary() %>% 
+  summary() |> 
   # pass summary through round
   round(2)
 ```
@@ -151,11 +151,11 @@ for(i in 1:4){
   x <- rnorm(10)
   if(i == 1){
     x <- rnorm(10, mean = 2)
-    data <- x %>% as.data.frame()
+    data <- x |> as.data.frame()
     colnames(data) <- "Response"
     data$Explanatory <- paste0("x",i)
   }else{
-    newdat <- x %>% as.data.frame()
+    newdat <- x |> as.data.frame()
     colnames(newdat) <- "Response"
     newdat$Explanatory <- paste0("x",i)
     data <- rbind(data,newdat)
@@ -169,7 +169,7 @@ expanded_data$x2 <- data$Response[which(data$Explanatory=="x2")]
 expanded_data$x3 <- data$Response[which(data$Explanatory=="x3")]
 expanded_data$x4 <- data$Response[which(data$Explanatory=="x4")]
 
-expanded_data <- expanded_data %>%
+expanded_data <- expanded_data |>
   as.data.frame()
 ```
 
@@ -229,12 +229,12 @@ This command requires a Tukey HSD object from `agricolae`. You can manually crea
 
 # the following is a function that will make the significant label table
 sig.label.maker <- function(tukey_test, group_name){
-  sig.labels <- tukey_test$groups %>% 
+  sig.labels <- tukey_test$groups |> 
     # convert to a data.frame
-    as.data.frame() %>%
+    as.data.frame() |>
     # create a new column - place rownames into the column
     # converts to a format better for ggplot
-    mutate(Explanatorys = rownames(tukey_test$groups)) %>%
+    mutate(Explanatorys = rownames(tukey_test$groups)) |>
     # rename column to prevent confusion
     # specify dplyr; default function may be from plyr and not work
     dplyr::rename(Significance = groups)
@@ -265,7 +265,7 @@ anova_plotter <- function(summary_data, explanatory,
   colnames(plot_data_1) <- c("explanatory", "response", "se")
   colnames(plot_data_2) <- c("explanatory", "Significance")
   
-  plot_data <- plot_data_1 %>% 
+  plot_data <- plot_data_1 |> 
     full_join(plot_data_2, by = "explanatory")
   
   if(is.na(y_lim)){

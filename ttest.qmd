@@ -114,8 +114,8 @@ Because of this, some argue that "Welch's" should be the default $t$-test, and *
 Let's look at the values of all of the dog samples in our `canines` dataset.
 
 ```{r}
-dogs <- canines %>%
-  filter(Sample == "Dog") %>%
+dogs <- canines |>
+  filter(Sample == "Dog") |>
   select(Sample, OA)
 
 xbar <- mean(dogs$OA)
@@ -141,8 +141,8 @@ Now let's say we want to compare foxes and dogs to each other. Since we have all
 # already got dogs
 dog_oa <- dogs$OA
 
-foxes <- canines %>%
-  filter(Sample == "Fox") %>%
+foxes <- canines |>
+  filter(Sample == "Fox") |>
   select(Sample, OA)
 
 fox_oa <- foxes$OA

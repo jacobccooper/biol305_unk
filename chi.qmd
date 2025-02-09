@@ -109,9 +109,13 @@ sum(chi_vals)
 And now, to get the probability.
 
 ```{r}
-pchisq(sum(chi_vals), # chi stat
-       df = length(chi_vals) - 1, # degrees of freedom
-       lower.tail = FALSE) # looking RIGHT
+chi_vals |> 
+  # get chi statistic
+  sum() |> 
+  # get p value
+  pchisq(df = length(chi_vals) - 1,
+         # looking RIGHT
+         lower.tail = F)
 ```
 
 Here, we get $p = 0.002$, indicating that there is not an equal probability for selling drinks at different times of day.
@@ -197,10 +201,22 @@ sum(chi_matrix)
 Here, we get a $\chi^2$ value of `r sum(chi_matrix)`. We can use our handy family functions to determine the probability of this event:
 
 ```{r}
-pchisq(sum(chi_matrix), df = 1, lower.tail = F)
+chi_matrix |> 
+  # get chi statistic
+  sum() |> 
+  pchisq(df = 1,
+         # looking RIGHT
+         lower.tail = F)
 ```
 
-Here, we get a $p$ value of `r round(pchisq(sum(chi_matrix), df = 1, lower.tail = F),3)`.
+Here, we get a $p$ value of:
+
+```{r}
+chi_matrix |> 
+  sum() |> 
+  pchisq(df = 1, lower.tail = F) |> 
+  round(3)
+```
 
 Alternatively, we can calculate this using *expected counts*. For many situations, we don't know what the baseline probability *should* be, so we calculate the expected counts based on what we do know. Expected counts are calculated as follows:
 
@@ -238,7 +254,15 @@ e_o2 <- ((data - expected)^2)/expected
 sum(e_o2)
 ```
 
-Now we have a $\chi^2$ of `r round(sum(e_o2),2)` - which, as we will see below, is the exact same value as we get for an uncorrected `chisq.test` from *R*'s default output.
+Now we have a $\chi^2$ of:
+
+```{r}
+e_o2 |> 
+  sum() |> 
+  round(2)
+```
+
+As we will see below, is the exact same value as we get for an uncorrected `chisq.test` from *R*'s default output.
 
 #### $\chi^2$ estimations in *R*
 
@@ -254,7 +278,14 @@ chi_data <- chisq.test(data, correct = F)
 chi_data
 ```
 
-Here, we get $p = $`r round(chi_data$p.value,3)`, which is significant with $\alpha = 0.05$.
+Here, we get the following for your $p$ value:
+
+```{r}
+chi_data$p.value |> 
+  round(3)
+```
+
+This is significant with $\alpha = 0.05$.
 
 **Note** that these values are slightly different. they will be even more different if `correct` is set to `TRUE`. By default, *R*, uses a [Yate's correction for continuity](https://en.wikipedia.org/wiki/Yates's_correction_for_continuity). This accounts for error introduced by comparing the discrete values to a continuous distribution.
 

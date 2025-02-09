@@ -21,7 +21,7 @@ You decide to ask your friends to rate their happiness on a scale of 0-100 befor
 before_asking <- c(96,80,86,92,100,92,95,91,87)
 after_asking <- c(72,53,90,85,90,86,83,79,62)
 
-happiness <- cbind(before_asking, after_asking) %>% 
+happiness <- cbind(before_asking, after_asking) |> 
   as.data.frame()
 
 happiness
@@ -43,7 +43,7 @@ You hear that going running is good for your grades. You decide to look and see 
 run_time <- c(20,25,22,50,30,10,6)
 grade <- c(94,84,95,72,88,90,85)
 
-run_grades <- cbind(run_time, grade) %>% 
+run_grades <- cbind(run_time, grade) |> 
   as.data.frame()
 
 run_grades
@@ -63,7 +63,7 @@ High-jumpers use the "Fosbury Flop" because it improves their performance by all
 pre_flop <- c(2.09,2.12,2.15,2.18,2.17,2.28,2.29)
 post_flop <- c(2.30,2.33,2.39,2.34,2.42,2.45,2.44)
 
-jump_heights <- cbind(pre_flop, post_flop) %>% 
+jump_heights <- cbind(pre_flop, post_flop) |> 
   as.data.frame()
 
 jump_heights
@@ -85,7 +85,7 @@ a_burn_year <- c(1,0,3,2,1,0,0,2)
 b_one_year_post_burn <- c(3,5,7,6,5,3,2,5)
 c_five_years_post_burn <- c(20,21,15,8,8,7,10,8)
 
-prairie_chickens <- cbind(Location, a_burn_year, b_one_year_post_burn, c_five_years_post_burn) %>% 
+prairie_chickens <- cbind(Location, a_burn_year, b_one_year_post_burn, c_five_years_post_burn) |> 
   as.data.frame()
 
 prairie_chickens

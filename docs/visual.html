@@ -353,7 +353,7 @@ window.Quarto = {
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
 ✔ purrr     1.0.2     </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
@@ -411,7 +411,7 @@ window.Quarto = {
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> <span class="fu">c</span>(<span class="st">"Cat 1"</span>, <span class="dv">4</span>,</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"Cat 2"</span>, <span class="dv">8</span>,</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"Cat 3"</span>, <span class="dv">7</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"Cat 4"</span>, <span class="dv">3</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"Cat 4"</span>, <span class="dv">3</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(count_table) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Category"</span>,<span class="st">"Count"</span>)</span>
@@ -438,7 +438,7 @@ window.Quarto = {
 <p>We can also use the program <code>ggplot</code>, part of the <code>tidyverse</code>, to create histograms.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot requires data frames</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> x <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(x2) <span class="ot">&lt;-</span> <span class="st">"x"</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> x2, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
@@ -475,7 +475,7 @@ window.Quarto = {
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">1000</span>,</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">mean =</span> <span class="dv">1</span>,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">sd =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">sd =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(y) <span class="ot">&lt;-</span> <span class="st">"x"</span></span>
@@ -486,12 +486,12 @@ window.Quarto = {
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(xy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           x cat
-1  0.2851675   x
-2 -0.8353002   x
-3 -0.4422198   x
-4 -1.1466913   x
-5 -1.3812856   x
-6 -0.9698832   x</code></pre>
+1  1.0600659   x
+2 -1.2621921   x
+3  1.7613120   x
+4  0.9443103   x
+5 -0.3686830   x
+6  0.8422264   x</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -583,7 +583,7 @@ window.Quarto = {
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.09683625</code></pre>
+<pre><code>[1] 0.01908543</code></pre>
 </div>
 </div>
 <p>Generally, a <strong>value between</strong> <span class="math inline">\(-1\)</span> <strong>and</strong> <span class="math inline">\(+1\)</span> <strong>for skewness is “acceptable”</strong> and not considered overly skewed. Positive values indicate “right” skew and negative values indicate a “left” skew. If something is too skewed, it may violate assumptions of normality and thus need <em>non-parametric</em> tests rather than our standard parametric tests - something we will cover later!</p>
@@ -607,7 +607,7 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(x3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.094743</code></pre>
+<pre><code>[1] 2.2469</code></pre>
 </div>
 </div>
 <p>As we can see, the above is a heavily skewed dataset with a positive (“right”) skew.</p>
@@ -631,14 +631,14 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># non-zeroed</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.906894</code></pre>
+<pre><code>[1] 3.135303</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># zeroed</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(x)<span class="sc">-</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.09310623</code></pre>
+<pre><code>[1] 0.1353029</code></pre>
 </div>
 </div>
 <p>As expected, out values drawn from a normal distribution are not overly skewed. Let’s compare these to a more kurtic distribution:</p>
@@ -647,7 +647,7 @@ window.Quarto = {
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(xk)<span class="sc">-</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 26.34085</code></pre>
+<pre><code>[1] 36.08715</code></pre>
 </div>
 </div>
 <p>What does this dataset look like?</p>
@@ -682,7 +682,7 @@ window.Quarto = {
 </div>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -2.872248  3.195248</code></pre>
+<pre><code>[1] -3.350475  3.497701</code></pre>
 </div>
 </div>
 <p>Based on this range, we need to create our bin sizes. We want our lowest bin to be below our lowest value, and our highest bin above our highest value. Here, I’m setting a step size of 1. <strong>You will have to examine your data and determine the best break size for your datasets.</strong></p>
@@ -710,7 +710,7 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>data_transform
 [-3,-2) [-2,-1)  [-1,0)   [0,1)   [1,2)   [2,3)   [3,4) 
-     20     132     351     359     128       9       1 </code></pre>
+     20     128     365     329     131      23       1 </code></pre>
 </div>
 </div>
 <div class="cell">
@@ -724,7 +724,7 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cumulative_freq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        [-3,-2) [-2,-1)  [-1,0)   [0,1)   [1,2)   [2,3)   [3,4) 
-      0      20     152     503     862     990     999    1000 </code></pre>
+      0      20     148     513     842     973     996     997 </code></pre>
 </div>
 </div>
 <div class="cell">

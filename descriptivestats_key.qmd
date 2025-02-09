@@ -96,7 +96,7 @@ key_maker <- function(x, # specify data
   print(paste0("Range: ", round(max(x) - min(x),roundval)))
   
   # get IQRs, use method of book!
-  quantiles_x <- quantile(x, type = 6) %>% as.numeric()
+  quantiles_x <- quantile(x, type = 6) |> as.numeric()
   # get 25th and 75th quantiles
   print(paste0("IQR: ",round(quantiles_x[4] - quantiles_x[2],roundval)))
   
@@ -115,11 +115,11 @@ key_maker <- function(x, # specify data
   print(paste0("SE: ", round(se(x),roundval)))
   
   # calculate 25th quantile
-  lowquant <- quantile(x,0.25,type = 6) %>% 
+  lowquant <- quantile(x,0.25,type = 6) |> 
     as.numeric() # convert to numeric
   
   # calculate 75th quantile
-  hiquant <- quantile(x,0.75,type = 6) %>% 
+  hiquant <- quantile(x,0.75,type = 6) |> 
     as.numeric() # convert to numeric
   
   # get the IQR
@@ -164,7 +164,7 @@ nebraskans <- c(5056,5061,5276,5244,5209,
 
 years <- 2023:2013
 
-nebraskans_years <- cbind(years,nebraskans) %>% 
+nebraskans_years <- cbind(years,nebraskans) |> 
   as.data.frame()
 
 nebraskans_years
@@ -187,7 +187,7 @@ The following is a dataset looking at oceanic conditions and other variables ass
 
 ```{r}
 url_file <- curl("https://figshare.com/ndownloader/files/42314604")
-pirates <- url_file %>% read_csv()
+pirates <- url_file |> read_csv()
 ```
 
 ```{r}
@@ -208,7 +208,7 @@ The following is a dataset on skin sores in different communities in Australia a
 ```{r}
 url_file <- curl("https://doi.org/10.1371/journal.pcbi.1007838.s006")
 
-ages <- url_file %>% read_csv()
+ages <- url_file |> read_csv()
 ```
 
 Let's see what this file is like real fast. We can use the command `dim` to see the `rows` and `columns`.

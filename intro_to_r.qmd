@@ -5,11 +5,11 @@ author: "Dr. Jacob C. Cooper, UNK"
 
 In this class, we will be using *R* to perform statistical analyses. *R* is a free software program designed for use in a myriad of statistical and computational scenarios. It can handle extremely large datasets, can handle spatial data, and has wrappers for compatibility with *Python*, *Bash*, and other programs (even *Java*!).
 
-# Setup
+## Setup
 
 First, we need to download *R* onto your machine. We are also going to download *RStudio* to assist with creating *R* scripts and documents.
 
-## Installing *R*
+### Installing *R*
 
 First, navigate to the [*R* download and install page](https://cloud.r-project.org/). Download the appropriate version for your operating system (Windows, Mac, or Linux). **Note** that coding will be formatted slightly different for Windows than for other operating systems. If you have a Chromebook, you will have to [follow the online instructions for installing both programs on Chrome](https://levente.littvay.hu/chromebook/).
 
@@ -39,7 +39,7 @@ Type 'q()' to quit R.
 
 If that screen appears, congratulations! *R* is properly installed. If the install was not successful, please talk to Dr. Cooper and check with your classmates as well.
 
-## Installing *RStudio*
+### Installing *RStudio*
 
 *RStudio* is a GUI (graphics user interface) that helps make *R* easier to use. Furthermore, it allows you to create documents in *R*, including websites (such as this one), PDFs, and even presentations. This can greatly streamline the research pipeline and help you publish your results and associated code in a quick and efficient fashion.
 
@@ -51,11 +51,43 @@ Open *RStudio* on your machine. You should be presented with something like the 
 
 In *RStudio*, the top left window is always going to be our coding window. This is where we will type all of our code and create our documents. In the bottom left we will see *R* executing the code. This will show what the computer is "thinking" and will help us spot any potential issues. The top right window is the "environment", which shows what variables and datasets are stored within the computers' memory. (It can also show some other things, but we aren't concerned with that at this point). The bottom right window is the "display" window. This is where plots and help windows will appear if they don't appear in the document (top left) window itself.
 
-Now, we will create our first *R* document!
+### Setting up the "native pipe" operator
 
-# Creating an *RMarkdown* document
+There are two ways to type commands in *R*: in a "nested" fashion and in a "piped" fashion.
 
-## Setup
+Let's say that we have a random series of 100 numbers from a random normal distribution, which we can get by running the following:
+
+```{r}
+# make repeatable
+set.seed(42)
+# get 100 values from normal
+x <- rnorm(100)
+```
+
+Let's say that we want to get the mean of these values *and* round these values to two decimal places for our final answer. To do this in a nested fashion, we would do the following:
+
+```{r}
+# round mean of x
+round(mean(x), 2)
+```
+
+This works pretty well, but it can get confusion with so many parentheses over each other. Thus, we can use the "pipe" method instead.
+
+In *RStudio*, click on the tabs at the top of the screen to go to Tools \> Global Options, and in the pop up screen select Code. On this screen, you should see a tick box for "Use native pipe operator". Make sure this box is checked. Now, we can use `CTRL` + `SHIFT` + `M` to insert the "pipe" operator `|>`.
+
+The pipe operator takes whatever came previous and puts it through the next command. For example, `mean(x)` could also be written as `x |> mean()`, where `x` would be placed inside of `mean()`.
+
+```{r}
+x |> 
+  mean() |> 
+  round(2)
+```
+
+As you can see, the above breaks things down into a more step-by-step fashion, and makes code easier to follow.
+
+## Creating an *RMarkdown* document
+
+### Setup
 
 In this class, we will be creating assignments in what is called *RMarkdown*. This is a rich-text version of *R* that allows us to create documents with the code embedded. In *RStudio*, click the "+" button in the far top left to open the `New Document` menu. Scroll down this list and click on `R Markdown`.
 
@@ -73,7 +105,7 @@ Plain text in the document will be rendered as plain text in the document. (I.e.
 
 We also have code "chunks" that are shown above. A code chunk can be manually typed out or inserted by pressing `CTRL` + `ALT` + `I` (Windows, Linux) or `COMMAND` + `OPTION` + `I` (Mac). Everything inside a "code chunk" will be read as *R* code and executed as such. Note that you can have additional commands in the *R* chunks, but we won't cover that for now.
 
-## Using code chunks
+### Using code chunks
 
 In your computer, erase all information except for the `yaml` header between the dashes on your computer. `Save` your file in a folder where you want your assignment to be located. It is important you do this step up front as the computer will sometimes save in random places if you don't specify a file location at the beginning. *Don't forget to save your work frequently*!
 
@@ -114,7 +146,7 @@ x^x
 
 As we can see, since I didn't "store" this value as a variable in *R* using `<-`, the value is not in the environment.
 
-## Plotting
+### Plotting
 
 Now, let's try creating a plot. This is easy in *R*, as we just use the command `plot`.
 
@@ -143,7 +175,7 @@ plot(x = x, # specify x values
      col = "red") # make points red
 ```
 
-## Tab complete
+### Tab complete
 
 *RStudio* allows for "tab-completing" while typing code. Tab-completing is a way of typing the first part of a command, variable name, or file name and hitting "tab" to show all options with that spelling. You should use tab completing because it:
 
@@ -152,7 +184,7 @@ plot(x = x, # specify x values
 -   increases the speed at which you code
 -   provides help with specific functions
 
-## Help
+### Help
 
 At any point in *R*, you can look up "help" for a specific function by typing `?functionname`. Try this on your computer with the following:
 
@@ -160,7 +192,7 @@ At any point in *R*, you can look up "help" for a specific function by typing `?
 ?mean
 ```
 
-# Working with data
+## Working with data
 
 Throughout this course, we are going to have to work with datasets that are from our book or other sources. Here, we are going to work through an example dataset. First, we need to install *libraries*. A *library* is a collated, pre-existing batch of code that is designed to assist with data analysis or to perform specific functions. These *libraries* make life a lot easier, and create short commands for completing relatively complex tasks.
 
@@ -199,7 +231,7 @@ To clarify the conflicts, pretend that you can only know one definition of a wor
 
 We won't have to deal with conflicts much in this class, and I'll warn you (or help you) if there is a conflict.
 
-## Downloading data
+### Downloading data
 
 Now, we need to download our first data set. These datasets are stored on GitHub. We are going to be looking at data from Dr. Cooper's dissertation concerning Afrotropical bird distributions [@cooper_biogeographic_2021]. This website is in the data folder on this websites' GitHub page, [accessible here](https://github.com/jacobccooper/biol105_unk/blob/main/datasets/lacustrine_range_size.csv).
 
@@ -209,14 +241,14 @@ Now, we need to download our first data set. These datasets are stored on GitHub
 ranges <- read_csv("https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/datasets/lacustrine_range_size.csv")
 ```
 
-Alternatively, we can use the operator `%>%` to simplify this process. `%>%` means "take whatever you got from the previous step and *pipe* it into the next step". So, the following does the exact same thing:
+Alternatively, we can use the operator `|>` to simplify this process. `|>` means "take whatever you got from the previous step and *pipe* it into the next step". So, the following does the exact same thing:
 
 ```{r}
-ranges <- "https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/datasets/lacustrine_range_size.csv" %>%
+ranges <- "https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/datasets/lacustrine_range_size.csv" |>
   read_csv()
 ```
 
-Using the `%>%` is preferred as you can better set up a workflow and because it more closely mimics other coding languages, such as `bash`.
+Using the `|>` is preferred as you can better set up a workflow and because it more closely mimics other coding languages, such as `bash`.
 
 Let's view the data to see if it worked. We can use the command `head` to view the first few rows:
 
@@ -241,7 +273,7 @@ As seen above, we now have information for the following statistics for each var
 
 We can also calculate some of these statistics manually to see if we are doing everything correctly. It is easiest to do this by using predefined functions in *R* (code others have written to perform a particular task) or to create our own functions in *R*. We will do both to determine the average of `combined_current_km2`.
 
-## Subsetting data
+### Subsetting data
 
 First, we need to select only the column of interest. In *R*, we have two ways of subsetting data to get a particular column.
 
@@ -279,7 +311,7 @@ round(mean(current_combined),1) # round mean to one decimal
 
 ```{r}
 # pipe mean through round
-mean(current_combined) %>%
+mean(current_combined)  |> 
   round(1)
 ```
 
@@ -294,7 +326,7 @@ We can also calculate the mean manually. The mean is $\frac{\sum_{i=1}^nx}{n}$, 
 our_mean <- function(x){
   sum_x <- sum(x) # sum all values in vector
   n <- length(x) # get length of vector
-  xbar <- sum_x/n # calcualte mean
+  xbar <- sum_x/n # calculate mean
   return(xbar) # return the value outside the function
 }
 ```
@@ -308,11 +340,11 @@ our_mean(ranges$combined_current_km2)
 As we can see, it works just the same as `mean`! We can round this as well.
 
 ```{r}
-our_mean(ranges$combined_current_km2) %>%
+our_mean(ranges$combined_current_km2) |> 
   round(1)
 ```
 
-# Your turn!
+## Your turn!
 
 **With a partner or on your own**, try to do the following:
 

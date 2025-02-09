@@ -65,7 +65,7 @@ mean(fraps)
 *Note* that the above should be rounded to a whole number, since we were given the data in whole numbers!
 
 ```{r}
-mean(fraps) %>%
+mean(fraps) |>
   round(0)
 
 # OR
@@ -268,7 +268,7 @@ match(fraps,u)
 
 ```{r}
 # count them
-tab <- match(fraps,u) %>%
+tab <- match(fraps,u) |>
   tabulate()
 
 tab
@@ -446,9 +446,9 @@ cv(frap_order)
 Outliers are any values that are outside of the 1.5 times the interquartile range. We can calculate this for our example dataset as follows:
 
 ```{r}
-lowquant <- quantile(frap_order,0.25,type = 6) %>% as.numeric()
+lowquant <- quantile(frap_order,0.25,type = 6) |> as.numeric()
 
-hiquant <- quantile(frap_order,0.75,type = 6) %>% as.numeric()
+hiquant <- quantile(frap_order,0.75,type = 6) |> as.numeric()
 
 iqr <- hiquant - lowquant
 ```
@@ -525,7 +525,7 @@ nebraskans <- c(5056,5061,5276,5244,5209,
 
 years <- 2023:2013
 
-nebraskans_years <- cbind(years,nebraskans) %>% 
+nebraskans_years <- cbind(years,nebraskans) |> 
   as.data.frame()
 
 nebraskans_years
@@ -545,7 +545,7 @@ nebraskans
 Now we can get the `mean` of this vector.
 
 ```{r}
-mean(nebraskans) %>%
+mean(nebraskans) |>
   round(0) # don't forget to round!
 ```
 

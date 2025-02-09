@@ -301,25 +301,26 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup"><span class="header-section-number">2</span> Setup</a>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup"><span class="header-section-number">1.1</span> Setup</a>
   <ul class="collapse">
-  <li><a href="#installing-r" id="toc-installing-r" class="nav-link" data-scroll-target="#installing-r"><span class="header-section-number">2.1</span> Installing <em>R</em></a></li>
-  <li><a href="#installing-rstudio" id="toc-installing-rstudio" class="nav-link" data-scroll-target="#installing-rstudio"><span class="header-section-number">2.2</span> Installing <em>RStudio</em></a></li>
+  <li><a href="#installing-r" id="toc-installing-r" class="nav-link" data-scroll-target="#installing-r"><span class="header-section-number">1.1.1</span> Installing <em>R</em></a></li>
+  <li><a href="#installing-rstudio" id="toc-installing-rstudio" class="nav-link" data-scroll-target="#installing-rstudio"><span class="header-section-number">1.1.2</span> Installing <em>RStudio</em></a></li>
+  <li><a href="#setting-up-the-native-pipe-operator" id="toc-setting-up-the-native-pipe-operator" class="nav-link" data-scroll-target="#setting-up-the-native-pipe-operator"><span class="header-section-number">1.1.3</span> Setting up the “native pipe” operator</a></li>
   </ul></li>
-  <li><a href="#creating-an-rmarkdown-document" id="toc-creating-an-rmarkdown-document" class="nav-link" data-scroll-target="#creating-an-rmarkdown-document"><span class="header-section-number">3</span> Creating an <em>RMarkdown</em> document</a>
+  <li><a href="#creating-an-rmarkdown-document" id="toc-creating-an-rmarkdown-document" class="nav-link" data-scroll-target="#creating-an-rmarkdown-document"><span class="header-section-number">1.2</span> Creating an <em>RMarkdown</em> document</a>
   <ul class="collapse">
-  <li><a href="#setup-1" id="toc-setup-1" class="nav-link" data-scroll-target="#setup-1"><span class="header-section-number">3.1</span> Setup</a></li>
-  <li><a href="#using-code-chunks" id="toc-using-code-chunks" class="nav-link" data-scroll-target="#using-code-chunks"><span class="header-section-number">3.2</span> Using code chunks</a></li>
-  <li><a href="#plotting" id="toc-plotting" class="nav-link" data-scroll-target="#plotting"><span class="header-section-number">3.3</span> Plotting</a></li>
-  <li><a href="#tab-complete" id="toc-tab-complete" class="nav-link" data-scroll-target="#tab-complete"><span class="header-section-number">3.4</span> Tab complete</a></li>
-  <li><a href="#help" id="toc-help" class="nav-link" data-scroll-target="#help"><span class="header-section-number">3.5</span> Help</a></li>
+  <li><a href="#setup-1" id="toc-setup-1" class="nav-link" data-scroll-target="#setup-1"><span class="header-section-number">1.2.1</span> Setup</a></li>
+  <li><a href="#using-code-chunks" id="toc-using-code-chunks" class="nav-link" data-scroll-target="#using-code-chunks"><span class="header-section-number">1.2.2</span> Using code chunks</a></li>
+  <li><a href="#plotting" id="toc-plotting" class="nav-link" data-scroll-target="#plotting"><span class="header-section-number">1.2.3</span> Plotting</a></li>
+  <li><a href="#tab-complete" id="toc-tab-complete" class="nav-link" data-scroll-target="#tab-complete"><span class="header-section-number">1.2.4</span> Tab complete</a></li>
+  <li><a href="#help" id="toc-help" class="nav-link" data-scroll-target="#help"><span class="header-section-number">1.2.5</span> Help</a></li>
   </ul></li>
-  <li><a href="#working-with-data" id="toc-working-with-data" class="nav-link" data-scroll-target="#working-with-data"><span class="header-section-number">4</span> Working with data</a>
+  <li><a href="#working-with-data" id="toc-working-with-data" class="nav-link" data-scroll-target="#working-with-data"><span class="header-section-number">1.3</span> Working with data</a>
   <ul class="collapse">
-  <li><a href="#downloading-data" id="toc-downloading-data" class="nav-link" data-scroll-target="#downloading-data"><span class="header-section-number">4.1</span> Downloading data</a></li>
-  <li><a href="#subsetting-data" id="toc-subsetting-data" class="nav-link" data-scroll-target="#subsetting-data"><span class="header-section-number">4.2</span> Subsetting data</a></li>
+  <li><a href="#downloading-data" id="toc-downloading-data" class="nav-link" data-scroll-target="#downloading-data"><span class="header-section-number">1.3.1</span> Downloading data</a></li>
+  <li><a href="#subsetting-data" id="toc-subsetting-data" class="nav-link" data-scroll-target="#subsetting-data"><span class="header-section-number">1.3.2</span> Subsetting data</a></li>
   </ul></li>
-  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">5</span> Your turn!</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">1.4</span> Your turn!</a></li>
   </ul>
 </nav>
     </div>
@@ -352,11 +353,11 @@ window.Quarto = {
 
 
 <p>In this class, we will be using <em>R</em> to perform statistical analyses. <em>R</em> is a free software program designed for use in a myriad of statistical and computational scenarios. It can handle extremely large datasets, can handle spatial data, and has wrappers for compatibility with <em>Python</em>, <em>Bash</em>, and other programs (even <em>Java</em>!).</p>
-<section id="setup" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Setup</h1>
+<section id="setup" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="setup"><span class="header-section-number">1.1</span> Setup</h2>
 <p>First, we need to download <em>R</em> onto your machine. We are also going to download <em>RStudio</em> to assist with creating <em>R</em> scripts and documents.</p>
-<section id="installing-r" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="installing-r"><span class="header-section-number">2.1</span> Installing <em>R</em></h2>
+<section id="installing-r" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="installing-r"><span class="header-section-number">1.1.1</span> Installing <em>R</em></h3>
 <p>First, navigate to the <a href="https://cloud.r-project.org/"><em>R</em> download and install page</a>. Download the appropriate version for your operating system (Windows, Mac, or Linux). <strong>Note</strong> that coding will be formatted slightly different for Windows than for other operating systems. If you have a Chromebook, you will have to <a href="https://levente.littvay.hu/chromebook/">follow the online instructions for installing both programs on Chrome</a>.</p>
 <p>Follow the installation steps for <em>R</em>, and verify that the installation was successful by searching for <em>R</em> on your machine. You should be presented with a coding window that looks like the following:</p>
 <pre><code>R version 4.4.1 (2024-06-14) -- "Race for Your Life"
@@ -380,8 +381,8 @@ Type 'q()' to quit R.
 &gt;</code></pre>
 <p>If that screen appears, congratulations! <em>R</em> is properly installed. If the install was not successful, please talk to Dr.&nbsp;Cooper and check with your classmates as well.</p>
 </section>
-<section id="installing-rstudio" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="installing-rstudio"><span class="header-section-number">2.2</span> Installing <em>RStudio</em></h2>
+<section id="installing-rstudio" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="installing-rstudio"><span class="header-section-number">1.1.2</span> Installing <em>RStudio</em></h3>
 <p><em>RStudio</em> is a GUI (graphics user interface) that helps make <em>R</em> easier to use. Furthermore, it allows you to create documents in <em>R</em>, including websites (such as this one), PDFs, and even presentations. This can greatly streamline the research pipeline and help you publish your results and associated code in a quick and efficient fashion.</p>
 <p>Head over the the <a href="https://posit.co/downloads/"><em>RStudio</em> download website</a> and download “<em>RStudio</em> Desktop”, which is free. Be sure to pick the correct version for your machine.</p>
 <p>Open <em>RStudio</em> on your machine. You should be presented with something like the following:</p>
@@ -392,13 +393,43 @@ Type 'q()' to quit R.
 </figure>
 </div>
 <p>In <em>RStudio</em>, the top left window is always going to be our coding window. This is where we will type all of our code and create our documents. In the bottom left we will see <em>R</em> executing the code. This will show what the computer is “thinking” and will help us spot any potential issues. The top right window is the “environment”, which shows what variables and datasets are stored within the computers’ memory. (It can also show some other things, but we aren’t concerned with that at this point). The bottom right window is the “display” window. This is where plots and help windows will appear if they don’t appear in the document (top left) window itself.</p>
-<p>Now, we will create our first <em>R</em> document!</p>
+</section>
+<section id="setting-up-the-native-pipe-operator" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="setting-up-the-native-pipe-operator"><span class="header-section-number">1.1.3</span> Setting up the “native pipe” operator</h3>
+<p>There are two ways to type commands in <em>R</em>: in a “nested” fashion and in a “piped” fashion.</p>
+<p>Let’s say that we have a random series of 100 numbers from a random normal distribution, which we can get by running the following:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make repeatable</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># get 100 values from normal</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s say that we want to get the mean of these values <em>and</em> round these values to two decimal places for our final answer. To do this in a nested fashion, we would do the following:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># round mean of x</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(x), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.03</code></pre>
+</div>
+</div>
+<p>This works pretty well, but it can get confusion with so many parentheses over each other. Thus, we can use the “pipe” method instead.</p>
+<p>In <em>RStudio</em>, click on the tabs at the top of the screen to go to Tools &gt; Global Options, and in the pop up screen select Code. On this screen, you should see a tick box for “Use native pipe operator”. Make sure this box is checked. Now, we can use <code>CTRL</code> + <code>SHIFT</code> + <code>M</code> to insert the “pipe” operator <code>|&gt;</code>.</p>
+<p>The pipe operator takes whatever came previous and puts it through the next command. For example, <code>mean(x)</code> could also be written as <code>x |&gt; mean()</code>, where <code>x</code> would be placed inside of <code>mean()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.03</code></pre>
+</div>
+</div>
+<p>As you can see, the above breaks things down into a more step-by-step fashion, and makes code easier to follow.</p>
 </section>
 </section>
-<section id="creating-an-rmarkdown-document" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Creating an <em>RMarkdown</em> document</h1>
-<section id="setup-1" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="setup-1"><span class="header-section-number">3.1</span> Setup</h2>
+<section id="creating-an-rmarkdown-document" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="creating-an-rmarkdown-document"><span class="header-section-number">1.2</span> Creating an <em>RMarkdown</em> document</h2>
+<section id="setup-1" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="setup-1"><span class="header-section-number">1.2.1</span> Setup</h3>
 <p>In this class, we will be creating assignments in what is called <em>RMarkdown</em>. This is a rich-text version of <em>R</em> that allows us to create documents with the code embedded. In <em>RStudio</em>, click the “+” button in the far top left to open the <code>New Document</code> menu. Scroll down this list and click on <code>R Markdown</code>.</p>
 <p>A screen such as this will appear:</p>
 <div class="quarto-figure quarto-figure-center">
@@ -418,8 +449,8 @@ Type 'q()' to quit R.
 <p>Plain text in the document will be rendered as plain text in the document. (I.e., whatever you type normally will become “normal text” in the finished document). Lines preceded with <code>#</code> will become headers, with <code>##</code> being a second level header and <code>###</code> being a third level header, etc. Words can also be made italic by putting an asterisk on each side of the word (<code>*italic*</code>) and bold by putting two asterisks on each side (<code>**bold**</code>). URLs are also supported, with <code>&lt;&gt;</code> on each side of a URL making it clickable, and words being hyperlinked by typing <code>[words to show](target URL)</code>.</p>
 <p>We also have code “chunks” that are shown above. A code chunk can be manually typed out or inserted by pressing <code>CTRL</code> + <code>ALT</code> + <code>I</code> (Windows, Linux) or <code>COMMAND</code> + <code>OPTION</code> + <code>I</code> (Mac). Everything inside a “code chunk” will be read as <em>R</em> code and executed as such. Note that you can have additional commands in the <em>R</em> chunks, but we won’t cover that for now.</p>
 </section>
-<section id="using-code-chunks" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="using-code-chunks"><span class="header-section-number">3.2</span> Using code chunks</h2>
+<section id="using-code-chunks" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="using-code-chunks"><span class="header-section-number">1.2.2</span> Using code chunks</h3>
 <p>In your computer, erase all information except for the <code>yaml</code> header between the dashes on your computer. <code>Save</code> your file in a folder where you want your assignment to be located. It is important you do this step up front as the computer will sometimes save in random places if you don’t specify a file location at the beginning. <em>Don’t forget to save your work frequently</em>!</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -436,11 +467,11 @@ Type 'q()' to quit R.
 </div>
 <p>We can see now that the <code>HTML</code> document has the title of the document, the author’s name, the date on which the code was run, and a greyed-out box with color coded <em>R</em> code followed by the output. Let’s try something a little more complex. Create a new code chunk and type the following:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will create a variable in <em>R</em>, <code>x</code>, that is sequentially each whole number between 1 and 10. We can see this by highlighting or typing only the letter <code>x</code> and running that line of code by clicking <code>CTRL</code> + <code>ENTER</code> (Windows / Linux) or <code>COMMAND</code> + <code>ENTER</code> (Mac).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 </div>
@@ -454,15 +485,15 @@ Type 'q()' to quit R.
 </div>
 <p>Let’s create another vector <code>y</code> that is the squared values of <code>x</code>, such that <span class="math inline">\(y=x^2\)</span>. We can raise values to an exponent by using <code>^</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]   1   4   9  16  25  36  49  64  81 100</code></pre>
 </div>
 </div>
 <p>Now we have the value <code>y</code> in the environment that is the square of the values of <code>x</code>. This is a <code>numeric</code> vector of 10 values numbered 1 to 10 where each value corresponds to a square of the <code>x</code> value. We can raise things to any value however, including <span class="math inline">\(x^x\)</span>!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x<span class="sc">^</span>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>x<span class="sc">^</span>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]           1           4          27         256        3125       46656
  [7]      823543    16777216   387420489 10000000000</code></pre>
@@ -470,48 +501,48 @@ Type 'q()' to quit R.
 </div>
 <p>As we can see, since I didn’t “store” this value as a variable in <em>R</em> using <code>&lt;-</code>, the value is not in the environment.</p>
 </section>
-<section id="plotting" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="plotting"><span class="header-section-number">3.3</span> Plotting</h2>
+<section id="plotting" class="level3" data-number="1.2.3">
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="plotting"><span class="header-section-number">1.2.3</span> Plotting</h3>
 <p>Now, let’s try creating a plot. This is easy in <em>R</em>, as we just use the command <code>plot</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="intro_to_r_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="intro_to_r_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>By specifying the <code>y</code> and <code>x</code> components in <code>plot</code>, we can quickly generate a point plot. We can alter the visual parameters of this plot using a few different commands. I will outline these below with inline notes. Inline notes in the code can be made by using a <code>#</code> symbol before them, which basically tells <em>R</em> to ignore everything after the <code>#</code>. For example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Test"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Test"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Test"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print("Test 2")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print("Test 2")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This prints the word <code>Test</code>, but doesn’t print <code>Test 2</code>.</p>
 <p>Now let’s make the plot with some new visual parameters.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> x, <span class="co"># specify x values</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> y, <span class="co"># specify y values</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Y Values"</span>, <span class="co"># specify Y label</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"X Values"</span>, <span class="co"># specify X label</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Plot Title"</span>, <span class="co"># specify main title</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">19</span>, <span class="co"># adjust point style</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"red"</span>) <span class="co"># make points red</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> x, <span class="co"># specify x values</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> y, <span class="co"># specify y values</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Y Values"</span>, <span class="co"># specify Y label</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"X Values"</span>, <span class="co"># specify X label</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Plot Title"</span>, <span class="co"># specify main title</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">19</span>, <span class="co"># adjust point style</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"red"</span>) <span class="co"># make points red</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="intro_to_r_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="intro_to_r_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="tab-complete" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="tab-complete"><span class="header-section-number">3.4</span> Tab complete</h2>
+<section id="tab-complete" class="level3" data-number="1.2.4">
+<h3 data-number="1.2.4" class="anchored" data-anchor-id="tab-complete"><span class="header-section-number">1.2.4</span> Tab complete</h3>
 <p><em>RStudio</em> allows for “tab-completing” while typing code. Tab-completing is a way of typing the first part of a command, variable name, or file name and hitting “tab” to show all options with that spelling. You should use tab completing because it:</p>
 <ul>
 <li>reduces spelling mistakes</li>
@@ -520,16 +551,16 @@ Type 'q()' to quit R.
 <li>provides help with specific functions</li>
 </ul>
 </section>
-<section id="help" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="help"><span class="header-section-number">3.5</span> Help</h2>
+<section id="help" class="level3" data-number="1.2.5">
+<h3 data-number="1.2.5" class="anchored" data-anchor-id="help"><span class="header-section-number">1.2.5</span> Help</h3>
 <p>At any point in <em>R</em>, you can look up “help” for a specific function by typing <code>?functionname</code>. Try this on your computer with the following:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>?mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>?mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="working-with-data" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Working with data</h1>
+<section id="working-with-data" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="working-with-data"><span class="header-section-number">1.3</span> Working with data</h2>
 <p>Throughout this course, we are going to have to work with datasets that are from our book or other sources. Here, we are going to work through an example dataset. First, we need to install <em>libraries</em>. A <em>library</em> is a collated, pre-existing batch of code that is designed to assist with data analysis or to perform specific functions. These <em>libraries</em> make life a lot easier, and create short commands for completing relatively complex tasks.</p>
 <p>In this class, there is one major library that you will need <em>almost every week</em>! First, we need to install this library:</p>
 <ol type="1">
@@ -537,27 +568,27 @@ Type 'q()' to quit R.
 </ol>
 <p><strong>NOTE: If you leave the install prompts in your RMarkdown document, <em>it will not knit!</em></strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run this code the first time ONLY</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT INCLUDE IN RMD FILE</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># does not need to be run every time you use R!</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># tidyverse has a bunch of packages in it!</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># great for data manipulation</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># if you ever need to update:</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># leaving brackets open means "update everything"</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="fu">update.packages</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run this code the first time ONLY</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT INCLUDE IN RMD FILE</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># does not need to be run every time you use R!</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># tidyverse has a bunch of packages in it!</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># great for data manipulation</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># if you ever need to update:</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># leaving brackets open means "update everything"</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fu">update.packages</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>After packages are installed, we will need to load them into our <em>R</em> environment. While we only need to <code>install.packages</code> once on our machine, we need to load libraries <em>every time we restart the program</em>!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
 ✔ purrr     1.0.2     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
@@ -572,13 +603,13 @@ Type 'q()' to quit R.
 </ol>
 <p>To clarify the conflicts, pretend that you can only know one definition of a word at a time. You may know the word “cola” as a type of soda pop or as a drink in general. However, in Spanish, “cola” refers to a line or a tail. While we can learn both of these definitions and know which one is which because of context, a computer can’t do that. In <em>R</em>, we would then have to specify which “cola” we are referring to. We do this by listing the package before the command; in this case, <code>english::cola</code> would mean a soda pop and <code>spanish::cola</code> would refer to a line or tail. If we just type <code>cola</code>, the computer will assume one of these definitions but not even consider the other.</p>
 <p>We won’t have to deal with conflicts much in this class, and I’ll warn you (or help you) if there is a conflict.</p>
-<section id="downloading-data" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="downloading-data"><span class="header-section-number">4.1</span> Downloading data</h2>
+<section id="downloading-data" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="downloading-data"><span class="header-section-number">1.3.1</span> Downloading data</h3>
 <p>Now, we need to download our first data set. These datasets are stored on GitHub. We are going to be looking at data from Dr.&nbsp;Cooper’s dissertation concerning Afrotropical bird distributions <span class="citation" data-cites="cooper_biogeographic_2021">(<a href="references.html#ref-cooper_biogeographic_2021" role="doc-biblioref">Cooper 2021</a>)</span>. This website is in the data folder on this websites’ GitHub page, <a href="https://github.com/jacobccooper/biol105_unk/blob/main/datasets/lacustrine_range_size.csv">accessible here</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read comma separated file (csv) into R memory</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># reads directly from URL</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>ranges <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/datasets/lacustrine_range_size.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read comma separated file (csv) into R memory</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># reads directly from URL</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>ranges <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/datasets/lacustrine_range_size.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 12 Columns: 10
 ── Column specification ────────────────────────────────────────────────────────
@@ -590,10 +621,10 @@ dbl (9): combined_current_km2, consensus_km2, bioclim_current_km2, 2050_comb...
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-<p>Alternatively, we can use the operator <code>%&gt;%</code> to simplify this process. <code>%&gt;%</code> means “take whatever you got from the previous step and <em>pipe</em> it into the next step”. So, the following does the exact same thing:</p>
+<p>Alternatively, we can use the operator <code>|&gt;</code> to simplify this process. <code>|&gt;</code> means “take whatever you got from the previous step and <em>pipe</em> it into the next step”. So, the following does the exact same thing:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>ranges <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/datasets/lacustrine_range_size.csv"</span> <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ranges <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/datasets/lacustrine_range_size.csv"</span> <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 12 Columns: 10
 ── Column specification ────────────────────────────────────────────────────────
@@ -605,10 +636,10 @@ dbl (9): combined_current_km2, consensus_km2, bioclim_current_km2, 2050_comb...
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-<p>Using the <code>%&gt;%</code> is preferred as you can better set up a workflow and because it more closely mimics other coding languages, such as <code>bash</code>.</p>
+<p>Using the <code>|&gt;</code> is preferred as you can better set up a workflow and because it more closely mimics other coding languages, such as <code>bash</code>.</p>
 <p>Let’s view the data to see if it worked. We can use the command <code>head</code> to view the first few rows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ranges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ranges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 10
   species                combined_current_km2 consensus_km2 bioclim_current_km2
@@ -626,7 +657,7 @@ dbl (9): combined_current_km2, consensus_km2, bioclim_current_km2, 2050_comb...
 </div>
 <p>We can perform a lot of summary statistics in <em>R</em>. Some of these we can view for multiple columns at once using <code>summary</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ranges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ranges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   species          combined_current_km2 consensus_km2     bioclim_current_km2
  Length:12          Min.   :  8770       Min.   :  861.3   Min.   :  3749     
@@ -662,8 +693,8 @@ dbl (9): combined_current_km2, consensus_km2, bioclim_current_km2, 2050_comb...
 </ul>
 <p>We can also calculate some of these statistics manually to see if we are doing everything correctly. It is easiest to do this by using predefined functions in <em>R</em> (code others have written to perform a particular task) or to create our own functions in <em>R</em>. We will do both to determine the average of <code>combined_current_km2</code>.</p>
 </section>
-<section id="subsetting-data" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="subsetting-data"><span class="header-section-number">4.2</span> Subsetting data</h2>
+<section id="subsetting-data" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="subsetting-data"><span class="header-section-number">1.3.2</span> Subsetting data</h3>
 <p>First, we need to select only the column of interest. In <em>R</em>, we have two ways of subsetting data to get a particular column.</p>
 <ul>
 <li><code>var[rows,cols]</code> is a way to look at a particular object (<code>var</code> in this case) and choose a specific combination of <code>row</code> number and <code>column</code> number (<code>col</code>). This is great if you know a specific index, but it is better to use a specific name.</li>
@@ -671,9 +702,9 @@ dbl (9): combined_current_km2, consensus_km2, bioclim_current_km2, 2050_comb...
 <li><code>var$colname</code> is a way to call the specific column name directly from the dataset.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using R functions</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>ranges<span class="sc">$</span>combined_current_km2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using R functions</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>ranges<span class="sc">$</span>combined_current_km2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  25209.4  68171.2  60939.2  27021.3  78679.9   8769.9 232377.2  17401.4
  [9]  51853.5  35455.1  23570.3 187179.1</code></pre>
@@ -681,9 +712,9 @@ dbl (9): combined_current_km2, consensus_km2, bioclim_current_km2, 2050_comb...
 </div>
 <p>As shown above, calling the specific column name with <code>$</code> allows us to see only the data of interest. We can also save these data as an object.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>current_combined <span class="ot">&lt;-</span> ranges<span class="sc">$</span>combined_current_km2</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>current_combined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>current_combined <span class="ot">&lt;-</span> ranges<span class="sc">$</span>combined_current_km2</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>current_combined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  25209.4  68171.2  60939.2  27021.3  78679.9   8769.9 232377.2  17401.4
  [9]  51853.5  35455.1  23570.3 187179.1</code></pre>
@@ -691,23 +722,23 @@ dbl (9): combined_current_km2, consensus_km2, bioclim_current_km2, 2050_comb...
 </div>
 <p>Now that we have it as an object, specifically a numeric vector, we can perform whatever math operations we need to on the dataset.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(current_combined)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(current_combined)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 68052.29</code></pre>
 </div>
 </div>
 <p>Here, we can see the mean for the entire dataset. However, we should always round values to the same number of decimal points as the original data. We can do this with <code>round</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(current_combined),<span class="dv">1</span>) <span class="co"># round mean to one decimal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(current_combined),<span class="dv">1</span>) <span class="co"># round mean to one decimal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 68052.3</code></pre>
 </div>
 </div>
 <p><em>Note</em> that the above has a nested set of commands. We can write this exact same thing as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pipe mean through round</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(current_combined) <span class="sc">%&gt;%</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pipe mean through round</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(current_combined)  <span class="sc">|&gt;</span> </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 68052.3</code></pre>
 </div>
@@ -715,35 +746,35 @@ dbl (9): combined_current_km2, consensus_km2, bioclim_current_km2, 2050_comb...
 <p>Use the method that is easiest for you to follow!</p>
 <p>We can also calculate the mean manually. The mean is <span class="math inline">\(\frac{\sum_{i=1}^nx}{n}\)</span>, or the sum of all the values within a vector divided by the number of values in that vector.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create function</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># use curly brackets to denote function</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># our data goes in place of "x" when finally run</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>our_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  sum_x <span class="ot">&lt;-</span> <span class="fu">sum</span>(x) <span class="co"># sum all values in vector</span></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x) <span class="co"># get length of vector</span></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  xbar <span class="ot">&lt;-</span> sum_x<span class="sc">/</span>n <span class="co"># calcualte mean</span></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(xbar) <span class="co"># return the value outside the function</span></span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create function</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># use curly brackets to denote function</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co"># our data goes in place of "x" when finally run</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>our_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  sum_x <span class="ot">&lt;-</span> <span class="fu">sum</span>(x) <span class="co"># sum all values in vector</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x) <span class="co"># get length of vector</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  xbar <span class="ot">&lt;-</span> sum_x<span class="sc">/</span>n <span class="co"># calculate mean</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(xbar) <span class="co"># return the value outside the function</span></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s try it.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">our_mean</span>(ranges<span class="sc">$</span>combined_current_km2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">our_mean</span>(ranges<span class="sc">$</span>combined_current_km2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 68052.29</code></pre>
 </div>
 </div>
 <p>As we can see, it works just the same as <code>mean</code>! We can round this as well.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">our_mean</span>(ranges<span class="sc">$</span>combined_current_km2) <span class="sc">%&gt;%</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">our_mean</span>(ranges<span class="sc">$</span>combined_current_km2) <span class="sc">|&gt;</span> </span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 68052.3</code></pre>
 </div>
 </div>
 </section>
 </section>
-<section id="your-turn" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Your turn!</h1>
+<section id="your-turn" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">1.4</span> Your turn!</h2>
 <p><strong>With a partner or on your own</strong>, try to do the following:</p>
 <ol type="1">
 <li>Create an <em>RMarkdown document</em> that will save as an <code>.html</code>.</li>

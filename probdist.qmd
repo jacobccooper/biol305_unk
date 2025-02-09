@@ -149,7 +149,7 @@ binom_result <- binom.test(x = 3,
                            n = 10,
                            p = 0.5)
 
-binom_result$p.value %>% round(2)
+binom_result$p.value |> round(2)
 ```
 
 ```{r}
@@ -233,7 +233,7 @@ Above, we can see the probability of each number of successes three and fewer, f
 ```{r}
 dbinom(x = 0:3, 
        size = 10, 
-       prob = 0.5) %>%
+       prob = 0.5) |>
   sum()
 ```
 
@@ -242,8 +242,8 @@ As we can see, we get the same value as for `pbinom`! We can use this method for
 ```{r}
 dbinom(x = 3:6,
        size = 10,
-       prob = 0.5) %>% 
-  sum() %>% 
+       prob = 0.5) |> 
+  sum() |> 
   round(4)
 ```
 
@@ -261,7 +261,7 @@ dpois(x = 0:1,
 Now, let's sum this and subtract it from 1.
 
 ```{r}
-1 - dpois(x = 0:1, lambda = 0.5) %>% 
+1 - dpois(x = 0:1, lambda = 0.5) |> 
   sum()
 ```
 
@@ -271,6 +271,6 @@ The probability is only about 9%.
 
 ### Chapter 5
 
-Complete problems 5.1, 5.2, 5.3, 5.5, 5.6, 5.11, 5.12, 5.13, 5.14, and 5.20 as written in your textbook. 
+Complete problems 5.1, 5.2, 5.3, 5.5, 5.6, 5.11, 5.12, 5.13, 5.14, and 5.20 as written in your textbook.
 
 Be sure to show your work, and submit your assignment as a knitted `html` document.

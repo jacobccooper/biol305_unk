@@ -377,7 +377,7 @@ window.Quarto = {
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>data_expanded <span class="ot">&lt;-</span> <span class="fu">cbind</span>(Blocking_Variable,</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>                       Explanatory_1,</span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>                       Explanatory_2,</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>                       Explanatory_3) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>                       Explanatory_3) <span class="sc">|&gt;</span> </span>
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="co"># create data frame</span></span>
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>data_expanded</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -393,7 +393,7 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># expand to "long" format</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># if not done earlier, convert to data frame</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data_expanded <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data_expanded <span class="sc">|&gt;</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># !by column for aggregating</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># names_to = what to name column aggregation</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># values_to = what the measurements should be called</span></span>
@@ -463,8 +463,8 @@ Group 3-Group 2  1.9666667 -0.2800810 4.213414 0.0745795</code></pre>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change Explanatory_Variables to your data</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>Treatments <span class="ot">&lt;-</span> <span class="fu">unique</span>(data<span class="sc">$</span>Explanatory_Variables)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>sig_labels <span class="ot">&lt;-</span> Treatments <span class="sc">%&gt;%</span> </span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>sig_labels <span class="ot">&lt;-</span> Treatments <span class="sc">|&gt;</span> </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Significance =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(Treatments)))</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Change Explanatory_Variables to your data</span></span>
@@ -575,8 +575,8 @@ Explanatory_3-Explanatory_2 -2.4000000 -4.646748 -0.1532523 0.04063012</code></p
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(Individuals, </span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>                   Visit_1,</span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>                   Visit_2,</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                   Visit_3) <span class="sc">%&gt;%</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                   Visit_3) <span class="sc">|&gt;</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>Individuals,</span>
 <span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Visits"</span>,</span>
 <span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"Measurements"</span>)</span>
@@ -643,11 +643,11 @@ Visits          2     4  89.7895   5e-04</code></pre>
 </div>
 <p>As we can see above, we can get the ANOVA results from this linear mixed-effects model fit to the dataset. Now, we need to know post-hoc which sets are different:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>lme_data <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>lme_data <span class="sc">|&gt;</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># "general linear hypothesis"</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># define a comparison to make</span></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># can add corrections like test = adjusted (type = "bonferroni")</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glht</span>(<span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="at">Visits =</span> <span class="st">"Tukey"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glht</span>(<span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="at">Visits =</span> <span class="st">"Tukey"</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return a summary of the above</span></span>
 <span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -677,7 +677,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>sig_levels_repeated <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="st">"Visit_1"</span>, <span class="st">"A"</span>,</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"Visit_2"</span>, <span class="st">"B"</span>,</span>
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"Visit_3"</span>, <span class="st">"C"</span>), </span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">byrow =</span> T, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">byrow =</span> T, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"># make labels match!</span></span>
 <span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(sig_levels_repeated) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Visits"</span>, <span class="st">"Significance"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -773,9 +773,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 <span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>                       data_expanded3)</span>
 <span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a><span class="co"># expand to "long" format</span></span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data_expanded <span class="sc">%&gt;%</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data_expanded <span class="sc">|&gt;</span></span>
 <span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert to data frame</span></span>
-<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span></span>
 <span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># !by column for aggregating</span></span>
 <span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># names_to = what to name column aggregation</span></span>
 <span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># values_to = what the measurements should be called</span></span>
@@ -918,11 +918,11 @@ Explanatory_3:Group 3-Explanatory_2:Group 3 -1.64694447 0.0001097</code></pre>
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="do">### CREATING DATA FOR EXAMPLE </span></span>
 <span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co"># new set of foods - this time, ten of them</span></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>Treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="st">"Treatment"</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>Treatments <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="st">"Treatment"</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.factor</span>()</span>
 <span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="co"># pre-created data frame of locations from earlier</span></span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>Blocking_Factor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="st">"Block"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>Blocking_Factor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="st">"Block"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.factor</span>()</span>
 <span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>long_data <span class="ot">&lt;-</span> <span class="fu">crossing</span>(Blocking_Factor, Treatments)</span>
@@ -932,7 +932,7 @@ Explanatory_3:Group 3-Explanatory_2:Group 3 -1.64694447 0.0001097</code></pre>
 <span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(<span class="fu">unique</span>(long_data<span class="sc">$</span>Treatments))){</span>
 <span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>  subset_rows <span class="ot">&lt;-</span> <span class="fu">which</span>(long_data<span class="sc">$</span>Treatments<span class="sc">==</span>long_data<span class="sc">$</span>Treatments[i])</span>
 <span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>  long_data<span class="sc">$</span>Measurements[subset_rows] <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="fu">length</span>(subset_rows),</span>
-<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">min =</span> i<span class="dv">-2</span>, <span class="at">max =</span> i<span class="sc">+</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">min =</span> i<span class="dv">-2</span>, <span class="at">max =</span> i<span class="sc">+</span><span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="dv">1</span>)</span>
 <span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a></span>

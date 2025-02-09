@@ -58,7 +58,7 @@ count_table <- matrix(nrow = 4, ncol = 2, byrow = T,
                       data = c("Cat 1", 4,
                                "Cat 2", 8,
                                "Cat 3", 7,
-                               "Cat 4", 3)) %>%
+                               "Cat 4", 3)) |>
   as.data.frame()
 
 colnames(count_table) <- c("Category","Count")
@@ -80,7 +80,7 @@ We can also use the program `ggplot`, part of the `tidyverse`, to create histogr
 
 ```{r}
 # ggplot requires data frames
-x2 <- x %>% as.data.frame()
+x2 <- x |> as.data.frame()
 colnames(x2) <- "x"
 
 ggplot(data = x2, aes(x = x)) +
@@ -101,7 +101,7 @@ x2$cat <- "x"
 
 y <- rnorm(n = 1000,
            mean = 1,
-           sd = 1) %>%
+           sd = 1) |>
   as.data.frame()
 
 colnames(y) <- "x"
