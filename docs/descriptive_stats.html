@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -369,7 +369,7 @@ window.Quarto = {
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
 ✔ purrr     1.0.2     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
@@ -634,7 +634,7 @@ dbl (1): Frap_Num
 </section>
 <section id="mode" class="level3" data-number="2.4.6">
 <h3 data-number="2.4.6" class="anchored" data-anchor-id="mode"><span class="header-section-number">2.4.6</span> Mode</h3>
-<p>There is no default method for finding the mode in <em>R</em>. However, websites like <a href="https://www.statology.org/mode-in-r/">Statology</a> provide wraparound functions.</p>
+<p>There is library for finding the mode in <em>R</em>. However, websites like <a href="https://www.statology.org/mode-in-r/">Statology</a> provide wraparound functions.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Based on Statology function</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co"># define function to calculate mode</span></span>
@@ -752,7 +752,7 @@ dbl (1): Frap_Num
 <div class="cell">
 <div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(diffs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.552714e-15</code></pre>
+<pre><code>[1] 0</code></pre>
 </div>
 </div>
 <p>This is not quite zero due to rounding error, but is essentially zero as it is 0.0000000000000036.</p>
@@ -788,7 +788,7 @@ dbl (1): Frap_Num
 <div class="cell">
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>var_frap <span class="sc">==</span> <span class="fu">var</span>(frap_order)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
+<pre><code>[1] FALSE</code></pre>
 </div>
 </div>
 <p>Seeing as this is <code>TRUE</code>, we calculated it correctly.</p>
@@ -806,7 +806,7 @@ dbl (1): Frap_Num
 <div class="cell">
 <div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(var_frap) <span class="sc">==</span> <span class="fu">sd</span>(frap_order)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
+<pre><code>[1] FALSE</code></pre>
 </div>
 </div>
 <p>As you can see, we calculated this correctly!</p>
@@ -840,20 +840,21 @@ SE = \frac{\sigma}{\sqrt{n}}
 <h3 data-number="2.4.10" class="anchored" data-anchor-id="coefficient-of-variation"><span class="header-section-number">2.4.10</span> Coefficient of variation</h3>
 <p>The coefficient of variation, another measure of data spread and location, is calculated by the following:</p>
 <p><span class="math display">\[
-CV = \frac{\sigma}{\mu}
+CV = \frac{\sigma}{\mu}*100
 \]</span></p>
 <p>We can write a function to calculate this in <em>R</em> as well.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>cv <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
 <span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  sigma <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
 <span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
-<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>  val <span class="ot">&lt;-</span> sigma<span class="sc">/</span>mu</span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>  val <span class="ot">&lt;-</span> sigma<span class="sc">/</span>mu<span class="sc">*</span><span class="dv">100</span></span>
 <span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(val)</span>
 <span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-8"><a href="#cb84-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cv</span>(frap_order)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb84-8"><a href="#cb84-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cv</span>(frap_order) <span class="sc">|&gt;</span> </span>
+<span id="cb84-9"><a href="#cb84-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7945927</code></pre>
+<pre><code>[1] 79.46</code></pre>
 </div>
 </div>
 <p><em>Remember</em> that we will need to round values.</p>

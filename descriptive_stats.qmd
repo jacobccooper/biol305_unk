@@ -228,9 +228,9 @@ This is a classic example of how things in *R* (and in statistics in general!) c
 
 **In this class, we will be using Type 6 interpretation for the quantiles - you will have to specify this in the quantile function EVERY TIME!** If you do *not* specify Type 6, you will get the questions incorrect and you will get answers that do not agree with the book, with Excel, or what you calculate by hand.
 
-### Mode
+### Mode 
 
-There is no default method for finding the mode in *R*. However, websites like [Statology](https://www.statology.org/mode-in-r/) provide wraparound functions.
+There is library for finding the mode in *R*. However, websites like [Statology](https://www.statology.org/mode-in-r/) provide wraparound functions.
 
 ```{r}
 # Based on Statology function
