@@ -1,6 +1,6 @@
 ---
 title: "Descriptive Statistics"
-author: "Dr. Jacob C. Cooper"
+author: "Dr. Jacob C. Cooper and Caleb Rother"
 format: html
 editor: visual
 ---
@@ -228,49 +228,25 @@ This is a classic example of how things in *R* (and in statistics in general!) c
 
 **In this class, we will be using Type 6 interpretation for the quantiles - you will have to specify this in the quantile function EVERY TIME!** If you do *not* specify Type 6, you will get the questions incorrect and you will get answers that do not agree with the book, with Excel, or what you calculate by hand.
 
-### Mode 
+### Mode
 
-There is library for finding the mode in *R*. However, websites like [Statology](https://www.statology.org/mode-in-r/) provide wraparound functions.
-
-```{r}
-# Based on Statology function
-# define function to calculate mode
-find_mode <- function(x) {
-  # get unique values from vector
-  u <- unique(x)
-  # count number of occurrences for each value
-  tab <- tabulate(match(x, u))
-  
-  # if no mode, say so
-  if(length(x)==length(u[tab == max(tab)])){
-    print("No mode.")
-  }else{
-    # return the value with the highest count
-    u[tab == max(tab)]
-  }
-}
-
-find_mode(fraps)
-```
-
-We can also do this by hand, by counting the number of occurrences of each value. This can be done in a stepwise fashion using commands in the above function.
+There is no default code to find the mode in *R*. We can do this by hand, by counting the number of occurrences of each value as shown below.
 
 ```{r}
 # unique counts
-u <- unique(fraps)
+u <- unique(fraps) 
 u
 ```
 
 ```{r}
-# which elements match
+# which elements match 
 match(fraps,u)
 ```
 
 ```{r}
-# count them
-tab <- match(fraps,u) |>
-  tabulate()
-
+# count them 
+tab <- match(fraps,u) |> 
+  tabulate()  
 tab
 ```
 
@@ -316,11 +292,39 @@ This allows you to find how many arguments match your condition quickly, and eve
 
 -   `!`: not, so "not equal to" would be `!=`.
 
+However, the library *DescTools* has many missing basic statistical functions, including **Mode()**. Use this method in your codeto reduce clutter and make the code run faster.
+
+```{r}
+# Install package (remove the hashtag to perform this)
+#install.packages('DescTools')  
+```
+
+```{r}
+#Load the package  
+library(DescTools)  
+
+#Run the function  
+Mode(fraps)  
+###Note the capitalization of mode###
+```
+
+The output of this function is three lines. In our case it reads:
+
+```         
+[1] 2
+attr(,"freq") 
+[1] 3
+```
+
+The **first number** is the mode; in our case, two is our mode. The second line is the computer telling us that our second number is the frequency of our first number. In our case, that means our mode, which is two, appears three times. There are three twos.
+
+If there are two or more modes, these numbers will also appear in the first line of the output.
+
 ### Variance
 
 When we are dealing with datasets, the variance is a measure of the total spread of the data. The variance is calculated using the following:$$\sigma^2=\frac{\sum (x_i-\bar{x})^2}{n-1}$$
 
-Essentially, this means that for every value of $x$, we are finding the difference between that value and the mean and squaring it, summing all of these quared differences, and dividing them by the number of samples in the dataset minus one. Let's do this for the frappuccino dataset.
+Essentially, this means that for every value of $x$, we are finding the difference between that value and the mean and squaring it, summing all of these squared differences, and dividing them by the number of samples in the dataset minus one. Let's do this for the frappuccino dataset.
 
 ```{r}
 frap_order
@@ -397,24 +401,11 @@ $$
 SE = \frac{\sigma}{\sqrt{n}}
 $$
 
-There is not built in function for the standard error in excel, but we can write our own:
+There is not a built in function for standard error in *R*, but we can use *DescTools*.
 
 ```{r}
-se <- function(x){
-  n <- length(x) # calculate n
-  s <- sd(x) # calculate standard deviation
-  se_val <- s/sqrt(n)
-  return(se_val)
-}
+MeanSE(frap_order)
 ```
-
-Let's test this code.
-
-```{r}
-se(frap_order)
-```
-
-Our code works! And we can see exactly how the standard error is calculate. We can also adjust this code as needed for different situations, like samples.
 
 **Remember**, the standard error is used to help reflect our *confidence* in a specific measurement (*e.g.*, how certain we are of the mean, and what values we believe the mean falls between). We want our estimates to be as precise as possible with as little uncertainty as possible. Given this, does having more samples make our estimates more or less confident? Mathematically, what happens as our sample size *increases*?
 
@@ -426,7 +417,7 @@ $$
 CV = \frac{\sigma}{\mu}*100
 $$
 
-We can write a function to calculate this in *R* as well.
+If we were to calculate this by hand, it would be done with this function:
 
 ```{r}
 cv <- function(x){
@@ -438,9 +429,15 @@ cv <- function(x){
 
 cv(frap_order) |> 
   round(2)
+#Remember that we will need to round values.
 ```
 
-*Remember* that we will need to round values.
+However, we can also complete this with a *DescTools* function.
+
+```{r}
+(CoefVar(frap_order)*100) |> 
+  round(2)
+```
 
 ### Outliers
 
@@ -480,6 +477,14 @@ frap_order[which(frap_order > hibound)]
 ```
 
 We have no outliers for this particular dataset.
+
+This can also be done with *DescTools*.
+
+```{r}
+Outlier(frap_order)
+```
+
+Again, there are no outliers as this code is effectively the same. If there are, it will return all outliers, but not indicate if they are high or low. This can be solved by comparing the returned outlier to the mean. If it is above the mean, it is a high outlier, and vice versa.
 
 ## Homework: Descriptive Statistics
 
