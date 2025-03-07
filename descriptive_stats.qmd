@@ -423,7 +423,7 @@ Our code works! And we can see exactly how the standard error is calculate. We c
 The coefficient of variation, another measure of data spread and location, is calculated by the following:
 
 $$
-CV = \frac{\sigma}{\mu}
+CV = \frac{\sigma}{\mu}*100
 $$
 
 We can write a function to calculate this in *R* as well.
@@ -432,11 +432,12 @@ We can write a function to calculate this in *R* as well.
 cv <- function(x){
   sigma <- sd(x)
   mu <- mean(x)
-  val <- sigma/mu
+  val <- sigma/mu*100
   return(val)
 }
 
-cv(frap_order)
+cv(frap_order) |> 
+  round(2)
 ```
 
 *Remember* that we will need to round values.
