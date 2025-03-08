@@ -234,7 +234,7 @@ There is no default code to find the mode in *R*. We can do this by hand, by cou
 
 <details>
 
-<summary>Click to expand code and explanation</summary>
+<summary>Click to see manual method</summary>
 
 ```{r}
 # unique counts
@@ -284,8 +284,6 @@ and
 sum(2==3)
 ```
 
-</details>
-
 This allows you to find how many arguments match your condition quickly, and even allows you to subset based on these indices as well. Keep in mind you can use greater than `<`, less than `>`, greater than or equal to `<=`, less than or equal to `>=`, is equal to `==`, and is not equal to `!=` to identify numerical relationships. Other logical arguments include:
 
 -   `&`: both conditions must be `TRUE` to match (e.g., `c(10,20) & c(20,10)`). Try the following as well: `fraps < 10 & fraps > 3`.
@@ -297,6 +295,12 @@ This allows you to find how many arguments match your condition quickly, and eve
 -   `||`: or, but for a single element, like `&&` above.
 
 -   `!`: not, so "not equal to" would be `!=`.
+
+    </details>
+
+    <details>
+
+    <summary>Click to see DescTools method</summary>
 
 However, the library *DescTools* has many missing basic statistical functions, including **Mode()**. Use this method in your code to reduce clutter and make the code run faster.
 
@@ -321,9 +325,13 @@ The **first number** is the mode; in our case, two is our mode. The second line 
 
 If there are two or more modes, these numbers will also appear in the first line of the output.
 
+</details>
+
 ### Variance
 
-When we are dealing with datasets, the variance is a measure of the total spread of the data. The variance is calculated using the following:$$\sigma^2=\frac{\sum (x_i-\bar{x})^2}{n-1}$$
+When we are dealing with datasets, the variance is a measure of the total spread of the data. The variance is calculated using the following:
+
+$$\sigma^2=\frac{\sum (x_i-\bar{x})^2}{n-1}$$
 
 Essentially, this means that for every value of $x$, we are finding the difference between that value and the mean and squaring it, summing all of these squared differences, and dividing them by the number of samples in the dataset minus one. Let's do this for the frappuccino dataset.
 
@@ -386,7 +394,13 @@ Another common measurement of spread is the standard deviation ($\sigma$). As yo
 sqrt(var_frap)
 ```
 
-We can test this against the built in `sd` function in *R*:
+There is also the built in sd function in R:
+
+```{r}
+sd(frap_order)
+```
+
+We can test the manual method against the built in `sd` function in *R*:
 
 ```{r}
 sqrt(var_frap) == sd(frap_order)
@@ -442,6 +456,10 @@ However, we can also complete this with a *DescTools* function.
 
 ### Outliers
 
+<details>
+
+<summary>Click to see manual method</summary>
+
 Outliers are any values that are outside of the 1.5 times the interquartile range. We can calculate this for our example dataset as follows:
 
 ```{r}
@@ -451,6 +469,12 @@ hiquant <- quantile(frap_order,0.75,type = 6) |> as.numeric()
 
 iqr <- hiquant - lowquant
 ```
+
+</details>
+
+<details>
+
+<summary>Click to see IQR method</summary>
 
 We can also calculate the interquartile range using `IQR`. **Remember**, you must use `type = 6`!
 
@@ -479,6 +503,12 @@ frap_order[which(frap_order > hibound)]
 
 We have no outliers for this particular dataset.
 
+</details>
+
+<details>
+
+<summary>Click to see DescTools method</summary>
+
 This can also be done with *DescTools*.
 
 ```{r}
@@ -486,6 +516,8 @@ Outlier(frap_order)
 ```
 
 Again, there are no outliers as this code is effectively the same. If there are, it will return all outliers, but not indicate if they are high or low. This can be solved by comparing the returned outlier to the mean. If it is above the mean, it is a high outlier, and vice versa.
+
+</details>
 
 ## Homework: Descriptive Statistics
 
