@@ -232,6 +232,10 @@ This is a classic example of how things in *R* (and in statistics in general!) c
 
 There is no default code to find the mode in *R*. We can do this by hand, by counting the number of occurrences of each value as shown below.
 
+<details>
+
+<summary>Click to expand code and explanation</summary>
+
 ```{r}
 # unique counts
 u <- unique(fraps) 
@@ -280,6 +284,8 @@ and
 sum(2==3)
 ```
 
+</details>
+
 This allows you to find how many arguments match your condition quickly, and even allows you to subset based on these indices as well. Keep in mind you can use greater than `<`, less than `>`, greater than or equal to `<=`, less than or equal to `>=`, is equal to `==`, and is not equal to `!=` to identify numerical relationships. Other logical arguments include:
 
 -   `&`: both conditions must be `TRUE` to match (e.g., `c(10,20) & c(20,10)`). Try the following as well: `fraps < 10 & fraps > 3`.
@@ -292,12 +298,7 @@ This allows you to find how many arguments match your condition quickly, and eve
 
 -   `!`: not, so "not equal to" would be `!=`.
 
-However, the library *DescTools* has many missing basic statistical functions, including **Mode()**. Use this method in your codeto reduce clutter and make the code run faster.
-
-```{r}
-# Install package (remove the hashtag to perform this)
-#install.packages('DescTools')  
-```
+However, the library *DescTools* has many missing basic statistical functions, including **Mode()**. Use this method in your code to reduce clutter and make the code run faster.
 
 ```{r}
 #Load the package  
