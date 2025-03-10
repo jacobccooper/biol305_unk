@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.56">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -139,7 +139,7 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># allows for internet downloading</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(curl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Using libcurl 8.7.1 with LibreSSL/3.3.6</code></pre>
+<pre><code>Using libcurl 8.3.0 with Schannel</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># enables data management tools</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -242,7 +242,7 @@ window.Quarto = {
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Range: "</span>, <span class="fu">round</span>(<span class="fu">max</span>(x) <span class="sc">-</span> <span class="fu">min</span>(x),roundval)))</span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get IQRs, use method of book!</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  quantiles_x <span class="ot">&lt;-</span> <span class="fu">quantile</span>(x, <span class="at">type =</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>()</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  quantiles_x <span class="ot">&lt;-</span> <span class="fu">quantile</span>(x, <span class="at">type =</span> <span class="dv">6</span>) <span class="sc">|&gt;</span> <span class="fu">as.numeric</span>()</span>
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get 25th and 75th quantiles</span></span>
 <span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"IQR: "</span>,<span class="fu">round</span>(quantiles_x[<span class="dv">4</span>] <span class="sc">-</span> quantiles_x[<span class="dv">2</span>],roundval)))</span>
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -254,18 +254,18 @@ window.Quarto = {
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate coefficient of variation</span></span>
 <span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># use previously defined function</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"CV: "</span>,<span class="fu">round</span>(<span class="fu">cv</span>(x),roundval)))</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"CV: "</span>,<span class="fu">round</span>((<span class="fu">cv</span>(x)<span class="sc">*</span><span class="dv">100</span>),roundval)))</span>
 <span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate standard error</span></span>
 <span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># use previously defined function</span></span>
 <span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"SE: "</span>, <span class="fu">round</span>(<span class="fu">se</span>(x),roundval)))</span>
 <span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate 25th quantile</span></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>  lowquant <span class="ot">&lt;-</span> <span class="fu">quantile</span>(x,<span class="fl">0.25</span>,<span class="at">type =</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>  lowquant <span class="ot">&lt;-</span> <span class="fu">quantile</span>(x,<span class="fl">0.25</span>,<span class="at">type =</span> <span class="dv">6</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.numeric</span>() <span class="co"># convert to numeric</span></span>
 <span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate 75th quantile</span></span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>  hiquant <span class="ot">&lt;-</span> <span class="fu">quantile</span>(x,<span class="fl">0.75</span>,<span class="at">type =</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>  hiquant <span class="ot">&lt;-</span> <span class="fu">quantile</span>(x,<span class="fl">0.75</span>,<span class="at">type =</span> <span class="dv">6</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.numeric</span>() <span class="co"># convert to numeric</span></span>
 <span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get the IQR</span></span>
@@ -309,7 +309,7 @@ window.Quarto = {
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="dv">2023</span><span class="sc">:</span><span class="dv">2013</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>nebraskans_years <span class="ot">&lt;-</span> <span class="fu">cbind</span>(years,nebraskans) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>nebraskans_years <span class="ot">&lt;-</span> <span class="fu">cbind</span>(years,nebraskans) <span class="sc">|&gt;</span> </span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>nebraskans_years</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -339,7 +339,7 @@ window.Quarto = {
 [1] "IQR: 331"
 [1] "Variance: 42404"
 [1] "SD: 206"
-[1] "CV: 0"
+[1] "CV: 4"
 [1] "SE: 62"
 [1] "No low outliers."
 [1] "No high outliers."</code></pre>
@@ -355,7 +355,7 @@ window.Quarto = {
 <p>The following is a dataset looking at oceanic conditions and other variables associated with pirate attacks within the region between 2010 and 2021 <span class="citation" data-cites="Moura2023">[@Moura2023]</span>. Using these data, please calculate the mean, median, range, interquartile range, variance, standard deviation, coefficient of variation, standard error, and whether there are any “outliers” for distance from shore for each pirate attack (columns <code>Distance_from_Coast</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>url_file <span class="ot">&lt;-</span> <span class="fu">curl</span>(<span class="st">"https://figshare.com/ndownloader/files/42314604"</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pirates <span class="ot">&lt;-</span> url_file <span class="sc">%&gt;%</span> <span class="fu">read_csv</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pirates <span class="ot">&lt;-</span> url_file <span class="sc">|&gt;</span> <span class="fu">read_csv</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>New names:
 Rows: 595 Columns: 40
@@ -379,7 +379,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 [1] "IQR: 43.5"
 [1] "Variance: 2502.82"
 [1] "SD: 50.03"
-[1] "CV: 1.49"
+[1] "CV: 148.99"
 [1] "SE: 2.05"
 [1] "No low outliers."
 [1] "High outlier(s):"
@@ -402,7 +402,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>url_file <span class="ot">&lt;-</span> <span class="fu">curl</span>(<span class="st">"https://doi.org/10.1371/journal.pcbi.1007838.s006"</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> url_file <span class="sc">%&gt;%</span> <span class="fu">read_csv</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> url_file <span class="sc">|&gt;</span> <span class="fu">read_csv</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 17150 Columns: 2
 ── Column specification ────────────────────────────────────────────────────────
@@ -431,7 +431,7 @@ dbl (1): time_difference
 [1] "IQR: 32.0026956"
 [1] "Variance: 2526.193286"
 [1] "SD: 50.2612503"
-[1] "CV: 1.5312299"
+[1] "CV: 153.122988"
 [1] "SE: 0.3837967"
 [1] "No low outliers."
 [1] "High outlier(s):"

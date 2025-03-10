@@ -108,7 +108,7 @@ key_maker <- function(x, # specify data
   
   # calculate coefficient of variation
   # use previously defined function
-  print(paste0("CV: ",round(cv(x),roundval)))
+  print(paste0("CV: ",round((cv(x)*100),roundval)))
   
   # calculate standard error
   # use previously defined function
