@@ -305,7 +305,8 @@ This allows you to find how many arguments match your condition quickly, and eve
 However, the library *DescTools* has many missing basic statistical functions, including **Mode()**. Use this method in your code to reduce clutter and make the code run faster.
 
 ```{r}
-#Load the package  
+#Load the package
+#Must be loaded each time it is used
 library(DescTools)  
 
 #Run the function  

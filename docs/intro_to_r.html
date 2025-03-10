@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Dr.&nbsp;Jacob C. Cooper, UNK">
+<meta name="author" content="UNK Biology">
 
 <title>1&nbsp; Intro to R – Biology 305: Biostatistics</title>
 <style>
@@ -340,7 +340,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Dr.&nbsp;Jacob C. Cooper, UNK </p>
+             <p>UNK Biology </p>
           </div>
   </div>
     
@@ -360,7 +360,7 @@ window.Quarto = {
 <section id="installing-r" class="level3" data-number="1.1.1">
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="installing-r"><span class="header-section-number">1.1.1</span> Installing <em>R</em></h3>
 <p>First, navigate to the <a href="https://cloud.r-project.org/"><em>R</em> download and install page</a>. Download the appropriate version for your operating system (Windows, Mac, or Linux). <strong>Note</strong> that coding will be formatted slightly different for Windows than for other operating systems. If you have a Chromebook, you will have to <a href="https://levente.littvay.hu/chromebook/">follow the online instructions for installing both programs on Chrome</a>.</p>
-<p>Follow the installation steps for <em>R</em>, and verify that the installation was successful by searching for <em>R</em> on your machine. You should be presented with a coding window that looks like the following:</p>
+<p>Follow the installation steps for <em>R</em>, and verify that the installation was successful by searching for <em>R</em> on your machine. You should be presented with a coding window that looks like the following, but may not be an exact match:</p>
 <pre><code>R version 4.4.1 (2024-06-14) -- "Race for Your Life"
 Copyright (C) 2024 The R Foundation for Statistical Computing
 Platform: aarch64-apple-darwin20
@@ -380,7 +380,7 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 &gt;</code></pre>
-<p>If that screen appears, congratulations! <em>R</em> is properly installed. If the install was not successful, please talk to Dr.&nbsp;Cooper and check with your classmates as well.</p>
+<p>If that screen appears, congratulations! <em>R</em> is properly installed. If the install was not successful, please talk to your instructor and teaching assistant(s) for help with installation.</p>
 </section>
 <section id="installing-rstudio" class="level3" data-number="1.1.2">
 <h3 data-number="1.1.2" class="anchored" data-anchor-id="installing-rstudio"><span class="header-section-number">1.1.2</span> Installing <em>RStudio</em></h3>
@@ -424,7 +424,7 @@ Type 'q()' to quit R.
 <pre><code>[1] 0.03</code></pre>
 </div>
 </div>
-<p>As you can see, the above breaks things down into a more step-by-step fashion, and makes code easier to follow.</p>
+<p>As you can see, the above breaks things down into a more step-by-step fashion, and makes code easier to follow. We will be using this extensively in this course.</p>
 </section>
 </section>
 <section id="creating-an-rmarkdown-document" class="level2" data-number="1.2">
@@ -452,7 +452,8 @@ Type 'q()' to quit R.
 </section>
 <section id="using-code-chunks" class="level3" data-number="1.2.2">
 <h3 data-number="1.2.2" class="anchored" data-anchor-id="using-code-chunks"><span class="header-section-number">1.2.2</span> Using code chunks</h3>
-<p>In your computer, erase all information except for the <code>yaml</code> header between the dashes on your computer. <code>Save</code> your file in a folder where you want your assignment to be located. It is important you do this step up front as the computer will sometimes save in random places if you don’t specify a file location at the beginning. <em>Don’t forget to save your work frequently</em>!</p>
+<p>In your computer, erase all information except for the <code>yaml</code> header between the dashes at the top of the document. <code>Save</code> your file in a folder where you want your assignment to be located. It is important you do this step up front as the computer will sometimes save in random places if you don’t specify a file location at the beginning. <em>Don’t forget to save your work frequently</em>!</p>
+<p>After clearing the document, type the following at the top, exactly as shown. You can insert a code chunk (the <code>{r}</code> part framing the code with hashes before and after) by clicking <code>CTRL</code>+<code>ALT</code>+<code>I</code> (<code>CMD</code>+<code>OPT</code>+<code>I</code> on a Mac).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/test_text.png" class="img-fluid figure-img"></p>

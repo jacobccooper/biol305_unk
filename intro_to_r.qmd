@@ -1,6 +1,6 @@
 ---
 title: "Intro to *R*"
-author: "Dr. Jacob C. Cooper, UNK"
+author: "UNK Biology"
 ---
 
 In this class, we will be using *R* to perform statistical analyses. *R* is a free software program designed for use in a myriad of statistical and computational scenarios. It can handle extremely large datasets, can handle spatial data, and has wrappers for compatibility with *Python*, *Bash*, and other programs (even *Java*!).
@@ -13,7 +13,7 @@ First, we need to download *R* onto your machine. We are also going to download 
 
 First, navigate to the [*R* download and install page](https://cloud.r-project.org/). Download the appropriate version for your operating system (Windows, Mac, or Linux). **Note** that coding will be formatted slightly different for Windows than for other operating systems. If you have a Chromebook, you will have to [follow the online instructions for installing both programs on Chrome](https://levente.littvay.hu/chromebook/).
 
-Follow the installation steps for *R*, and verify that the installation was successful by searching for *R* on your machine. You should be presented with a coding window that looks like the following:
+Follow the installation steps for *R*, and verify that the installation was successful by searching for *R* on your machine. You should be presented with a coding window that looks like the following, but may not be an exact match:
 
 ```         
 R version 4.4.1 (2024-06-14) -- "Race for Your Life"
@@ -37,7 +37,7 @@ Type 'q()' to quit R.
 >
 ```
 
-If that screen appears, congratulations! *R* is properly installed. If the install was not successful, please talk to Dr. Cooper and check with your classmates as well.
+If that screen appears, congratulations! *R* is properly installed. If the install was not successful, please talk to your instructor and teaching assistant(s) for help with installation.
 
 ### Installing *RStudio*
 
@@ -83,7 +83,7 @@ x |>
   round(2)
 ```
 
-As you can see, the above breaks things down into a more step-by-step fashion, and makes code easier to follow.
+As you can see, the above breaks things down into a more step-by-step fashion, and makes code easier to follow. We will be using this extensively in this course.
 
 ## Creating an *RMarkdown* document
 
@@ -107,7 +107,9 @@ We also have code "chunks" that are shown above. A code chunk can be manually ty
 
 ### Using code chunks
 
-In your computer, erase all information except for the `yaml` header between the dashes on your computer. `Save` your file in a folder where you want your assignment to be located. It is important you do this step up front as the computer will sometimes save in random places if you don't specify a file location at the beginning. *Don't forget to save your work frequently*!
+In your computer, erase all information except for the `yaml` header between the dashes at the top of the document. `Save` your file in a folder where you want your assignment to be located. It is important you do this step up front as the computer will sometimes save in random places if you don't specify a file location at the beginning. *Don't forget to save your work frequently*!
+
+After clearing the document, type the following at the top, exactly as shown. You can insert a code chunk (the `{r}` part framing the code with hashes before and after) by clicking `CTRL`+`ALT`+`I` (`CMD`+`OPT`+`I` on a Mac).
 
 ![Text to type in your *Rmarkdown* document.](images/test_text.png)
 
