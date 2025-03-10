@@ -196,6 +196,8 @@ At any point in *R*, you can look up "help" for a specific function by typing `?
 
 Throughout this course, we are going to have to work with datasets that are from our book or other sources. Here, we are going to work through an example dataset. First, we need to install *libraries*. A *library* is a collated, pre-existing batch of code that is designed to assist with data analysis or to perform specific functions. These *libraries* make life a lot easier, and create short commands for completing relatively complex tasks.
 
+### Libraries
+
 In this class, there is one major library that you will need *almost every week*! First, we need to install this library:
 
 1.  `tidyverse`: this package is actually a [group of packages](https://www.tidyverse.org/) designed to help with data analysis, management, and visualization.
@@ -216,16 +218,20 @@ install.packages("tidyverse")
 update.packages()
 ```
 
-After packages are installed, we will need to load them into our *R* environment. While we only need to `install.packages` once on our machine, we need to load libraries *every time we restart the program*!
+**NOTE: The following is required in EVERY DOCUMENT that uses the `tidyverse` commands!**
+
+After packages are installed, we will need to load them into our *R* environment. While we only need to do `install.packages` once on our machine, **we need to load libraries *every time we restart the program!***
 
 ```{r}
 library(tidyverse)
 ```
 
-You should an output like the above. What this means is:
+You should have an output like the above. What this means is:
 
 1.  The core packages that comprise the tidyverse loaded successfully, and version numbers for each are shown.
 2.  The conflicts basically means that certain commands will not work as they used to because *R* has "re-learned" a particular word.
+
+#### Conflicts
 
 To clarify the conflicts, pretend that you can only know one definition of a word at a time. You may know the word "cola" as a type of soda pop or as a drink in general. However, in Spanish, "cola" refers to a line or a tail. While we can learn both of these definitions and know which one is which because of context, a computer can't do that. In *R*, we would then have to specify which "cola" we are referring to. We do this by listing the package before the command; in this case, `english::cola` would mean a soda pop and `spanish::cola` would refer to a line or tail. If we just type `cola`, the computer will assume one of these definitions but not even consider the other.
 

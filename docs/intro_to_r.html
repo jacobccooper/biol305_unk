@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -317,8 +317,9 @@ window.Quarto = {
   </ul></li>
   <li><a href="#working-with-data" id="toc-working-with-data" class="nav-link" data-scroll-target="#working-with-data"><span class="header-section-number">1.3</span> Working with data</a>
   <ul class="collapse">
-  <li><a href="#downloading-data" id="toc-downloading-data" class="nav-link" data-scroll-target="#downloading-data"><span class="header-section-number">1.3.1</span> Downloading data</a></li>
-  <li><a href="#subsetting-data" id="toc-subsetting-data" class="nav-link" data-scroll-target="#subsetting-data"><span class="header-section-number">1.3.2</span> Subsetting data</a></li>
+  <li><a href="#libraries" id="toc-libraries" class="nav-link" data-scroll-target="#libraries"><span class="header-section-number">1.3.1</span> Libraries</a></li>
+  <li><a href="#downloading-data" id="toc-downloading-data" class="nav-link" data-scroll-target="#downloading-data"><span class="header-section-number">1.3.2</span> Downloading data</a></li>
+  <li><a href="#subsetting-data" id="toc-subsetting-data" class="nav-link" data-scroll-target="#subsetting-data"><span class="header-section-number">1.3.3</span> Subsetting data</a></li>
   </ul></li>
   <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">1.4</span> Your turn!</a></li>
   </ul>
@@ -562,6 +563,8 @@ Type 'q()' to quit R.
 <section id="working-with-data" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="working-with-data"><span class="header-section-number">1.3</span> Working with data</h2>
 <p>Throughout this course, we are going to have to work with datasets that are from our book or other sources. Here, we are going to work through an example dataset. First, we need to install <em>libraries</em>. A <em>library</em> is a collated, pre-existing batch of code that is designed to assist with data analysis or to perform specific functions. These <em>libraries</em> make life a lot easier, and create short commands for completing relatively complex tasks.</p>
+<section id="libraries" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="libraries"><span class="header-section-number">1.3.1</span> Libraries</h3>
 <p>In this class, there is one major library that you will need <em>almost every week</em>! First, we need to install this library:</p>
 <ol type="1">
 <li><code>tidyverse</code>: this package is actually a <a href="https://www.tidyverse.org/">group of packages</a> designed to help with data analysis, management, and visualization.</li>
@@ -580,7 +583,8 @@ Type 'q()' to quit R.
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># leaving brackets open means "update everything"</span></span>
 <span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fu">update.packages</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>After packages are installed, we will need to load them into our <em>R</em> environment. While we only need to <code>install.packages</code> once on our machine, we need to load libraries <em>every time we restart the program</em>!</p>
+<p><strong>NOTE: The following is required in EVERY DOCUMENT that uses the <code>tidyverse</code> commands!</strong></p>
+<p>After packages are installed, we will need to load them into our <em>R</em> environment. While we only need to do <code>install.packages</code> once on our machine, <strong>we need to load libraries <em>every time we restart the program!</em></strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -588,7 +592,7 @@ Type 'q()' to quit R.
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
 ✔ purrr     1.0.2     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
@@ -596,16 +600,20 @@ Type 'q()' to quit R.
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 </div>
-<p>You should an output like the above. What this means is:</p>
+<p>You should have an output like the above. What this means is:</p>
 <ol type="1">
 <li>The core packages that comprise the tidyverse loaded successfully, and version numbers for each are shown.</li>
 <li>The conflicts basically means that certain commands will not work as they used to because <em>R</em> has “re-learned” a particular word.</li>
 </ol>
+<section id="conflicts" class="level4" data-number="1.3.1.1">
+<h4 data-number="1.3.1.1" class="anchored" data-anchor-id="conflicts"><span class="header-section-number">1.3.1.1</span> Conflicts</h4>
 <p>To clarify the conflicts, pretend that you can only know one definition of a word at a time. You may know the word “cola” as a type of soda pop or as a drink in general. However, in Spanish, “cola” refers to a line or a tail. While we can learn both of these definitions and know which one is which because of context, a computer can’t do that. In <em>R</em>, we would then have to specify which “cola” we are referring to. We do this by listing the package before the command; in this case, <code>english::cola</code> would mean a soda pop and <code>spanish::cola</code> would refer to a line or tail. If we just type <code>cola</code>, the computer will assume one of these definitions but not even consider the other.</p>
 <p>We won’t have to deal with conflicts much in this class, and I’ll warn you (or help you) if there is a conflict.</p>
-<section id="downloading-data" class="level3" data-number="1.3.1">
-<h3 data-number="1.3.1" class="anchored" data-anchor-id="downloading-data"><span class="header-section-number">1.3.1</span> Downloading data</h3>
-<p>Now, we need to download our first data set. These datasets are stored on GitHub. We are going to be looking at data from Dr.&nbsp;Cooper’s dissertation concerning Afrotropical bird distributions <span class="citation" data-cites="cooper_biogeographic_2021">(<a href="#ref-cooper_biogeographic_2021" role="doc-biblioref">Cooper 2021</a>)</span>. This website is in the data folder on this websites’ GitHub page, <a href="https://github.com/jacobccooper/biol105_unk/blob/main/datasets/lacustrine_range_size.csv">accessible here</a>.</p>
+</section>
+</section>
+<section id="downloading-data" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="downloading-data"><span class="header-section-number">1.3.2</span> Downloading data</h3>
+<p>Now, we need to download our first data set. These datasets are stored on GitHub. We are going to be looking at data from Dr.&nbsp;Cooper’s dissertation concerning Afrotropical bird distributions <span class="citation" data-cites="cooper_biogeographic_2021">(<a href="references.html#ref-cooper_biogeographic_2021" role="doc-biblioref">Cooper 2021</a>)</span>. This website is in the data folder on this websites’ GitHub page, <a href="https://github.com/jacobccooper/biol105_unk/blob/main/datasets/lacustrine_range_size.csv">accessible here</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read comma separated file (csv) into R memory</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># reads directly from URL</span></span>
@@ -693,8 +701,8 @@ dbl (9): combined_current_km2, consensus_km2, bioclim_current_km2, 2050_comb...
 </ul>
 <p>We can also calculate some of these statistics manually to see if we are doing everything correctly. It is easiest to do this by using predefined functions in <em>R</em> (code others have written to perform a particular task) or to create our own functions in <em>R</em>. We will do both to determine the average of <code>combined_current_km2</code>.</p>
 </section>
-<section id="subsetting-data" class="level3" data-number="1.3.2">
-<h3 data-number="1.3.2" class="anchored" data-anchor-id="subsetting-data"><span class="header-section-number">1.3.2</span> Subsetting data</h3>
+<section id="subsetting-data" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="subsetting-data"><span class="header-section-number">1.3.3</span> Subsetting data</h3>
 <p>First, we need to select only the column of interest. In <em>R</em>, we have two ways of subsetting data to get a particular column.</p>
 <ul>
 <li><code>var[rows,cols]</code> is a way to look at a particular object (<code>var</code> in this case) and choose a specific combination of <code>row</code> number and <code>column</code> number (<code>col</code>). This is great if you know a specific index, but it is better to use a specific name.</li>
@@ -785,7 +793,7 @@ dbl (9): combined_current_km2, consensus_km2, bioclim_current_km2, 2050_comb...
 <p>Let me know if you have any issues.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-cooper_biogeographic_2021" class="csl-entry" role="listitem">
 Cooper, J. C. (2021). Biogeographic and <span>Ecologic</span> <span>Drivers</span> of <span>Avian</span> <span>Diversity</span>. [Online.] Available at <a href="https://doi.org/10.6082/uchicago.3379">https://doi.org/10.6082/uchicago.3379</a>.
 </div>
