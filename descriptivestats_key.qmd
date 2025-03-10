@@ -1,6 +1,6 @@
 ---
 title: "Descriptive Statistics (Key)"
-author: "Dr. Jacob C. Cooper"
+author: "University of Nebraska at Kearney Biology"
 format: html
 editor: visual
 ---
@@ -10,9 +10,6 @@ editor: visual
 For the homework this week, we were looking at *descriptive statistics* over large datasets. These help us get an idea of what the data are like. We required two packages to perform these analyses:
 
 ```{r}
-# allows for internet downloading
-library(curl)
-
 # enables data management tools
 library(tidyverse)
 ```
@@ -186,8 +183,7 @@ key_maker(nebraskans_years$nebraskans, # data
 The following is a dataset looking at oceanic conditions and other variables associated with pirate attacks within the region between 2010 and 2021 [@Moura2023]. Using these data, please calculate the mean, median, range, interquartile range, variance, standard deviation, coefficient of variation, standard error, and whether there are any "outliers" for distance from shore for each pirate attack (columns `Distance_from_Coast`).
 
 ```{r}
-url_file <- curl("https://figshare.com/ndownloader/files/42314604")
-pirates <- url_file |> read_csv()
+pirates <- read_csv("https://figshare.com/ndownloader/files/42314604")
 ```
 
 ```{r}
@@ -206,9 +202,7 @@ key_maker(pirates$Distance_from_Coast,
 The following is a dataset on skin sores in different communities in Australia and Oceania, specifically looking at the amount of time that passes between skin infections [@lydeamore_estimation_2020]. This file includes multiple different datasets, and focuses on data from children in the first five years of their life, on househould visits, and on data collected during targeted studies [@Lydeamore2020].
 
 ```{r}
-url_file <- curl("https://doi.org/10.1371/journal.pcbi.1007838.s006")
-
-ages <- url_file |> read_csv()
+ages <- read_csv("https://doi.org/10.1371/journal.pcbi.1007838.s006")
 ```
 
 Let's see what this file is like real fast. We can use the command `dim` to see the `rows` and `columns`.

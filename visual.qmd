@@ -1,6 +1,6 @@
 ---
 title: "Diagnosing data visually"
-author: "Dr. Jacob C. Cooper"
+author: "University of Nebraska at Kearney Biology"
 format: html
 editor: visual
 ---
@@ -14,7 +14,6 @@ Inspecting data visually can give us a lot of information about whether data are
 First, we need to load our *R* libraries.
 
 ```{r}
-library(curl)
 library(tidyverse)
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: "Normality & hypothesis testing"
-author: "Dr. Jacob C. Cooper"
+author: "University of Nebraska at Kearney Biology"
 format: html
 editor: visual
 ---
@@ -8,7 +8,6 @@ editor: visual
 ## Normal distributions
 
 ```{r,echo=F,error=FALSE,warning=FALSE,message=FALSE}
-library(curl)
 library(tidyverse)
 ```
 
@@ -27,8 +26,7 @@ Standard normal distributions have a mean, median, and mode that are *equal*. Th
 In order to see an example of the normal distribution in nature, we are going to examine the BeeWalk survey database from the island of Great Britain [@Comont2020]. We are not interested in the bee data at present, however, but in the climatic data from when the surveys were performed.
 
 ```{r}
-beewalk <- curl("https://figshare.com/ndownloader/files/44726902") |>
-  read_csv()
+beewalk <- read_csv("https://figshare.com/ndownloader/files/44726902")
 ```
 
 Note that this is another massive dataset - $306,550$ rows of data!

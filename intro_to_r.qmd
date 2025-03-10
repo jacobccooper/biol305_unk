@@ -1,6 +1,6 @@
 ---
 title: "Intro to *R*"
-author: "UNK Biology"
+author: "University of Nebraska at Kearney Biology"
 ---
 
 In this class, we will be using *R* to perform statistical analyses. *R* is a free software program designed for use in a myriad of statistical and computational scenarios. It can handle extremely large datasets, can handle spatial data, and has wrappers for compatibility with *Python*, *Bash*, and other programs (even *Java*!).

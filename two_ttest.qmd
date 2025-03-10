@@ -1,6 +1,6 @@
 ---
 title: "Two sample tests"
-author: "Dr. Jacob C. Cooper"
+author: "University of Nebraska at Kearney Biology"
 format: html
 editor: visual
 ---

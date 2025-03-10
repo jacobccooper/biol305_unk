@@ -1,6 +1,6 @@
 ---
 title: "Final exam & review"
-author: "Dr. Jacob C. Cooper & Dr. Melissa Wuellner"
+author: "University of Nebraska at Kearney Biology"
 format: html
 editor: visual
 ---

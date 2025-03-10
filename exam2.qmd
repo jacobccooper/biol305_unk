@@ -1,6 +1,6 @@
 ---
 title: "Exam 2 practice"
-author: "Dr. Melissa Wuellner & Dr. Jacob C. Cooper"
+author: "University of Nebraska at Kearney Biology"
 format: html
 editor: visual
 ---

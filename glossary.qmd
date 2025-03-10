@@ -1,6 +1,6 @@
 ---
 title: "Functions & Glossary"
-author: "Dr. Jacob C. Cooper"
+author: "University of Nebraska at Kearney Biology"
 format: html
 editor: visual
 ---
@@ -14,14 +14,14 @@ library(agricolae)
 
 The following are common useful commands used in *R*, with examples of their use.
 
--   `<-` / `=` - save a value as an object
+-   `<-` / `=` - save a value as an object. On Mac, the keyboard shortcut is `OPTION`+`-`. Windows can be formatted so that the shortcut is `ALT`+`-`.
 
 ```{r}
 x <- 10
 x
 ```
 
--   `|>` - "pipe" a command or output into another command. You can use the shortcut `CTRL SHIFT M` on Windows or Mac.
+-   `|>` - "pipe" a command or output into another command. You can use the shortcut `CTRL`+`SHIFT`+`M` on Windows or Mac.
 
 ```{r}
 # make repeatable
@@ -35,6 +35,23 @@ x |>
   summary() |> 
   # pass summary through round
   round(2)
+```
+
+-   `->` - save a value as an object at the end of a pipeline
+
+```{r}
+# same pipeline as previous, but more sequential
+
+# get random values
+rnorm(20) |> 
+  # pass to summary
+  summary() |> 
+  # pass summary through round
+  round(2) ->
+  # save as x
+  x
+
+x
 ```
 
 -   `c` - concatenate, place two values together
@@ -114,7 +131,7 @@ se(x)
 cv <- function(x){
   sigma <- sd(x)
   mu <- mean(x)
-  val <- sigma/mu
+  val <- sigma/mu*100
   return(val)
 }
 
