@@ -98,7 +98,13 @@ As we can see, even with 100 sample, we still have some chances of having groups
 
 ## ANOVA: By hand
 
-For this workthrough, we will use the following example dataset:
+We are predominately going to be using the default function `aov` to perform ANOVAs in this course. However, you can expand the following workthrough if you would like to see step-by-step instructions on calculating a one-way ANOVA by hand.
+
+<details>
+
+<summary>Click here to see the manual method.</summary>
+
+For this workthrough, we will use the following psuedorandom dataset:
 
 ```{r}
 set.seed(8675309)
@@ -325,6 +331,8 @@ pf(f_stat,
 
 Given how small our $p$ value is, we want to round this to $p<0.0001$. As we can see, it is very unlikely that these are the same population.
 
+</details>
+
 ## ANOVA: By *R*
 
 For this, we need to use the dataframe where we have all data in a single column and all ID's in the other columns. We then show how we want the ANOVA to operate across the data using the `~` symbol.
@@ -335,7 +343,7 @@ data_aov <- aov(Response ~ Explanatory, data = data)
 summary(data_aov)
 ```
 
-As we can see, all these values match what we did by hand above!
+These numbers match the *by hand* methodology from the previous section, showing that the math is the same.
 
 ## Post-hoc Tukey test
 
@@ -344,6 +352,10 @@ ANOVA tells us *if* a test is different, but it doesn't tell us *which* test is 
 ### Tukey test by hand
 
 To do this by hand, we will need a lot of data from our aforementioned ANOVA test.
+
+<details>
+
+<summary>Click here to see the by-hand method.</summary>
 
 We need to calculate pairwise differences between each set of means.
 
@@ -409,6 +421,8 @@ pairwise_mean_diffs
 As we can see above, three differences cross our threshold - all associated with `x1`.
 
 When we graph things, we want to label this group as different. We will cover this a little later in the tutorial.
+
+</details>
 
 ### Tukey test in *R*
 
@@ -540,6 +554,9 @@ ggplot(summary_data, # plot summary data
 The Kruskal-Wallis test is the non-parametric version of an ANOVA. To demonstrate this, we will be creating a non-normal distribution by pulling random values from a *uniform* distribution, using the random uniform function `runif`. **Note** we are rounding the data here to make it more similar to non-normal datasets you may encounter, and to increase the probability of ties.
 
 ```{r}
+## COPY THIS WHOLE CHUNK ##
+# will load example data
+
 set.seed(8675309)
 
 for(i in 1:4){
@@ -601,6 +618,10 @@ The above histogram appears non-normal, and the Shapiro-Wilk also indicates this
 
 ### By hand
 
+<details>
+
+<summary>Click here to see the Kruskal-Wallis by hand.</summary>
+
 First, we need to order all the data in the entire dataset. **This is easiest to do if we use the dataset with all data in a single column.**
 
 ```{r}
@@ -659,6 +680,8 @@ pchisq(q = H,
 ```
 
 As we can see, the probability is extremely low with $p < 0.0001$. One distribution is different, and we can proceed with Tukey tests.
+
+</details>
 
 ### Using *R*
 
