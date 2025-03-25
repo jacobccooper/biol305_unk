@@ -306,7 +306,7 @@ However, the library *DescTools* has many missing basic statistical functions, i
 
 ```{r}
 #Load the package
-#Must be loaded each time it is used
+#Must be loaded each time it you reboot R
 library(DescTools)  
 
 #Run the function  
@@ -420,7 +420,7 @@ $$
 There is not a built in function for standard error in *R*, but we can use *DescTools*.
 
 ```{r}
-MeanSE(frap_order)
+MeanSE(frap_order) #This is from DescTools!
 ```
 
 **Remember**, the standard error is used to help reflect our *confidence* in a specific measurement (*e.g.*, how certain we are of the mean, and what values we believe the mean falls between). We want our estimates to be as precise as possible with as little uncertainty as possible. Given this, does having more samples make our estimates more or less confident? Mathematically, what happens as our sample size *increases*?
