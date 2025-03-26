@@ -228,62 +228,20 @@ As we can see, this is a very *leptokurtic* distribution.
 
 A *cumulative frequency plot* shows the overall spread of the data as a cumulative line over the entire dataset. This is another way to see the spread of the data and is often complementary to a histogram.
 
-The following cumulative distribution plot is based on the method outlined in [Geeks for Geeks](https://www.geeksforgeeks.org/cumulative-frequency-graph-in-r/).
-
 ### If data are not in histogram/frequency format
 
-You will need to create a frequency table to make them be in histogram format.
+The use of the Empirical Cumulative Distribution Function, **ecdf()**,can turn a variable into what is needed to create a cumulative frequency plot. This is a base part of *R* and therefore does not require any libraries.
 
 ```{r}
-# declaring the break points
-# make break points based on data
-# always round UP with ceiling
-range.x <- ceiling(max(x)-min(x))
-
-range.x
-range(x)
-```
-
-Based on this range, we need to create our bin sizes. We want our lowest bin to be below our lowest value, and our highest bin above our highest value. Here, I'm setting a step size of 1. **You will have to examine your data and determine the best break size for your datasets.**
-
-```{r}
-# make bins based on range
-# create sequential series
-break_points <- seq(-3, # starting value, low
-                    4, # end value, high
-                    1) # increment size
+plot(ecdf(x)) #Creating a cumulative frequency plot
 ```
 
 ```{r}
-# transforming the data
-data_transform = cut(x, # your data!
-                     break_points, # the breaks you defined
-					right=FALSE) # closed on the left for intervals
-# creating the frequency table
-freq_table = table(data_transform) # create a table
+plot(ecdf(x), 
+     xlab = "Data Values", #Labeling the x-axis
+     ylab = "Cumulative Probability", #Labeling the y-axis
+     main = "ECDF of X") #Main title for the graph
 
-# printing the frequency table
-print("Frequency Table")
-print(freq_table)
-```
-
-```{r}
-# calculating cumulative frequency
-cumulative_freq = c(0, # start at 0, no points
-                    cumsum(freq_table)) # get the cumulative frequency!
-print("Cumulative Frequency")
-print(cumulative_freq)
-```
-
-```{r}
-# plotting the data
-plot(break_points, # x axis is break_points
-     cumulative_freq, # y axis is cumulative frequency
-	xlab="Data Distribution", # x axis label
-	ylab="Cumulative Frequency") # y axis label
-# creating line graph
-lines(break_points, # add lines to the graph, this is x
-      cumulative_freq) # this is y for lines
 ```
 
 ### If data are in histogram/frequency format
