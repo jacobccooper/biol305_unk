@@ -692,7 +692,7 @@ W = 0.98922, p-value = 0.1371</code></pre>
 <pre><code>[1] "Our Z scores are: -1.96 &amp; 1.96"</code></pre>
 </div>
 </div>
-<p>The above values make sense, given the distribution is symmetrical. Our above dashed line is as <span class="math inline">\(Z = 1.6\)</span>, which means we should have a <span class="math inline">\(p = 0.05\)</span>, so the dashed line should be <em>closer</em> to the mean than our cutoffs.</p>
+<p>The above values make sense, given the distribution is symmetrical. Our above dashed line is as <span class="math inline">\(Z = 1.96\)</span>, which means we should have a <span class="math inline">\(p = 0.05\)</span>, so the dashed line should be <em>closer</em> to the mean than our cutoffs.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="do">### THIS WILL TAKE A WHILE TO RUN </span><span class="al">###</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -704,11 +704,11 @@ W = 0.98922, p-value = 0.1371</code></pre>
 <span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co"># create new plot object</span></span>
 <span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>p2  <span class="ot">&lt;-</span>  p <span class="sc">+</span> <span class="co"># add previous step as a "backbone"</span></span>
 <span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add new shaded area</span></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> <span class="fu">subset</span>(d, x <span class="sc">&lt;</span> <span class="fl">1.6</span>), <span class="co"># select area</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> <span class="fu">subset</span>(d, x <span class="sc">&lt;</span> <span class="fl">1.96</span>), <span class="co"># select area</span></span>
 <span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>            <span class="co"># define color, shading intensity, etc.</span></span>
 <span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y), <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add value line</span></span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">1.6</span>, <span class="at">colour =</span> <span class="st">"black"</span>, </span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">1.96</span>, <span class="at">colour =</span> <span class="st">"black"</span>, </span>
 <span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"dashed"</span>,<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> low_alpha, <span class="at">colour =</span> <span class="st">"red"</span>, </span>
 <span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"solid"</span>,<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
@@ -767,7 +767,7 @@ Z = \frac{\bar{x}-\mu}{\frac{\sigma}{\sqrt{n}}}
 <pre><code>[1] 0.0276425</code></pre>
 </div>
 </div>
-<p>After rounding, we get <span class="math inline">\(p = 0.03\)</span>, a <span class="math inline">\(p\)</span> that is significant if for a one-tailed <span class="math inline">\(\alpha = 0.05\)</span> but insignificant for a two-tailed <span class="math inline">\(\alpha = 0.05\)</span>.</p>
+<p>After rounding, we get <span class="math inline">\(p = 0.03\)</span>, a <span class="math inline">\(p\)</span> that is significant as it is less than our overal <span class="math inline">\(\alpha\)</span>.</p>
 </section>
 <section id="calculated-the-p-value" class="level3" data-number="4.2.4">
 <h3 data-number="4.2.4" class="anchored" data-anchor-id="calculated-the-p-value"><span class="header-section-number">4.2.4</span> Calculated the <span class="math inline">\(p\)</span> value</h3>

@@ -282,7 +282,7 @@ print(paste0("Our Z scores are: ",
              round(hi_alpha,2)))
 ```
 
-The above values make sense, given the distribution is symmetrical. Our above dashed line is as $Z = 1.6$, which means we should have a $p = 0.05$, so the dashed line should be *closer* to the mean than our cutoffs.
+The above values make sense, given the distribution is symmetrical. Our above dashed line is as $Z = 1.96$, which means we should have a $p = 0.05$, so the dashed line should be *closer* to the mean than our cutoffs.
 
 ```{r}
 ### THIS WILL TAKE A WHILE TO RUN ###
@@ -295,11 +295,11 @@ d  <-  ggplot_build(p)$data[[1]]
 # create new plot object
 p2  <-  p + # add previous step as a "backbone"
   # add new shaded area
-  geom_area(data = subset(d, x < 1.6), # select area
+  geom_area(data = subset(d, x < 1.96), # select area
             # define color, shading intensity, etc.
             aes(x=x,y=y), fill = "white", alpha = 1) +
   # add value line
-  geom_vline(xintercept = 1.6, colour = "black", 
+  geom_vline(xintercept = 1.96, colour = "black", 
              linetype = "dashed",linewidth = 1) +
   geom_vline(xintercept = low_alpha, colour = "red", 
              linetype = "solid",linewidth = 1) +
@@ -356,7 +356,7 @@ Now, we can calculate the $p$ value for this $Z$ score.
 pnorm(Z)
 ```
 
-After rounding, we get $p = 0.03$, a $p$ that is significant if for a one-tailed $\alpha = 0.05$ but insignificant for a two-tailed $\alpha = 0.05$.
+After rounding, we get $p = 0.03$, a $p$ that is significant as it is less than our overal $\alpha$.
 
 ### Calculated the $p$ value
 

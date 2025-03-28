@@ -30,6 +30,8 @@ The following is how to create default histograms on data. If you need to create
 ```{r}
 # create random string from normal distribution
 # this step is not necessary for data analysis in homework
+set.seed(8675309)
+
 x <- rnorm(n = 1000, # 1000 values
            mean = 0,
            sd = 1)
