@@ -356,7 +356,7 @@ Now, we can calculate the $p$ value for this $Z$ score.
 pnorm(Z)
 ```
 
-After rounding, we get $p = 0.03$, a $p$ that is significant as it is less than our overal $\alpha$.
+After rounding, we get $p = 0.03$, a $p$ that is significant as it is less than our overall $\alpha$.
 
 ### Calculated the $p$ value
 

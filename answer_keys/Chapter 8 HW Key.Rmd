@@ -1,0 +1,55 @@
+---
+title: "Chapter 8 HW KEY"
+author: "Caleb Rother"
+date: "2025-03-30"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+DONT FORGET ROUNDING
+```{r}
+##8.1
+#A
+pnorm(1.43, lower.tail = FALSE)
+#B
+pnorm(-1.43, lower.tail = FALSE) 
+#C
+1-(pnorm(2.17, lower.tail = FALSE)+pnorm(0.19))
+#This is correct, back of book is wrong!
+#D
+pnorm(1.14) - pnorm(-2.21)
+```
+
+```{r}
+zscore <- function(xbar, mu, sd.x, n = 1){
+  z <- (xbar - mu)/(sd.x/sqrt(n))
+  return(z)
+}
+```
+
+```{r}
+#8.2 A
+zfish <- zscore(xbar = 40, 
+                mu = 34.29, 
+                sd.x = 5.49)
+pnorm(zfish, lower.tail = FALSE)
+```
+```{r}
+#8.2B
+zfish2 <- zscore(40, 34.29, 5.49, n = 10)
+pnorm(zfish2, lower.tail = FALSE)
+```
+```{r}
+#8.2 C
+zfishH <- zscore(42, 34.29, 5.49) 
+zfishL <- zscore(32, 34.29, 5.49)
+(pnorm(zfishH) - pnorm(zfishL))
+#This is correct, back of book is wrong!
+```
+```{r}
+
+```
+
