@@ -1,0 +1,203 @@
+---
+title: "Exam 2 Practice"
+author: "Dr. Wuellner"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+# Question 1
+
+```{r}
+cyclones <- c(370,452,273,422,526,624,513,1059,980,1200,995,1751)
+```
+
+### Part A
+
+The latitude and season are **explanatory variables**. The number of cyclones is the **response variable**.  Latitude and season can be used to explain the differences in the number of cyclones. 
+
+### Part B
+
+The `Latitude Band` is ordinal.  It has name information and can be ordered.
+
+The `Season` is nominal.  It has name only infomration.  There is no order.
+
+The `Number of cyclones` is interval *or* ratio, depending on justification provided.  At a minimum, the data have name information, an order, and have real differences.  Students could argue whether or not there is a real zero.
+
+### Part C
+
+(The following combines the two scenarios; students should not both latitude and season as *explanatory variables* in sets of hypotheses).
+
+$H_0$: There is no difference in hurricanes between latitudinal bands.
+
+$H_A$: There is a difference in the number of hurricanes latitudinal bands.
+
+$H_0$: There is no difference in hurricanes between seasons.
+
+$H_A$: There is a difference in the number of hurricanes between seasons.
+
+
+### Part D
+
+Students should include some writing of their conclusions.
+
+```{r}
+mean(cyclones) |> round(0)
+```
+
+```{r}
+median(cyclones) |> round()
+```
+
+```{r}
+# Based on Statology function
+# define function to calculate mode
+find_mode <- function(x) {
+  # get unique values from vector
+  u <- unique(x)
+  # count number of occurrences for each value
+  tab <- tabulate(match(x, u))
+  
+  if(length(x)==length(u[tab == max(tab)])){
+    print("No mode.")
+  }else{
+    # return the value with the highest count
+    u[tab == max(tab)]
+  }
+}
+
+find_mode(cyclones)
+```
+
+There is no mode.
+
+Mean and median are dissimilar, so we would say that our data is not normally distributed.
+
+
+### Part E
+
+```{r}
+zscore <- function(xbar, mu, sd.x, n = 1){
+  z <- (xbar - mu)/(sd.x/sqrt(n))
+  return(z)
+}
+
+z <- zscore(mean(cyclones),
+            mu = 650,
+            sd.x = 425,
+            n = length(cyclones))
+
+pnorm(z)
+```
+
+Remember, should be less than $0.5$!
+
+```{r}
+pnorm(z, lower.tail = F)
+```
+
+Remember, p should be rounded to four places for this class.
+
+```{r}
+pnorm(z, lower.tail = F) |>
+  round(4)
+```
+
+$p = 0.1789$; fail to reject null.
+
+# Question 2
+
+```{r}
+fish_id <- 1:20
+
+minnows <- c(89,75,86,74,69,100,73,69,96,79,61,62,95,98,100,57,70,78,65,65)
+```
+
+### Part A
+
+$H_0$: Fish in the Kearney Canal are the same size as other populations.
+
+$H_A$: Fish in the Kearney Canal are smaller than other populations.
+
+Just like the fish, this test has only one-tail.
+
+### Part B
+
+```{r}
+median(minnows) |> round()
+```
+
+The median is `r round(median(minnows))`.
+
+```{r}
+quantile(minnows, type = 6) |> round()
+```
+
+The 25% is 68, the 75% is 90. The interquartile range is `r round(IQR(minnows, type = 6))`. 
+
+```{r}
+boxplot(minnows,
+        ylim = c(0, 150))
+```
+
+Let's check for outliers.
+
+```{r}
+lowquant <- quantile(minnows,0.25,type = 6) |> as.numeric()
+
+hiquant <- quantile(minnows,0.75,type = 6) |> as.numeric()
+
+iqr <- IQR(minnows, type = 6)
+
+lowbound <- lowquant - (1.5*iqr)
+hibound <- hiquant + (1.5*iqr)
+
+# low outliers?
+# select elements that match
+# identify using logical "which"
+minnows[which(minnows < lowbound)]
+```
+
+```{r}
+# high outliers?
+# select elements that match
+# identify using logical "which"
+minnows[which(minnows > hibound)]
+```
+mean(minnows)
+
+
+There are no outliers in this dataset.
+
+```{r}
+zscore <- function(xbar, mu, sd.x, n = 1){
+  z <- (xbar - mu)/(sd.x/sqrt(n))
+  return(z)
+}
+
+z <- zscore(xbar = mean(minnows),
+       mu = 85,
+       sd.x = 4.5,
+       n = 20)
+
+z |> round(2)
+```
+
+The $Z$-score is -6.91.
+
+### Part D
+
+The probability of seeing something as extreme or more extreme is the $p$ value.
+
+```{r}
+pnorm(z)
+```
+
+This is a very small value, so I would report that $p < 0.0001$.
+
+### Part E
+
+Based on the information we have here, $p < \alpha$ and thus we can reject the null hypothesis that these populations are the same size.
