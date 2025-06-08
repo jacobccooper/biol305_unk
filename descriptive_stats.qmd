@@ -15,7 +15,7 @@ Descriptive statistics allow us to quickly get an idea of how our datasets are "
 
 As with every week, we will need to load our relevant packages first. This week, we are using the following:
 
-```{r}
+```{r, message=FALSE, warning=FALSE, results='hide'}
 # enables data management tools
 library(tidyverse)
 ```
@@ -31,7 +31,7 @@ library(tidyverse)
 
 For the example this week, we will be using the `starbucks` dataset, describing the number of drinks purchased during particular time periods during the day.
 
-```{r}
+```{r, message=FALSE, warning=FALSE, results='hide'}
 starbucks <- read_csv("https://raw.githubusercontent.com/jacobccooper/biol105_unk/main/datasets/starbucks.csv")
 ```
 
@@ -507,7 +507,7 @@ Another common measurement of spread is the standard deviation ($\sigma$). As yo
 sqrt(var_frap)
 ```
 
-There is also the built in sd function in R:
+There is also the built in sd function in *R*:
 
 ```{r}
 sd(frap_order)
@@ -678,10 +678,6 @@ Again, there are no outliers as this code is effectively the same. If there are,
 
 Now that we've covered these basic statistics, it's your turn! For this week, you will be completing homework that involves methods from Chapter 4 in your book.
 
-------------------------------------------------------------------------
-
-<br>
-<br>
 
 ***
 
@@ -709,10 +705,6 @@ Please create an *RMarkdown* document that will render as an `.html` file. You w
 
 **Please show all of your work for full credit.**
 
-------------------------------------------------------------------------
-
-<br>
-<br>
 
 ***
 
