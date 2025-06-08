@@ -379,6 +379,8 @@ window.Quarto = {
 </div>
 </div>
 <hr>
+<p><br> <br></p>
+<hr>
 </section>
 <section id="downloading-the-data" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="downloading-the-data"><span class="header-section-number">2.3</span> Downloading the data</h2>
@@ -397,6 +399,8 @@ dbl (1): Frap_Num
 </div>
 </div>
 <hr>
+<p><br> <br></p>
+<hr>
 </section>
 <section id="descriptive-statistics" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="descriptive-statistics"><span class="header-section-number">2.4</span> Descriptive statistics</h2>
@@ -410,6 +414,8 @@ dbl (1): Frap_Num
 <p><em>Note</em> above that the relative position of the <em>mean</em>, <em>median</em>, and <em>mode</em> can be indicative of skew. Please also note that these values will rarely be exactly equal “in the real world”, and thus you need to weigh differences against the entire dataset when assessing skew. There is a lot of nuance like this in statistics; it is not always an “exact” science, but sometimes involves judgment calls and assessments based on what you observe in the data.</p>
 <p>Using the <code>starbucks</code> dataset, we can look at some of these descriptive statistics to understand what is going on.</p>
 <hr>
+<p><br> <br></p>
+<hr>
 <section id="notation" class="level3" data-number="2.4.1">
 <h3 data-number="2.4.1" class="anchored" data-anchor-id="notation"><span class="header-section-number">2.4.1</span> Notation</h3>
 <details>
@@ -422,6 +428,8 @@ Click to see notion information
 <li><p><span class="math inline">\(\mu\)</span> is a population, but <span class="math inline">\(\bar{x}\)</span> is a sample (both of these variables refer to the <em>mean</em>).</p></li>
 </ul>
 </details>
+<hr>
+<p><br> <br></p>
 <hr>
 </section>
 <section id="mean" class="level3" data-number="2.4.2">
@@ -482,6 +490,8 @@ Click to see how to calculate mean
 </div>
 </details>
 <hr>
+<p><br> <br></p>
+<hr>
 </section>
 <section id="range" class="level3" data-number="2.4.3">
 <h3 data-number="2.4.3" class="anchored" data-anchor-id="range"><span class="header-section-number">2.4.3</span> Range</h3>
@@ -498,6 +508,8 @@ Click to see how to calculate range
 </div>
 <p>The range of our dataset is 13.</p>
 </details>
+<hr>
+<p><br> <br></p>
 <hr>
 </section>
 <section id="median" class="level3" data-number="2.4.4">
@@ -590,6 +602,8 @@ Click to see how to calculate the median
 <p>As we can see, these values are equal!</p>
 </details>
 <hr>
+<p><br> <br></p>
+<hr>
 </section>
 <section id="other-quartiles-and-quantiles" class="level3" data-number="2.4.5">
 <h3 data-number="2.4.5" class="anchored" data-anchor-id="other-quartiles-and-quantiles"><span class="header-section-number">2.4.5</span> Other quartiles and quantiles</h3>
@@ -664,6 +678,8 @@ Click to see how to find quartiles and quantiles
 <p>This is a classic example of how things in <em>R</em> (and in statistics in general!) can depend on interpretation and are not always “hard and fast” rules.</p>
 <p><strong>In this class, we will be using Type 6 interpretation for the quantiles - you will have to specify this in the quantile function EVERY TIME!</strong> If you do <em>not</em> specify Type 6, you will get the questions incorrect and you will get answers that do not agree with the book, with Excel, or what you calculate by hand.</p>
 </details>
+<hr>
+<p><br> <br></p>
 <hr>
 </section>
 <section id="mode" class="level3" data-number="2.4.6">
@@ -768,6 +784,8 @@ attr(,"freq")
 <p>If there are two or more modes, these numbers will also appear in the first line of the output.</p>
 </details>
 <hr>
+<p><br> <br></p>
+<hr>
 </section>
 <section id="variance" class="level3" data-number="2.4.7">
 <h3 data-number="2.4.7" class="anchored" data-anchor-id="variance"><span class="header-section-number">2.4.7</span> Variance</h3>
@@ -840,6 +858,8 @@ Click to see how to calculate variance
 <p>Seeing as this is <code>TRUE</code>, we calculated it correctly.</p>
 </details>
 <hr>
+<p><br> <br></p>
+<hr>
 </section>
 <section id="standard-deviation" class="level3" data-number="2.4.8">
 <h3 data-number="2.4.8" class="anchored" data-anchor-id="standard-deviation"><span class="header-section-number">2.4.8</span> Standard deviation</h3>
@@ -871,6 +891,8 @@ Click to see how to calculate standard deviation
 <p>As you can see, we calculated this correctly!</p>
 </details>
 <hr>
+<p><br> <br></p>
+<hr>
 </section>
 <section id="standard-error" class="level3" data-number="2.4.9">
 <h3 data-number="2.4.9" class="anchored" data-anchor-id="standard-error"><span class="header-section-number">2.4.9</span> Standard error</h3>
@@ -891,6 +913,8 @@ SE = \frac{\sigma}{\sqrt{n}}
 </div>
 </details>
 <p><strong>Remember</strong>, the standard error is used to help reflect our <em>confidence</em> in a specific measurement (<em>e.g.</em>, how certain we are of the mean, and what values we believe the mean falls between). We want our estimates to be as precise as possible with as little uncertainty as possible. Given this, does having more samples make our estimates more or less confident? Mathematically, what happens as our sample size <em>increases</em>?</p>
+<hr>
+<p><br> <br></p>
 <hr>
 </section>
 <section id="coefficient-of-variation" class="level3" data-number="2.4.10">
@@ -928,6 +952,8 @@ CV = \frac{\sigma}{\mu}*100
 </div>
 </div>
 </details>
+<hr>
+<p><br> <br></p>
 <hr>
 </section>
 <section id="outliers" class="level3" data-number="2.4.11">
@@ -991,11 +1017,15 @@ Click to see DescTools method
 <p>Again, there are no outliers as this code is effectively the same. If there are, it will return all outliers, but not indicate if they are high or low. This can be solved by comparing the returned outlier to the mean. If it is above the mean, it is a high outlier, and vice versa.</p>
 </details>
 <hr>
+<p><br> <br></p>
+<hr>
 </section>
 </section>
 <section id="homework-descriptive-statistics" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="homework-descriptive-statistics"><span class="header-section-number">2.5</span> Homework: Descriptive Statistics</h2>
 <p>Now that we’ve covered these basic statistics, it’s your turn! For this week, you will be completing homework that involves methods from Chapter 4 in your book.</p>
+<hr>
+<p><br> <br></p>
 <hr>
 <section id="homework-instructions" class="level3" data-number="2.5.1">
 <h3 data-number="2.5.1" class="anchored" data-anchor-id="homework-instructions"><span class="header-section-number">2.5.1</span> Homework instructions</h3>
@@ -1012,6 +1042,8 @@ Click to see DescTools method
 <li><p>whether there are any “outliers”</p></li>
 </ul>
 <p><strong>Please show all of your work for full credit.</strong></p>
+<hr>
+<p><br> <br></p>
 <hr>
 </section>
 <section id="data-for-homework-problems" class="level3" data-number="2.5.2">

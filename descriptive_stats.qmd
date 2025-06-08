@@ -22,6 +22,11 @@ library(tidyverse)
 
 ------------------------------------------------------------------------
 
+<br>
+<br>
+
+***
+
 ## Downloading the data
 
 For the example this week, we will be using the `starbucks` dataset, describing the number of drinks purchased during particular time periods during the day.
@@ -31,6 +36,11 @@ starbucks <- read_csv("https://raw.githubusercontent.com/jacobccooper/biol105_un
 ```
 
 ------------------------------------------------------------------------
+
+<br>
+<br>
+
+***
 
 ## Descriptive statistics
 
@@ -43,6 +53,11 @@ Descriptive statistics are statistics that help us understand the shape and natu
 Using the `starbucks` dataset, we can look at some of these descriptive statistics to understand what is going on.
 
 ------------------------------------------------------------------------
+
+<br>
+<br>
+
+***
 
 ### Notation
 
@@ -59,6 +74,11 @@ As a quick reminder, we use Greek lettering for *populations* and Roman letterin
 </details>
 
 ------------------------------------------------------------------------
+
+<br>
+<br>
+
+***
 
 ### Mean
 
@@ -106,6 +126,11 @@ round(sum(fraps)/length(fraps),0)
 
 ------------------------------------------------------------------------
 
+<br>
+<br>
+
+***
+
 ### Range
 
 <details>
@@ -123,6 +148,11 @@ The range of our dataset is 13.
 </details>
 
 ------------------------------------------------------------------------
+
+<br>
+<br>
+
+***
 
 ### Median
 
@@ -205,6 +235,11 @@ As we can see, these values are equal!
 
 ------------------------------------------------------------------------
 
+<br>
+<br>
+
+***
+
 ### Other quartiles and quantiles
 
 <details>
@@ -275,6 +310,11 @@ This is a classic example of how things in *R* (and in statistics in general!) c
 </details>
 
 ------------------------------------------------------------------------
+
+<br>
+<br>
+
+***
 
 ### Mode
 
@@ -378,6 +418,11 @@ If there are two or more modes, these numbers will also appear in the first line
 
 ------------------------------------------------------------------------
 
+<br>
+<br>
+
+***
+
 ### Variance
 
 <details>
@@ -445,6 +490,11 @@ Seeing as this is `TRUE`, we calculated it correctly.
 
 ------------------------------------------------------------------------
 
+<br>
+<br>
+
+***
+
 ### Standard deviation
 
 <details>
@@ -475,6 +525,11 @@ As you can see, we calculated this correctly!
 
 ------------------------------------------------------------------------
 
+<br>
+<br>
+
+***
+
 ### Standard error
 
 <details>
@@ -498,6 +553,11 @@ MeanSE(frap_order) #This is from DescTools!
 **Remember**, the standard error is used to help reflect our *confidence* in a specific measurement (*e.g.*, how certain we are of the mean, and what values we believe the mean falls between). We want our estimates to be as precise as possible with as little uncertainty as possible. Given this, does having more samples make our estimates more or less confident? Mathematically, what happens as our sample size *increases*?
 
 ------------------------------------------------------------------------
+
+<br>
+<br>
+
+***
 
 ### Coefficient of variation
 
@@ -536,6 +596,11 @@ However, we can also complete this with a *DescTools* function.
 </details>
 
 ------------------------------------------------------------------------
+
+<br>
+<br>
+
+***
 
 ### Outliers
 
@@ -604,11 +669,21 @@ Again, there are no outliers as this code is effectively the same. If there are,
 
 ------------------------------------------------------------------------
 
+<br>
+<br>
+
+***
+
 ## Homework: Descriptive Statistics
 
 Now that we've covered these basic statistics, it's your turn! For this week, you will be completing homework that involves methods from Chapter 4 in your book.
 
 ------------------------------------------------------------------------
+
+<br>
+<br>
+
+***
 
 ### Homework instructions
 
@@ -635,6 +710,11 @@ Please create an *RMarkdown* document that will render as an `.html` file. You w
 **Please show all of your work for full credit.**
 
 ------------------------------------------------------------------------
+
+<br>
+<br>
+
+***
 
 ### Data for homework problems
 
