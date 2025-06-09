@@ -1,19 +1,27 @@
 ---
 title: "Diagnosing data visually"
 author: "University of Nebraska at Kearney Biology"
-format: html
+format:
+  html:
+    css: styles.css
+    theme: default
 editor: visual
 ---
+
 
 ## The importance of visual inspection
 
 Inspecting data visually can give us a lot of information about whether data are normally distributed and about whether there are any major errors or issues with our dataset. It can also help us determine if data meet model assumptions, or if we need to use different tests more appropriate for our datasets.
 
+<hr style="height: 7px; background-color" />
+
+<br>
+
 ## Sample data and preparation
 
 First, we need to load our *R* libraries.
 
-```{r}
+```{r, message=FALSE, warning=FALSE, results='hide'}
 library(tidyverse)
 ```
 

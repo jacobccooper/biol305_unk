@@ -1,7 +1,10 @@
 ---
 title: "Descriptive Statistics"
 author: "University of Nebraska at Kearney Biology"
-format: html
+format:
+  html:
+    css: styles.css
+    theme: default
 editor: visual
 ---
 
@@ -9,9 +12,9 @@ editor: visual
 
 Descriptive statistics allow us to quickly get an idea of how our datasets are "behaving". This allows us to identify potential errors, trends, or particular outliers for further analysis. While you are likely familiar with many of the calculations we will go over, these remain powerful calculations for initial analysis. In this page, we will go over how to complete these calculations in *R*. You will then complete an assignment based on these topics.
 
-------------------------------------------------------------------------
+<hr>
 
-## Preparing *R*
+## Preparing *R* {.tight-top}
 
 As with every week, we will need to load our relevant packages first. This week, we are using the following:
 
@@ -20,14 +23,14 @@ As with every week, we will need to load our relevant packages first. This week,
 library(tidyverse)
 ```
 
-------------------------------------------------------------------------
+<hr>
 
 <br>
 <br>
 
-***
+<hr>
 
-## Downloading the data
+## Downloading the data {.tight-top}
 
 For the example this week, we will be using the `starbucks` dataset, describing the number of drinks purchased during particular time periods during the day.
 
@@ -35,14 +38,14 @@ For the example this week, we will be using the `starbucks` dataset, describing 
 starbucks <- read_csv("https://raw.githubusercontent.com/jacobccooper/biol105_unk/main/datasets/starbucks.csv")
 ```
 
-------------------------------------------------------------------------
+<hr>
 
 <br>
 <br>
 
-***
+<hr>
 
-## Descriptive statistics
+## Descriptive statistics {.tight-top}
 
 Descriptive statistics are statistics that help us understand the shape and nature of the data on hand. These include really common metrics such as *mean*, *median*, and *mode*, as well as more nuanced metrics like *quartiles* that help us understand if there is any *skew* in the dataset. (*Skew* refers to a bias in the data, where more data points lie on one side of the distribution and there is a long *tail* of data in the other direction).
 
@@ -52,14 +55,14 @@ Descriptive statistics are statistics that help us understand the shape and natu
 
 Using the `starbucks` dataset, we can look at some of these descriptive statistics to understand what is going on.
 
-------------------------------------------------------------------------
+<hr>
 
 <br>
 <br>
 
-***
+<hr>
 
-### Notation
+### Notation {.tight-top}
 
 <details>
 
@@ -73,14 +76,14 @@ As a quick reminder, we use Greek lettering for *populations* and Roman letterin
 
 </details>
 
-------------------------------------------------------------------------
+<hr>
 
 <br>
 <br>
 
-***
+<hr>
 
-### Mean
+### Mean {.tight-top}
 
 <details>
 
@@ -124,14 +127,14 @@ round(sum(fraps)/length(fraps),0)
 
 </details>
 
-------------------------------------------------------------------------
+<hr>
 
 <br>
 <br>
 
-***
+<hr>
 
-### Range
+### Range {.tight-top}
 
 <details>
 
@@ -147,14 +150,14 @@ The range of our dataset is 13.
 
 </details>
 
-------------------------------------------------------------------------
+<hr>
 
 <br>
 <br>
 
-***
+<hr>
 
-### Median
+### Median {.tight-top}
 
 <details>
 
@@ -233,14 +236,14 @@ As we can see, these values are equal!
 
 </details>
 
-------------------------------------------------------------------------
+<hr>
 
 <br>
 <br>
 
-***
+<hr>
 
-### Other quartiles and quantiles
+### Other quartiles and quantiles {.tight-top}
 
 <details>
 
@@ -309,14 +312,14 @@ This is a classic example of how things in *R* (and in statistics in general!) c
 
 </details>
 
-------------------------------------------------------------------------
+<hr>
 
 <br>
 <br>
 
-***
+<hr>
 
-### Mode
+### Mode {.tight-top}
 
 There is no default code to find the mode in *R*. We can do this by hand, by counting the number of occurrences of each value as shown below.
 
@@ -416,14 +419,14 @@ If there are two or more modes, these numbers will also appear in the first line
 
 </details>
 
-------------------------------------------------------------------------
+<hr>
 
 <br>
 <br>
 
-***
+<hr>
 
-### Variance
+### Variance {.tight-top}
 
 <details>
 
@@ -488,14 +491,14 @@ Seeing as this is `TRUE`, we calculated it correctly.
 
 </details>
 
-------------------------------------------------------------------------
+<hr>
 
 <br>
 <br>
 
-***
+<hr>
 
-### Standard deviation
+### Standard deviation {.tight-top}
 
 <details>
 
@@ -523,14 +526,14 @@ As you can see, we calculated this correctly!
 
 </details>
 
-------------------------------------------------------------------------
+<hr>
 
 <br>
 <br>
 
-***
+<hr>
 
-### Standard error
+### Standard error {.tight-top}
 
 <details>
 
@@ -552,14 +555,14 @@ MeanSE(frap_order) #This is from DescTools!
 
 **Remember**, the standard error is used to help reflect our *confidence* in a specific measurement (*e.g.*, how certain we are of the mean, and what values we believe the mean falls between). We want our estimates to be as precise as possible with as little uncertainty as possible. Given this, does having more samples make our estimates more or less confident? Mathematically, what happens as our sample size *increases*?
 
-------------------------------------------------------------------------
+<hr>
 
 <br>
 <br>
 
-***
+<hr>
 
-### Coefficient of variation
+### Coefficient of variation {.tight-top}
 
 <details>
 
@@ -595,14 +598,14 @@ However, we can also complete this with a *DescTools* function.
 
 </details>
 
-------------------------------------------------------------------------
+<hr>
 
 <br>
 <br>
 
-***
+<hr>
 
-### Outliers
+### Outliers {.tight-top}
 
 <details>
 
@@ -667,21 +670,21 @@ Again, there are no outliers as this code is effectively the same. If there are,
 
 </details>
 
-------------------------------------------------------------------------
+<hr>
 
 <br>
 <br>
 
-***
+<hr>
 
-## Homework: Descriptive Statistics
+## Homework: Descriptive Statistics {.tight-top}
 
 Now that we've covered these basic statistics, it's your turn! For this week, you will be completing homework that involves methods from Chapter 4 in your book.
 
 
-***
+<hr>
 
-### Homework instructions
+### Homework instructions {.tight-top}
 
 Please create an *RMarkdown* document that will render as an `.html` file. You will submit this file to show your coding and your work. Please refer to the [Introduction to *R*](https://jacobccooper.github.io/biol105_unk/intro_to_r.html) for refreshers on how to create an `.html` document in *RMarkdown*. You will need to do the following for each of these datasets:
 
@@ -706,9 +709,9 @@ Please create an *RMarkdown* document that will render as an `.html` file. You w
 **Please show all of your work for full credit.**
 
 
-***
+<hr>
 
-### Data for homework problems
+### Data for homework problems {.tight-top}
 
 <details>
 
