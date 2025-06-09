@@ -294,17 +294,11 @@ window.Quarto = {
   <li><a href="#boxplots" id="toc-boxplots" class="nav-link" data-scroll-target="#boxplots"><span class="header-section-number">3.4</span> Boxplots</a></li>
   <li><a href="#skewness" id="toc-skewness" class="nav-link" data-scroll-target="#skewness"><span class="header-section-number">3.5</span> Skewness</a></li>
   <li><a href="#kurtosis" id="toc-kurtosis" class="nav-link" data-scroll-target="#kurtosis"><span class="header-section-number">3.6</span> Kurtosis</a></li>
-  <li><a href="#cumulative-frequency-plot" id="toc-cumulative-frequency-plot" class="nav-link" data-scroll-target="#cumulative-frequency-plot"><span class="header-section-number">3.7</span> Cumulative frequency plot</a>
-  <ul class="collapse">
-  <li><a href="#if-data-are-not-in-histogramfrequency-format" id="toc-if-data-are-not-in-histogramfrequency-format" class="nav-link" data-scroll-target="#if-data-are-not-in-histogramfrequency-format"><span class="header-section-number">3.7.1</span> If data are not in histogram/frequency format</a></li>
-  <li><a href="#if-data-are-in-histogramfrequency-format" id="toc-if-data-are-in-histogramfrequency-format" class="nav-link" data-scroll-target="#if-data-are-in-histogramfrequency-format"><span class="header-section-number">3.7.2</span> If data are in histogram/frequency format</a></li>
-  </ul></li>
+  <li><a href="#cumulative-frequency-plot" id="toc-cumulative-frequency-plot" class="nav-link" data-scroll-target="#cumulative-frequency-plot"><span class="header-section-number">3.7</span> Cumulative frequency plot</a></li>
   <li><a href="#homework-chapter-3" id="toc-homework-chapter-3" class="nav-link" data-scroll-target="#homework-chapter-3"><span class="header-section-number">3.8</span> Homework: Chapter 3</a>
   <ul class="collapse">
   <li><a href="#helpful-hint" id="toc-helpful-hint" class="nav-link" data-scroll-target="#helpful-hint"><span class="header-section-number">3.8.1</span> Helpful hint</a></li>
-  <li><a href="#directions" id="toc-directions" class="nav-link" data-scroll-target="#directions"><span class="header-section-number">3.8.2</span> Directions</a></li>
   </ul></li>
-  <li><a href="#addendum" id="toc-addendum" class="nav-link" data-scroll-target="#addendum"><span class="header-section-number">3.9</span> Addendum</a></li>
   </ul>
 </nav>
     </div>
@@ -339,22 +333,32 @@ window.Quarto = {
 <section id="the-importance-of-visual-inspection" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="the-importance-of-visual-inspection"><span class="header-section-number">3.1</span> The importance of visual inspection</h2>
 <p>Inspecting data visually can give us a lot of information about whether data are normally distributed and about whether there are any major errors or issues with our dataset. It can also help us determine if data meet model assumptions, or if we need to use different tests more appropriate for our datasets.</p>
-<hr style="height: 7px; background-color">
+<hr>
 <p><br></p>
+<hr>
 </section>
-<section id="sample-data-and-preparation" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="sample-data-and-preparation"><span class="header-section-number">3.2</span> Sample data and preparation</h2>
-<p>First, we need to load our <em>R</em> libraries.</p>
+<section id="sample-data-and-preparation" class="level2 tight-top" data-number="3.2">
+<h2 class="tight-top anchored" data-number="3.2" data-anchor-id="sample-data-and-preparation"><span class="header-section-number">3.2</span> Sample data and preparation</h2>
+<p>Before we start, we must load our <em>R</em> libraries.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Next, we can download our data sample.</p>
+<hr>
+<p><br></p>
+<hr>
 </section>
-<section id="histograms" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="histograms"><span class="header-section-number">3.3</span> Histograms</h2>
+<section id="histograms" class="level2 tight-top" data-number="3.3">
+<h2 class="tight-top anchored" data-number="3.3" data-anchor-id="histograms"><span class="header-section-number">3.3</span> Histograms</h2>
 <p>A histogram is a frequency diagram that we can use to visually diagnose data and their distributions. We are going to examine a histogram using a random string of data. <em>R</em> can generate random (though, actually pseudorandom) strings of data on command, pulling them from different distributions. These distributions are pseudorandom because we can’t actually program <em>R</em> to be random, so it starts from a wide variety of pseudorandom points.</p>
-<section id="histograms-on-numeric-vectors" class="level3" data-number="3.3.1">
-<h3 data-number="3.3.1" class="anchored" data-anchor-id="histograms-on-numeric-vectors"><span class="header-section-number">3.3.1</span> Histograms on numeric vectors</h3>
+<hr>
+<p><br></p>
+<hr>
+<section id="histograms-on-numeric-vectors" class="level3 tight-top" data-number="3.3.1">
+<h3 class="tight-top anchored" data-number="3.3.1" data-anchor-id="histograms-on-numeric-vectors"><span class="header-section-number">3.3.1</span> Histograms on numeric vectors</h3>
+<details>
+<summary>
+Click to see how to make a default histogram
+</summary>
 <p>The following is how to create default histograms on data. If you need to create custom bin sizes, please see the notes under <em>Cumulative frequency plots</em> for data that are not already in frequency format.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create random string from normal distribution</span></span>
@@ -388,9 +392,17 @@ window.Quarto = {
 </div>
 </div>
 <p>The number of bins can be somewhat arbitrary, but a value should be chosen based off of what illustrates the data well. <em>R</em> will auto-select a number of bins in some cases, but you can also select a number of bins. Some assignments will ask you to choose a specific number of bins as well.</p>
+</details>
+<hr>
+<p><br></p>
+<hr>
 </section>
-<section id="histograms-on-frequency-counts" class="level3" data-number="3.3.2">
-<h3 data-number="3.3.2" class="anchored" data-anchor-id="histograms-on-frequency-counts"><span class="header-section-number">3.3.2</span> Histograms on frequency counts</h3>
+<section id="histograms-on-frequency-counts" class="level3 tight-top" data-number="3.3.2">
+<h3 class="tight-top anchored" data-number="3.3.2" data-anchor-id="histograms-on-frequency-counts"><span class="header-section-number">3.3.2</span> Histograms on frequency counts</h3>
+<details>
+<summary>
+Click to see how to make a histogram with frequency data
+</summary>
 <p>Say, for example, that we have a dataset where everything is already shown as frequencies. We can create a frequency histogram using <code>barplot</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>count_table <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T,</span>
@@ -417,9 +429,17 @@ window.Quarto = {
 </div>
 </div>
 </div>
+</details>
+<hr>
+<p><br></p>
+<hr>
 </section>
-<section id="ggplot-histograms" class="level3" data-number="3.3.3">
-<h3 data-number="3.3.3" class="anchored" data-anchor-id="ggplot-histograms"><span class="header-section-number">3.3.3</span> ggplot histograms</h3>
+<section id="ggplot-histograms" class="level3 tight-top" data-number="3.3.3">
+<h3 class="tight-top anchored" data-number="3.3.3" data-anchor-id="ggplot-histograms"><span class="header-section-number">3.3.3</span> ggplot histograms</h3>
+<details>
+<summary>
+Click to see how to make <em>fancy</em> histograms (optional)
+</summary>
 <p>The following is an <strong><em>optional</em></strong> workthrough on how to make really fancy plots.</p>
 <p>We can also use the program <code>ggplot</code>, part of the <code>tidyverse</code>, to create histograms.</p>
 <div class="cell">
@@ -527,11 +547,19 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>There are lots of other commands you can incorporate as well if you so choose; I recommend checking <a href="http://www.sthda.com/english/wiki/ggplot2-histogram-plot-quick-start-guide-r-software-and-data-visualization">sites like this one</a>.</p>
+<p>There are lots of other commands you can incorporate as well if you so choose; I recommend checking <a href="http://www.sthda.com/english/wiki/ggplot2-histogram-plot-quick-start-guide-r-software-and-data-visualization">sites like this one</a> or using ChatGPT.</p>
+</details>
+<hr>
+<p><br></p>
+<hr>
 </section>
 </section>
-<section id="boxplots" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="boxplots"><span class="header-section-number">3.4</span> Boxplots</h2>
+<section id="boxplots" class="level2 tight-top" data-number="3.4">
+<h2 class="tight-top anchored" data-number="3.4" data-anchor-id="boxplots"><span class="header-section-number">3.4</span> Boxplots</h2>
+<details>
+<summary>
+Click to see how to make boxplots
+</summary>
 <p>We can also create boxplots to visualize the spread of the data. Boxplots include a bar for the median, a box representing the interquartile range between the 25th and 75th percentiles, and whiskers that extend <span class="math inline">\(1.5 \cdot IQR\)</span> beyond the 25th and 75th percentiles. We can create a boxplot using the command <code>boxplot</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using pre-declared variable x</span></span>
@@ -559,9 +587,17 @@ window.Quarto = {
 </div>
 </div>
 <p>On the above plot, <em>outliers</em> for the dataset are shown as dots beyond the ends of the “whiskers”.</p>
+</details>
+<hr>
+<p><br></p>
+<hr>
 </section>
-<section id="skewness" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="skewness"><span class="header-section-number">3.5</span> Skewness</h2>
+<section id="skewness" class="level2 tight-top" data-number="3.5">
+<h2 class="tight-top anchored" data-number="3.5" data-anchor-id="skewness"><span class="header-section-number">3.5</span> Skewness</h2>
+<details>
+<summary>
+Click to read about skewness
+</summary>
 <p>Skew is a measure of how much a dataset “leans” to the positive or negative directions (<em>i.e.</em>, to the “left” or to the “right”). To calculate skew, we are going to use the <code>moments</code> library.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># don't forget to install if needed!</span></span>
@@ -597,9 +633,17 @@ window.Quarto = {
 </div>
 </div>
 <p>As we can see, the above is a heavily skewed dataset with a positive (“right”) skew.</p>
+</details>
+<hr>
+<p><br></p>
+<hr>
 </section>
-<section id="kurtosis" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="kurtosis"><span class="header-section-number">3.6</span> Kurtosis</h2>
+<section id="kurtosis" class="level2 tight-top" data-number="3.6">
+<h2 class="tight-top anchored" data-number="3.6" data-anchor-id="kurtosis"><span class="header-section-number">3.6</span> Kurtosis</h2>
+<details>
+<summary>
+Click to read about kurtosis
+</summary>
 <p>Kurtosis refers to how sharp or shallow the peak of the distribution is (<em>platykurtic</em> vs.&nbsp;<em>leptokurtic</em>). Remember - <em>platy</em>kyrtic are <em>plateau</em>kurtic, wide and broad like a plateau, and <em>leptokurtic</em> distributions are sharp. Intermediate distributions that are roughly normal are <em>mesokurtic</em>.</p>
 <p>Much like skewness, <strong>kurtosis values of</strong> <span class="math inline">\(&gt; 2\)</span> <strong>and</strong> <span class="math inline">\(&lt; -2\)</span> <strong>are generally considered extreme</strong>, and thus not mesokurtic. This threshold can vary a bit based on source, but for this class, we will use a threshold of <span class="math inline">\(\pm 2\)</span> for both skewness and kurtosis.</p>
 <p>Let’s see the kurtosis of <code>x</code>. <strong><em>Note</em></strong> that when doing the equation, a normal distribution actually has a kurtosis of <span class="math inline">\(3\)</span>; <strong>thus, we are doing kurtosis</strong> <span class="math inline">\(-3\)</span> <strong>to “zero” the distribution and make it comparable to skewness</strong>.</p>
@@ -648,12 +692,19 @@ window.Quarto = {
 </div>
 </div>
 <p>As we can see, this is a very <em>leptokurtic</em> distribution.</p>
+</details>
+<hr>
+<p><br></p>
+<hr>
 </section>
-<section id="cumulative-frequency-plot" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="cumulative-frequency-plot"><span class="header-section-number">3.7</span> Cumulative frequency plot</h2>
+<section id="cumulative-frequency-plot" class="level2 tight-top" data-number="3.7">
+<h2 class="tight-top anchored" data-number="3.7" data-anchor-id="cumulative-frequency-plot"><span class="header-section-number">3.7</span> Cumulative frequency plot</h2>
 <p>A <em>cumulative frequency plot</em> shows the overall spread of the data as a cumulative line over the entire dataset. This is another way to see the spread of the data and is often complementary to a histogram.</p>
-<section id="if-data-are-not-in-histogramfrequency-format" class="level3" data-number="3.7.1">
-<h3 data-number="3.7.1" class="anchored" data-anchor-id="if-data-are-not-in-histogramfrequency-format"><span class="header-section-number">3.7.1</span> If data are not in histogram/frequency format</h3>
+<hr>
+<details>
+<summary>
+Click to see how to make a cumulative frequency plot if data is not in histogram/frequency format
+</summary>
 <p>The use of the Empirical Cumulative Distribution Function, <strong>ecdf()</strong>,can turn a variable into what is needed to create a cumulative frequency plot. This is a base part of <em>R</em> and therefore does not require any libraries.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ecdf</span>(x)) <span class="co">#Creating a cumulative frequency plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -678,9 +729,12 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</section>
-<section id="if-data-are-in-histogramfrequency-format" class="level3" data-number="3.7.2">
-<h3 data-number="3.7.2" class="anchored" data-anchor-id="if-data-are-in-histogramfrequency-format"><span class="header-section-number">3.7.2</span> If data are in histogram/frequency format</h3>
+</details>
+<hr>
+<details>
+<summary>
+Click to see how to make a cumulative frequency plot if data is in histogram/frequency format
+</summary>
 <p>If you have a list of frequencies (say, <em>for river discharge over several years</em>), you only need to do the <code>cumsum</code> function. For example:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span> ,<span class="dv">2</span> ,<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">16</span>, <span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
@@ -709,13 +763,26 @@ window.Quarto = {
 </div>
 </div>
 </div>
+</details>
+<hr>
+<p><br></p>
+<hr>
 </section>
-</section>
-<section id="homework-chapter-3" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="homework-chapter-3"><span class="header-section-number">3.8</span> Homework: Chapter 3</h2>
-<p>From your book, complete problems 3.1, 3.4 &amp; 3.5. Data for these problems are available on <em>Canvas</em> and in your book.</p>
-<section id="helpful-hint" class="level3" data-number="3.8.1">
-<h3 data-number="3.8.1" class="anchored" data-anchor-id="helpful-hint"><span class="header-section-number">3.8.1</span> Helpful hint</h3>
+<section id="homework-chapter-3" class="level2 tight-top" data-number="3.8">
+<h2 class="tight-top anchored" data-number="3.8" data-anchor-id="homework-chapter-3"><span class="header-section-number">3.8</span> Homework: Chapter 3</h2>
+<p>From your book, complete problems <strong>3.1, 3.4 &amp; 3.5</strong>. Data for these problems are available on <em>Canvas</em> and in your book.</p>
+<p><br></p>
+<p><strong>Directions:</strong></p>
+<p>Please complete all computer portions in an <code>rmarkdown</code> document knitted as an html. Upload any “by hand” calculations as images in the HTML or separately on <em>Canvas</em>.</p>
+<hr>
+<p><br></p>
+<hr>
+<section id="helpful-hint" class="level3 tight-top" data-number="3.8.1">
+<h3 class="tight-top anchored" data-number="3.8.1" data-anchor-id="helpful-hint"><span class="header-section-number">3.8.1</span> Helpful hint</h3>
+<details>
+<summary>
+Click for a useful hint!
+</summary>
 <p><strong>HINT</strong>: For 3.5, consider just making a vector of the values of interest for a histogram.</p>
 <p>For example, see the following. For reference:</p>
 <ul>
@@ -740,17 +807,13 @@ window.Quarto = {
 </div>
 </div>
 </div>
-</section>
-<section id="directions" class="level3" data-number="3.8.2">
-<h3 data-number="3.8.2" class="anchored" data-anchor-id="directions"><span class="header-section-number">3.8.2</span> Directions</h3>
-<p>Please complete all computer portions in an <code>rmarkdown</code> document knitted as an html. Upload any “by hand” calculations as images in the HTML or separately on <em>Canvas</em>.</p>
-</section>
-</section>
-<section id="addendum" class="level2" data-number="3.9">
-<h2 data-number="3.9" class="anchored" data-anchor-id="addendum"><span class="header-section-number">3.9</span> Addendum</h2>
-<p>With thanks to Hernan Vargas &amp; Riley Grieser for help in formatting this page. Additional comments provided by BIOL 305 classes.</p>
+</details>
+<p><br> <br></p>
+<hr>
+<p><strong>Addendum</strong> With thanks to Hernan Vargas &amp; Riley Grieser for help in formatting this page. Additional comments provided by BIOL 305 classes.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

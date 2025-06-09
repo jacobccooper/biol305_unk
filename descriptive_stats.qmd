@@ -14,7 +14,11 @@ Descriptive statistics allow us to quickly get an idea of how our datasets are "
 
 <hr>
 
-## Preparing *R* {.tight-top}
+<br>
+
+<hr>
+
+## Sample data and preparation {.tight-top}
 
 As with every week, we will need to load our relevant packages first. This week, we are using the following:
 
@@ -25,8 +29,7 @@ library(tidyverse)
 
 <hr>
 
-<br>
-<br>
+<br> <br>
 
 <hr>
 
@@ -40,8 +43,7 @@ starbucks <- read_csv("https://raw.githubusercontent.com/jacobccooper/biol105_un
 
 <hr>
 
-<br>
-<br>
+<br> <br>
 
 <hr>
 
@@ -57,8 +59,7 @@ Using the `starbucks` dataset, we can look at some of these descriptive statisti
 
 <hr>
 
-<br>
-<br>
+<br> <br>
 
 <hr>
 
@@ -78,8 +79,7 @@ As a quick reminder, we use Greek lettering for *populations* and Roman letterin
 
 <hr>
 
-<br>
-<br>
+<br> <br>
 
 <hr>
 
@@ -129,8 +129,7 @@ round(sum(fraps)/length(fraps),0)
 
 <hr>
 
-<br>
-<br>
+<br> <br>
 
 <hr>
 
@@ -152,8 +151,7 @@ The range of our dataset is 13.
 
 <hr>
 
-<br>
-<br>
+<br> <br>
 
 <hr>
 
@@ -238,8 +236,7 @@ As we can see, these values are equal!
 
 <hr>
 
-<br>
-<br>
+<br> <br>
 
 <hr>
 
@@ -314,8 +311,7 @@ This is a classic example of how things in *R* (and in statistics in general!) c
 
 <hr>
 
-<br>
-<br>
+<br> <br>
 
 <hr>
 
@@ -421,8 +417,7 @@ If there are two or more modes, these numbers will also appear in the first line
 
 <hr>
 
-<br>
-<br>
+<br> <br>
 
 <hr>
 
@@ -493,8 +488,7 @@ Seeing as this is `TRUE`, we calculated it correctly.
 
 <hr>
 
-<br>
-<br>
+<br> <br>
 
 <hr>
 
@@ -528,8 +522,7 @@ As you can see, we calculated this correctly!
 
 <hr>
 
-<br>
-<br>
+<br> <br>
 
 <hr>
 
@@ -557,8 +550,7 @@ MeanSE(frap_order) #This is from DescTools!
 
 <hr>
 
-<br>
-<br>
+<br> <br>
 
 <hr>
 
@@ -600,8 +592,7 @@ However, we can also complete this with a *DescTools* function.
 
 <hr>
 
-<br>
-<br>
+<br> <br>
 
 <hr>
 
@@ -672,15 +663,13 @@ Again, there are no outliers as this code is effectively the same. If there are,
 
 <hr>
 
-<br>
-<br>
+<br> <br>
 
 <hr>
 
 ## Homework: Descriptive Statistics {.tight-top}
 
 Now that we've covered these basic statistics, it's your turn! For this week, you will be completing homework that involves methods from Chapter 4 in your book.
-
 
 <hr>
 
@@ -707,7 +696,6 @@ Please create an *RMarkdown* document that will render as an `.html` file. You w
 -   whether there are any "outliers"
 
 **Please show all of your work for full credit.**
-
 
 <hr>
 
