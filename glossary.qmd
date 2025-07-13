@@ -14,14 +14,44 @@ library(agricolae)
 
 The following are common useful commands used in *R*, with examples of their use.
 
--   `<-` / `=` - save a value as an object. On Mac, the keyboard shortcut is `OPTION`+`-`. Windows can be formatted so that the shortcut is `ALT`+`-`.
+Commands are given as Windows & Linux / Mac.
+
+### The basics
+
+-   Save your file with `CTRL` + `S` / ⌘ + `S`
+
+-   Undo your last action with `CTRL` + `Z` / ⌘ + `Z`
+
+-   Cut text with `CTRL` + `X` / ⌘ + `X`
+
+-   Copy text with `CTRL` + `C` / ⌘ + `C`
+
+-   Paste text with `CTRL` + `V` / ⌘ + `V`
+
+-   Select all text in a document with `CTRL` + `A` / ⌘ + `A`
+
+### Code basics
+
+-   A code chunk can be inserted using `CTRL` + `SHIFT` + `I` / ⌘ + `shift` + `I`
+
+-   Run a line of code with `CTRL` + `ENTER` / ⌘ + `return`
+
+-   Run a code chunk with `CTRL` + `SHIFT` + `ENTER` / ⌘ + `shift` + `return`
+
+-   Run all code in the document above where you were `CTRL` + `SHIFT` + `ALT` +`P` / ⌘ + `shift` + ⌥ + `P`
+
+-   Run all code with `CTRL` + `ALT` + `R` / ⌘ + ⌥ + `R`
+
+### Code formatting
+
+-   `<-` - save a value as an object. On Mac, the keyboard shortcut is ⌥ + `-`. Windows can be formatted so that the shortcut is `ALT` + `-`.
 
 ```{r}
 x <- 10
 x
 ```
 
--   `|>` - "pipe" a command or output into another command. You can use the shortcut `CTRL`+`SHIFT`+`M` on Windows or Mac.
+-   `|>` - "pipe" a command or output into another command. You can use the shortcut `CTRL`+`SHIFT`+`M` / \^ + `SHIFT` + `M`.
 
 ```{r}
 # make repeatable

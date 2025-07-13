@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -72,10 +72,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d5d78c9e45e9a5253a6059031ce5ea1b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -294,7 +294,12 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#common-commands" id="toc-common-commands" class="nav-link active" data-scroll-target="#common-commands"><span class="header-section-number">17.1</span> Common Commands</a></li>
+  <li><a href="#common-commands" id="toc-common-commands" class="nav-link active" data-scroll-target="#common-commands"><span class="header-section-number">17.1</span> Common Commands</a>
+  <ul class="collapse">
+  <li><a href="#the-basics" id="toc-the-basics" class="nav-link" data-scroll-target="#the-basics"><span class="header-section-number">17.1.1</span> The basics</a></li>
+  <li><a href="#code-basics" id="toc-code-basics" class="nav-link" data-scroll-target="#code-basics"><span class="header-section-number">17.1.2</span> Code basics</a></li>
+  <li><a href="#code-formatting" id="toc-code-formatting" class="nav-link" data-scroll-target="#code-formatting"><span class="header-section-number">17.1.3</span> Code formatting</a></li>
+  </ul></li>
   <li><a href="#basic-statistics" id="toc-basic-statistics" class="nav-link" data-scroll-target="#basic-statistics"><span class="header-section-number">17.2</span> Basic statistics</a></li>
   <li><a href="#custom-functions-from-class-and-elsewhere" id="toc-custom-functions-from-class-and-elsewhere" class="nav-link" data-scroll-target="#custom-functions-from-class-and-elsewhere"><span class="header-section-number">17.3</span> Custom functions from class and elsewhere</a>
   <ul class="collapse">
@@ -336,8 +341,32 @@ window.Quarto = {
 <section id="common-commands" class="level2" data-number="17.1">
 <h2 data-number="17.1" class="anchored" data-anchor-id="common-commands"><span class="header-section-number">17.1</span> Common Commands</h2>
 <p>The following are common useful commands used in <em>R</em>, with examples of their use.</p>
+<p>Commands are given as Windows &amp; Linux / Mac.</p>
+<section id="the-basics" class="level3" data-number="17.1.1">
+<h3 data-number="17.1.1" class="anchored" data-anchor-id="the-basics"><span class="header-section-number">17.1.1</span> The basics</h3>
 <ul>
-<li><code>&lt;-</code> / <code>=</code> - save a value as an object. On Mac, the keyboard shortcut is <code>OPTION</code>+<code>-</code>. Windows can be formatted so that the shortcut is <code>ALT</code>+<code>-</code>.</li>
+<li><p>Save your file with <code>CTRL</code> + <code>S</code> / ⌘ + <code>S</code></p></li>
+<li><p>Undo your last action with <code>CTRL</code> + <code>Z</code> / ⌘ + <code>Z</code></p></li>
+<li><p>Cut text with <code>CTRL</code> + <code>X</code> / ⌘ + <code>X</code></p></li>
+<li><p>Copy text with <code>CTRL</code> + <code>C</code> / ⌘ + <code>C</code></p></li>
+<li><p>Paste text with <code>CTRL</code> + <code>V</code> / ⌘ + <code>V</code></p></li>
+<li><p>Select all text in a document with <code>CTRL</code> + <code>A</code> / ⌘ + <code>A</code></p></li>
+</ul>
+</section>
+<section id="code-basics" class="level3" data-number="17.1.2">
+<h3 data-number="17.1.2" class="anchored" data-anchor-id="code-basics"><span class="header-section-number">17.1.2</span> Code basics</h3>
+<ul>
+<li><p>A code chunk can be inserted using <code>CTRL</code> + <code>SHIFT</code> + <code>I</code> / ⌘ + <code>shift</code> + <code>I</code></p></li>
+<li><p>Run a line of code with <code>CTRL</code> + <code>ENTER</code> / ⌘ + <code>return</code></p></li>
+<li><p>Run a code chunk with <code>CTRL</code> + <code>SHIFT</code> + <code>ENTER</code> / ⌘ + <code>shift</code> + <code>return</code></p></li>
+<li><p>Run all code in the document above where you were <code>CTRL</code> + <code>SHIFT</code> + <code>ALT</code> +<code>P</code> / ⌘ + <code>shift</code> + ⌥ + <code>P</code></p></li>
+<li><p>Run all code with <code>CTRL</code> + <code>ALT</code> + <code>R</code> / ⌘ + ⌥ + <code>R</code></p></li>
+</ul>
+</section>
+<section id="code-formatting" class="level3" data-number="17.1.3">
+<h3 data-number="17.1.3" class="anchored" data-anchor-id="code-formatting"><span class="header-section-number">17.1.3</span> Code formatting</h3>
+<ul>
+<li><code>&lt;-</code> - save a value as an object. On Mac, the keyboard shortcut is ⌥ + <code>-</code>. Windows can be formatted so that the shortcut is <code>ALT</code> + <code>-</code>.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
@@ -347,7 +376,7 @@ window.Quarto = {
 </div>
 </div>
 <ul>
-<li><code>|&gt;</code> - “pipe” a command or output into another command. You can use the shortcut <code>CTRL</code>+<code>SHIFT</code>+<code>M</code> on Windows or Mac.</li>
+<li><code>|&gt;</code> - “pipe” a command or output into another command. You can use the shortcut <code>CTRL</code>+<code>SHIFT</code>+<code>M</code> / ^ + <code>SHIFT</code> + <code>M</code>.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make repeatable</span></span>
@@ -397,6 +426,7 @@ window.Quarto = {
 <pre><code>[1] 10 11</code></pre>
 </div>
 </div>
+</section>
 </section>
 <section id="basic-statistics" class="level2" data-number="17.2">
 <h2 data-number="17.2" class="anchored" data-anchor-id="basic-statistics"><span class="header-section-number">17.2</span> Basic statistics</h2>
@@ -866,6 +896,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -976,6 +1008,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
+      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
