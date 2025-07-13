@@ -8,7 +8,9 @@ book:
   date: "`r format(Sys.time(), '%d %B, %Y')`"
   chapters:
     - index.qmd
+    - install_r.qmd
     - intro_to_r.qmd
+    - first_analysis.qmd
     - descriptive_stats.qmd
     - visual.qmd
     - normality.qmd

@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="University of Nebraska at Kearney Biology">
+<meta name="author" content="UNK Biology">
 
-<title>15&nbsp; Final exam &amp; review – Biology 305: Biostatistics</title>
+<title>3&nbsp; Running your first analysis – Biology 305: Biostatistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -55,7 +55,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -65,8 +84,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./conclusion.html" rel="next">
-<link href="./picktest.html" rel="prev">
+<link href="./descriptive_stats.html" rel="next">
+<link href="./intro_to_r.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -145,7 +164,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./final_exam.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Final exam &amp; review</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./first_analysis.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Running your first analysis</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -190,7 +209,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./first_analysis.html" class="sidebar-item-text sidebar-link">
+  <a href="./first_analysis.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Running your first analysis</span></span></a>
   </div>
 </li>
@@ -262,7 +281,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./final_exam.html" class="sidebar-item-text sidebar-link active">
+  <a href="./final_exam.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Final exam &amp; review</span></span></a>
   </div>
 </li>
@@ -294,33 +313,14 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">15.1</span> Introduction</a></li>
-  <li><a href="#happiness" id="toc-happiness" class="nav-link" data-scroll-target="#happiness"><span class="header-section-number">15.2</span> Happiness</a>
+  <li><a href="#create-a-new-document" id="toc-create-a-new-document" class="nav-link active" data-scroll-target="#create-a-new-document"><span class="header-section-number">3.1</span> Create a new document</a></li>
+  <li><a href="#working-with-data" id="toc-working-with-data" class="nav-link" data-scroll-target="#working-with-data"><span class="header-section-number">3.2</span> Working with data</a>
   <ul class="collapse">
-  <li><a href="#what-are-the-null-and-statistical-hypotheses-of-this-study" id="toc-what-are-the-null-and-statistical-hypotheses-of-this-study" class="nav-link" data-scroll-target="#what-are-the-null-and-statistical-hypotheses-of-this-study"><span class="header-section-number">15.2.1</span> What are the null and statistical hypotheses of this study?</a></li>
-  <li><a href="#what-statistical-test-should-be-used-for-this-test-justify-your-answer-and-be-specific." id="toc-what-statistical-test-should-be-used-for-this-test-justify-your-answer-and-be-specific." class="nav-link" data-scroll-target="#what-statistical-test-should-be-used-for-this-test-justify-your-answer-and-be-specific."><span class="header-section-number">15.2.2</span> What statistical test should be used for this test? Justify your answer, and be specific.</a></li>
-  <li><a href="#calculate-the-appropriate-test-statistic-showing-all-or-your-work." id="toc-calculate-the-appropriate-test-statistic-showing-all-or-your-work." class="nav-link" data-scroll-target="#calculate-the-appropriate-test-statistic-showing-all-or-your-work."><span class="header-section-number">15.2.3</span> Calculate the appropriate test statistic, showing <em>all</em> or your work.</a></li>
-  <li><a href="#assume-that-alpha-0.05.-state-your-final-conclusion-from-the-survey." id="toc-assume-that-alpha-0.05.-state-your-final-conclusion-from-the-survey." class="nav-link" data-scroll-target="#assume-that-alpha-0.05.-state-your-final-conclusion-from-the-survey."><span class="header-section-number">15.2.4</span> Assume that <span class="math inline">\(\alpha = 0.05\)</span>. State your final conclusion from the survey.</a></li>
+  <li><a href="#libraries" id="toc-libraries" class="nav-link" data-scroll-target="#libraries"><span class="header-section-number">3.2.1</span> Libraries</a></li>
+  <li><a href="#downloading-data" id="toc-downloading-data" class="nav-link" data-scroll-target="#downloading-data"><span class="header-section-number">3.2.2</span> Downloading data</a></li>
+  <li><a href="#subsetting-data" id="toc-subsetting-data" class="nav-link" data-scroll-target="#subsetting-data"><span class="header-section-number">3.2.3</span> Subsetting data</a></li>
   </ul></li>
-  <li><a href="#running-and-grades" id="toc-running-and-grades" class="nav-link" data-scroll-target="#running-and-grades"><span class="header-section-number">15.3</span> Running and grades</a>
-  <ul class="collapse">
-  <li><a href="#what-is-the-appropriate-analysis-for-this-question" id="toc-what-is-the-appropriate-analysis-for-this-question" class="nav-link" data-scroll-target="#what-is-the-appropriate-analysis-for-this-question"><span class="header-section-number">15.3.1</span> What is the appropriate analysis for this question?</a></li>
-  <li><a href="#perform-the-test.-what-is-the-test-statistic" id="toc-perform-the-test.-what-is-the-test-statistic" class="nav-link" data-scroll-target="#perform-the-test.-what-is-the-test-statistic"><span class="header-section-number">15.3.2</span> Perform the test. What is the <em>test statistic</em>?</a></li>
-  <li><a href="#state-your-conclusion-about-this-scenario-using-alpha-0.05." id="toc-state-your-conclusion-about-this-scenario-using-alpha-0.05." class="nav-link" data-scroll-target="#state-your-conclusion-about-this-scenario-using-alpha-0.05."><span class="header-section-number">15.3.3</span> State your conclusion about this scenario, using <span class="math inline">\(\alpha = 0.05\)</span>.</a></li>
-  </ul></li>
-  <li><a href="#fosbury-flop" id="toc-fosbury-flop" class="nav-link" data-scroll-target="#fosbury-flop"><span class="header-section-number">15.4</span> Fosbury Flop</a>
-  <ul class="collapse">
-  <li><a href="#what-is-the-appropriate-test-for-this-analysis-justify-your-answer-and-be-specific." id="toc-what-is-the-appropriate-test-for-this-analysis-justify-your-answer-and-be-specific." class="nav-link" data-scroll-target="#what-is-the-appropriate-test-for-this-analysis-justify-your-answer-and-be-specific."><span class="header-section-number">15.4.1</span> What is the appropriate test for this analysis? Justify your answer, and be specific.</a></li>
-  <li><a href="#perform-the-test.-what-is-the-test-statistic-1" id="toc-perform-the-test.-what-is-the-test-statistic-1" class="nav-link" data-scroll-target="#perform-the-test.-what-is-the-test-statistic-1"><span class="header-section-number">15.4.2</span> Perform the test. What is the <em>test statistic</em>?</a></li>
-  <li><a href="#state-your-conclusion-about-this-scenario.-set-alpha-0.05." id="toc-state-your-conclusion-about-this-scenario.-set-alpha-0.05." class="nav-link" data-scroll-target="#state-your-conclusion-about-this-scenario.-set-alpha-0.05."><span class="header-section-number">15.4.3</span> State your conclusion about this scenario. Set <span class="math inline">\(\alpha = 0.05\)</span>.</a></li>
-  </ul></li>
-  <li><a href="#sandhills-stonehills" id="toc-sandhills-stonehills" class="nav-link" data-scroll-target="#sandhills-stonehills"><span class="header-section-number">15.5</span> Sandhills, Stonehills</a>
-  <ul class="collapse">
-  <li><a href="#what-is-the-appropriate-test" id="toc-what-is-the-appropriate-test" class="nav-link" data-scroll-target="#what-is-the-appropriate-test"><span class="header-section-number">15.5.1</span> What is the appropriate test?</a></li>
-  <li><a href="#what-is-are-the-explanatory-variables" id="toc-what-is-are-the-explanatory-variables" class="nav-link" data-scroll-target="#what-is-are-the-explanatory-variables"><span class="header-section-number">15.5.2</span> What is / are the explanatory variables?</a></li>
-  <li><a href="#perform-the-appropriate-test.-make-a-graph-if-necessary." id="toc-perform-the-appropriate-test.-make-a-graph-if-necessary." class="nav-link" data-scroll-target="#perform-the-appropriate-test.-make-a-graph-if-necessary."><span class="header-section-number">15.5.3</span> Perform the appropriate test. Make a graph if necessary.</a></li>
-  <li><a href="#state-your-conclusions-about-this-test.-set-alpha-0.05." id="toc-state-your-conclusions-about-this-test.-set-alpha-0.05." class="nav-link" data-scroll-target="#state-your-conclusions-about-this-test.-set-alpha-0.05."><span class="header-section-number">15.5.4</span> State your conclusions about this test. Set <span class="math inline">\(\alpha = 0.05\)</span>.</a></li>
-  </ul></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">3.3</span> Your turn!</a></li>
   </ul>
 </nav>
     </div>
@@ -329,7 +329,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Final exam &amp; review</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Running your first analysis</span></h1>
 </div>
 
 
@@ -339,7 +339,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>University of Nebraska at Kearney Biology </p>
+             <p>UNK Biology </p>
           </div>
   </div>
     
@@ -352,165 +352,276 @@ window.Quarto = {
 </header>
 
 
-<section id="introduction" class="level2" data-number="15.1">
-<h2 data-number="15.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">15.1</span> Introduction</h2>
-<p>These are questions that are posed as they would be on a final. Please complete each part of each question; we will review the answers. The following data are either imaginary or pulled from publicly available sources like <a href="https://wikipedia.org">Wikipedia</a>.</p>
+<p>Here, we are going to go through a work through with our first set of data. This will be your first assignment using <em>RMarkdown</em> and <em>RStudio</em>.</p>
+<section id="create-a-new-document" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="create-a-new-document"><span class="header-section-number">3.1</span> Create a new document</h2>
+<p>Refer to the previous section to create a new document. Name it <code>LastName_first_analysis.rmd</code>, with <code>LastName</code> replaced by your surname. Save this document in your assignments folder, and make sure it will <code>knit</code> as an <code>html</code> document.</p>
+<ul>
+<li>You should <em>always</em> have your last name in your file name when you submit documents in this class.</li>
+</ul>
+</section>
+<section id="working-with-data" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="working-with-data"><span class="header-section-number">3.2</span> Working with data</h2>
+<p>Throughout this course, we are going to have to work with datasets that are from our book or other sources. Here, we are going to work through an example dataset.</p>
+<ul>
+<li>First, we need to install <em>libraries</em>. A <strong><em>library</em></strong> is a collated, pre-existing batch of code that is designed to assist with data analysis or to perform specific functions. These libraries make life a lot easier, and create short commands for completing relatively complex tasks.</li>
+</ul>
+<section id="libraries" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="libraries"><span class="header-section-number">3.2.1</span> Libraries</h3>
+<p>In this class, there is one major library that you will need <em>almost every week</em>! <strong>Even if I don’t declare this library, you should load it in your documents</strong>.</p>
+<ul>
+<li><p>Libraries are declared at the very beginning of the document</p></li>
+<li><p>Libraries <em>must</em> be in a code chunk at the top of the document or else they will not be loaded before the code requiring them, preventing your document from being <code>knit</code>.</p>
+<ul>
+<li>Make sure you read your error codes - many times it will say that your command is not found, and that often means your library is not loaded. That, or you misspelled something.</li>
+</ul></li>
+</ul>
+<ol type="1">
+<li><code>tidyverse</code>: this package is actually a <a href="https://www.tidyverse.org/">group of packages</a> designed to help with data analysis, management, and visualization.</li>
+</ol>
+<p><strong>NOTE: If you leave the install prompts in your RMarkdown document, <em>it will not knit!</em> Install the following using the bottom right coding window of your <em>RStudio</em> session.</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run this code the first time ONLY</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT INCLUDE IN RMD FILE</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># does not need to be run every time you use R!</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># tidyverse has a bunch of packages in it!</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># great for data manipulation</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># if you ever need to update:</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># leaving brackets open means "update everything"</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">update.packages</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>After packages are installed, we will need to load them into our <em>R</em> environment. While we only need to do <code>install.packages</code> once on our machine, <strong>we need to load libraries <em>every time we restart the program!</em></strong></li>
+</ul>
+<p><strong>NOTE: The following is required in EVERY DOCUMENT that uses the <code>tidyverse</code> commands!</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">### MUST BE RUN AT THE TOP OF EVERY DOCUMENT </span><span class="al">###</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Load tidyverse into R session / document</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ ggplot2   3.5.2     ✔ tibble    3.3.0
 ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
+✔ purrr     1.0.4     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 </div>
+<p>You should have an output like the above. What this means is:</p>
+<ol type="1">
+<li>The core packages that comprise the <code>tidyverse</code> loaded successfully, and version numbers for each are shown.</li>
+<li>The conflicts basically means that certain commands will not work as they used to because <em>R</em> has “re-learned” a particular word.</li>
+</ol>
+<section id="conflicts" class="level4" data-number="3.2.1.1">
+<h4 data-number="3.2.1.1" class="anchored" data-anchor-id="conflicts"><span class="header-section-number">3.2.1.1</span> Conflicts</h4>
+<p>To clarify the conflicts, pretend that you can only know one definition of a word at a time, in this case, the word “cola”.</p>
+<ul>
+<li><p><strong>English</strong>: Cola is a type of soda pop or soft drink.</p></li>
+<li><p><strong>Spanish</strong>: Cola refers to a line or a tail.</p></li>
+</ul>
+<p>While we can figure out which definition is being used based on context, <em>R</em> can’t. It will always use the most recent definition, such that it may interpret something as “Mi perro movió la <em>refresco</em>” or “I bought a <em>tail</em> from the vending machine”. To avoid this confusion in <em>R</em>, we specify which “cola” we are referring to. In the above, this would look like “Mi perro movió la <code>español::cola</code>” and “I bought a <code>english::cola</code> from the vending machine”.</p>
+<p>We should not have many conflicts in this class, but be aware they may exist.</p>
 </section>
-<section id="happiness" class="level2" data-number="15.2">
-<h2 data-number="15.2" class="anchored" data-anchor-id="happiness"><span class="header-section-number">15.2</span> Happiness</h2>
-<p>You decide to ask your friends to rate their happiness on a scale of 0-100 before and after you bother them to ask how happy they are, thereby inciting an existential crises within each of them. You predict that asking this question will decrease the happiness they are feeling at that moment. These data are ranked data, but assume they are parametric given the size of the scale being used.</p>
+</section>
+<section id="downloading-data" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="downloading-data"><span class="header-section-number">3.2.2</span> Downloading data</h3>
+<p>Now, we need to download our first data set. These datasets are stored on GitHub. We are going to be looking at data from Dr.&nbsp;Cooper’s dissertation concerning Afrotropical bird distributions <span class="citation" data-cites="cooper_biogeographic_2021">(<a href="#ref-cooper_biogeographic_2021" role="doc-biblioref">Cooper 2021</a>)</span>. This website is in the data folder on this websites’ GitHub page, <a href="https://github.com/jacobccooper/biol105_unk/blob/main/datasets/lacustrine_range_size.csv">accessible here</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>before_asking <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">96</span>,<span class="dv">80</span>,<span class="dv">86</span>,<span class="dv">92</span>,<span class="dv">100</span>,<span class="dv">92</span>,<span class="dv">95</span>,<span class="dv">91</span>,<span class="dv">87</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>after_asking <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">72</span>,<span class="dv">53</span>,<span class="dv">90</span>,<span class="dv">85</span>,<span class="dv">90</span>,<span class="dv">86</span>,<span class="dv">83</span>,<span class="dv">79</span>,<span class="dv">62</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>happiness <span class="ot">&lt;-</span> <span class="fu">cbind</span>(before_asking, after_asking) <span class="sc">|&gt;</span> </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>happiness</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  before_asking after_asking
-1            96           72
-2            80           53
-3            86           90
-4            92           85
-5           100           90
-6            92           86
-7            95           83
-8            91           79
-9            87           62</code></pre>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read comma separated file (csv) into R memory</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># reads directly from URL</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>ranges <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/datasets/lacustrine_range_size.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 12 Columns: 10
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): species
+dbl (9): combined_current_km2, consensus_km2, bioclim_current_km2, 2050_comb...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-<section id="what-are-the-null-and-statistical-hypotheses-of-this-study" class="level3" data-number="15.2.1">
-<h3 data-number="15.2.1" class="anchored" data-anchor-id="what-are-the-null-and-statistical-hypotheses-of-this-study"><span class="header-section-number">15.2.1</span> What are the null and statistical hypotheses of this study?</h3>
-</section>
-<section id="what-statistical-test-should-be-used-for-this-test-justify-your-answer-and-be-specific." class="level3" data-number="15.2.2">
-<h3 data-number="15.2.2" class="anchored" data-anchor-id="what-statistical-test-should-be-used-for-this-test-justify-your-answer-and-be-specific."><span class="header-section-number">15.2.2</span> What statistical test should be used for this test? Justify your answer, and be specific.</h3>
-</section>
-<section id="calculate-the-appropriate-test-statistic-showing-all-or-your-work." class="level3" data-number="15.2.3">
-<h3 data-number="15.2.3" class="anchored" data-anchor-id="calculate-the-appropriate-test-statistic-showing-all-or-your-work."><span class="header-section-number">15.2.3</span> Calculate the appropriate test statistic, showing <em>all</em> or your work.</h3>
-</section>
-<section id="assume-that-alpha-0.05.-state-your-final-conclusion-from-the-survey." class="level3" data-number="15.2.4">
-<h3 data-number="15.2.4" class="anchored" data-anchor-id="assume-that-alpha-0.05.-state-your-final-conclusion-from-the-survey."><span class="header-section-number">15.2.4</span> Assume that <span class="math inline">\(\alpha = 0.05\)</span>. State your final conclusion from the survey.</h3>
-</section>
-</section>
-<section id="running-and-grades" class="level2" data-number="15.3">
-<h2 data-number="15.3" class="anchored" data-anchor-id="running-and-grades"><span class="header-section-number">15.3</span> Running and grades</h2>
-<p>You hear that going running is good for your grades. You decide to look and see if the amount of time people spend running is related to their grades. You obtain the following data:</p>
+<p>Alternatively, we can use the operator <code>|&gt;</code> to simplify this process. <code>|&gt;</code> means “take whatever you got from the previous step and <em>pipe</em> it into the next step”. So, the following does the exact same thing:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>run_time <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">25</span>,<span class="dv">22</span>,<span class="dv">50</span>,<span class="dv">30</span>,<span class="dv">10</span>,<span class="dv">6</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>grade <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">94</span>,<span class="dv">84</span>,<span class="dv">95</span>,<span class="dv">72</span>,<span class="dv">88</span>,<span class="dv">90</span>,<span class="dv">85</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>run_grades <span class="ot">&lt;-</span> <span class="fu">cbind</span>(run_time, grade) <span class="sc">|&gt;</span> </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>run_grades</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  run_time grade
-1       20    94
-2       25    84
-3       22    95
-4       50    72
-5       30    88
-6       10    90
-7        6    85</code></pre>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ranges <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/datasets/lacustrine_range_size.csv"</span> <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 12 Columns: 10
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): species
+dbl (9): combined_current_km2, consensus_km2, bioclim_current_km2, 2050_comb...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-<section id="what-is-the-appropriate-analysis-for-this-question" class="level3" data-number="15.3.1">
-<h3 data-number="15.3.1" class="anchored" data-anchor-id="what-is-the-appropriate-analysis-for-this-question"><span class="header-section-number">15.3.1</span> What is the appropriate analysis for this question?</h3>
-</section>
-<section id="perform-the-test.-what-is-the-test-statistic" class="level3" data-number="15.3.2">
-<h3 data-number="15.3.2" class="anchored" data-anchor-id="perform-the-test.-what-is-the-test-statistic"><span class="header-section-number">15.3.2</span> Perform the test. What is the <em>test statistic</em>?</h3>
-</section>
-<section id="state-your-conclusion-about-this-scenario-using-alpha-0.05." class="level3" data-number="15.3.3">
-<h3 data-number="15.3.3" class="anchored" data-anchor-id="state-your-conclusion-about-this-scenario-using-alpha-0.05."><span class="header-section-number">15.3.3</span> State your conclusion about this scenario, using <span class="math inline">\(\alpha = 0.05\)</span>.</h3>
-</section>
-</section>
-<section id="fosbury-flop" class="level2" data-number="15.4">
-<h2 data-number="15.4" class="anchored" data-anchor-id="fosbury-flop"><span class="header-section-number">15.4</span> Fosbury Flop</h2>
-<p>High-jumpers use the “Fosbury Flop” because it improves their performance by allowing their center of mass to pass <em>under</em> the high-jump bar while their bodies pass <em>over</em> the bar. Below are jump heights (in meters) for world records from before the Fosbury Flop was widely used and after the Fosbury Flop was widely used. Does the flop significantly improve athlete performace?</p>
+<p>Using the <code>|&gt;</code> is preferred as you can better set up a workflow and because it more closely mimics other coding languages, such as <code>bash</code>.</p>
+<p>Let’s view the data to see if it worked. We can use the command <code>head</code> to view the first few rows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pre_flop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.09</span>,<span class="fl">2.12</span>,<span class="fl">2.15</span>,<span class="fl">2.18</span>,<span class="fl">2.17</span>,<span class="fl">2.28</span>,<span class="fl">2.29</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>post_flop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.30</span>,<span class="fl">2.33</span>,<span class="fl">2.39</span>,<span class="fl">2.34</span>,<span class="fl">2.42</span>,<span class="fl">2.45</span>,<span class="fl">2.44</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>jump_heights <span class="ot">&lt;-</span> <span class="fu">cbind</span>(pre_flop, post_flop) <span class="sc">|&gt;</span> </span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>jump_heights</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ranges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  pre_flop post_flop
-1     2.09      2.30
-2     2.12      2.33
-3     2.15      2.39
-4     2.18      2.34
-5     2.17      2.42
-6     2.28      2.45
-7     2.29      2.44</code></pre>
+<pre><code># A tibble: 6 × 10
+  species                combined_current_km2 consensus_km2 bioclim_current_km2
+  &lt;chr&gt;                                 &lt;dbl&gt;         &lt;dbl&gt;               &lt;dbl&gt;
+1 Batis_diops                          25209.         6694.              19241.
+2 Chamaetylas_poliophrys               68171.         1106.              68158.
+3 Cinnyris_regius                      60939.        13305.              53627.
+4 Cossypha_archeri                     27021.         6409.              11798.
+5 Cyanomitra_alinae                    78680.        34320.              63381.
+6 Graueria_vittata                      8770.          861.               8301.
+# ℹ 6 more variables: `2050_combined_km2` &lt;dbl&gt;, `2050_consensus_km2` &lt;dbl&gt;,
+#   `2070_combined_km2` &lt;dbl&gt;, `2070_consensus_km2` &lt;dbl&gt;,
+#   alltime_consensus_km2 &lt;dbl&gt;, past_stable_km2 &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<section id="what-is-the-appropriate-test-for-this-analysis-justify-your-answer-and-be-specific." class="level3" data-number="15.4.1">
-<h3 data-number="15.4.1" class="anchored" data-anchor-id="what-is-the-appropriate-test-for-this-analysis-justify-your-answer-and-be-specific."><span class="header-section-number">15.4.1</span> What is the appropriate test for this analysis? Justify your answer, and be specific.</h3>
-</section>
-<section id="perform-the-test.-what-is-the-test-statistic-1" class="level3" data-number="15.4.2">
-<h3 data-number="15.4.2" class="anchored" data-anchor-id="perform-the-test.-what-is-the-test-statistic-1"><span class="header-section-number">15.4.2</span> Perform the test. What is the <em>test statistic</em>?</h3>
-</section>
-<section id="state-your-conclusion-about-this-scenario.-set-alpha-0.05." class="level3" data-number="15.4.3">
-<h3 data-number="15.4.3" class="anchored" data-anchor-id="state-your-conclusion-about-this-scenario.-set-alpha-0.05."><span class="header-section-number">15.4.3</span> State your conclusion about this scenario. Set <span class="math inline">\(\alpha = 0.05\)</span>.</h3>
-</section>
-</section>
-<section id="sandhills-stonehills" class="level2" data-number="15.5">
-<h2 data-number="15.5" class="anchored" data-anchor-id="sandhills-stonehills"><span class="header-section-number">15.5</span> Sandhills, Stonehills</h2>
-<p>You decide to look at concentrations of Greater Prairie-Chickens <em>Tympanuchus cupido</em> in fields a set amount of years after control burns. The following table shows the count of prairie-chickens in each field from the year of the burn until 5 years after the burn. Conditions are lettered to ensure sorting is performed correctly.</p>
+<p>We can perform a lot of summary statistics in <em>R</em>. Some of these we can view for multiple columns at once using <code>summary</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Location <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Sandhills"</span>, <span class="dv">4</span>), <span class="fu">rep</span>(<span class="st">"Stonehills"</span>, <span class="dv">4</span>))</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>a_burn_year <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">2</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>b_one_year_post_burn <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>c_five_years_post_burn <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">21</span>,<span class="dv">15</span>,<span class="dv">8</span>,<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">10</span>,<span class="dv">8</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>prairie_chickens <span class="ot">&lt;-</span> <span class="fu">cbind</span>(Location, a_burn_year, b_one_year_post_burn, c_five_years_post_burn) <span class="sc">|&gt;</span> </span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>prairie_chickens</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ranges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    Location a_burn_year b_one_year_post_burn c_five_years_post_burn
-1  Sandhills           1                    3                     20
-2  Sandhills           0                    5                     21
-3  Sandhills           3                    7                     15
-4  Sandhills           2                    6                      8
-5 Stonehills           1                    5                      8
-6 Stonehills           0                    3                      7
-7 Stonehills           0                    2                     10
-8 Stonehills           2                    5                      8</code></pre>
+<pre><code>   species          combined_current_km2 consensus_km2     bioclim_current_km2
+ Length:12          Min.   :  8770       Min.   :  861.3   Min.   :  3749     
+ Class :character   1st Qu.: 24800       1st Qu.: 4186.2   1st Qu.: 10924     
+ Mode  :character   Median : 43654       Median : 7778.1   Median : 31455     
+                    Mean   : 68052       Mean   :18161.8   Mean   : 42457     
+                    3rd Qu.: 70798       3rd Qu.:18558.7   3rd Qu.: 62835     
+                    Max.   :232377       Max.   :79306.6   Max.   :148753     
+ 2050_combined_km2 2050_consensus_km2 2070_combined_km2  2070_consensus_km2
+ Min.   :  1832    Min.   :    0.0    Min.   :   550.3   Min.   :    0.0   
+ 1st Qu.:  6562    1st Qu.:  589.5    1st Qu.:  6583.8   1st Qu.:  311.4   
+ Median : 26057    Median : 6821.9    Median : 24281.7   Median : 2714.6   
+ Mean   : 33247    Mean   :14418.4    Mean   : 31811.0   Mean   : 8250.5   
+ 3rd Qu.: 40460    3rd Qu.:18577.1    3rd Qu.: 38468.9   3rd Qu.:10034.4   
+ Max.   :132487    Max.   :79236.2    Max.   :129591.0   Max.   :53291.8   
+ alltime_consensus_km2 past_stable_km2 
+ Min.   :    0.0       Min.   :   0.0  
+ 1st Qu.:  790.9       1st Qu.:   0.0  
+ Median : 8216.8       Median :   0.0  
+ Mean   :15723.3       Mean   : 127.3  
+ 3rd Qu.:19675.0       3rd Qu.:   0.0  
+ Max.   :82310.5       Max.   :1434.8  </code></pre>
 </div>
 </div>
-<section id="what-is-the-appropriate-test" class="level3" data-number="15.5.1">
-<h3 data-number="15.5.1" class="anchored" data-anchor-id="what-is-the-appropriate-test"><span class="header-section-number">15.5.1</span> What is the appropriate test?</h3>
+<p>As seen above, we now have information for the following statistics for each variable:</p>
+<ul>
+<li><code>Min</code> = minimum</li>
+<li><code>1st Qu.</code> = 1st quartile</li>
+<li><code>Median</code> = middle of the dataset</li>
+<li><code>Mean</code> = average of the dataset</li>
+<li><code>3rd Qu.</code> = 3rd quartile</li>
+<li><code>Max.</code> = maximum</li>
+</ul>
+<p>We can also calculate some of these statistics manually to see if we are doing everything correctly. It is easiest to do this by using predefined functions in <em>R</em> (code others have written to perform a particular task) or to create our own functions in <em>R</em>. We will do both to determine the average of <code>combined_current_km2</code>.</p>
 </section>
-<section id="what-is-are-the-explanatory-variables" class="level3" data-number="15.5.2">
-<h3 data-number="15.5.2" class="anchored" data-anchor-id="what-is-are-the-explanatory-variables"><span class="header-section-number">15.5.2</span> What is / are the explanatory variables?</h3>
+<section id="subsetting-data" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="subsetting-data"><span class="header-section-number">3.2.3</span> Subsetting data</h3>
+<p>First, we need to select only the column of interest. In <em>R</em>, we have two ways of subsetting data to get a particular column.</p>
+<ul>
+<li><code>var[rows,cols]</code> is a way to look at a particular object (<code>var</code> in this case) and choose a specific combination of <code>row</code> number and <code>column</code> number (<code>col</code>). This is great if you know a specific index, but it is better to use a specific name.</li>
+<li><code>var[rows,"cols"]</code> is a way to do the above but by using a specific column name, like <code>combined_current_km2</code>.</li>
+<li><code>var$colname</code> is a way to call the specific column name directly from the dataset.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using R functions</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ranges<span class="sc">$</span>combined_current_km2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  25209.4  68171.2  60939.2  27021.3  78679.9   8769.9 232377.2  17401.4
+ [9]  51853.5  35455.1  23570.3 187179.1</code></pre>
+</div>
+</div>
+<p>As shown above, calling the specific column name with <code>$</code> allows us to see only the data of interest. We can also save these data as an object.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>current_combined <span class="ot">&lt;-</span> ranges<span class="sc">$</span>combined_current_km2</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>current_combined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  25209.4  68171.2  60939.2  27021.3  78679.9   8769.9 232377.2  17401.4
+ [9]  51853.5  35455.1  23570.3 187179.1</code></pre>
+</div>
+</div>
+<p>Now that we have it as an object, specifically a numeric vector, we can perform whatever math operations we need to on the dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(current_combined)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 68052.29</code></pre>
+</div>
+</div>
+<p>Here, we can see the mean for the entire dataset. However, we should always round values to the same number of decimal points as the original data. We can do this with <code>round</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(current_combined),<span class="dv">1</span>) <span class="co"># round mean to one decimal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 68052.3</code></pre>
+</div>
+</div>
+<p><em>Note</em> that the above has a nested set of commands. We can write this exact same thing as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pipe mean through round</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>current_combined <span class="sc">|&gt;</span> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 68052.3</code></pre>
+</div>
+</div>
+<p>Use the method that is easiest for you to follow!</p>
+<p>We can also calculate the mean manually. The mean is <span class="math inline">\(\frac{\sum_{i=1}^nx}{n}\)</span>, or the sum of all the values within a vector divided by the number of values in that vector.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create function</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># use curly brackets to denote function</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># our data goes in place of "x" when finally run</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>our_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  sum_x <span class="ot">&lt;-</span> <span class="fu">sum</span>(x) <span class="co"># sum all values in vector</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x) <span class="co"># get length of vector</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  xbar <span class="ot">&lt;-</span> sum_x<span class="sc">/</span>n <span class="co"># calculate mean</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(xbar) <span class="co"># return the value outside the function</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s try it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">our_mean</span>(ranges<span class="sc">$</span>combined_current_km2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 68052.29</code></pre>
+</div>
+</div>
+<p>As we can see, it works just the same as <code>mean</code>! We can round this as well.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ranges<span class="sc">$</span>combined_current_km2 <span class="sc">|&gt;</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">our_mean</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 68052.3</code></pre>
+</div>
+</div>
 </section>
-<section id="perform-the-appropriate-test.-make-a-graph-if-necessary." class="level3" data-number="15.5.3">
-<h3 data-number="15.5.3" class="anchored" data-anchor-id="perform-the-appropriate-test.-make-a-graph-if-necessary."><span class="header-section-number">15.5.3</span> Perform the appropriate test. Make a graph if necessary.</h3>
 </section>
-<section id="state-your-conclusions-about-this-test.-set-alpha-0.05." class="level3" data-number="15.5.4">
-<h3 data-number="15.5.4" class="anchored" data-anchor-id="state-your-conclusions-about-this-test.-set-alpha-0.05."><span class="header-section-number">15.5.4</span> State your conclusions about this test. Set <span class="math inline">\(\alpha = 0.05\)</span>.</h3>
+<section id="your-turn" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">3.3</span> Your turn!</h2>
+<p><strong>Please complete the following:</strong></p>
+<ol type="1">
+<li>Create an <em>RMarkdown document</em> that will save as an <code>.html</code>.</li>
+<li>Load the data, as shown here, and print the summary statistics in the document.</li>
+<li>Calculate the value of <code>combined_current_km2</code> divided by <code>2050_combined_km2</code> and print the results.
+<ul>
+<li><em>Hint</em>: you can divide and multiply objects in <em>R</em>, like <code>a + b</code>, <code>a/b</code>, etc.</li>
+</ul></li>
+<li><code>knit</code> your results, with your name(s) and date, as an HTML document.</li>
+</ol>
+<p>Let me know if you have any issues.</p>
 
 
-</section>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-cooper_biogeographic_2021" class="csl-entry" role="listitem">
+Cooper, J. C. (2021). Biogeographic and <span>Ecologic</span> <span>Drivers</span> of <span>Avian</span> <span>Diversity</span>. [Online.] Available at <a href="https://doi.org/10.6082/uchicago.3379">https://doi.org/10.6082/uchicago.3379</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -936,13 +1047,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./picktest.html" class="pagination-link" aria-label="Pick the test">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Pick the test</span></span>
+      <a href="./intro_to_r.html" class="pagination-link" aria-label="Intro to *R*">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Intro to <em>R</em></span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./conclusion.html" class="pagination-link" aria-label="Conclusions">
-        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Conclusions</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./descriptive_stats.html" class="pagination-link" aria-label="Descriptive Statistics">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

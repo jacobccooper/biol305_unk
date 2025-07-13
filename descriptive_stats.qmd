@@ -16,11 +16,14 @@ As with every week, we will need to load our relevant packages first. This week,
 ```{r}
 # enables data management tools
 library(tidyverse)
+# DescTools can also be used
+# see section on MODE
+library(DescTools)
 ```
 
 ## Downloading the data
 
-For the example this week, we will be using the `starbucks` dataset, describing the number of drinks purchased during particular time periods during the day.
+For this week, we will be using a hypothetical dataset on the number of drinks sold by hour at Starbucks.
 
 ```{r}
 starbucks <- read_csv("https://raw.githubusercontent.com/jacobccooper/biol105_unk/main/datasets/starbucks.csv")
