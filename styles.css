@@ -1,0 +1,22 @@
+/* All h2 headers get a wider bottom border */
+h2 {
+  border-bottom: 1px solid #c7c8c9; /* wider line */
+  padding-bottom: 0.2em;
+}
+
+h2.tight-top {
+  margin-top: 0.25em !important;
+  padding-top: 0 !important;
+}
+
+hr {
+  margin-top: 1em;    /* adjust space above line */
+  margin-bottom: 0;   /* remove space below line */
+  padding: 0.5;         /* usually no padding needed */
+  border-top: 1px solid #BLACK; /* your line style */
+}
+
+h3.tight-top {
+  margin-top: 0.3em !important;
+  padding-top: 0 !important;
+}

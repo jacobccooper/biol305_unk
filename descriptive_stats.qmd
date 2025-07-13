@@ -1,19 +1,28 @@
 ---
 title: "Descriptive Statistics"
 author: "University of Nebraska at Kearney Biology"
-format: html
+format:
+  html:
+    css: styles.css
+    theme: default
 editor: visual
 ---
 
 ## Purposes of descriptive statistics
 
-Descriptive statistics enable researchers to quickly and easily examine the "behavior" of their datasets, identifying potential errors and allowing them to observe particular trends that may be worth further analysis. Here, we will cover how to calculate descriptive statistics for multiple different datasets, culminating in an assignment covering these topics.
+Descriptive statistics allow us to quickly get an idea of how our datasets are "behaving". This allows us to identify potential errors, trends, or particular outliers for further analysis. While you are likely familiar with many of the calculations we will go over, these remain powerful calculations for initial analysis. In this page, we will go over how to complete these calculations in *R*. You will then complete an assignment based on these topics.
 
-## Preparing *R*
+<hr>
+
+<br>
+
+<hr>
+
+## Sample data and preparation {.tight-top}
 
 As with every week, we will need to load our relevant packages first. This week, we are using the following:
 
-```{r}
+```{r, message=FALSE, warning=FALSE, results='hide'}
 # enables data management tools
 library(tidyverse)
 # DescTools can also be used
@@ -21,15 +30,27 @@ library(tidyverse)
 library(DescTools)
 ```
 
-## Downloading the data
+<hr>
+
+<br> <br>
+
+<hr>
+
+## Downloading the data {.tight-top}
 
 For this week, we will be using a hypothetical dataset on the number of drinks sold by hour at Starbucks.
 
-```{r}
+```{r, message=FALSE, warning=FALSE, results='hide'}
 starbucks <- read_csv("https://raw.githubusercontent.com/jacobccooper/biol105_unk/main/datasets/starbucks.csv")
 ```
 
-## Descriptive statistics
+<hr>
+
+<br> <br>
+
+<hr>
+
+## Descriptive statistics {.tight-top}
 
 Descriptive statistics are statistics that help us understand the shape and nature of the data on hand. These include really common metrics such as *mean*, *median*, and *mode*, as well as more nuanced metrics like *quartiles* that help us understand if there is any *skew* in the dataset. (*Skew* refers to a bias in the data, where more data points lie on one side of the distribution and there is a long *tail* of data in the other direction).
 
@@ -39,7 +60,17 @@ Descriptive statistics are statistics that help us understand the shape and natu
 
 Using the `starbucks` dataset, we can look at some of these descriptive statistics to understand what is going on.
 
-### Notation
+<hr>
+
+<br> <br>
+
+<hr>
+
+### Notation {.tight-top}
+
+<details>
+
+<summary>Click to see notion information</summary>
 
 As a quick reminder, we use Greek lettering for *populations* and Roman lettering for samples. For example:
 
@@ -47,7 +78,19 @@ As a quick reminder, we use Greek lettering for *populations* and Roman letterin
 
 -   $\mu$ is a population, but $\bar{x}$ is a sample (both of these variables refer to the *mean*).
 
-### Mean
+</details>
+
+<hr>
+
+<br> <br>
+
+<hr>
+
+### Mean {.tight-top}
+
+<details>
+
+<summary>Click to see how to calculate mean</summary>
 
 The mean is the "average" value within a set of data, specifically, the sum of all values divided by the length of those values: $\frac{\sum_{i=1}^nx}{n}$.
 
@@ -85,7 +128,19 @@ We already covered calculating the average manually in our previous tutorial, bu
 round(sum(fraps)/length(fraps),0)
 ```
 
-### Range
+</details>
+
+<hr>
+
+<br> <br>
+
+<hr>
+
+### Range {.tight-top}
+
+<details>
+
+<summary>Click to see how to calculate range</summary>
 
 The range is the difference between the largest and smallest units in a dataset. We can use the commands `min` and `max` to calculate this.
 
@@ -95,7 +150,19 @@ max(fraps) - min(fraps)
 
 The range of our dataset is 13.
 
-### Median
+</details>
+
+<hr>
+
+<br> <br>
+
+<hr>
+
+### Median {.tight-top}
+
+<details>
+
+<summary>Click to see how to calculate the median</summary>
 
 The median is also known as the 50th percentile, and is the midpoint of the data when ordered from least to greatest. If there are an even number of data points, then it is the average point between the two center points. For odd data, this is the $\frac{n+1}{2}$th observation. For even data, since we need to take an average, this is the $\frac{\frac{n}{2}+(\frac{n}{2}+1)}{2}$. You should be able to do these by hand and by using a program.
 
@@ -168,7 +235,19 @@ med
 
 As we can see, these values are equal!
 
-### Other quartiles and quantiles
+</details>
+
+<hr>
+
+<br> <br>
+
+<hr>
+
+### Other quartiles and quantiles {.tight-top}
+
+<details>
+
+<summary>Click to see how to find quartiles and quantiles</summary>
 
 We also use the 25th percentile and the 75th percentile to understand data distributions. These are calculated similar to the above, but the bottom quartile is only $\frac{1}{4}$ of the way between values and the 75th quartile is $\frac{3}{4}$ of the way between values. We can use the *R* function `quantile` to calculate these.
 
@@ -231,7 +310,15 @@ This is a classic example of how things in *R* (and in statistics in general!) c
 
 **In this class, we will be using Type 6 interpretation for the quantiles - you will have to specify this in the quantile function EVERY TIME!** If you do *not* specify Type 6, you will get the questions incorrect and you will get answers that do not agree with the book, with Excel, or what you calculate by hand.
 
-### Mode
+</details>
+
+<hr>
+
+<br> <br>
+
+<hr>
+
+### Mode {.tight-top}
 
 There is no default code to find the mode in *R*. We can do this by hand, by counting the number of occurrences of each value as shown below.
 
@@ -299,17 +386,17 @@ This allows you to find how many arguments match your condition quickly, and eve
 
 -   `!`: not, so "not equal to" would be `!=`.
 
-    </details>
-
-    <details>
-
-    <summary>Click to see DescTools method</summary>
+</details>
 
 However, the library *DescTools* has many missing basic statistical functions, including **Mode()**. Use this method in your code to reduce clutter and make the code run faster.
 
+<details>
+
+<summary>Click to see DescTools method</summary>
+
 ```{r}
 #Load the package
-#Must be loaded each time it is used
+#Must be loaded each time it you reboot R
 library(DescTools)  
 
 #Run the function  
@@ -331,7 +418,17 @@ If there are two or more modes, these numbers will also appear in the first line
 
 </details>
 
-### Variance
+<hr>
+
+<br> <br>
+
+<hr>
+
+### Variance {.tight-top}
+
+<details>
+
+<summary>Click to see how to calculate variance</summary>
 
 When we are dealing with datasets, the variance is a measure of the total spread of the data. The variance is calculated using the following:
 
@@ -390,7 +487,19 @@ var_frap == var(frap_order)
 
 Seeing as this is `TRUE`, we calculated it correctly.
 
-### Standard deviation
+</details>
+
+<hr>
+
+<br> <br>
+
+<hr>
+
+### Standard deviation {.tight-top}
+
+<details>
+
+<summary>Click to see how to calculate standard deviation</summary>
 
 Another common measurement of spread is the standard deviation ($\sigma$). As you remember from class (or may have guessed from the notation on this site), the standard deviation is just the square root of the variance.
 
@@ -398,7 +507,7 @@ Another common measurement of spread is the standard deviation ($\sigma$). As yo
 sqrt(var_frap)
 ```
 
-There is also the built in sd function in R:
+There is also the built in sd function in *R*:
 
 ```{r}
 sd(frap_order)
@@ -412,7 +521,19 @@ sqrt(var_frap) == sd(frap_order)
 
 As you can see, we calculated this correctly!
 
-### Standard error
+</details>
+
+<hr>
+
+<br> <br>
+
+<hr>
+
+### Standard error {.tight-top}
+
+<details>
+
+<summary>Click to see how to calculate standard error</summary>
 
 The standard error is used to help understand the spread of data and to help estimate the accuracy of our measurements for things like the mean. The standard error is calculated thusly:
 
@@ -423,12 +544,24 @@ $$
 There is not a built in function for standard error in *R*, but we can use *DescTools*.
 
 ```{r}
-MeanSE(frap_order)
+MeanSE(frap_order) #This is from DescTools!
 ```
+
+</details>
 
 **Remember**, the standard error is used to help reflect our *confidence* in a specific measurement (*e.g.*, how certain we are of the mean, and what values we believe the mean falls between). We want our estimates to be as precise as possible with as little uncertainty as possible. Given this, does having more samples make our estimates more or less confident? Mathematically, what happens as our sample size *increases*?
 
-### Coefficient of variation
+<hr>
+
+<br> <br>
+
+<hr>
+
+### Coefficient of variation {.tight-top}
+
+<details>
+
+<summary>Click to see how to calculate coefficient of variation</summary>
 
 The coefficient of variation, another measure of data spread and location, is calculated by the following:
 
@@ -458,7 +591,15 @@ However, we can also complete this with a *DescTools* function.
   round(2)
 ```
 
-### Outliers
+</details>
+
+<hr>
+
+<br> <br>
+
+<hr>
+
+### Outliers {.tight-top}
 
 <details>
 
@@ -523,11 +664,19 @@ Again, there are no outliers as this code is effectively the same. If there are,
 
 </details>
 
-## Homework: Descriptive Statistics
+<hr>
+
+<br> <br>
+
+<hr>
+
+## Homework: Descriptive Statistics {.tight-top}
 
 Now that we've covered these basic statistics, it's your turn! For this week, you will be completing homework that involves methods from Chapter 4 in your book.
 
-### Homework instructions
+<hr>
+
+### Homework instructions {.tight-top}
 
 Please create an *RMarkdown* document that will render as an `.html` file. You will submit this file to show your coding and your work. Please refer to the [Introduction to *R*](https://jacobccooper.github.io/biol105_unk/intro_to_r.html) for refreshers on how to create an `.html` document in *RMarkdown*. You will need to do the following for each of these datasets:
 
@@ -551,7 +700,13 @@ Please create an *RMarkdown* document that will render as an `.html` file. You w
 
 **Please show all of your work for full credit.**
 
-### Data for homework problems
+<hr>
+
+### Data for homework problems {.tight-top}
+
+<details>
+
+<summary>Click for homework data</summary>
 
 For each question, calculate the mean, median, range, interquartile range, variance, standard deviation, coefficient of variation, standard error, and whether there are any "outliers".
 
@@ -621,3 +776,5 @@ dim(ages)
 As you can see, this file has only two columns but 17,150 rows! For the column `time_difference`, please calculate the mean, median, range, interquartile range, variance, standard deviation, coefficient of variation, standard error, and whether there are any "outliers".
 
 **Synthesis question**: Folks will often think about probabilities of events being "low but never zero". What does that mean in the context of these data? What about these data make you feel like probabilities may decrease through time but never become zero?
+
+</details>

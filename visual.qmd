@@ -1,7 +1,10 @@
 ---
 title: "Diagnosing data visually"
 author: "University of Nebraska at Kearney Biology"
-format: html
+format:
+  html:
+    css: styles.css
+    theme: default
 editor: visual
 ---
 
@@ -9,21 +12,41 @@ editor: visual
 
 Inspecting data visually can give us a lot of information about whether data are normally distributed and about whether there are any major errors or issues with our dataset. It can also help us determine if data meet model assumptions, or if we need to use different tests more appropriate for our datasets.
 
-## Sample data and preparation
+<hr>
 
-First, we need to load our *R* libraries.
+<br>
 
-```{r}
+<hr>
+
+## Sample data and preparation {.tight-top}
+
+Before we start, we must load our *R* libraries.
+
+```{r, message=FALSE, warning=FALSE, results='hide'}
 library(tidyverse)
 ```
 
-Next, we can download our data sample.
+<hr>
 
-## Histograms
+<br>
+
+<hr>
+
+## Histograms {.tight-top}
 
 A histogram is a frequency diagram that we can use to visually diagnose data and their distributions. We are going to examine a histogram using a random string of data. *R* can generate random (though, actually pseudorandom) strings of data on command, pulling them from different distributions. These distributions are pseudorandom because we can't actually program *R* to be random, so it starts from a wide variety of pseudorandom points.
 
-### Histograms on numeric vectors
+<hr>
+
+<br>
+
+<hr>
+
+### Histograms on numeric vectors {.tight-top}
+
+<details>
+
+<summary>Click to see how to make a default histogram</summary>
 
 The following is how to create default histograms on data. If you need to create custom bin sizes, please see the notes under *Cumulative frequency plots* for data that are not already in frequency format.
 
@@ -50,7 +73,19 @@ hist(x,breaks = 100)
 
 The number of bins can be somewhat arbitrary, but a value should be chosen based off of what illustrates the data well. *R* will auto-select a number of bins in some cases, but you can also select a number of bins. Some assignments will ask you to choose a specific number of bins as well.
 
-### Histograms on frequency counts
+</details>
+
+<hr>
+
+<br>
+
+<hr>
+
+### Histograms on frequency counts {.tight-top}
+
+<details>
+
+<summary>Click to see how to make a histogram with frequency data</summary>
 
 Say, for example, that we have a dataset where everything is already shown as frequencies. We can create a frequency histogram using `barplot`.
 
@@ -73,7 +108,19 @@ barplot(count_table$Count, # response variable, counts for histogram
         names.arg = count_table$Category) # make these the names
 ```
 
-### ggplot histograms
+</details>
+
+<hr>
+
+<br>
+
+<hr>
+
+### ggplot histograms {.tight-top}
+
+<details>
+
+<summary>Click to see how to make *fancy* histograms (optional)</summary>
 
 The following is an ***optional*** workthrough on how to make really fancy plots.
 
@@ -135,9 +182,21 @@ ggplot(xy, aes(x = x, fill = cat))+
   theme_minimal()
 ```
 
-There are lots of other commands you can incorporate as well if you so choose; I recommend checking [sites like this one](http://www.sthda.com/english/wiki/ggplot2-histogram-plot-quick-start-guide-r-software-and-data-visualization).
+There are lots of other commands you can incorporate as well if you so choose; I recommend checking [sites like this one](http://www.sthda.com/english/wiki/ggplot2-histogram-plot-quick-start-guide-r-software-and-data-visualization) or using ChatGPT.
 
-## Boxplots
+</details>
+
+<hr>
+
+<br>
+
+<hr>
+
+## Boxplots {.tight-top}
+
+<details>
+
+<summary>Click to see how to make boxplots</summary>
 
 We can also create boxplots to visualize the spread of the data. Boxplots include a bar for the median, a box representing the interquartile range between the 25th and 75th percentiles, and whiskers that extend $1.5 \cdot IQR$ beyond the 25th and 75th percentiles. We can create a boxplot using the command `boxplot`.
 
@@ -157,7 +216,19 @@ boxplot(x, # what to plot
 
 On the above plot, *outliers* for the dataset are shown as dots beyond the ends of the "whiskers".
 
-## Skewness
+</details>
+
+<hr>
+
+<br>
+
+<hr>
+
+## Skewness {.tight-top}
+
+<details>
+
+<summary>Click to read about skewness</summary>
 
 Skew is a measure of how much a dataset "leans" to the positive or negative directions (*i.e.*, to the "left" or to the "right"). To calculate skew, we are going to use the `moments` library.
 
@@ -188,7 +259,19 @@ skewness(x3)
 
 As we can see, the above is a heavily skewed dataset with a positive ("right") skew.
 
-## Kurtosis
+</details>
+
+<hr>
+
+<br>
+
+<hr>
+
+## Kurtosis {.tight-top}
+
+<details>
+
+<summary>Click to read about kurtosis</summary>
 
 Kurtosis refers to how sharp or shallow the peak of the distribution is (*platykurtic* vs. *leptokurtic*). Remember - *platy*kyrtic are *plateau*kurtic, wide and broad like a plateau, and *leptokurtic* distributions are sharp. Intermediate distributions that are roughly normal are *mesokurtic*.
 
@@ -226,69 +309,45 @@ hist(xk,breaks = 100)
 
 As we can see, this is a very *leptokurtic* distribution.
 
-## Cumulative frequency plot
+</details>
+
+<hr>
+
+<br>
+
+<hr>
+
+## Cumulative frequency plot {.tight-top}
 
 A *cumulative frequency plot* shows the overall spread of the data as a cumulative line over the entire dataset. This is another way to see the spread of the data and is often complementary to a histogram.
 
-The following cumulative distribution plot is based on the method outlined in [Geeks for Geeks](https://www.geeksforgeeks.org/cumulative-frequency-graph-in-r/).
+<hr>
 
-### If data are not in histogram/frequency format
+<details>
 
-You will need to create a frequency table to make them be in histogram format.
+<summary>Click to see how to make a cumulative frequency plot if data is not in histogram/frequency format</summary>
 
-```{r}
-# declaring the break points
-# make break points based on data
-# always round UP with ceiling
-range.x <- ceiling(max(x)-min(x))
-
-range.x
-range(x)
-```
-
-Based on this range, we need to create our bin sizes. We want our lowest bin to be below our lowest value, and our highest bin above our highest value. Here, I'm setting a step size of 1. **You will have to examine your data and determine the best break size for your datasets.**
+The use of the Empirical Cumulative Distribution Function, **ecdf()**,can turn a variable into what is needed to create a cumulative frequency plot. This is a base part of *R* and therefore does not require any libraries.
 
 ```{r}
-# make bins based on range
-# create sequential series
-break_points <- seq(-3, # starting value, low
-                    4, # end value, high
-                    1) # increment size
+plot(ecdf(x)) #Creating a cumulative frequency plot
 ```
 
 ```{r}
-# transforming the data
-data_transform = cut(x, # your data!
-                     break_points, # the breaks you defined
-					right=FALSE) # closed on the left for intervals
-# creating the frequency table
-freq_table = table(data_transform) # create a table
+plot(ecdf(x), 
+     xlab = "Data Values", #Labeling the x-axis
+     ylab = "Cumulative Probability", #Labeling the y-axis
+     main = "ECDF of X") #Main title for the graph
 
-# printing the frequency table
-print("Frequency Table")
-print(freq_table)
 ```
 
-```{r}
-# calculating cumulative frequency
-cumulative_freq = c(0, # start at 0, no points
-                    cumsum(freq_table)) # get the cumulative frequency!
-print("Cumulative Frequency")
-print(cumulative_freq)
-```
+</details>
 
-```{r}
-# plotting the data
-plot(break_points, # x axis is break_points
-     cumulative_freq, # y axis is cumulative frequency
-	xlab="Data Distribution", # x axis label
-	ylab="Cumulative Frequency") # y axis label
-# creating line graph
-lines(break_points, # add lines to the graph, this is x
-      cumulative_freq) # this is y for lines
-```
+<hr>
 
-### If data are in histogram/frequency format
+<details>
+
+<summary>Click to see how to make a cumulative frequency plot if data is in histogram/frequency format</summary>
 
 If you have a list of frequencies (say, *for river discharge over several years*), you only need to do the `cumsum` function. For example:
 
@@ -309,11 +368,35 @@ plot(x = 1:length(sum_y), # get length of sum_y, make x index
      type = "l") # make a line plot
 ```
 
-## Homework: Chapter 3
+</details>
 
-From your book, complete problems 3.1, 3.4 & 3.5. Data for these problems are available on *Canvas* and in your book.
+<hr>
 
-### Helpful hint
+<br>
+
+<hr>
+
+## Homework: Chapter 3 {.tight-top}
+
+From your book, complete problems **3.1, 3.4 & 3.5**. Data for these problems are available on *Canvas* and in your book.
+
+<br>
+
+**Directions:**
+
+Please complete all computer portions in an `rmarkdown` document knitted as an html. Upload any "by hand" calculations as images in the HTML or separately on *Canvas*.
+
+<hr>
+
+<br>
+
+<hr>
+
+### Helpful hint {.tight-top}
+
+<details>
+
+<summary>Click for a useful hint!</summary>
 
 **HINT**: For 3.5, consider just making a vector of the values of interest for a histogram.
 
@@ -334,10 +417,10 @@ barplot(y,
         names.arg = c("Cat 1", "Cat 2", "Cat 3"))
 ```
 
-### Directions
+</details>
 
-Please complete all computer portions in an `rmarkdown` document knitted as an html. Upload any "by hand" calculations as images in the HTML or separately on *Canvas*.
+<br> <br>
 
-## Addendum
+<hr>
 
-With thanks to Hernan Vargas & Riley Grieser for help in formatting this page. Additional comments provided by BIOL 305 classes.
+**Addendum** With thanks to Hernan Vargas & Riley Grieser for help in formatting this page. Additional comments provided by BIOL 305 classes.
