@@ -371,7 +371,7 @@ window.Quarto = {
 <summary>
 Click to see how to make a default histogram
 </summary>
-<p>The following is how to create default histograms on data. If you need to create custom bin sizes, please see the notes under <em>Cumulative frequency plots</em> for data that are not already in frequency format.</p>
+<p>The following is how to create default histograms on data. If you need to create custom bin sizes, please see the notes under <a href="#cumulative-frequency-plot">Cumulative frequency plot</a> for data that are not already in frequency format.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create random string from normal distribution</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># this step is not necessary for data analysis in homework</span></span>
@@ -392,7 +392,7 @@ Click to see how to make a default histogram
 </div>
 </div>
 <p><strong>NOTE</strong> that a histogram can only be made on a vector of values. If you try to make a histogram on a data frame, <em>you will get an error and it will not work</em>. You have to specify which column you wish to use with the <code>$</code> operator. (For example, for dataframe <code>xy</code> with columns <code>x</code> and <code>y</code>, you would use <code>hist(xy$y)</code>).</p>
-<p>We can up the number of bins to see this better.</p>
+<p>We can increase the number of bins to see this better.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x,<span class="at">breaks =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -717,7 +717,7 @@ Click to read about kurtosis
 <summary>
 Click to see how to make a cumulative frequency plot if data is not in histogram/frequency format
 </summary>
-<p>The use of the Empirical Cumulative Distribution Function, <strong>ecdf()</strong>,can turn a variable into what is needed to create a cumulative frequency plot. This is a base part of <em>R</em> and therefore does not require any libraries.</p>
+<p>The use of the Empirical Cumulative Distribution Function <strong><code>ecdf</code></strong> can turn a variable into what is needed to create a cumulative frequency plot.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ecdf</span>(x)) <span class="co">#Creating a cumulative frequency plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">

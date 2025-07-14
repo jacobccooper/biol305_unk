@@ -48,7 +48,7 @@ A histogram is a frequency diagram that we can use to visually diagnose data and
 
 <summary>Click to see how to make a default histogram</summary>
 
-The following is how to create default histograms on data. If you need to create custom bin sizes, please see the notes under *Cumulative frequency plots* for data that are not already in frequency format.
+The following is how to create default histograms on data. If you need to create custom bin sizes, please see the notes under [Cumulative frequency plot] for data that are not already in frequency format.
 
 ```{r}
 # create random string from normal distribution
@@ -65,7 +65,7 @@ hist(x)
 
 **NOTE** that a histogram can only be made on a vector of values. If you try to make a histogram on a data frame, *you will get an error and it will not work*. You have to specify which column you wish to use with the `$` operator. (For example, for dataframe `xy` with columns `x` and `y`, you would use `hist(xy$y)`).
 
-We can up the number of bins to see this better.
+We can increase the number of bins to see this better.
 
 ```{r}
 hist(x,breaks = 100)
@@ -327,7 +327,7 @@ A *cumulative frequency plot* shows the overall spread of the data as a cumulati
 
 <summary>Click to see how to make a cumulative frequency plot if data is not in histogram/frequency format</summary>
 
-The use of the Empirical Cumulative Distribution Function, **ecdf()**,can turn a variable into what is needed to create a cumulative frequency plot. This is a base part of *R* and therefore does not require any libraries.
+The use of the Empirical Cumulative Distribution Function **`ecdf`** can turn a variable into what is needed to create a cumulative frequency plot.
 
 ```{r}
 plot(ecdf(x)) #Creating a cumulative frequency plot
