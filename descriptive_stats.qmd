@@ -696,7 +696,7 @@ Again, there are no outliers as this code is effectively the same. If there are,
 
 ## Homework: Descriptive Statistics {.tight-top}
 
-Now that we've covered these basic statistics, it's your turn! For this week, you will be completing homework that involves methods from Chapter 4 in your book.
+Now that we've covered these basic statistics, it's your turn!
 
 <hr>
 

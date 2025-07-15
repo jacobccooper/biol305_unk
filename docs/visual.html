@@ -55,7 +55,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -174,7 +193,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Preface</span></a>
+ <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -307,10 +326,15 @@ window.Quarto = {
   <li><a href="#skewness" id="toc-skewness" class="nav-link" data-scroll-target="#skewness"><span class="header-section-number">5.5</span> Skewness</a></li>
   <li><a href="#kurtosis" id="toc-kurtosis" class="nav-link" data-scroll-target="#kurtosis"><span class="header-section-number">5.6</span> Kurtosis</a></li>
   <li><a href="#cumulative-frequency-plot" id="toc-cumulative-frequency-plot" class="nav-link" data-scroll-target="#cumulative-frequency-plot"><span class="header-section-number">5.7</span> Cumulative frequency plot</a></li>
-  <li><a href="#homework-chapter-3" id="toc-homework-chapter-3" class="nav-link" data-scroll-target="#homework-chapter-3"><span class="header-section-number">5.8</span> Homework: Chapter 3</a>
+  <li><a href="#homework-visualizing-data" id="toc-homework-visualizing-data" class="nav-link" data-scroll-target="#homework-visualizing-data"><span class="header-section-number">5.8</span> Homework: Visualizing data</a>
   <ul class="collapse">
   <li><a href="#helpful-hint" id="toc-helpful-hint" class="nav-link" data-scroll-target="#helpful-hint"><span class="header-section-number">5.8.1</span> Helpful hint</a></li>
+  <li><a href="#problem-1" id="toc-problem-1" class="nav-link" data-scroll-target="#problem-1"><span class="header-section-number">5.8.2</span> Problem 1</a></li>
+  <li><a href="#problem-2" id="toc-problem-2" class="nav-link" data-scroll-target="#problem-2"><span class="header-section-number">5.8.3</span> Problem 2</a></li>
+  <li><a href="#problem-3" id="toc-problem-3" class="nav-link" data-scroll-target="#problem-3"><span class="header-section-number">5.8.4</span> Problem 3</a></li>
+  <li><a href="#problem-4" id="toc-problem-4" class="nav-link" data-scroll-target="#problem-4"><span class="header-section-number">5.8.5</span> Problem 4</a></li>
   </ul></li>
+  <li><a href="#acknowledgment" id="toc-acknowledgment" class="nav-link" data-scroll-target="#acknowledgment"><span class="header-section-number">5.9</span> Acknowledgment</a></li>
   </ul>
 </nav>
     </div>
@@ -639,9 +663,10 @@ Click to read about skewness
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(x3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(x3) <span class="sc">|&gt;</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.184963</code></pre>
+<pre><code>[1] 2.18</code></pre>
 </div>
 </div>
 <p>As we can see, the above is a heavily skewed dataset with a positive (“right”) skew.</p>
@@ -671,18 +696,20 @@ Click to read about kurtosis
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># non-zeroed</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(x) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.04663</code></pre>
+<pre><code>[1] 3.05</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># zeroed</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(x)<span class="sc">-</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># put whole thing to be rounded in brackets</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>(<span class="fu">kurtosis</span>(x)<span class="sc">-</span><span class="dv">3</span>) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.04662957</code></pre>
+<pre><code>[1] 0.05</code></pre>
 </div>
 </div>
+<p><em>Note</em> when rounding a calculation, the calculation must be in brackets or it will only round the last value.</p>
 <p>As expected, out values drawn from a normal distribution are not overly skewed. Let’s compare these to a more kurtic distribution:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>xk <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">3</span></span>
@@ -780,9 +807,8 @@ Click to see how to make a cumulative frequency plot if data is in histogram/fre
 <p><br></p>
 <hr>
 </section>
-<section id="homework-chapter-3" class="level2 tight-top" data-number="5.8">
-<h2 class="tight-top anchored" data-number="5.8" data-anchor-id="homework-chapter-3"><span class="header-section-number">5.8</span> Homework: Chapter 3</h2>
-<p>From your book, complete problems <strong>3.1, 3.4 &amp; 3.5</strong>. Data for these problems are available on <em>Canvas</em> and in your book.</p>
+<section id="homework-visualizing-data" class="level2 tight-top" data-number="5.8">
+<h2 class="tight-top anchored" data-number="5.8" data-anchor-id="homework-visualizing-data"><span class="header-section-number">5.8</span> Homework: Visualizing data</h2>
 <p><br></p>
 <p><strong>Directions:</strong></p>
 <p>Please complete all computer portions in an <code>rmarkdown</code> document knitted as an html. Upload any “by hand” calculations as images in the HTML or separately on <em>Canvas</em>.</p>
@@ -822,10 +848,84 @@ Click for a useful hint!
 </details>
 <p><br> <br></p>
 <hr>
-<p><strong>Addendum</strong> With thanks to Hernan Vargas &amp; Riley Grieser for help in formatting this page. Additional comments provided by BIOL 305 classes.</p>
-
-
 </section>
+<section id="problem-1" class="level3" data-number="5.8.2">
+<h3 data-number="5.8.2" class="anchored" data-anchor-id="problem-1"><span class="header-section-number">5.8.2</span> Problem 1</h3>
+<p>The Research Institute Nature and Forest in Brussels, Belgium, conducted a survey of fish from the southern North Sea to help with the identification of fish from seabird diets <span class="citation" data-cites="verstraete_photos_2020">(<a href="references.html#ref-verstraete_photos_2020" role="doc-biblioref">Verstraete et al. 2020</a>)</span>. We will be looking at the lengths one specific taxon - the Atlantic Herring <em>Clupea harengus</em>.</p>
+<p>Copy and run the code below to load in your data. Use the object <code>clupea.lengths</code> for this problem.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download fish data</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>fishes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://zenodo.org/records/4066594/files/reference_data.csv"</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co"># isolate Clupea harengus</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>clupea <span class="ot">&lt;-</span> fishes <span class="sc">|&gt;</span> </span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(scientific_name <span class="sc">==</span> <span class="st">"Clupea harengus"</span>)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co"># get vector of lengths</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="co"># remove missing data</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>clupea.lengths <span class="ot">&lt;-</span> clupea<span class="sc">$</span>fish_length_mm <span class="sc">|&gt;</span> </span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li>Create a histogram of these data.</li>
+<li>Create a cumulative frequency plot of these data.</li>
+<li>Calculate the kurtosis of these data, and make a conclusion about the kurtosis of the dataset.</li>
+<li>Calculate the skewness of these data, and make a conclusion about the skewness of the dataset.</li>
+<li>Create a boxplot of these data.</li>
+</ol>
+</section>
+<section id="problem-2" class="level3" data-number="5.8.3">
+<h3 data-number="5.8.3" class="anchored" data-anchor-id="problem-2"><span class="header-section-number">5.8.3</span> Problem 2</h3>
+<p>The Fremont Bridge in Seattle is one of the only bridges that connects the north and south sides of the city, crossing the Fremont Cut - a navigational canal between the Puget Sound and Lake Union &amp; Lake Washington. As such, it is an important transportation corridor. We will be looking at counts of bicyclists, taken hourly for the east (predominately northbound) side over a seven year period <span class="citation" data-cites="weber_fremont_2019">(<a href="references.html#ref-weber_fremont_2019" role="doc-biblioref">Weber 2019</a>)</span>. This dataset has 56,904 records - thus, this is not something that would be easily done without the use of a program like <em>R</em>!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>bicycles <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://zenodo.org/records/2648564/files/Fremont_Bridge_Hourly_Bicycle_Counts_by_Month_October_2012_to_present.csv"</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>bike.count <span class="ot">&lt;-</span> bicycles<span class="sc">$</span><span class="st">`</span><span class="at">Fremont Bridge East Sidewalk</span><span class="st">`</span> <span class="sc">|&gt;</span> </span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li>Create a histogram of these data.</li>
+<li>Create a cumulative frequency plot of these data.</li>
+<li>Calculate the kurtosis of these data, and make a conclusion about the kurtosis of the dataset.</li>
+<li>Calculate the skewness of these data, and make a conclusion about the skewness of the dataset.</li>
+<li>Create a boxplot of these data.</li>
+</ol>
+</section>
+<section id="problem-3" class="level3" data-number="5.8.4">
+<h3 data-number="5.8.4" class="anchored" data-anchor-id="problem-3"><span class="header-section-number">5.8.4</span> Problem 3</h3>
+<p>Take the object <code>bike.count</code> from the previous problem and perform a <em>log transformation</em> of the data. To do this, we will take the natural log of the dataset plus one. We must add 1 to every value in the dataset, because the natural log of 0 is negative infinity; adding one makes every value in the dataset quantifiable as the minimum value for any count data is 0.</p>
+<p>Perform the following action on your computer, replacing <code>x</code> with your <code>bike.data</code> object. Name your object <code>log.bikes</code> instead of <code>log.x</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>log.x <span class="ot">&lt;-</span> <span class="fu">log</span>(x <span class="sc">+</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After performing the log transformation, complete the following.</p>
+<ol type="1">
+<li>Create a histogram of these data.</li>
+<li>Create a cumulative frequency plot of these data.</li>
+<li>Calculate the kurtosis of these data, and make a conclusion about the kurtosis of the dataset.</li>
+<li>Calculate the skewness of these data, and make a conclusion about the skewness of the dataset.</li>
+<li>Create a boxplot of these data.</li>
+<li>How did the log transformation change these data?</li>
+</ol>
+</section>
+<section id="problem-4" class="level3" data-number="5.8.5">
+<h3 data-number="5.8.5" class="anchored" data-anchor-id="problem-4"><span class="header-section-number">5.8.5</span> Problem 4</h3>
+<p>Is there pseudoreplication in the bicycle dataset? Why or why not?</p>
+</section>
+</section>
+<section id="acknowledgment" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="acknowledgment"><span class="header-section-number">5.9</span> Acknowledgment</h2>
+<p>Thanks to Hernan Vargas &amp; Riley Grieser for help in formatting this page. Additional comments provided by BIOL 305 classes.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-verstraete_photos_2020" class="csl-entry" role="listitem">
+Verstraete, H., W. Courtens, R. Daelemans, M. Van de walle, N. Vanermen, P. Desmet, and E. W. M. Stienen (2020). Photos and measurements of otoliths from fish caught in the southern part of the <span>North</span> <span>Sea</span>. [Online.] Available at <a href="https://zenodo.org/records/4066594">https://zenodo.org/records/4066594</a>.
+</div>
+<div id="ref-weber_fremont_2019" class="csl-entry" role="listitem">
+Weber, G. (2019). Fremont <span>Bridge</span> <span>Hourly</span> <span>Bicycle</span> <span>Counts</span> by <span>Month</span> <span>October</span> 2012 to present. [Online.] Available at <a href="https://zenodo.org/records/2648564">https://zenodo.org/records/2648564</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

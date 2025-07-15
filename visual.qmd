@@ -254,7 +254,8 @@ hist(x3)
 ```
 
 ```{r}
-skewness(x3)
+skewness(x3) |> 
+  round(2)
 ```
 
 As we can see, the above is a heavily skewed dataset with a positive ("right") skew.
@@ -285,13 +286,16 @@ hist(x)
 
 ```{r}
 # non-zeroed
-kurtosis(x)
+kurtosis(x) |> round(2)
 ```
 
 ```{r}
 # zeroed
-kurtosis(x)-3
+# put whole thing to be rounded in brackets
+(kurtosis(x)-3) |> round(2)
 ```
+
+*Note* when rounding a calculation, the calculation must be in brackets or it will only round the last value.
 
 As expected, out values drawn from a normal distribution are not overly skewed. Let's compare these to a more kurtic distribution:
 
@@ -376,9 +380,7 @@ plot(x = 1:length(sum_y), # get length of sum_y, make x index
 
 <hr>
 
-## Homework: Chapter 3 {.tight-top}
-
-From your book, complete problems **3.1, 3.4 & 3.5**. Data for these problems are available on *Canvas* and in your book.
+## Homework: Visualizing data {.tight-top}
 
 <br>
 
@@ -423,4 +425,72 @@ barplot(y,
 
 <hr>
 
-**Addendum** With thanks to Hernan Vargas & Riley Grieser for help in formatting this page. Additional comments provided by BIOL 305 classes.
+### Problem 1
+
+The Research Institute Nature and Forest in Brussels, Belgium, conducted a survey of fish from the southern North Sea to help with the identification of fish from seabird diets [@verstraete_photos_2020]. We will be looking at the lengths one specific taxon - the Atlantic Herring *Clupea harengus*.
+
+Copy and run the code below to load in your data. Use the object `clupea.lengths` for this problem.
+
+```{r, message=F}
+# download fish data
+fishes <- read_csv("https://zenodo.org/records/4066594/files/reference_data.csv")
+
+# isolate Clupea harengus
+clupea <- fishes |> 
+  filter(scientific_name == "Clupea harengus")
+
+# get vector of lengths
+# remove missing data
+clupea.lengths <- clupea$fish_length_mm |> 
+  na.omit()
+```
+
+1.  Create a histogram of these data.
+2.  Create a cumulative frequency plot of these data.
+3.  Calculate the kurtosis of these data, and make a conclusion about the kurtosis of the dataset.
+4.  Calculate the skewness of these data, and make a conclusion about the skewness of the dataset.
+5.  Create a boxplot of these data.
+
+### Problem 2
+
+The Fremont Bridge in Seattle is one of the only bridges that connects the north and south sides of the city, crossing the Fremont Cut - a navigational canal between the Puget Sound and Lake Union & Lake Washington. As such, it is an important transportation corridor. We will be looking at counts of bicyclists, taken hourly for the east (predominately northbound) side over a seven year period [@weber_fremont_2019]. This dataset has 56,904 records - thus, this is not something that would be easily done without the use of a program like *R*!
+
+```{r, message=FALSE}
+bicycles <- read_csv("https://zenodo.org/records/2648564/files/Fremont_Bridge_Hourly_Bicycle_Counts_by_Month_October_2012_to_present.csv")
+
+bike.count <- bicycles$`Fremont Bridge East Sidewalk` |> 
+  na.omit()
+```
+
+1.  Create a histogram of these data.
+2.  Create a cumulative frequency plot of these data.
+3.  Calculate the kurtosis of these data, and make a conclusion about the kurtosis of the dataset.
+4.  Calculate the skewness of these data, and make a conclusion about the skewness of the dataset.
+5.  Create a boxplot of these data.
+
+### Problem 3
+
+Take the object `bike.count` from the previous problem and perform a *log transformation* of the data. To do this, we will take the natural log of the dataset plus one. We must add 1 to every value in the dataset, because the natural log of 0 is negative infinity; adding one makes every value in the dataset quantifiable as the minimum value for any count data is 0.
+
+Perform the following action on your computer, replacing `x` with your `bike.data` object. Name your object `log.bikes` instead of `log.x`.
+
+```{r, eval = FALSE}
+log.x <- log(x + 1)
+```
+
+After performing the log transformation, complete the following.
+
+1.  Create a histogram of these data.
+2.  Create a cumulative frequency plot of these data.
+3.  Calculate the kurtosis of these data, and make a conclusion about the kurtosis of the dataset.
+4.  Calculate the skewness of these data, and make a conclusion about the skewness of the dataset.
+5.  Create a boxplot of these data.
+6.  How did the log transformation change these data?
+
+### Problem 4
+
+Is there pseudoreplication in the bicycle dataset? Why or why not?
+
+## Acknowledgment
+
+Thanks to Hernan Vargas & Riley Grieser for help in formatting this page. Additional comments provided by BIOL 305 classes.
