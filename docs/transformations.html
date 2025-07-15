@@ -8,7 +8,7 @@
 
 <meta name="author" content="University of Nebraska at Kearney Biology">
 
-<title>8&nbsp; Exam 2 practice – Biology 305: Biostatistics</title>
+<title>7&nbsp; Transforming data – Biology 305: Biostatistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,7 +21,60 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -31,8 +84,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./probdist.html" rel="next">
-<link href="./transformations.html" rel="prev">
+<link href="./exam2.html" rel="next">
+<link href="./normality.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -111,7 +164,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./exam2.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exam 2 practice</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./transformations.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transforming data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -180,13 +233,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./transformations.html" class="sidebar-item-text sidebar-link">
+  <a href="./transformations.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transforming data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exam2.html" class="sidebar-item-text sidebar-link active">
+  <a href="./exam2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exam 2 practice</span></span></a>
   </div>
 </li>
@@ -266,7 +319,23 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#exam-2-practice" id="toc-exam-2-practice" class="nav-link active" data-scroll-target="#exam-2-practice"><span class="header-section-number">8.1</span> Exam 2 Practice</a></li>
+  <li><a href="#importance-of-normality-data" id="toc-importance-of-normality-data" class="nav-link active" data-scroll-target="#importance-of-normality-data"><span class="header-section-number">7.1</span> Importance of normality Data</a></li>
+  <li><a href="#testing-if-data-are-normal" id="toc-testing-if-data-are-normal" class="nav-link" data-scroll-target="#testing-if-data-are-normal"><span class="header-section-number">7.2</span> Testing if data are normal</a>
+  <ul class="collapse">
+  <li><a href="#histograms" id="toc-histograms" class="nav-link" data-scroll-target="#histograms"><span class="header-section-number">7.2.1</span> Histograms</a></li>
+  <li><a href="#qq-plots" id="toc-qq-plots" class="nav-link" data-scroll-target="#qq-plots"><span class="header-section-number">7.2.2</span> QQ Plots</a></li>
+  <li><a href="#shapiro-wilk-test" id="toc-shapiro-wilk-test" class="nav-link" data-scroll-target="#shapiro-wilk-test"><span class="header-section-number">7.2.3</span> Shapiro-Wilk test</a></li>
+  </ul></li>
+  <li><a href="#transforming-data" id="toc-transforming-data" class="nav-link" data-scroll-target="#transforming-data"><span class="header-section-number">7.3</span> Transforming data</a>
+  <ul class="collapse">
+  <li><a href="#log-transformation-example" id="toc-log-transformation-example" class="nav-link" data-scroll-target="#log-transformation-example"><span class="header-section-number">7.3.1</span> Log transformation example</a></li>
+  </ul></li>
+  <li><a href="#homework-transforming-data" id="toc-homework-transforming-data" class="nav-link" data-scroll-target="#homework-transforming-data"><span class="header-section-number">7.4</span> Homework: Transforming data</a>
+  <ul class="collapse">
+  <li><a href="#analyzing-data" id="toc-analyzing-data" class="nav-link" data-scroll-target="#analyzing-data"><span class="header-section-number">7.4.1</span> Analyzing data</a></li>
+  <li><a href="#transforming-data-1" id="toc-transforming-data-1" class="nav-link" data-scroll-target="#transforming-data-1"><span class="header-section-number">7.4.2</span> Transforming Data</a></li>
+  <li><a href="#submitting-assignment" id="toc-submitting-assignment" class="nav-link" data-scroll-target="#submitting-assignment"><span class="header-section-number">7.4.3</span> Submitting assignment</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -275,7 +344,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exam 2 practice</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transforming data</span></h1>
 </div>
 
 
@@ -298,11 +367,257 @@ window.Quarto = {
 </header>
 
 
-<section id="exam-2-practice" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="exam-2-practice"><span class="header-section-number">8.1</span> Exam 2 Practice</h2>
-<p>Exam 2 practice is available on Canvas.</p>
+<section id="importance-of-normality-data" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="importance-of-normality-data"><span class="header-section-number">7.1</span> Importance of normality Data</h2>
+<p>For this walkthrough, we will use two datasets - one with normal data, and one with non-normal data.</p>
+<p>Our normal dataset is drawn from measurements of birds in western Ecuador, collected by several friends of Dr.&nbsp;Cooper, where we will be specifically looking at measurements of the Plain Antvireo <em>Dysithamnus mentalis</em> <span class="citation" data-cites="lele_morphological_2022">(<a href="references.html#ref-lele_morphological_2022" role="doc-biblioref">Lele et al. 2022</a>)</span>.</p>
+<p>Our non-normal dataset counts the number of job vacancies offering an hourly wage by region in the United Kingdom for different time periods <span class="citation" data-cites="centre_counts_2025">(<a href="references.html#ref-centre_counts_2025" role="doc-biblioref">Urban Big Data Centre 2025</a>)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Bird data</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>birds <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://zenodo.org/records/6511860/files/Lele_et_al._2022_BITR-21-373_raw_data.csv"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>antvireo <span class="ot">&lt;-</span> birds <span class="sc">|&gt;</span> </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(SPECIES <span class="sc">==</span> <span class="st">"PLAIN ANTVIREO"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove abnormal birds</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(BILL.LENGTH <span class="sc">&gt;</span> <span class="dv">5</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>antvireo.bill <span class="ot">&lt;-</span> antvireo<span class="sc">$</span>BILL.LENGTH <span class="sc">|&gt;</span> </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Job advert data</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>jobs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://zenodo.org/records/14771706/files/adzuna_month_ttwa_vacancies_with_hourly_wage_panel.csv"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># take a subset</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># whole dataset is too large!</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>hourly.jobs <span class="ot">&lt;-</span> jobs<span class="sc">$</span>vacancies_offering_an_hourly_wage[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="testing-if-data-are-normal" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="testing-if-data-are-normal"><span class="header-section-number">7.2</span> Testing if data are normal</h2>
+<p>There are two major methods we can use to see if data are normally distributed.</p>
+<section id="histograms" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="histograms"><span class="header-section-number">7.2.1</span> Histograms</h3>
+<p>One of the first things that you should do is look at a histogram of your data. Histograms will help you spot any large data irregularities, and can help you get an idea of whether you should expect you data to be non-normally distributed.</p>
+<p>First, let’s look at our <code>antvireo.bill</code> data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(antvireo.bill)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="transformations_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>These data appear relatively normal.</p>
+<p>Next, let’s look at the <code>hourly.jobs</code> data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(hourly.jobs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="transformations_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>These data appear highly non-normal; most values are low, and we have an extreme right skew.</p>
+</section>
+<section id="qq-plots" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="qq-plots"><span class="header-section-number">7.2.2</span> QQ Plots</h3>
+<details>
+<summary>
+Visual method for assessing normality
+</summary>
+<p>One way to see if data are normal is to use a <a href="https://www.statology.org/q-q-plot-r/">QQ plot</a>. These plot data quantiles to theoretical quantiles to see how well they align, with a perfectly normal distribution having a completely linear QQ plot. Let’s look at these with our <code>antvireo.bill</code> data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(antvireo.bill)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="transformations_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As we can see above, the data are roughly linear, which means are data appear normal. The “stairsteps” are from the accuracy in measuring temperature, which was likely rounded and thus created a distribution that is not completely continuous.</p>
+<p>Now, lets check how our <code>hourly.jobs</code> data look:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(hourly.jobs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="transformations_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As we can see, these data are not very linear, suggesting that the data are highly non-normal.</p>
+</details>
+</section>
+<section id="shapiro-wilk-test" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="shapiro-wilk-test"><span class="header-section-number">7.2.3</span> Shapiro-Wilk test</h3>
+<details>
+<summary>
+Statistical method for assessing normality
+</summary>
+<p>Another way to test for normality is to use a Shapiro-Wilk test of normality. We will not get into the specifics of this distribution, but this tests the null hypothesis that data originated in a normal distribution, with the alternative hypothesis that the data originated in a non-normal distribution.</p>
+<p><em>NOTE</em> that the Shapiro-Wilk test does not perform well with extremely large datasets, which may be the result of <a href="https://en.wikipedia.org/wiki/Overfitting">model overfitting</a>.</p>
+<p>This test uses an <span class="math inline">\(\alpha = 0.05\)</span>, and we <em>reject the null hypothesis</em> if our <span class="math inline">\(p &lt; \alpha\)</span>, with <span class="math inline">\(p\)</span> representing the probability of observing something as extreme or more extreme than the result we observe. If we reject the null hypothesis, our data are non-normal and require transformation. If we accept the null hypothesis, we can proceed with treating our data as normally distributed.</p>
+<p>Let’s look at the <code>antvireo.bill</code> data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(antvireo.bill)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  antvireo.bill
+W = 0.97513, p-value = 0.2984</code></pre>
+</div>
+</div>
+<p>As we expected from our <code>qqnorm</code> plot, our data for the Plain Antvireo bills are normally distributed, and we accept the null hypothesis as <span class="math inline">\(p&gt;\alpha\)</span> with <span class="math inline">\(0.30 &gt; 0.05\)</span>.</p>
+<p>Next, let’s do a Shapiro-Wilks test on our <code>hourly.jobs</code> data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(hourly.jobs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  hourly.jobs
+W = 0.39393, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>As we can see, our <span class="math inline">\(p &lt; 0.001\)</span>, therefore we reject the null hypothesis and conclude the <code>hourly.jobs</code> data are non-normal.</p>
+</details>
+</section>
+</section>
+<section id="transforming-data" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="transforming-data"><span class="header-section-number">7.3</span> Transforming data</h2>
+<p>There are multiply different transformations that can be performed on different datasets. In this class, we will focus on three transformations:</p>
+<ol type="1">
+<li>Log transformations, some of the most common transformations</li>
+<li>Square transformations</li>
+<li>Square-root transformations</li>
+</ol>
+<p><em>Note:</em> there are many other types of transformations, we just don’t go in depth with them here.</p>
+<p>When transforming a dataset, you must perform the mathematical function across all values within the dataset. You can then assess whether this dataset is normally distributed and determine whether you can proceed with statistical analyses that you would perform on normal distributions.</p>
+<p>The process for all transformations is the same, so this walkthrough will only perform one: the log transformation.</p>
+<section id="log-transformation-example" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="log-transformation-example"><span class="header-section-number">7.3.1</span> Log transformation example</h3>
+<details>
+<summary>
+Walkthrough of a transformation for normality
+</summary>
+<p>We know that our <code>hourly.jobs</code> dataset is non-normally distributed, so we need to perform a transformation to see if we can achieve normality. Here, we will perform a log transformation. In <em>R</em>, the function <code>log</code> performs a <em>natural log</em> (<span class="math inline">\(ln\)</span>) by default. Because <span class="math inline">\(ln(0)\)</span> is <span class="math inline">\(-Infinity\)</span>, folks will often add <span class="math inline">\(+1\)</span> to their entire dataset to avoid zero values. This is not necessary if your entire dataset is non-zero and positive.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check if any values are below zero</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># function will return # vals at or below 0</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(hourly.jobs <span class="sc">&lt;=</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p>There are no values less than or equal to zero in this dataset. However, if we wanted to add one to them, we could do so by just taking <code>hourly.jobs + 1</code> and creating a new object.</p>
+<p>Next, let’s perform the log transformation:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>log.hourly.jobs <span class="ot">&lt;-</span> hourly.jobs <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Very straightforward! How do these data look?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(log.hourly.jobs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="transformations_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>These data appear far more normal. What about on a qqplot?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(log.hourly.jobs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="transformations_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The line is much straighter, as is expected for a normal distribution.</p>
+<p>Now, for the Shapiro-Wilk test:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(log.hourly.jobs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  log.hourly.jobs
+W = 0.98204, p-value = 0.1911</code></pre>
+</div>
+</div>
+<p>We now have a <span class="math inline">\(p&gt;\alpha\)</span> with <span class="math inline">\(0.19&gt;0.05\)</span>, indicating that these data are now normally distributed. We can now proceed with our analyses!</p>
+<p><strong>Note, however, that you must <em>back transform</em> your data after a transformation!</strong></p>
+<p>A back transformation of <span class="math inline">\(ln(x)\)</span> is <span class="math inline">\(e^x\)</span>. In <em>R</em>, <span class="math inline">\(e\)</span> is found by entering <code>exp(1)</code>. Thus we would do the following if looking at the mean from the logs:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>log.mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(log.hourly.jobs)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>log.mean <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.05</code></pre>
+</div>
+</div>
+<p>And back transformed:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>transformed.log.mean <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="dv">1</span>)<span class="sc">^</span>log.mean</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>transformed.log.mean <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 156</code></pre>
+</div>
+</div>
+</details>
+</section>
+</section>
+<section id="homework-transforming-data" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="homework-transforming-data"><span class="header-section-number">7.4</span> Homework: Transforming data</h2>
+<p>This homework assignment is designed to help you become more familiar with manipulating data and with transforming data.</p>
+<section id="analyzing-data" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="analyzing-data"><span class="header-section-number">7.4.1</span> Analyzing data</h3>
+<p>Using the <code>bird</code> dataset above, pick two other species of birds and do the following:</p>
+<ol type="1">
+<li>Provide information on the mean, median, mode, kurtosis, and skewness</li>
+<li>Create a histogram plot</li>
+<li>Determine if the data are normally distributed</li>
+<li>If data are <em>not</em> normally distributed, see if a square, log, or square root transformation will make the data normal.</li>
+<li>Provide an overall assessment of the data’s normality.</li>
+</ol>
+</section>
+<section id="transforming-data-1" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="transforming-data-1"><span class="header-section-number">7.4.2</span> Transforming Data</h3>
+<p>Using the below newly created data object, perform all the same steps as you did for the bird data above.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>hourly.jobs.homework <span class="ot">&lt;-</span> jobs<span class="sc">$</span>vacancies_offering_an_hourly_wage[<span class="dv">200</span><span class="sc">:</span><span class="dv">300</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="submitting-assignment" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="submitting-assignment"><span class="header-section-number">7.4.3</span> Submitting assignment</h3>
+<p>Submit your homework assignment as an <code>html</code> file on <em>Canvas</em>.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-lele_morphological_2022" class="csl-entry" role="listitem">
+Lele, A., H. Garrod, E. Ferguson, C. Azahara Prieto Gil, and M. Ellis (2022). Morphological measurements in a coastal <span>Ecuadorian</span> avifauna. [Online.] Available at <a href="https://zenodo.org/records/6511860">https://zenodo.org/records/6511860</a>.
+</div>
+<div id="ref-centre_counts_2025" class="csl-entry" role="listitem">
+Urban Big Data Centre (2025). Counts hourly pay <span>Adzuna</span> jobs. [Online.] Available at <a href="https://zenodo.org/records/14771706">https://zenodo.org/records/14771706</a>.
+</div>
+</div>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -728,13 +1043,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./transformations.html" class="pagination-link" aria-label="Transforming data">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transforming data</span></span>
+      <a href="./normality.html" class="pagination-link" aria-label="Normality &amp; hypothesis testing">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Normality &amp; hypothesis testing</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./probdist.html" class="pagination-link" aria-label="Probability distributions">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Probability distributions</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./exam2.html" class="pagination-link" aria-label="Exam 2 practice">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exam 2 practice</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

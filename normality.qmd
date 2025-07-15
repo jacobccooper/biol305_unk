@@ -23,6 +23,10 @@ Standard normal distributions have a mean, median, and mode that are *equal*. Th
 
 ### Example in nature
 
+<details>
+
+<summary>An example of naturally occurring normal distributions</summary>
+
 In order to see an example of the normal distribution in nature, we are going to examine the BeeWalk survey database from the island of Great Britain [@Comont2020]. We are not interested in the bee data at present, however, but in the climatic data from when the surveys were performed.
 
 ```{r}
@@ -108,7 +112,13 @@ kurtosis(temps)-3
 
 Data do not show any significant kurtosis.
 
+</details>
+
 ### Effect of sampling
+
+<details>
+
+<summary>How sample size effects statistical calculations</summary>
 
 Oftentimes, we will see things approach the normal distribution as we collect more samples. We can model this by subsampling our temperature vector.
 
@@ -145,30 +155,13 @@ hist(sub.temps, main = "1000 samples", breaks = 40)
 
 Now the normal distribution is even more clear. As we can also see, the more we sample, the more we approach the true means and distribution of the actual dataset. Because of this, we can perform experiments and observations of small groups and subsamples and make inferences about the whole, given that most systems naturally approach statistical distributions like the normal!
 
-### Testing if data are normal
+</details>
 
-There are two major methods we can use to see if data are normally distributed.
+<hr>
 
-#### QQ Plots
+<br>
 
-Another way to see if data are normal is to use a [QQ plot](https://www.statology.org/q-q-plot-r/). These plots data quantiles to theoretical quantiles to see how well they align, with a perfectly normal distribution having a completely linear QQ plot. Let's look at these with our `beewalk` data.
-
-```{r}
-qqnorm(temps)
-```
-
-As we can see above, the data are roughly linear, which means are data are very normal. The "stairsteps" are from the accuracy in measuring temperature, which was likely rounded and thus created a distribution that is not completely continuous.
-
-#### Shapiro-Wilk test
-
-Another way to test for normality is to use a Shapiro-Wilk test of normality. We will not get into the specific of this distribution, but this tests the null hypothesis that data originated in a normal distribution, with the alternative hypothesis that the data originated in a non-normal distribution. You will read next about the specifics of hypothesis testing, but this test uses an $\alpha = 0.05$, and we *reject the null hypothesis* if our $p < \alpha$, with $p$ representing the probability of observing something as extreme or more extreme than the result we observe. Our `temps` dataset is too large, as `shapiro.test` requires vectors of $< 5000$. Let's take a random sample and try again.
-
-```{r}
-sample(temps, 200) |>
-  shapiro.test()
-```
-
-For our subsets of temperature, we find that the temperature is normally distributed. **Note** that having all $5000$ temperatures included makes this test find a "non-normal" result, likely from the same stairstepping phenomenon from rounding that we discussed before, which may result in [model overfitting](https://en.wikipedia.org/wiki/Overfitting) to the rounded data.
+<hr>
 
 ## Hypothesis testing
 
@@ -358,7 +351,7 @@ pnorm(Z)
 
 After rounding, we get $p = 0.03$, a $p$ that is significant as it is less than our overal $\alpha$.
 
-### Calculated the $p$ value
+### Calculating the $p$ value
 
 We have two different methods for calculating a $p$ value:
 

@@ -14,6 +14,7 @@ book:
     - descriptive_stats.qmd
     - visual.qmd
     - normality.qmd
+    - transformations.qmd
     - exam2.qmd
     - probdist.qmd
     - chi.qmd
