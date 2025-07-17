@@ -19,6 +19,12 @@ Remember, for our specific tests, we are setting an $\alpha$ value in advance (t
 
 Previously, we talked about the [*normal distribution*](https://jacobccooper.github.io/biol305_unk/normality.html), which is used to approximate a lot of datasets in nature. However, several other probability distributions are also useful for biological systems, which are outlined here.
 
+## Review: Basic statistics
+
+If we are looking at things that could be one *or* the other thing, we add the probabilities. For example, the odds of getting a four or a six on a 20 sided die are $\frac{1}{20}+\frac{1}{20}=\frac{2}{20}=\frac{1}{10}$.
+
+If we are looking at things that could be one thing *and* another thing, we multiply the probabilities together. For example, if we roll two six-sided die and we are looking at the odds of a 2 or a 4 on both die, the odds are $(\frac{1}{6}+\frac{1}{6})\cdot(\frac{1}{6}+\frac{1}{6})=\frac{1}{3}\cdot\frac{1}{3}=\frac{1}{9}$.
+
 ## Binomial distribution
 
 A *binomial distribution* is one in which only two outcomes are possible - often coded as $0$ and $1$ and usually representing failure and success, respectively. The binomial is described by the following function:
@@ -40,6 +46,10 @@ In *R*, the binomial distribution is represented by the following functions:
 -   `rbinom`: generates random values according to a binomial.
 
 ### Binomial examples
+
+<details>
+
+<summary>Binomial example walkthrough</summary>
 
 Let's see what this looks like. Let's consider a scenario where we flip a coin 10 times and get 9 heads. How likely is this outcome?
 
@@ -112,7 +122,13 @@ plot(x,
 
 As we increase the number of flips, we can see that the probability of success forms a *normal distribution* centered on the outcome given the default probability. Thus, as we deviate from our *expected outcome* (initial probability multiple by the number of trials), then our results become less likely.
 
+</details>
+
 ### Binomial exact tests
+
+<details>
+
+<summary>Binomial exact test walkthrough</summary>
 
 We can perform exact binomial tests by using the *R* function `binom.test`. This is a built in function within *R*. This test requires the following arguments:
 
@@ -158,6 +174,8 @@ binom_result$conf.int
 
 This test is easily implemented, but always double check and make sure you are setting it up correctly.
 
+</details>
+
 ## Poisson distribution
 
 The *Poisson distribution* is used to reflect random count data. Specifically, the Poisson is used to determine if success events are *overdispersed* (*i.e.*, regularly spaced), *random*, or *underdispersed* (i.e., *clustered*). The Poisson introduces the variable *lambda* ($\lambda$) which represents the mean ($\mu$) and the variance ($\sigma^2$), which are equal in a Poisson distribution. A Poisson distribution is described by the following function:
@@ -165,8 +183,6 @@ The *Poisson distribution* is used to reflect random count data. Specifically, t
 $$
 p(x)=\frac{\lambda^{x}e^{-\lambda}}{x!}
 $$
-
-### Poisson example
 
 The Poisson is represented by the following functions in *R* which closely resemble the functions for the normal and binomial distributions:
 
@@ -177,6 +193,8 @@ The Poisson is represented by the following functions in *R* which closely resem
 -   `qpois`: quantile function
 
 -   `rpois`: random values from a Poisson.
+
+### Poisson example
 
 Let's look at the probability of $0$ to $10$ successes when we have our $\lambda=1$.
 
@@ -211,6 +229,10 @@ We will not often use the `poisson.test` in this class, but it is good to be awa
 With both the Binomial and the Poisson, we can calculate cumulative probabilities. Both of these require the density (`d`) versions of the arguments.
 
 ### Binomial cumulative
+
+<details>
+
+<summary>Obtaining cumulative probability in a binomial distribution</summary>
 
 Let's say we have ten trials with three successes and a base probability of $0.5$. We can calculate the probability to the *left* by using the following:
 
@@ -249,7 +271,13 @@ dbinom(x = 3:6,
 
 The probability of getting one of these outcomes is 77.34%.
 
+</details>
+
 ### Poisson cumulative probability
+
+<details>
+
+<summary>Cumulative probability for Poisson distributions</summary>
 
 Likewise, we can use `ppois` to get the $p$ value and `dpois` to get the distribution function of specific outcomes. So, let's say we have a scenario with a $\lambda = 0.5$ and we are looking at the probability of 2 successes or greater. In this case, we have an infinite series, which we can't calculate. However, we can calculate the probability of what it *isn't* and then subtract from 1. In this case, we are looking for the probability of *not* having 0 or 1 successes.
 
@@ -267,10 +295,48 @@ Now, let's sum this and subtract it from 1.
 
 The probability is only about 9%.
 
+</details>
+
 ## Homework
 
-### Chapter 5
+Remember - your homework must be completed in an `rmarkdown` document submitted as an `html` file.
 
-Complete problems 5.1, 5.2, 5.3, 5.5, 5.6, 5.11, 5.12, 5.13, 5.14, and 5.20 as written in your textbook.
+For each question, you must determine whether a binomial or a Poisson distribution is most appropriate. (Provide justification on your document for why you chose the distribution you did). After picking the correct distribution, answer the statistical question posed.
 
-Be sure to show your work, and submit your assignment as a knitted `html` document.
+Some of the inspiration for these problems is drawn from [Statology](https://www.statology.org/binomial-distribution-real-life-examples/).
+
+### Problem 1
+
+There is a claw machine at the local fair that is notoriously difficult to use. In fact, it is estimated that only 1 in 50 attempts are successful at getting a toy out of the machine. What is the probability that you would try it 50 times and win thrice?
+
+### Problem 2
+
+Whooping Cranes *Grus americanus* are some of the most endangered birds in North America, with only 557 birds in the population that migrates through Nebraska. Conversely, approximately 736,000 Sandhill Cranes *Antigone canadensis* migrate through Nebraska. Assuming that census counts of flocks of 5000 cranes have the expected average ratio of cranes, what are the odds of finding a crane flock with two or more Whooping Cranes?
+
+### Problem 3
+
+Your friend has a twenty-sided dice that you suspect to be unfair. They have rolled a 20 four times in the past thirty rolls. Is the dice unfair?
+
+### Problem 4
+
+You roll three die at a single time. What are the odds of getting exactly two fours?
+
+### Problem 5
+
+You notice that in a class of 200 people, the odds of any given student being absent is approximately 3%. What are the odds that 5 people miss a given class?
+
+### Problem 6
+
+There are approximately 3 severe storm warnings per 16 week semester at UNK. What are the odds of having a semester with no severe storm warnings?
+
+### Problem 7
+
+You are giving mice an experimental treatment that is designed to change their fur color. In a trial of 500 mice, 15 had their fur change color. Using this precedent, are the odds of having 6 mice have their fur change color in another trial of 500 individuals?
+
+### Problem 8
+
+What are the odds of rolling no fours on two twenty-sided die?
+
+### Problem 9
+
+Dr. Cooper once caught his mom shaking sodas and putting them back at the shelves at a gas station while they were traveling. Assuming his mom was able to shake 10% of the sodas before getting caught, what are the odds of getting three shaken sodas if you buy 20 sodas?

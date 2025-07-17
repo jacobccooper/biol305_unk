@@ -1,5 +1,5 @@
 ---
-title: "Testing means with $t$-tests"
+title: "Means testing"
 author: "University of Nebraska at Kearney Biology"
 format: html
 editor: visual
@@ -9,7 +9,21 @@ editor: visual
 
 Previously, we talked about normal distributions as a method for comparing samples to overall populations or comparing individuals to overall populations. However, sample sizes can introduce some error, and oftentimes we may not have access to an entire population. In these situations, we need a better test that can account for this changing error and the effect of different sample sizes. This is especially important when comparing two samples to each other. We may find a small sample from one population and a small sample for another, and we want to determine if these came from the same overall population as effectively as possible.
 
+### Parametric and Non-parametric tests
+
+We have divided tests into *parametric* and *non-parametric* tests below. *Parametric* tests are those that follow a normal distribution; *non-parametric* tests violate this expectation.
+
+Remember, parametric tests are more powerful and preferred in all circumstances. If your data are not parametric, you will first have to see if the data can be transformed. If the data cannot be transformed, then you can proceed with a non-parametric test.
+
+### A little history
+
+<details>
+
+<summary>Why is it called "Student's *t* test"?</summary>
+
 The distribution that we commonly refer to as a $t$-distribution is also sometimes known as a "Student's $t$-distribution" as it was first published by a man with the pseudonym of "Student". Student was in fact [William Sealy Gossett](https://en.wikipedia.org/wiki/William_Sealy_Gosset), an employee of the Guinness corporation who was barred from publishing things by his employer to ensure that trade secrets were not made known to their competitors. Knowing that his work regarding statistics was important, Gossett opted to publish his research anyway under his pseudonym.
+
+</details>
 
 ## Dataset
 
@@ -35,7 +49,9 @@ canines$OA <- as.numeric(canines$OA)
 summary(canines)
 ```
 
-## $t$-distribution
+## Parametric tests
+
+### $t$-distribution
 
 For these scenarios where we are testing a single sample mean from one or more samples we use a $t$-distributions. A $t$-distribution is a specially altered normal distribution that has been adjusted to account for the number of individuals being sampled. Specifically, a $t$-distributions with infinite degrees of freedom is the same as a normal distribution, and our degrees of freedom help create a more platykurtic distribution to account for error and uncertainty. The distribution can be calculated as follows:
 
@@ -69,13 +85,13 @@ In *R*, we have the following functions to help with $t$ distributions:
 
 All of the above arguments required the degrees of freedom to be declared. Unlike the normal distribution functions, these can not be adjusted for your data; tests must be performed using `t.test`.
 
-## $t$-tests
+### $t$-tests
 
 We have three major types of $t$-tests:
 
--   **One-sample** $t$**-tests**: a single sample is being compared to a value, or *vice versa*
+-   **One-sample** $t$**-tests**: a single sample is being compared to a value, or *vice versa.*
 
--   **Two-sample** $t$**-tests**: two samples are being compared to one another to see if they come from the same population
+-   **Two-sample** $t$**-tests**: two samples are being compared to one another to see if they come from the same population.
 
 -   **Paired** $t$**-tests**: before-and-after measurements of the same individuals are being compared. This is necessary to account for a repeat in the individuals being measured, and different potential baselines at initiation. In this case, we are looking to see if the difference between before and after is equal to zero.
 
@@ -108,6 +124,16 @@ $$
 A $t$-test works well under a certain set of assumptions, include *equal variance* between samples and roughly equal *sample sizes*. A Welch's $t$-test is better for scenarios with *unequal variance* and *small sample sizes*. If sample sizes and variances are equal, the two $t$-tests should perform the same.
 
 Because of this, some argue that "Welch's" should be the default $t$-test, and **in *R*, Welch's *is* the default** $t$**-test**. If you want to specify a "regular" $t$-value, you will have to set the option `var.equal = TRUE`. (The default is `var.equal = FALSE`).
+
+**In this class, we will default to a Welch's test in *all* instances.**
+
+**If you choose to do a Student's *t*-test, you must do the following:**
+
+-   Download the `car` library
+
+-   Use the `leveneTest` function to see if variances are equal between populations
+
+We do not cover this in depth here, but be aware of this difference. For more information, see @ruxton_unequal_2006.
 
 ### One-sample $t$-tests
 
@@ -185,7 +211,11 @@ t.test(t1, t2)
 
 This value differs because, in a paired test, we are looking to see if the difference between the distributions is $0$, while in the independent (standard) test we are comparing the overall distributions of the samples.
 
-## Wilcoxon tests
+## Non-parametric tests
+
+The following tests should be used when no data transformations have been successful with your dataset.
+
+### Wilcoxon tests
 
 When data (and the differences among data) are non-normal, they violate the assumptions of a $t$-test. In these cases, we have to do a Wilcoxon test (also called a Wilcoxon signed rank test). In *R*, the command `wilcox.test` also includes the Mann-Whitney $U$ test for unpaired data and the standard Wilcoxon test $W$ for paired data.
 
