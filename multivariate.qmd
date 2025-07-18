@@ -6,10 +6,115 @@ editor: visual
 
 ## Multivariate analyses
 
+Multivariate analyses are commonly used to help understand the variation that exists in large, multidimensional datasets. These analyses can help us understand relationships among individuals and help us determine how many groups (and what groups) exist in a dataset.
+
+For this particular walkthrough, we will be using data on the Northern Double-collared Sunbird *Cinnyris reichenowi sensu lato* complex from equatorial Afromontane regions [@cooper_multiple_2021; @cooper_data_2021].
+
+```{r, message = FALSE}
+library(tidyverse)
+
+cinnyris <- read_csv("https://raw.github.com/jacobccooper/biol305_unk/main/datasets/cinnyris.csv")
+
+male_cinnyris <- cinnyris |> 
+  mutate(Genus = as.factor(Genus)) |> 
+  mutate(Species = as.factor(Species)) |> 
+  mutate(Subspecies = as.factor(Subspecies)) |> 
+  filter(Age == "Adult") |> 
+  filter(Sex == "Male") |> 
+  select(-`Collection Name`, -Locality, -Country, -Age, 
+         -`Notes / Existing Damage Precluding Measurements`) |> 
+  na.omit()
+```
+
 ## Principal components
 
-A very common method of visualizing variation in population is using principal components analyses (PCA).
+<details>
+
+<summary>Click here for an overview of PCA</summary>
+
+A very common method of visualizing variation in population is using principal components analyses (PCA). Principal components help collapse multidimensional data into a few dimensions that explain the most variation possible across the dataset.
+
+For principal components, we want to use the library `vegan`.
+
+```{r}
+library(vegan)
+```
+
+The function for principal components in `vegan` is `rda`, which will only work on a whole dataframe with no non-numeric data. Thus, we must create a new object of only numerical data and then re-merge it with the original dataframe. The row order is maintained, so this will not be an issue.
+
+```{r}
+male.cinnyris.data <- male_cinnyris |> 
+  select(-Genus, -Species, -Subspecies, 
+         -Collection, -Catalog, -Locality2, -Sex)
+
+cinnyris.pca <- rda(male.cinnyris.data)
+
+cinnyris.pca
+```
+
+Above, we can see that we now have a complex object that contains our PCA. We can use the function `biplot` to see how our data look and how our variables contributed to the principal components.
+
+```{r}
+biplot(cinnyris.pca)
+ordihull(cinnyris.pca,
+         group = male_cinnyris$Subspecies)
+```
+
+We can also do a `ggplot` to color our data and see how it works. Let's combine our datasets so we can do this.
+
+```{r}
+cinnyris.male.pca <- cbind(male_cinnyris, 
+                           # extract PC values
+                           cinnyris.pca$CA$u)
+
+ggplot(cinnyris.male.pca, aes(x = PC1, y = PC2)) +
+  geom_point() +
+  theme_classic()
+```
+
+To the naked eye, these data seem to fall into two major clusters. This can be examined again, this time assigning colors to one of our explanatory variables: subspecies.
+
+```{r}
+ggplot(cinnyris.male.pca, aes(x = PC1, y = PC2, colour = Subspecies)) +
+  geom_point() +
+  stat_ellipse() +
+  theme_classic()
+```
+
+As we can see, many of these birds fall into one of the two groups. Only one population - *genderuensis* - seems to really bridge both groups.
+
+The following shows how each variable contributed to each principal component:
+
+```{r}
+cinnyris.pca$CA$v
+```
+
+We can also see the percent variance explained by each axis, which is contained within the eigenvectors of the PCA:
+
+```{r}
+cinnyris.pca$CA$eig/sum(cinnyris.pca$CA$eig)
+```
+
+The first principal component explains 68% of the variation, and the second 19% of the variation.
+
+</details>
 
 ## Clustering
+
+### K-means clustering
+
+<details>
+
+<summary>Click here for K-means clustering</summary>
+
+</details>
+
+### Hierarchical clustering
+
+<details>
+
+<summary>Click here for hierarchical clustering</summary>
+
+</details>
 
 ## Homework
