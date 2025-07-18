@@ -8,7 +8,7 @@
 
 <meta name="author" content="University of Nebraska at Kearney Biology">
 
-<title>13&nbsp; Correlation &amp; regression – Biology 305: Biostatistics</title>
+<title>14&nbsp; Correlation &amp; regression – Biology 305: Biostatistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./picktest.html" rel="next">
+<link href="./multivariate.html" rel="next">
 <link href="./anova2.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -145,7 +145,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cor_reg.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cor_reg.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -173,7 +173,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Preface</span></a>
+ <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -214,68 +214,80 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./transformations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transforming data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./exam2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exam 2 practice</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exam 2 practice</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./probdist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Probability distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Probability distributions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">χ2 (Chi-squared) tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">χ2 (Chi-squared) tests</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Testing means with <span class="math inline">\(t\)</span>-tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Means testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">ANOVA: Part 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ANOVA: Part 1</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ANOVA: Part 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">ANOVA: Part 2</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cor_reg.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Multivariate methods</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./picktest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Pick the test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Pick the test</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./final_exam.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Final exam &amp; review</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Final exam &amp; review</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./conclusion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Conclusions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Conclusions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Functions &amp; Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Functions &amp; Glossary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -294,22 +306,22 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">13.1</span> Introduction</a></li>
-  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="header-section-number">13.2</span> Correlation</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">14.1</span> Introduction</a></li>
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="header-section-number">14.2</span> Correlation</a>
   <ul class="collapse">
-  <li><a href="#pearsons" id="toc-pearsons" class="nav-link" data-scroll-target="#pearsons"><span class="header-section-number">13.2.1</span> Pearson’s</a></li>
-  <li><a href="#spearmans" id="toc-spearmans" class="nav-link" data-scroll-target="#spearmans"><span class="header-section-number">13.2.2</span> Spearman’s</a></li>
-  <li><a href="#other-non-parametric-methods" id="toc-other-non-parametric-methods" class="nav-link" data-scroll-target="#other-non-parametric-methods"><span class="header-section-number">13.2.3</span> Other non-parametric methods</a></li>
+  <li><a href="#pearsons" id="toc-pearsons" class="nav-link" data-scroll-target="#pearsons"><span class="header-section-number">14.2.1</span> Pearson’s</a></li>
+  <li><a href="#spearmans" id="toc-spearmans" class="nav-link" data-scroll-target="#spearmans"><span class="header-section-number">14.2.2</span> Spearman’s</a></li>
+  <li><a href="#other-non-parametric-methods" id="toc-other-non-parametric-methods" class="nav-link" data-scroll-target="#other-non-parametric-methods"><span class="header-section-number">14.2.3</span> Other non-parametric methods</a></li>
   </ul></li>
-  <li><a href="#regression" id="toc-regression" class="nav-link" data-scroll-target="#regression"><span class="header-section-number">13.3</span> Regression</a>
+  <li><a href="#regression" id="toc-regression" class="nav-link" data-scroll-target="#regression"><span class="header-section-number">14.3</span> Regression</a>
   <ul class="collapse">
-  <li><a href="#parametric" id="toc-parametric" class="nav-link" data-scroll-target="#parametric"><span class="header-section-number">13.3.1</span> Parametric</a></li>
-  <li><a href="#non-parametric" id="toc-non-parametric" class="nav-link" data-scroll-target="#non-parametric"><span class="header-section-number">13.3.2</span> Non-parametric</a></li>
+  <li><a href="#parametric" id="toc-parametric" class="nav-link" data-scroll-target="#parametric"><span class="header-section-number">14.3.1</span> Parametric</a></li>
+  <li><a href="#non-parametric" id="toc-non-parametric" class="nav-link" data-scroll-target="#non-parametric"><span class="header-section-number">14.3.2</span> Non-parametric</a></li>
   </ul></li>
-  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework"><span class="header-section-number">13.4</span> Homework</a>
+  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework"><span class="header-section-number">14.4</span> Homework</a>
   <ul class="collapse">
-  <li><a href="#chapter-13" id="toc-chapter-13" class="nav-link" data-scroll-target="#chapter-13"><span class="header-section-number">13.4.1</span> Chapter 13</a></li>
-  <li><a href="#chapter-14" id="toc-chapter-14" class="nav-link" data-scroll-target="#chapter-14"><span class="header-section-number">13.4.2</span> Chapter 14</a></li>
+  <li><a href="#chapter-13" id="toc-chapter-13" class="nav-link" data-scroll-target="#chapter-13"><span class="header-section-number">14.4.1</span> Chapter 13</a></li>
+  <li><a href="#chapter-14" id="toc-chapter-14" class="nav-link" data-scroll-target="#chapter-14"><span class="header-section-number">14.4.2</span> Chapter 14</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -319,7 +331,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></h1>
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></h1>
 </div>
 
 
@@ -359,13 +371,13 @@ window.Quarto = {
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 </div>
-<section id="introduction" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">13.1</span> Introduction</h2>
+<section id="introduction" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">14.1</span> Introduction</h2>
 <p>When we are comparing <em>two continuous variables</em>, we use two forms of tests: <em>correlation</em> to understand <em>if</em> there is a relationship between two variables, and <em>linear regression</em> to determine <em>what</em> that relationships is.</p>
 <p><strong>Remember</strong> - “if” is always correlation, and “what is it” is always linear regression when choosing a test for an exam.</p>
 </section>
-<section id="correlation" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="correlation"><span class="header-section-number">13.2</span> Correlation</h2>
+<section id="correlation" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="correlation"><span class="header-section-number">14.2</span> Correlation</h2>
 <p>Correlation - denoted by <span class="math inline">\(\rho\)</span> (“rho”) and not to be confused with <span class="math inline">\(p\)</span> - is a measure of how closely related to continuous variables appear to be. This can vary from a purely negative relationship to a purely positive relationship, such that <span class="math inline">\(-1 \le \rho \le 1\)</span> with <span class="math inline">\(\rho = 0\)</span> indicating a random relationship between data.</p>
 <p>We can visualize these as follows:</p>
 <div class="cell">
@@ -427,11 +439,11 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(y, x) <span class="sc">|&gt;</span> </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.02</code></pre>
+<pre><code>[1] -0.32</code></pre>
 </div>
 </div>
-<section id="pearsons" class="level3" data-number="13.2.1">
-<h3 data-number="13.2.1" class="anchored" data-anchor-id="pearsons"><span class="header-section-number">13.2.1</span> Pearson’s</h3>
+<section id="pearsons" class="level3" data-number="14.2.1">
+<h3 data-number="14.2.1" class="anchored" data-anchor-id="pearsons"><span class="header-section-number">14.2.1</span> Pearson’s</h3>
 <p>Pearson’s correlation coefficient is our value for <em>parametric tests</em>. We often denote our correlation coefficient as <span class="math inline">\(r\)</span> and not <span class="math inline">\(\rho\)</span> for this particular test. It is calculated as follows:</p>
 <p><span class="math display">\[
 r = \frac{\Sigma xy - (\frac{\Sigma x \Sigma y}{n})}{\sqrt{(\Sigma x^2 - \frac{(\Sigma x)^2}{n}})(\Sigma y^2 - \frac{(\Sigma y)^2}{n})}
@@ -530,21 +542,21 @@ r = \frac{\Sigma xy - (\frac{\Sigma x \Sigma y}{n})}{\sqrt{(\Sigma x^2 - \frac{(
 </div>
 <p>There we go! Our function printed out everything that we need.</p>
 </section>
-<section id="spearmans" class="level3" data-number="13.2.2">
-<h3 data-number="13.2.2" class="anchored" data-anchor-id="spearmans"><span class="header-section-number">13.2.2</span> Spearman’s</h3>
+<section id="spearmans" class="level3" data-number="14.2.2">
+<h3 data-number="14.2.2" class="anchored" data-anchor-id="spearmans"><span class="header-section-number">14.2.2</span> Spearman’s</h3>
 <p>Spearman’s correlation is one of the non-parametric methods for our correlation tests. We can use this for ranked data or for non-parametric datasets. We do this the exact same way, except we change <code>method = "spearman"</code>.</p>
 </section>
-<section id="other-non-parametric-methods" class="level3" data-number="13.2.3">
-<h3 data-number="13.2.3" class="anchored" data-anchor-id="other-non-parametric-methods"><span class="header-section-number">13.2.3</span> Other non-parametric methods</h3>
+<section id="other-non-parametric-methods" class="level3" data-number="14.2.3">
+<h3 data-number="14.2.3" class="anchored" data-anchor-id="other-non-parametric-methods"><span class="header-section-number">14.2.3</span> Other non-parametric methods</h3>
 <p>To be expanded upon, but not necessary for the class at present.</p>
 </section>
 </section>
-<section id="regression" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="regression"><span class="header-section-number">13.3</span> Regression</h2>
+<section id="regression" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="regression"><span class="header-section-number">14.3</span> Regression</h2>
 <p>Regression is used when we want to know <em>what</em> the relationship is between two variables. Regression operates similar to ANOVA and correlation, providing us with the nature of the relationship, the strength of the relationship, and gives us values for calculating the relationship. <strong>For this class, we are only focusing on linear regression for relationships between linear variables</strong>.</p>
 <p>The equation for a regression line is often written as <span class="math inline">\(y_i = \alpha + \beta x_i + e_i\)</span>, where <span class="math inline">\(\alpha\)</span> is the <span class="math inline">\(y\)</span> intercept, <span class="math inline">\(\beta\)</span> is the slope, and <span class="math inline">\(e\)</span> is the error around each point. We will not perform regression calculations by hand in this class.</p>
-<section id="parametric" class="level3" data-number="13.3.1">
-<h3 data-number="13.3.1" class="anchored" data-anchor-id="parametric"><span class="header-section-number">13.3.1</span> Parametric</h3>
+<section id="parametric" class="level3" data-number="14.3.1">
+<h3 data-number="14.3.1" class="anchored" data-anchor-id="parametric"><span class="header-section-number">14.3.1</span> Parametric</h3>
 <p>We will use out previous established <code>x</code> and <code>y</code> datasets that are strongly positively correlated for this example. The equation for calculating a linear relationship is <code>lm</code>, which stands for “linear model”. This uses equations like ANOVA, but can also use two vectors of data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>xy_linear <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
@@ -649,18 +661,18 @@ F-statistic: 37.04 on 1 and 13 DF,  p-value: 3.867e-05</code></pre>
 </div>
 <p>As we can see above, our points follow the line from the plot. By using this format, however, we can make predictions of value for any point we want.</p>
 </section>
-<section id="non-parametric" class="level3" data-number="13.3.2">
-<h3 data-number="13.3.2" class="anchored" data-anchor-id="non-parametric"><span class="header-section-number">13.3.2</span> Non-parametric</h3>
+<section id="non-parametric" class="level3" data-number="14.3.2">
+<h3 data-number="14.3.2" class="anchored" data-anchor-id="non-parametric"><span class="header-section-number">14.3.2</span> Non-parametric</h3>
 <p>We are not doing non-parametric linear regression in this class.</p>
 </section>
 </section>
-<section id="homework" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="homework"><span class="header-section-number">13.4</span> Homework</h2>
-<section id="chapter-13" class="level3" data-number="13.4.1">
-<h3 data-number="13.4.1" class="anchored" data-anchor-id="chapter-13"><span class="header-section-number">13.4.1</span> Chapter 13</h3>
+<section id="homework" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="homework"><span class="header-section-number">14.4</span> Homework</h2>
+<section id="chapter-13" class="level3" data-number="14.4.1">
+<h3 data-number="14.4.1" class="anchored" data-anchor-id="chapter-13"><span class="header-section-number">14.4.1</span> Chapter 13</h3>
 </section>
-<section id="chapter-14" class="level3" data-number="13.4.2">
-<h3 data-number="13.4.2" class="anchored" data-anchor-id="chapter-14"><span class="header-section-number">13.4.2</span> Chapter 14</h3>
+<section id="chapter-14" class="level3" data-number="14.4.2">
+<h3 data-number="14.4.2" class="anchored" data-anchor-id="chapter-14"><span class="header-section-number">14.4.2</span> Chapter 14</h3>
 
 
 </section>
@@ -1090,12 +1102,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./anova2.html" class="pagination-link" aria-label="ANOVA: Part 2">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ANOVA: Part 2</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">ANOVA: Part 2</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./picktest.html" class="pagination-link" aria-label="Pick the test">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Pick the test</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./multivariate.html" class="pagination-link" aria-label="Multivariate methods">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Multivariate methods</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
