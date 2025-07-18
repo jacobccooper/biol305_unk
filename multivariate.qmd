@@ -1,0 +1,15 @@
+---
+title: "Multivariate methods"
+format: html
+editor: visual
+---
+
+## Multivariate analyses
+
+## Principal components
+
+A very common method of visualizing variation in population is using principal components analyses (PCA).
+
+## Clustering
+
+## Homework

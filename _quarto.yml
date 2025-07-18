@@ -22,6 +22,7 @@ book:
     - anova1.qmd
     - anova2.qmd
     - cor_reg.qmd
+    - multivariate.qmd
     - picktest.qmd
     - final_exam.qmd
     - conclusion.qmd
