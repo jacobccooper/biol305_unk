@@ -313,11 +313,18 @@ window.Quarto = {
   <li><a href="#code-formatting" id="toc-code-formatting" class="nav-link" data-scroll-target="#code-formatting"><span class="header-section-number">19.1.3</span> Code formatting</a></li>
   </ul></li>
   <li><a href="#basic-statistics" id="toc-basic-statistics" class="nav-link" data-scroll-target="#basic-statistics"><span class="header-section-number">19.2</span> Basic statistics</a></li>
-  <li><a href="#custom-functions-from-class-and-elsewhere" id="toc-custom-functions-from-class-and-elsewhere" class="nav-link" data-scroll-target="#custom-functions-from-class-and-elsewhere"><span class="header-section-number">19.3</span> Custom functions from class and elsewhere</a>
+  <li><a href="#null-hypotheses" id="toc-null-hypotheses" class="nav-link" data-scroll-target="#null-hypotheses"><span class="header-section-number">19.3</span> Null hypotheses</a>
   <ul class="collapse">
-  <li><a href="#basic-stats" id="toc-basic-stats" class="nav-link" data-scroll-target="#basic-stats"><span class="header-section-number">19.3.1</span> Basic stats</a></li>
-  <li><a href="#normal-distributions" id="toc-normal-distributions" class="nav-link" data-scroll-target="#normal-distributions"><span class="header-section-number">19.3.2</span> Normal distributions</a></li>
-  <li><a href="#anova" id="toc-anova" class="nav-link" data-scroll-target="#anova"><span class="header-section-number">19.3.3</span> ANOVA</a></li>
+  <li><a href="#chi2-tests" id="toc-chi2-tests" class="nav-link" data-scroll-target="#chi2-tests"><span class="header-section-number">19.3.1</span> <span class="math inline">\(\chi^2\)</span> tests</a></li>
+  <li><a href="#one-sample-tests" id="toc-one-sample-tests" class="nav-link" data-scroll-target="#one-sample-tests"><span class="header-section-number">19.3.2</span> One-sample tests</a></li>
+  <li><a href="#multi-sample-tests" id="toc-multi-sample-tests" class="nav-link" data-scroll-target="#multi-sample-tests"><span class="header-section-number">19.3.3</span> Multi-sample tests</a></li>
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="header-section-number">19.3.4</span> Correlation</a></li>
+  <li><a href="#regression" id="toc-regression" class="nav-link" data-scroll-target="#regression"><span class="header-section-number">19.3.5</span> Regression</a></li>
+  </ul></li>
+  <li><a href="#custom-functions-from-class-and-elsewhere" id="toc-custom-functions-from-class-and-elsewhere" class="nav-link" data-scroll-target="#custom-functions-from-class-and-elsewhere"><span class="header-section-number">19.4</span> Custom functions from class and elsewhere</a>
+  <ul class="collapse">
+  <li><a href="#normal-distributions" id="toc-normal-distributions" class="nav-link" data-scroll-target="#normal-distributions"><span class="header-section-number">19.4.1</span> Normal distributions</a></li>
+  <li><a href="#anova" id="toc-anova" class="nav-link" data-scroll-target="#anova"><span class="header-section-number">19.4.2</span> ANOVA</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -442,9 +449,16 @@ window.Quarto = {
 </section>
 <section id="basic-statistics" class="level2" data-number="19.2">
 <h2 data-number="19.2" class="anchored" data-anchor-id="basic-statistics"><span class="header-section-number">19.2</span> Basic statistics</h2>
+<details>
+<summary>
+Click here for basic statistics
+</summary>
 <p>For these examples, we will create a random vector of number to demonstrate how they work.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make repeatable</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">8675309</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># get random normal values</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><code>mean</code> - get the mean / average of a set of data</li>
@@ -452,141 +466,250 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.05326273</code></pre>
+<pre><code>[1] -0.02659863</code></pre>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.0006443188</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">IQR</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.378508</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -3.449557  3.412794</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate range</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(<span class="fu">range</span>(x)[<span class="dv">1</span>] <span class="sc">-</span> <span class="fu">range</span>(x)[<span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.862351</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate range</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(x) <span class="sc">-</span> <span class="fu">min</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.862351</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="glossary_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</details>
 </section>
-<section id="custom-functions-from-class-and-elsewhere" class="level2" data-number="19.3">
-<h2 data-number="19.3" class="anchored" data-anchor-id="custom-functions-from-class-and-elsewhere"><span class="header-section-number">19.3</span> Custom functions from class and elsewhere</h2>
+<section id="null-hypotheses" class="level2" data-number="19.3">
+<h2 data-number="19.3" class="anchored" data-anchor-id="null-hypotheses"><span class="header-section-number">19.3</span> Null hypotheses</h2>
+<details>
+<summary>
+Click here for null hypotheses
+</summary>
+<section id="chi2-tests" class="level3" data-number="19.3.1">
+<h3 data-number="19.3.1" class="anchored" data-anchor-id="chi2-tests"><span class="header-section-number">19.3.1</span> <span class="math inline">\(\chi^2\)</span> tests</h3>
+<section id="chi2-goodness-of-fit" class="level4" data-number="19.3.1.1">
+<h4 data-number="19.3.1.1" class="anchored" data-anchor-id="chi2-goodness-of-fit"><span class="header-section-number">19.3.1.1</span> <span class="math inline">\(\chi^2\)</span> goodness-of-fit</h4>
+<p><span class="math inline">\(H_0\)</span>: The frequency of observations fits the expected observation frequencies.</p>
+</section>
+<section id="chi2-test-of-independence-i.e.-association" class="level4" data-number="19.3.1.2">
+<h4 data-number="19.3.1.2" class="anchored" data-anchor-id="chi2-test-of-independence-i.e.-association"><span class="header-section-number">19.3.1.2</span> <span class="math inline">\(\chi^2\)</span> test of independence (i.e., association)</h4>
+<p><span class="math inline">\(H_0\)</span>: Variable X and Variable Y are not related.</p>
+</section>
+</section>
+<section id="one-sample-tests" class="level3" data-number="19.3.2">
+<h3 data-number="19.3.2" class="anchored" data-anchor-id="one-sample-tests"><span class="header-section-number">19.3.2</span> One-sample tests</h3>
+<section id="one-sample-t-test" class="level4" data-number="19.3.2.1">
+<h4 data-number="19.3.2.1" class="anchored" data-anchor-id="one-sample-t-test"><span class="header-section-number">19.3.2.1</span> One-sample <span class="math inline">\(t\)</span>-test</h4>
+<p><span class="math inline">\(H_0\)</span>: <span class="math inline">\(\mu=X\)</span></p>
+</section>
+<section id="paired-t-test" class="level4" data-number="19.3.2.2">
+<h4 data-number="19.3.2.2" class="anchored" data-anchor-id="paired-t-test"><span class="header-section-number">19.3.2.2</span> Paired <span class="math inline">\(t\)</span>-test</h4>
+<p><span class="math inline">\(H_0\)</span>: <span class="math inline">\(\mu_1-\mu_2=0\)</span> or <span class="math inline">\(\mu_d=0\)</span></p>
+</section>
+<section id="two-sample-t-test" class="level4" data-number="19.3.2.3">
+<h4 data-number="19.3.2.3" class="anchored" data-anchor-id="two-sample-t-test"><span class="header-section-number">19.3.2.3</span> Two-sample <span class="math inline">\(t\)</span>-test</h4>
+<p><span class="math inline">\(H_0\)</span>: <span class="math inline">\(\mu_1=\mu_2\)</span></p>
+</section>
+</section>
+<section id="multi-sample-tests" class="level3" data-number="19.3.3">
+<h3 data-number="19.3.3" class="anchored" data-anchor-id="multi-sample-tests"><span class="header-section-number">19.3.3</span> Multi-sample tests</h3>
+<p>All ANOVA tests have essentially the same null hypotheses, with the primary null hypothesis being that all means are the same. Secondary hypotheses may exist about <em>which</em> means are different; we have to do a post-hoc test to determine which means are different.</p>
+<p><span class="math inline">\(H_0\)</span>: <span class="math inline">\(\mu_1=\mu_2=\mu_3=...=\mu_n\)</span></p>
+</section>
+<section id="correlation" class="level3" data-number="19.3.4">
+<h3 data-number="19.3.4" class="anchored" data-anchor-id="correlation"><span class="header-section-number">19.3.4</span> Correlation</h3>
+<p>For all correlation tests, the null is that the correlation is 0 (i.e., not correlated positively or negatively). You can get the <span class="math inline">\(p\)</span> value for a test from a <span class="math inline">\(t\)</span> distribution.</p>
+<p>As an example, Pearson’s correlation:</p>
+<p><span class="math inline">\(H_0\)</span>: <span class="math inline">\(\rho = 0\)</span></p>
+</section>
+<section id="regression" class="level3" data-number="19.3.5">
+<h3 data-number="19.3.5" class="anchored" data-anchor-id="regression"><span class="header-section-number">19.3.5</span> Regression</h3>
+<p><span class="math inline">\(H_0\)</span>: <span class="math inline">\(\beta = 0\)</span></p>
+<p>where <span class="math inline">\(\beta\)</span> is the slope.</p>
+</section></details>
+</section>
+
+<section id="custom-functions-from-class-and-elsewhere" class="level2" data-number="19.4">
+<h2 data-number="19.4" class="anchored" data-anchor-id="custom-functions-from-class-and-elsewhere"><span class="header-section-number">19.4</span> Custom functions from class and elsewhere</h2>
 <p>The following functions are those developed for this class or adapted from code posted to sources like StackOverflow.</p>
-<section id="basic-stats" class="level3" data-number="19.3.1">
-<h3 data-number="19.3.1" class="anchored" data-anchor-id="basic-stats"><span class="header-section-number">19.3.1</span> Basic stats</h3>
-<p>For these basic stats, we are using the following example data:</p>
+<p>For these stats, we are using the following example data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">### EXAMPLE DATA </span><span class="al">###</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">### EXAMPLE DATA </span><span class="al">###</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="mode-calculations" class="level4" data-number="19.3.1.1">
-<h4 data-number="19.3.1.1" class="anchored" data-anchor-id="mode-calculations"><span class="header-section-number">19.3.1.1</span> Mode calculations</h4>
+<section id="mode-calculations" class="level4" data-number="19.4.0.1">
+<h4 data-number="19.4.0.1" class="anchored" data-anchor-id="mode-calculations"><span class="header-section-number">19.4.0.1</span> Mode calculations</h4>
+<details>
+<summary>
+Click here for mode
+</summary>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Based on Statology function</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># define function to calculate mode</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># works on vectors of data</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>find_mode <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get unique values from vector</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  u <span class="ot">&lt;-</span> <span class="fu">unique</span>(x)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># count number of occurrences for each value</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  tab <span class="ot">&lt;-</span> <span class="fu">tabulate</span>(<span class="fu">match</span>(x, u))</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># if no mode, say so</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">length</span>(x)<span class="sc">==</span><span class="fu">length</span>(u[tab <span class="sc">==</span> <span class="fu">max</span>(tab)])){</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"No mode."</span>)</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># return the value with the highest count</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    u[tab <span class="sc">==</span> <span class="fu">max</span>(tab)]</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="fu">find_mode</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Based on Statology function</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># define function to calculate mode</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># works on vectors of data</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>find_mode <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get unique values from vector</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  u <span class="ot">&lt;-</span> <span class="fu">unique</span>(x)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># count number of occurrences for each value</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  tab <span class="ot">&lt;-</span> <span class="fu">tabulate</span>(<span class="fu">match</span>(x, u))</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># if no mode, say so</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">length</span>(x)<span class="sc">==</span><span class="fu">length</span>(u[tab <span class="sc">==</span> <span class="fu">max</span>(tab)])){</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"No mode."</span>)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># return the value with the highest count</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    u[tab <span class="sc">==</span> <span class="fu">max</span>(tab)]</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="fu">find_mode</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5</code></pre>
 </div>
 </div>
-</section>
-<section id="standard-error" class="level4" data-number="19.3.1.2">
-<h4 data-number="19.3.1.2" class="anchored" data-anchor-id="standard-error"><span class="header-section-number">19.3.1.2</span> Standard error</h4>
+</details></section>
+<section id="standard-error" class="level4" data-number="19.4.0.2">
+<h4 data-number="19.4.0.2" class="anchored" data-anchor-id="standard-error"><span class="header-section-number">19.4.0.2</span> Standard error</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x) <span class="co"># calculate n</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span> <span class="fu">sd</span>(x) <span class="co"># calculate standard deviation</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  se_val <span class="ot">&lt;-</span> s<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(se_val)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">se</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">length</span>(x) <span class="co"># calculate n</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span> <span class="fu">sd</span>(x) <span class="co"># calculate standard deviation</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  se_val <span class="ot">&lt;-</span> s<span class="sc">/</span><span class="fu">sqrt</span>(n)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(se_val)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="fu">se</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.7385489</code></pre>
 </div>
 </div>
+
 </section>
-<section id="coefficient-of-variation" class="level4" data-number="19.3.1.3">
-<h4 data-number="19.3.1.3" class="anchored" data-anchor-id="coefficient-of-variation"><span class="header-section-number">19.3.1.3</span> Coefficient of variation</h4>
+<section id="coefficient-of-variation" class="level4" data-number="19.4.0.3">
+<h4 data-number="19.4.0.3" class="anchored" data-anchor-id="coefficient-of-variation"><span class="header-section-number">19.4.0.3</span> Coefficient of variation</h4>
+<details>
+<summary>
+Click here for coefficient of variation
+</summary>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cv <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  sigma <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  val <span class="ot">&lt;-</span> sigma<span class="sc">/</span>mu<span class="sc">*</span><span class="dv">100</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(val)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cv</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>cv <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  sigma <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  val <span class="ot">&lt;-</span> sigma<span class="sc">/</span>mu<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(val)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cv</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 48.98979</code></pre>
 </div>
 </div>
+</details>
 </section>
-</section>
-<section id="normal-distributions" class="level3" data-number="19.3.2">
-<h3 data-number="19.3.2" class="anchored" data-anchor-id="normal-distributions"><span class="header-section-number">19.3.2</span> Normal distributions</h3>
-<section id="z-score" class="level4" data-number="19.3.2.1">
-<h4 data-number="19.3.2.1" class="anchored" data-anchor-id="z-score"><span class="header-section-number">19.3.2.1</span> <span class="math inline">\(Z\)</span> score</h4>
+<section id="normal-distributions" class="level3" data-number="19.4.1">
+<h3 data-number="19.4.1" class="anchored" data-anchor-id="normal-distributions"><span class="header-section-number">19.4.1</span> Normal distributions</h3>
+<section id="z-score" class="level4" data-number="19.4.1.1">
+<h4 data-number="19.4.1.1" class="anchored" data-anchor-id="z-score"><span class="header-section-number">19.4.1.1</span> <span class="math inline">\(Z\)</span> score</h4>
+<details>
+<summary>
+Click here for <span class="math inline">\(Z\)</span>-score
+</summary>
 <p>Remember - in the <span class="math inline">\(Z\)</span>-score code below, if no <span class="math inline">\(n\)</span> is specified, then it will default to <span class="math inline">\(n = 1\)</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>zscore <span class="ot">&lt;-</span> <span class="cf">function</span>(xbar, mu, sd.x, <span class="at">n =</span> <span class="dv">1</span>){</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu)<span class="sc">/</span>(sd.x<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(z)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">zscore</span>(<span class="at">xbar =</span> <span class="dv">62</span>,</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">mu =</span> <span class="dv">65</span>,</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">sd.x =</span> <span class="fl">3.5</span>,</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>zscore <span class="ot">&lt;-</span> <span class="cf">function</span>(xbar, mu, sd.x, <span class="at">n =</span> <span class="dv">1</span>){</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu)<span class="sc">/</span>(sd.x<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(z)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="fu">zscore</span>(<span class="at">xbar =</span> <span class="dv">62</span>,</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">mu =</span> <span class="dv">65</span>,</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">sd.x =</span> <span class="fl">3.5</span>,</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -1.91663</code></pre>
 </div>
 </div>
+</details>
 </section>
 </section>
-<section id="anova" class="level3" data-number="19.3.3">
-<h3 data-number="19.3.3" class="anchored" data-anchor-id="anova"><span class="header-section-number">19.3.3</span> ANOVA</h3>
+<section id="anova" class="level3" data-number="19.4.2">
+<h3 data-number="19.4.2" class="anchored" data-anchor-id="anova"><span class="header-section-number">19.4.2</span> ANOVA</h3>
+<details>
+<summary>
+Click here for ANOVA functions
+</summary>
 <p>The following example data are going to be used to illustrate these functions.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="do">#### EXAMPLE DATA ####</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">8675309</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>){</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(i <span class="sc">==</span> <span class="dv">1</span>){</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">2</span>)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> x <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="st">"Response"</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>Explanatory <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    newdat <span class="ot">&lt;-</span> x <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(newdat) <span class="ot">&lt;-</span> <span class="st">"Response"</span></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    newdat<span class="sc">$</span>Explanatory <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(data,newdat)</span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a><span class="co"># split into "typical" table</span></span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>expanded_data <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x1 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x1"</span>)]</span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x2 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x2"</span>)]</span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x3 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x3"</span>)]</span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x4 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x4"</span>)]</span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>expanded_data <span class="ot">&lt;-</span> expanded_data <span class="sc">|&gt;</span></span>
-<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="do">#### EXAMPLE DATA ####</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">8675309</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>){</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(i <span class="sc">==</span> <span class="dv">1</span>){</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">2</span>)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> x <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="st">"Response"</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>Explanatory <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    newdat <span class="ot">&lt;-</span> x <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(newdat) <span class="ot">&lt;-</span> <span class="st">"Response"</span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    newdat<span class="sc">$</span>Explanatory <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(data,newdat)</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="co"># split into "typical" table</span></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>expanded_data <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x1 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x1"</span>)]</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x2 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x2"</span>)]</span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x3 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x3"</span>)]</span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x4 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x4"</span>)]</span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>expanded_data <span class="ot">&lt;-</span> expanded_data <span class="sc">|&gt;</span></span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The above is a <em>one-way ANOVA</em>. As a reminder, we would calculate the test as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pivot longer does not work for one-way ANOVA, requires blocking factor</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># can rbind things with same colnames to make longer</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>example_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> Explanatory, data)</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(example_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pivot longer does not work for one-way ANOVA, requires blocking factor</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># can rbind things with same colnames to make longer</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>example_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(Response <span class="sc">~</span> Explanatory, data)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(example_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 Explanatory  3  23.40   7.801   11.54 1.89e-05 ***
@@ -597,15 +720,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>Above, we can see a significant result of the ANOVA. We can follow this up with a Tukey test. <strong>This requires the package <code>agricolae</code>!</strong> Check the ANOVA pages, however, as not all ANOVA can use this <code>agricolae</code> shortcut method.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>example_tukey <span class="ot">&lt;-</span> <span class="fu">HSD.test</span>(example_aov,</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># what to group by?</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"Explanatory"</span>,</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># significance level?</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">alpha =</span> <span class="fl">0.05</span>, </span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># are data unbalanced</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">unbalanced =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># show answer?</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">console =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>example_tukey <span class="ot">&lt;-</span> <span class="fu">HSD.test</span>(example_aov,</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># what to group by?</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"Explanatory"</span>,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># significance level?</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">alpha =</span> <span class="fl">0.05</span>, </span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># are data unbalanced</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">unbalanced =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># show answer?</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">console =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Study: example_aov ~ "Explanatory"
@@ -641,21 +764,21 @@ x3  0.2197337      b
 x4 -0.2890524      b</code></pre>
 </div>
 </div>
-<section id="summarize-data-for-plotting" class="level4" data-number="19.3.3.1">
-<h4 data-number="19.3.3.1" class="anchored" data-anchor-id="summarize-data-for-plotting"><span class="header-section-number">19.3.3.1</span> Summarize data (for plotting)</h4>
+<section id="summarize-data-for-plotting" class="level4" data-number="19.4.2.1">
+<h4 data-number="19.4.2.1" class="anchored" data-anchor-id="summarize-data-for-plotting"><span class="header-section-number">19.4.2.1</span> Summarize data (for plotting)</h4>
 <p>Remember - you need to change <code>"Explanatory"</code> to your explanatory variable (in quotes!) and you need to change <code>Response</code> to your response column (no quotes!). The following requires <code>plyr</code> to work, but the function itself should call up <code>plyr</code> if you do not yet have it loaded.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize by group</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> <span class="cf">function</span>(data, explanatory){</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(plyr)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ddply</span>(data, <span class="fu">paste</span>(explanatory), summarise,</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">N =</span> <span class="fu">length</span>(Response),</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">mean =</span> <span class="fu">mean</span>(Response),</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sd =</span> <span class="fu">sd</span>(Response),</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">se =</span> sd <span class="sc">/</span> <span class="fu">sqrt</span>(N))</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>example_summary <span class="ot">&lt;-</span> <span class="fu">summary_data</span>(<span class="at">data =</span> data, <span class="at">explanatory =</span> <span class="st">"Explanatory"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize by group</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> <span class="cf">function</span>(data, explanatory){</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(plyr)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ddply</span>(data, <span class="fu">paste</span>(explanatory), summarise,</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">N =</span> <span class="fu">length</span>(Response),</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">mean =</span> <span class="fu">mean</span>(Response),</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sd =</span> <span class="fu">sd</span>(Response),</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">se =</span> sd <span class="sc">/</span> <span class="fu">sqrt</span>(N))</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>example_summary <span class="ot">&lt;-</span> <span class="fu">summary_data</span>(<span class="at">data =</span> data, <span class="at">explanatory =</span> <span class="st">"Explanatory"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: plyr</code></pre>
 </div>
@@ -685,7 +808,7 @@ Attaching package: 'plyr'</code></pre>
 
     compact</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>example_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>example_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Explanatory  N       mean        sd        se
 1          x1 10  1.7620153 1.0505466 0.3322120
@@ -695,33 +818,33 @@ Attaching package: 'plyr'</code></pre>
 </div>
 </div>
 </section>
-<section id="significant-label-maker" class="level4" data-number="19.3.3.2">
-<h4 data-number="19.3.3.2" class="anchored" data-anchor-id="significant-label-maker"><span class="header-section-number">19.3.3.2</span> Significant label maker</h4>
+<section id="significant-label-maker" class="level4" data-number="19.4.2.2">
+<h4 data-number="19.4.2.2" class="anchored" data-anchor-id="significant-label-maker"><span class="header-section-number">19.4.2.2</span> Significant label maker</h4>
 <p>This command requires a Tukey HSD object from <code>agricolae</code>. You can manually create a table like this for some other scenarios; see relevant pages for documentation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note first group must be EXACT MATCH to your summary_data object</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># groups are saved in the Tukey object</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this is true for Tukey later as well</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># the following is a function that will make the significant label table</span></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>sig.label.maker <span class="ot">&lt;-</span> <span class="cf">function</span>(tukey_test, group_name){</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  sig.labels <span class="ot">&lt;-</span> tukey_test<span class="sc">$</span>groups <span class="sc">|&gt;</span> </span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert to a data.frame</span></span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span></span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create a new column - place rownames into the column</span></span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># converts to a format better for ggplot</span></span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Explanatorys =</span> <span class="fu">rownames</span>(tukey_test<span class="sc">$</span>groups)) <span class="sc">|&gt;</span></span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># rename column to prevent confusion</span></span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># specify dplyr; default function may be from plyr and not work</span></span>
-<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">Significance =</span> groups)</span>
-<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(sig.labels)[<span class="fu">which</span>(<span class="fu">colnames</span>(sig.labels) <span class="sc">==</span> <span class="st">"Explanatorys"</span>)] <span class="ot">&lt;-</span> group_name</span>
-<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sig.labels)</span>
-<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Function requires explanatory groups in quotes</span></span>
-<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>sig_labels <span class="ot">&lt;-</span> <span class="fu">sig.label.maker</span>(example_tukey, <span class="st">"Explanatory"</span>)</span>
-<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>sig_labels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note first group must be EXACT MATCH to your summary_data object</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="co"># groups are saved in the Tukey object</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this is true for Tukey later as well</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="co"># the following is a function that will make the significant label table</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>sig.label.maker <span class="ot">&lt;-</span> <span class="cf">function</span>(tukey_test, group_name){</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  sig.labels <span class="ot">&lt;-</span> tukey_test<span class="sc">$</span>groups <span class="sc">|&gt;</span> </span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert to a data.frame</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># create a new column - place rownames into the column</span></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># converts to a format better for ggplot</span></span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Explanatorys =</span> <span class="fu">rownames</span>(tukey_test<span class="sc">$</span>groups)) <span class="sc">|&gt;</span></span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># rename column to prevent confusion</span></span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># specify dplyr; default function may be from plyr and not work</span></span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">Significance =</span> groups)</span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(sig.labels)[<span class="fu">which</span>(<span class="fu">colnames</span>(sig.labels) <span class="sc">==</span> <span class="st">"Explanatorys"</span>)] <span class="ot">&lt;-</span> group_name</span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sig.labels)</span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Function requires explanatory groups in quotes</span></span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a>sig_labels <span class="ot">&lt;-</span> <span class="fu">sig.label.maker</span>(example_tukey, <span class="st">"Explanatory"</span>)</span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a>sig_labels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Response Significance Explanatory
 x1  1.7620153            a          x1
@@ -731,99 +854,100 @@ x4 -0.2890524            b          x4</code></pre>
 </div>
 </div>
 </section>
-<section id="anova-plotter" class="level4" data-number="19.3.3.3">
-<h4 data-number="19.3.3.3" class="anchored" data-anchor-id="anova-plotter"><span class="header-section-number">19.3.3.3</span> ANOVA plotter</h4>
+<section id="anova-plotter" class="level4" data-number="19.4.2.3">
+<h4 data-number="19.4.2.3" class="anchored" data-anchor-id="anova-plotter"><span class="header-section-number">19.4.2.3</span> ANOVA plotter</h4>
 <p>The following function plots ANOVAS if you have a <code>summary_data</code> object and a <code>sig_labels</code> object, as shown above. <strong>This does not work on ANOVA with interactive components</strong>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>anova_plotter <span class="ot">&lt;-</span> <span class="cf">function</span>(summary_data, explanatory, </span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                          response, sig_labels,</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y_lim=</span><span class="cn">NA</span>, <span class="at">label_height=</span><span class="cn">NA</span>, </span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y_lab=</span><span class="cn">NA</span>, <span class="at">x_lab=</span><span class="cn">NA</span>){</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(tidyverse)</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  plot_data_1 <span class="ot">&lt;-</span> summary_data[,<span class="fu">c</span>(explanatory, response, <span class="st">"se"</span>)]</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  plot_data_2 <span class="ot">&lt;-</span> sig_labels[,<span class="fu">c</span>(explanatory,<span class="st">"Significance"</span>)]</span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(plot_data_1) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"explanatory"</span>, <span class="st">"response"</span>, <span class="st">"se"</span>)</span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(plot_data_2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"explanatory"</span>, <span class="st">"Significance"</span>)</span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>  plot_data <span class="ot">&lt;-</span> plot_data_1 <span class="sc">|&gt;</span> </span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">full_join</span>(plot_data_2, <span class="at">by =</span> <span class="st">"explanatory"</span>)</span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.na</span>(y_lim)){</span>
-<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">min</span>(plot_data<span class="sc">$</span>response) <span class="sc">&lt;</span> <span class="dv">0</span>){</span>
-<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>      y_lim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">min</span>(plot_data<span class="sc">$</span>response) <span class="sc">-</span> </span>
-<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>          <span class="dv">4</span><span class="sc">*</span><span class="fu">max</span>(plot_data<span class="sc">$</span>se),</span>
-<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">max</span>(plot_data<span class="sc">$</span>response) <span class="sc">+</span> </span>
-<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>          <span class="dv">4</span><span class="sc">*</span><span class="fu">max</span>(plot_data<span class="sc">$</span>se))</span>
-<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span>{</span>
-<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>      y_lim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(plot_data<span class="sc">$</span>response) <span class="sc">+</span> </span>
-<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">4</span><span class="sc">*</span><span class="fu">max</span>(plot_data<span class="sc">$</span>se))</span>
-<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.na</span>(label_height)){label_height <span class="ot">&lt;-</span> <span class="fl">0.25</span><span class="sc">*</span><span class="fu">max</span>(y_lim)}</span>
-<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.na</span>(y_lab)){y_lab <span class="ot">&lt;-</span> <span class="st">"Response"</span>}</span>
-<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.na</span>(x_lab)){x_lab <span class="ot">&lt;-</span> <span class="st">"Treatment"</span>}</span>
-<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a>  plot_1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(plot_data,</span>
-<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> explanatory, <span class="at">y =</span> response)) <span class="sc">+</span></span>
-<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_errorbar</span>(<span class="at">data =</span> plot_data,</span>
-<span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">aes</span>(<span class="at">ymin =</span> response <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>se,</span>
-<span id="cb38-36"><a href="#cb38-36" aria-hidden="true" tabindex="-1"></a>                      <span class="at">ymax =</span> response <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>se,</span>
-<span id="cb38-37"><a href="#cb38-37" aria-hidden="true" tabindex="-1"></a>                      <span class="at">width =</span> <span class="fl">0.1</span>)) <span class="sc">+</span></span>
-<span id="cb38-38"><a href="#cb38-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(y_lim) <span class="sc">+</span></span>
-<span id="cb38-39"><a href="#cb38-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
-<span id="cb38-40"><a href="#cb38-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
-<span id="cb38-41"><a href="#cb38-41" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">5</span>)) <span class="sc">+</span></span>
-<span id="cb38-42"><a href="#cb38-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> plot_data,</span>
-<span id="cb38-43"><a href="#cb38-43" aria-hidden="true" tabindex="-1"></a>            <span class="co"># make bold</span></span>
-<span id="cb38-44"><a href="#cb38-44" aria-hidden="true" tabindex="-1"></a>            <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
-<span id="cb38-45"><a href="#cb38-45" aria-hidden="true" tabindex="-1"></a>            <span class="co"># define where labels should go</span></span>
-<span id="cb38-46"><a href="#cb38-46" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> explanatory, </span>
-<span id="cb38-47"><a href="#cb38-47" aria-hidden="true" tabindex="-1"></a>                <span class="co"># define height of label</span></span>
-<span id="cb38-48"><a href="#cb38-48" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> label_height, </span>
-<span id="cb38-49"><a href="#cb38-49" aria-hidden="true" tabindex="-1"></a>                <span class="co"># what are the labels?</span></span>
-<span id="cb38-50"><a href="#cb38-50" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="fu">paste0</span>(Significance))) <span class="sc">+</span></span>
-<span id="cb38-51"><a href="#cb38-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(x_lab) <span class="sc">+</span></span>
-<span id="cb38-52"><a href="#cb38-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(y_lab)</span>
-<span id="cb38-53"><a href="#cb38-53" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb38-54"><a href="#cb38-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(plot_1)</span>
-<span id="cb38-55"><a href="#cb38-55" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb38-56"><a href="#cb38-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-57"><a href="#cb38-57" aria-hidden="true" tabindex="-1"></a><span class="fu">anova_plotter</span>(<span class="at">summary_data =</span> example_summary,</span>
-<span id="cb38-58"><a href="#cb38-58" aria-hidden="true" tabindex="-1"></a>              <span class="at">explanatory =</span> <span class="st">"Explanatory"</span>,</span>
-<span id="cb38-59"><a href="#cb38-59" aria-hidden="true" tabindex="-1"></a>              <span class="at">response =</span> <span class="st">"mean"</span>, <span class="co"># from summary_data table! What is to be plotted</span></span>
-<span id="cb38-60"><a href="#cb38-60" aria-hidden="true" tabindex="-1"></a>              <span class="at">sig_labels =</span> sig_labels)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>anova_plotter <span class="ot">&lt;-</span> <span class="cf">function</span>(summary_data, explanatory, </span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>                          response, sig_labels,</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y_lim=</span><span class="cn">NA</span>, <span class="at">label_height=</span><span class="cn">NA</span>, </span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">y_lab=</span><span class="cn">NA</span>, <span class="at">x_lab=</span><span class="cn">NA</span>){</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(tidyverse)</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>  plot_data_1 <span class="ot">&lt;-</span> summary_data[,<span class="fu">c</span>(explanatory, response, <span class="st">"se"</span>)]</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>  plot_data_2 <span class="ot">&lt;-</span> sig_labels[,<span class="fu">c</span>(explanatory,<span class="st">"Significance"</span>)]</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(plot_data_1) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"explanatory"</span>, <span class="st">"response"</span>, <span class="st">"se"</span>)</span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(plot_data_2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"explanatory"</span>, <span class="st">"Significance"</span>)</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>  plot_data <span class="ot">&lt;-</span> plot_data_1 <span class="sc">|&gt;</span> </span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">full_join</span>(plot_data_2, <span class="at">by =</span> <span class="st">"explanatory"</span>)</span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.na</span>(y_lim)){</span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">min</span>(plot_data<span class="sc">$</span>response) <span class="sc">&lt;</span> <span class="dv">0</span>){</span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>      y_lim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">min</span>(plot_data<span class="sc">$</span>response) <span class="sc">-</span> </span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a>          <span class="dv">4</span><span class="sc">*</span><span class="fu">max</span>(plot_data<span class="sc">$</span>se),</span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">max</span>(plot_data<span class="sc">$</span>response) <span class="sc">+</span> </span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>          <span class="dv">4</span><span class="sc">*</span><span class="fu">max</span>(plot_data<span class="sc">$</span>se))</span>
+<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span>{</span>
+<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a>      y_lim <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(plot_data<span class="sc">$</span>response) <span class="sc">+</span> </span>
+<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">4</span><span class="sc">*</span><span class="fu">max</span>(plot_data<span class="sc">$</span>se))</span>
+<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.na</span>(label_height)){label_height <span class="ot">&lt;-</span> <span class="fl">0.25</span><span class="sc">*</span><span class="fu">max</span>(y_lim)}</span>
+<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.na</span>(y_lab)){y_lab <span class="ot">&lt;-</span> <span class="st">"Response"</span>}</span>
+<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.na</span>(x_lab)){x_lab <span class="ot">&lt;-</span> <span class="st">"Treatment"</span>}</span>
+<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a>  plot_1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(plot_data,</span>
+<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> explanatory, <span class="at">y =</span> response)) <span class="sc">+</span></span>
+<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_errorbar</span>(<span class="at">data =</span> plot_data,</span>
+<span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">aes</span>(<span class="at">ymin =</span> response <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>se,</span>
+<span id="cb49-36"><a href="#cb49-36" aria-hidden="true" tabindex="-1"></a>                      <span class="at">ymax =</span> response <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>se,</span>
+<span id="cb49-37"><a href="#cb49-37" aria-hidden="true" tabindex="-1"></a>                      <span class="at">width =</span> <span class="fl">0.1</span>)) <span class="sc">+</span></span>
+<span id="cb49-38"><a href="#cb49-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylim</span>(y_lim) <span class="sc">+</span></span>
+<span id="cb49-39"><a href="#cb49-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span> </span>
+<span id="cb49-40"><a href="#cb49-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb49-41"><a href="#cb49-41" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb49-42"><a href="#cb49-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> plot_data,</span>
+<span id="cb49-43"><a href="#cb49-43" aria-hidden="true" tabindex="-1"></a>            <span class="co"># make bold</span></span>
+<span id="cb49-44"><a href="#cb49-44" aria-hidden="true" tabindex="-1"></a>            <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
+<span id="cb49-45"><a href="#cb49-45" aria-hidden="true" tabindex="-1"></a>            <span class="co"># define where labels should go</span></span>
+<span id="cb49-46"><a href="#cb49-46" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> explanatory, </span>
+<span id="cb49-47"><a href="#cb49-47" aria-hidden="true" tabindex="-1"></a>                <span class="co"># define height of label</span></span>
+<span id="cb49-48"><a href="#cb49-48" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> label_height, </span>
+<span id="cb49-49"><a href="#cb49-49" aria-hidden="true" tabindex="-1"></a>                <span class="co"># what are the labels?</span></span>
+<span id="cb49-50"><a href="#cb49-50" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="fu">paste0</span>(Significance))) <span class="sc">+</span></span>
+<span id="cb49-51"><a href="#cb49-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(x_lab) <span class="sc">+</span></span>
+<span id="cb49-52"><a href="#cb49-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(y_lab)</span>
+<span id="cb49-53"><a href="#cb49-53" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb49-54"><a href="#cb49-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(plot_1)</span>
+<span id="cb49-55"><a href="#cb49-55" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb49-56"><a href="#cb49-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-57"><a href="#cb49-57" aria-hidden="true" tabindex="-1"></a><span class="fu">anova_plotter</span>(<span class="at">summary_data =</span> example_summary,</span>
+<span id="cb49-58"><a href="#cb49-58" aria-hidden="true" tabindex="-1"></a>              <span class="at">explanatory =</span> <span class="st">"Explanatory"</span>,</span>
+<span id="cb49-59"><a href="#cb49-59" aria-hidden="true" tabindex="-1"></a>              <span class="at">response =</span> <span class="st">"mean"</span>, <span class="co"># from summary_data table! What is to be plotted</span></span>
+<span id="cb49-60"><a href="#cb49-60" aria-hidden="true" tabindex="-1"></a>              <span class="at">sig_labels =</span> sig_labels)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="glossary_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="glossary_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Note that in the above, the default label height is not working for us. We can adjust this with <code>label_height</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova_plotter</span>(<span class="at">summary_data =</span> example_summary,</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">explanatory =</span> <span class="st">"Explanatory"</span>,</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">response =</span> <span class="st">"mean"</span>, <span class="co"># from summary_data table! What is to be plotted</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">sig_labels =</span> sig_labels,</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">label_height =</span> <span class="sc">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova_plotter</span>(<span class="at">summary_data =</span> example_summary,</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">explanatory =</span> <span class="st">"Explanatory"</span>,</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">response =</span> <span class="st">"mean"</span>, <span class="co"># from summary_data table! What is to be plotted</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">sig_labels =</span> sig_labels,</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">label_height =</span> <span class="sc">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="glossary_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="glossary_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Much better!</p>
+</section></details>
 
 
 </section>
 </section>
-</section>
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

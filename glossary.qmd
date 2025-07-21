@@ -93,9 +93,16 @@ x
 
 ## Basic statistics
 
+<details>
+
+<summary>Click here for basic statistics</summary>
+
 For these examples, we will create a random vector of number to demonstrate how they work.
 
 ```{r}
+# make repeatable
+set.seed(8675309)
+# get random normal values
 x <- rnorm(1000)
 ```
 
@@ -105,13 +112,91 @@ x <- rnorm(1000)
 mean(x)
 ```
 
+```{r}
+median(x)
+```
+
+```{r}
+IQR(x)
+```
+
+```{r}
+range(x)
+```
+
+```{r}
+# calculate range
+abs(range(x)[1] - range(x)[2])
+```
+
+```{r}
+# calculate range
+max(x) - min(x)
+```
+
+```{r}
+hist(x)
+```
+
+</details>
+
+## Null hypotheses
+
+<details>
+
+<summary>Click here for null hypotheses</summary>
+
+### $\chi^2$ tests
+
+#### $\chi^2$ goodness-of-fit
+
+$H_0$: The frequency of observations fits the expected observation frequencies.
+
+#### $\chi^2$ test of independence (i.e., association)
+
+$H_0$: Variable X and Variable Y are not related.
+
+### One-sample tests
+
+#### One-sample $t$-test
+
+$H_0$: $\mu=X$
+
+#### Paired $t$-test
+
+$H_0$: $\mu_1-\mu_2=0$ or $\mu_d=0$
+
+#### Two-sample $t$-test
+
+$H_0$: $\mu_1=\mu_2$
+
+### Multi-sample tests
+
+All ANOVA tests have essentially the same null hypotheses, with the primary null hypothesis being that all means are the same. Secondary hypotheses may exist about *which* means are different; we have to do a post-hoc test to determine which means are different.
+
+$H_0$: $\mu_1=\mu_2=\mu_3=...=\mu_n$
+
+### Correlation
+
+For all correlation tests, the null is that the correlation is 0 (i.e., not correlated positively or negatively). You can get the $p$ value for a test from a $t$ distribution.
+
+As an example, Pearson's correlation:
+
+$H_0$: $\rho = 0$
+
+### Regression
+
+$H_0$: $\beta = 0$
+
+where $\beta$ is the slope.
+
+</details>
+
 ## Custom functions from class and elsewhere
 
 The following functions are those developed for this class or adapted from code posted to sources like StackOverflow.
 
-### Basic stats
-
-For these basic stats, we are using the following example data:
+For these stats, we are using the following example data:
 
 ```{r}
 ### EXAMPLE DATA ###
@@ -119,6 +204,10 @@ x <- c(1,2,3,5,5,4,6,8,7,9,5)
 ```
 
 #### Mode calculations
+
+<details>
+
+<summary>Click here for mode</summary>
 
 ```{r}
 # Based on Statology function
@@ -155,7 +244,13 @@ se <- function(x){
 se(x)
 ```
 
+</details>
+
 #### Coefficient of variation
+
+<details>
+
+<summary>Click here for coefficient of variation</summary>
 
 ```{r}
 cv <- function(x){
@@ -168,9 +263,15 @@ cv <- function(x){
 cv(x)
 ```
 
+</details>
+
 ### Normal distributions
 
 #### $Z$ score
+
+<details>
+
+<summary>Click here for $Z$-score</summary>
 
 Remember - in the $Z$-score code below, if no $n$ is specified, then it will default to $n = 1$.
 
@@ -186,7 +287,13 @@ zscore(xbar = 62,
        n = 5)
 ```
 
+</details>
+
 ### ANOVA
+
+<details>
+
+<summary>Click here for ANOVA functions</summary>
 
 The following example data are going to be used to illustrate these functions.
 
@@ -373,3 +480,5 @@ anova_plotter(summary_data = example_summary,
 ```
 
 Much better!
+
+</details>
