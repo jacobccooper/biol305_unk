@@ -91,6 +91,61 @@ x <- c(10,11)
 x
 ```
 
+### Boolean logic
+
+In order to create arguments in *R*, such as commands like `which`, we need to use Boolean logic commands.
+
+For this example, I will create a string from 1 to 10 to perform the commands on. *Note* that I am using brackets `[ ]` to call out an index within the object using these commands.
+
+These are as follows:
+
+```{r}
+# example string
+x <- 1:10
+```
+
+-   `>`: greater than
+
+```{r}
+x[x > 5]
+```
+
+-   `<`: less that
+
+```{r}
+x[x < 5]
+```
+
+-   `>=`: greater than or equal to
+
+```{r}
+x[x >= 5]
+```
+
+-   `<=`: less than or equal to
+
+```{r}
+x[x <= 5]
+```
+
+-   `==`: is equal to
+
+```{r}
+x[x == 5]
+```
+
+-   `|`: or
+
+```{r}
+x[x < 3 | x > 7]
+```
+
+-   `&`: and
+
+```{r}
+x[x > 3 & x < 7]
+```
+
 ## Basic statistics
 
 <details>
