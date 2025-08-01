@@ -5,7 +5,7 @@ project:
 book:
   title: "Biology 305: Biostatistics"
   author: "Dr. Jacob C. Cooper & Dr. Melissa Wuellner"
-  date: "`r format(Sys.time(), '%d %B, %Y')`"
+  date: "2025"
   chapters:
     - index.qmd
     - install_r.qmd
