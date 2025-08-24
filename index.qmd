@@ -13,16 +13,16 @@ This site will help you navigate different homework assignments to perform the n
 
 ***Welcome to class!***
 
-## Website authors:
+## Class authors
 
 -   [Dr. Melissa Wuellner](https://scholar.google.com/citations?user=yQDewvEAAAAJ)
 
-Original lecture organizer, author of many of the example problems.
+Primary lecture designer, author of many of the example problems.
 
 -   [Dr. Jacob C. Cooper](https://scholar.google.com/citations?user=Q82K8tsAAAAJ)
 
-Original website designer, primary *R* coding for site
+Primary website designer, primary *R* coding for site
 
--   Caleb Rother
+-   [Caleb Rother](https://calebrother.github.io/)
 
-Teaching assistant
+Teaching assistant, website designer, works with homework and coding

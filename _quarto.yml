@@ -5,7 +5,7 @@ project:
 book:
   title: "Biology 305: Biostatistics"
   author: "Dr. Jacob C. Cooper & Dr. Melissa Wuellner"
-  date: "2025"
+  date: "Fall 2025"
   chapters:
     - index.qmd
     - install_r.qmd
