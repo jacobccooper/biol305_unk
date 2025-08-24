@@ -332,7 +332,8 @@ window.Quarto = {
   <li><a href="#downloading-data" id="toc-downloading-data" class="nav-link" data-scroll-target="#downloading-data"><span class="header-section-number">3.2.2</span> Downloading data</a></li>
   <li><a href="#subsetting-data" id="toc-subsetting-data" class="nav-link" data-scroll-target="#subsetting-data"><span class="header-section-number">3.2.3</span> Subsetting data</a></li>
   </ul></li>
-  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">3.3</span> Your turn!</a></li>
+  <li><a href="#creating-a-new-column" id="toc-creating-a-new-column" class="nav-link" data-scroll-target="#creating-a-new-column"><span class="header-section-number">3.3</span> Creating a new column</a></li>
+  <li><a href="#your-turn" id="toc-your-turn" class="nav-link" data-scroll-target="#your-turn"><span class="header-section-number">3.4</span> Your turn!</a></li>
   </ul>
 </nav>
     </div>
@@ -419,7 +420,7 @@ window.Quarto = {
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.5.2     ✔ tibble    3.3.0
 ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.0.4     
+✔ purrr     1.1.0     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
@@ -614,8 +615,22 @@ dbl (9): combined_current_km2, consensus_km2, bioclim_current_km2, 2050_comb...
 </div>
 </section>
 </section>
-<section id="your-turn" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">3.3</span> Your turn!</h2>
+<section id="creating-a-new-column" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="creating-a-new-column"><span class="header-section-number">3.3</span> Creating a new column</h2>
+<p>The package <code>tidyverse</code> allows for easily creating new columns within a dataset using the command <code>mutate</code>.</p>
+<p>For example, we can create a column of <code>combined_current_km2 + 1</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>ranges <span class="ot">&lt;-</span> ranges <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">combined_plus_one =</span> combined_current_km2 <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ranges<span class="sc">$</span>combined_plus_one)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 25210.4 68172.2 60940.2 27022.3 78680.9  8770.9</code></pre>
+</div>
+</div>
+</section>
+<section id="your-turn" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="your-turn"><span class="header-section-number">3.4</span> Your turn!</h2>
 <p><strong>Please complete the following:</strong></p>
 <ol type="1">
 <li>Create an <em>RMarkdown document</em> that will save as an <code>.html</code>.</li>

@@ -1,6 +1,6 @@
 # Introduction {.unnumbered}
 
-Welcome to Biology 305 at the University of Nebraska at Kearney!
+**Welcome to Biology 305 at the University of Nebraska at Kearney!**
 
 In this class, you will learn:
 
@@ -13,7 +13,7 @@ This site will help you navigate different homework assignments to perform the n
 
 ***Welcome to class!***
 
-## Class authors
+# Class authors
 
 -   [Dr. Melissa Wuellner](https://scholar.google.com/citations?user=yQDewvEAAAAJ)
 

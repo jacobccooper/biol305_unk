@@ -189,6 +189,19 @@ ranges$combined_current_km2 |>
   round(1)
 ```
 
+## Creating a new column
+
+The package `tidyverse` allows for easily creating new columns within a dataset using the command `mutate`.
+
+For example, we can create a column of `combined_current_km2 + 1`.
+
+```{r}
+ranges <- ranges |> 
+  mutate(combined_plus_one = combined_current_km2 + 1)
+
+head(ranges$combined_plus_one)
+```
+
 ## Your turn!
 
 **Please complete the following:**
