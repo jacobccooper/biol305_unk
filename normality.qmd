@@ -23,6 +23,10 @@ Standard normal distributions have a mean, median, and mode that are *equal*. Th
 
 ### Example in nature
 
+<details>
+
+<summary>An example of naturally occurring normal distributions</summary>
+
 In order to see an example of the normal distribution in nature, we are going to examine the BeeWalk survey database from the island of Great Britain [@Comont2020]. We are not interested in the bee data at present, however, but in the climatic data from when the surveys were performed.
 
 ```{r}
@@ -108,7 +112,13 @@ kurtosis(temps)-3
 
 Data do not show any significant kurtosis.
 
+</details>
+
 ### Effect of sampling
+
+<details>
+
+<summary>How sample size effects statistical calculations</summary>
 
 Oftentimes, we will see things approach the normal distribution as we collect more samples. We can model this by subsampling our temperature vector.
 
@@ -145,30 +155,13 @@ hist(sub.temps, main = "1000 samples", breaks = 40)
 
 Now the normal distribution is even more clear. As we can also see, the more we sample, the more we approach the true means and distribution of the actual dataset. Because of this, we can perform experiments and observations of small groups and subsamples and make inferences about the whole, given that most systems naturally approach statistical distributions like the normal!
 
-### Testing if data are normal
+</details>
 
-There are two major methods we can use to see if data are normally distributed.
+<hr>
 
-#### QQ Plots
+<br>
 
-Another way to see if data are normal is to use a [QQ plot](https://www.statology.org/q-q-plot-r/). These plots data quantiles to theoretical quantiles to see how well they align, with a perfectly normal distribution having a completely linear QQ plot. Let's look at these with our `beewalk` data.
-
-```{r}
-qqnorm(temps)
-```
-
-As we can see above, the data are roughly linear, which means are data are very normal. The "stairsteps" are from the accuracy in measuring temperature, which was likely rounded and thus created a distribution that is not completely continuous.
-
-#### Shapiro-Wilk test
-
-Another way to test for normality is to use a Shapiro-Wilk test of normality. We will not get into the specific of this distribution, but this tests the null hypothesis that data originated in a normal distribution, with the alternative hypothesis that the data originated in a non-normal distribution. You will read next about the specifics of hypothesis testing, but this test uses an $\alpha = 0.05$, and we *reject the null hypothesis* if our $p < \alpha$, with $p$ representing the probability of observing something as extreme or more extreme than the result we observe. Our `temps` dataset is too large, as `shapiro.test` requires vectors of $< 5000$. Let's take a random sample and try again.
-
-```{r}
-sample(temps, 200) |>
-  shapiro.test()
-```
-
-For our subsets of temperature, we find that the temperature is normally distributed. **Note** that having all $5000$ temperatures included makes this test find a "non-normal" result, likely from the same stairstepping phenomenon from rounding that we discussed before, which may result in [model overfitting](https://en.wikipedia.org/wiki/Overfitting) to the rounded data.
+<hr>
 
 ## Hypothesis testing
 
@@ -200,6 +193,10 @@ Let's say that we are looking at a dataset defined by a standard normal distribu
 
 First, let's visualize this distribution:
 
+<details>
+
+<summary>Click here to view plot creation code.</summary>
+
 ```{r}
 ###THIS WILL TAKE A WHILE TO RUN###
 
@@ -230,7 +227,11 @@ p2  <-  p + # add previous step as a "backbone"
   ylab("Frequency (Probability)") +
   # make it neat and tidy
   theme_classic()
+```
 
+</details>
+
+```{r}
 # plot it
 # can use ggsave function to save
 plot(p2)
@@ -239,6 +240,10 @@ plot(p2)
 Above, the solid black line represents $x$, with the illustrated standard normal distribution being filled in blue.
 
 Let's see how much of the area represents values *as extreme or more extreme* as our value $x$.
+
+<summary>
+
+<details>Click here for code to create figure.</details>
 
 ```{r}
 ### THIS WILL TAKE A WHILE TO RUN ###
@@ -262,7 +267,11 @@ p2  <-  p + # add previous step as a "backbone"
   ylab("Frequency (Probability)") +
   # make it neat and tidy
   theme_classic()
+```
 
+</summary>
+
+```{r}
 # plot it
 # can use ggsave function to save
 plot(p2)
@@ -283,6 +292,10 @@ print(paste0("Our Z scores are: ",
 ```
 
 The above values make sense, given the distribution is symmetrical. Our above dashed line is as $Z = 1.96$, which means we should have a $p = 0.05$, so the dashed line should be *closer* to the mean than our cutoffs.
+
+<details>
+
+<summary>Click here for code to create figure.</summary>
 
 ```{r}
 ### THIS WILL TAKE A WHILE TO RUN ###
@@ -310,7 +323,11 @@ p2  <-  p + # add previous step as a "backbone"
   ylab("Frequency (Probability)") +
   # make it neat and tidy
   theme_classic()
+```
 
+</details>
+
+```{r}
 # plot it
 # can use ggsave function to save
 plot(p2)
@@ -358,7 +375,7 @@ pnorm(Z)
 
 After rounding, we get $p = 0.03$, a $p$ that is significant as it is less than our overall $\alpha$.
 
-### Calculated the $p$ value
+### Calculating the $p$ value
 
 We have two different methods for calculating a $p$ value:
 
@@ -388,7 +405,11 @@ There are other functions in this family as well in *R,* including `dnorm` for q
 
 When this class was being designed, [Hurricane Milton](https://en.wikipedia.org/wiki/Hurricane_Milton) was about to make contact with Florida. Hurricane Milton is considered one of the strongest hurricanes of all time, so we can look at historical hurricane data to determine just how powerful this storm really was. We can get information on maximum wind speeds of all recorded Atlantic hurricanes as of 2024 from Wikipedia.
 
-```{r, eval = F, echo = F}
+<details>
+
+<summary>Click here for details on creating the file for this walkthrough.</summary>
+
+```{r, eval = F}
 # https://stackoverflow.com/questions/59481608/how-to-remove-the-characters-from-a-string-and-leave-only-the-numbers-in-r
 
 # cocatenating wikipedia files.
@@ -487,6 +508,8 @@ colnames(speedlist) <- "Hurricane_Windspeed"
 
 write_csv(speedlist,path = "~/Documents/GitHub/biol105_unk/assignments/hurricane_speeds.csv")
 ```
+
+</details>
 
 ```{r}
 hurricanes <- read_csv("https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/assignments/hurricane_speeds.csv")
@@ -587,7 +610,7 @@ $$
 CI=\bar{x} \pm Z_{1-\frac{\alpha}{2}}\cdot \frac{\sigma}{\sqrt{n}}
 $$
 
-This interval gives us an idea of where the mean should lie. For example, if we are looking at the aforemention `beewalk` temperature data, we can calulate a $0.95$ confidence interval around the mean.
+This interval gives us an idea of where the mean should lie. For example, if we are looking at the aforementioned `beewalk` temperature data, we can calulate a $0.95$ confidence interval around the mean.
 
 ```{r}
 temps <- na.omit(beewalk$temperature)
@@ -628,6 +651,72 @@ print(paste(round(xbar, 2),
 
 *Note* that the above is rounded to two decimal places to illustrative purposes ONLY, and should be rounded to one decimal place if it was a homework assignment because the original data has only one decimal place.
 
-## Homework: Chapter 8
+## Homework: Normal distributions
 
-Please complete problems 8.1, 8.2, 8.3 & 8.6. Follow the directions as written in the book. Submit one `html` file, as derived from *RStudio*. For maximum clarity, create headings to separate your problems. (Remember, a header can be invoked by placing '`#`' in front of a line of text. For example: the header here is written as `# Homework: Chapter 8`).
+Submit one `html` file, as created in *RStudio*, with you answers to the following questions. For maximum clarity, create headings to separate your problems. (Remember, a header can be invoked by placing '`#`' in front of a line of text. For example: the header here is written as `# Homework: Chapter 8`).
+
+### $Z$ to $p$ 
+
+For each of the following, report the corresponding $p$ value for the $z$ score.
+
+A.  2.3
+B.  6.4
+C.  -1.5
+D.  -9.2
+E.  3.2
+
+### $P$ to $z$
+
+For the following, report the corresponding $z$ score for the stated $p$ value. For this question, assume every value is "looking left" (`lower.tail = T`).
+
+A.  0.96
+B.  0.23
+C.  0.14
+D.  0.0036
+E.  0.47
+F.  0.62
+
+### Confidence intervals
+
+For the following scenarios, calculate the confidence interval for the mean.
+
+A.  $\bar{x} = 7.6$, $\sigma = 1.3$, $n = 5$, $CI = 99\%$
+B.  $\bar{x} = -4.9$, $\sigma = 0.7$, $n = 6$, $CI = 95\%$
+C.  $\bar{x} = 2.1$, $\sigma = 0.4$, $n = 10$, $CI = 90\%$
+D.  $\bar{x} = 0.1$, $\sigma = 3$, $n = 12$, $CI = 95\%$
+
+### Italian climate - spring
+
+As part of a study on how climate affects the weights of Alpine Ibex, researchers recorded the maximum temperature in the spring at their study site [@brambilla_2024_12749273]. The researchers find another site with an average spring maximum temperature of 6.2ºC, and claim that it is warmer than their study site. Are the correct?
+
+Evaluate their claims by:
+
+1.  Calculating a $z$-score for their temperature (6.2).
+2.  Calculating a $p$-value for their temperature (6.2).
+3.  Reporting a 95% confidence interval for the mean for the temperatures reported in their dataset.
+4.  In a single sentence, state whether you find this temperature to be significantly warmer than the mean or not, stating what evidence you are using to make this conclusion.
+
+The data for this problem will be in the object `spring_temps` below:
+
+```{r, eval = F}
+# load weather data
+weather <- read_csv("https://zenodo.org/records/12749273/files/20240505_env_var_dataset.csv")
+
+# isolate spring temperatures
+spring_temps <- weather$SpringTmax |>
+  # remove NA values
+  na.omit() |> 
+  # ensure data are in correct numeric format
+  as.numeric()
+```
+
+### Italian climate - Summer
+
+Using the same dataset (`weather`) as the previous question, isolate the data for the summer (column `SummTmax`). The researchers find the average temperature of another site is 13.6ºC, and claim this is warmer than their research site. Are they correct? As with the previous question, complete the following:
+
+1.  Calculating a $z$-score for their temperature (6.2).
+2.  Calculating a $p$-value for their temperature (6.2).
+3.  Reporting a 95% confidence interval for the mean for the temperatures reported in their dataset.
+4.  In a single sentence, state whether you find this temperature to be significantly warmer than the mean or not, stating what evidence you are using to make this conclusion.
+
+*Note* for this question, you will have to isolate the column and perform all of the analysis steps yourself.

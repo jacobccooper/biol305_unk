@@ -8,7 +8,7 @@
 
 <meta name="author" content="University of Nebraska at Kearney Biology">
 
-<title>7&nbsp; χ2 (Chi-squared) tests – Biology 305: Biostatistics</title>
+<title>10&nbsp; χ2 (Chi-squared) tests – Biology 305: Biostatistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -145,7 +145,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chi.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">χ2 (Chi-squared) tests</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chi.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">χ2 (Chi-squared) tests</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -173,97 +173,121 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Preface</span></a>
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./install_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Installing R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_to_r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro to <em>R</em></span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Intro to <em>R</em></span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./first_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Running your first analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./descriptive_stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Diagnosing data visually</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Diagnosing data visually</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./normality.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Normality &amp; hypothesis testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Normality &amp; hypothesis testing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./transformations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transforming data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./exam2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exam 2 practice</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exam 2 practice</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./probdist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Probability distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Probability distributions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chi.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">χ2 (Chi-squared) tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">χ2 (Chi-squared) tests</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Testing means with <span class="math inline">\(t\)</span>-tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Means testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">ANOVA: Part 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ANOVA: Part 1</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ANOVA: Part 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">ANOVA: Part 2</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cor_reg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Multivariate methods</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./picktest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Pick the test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Pick the test</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./final_exam.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Final exam &amp; review</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Final exam &amp; review</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./conclusion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Conclusions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Conclusions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Functions &amp; Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Functions &amp; Glossary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -282,15 +306,15 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#chi2-squared-distribution" id="toc-chi2-squared-distribution" class="nav-link active" data-scroll-target="#chi2-squared-distribution"><span class="header-section-number">7.1</span> <span class="math inline">\(\chi^2\)</span>-squared distribution</a>
+  <li><a href="#chi2-squared-distribution" id="toc-chi2-squared-distribution" class="nav-link active" data-scroll-target="#chi2-squared-distribution"><span class="header-section-number">10.1</span> <span class="math inline">\(\chi^2\)</span>-squared distribution</a>
   <ul class="collapse">
-  <li><a href="#calculating-the-test-statistic" id="toc-calculating-the-test-statistic" class="nav-link" data-scroll-target="#calculating-the-test-statistic"><span class="header-section-number">7.1.1</span> Calculating the test statistic</a></li>
-  <li><a href="#chi2-goodness-of-fit-test" id="toc-chi2-goodness-of-fit-test" class="nav-link" data-scroll-target="#chi2-goodness-of-fit-test"><span class="header-section-number">7.1.2</span> <span class="math inline">\(\chi^2\)</span> goodness-of-fit test</a></li>
-  <li><a href="#chi2-test-of-independence" id="toc-chi2-test-of-independence" class="nav-link" data-scroll-target="#chi2-test-of-independence"><span class="header-section-number">7.1.3</span> <span class="math inline">\(\chi^2\)</span> test of independence</a></li>
+  <li><a href="#calculating-the-test-statistic" id="toc-calculating-the-test-statistic" class="nav-link" data-scroll-target="#calculating-the-test-statistic"><span class="header-section-number">10.1.1</span> Calculating the test statistic</a></li>
+  <li><a href="#chi2-goodness-of-fit-test" id="toc-chi2-goodness-of-fit-test" class="nav-link" data-scroll-target="#chi2-goodness-of-fit-test"><span class="header-section-number">10.1.2</span> <span class="math inline">\(\chi^2\)</span> goodness-of-fit test</a></li>
+  <li><a href="#chi2-test-of-independence" id="toc-chi2-test-of-independence" class="nav-link" data-scroll-target="#chi2-test-of-independence"><span class="header-section-number">10.1.3</span> <span class="math inline">\(\chi^2\)</span> test of independence</a></li>
   </ul></li>
-  <li><a href="#fishers-exact-test" id="toc-fishers-exact-test" class="nav-link" data-scroll-target="#fishers-exact-test"><span class="header-section-number">7.2</span> Fisher’s exact test</a>
+  <li><a href="#fishers-exact-test" id="toc-fishers-exact-test" class="nav-link" data-scroll-target="#fishers-exact-test"><span class="header-section-number">10.2</span> Fisher’s exact test</a>
   <ul class="collapse">
-  <li><a href="#chapter-7" id="toc-chapter-7" class="nav-link" data-scroll-target="#chapter-7"><span class="header-section-number">7.2.1</span> Chapter 7</a></li>
+  <li><a href="#chapter-7" id="toc-chapter-7" class="nav-link" data-scroll-target="#chapter-7"><span class="header-section-number">10.2.1</span> Chapter 7</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -300,7 +324,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">χ2 (Chi-squared) tests</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">χ2 (Chi-squared) tests</span></h1>
 </div>
 
 
@@ -323,8 +347,8 @@ window.Quarto = {
 </header>
 
 
-<section id="chi2-squared-distribution" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="chi2-squared-distribution"><span class="header-section-number">7.1</span> <span class="math inline">\(\chi^2\)</span>-squared distribution</h2>
+<section id="chi2-squared-distribution" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="chi2-squared-distribution"><span class="header-section-number">10.1</span> <span class="math inline">\(\chi^2\)</span>-squared distribution</h2>
 <p><span class="math inline">\(\chi^2\)</span>-squared (pronounced “<em>kai</em>”, and spelled “<em>chi</em>”) is a distribution used to understand if count data between different categories matches our expectation. For example, if we are looking at students in the class and comparing major vs.&nbsp;number of books read, we would expect <em>no association</em>, however we may find an association for a major such as English which required reading more literature. The <span class="math inline">\(\chi^2\)</span> introduces a new term <em>degrees of freedom</em> (<span class="math inline">\(df\)</span>) which reflects the number of individuals in the study. For many tests, <span class="math inline">\(df\)</span> are needed to reflect how a distribution changes with respect the number of individuals (and amount of variation possible) within a dataset. The equation for the <span class="math inline">\(\chi^2\)</span> is as follows, with the <span class="math inline">\(\chi^2\)</span> being a special case of the <em>gamma</em> (<span class="math inline">\(\gamma\)</span> or <span class="math inline">\(\Gamma\)</span>) distribution that is affected by the <span class="math inline">\(df\)</span>, which is defined as the number of rows minus one multiplied by the number of columns minus one <span class="math inline">\(df = (rows-1)(cols-1)\)</span>:</p>
 <p><span class="math display">\[
 f_n(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^\frac{n}{2-1}e^\frac{-x}{2}
@@ -354,8 +378,8 @@ f_n(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^\frac{n}{2-1}e^\frac{-x}{2}
 </div>
 </div>
 </div>
-<section id="calculating-the-test-statistic" class="level3" data-number="7.1.1">
-<h3 data-number="7.1.1" class="anchored" data-anchor-id="calculating-the-test-statistic"><span class="header-section-number">7.1.1</span> Calculating the test statistic</h3>
+<section id="calculating-the-test-statistic" class="level3" data-number="10.1.1">
+<h3 data-number="10.1.1" class="anchored" data-anchor-id="calculating-the-test-statistic"><span class="header-section-number">10.1.1</span> Calculating the test statistic</h3>
 <p>We evaluate <span class="math inline">\(\chi^2\)</span> tests by calculating a <span class="math inline">\(\chi^2\)</span> value based on our data and comparing it to an expected <span class="math inline">\(\chi^2\)</span> distribution. This <em>test statistic</em> can be evaluated by looking at a <span class="math inline">\(\chi^2\)</span> table or by using <em>R</em>. <strong>Note</strong> that you need to know the degrees of freedom in order to properly evaluate a <span class="math inline">\(\chi^2\)</span> test. We calculate our test statistic as follows:</p>
 <p><span class="math display">\[
 \chi^2=\Sigma\frac{(o-e)^2}{e}
@@ -367,11 +391,11 @@ f_n(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^\frac{n}{2-1}e^\frac{-x}{2}
 <li><p><span class="math inline">\(\chi^2\)</span> test of independence</p></li>
 </ul>
 </section>
-<section id="chi2-goodness-of-fit-test" class="level3" data-number="7.1.2">
-<h3 data-number="7.1.2" class="anchored" data-anchor-id="chi2-goodness-of-fit-test"><span class="header-section-number">7.1.2</span> <span class="math inline">\(\chi^2\)</span> goodness-of-fit test</h3>
+<section id="chi2-goodness-of-fit-test" class="level3" data-number="10.1.2">
+<h3 data-number="10.1.2" class="anchored" data-anchor-id="chi2-goodness-of-fit-test"><span class="header-section-number">10.1.2</span> <span class="math inline">\(\chi^2\)</span> goodness-of-fit test</h3>
 <p>A <span class="math inline">\(\chi^2\)</span> goodness-of-fit test looks at a vector of data, or counts in different categories, and asks if the observed frequencies vary from the expected frequencies.</p>
-<section id="chi2-estimate-by-hand" class="level4" data-number="7.1.2.1">
-<h4 data-number="7.1.2.1" class="anchored" data-anchor-id="chi2-estimate-by-hand"><span class="header-section-number">7.1.2.1</span> <span class="math inline">\(\chi^2\)</span> estimate by hand</h4>
+<section id="chi2-estimate-by-hand" class="level4" data-number="10.1.2.1">
+<h4 data-number="10.1.2.1" class="anchored" data-anchor-id="chi2-estimate-by-hand"><span class="header-section-number">10.1.2.1</span> <span class="math inline">\(\chi^2\)</span> estimate by hand</h4>
 <p>Let’s say, for example, we have the following dataset:</p>
 <table class="caption-top table">
 <thead>
@@ -474,8 +498,8 @@ f_n(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^\frac{n}{2-1}e^\frac{-x}{2}
 </div>
 <p>Here, we get <span class="math inline">\(p = 0.002\)</span>, indicating that there is not an equal probability for selling drinks at different times of day.</p>
 </section>
-<section id="chi2-estimation-by-code" class="level4" data-number="7.1.2.2">
-<h4 data-number="7.1.2.2" class="anchored" data-anchor-id="chi2-estimation-by-code"><span class="header-section-number">7.1.2.2</span> <span class="math inline">\(\chi^2\)</span> estimation by code</h4>
+<section id="chi2-estimation-by-code" class="level4" data-number="10.1.2.2">
+<h4 data-number="10.1.2.2" class="anchored" data-anchor-id="chi2-estimation-by-code"><span class="header-section-number">10.1.2.2</span> <span class="math inline">\(\chi^2\)</span> estimation by code</h4>
 <p>We can use the test <code>chisq.test</code> to perform this analysis as well.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(drinks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -490,8 +514,8 @@ X-squared = 26.453, df = 9, p-value = 0.001722</code></pre>
 <p>As we can see, these values are exactly the same as we just calculated by hand! <strong><em>Note</em></strong> that we can define the probability <code>p</code> if we want, otherwise it defaults to <code>p = rep(1/length(x), length(x))</code>.</p>
 </section>
 </section>
-<section id="chi2-test-of-independence" class="level3" data-number="7.1.3">
-<h3 data-number="7.1.3" class="anchored" data-anchor-id="chi2-test-of-independence"><span class="header-section-number">7.1.3</span> <span class="math inline">\(\chi^2\)</span> test of independence</h3>
+<section id="chi2-test-of-independence" class="level3" data-number="10.1.3">
+<h3 data-number="10.1.3" class="anchored" data-anchor-id="chi2-test-of-independence"><span class="header-section-number">10.1.3</span> <span class="math inline">\(\chi^2\)</span> test of independence</h3>
 <p>Usually when we use a <span class="math inline">\(\chi^2\)</span>, we are looking at count data. Let’s consider the following hypothetical scenario, comparing experience with <em>R</em> between non-biology majors (who, in this theoretical scenario, do not regularly use <em>R</em>) and Biology majors who are required to take <em>R</em> for this class:</p>
 <table class="caption-top table">
 <caption>The above table of counts is also known as a <strong>contingency table</strong>. Intuitively, we can see a difference, but we want to perform a statistical test to see just how likely these counts would be if both groups were equally likely. We can calculate this both “by hand” and using built in <em>R</em> functions.</caption>
@@ -515,8 +539,8 @@ X-squared = 26.453, df = 9, p-value = 0.001722</code></pre>
 </tr>
 </tbody>
 </table>
-<section id="chi2-estimations-by-hand" class="level4" data-number="7.1.3.1">
-<h4 data-number="7.1.3.1" class="anchored" data-anchor-id="chi2-estimations-by-hand"><span class="header-section-number">7.1.3.1</span> <span class="math inline">\(\chi^2\)</span> estimations by hand</h4>
+<section id="chi2-estimations-by-hand" class="level4" data-number="10.1.3.1">
+<h4 data-number="10.1.3.1" class="anchored" data-anchor-id="chi2-estimations-by-hand"><span class="header-section-number">10.1.3.1</span> <span class="math inline">\(\chi^2\)</span> estimations by hand</h4>
 <p>First, we can enter the data into <em>R</em>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">10</span>,<span class="dv">9</span>,<span class="dv">2</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
@@ -659,8 +683,8 @@ Biology     5.5  5.5</code></pre>
 </div>
 <p>As we will see below, is the exact same value as we get for an uncorrected <code>chisq.test</code> from <em>R</em>’s default output.</p>
 </section>
-<section id="chi2-estimations-in-r" class="level4" data-number="7.1.3.2">
-<h4 data-number="7.1.3.2" class="anchored" data-anchor-id="chi2-estimations-in-r"><span class="header-section-number">7.1.3.2</span> <span class="math inline">\(\chi^2\)</span> estimations in <em>R</em></h4>
+<section id="chi2-estimations-in-r" class="level4" data-number="10.1.3.2">
+<h4 data-number="10.1.3.2" class="anchored" data-anchor-id="chi2-estimations-in-r"><span class="header-section-number">10.1.3.2</span> <span class="math inline">\(\chi^2\)</span> estimations in <em>R</em></h4>
 <p>We can calculate this in <em>R</em> by entering in the entire table and using <code>chisq.test</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -708,8 +732,8 @@ X-squared = 6.042, df = 1, p-value = 0.01397</code></pre>
 </section>
 </section>
 </section>
-<section id="fishers-exact-test" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="fishers-exact-test"><span class="header-section-number">7.2</span> Fisher’s exact test</h2>
+<section id="fishers-exact-test" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="fishers-exact-test"><span class="header-section-number">10.2</span> Fisher’s exact test</h2>
 <p><span class="math inline">\(\chi^2\)</span> tests don’t work in scenarios where we have very small count sizes, such as a count size of 1. For these situations with small sample sizes and very small count sizes, we use Fisher’s exact test. This test gives us the <span class="math inline">\(p\)</span> value directly - no need to use a table of any kind! Let’s say we have a <span class="math inline">\(2x2\)</span> contingency table, as follows:</p>
 <table class="caption-top table">
 <tbody>
@@ -777,8 +801,8 @@ odds ratio
 </div>
 </div>
 <p>In this situation, <span class="math inline">\(p = 0.05\)</span> when rounded, so we would fail to reject but note that this is borderline.</p>
-<section id="chapter-7" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="chapter-7"><span class="header-section-number">7.2.1</span> Chapter 7</h3>
+<section id="chapter-7" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="chapter-7"><span class="header-section-number">10.2.1</span> Chapter 7</h3>
 <p>Complete problems 7.1, 7.2, 7.3, 7.5, and 7.7 as written in your text books. For these problems, please also state your <em>null</em> and <em>alternative</em> hypotheses, as well as a conclusion as to whether you <em>support</em> or <em>reject</em> the null.</p>
 <p>Next, do problems 7.9 and 7.11. For these two problems, pick which test is best and then perform said test. State your hypothesis and make a conclusion with respect to your <span class="math inline">\(p\)</span> value.</p>
 <p>Be sure to submit your homework as a knitted <code>html</code> document.</p>
@@ -1211,12 +1235,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./probdist.html" class="pagination-link" aria-label="Probability distributions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Probability distributions</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Probability distributions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ttest.html" class="pagination-link" aria-label="Testing means with $t$-tests">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Testing means with <span class="math inline">\(t\)</span>-tests</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ttest.html" class="pagination-link" aria-label="Means testing">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Means testing</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

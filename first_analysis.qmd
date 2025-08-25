@@ -1,0 +1,215 @@
+---
+title: "Running your first analysis"
+author: "UNK Biology"
+format: html
+editor: visual
+---
+
+Here, we are going to go through a work through with our first set of data. This will be your first assignment using *RMarkdown* and *RStudio*.
+
+## Create a new document
+
+Refer to the previous section to create a new document. Name it `LastName_first_analysis.rmd`, with `LastName` replaced by your surname. Save this document in your assignments folder, and make sure it will `knit` as an `html` document.
+
+-   You should *always* have your last name in your file name when you submit documents in this class.
+
+## Working with data
+
+Throughout this course, we are going to have to work with datasets that are from our book or other sources. Here, we are going to work through an example dataset.
+
+-   First, we need to install *libraries*. A ***library*** is a collated, pre-existing batch of code that is designed to assist with data analysis or to perform specific functions. These libraries make life a lot easier, and create short commands for completing relatively complex tasks.
+
+### Libraries
+
+In this class, there is one major library that you will need *almost every week*! **Even if I don't declare this library, you should load it in your documents**.
+
+-   Libraries are declared at the very beginning of the document
+
+-   Libraries *must* be in a code chunk at the top of the document or else they will not be loaded before the code requiring them, preventing your document from being `knit`.
+
+    -   Make sure you read your error codes - many times it will say that your command is not found, and that often means your library is not loaded. That, or you misspelled something.
+
+1.  `tidyverse`: this package is actually a [group of packages](https://www.tidyverse.org/) designed to help with data analysis, management, and visualization.
+
+**NOTE: If you leave the install prompts in your RMarkdown document, *it will not knit!* Install the following using the bottom right coding window of your *RStudio* session.**
+
+```{r, eval=FALSE}
+# run this code the first time ONLY
+# DO NOT INCLUDE IN RMD FILE
+# does not need to be run every time you use R!
+
+# tidyverse has a bunch of packages in it!
+# great for data manipulation
+install.packages("tidyverse")
+
+# if you ever need to update:
+# leaving brackets open means "update everything"
+update.packages()
+```
+
+-   After packages are installed, we will need to load them into our *R* environment. While we only need to do `install.packages` once on our machine, **we need to load libraries *every time we restart the program!***
+
+**NOTE: The following is required in EVERY DOCUMENT that uses the `tidyverse` commands!**
+
+```{r}
+### MUST BE RUN AT THE TOP OF EVERY DOCUMENT ###
+# Load tidyverse into R session / document
+library(tidyverse)
+```
+
+You should have an output like the above. What this means is:
+
+1.  The core packages that comprise the `tidyverse` loaded successfully, and version numbers for each are shown.
+2.  The conflicts basically means that certain commands will not work as they used to because *R* has "re-learned" a particular word.
+
+#### Conflicts
+
+To clarify the conflicts, pretend that you can only know one definition of a word at a time, in this case, the word "cola".
+
+-   **English**: Cola is a type of soda pop or soft drink.
+
+-   **Spanish**: Cola refers to a line or a tail.
+
+While we can figure out which definition is being used based on context, *R* can't. It will always use the most recent definition, such that it may interpret something as "Mi perro movió la *refresco*" or "I bought a *tail* from the vending machine". To avoid this confusion in *R*, we specify which "cola" we are referring to. In the above, this would look like "Mi perro movió la `español::cola`" and "I bought a `english::cola` from the vending machine".
+
+We should not have many conflicts in this class, but be aware they may exist.
+
+### Downloading data
+
+Now, we need to download our first data set. These datasets are stored on GitHub. We are going to be looking at data from Dr. Cooper's dissertation concerning Afrotropical bird distributions [@cooper_biogeographic_2021]. This website is in the data folder on this websites' GitHub page, [accessible here](https://github.com/jacobccooper/biol105_unk/blob/main/datasets/lacustrine_range_size.csv).
+
+```{r}
+# read comma separated file (csv) into R memory
+# reads directly from URL
+ranges <- read_csv("https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/datasets/lacustrine_range_size.csv")
+```
+
+Alternatively, we can use the operator `|>` to simplify this process. `|>` means "take whatever you got from the previous step and *pipe* it into the next step". So, the following does the exact same thing:
+
+```{r}
+ranges <- "https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/datasets/lacustrine_range_size.csv" |>
+  read_csv()
+```
+
+Using the `|>` is preferred as you can better set up a workflow and because it more closely mimics other coding languages, such as `bash`.
+
+Let's view the data to see if it worked. We can use the command `head` to view the first few rows:
+
+```{r}
+head(ranges)
+```
+
+We can perform a lot of summary statistics in *R*. Some of these we can view for multiple columns at once using `summary`.
+
+```{r}
+summary(ranges)
+```
+
+As seen above, we now have information for the following statistics for each variable:
+
+-   `Min` = minimum
+-   `1st Qu.` = 1st quartile
+-   `Median` = middle of the dataset
+-   `Mean` = average of the dataset
+-   `3rd Qu.` = 3rd quartile
+-   `Max.` = maximum
+
+We can also calculate some of these statistics manually to see if we are doing everything correctly. It is easiest to do this by using predefined functions in *R* (code others have written to perform a particular task) or to create our own functions in *R*. We will do both to determine the average of `combined_current_km2`.
+
+### Subsetting data
+
+First, we need to select only the column of interest. In *R*, we have two ways of subsetting data to get a particular column.
+
+-   `var[rows,cols]` is a way to look at a particular object (`var` in this case) and choose a specific combination of `row` number and `column` number (`col`). This is great if you know a specific index, but it is better to use a specific name.
+-   `var[rows,"cols"]` is a way to do the above but by using a specific column name, like `combined_current_km2`.
+-   `var$colname` is a way to call the specific column name directly from the dataset.
+
+```{r}
+# using R functions
+
+ranges$combined_current_km2
+```
+
+As shown above, calling the specific column name with `$` allows us to see only the data of interest. We can also save these data as an object.
+
+```{r}
+current_combined <- ranges$combined_current_km2
+
+current_combined
+```
+
+Now that we have it as an object, specifically a numeric vector, we can perform whatever math operations we need to on the dataset.
+
+```{r}
+mean(current_combined)
+```
+
+Here, we can see the mean for the entire dataset. However, we should always round values to the same number of decimal points as the original data. We can do this with `round`.
+
+```{r}
+round(mean(current_combined),1) # round mean to one decimal
+```
+
+*Note* that the above has a nested set of commands. We can write this exact same thing as follows:
+
+```{r}
+# pipe mean through round
+current_combined |> 
+  mean() |> 
+  round(1)
+```
+
+Use the method that is easiest for you to follow!
+
+We can also calculate the mean manually. The mean is $\frac{\sum_{i=1}^nx}{n}$, or the sum of all the values within a vector divided by the number of values in that vector.
+
+```{r}
+# create function
+# use curly brackets to denote function
+# our data goes in place of "x" when finally run
+our_mean <- function(x){
+  sum_x <- sum(x) # sum all values in vector
+  n <- length(x) # get length of vector
+  xbar <- sum_x/n # calculate mean
+  return(xbar) # return the value outside the function
+}
+```
+
+Let's try it.
+
+```{r}
+our_mean(ranges$combined_current_km2)
+```
+
+As we can see, it works just the same as `mean`! We can round this as well.
+
+```{r}
+ranges$combined_current_km2 |> 
+  our_mean() |> 
+  round(1)
+```
+
+## Creating a new column
+
+The package `tidyverse` allows for easily creating new columns within a dataset using the command `mutate`.
+
+For example, we can create a column of `combined_current_km2 + 1`.
+
+```{r}
+ranges <- ranges |> 
+  mutate(combined_plus_one = combined_current_km2 + 1)
+
+head(ranges$combined_plus_one)
+```
+
+## Your turn!
+
+**Please complete the following:**
+
+1.  Create an *RMarkdown document* that will save as an `.html`.
+2.  Load the data, as shown here, and print the summary statistics in the document.
+3.  Calculate the value of `combined_current_km2` divided by `2050_combined_km2` and print the results.
+    -   *Hint*: you can divide and multiply objects in *R*, like `a + b`, `a/b`, etc.
+4.  `knit` your results, with your name(s) and date, as an HTML document.
+
+Let me know if you have any issues.

@@ -1,7 +1,10 @@
 ---
 title: "Diagnosing data visually"
 author: "University of Nebraska at Kearney Biology"
-format: html
+format:
+  html:
+    css: styles.css
+    theme: default
 editor: visual
 ---
 
@@ -9,23 +12,43 @@ editor: visual
 
 Inspecting data visually can give us a lot of information about whether data are normally distributed and about whether there are any major errors or issues with our dataset. It can also help us determine if data meet model assumptions, or if we need to use different tests more appropriate for our datasets.
 
-## Sample data and preparation
+<hr>
 
-First, we need to load our *R* libraries.
+<br>
 
-```{r}
+<hr>
+
+## Sample data and preparation {.tight-top}
+
+Before we start, we must load our *R* libraries.
+
+```{r, message=FALSE, warning=FALSE, results='hide'}
 library(tidyverse)
 ```
 
-Next, we can download our data sample.
+<hr>
 
-## Histograms
+<br>
+
+<hr>
+
+## Histograms {.tight-top}
 
 A histogram is a frequency diagram that we can use to visually diagnose data and their distributions. We are going to examine a histogram using a random string of data. *R* can generate random (though, actually pseudorandom) strings of data on command, pulling them from different distributions. These distributions are pseudorandom because we can't actually program *R* to be random, so it starts from a wide variety of pseudorandom points.
 
-### Histograms on numeric vectors
+<hr>
 
-The following is how to create default histograms on data. If you need to create custom bin sizes, please see the notes under *Cumulative frequency plots* for data that are not already in frequency format.
+<br>
+
+<hr>
+
+### Histograms on numeric vectors {.tight-top}
+
+<details>
+
+<summary>Click to see how to make a default histogram</summary>
+
+The following is how to create default histograms on data. If you need to create custom bin sizes, please see the notes under [Cumulative frequency plot] for data that are not already in frequency format.
 
 ```{r}
 # create random string from normal distribution
@@ -42,7 +65,7 @@ hist(x)
 
 **NOTE** that a histogram can only be made on a vector of values. If you try to make a histogram on a data frame, *you will get an error and it will not work*. You have to specify which column you wish to use with the `$` operator. (For example, for dataframe `xy` with columns `x` and `y`, you would use `hist(xy$y)`).
 
-We can up the number of bins to see this better.
+We can increase the number of bins to see this better.
 
 ```{r}
 hist(x,breaks = 100)
@@ -50,7 +73,19 @@ hist(x,breaks = 100)
 
 The number of bins can be somewhat arbitrary, but a value should be chosen based off of what illustrates the data well. *R* will auto-select a number of bins in some cases, but you can also select a number of bins. Some assignments will ask you to choose a specific number of bins as well.
 
-### Histograms on frequency counts
+</details>
+
+<hr>
+
+<br>
+
+<hr>
+
+### Histograms on frequency counts {.tight-top}
+
+<details>
+
+<summary>Click to see how to make a histogram with frequency data</summary>
 
 Say, for example, that we have a dataset where everything is already shown as frequencies. We can create a frequency histogram using `barplot`.
 
@@ -73,7 +108,19 @@ barplot(count_table$Count, # response variable, counts for histogram
         names.arg = count_table$Category) # make these the names
 ```
 
-### ggplot histograms
+</details>
+
+<hr>
+
+<br>
+
+<hr>
+
+### ggplot histograms {.tight-top}
+
+<details>
+
+<summary>Click to see how to make *fancy* histograms (optional)</summary>
 
 The following is an ***optional*** workthrough on how to make really fancy plots.
 
@@ -135,9 +182,21 @@ ggplot(xy, aes(x = x, fill = cat))+
   theme_minimal()
 ```
 
-There are lots of other commands you can incorporate as well if you so choose; I recommend checking [sites like this one](http://www.sthda.com/english/wiki/ggplot2-histogram-plot-quick-start-guide-r-software-and-data-visualization).
+There are lots of other commands you can incorporate as well if you so choose; I recommend checking [sites like this one](http://www.sthda.com/english/wiki/ggplot2-histogram-plot-quick-start-guide-r-software-and-data-visualization) or using ChatGPT.
 
-## Boxplots
+</details>
+
+<hr>
+
+<br>
+
+<hr>
+
+## Boxplots {.tight-top}
+
+<details>
+
+<summary>Click to see how to make boxplots</summary>
 
 We can also create boxplots to visualize the spread of the data. Boxplots include a bar for the median, a box representing the interquartile range between the 25th and 75th percentiles, and whiskers that extend $1.5 \cdot IQR$ beyond the 25th and 75th percentiles. We can create a boxplot using the command `boxplot`.
 
@@ -157,7 +216,19 @@ boxplot(x, # what to plot
 
 On the above plot, *outliers* for the dataset are shown as dots beyond the ends of the "whiskers".
 
-## Skewness
+</details>
+
+<hr>
+
+<br>
+
+<hr>
+
+## Skewness {.tight-top}
+
+<details>
+
+<summary>Click to read about skewness</summary>
 
 Skew is a measure of how much a dataset "leans" to the positive or negative directions (*i.e.*, to the "left" or to the "right"). To calculate skew, we are going to use the `moments` library.
 
@@ -183,12 +254,25 @@ hist(x3)
 ```
 
 ```{r}
-skewness(x3)
+skewness(x3) |> 
+  round(2)
 ```
 
 As we can see, the above is a heavily skewed dataset with a positive ("right") skew.
 
-## Kurtosis
+</details>
+
+<hr>
+
+<br>
+
+<hr>
+
+## Kurtosis {.tight-top}
+
+<details>
+
+<summary>Click to read about kurtosis</summary>
 
 Kurtosis refers to how sharp or shallow the peak of the distribution is (*platykurtic* vs. *leptokurtic*). Remember - *platy*kyrtic are *plateau*kurtic, wide and broad like a plateau, and *leptokurtic* distributions are sharp. Intermediate distributions that are roughly normal are *mesokurtic*.
 
@@ -202,13 +286,16 @@ hist(x)
 
 ```{r}
 # non-zeroed
-kurtosis(x)
+kurtosis(x) |> round(2)
 ```
 
 ```{r}
 # zeroed
-kurtosis(x)-3
+# put whole thing to be rounded in brackets
+(kurtosis(x)-3) |> round(2)
 ```
+
+*Note* when rounding a calculation, the calculation must be in brackets or it will only round the last value.
 
 As expected, out values drawn from a normal distribution are not overly skewed. Let's compare these to a more kurtic distribution:
 
@@ -226,13 +313,25 @@ hist(xk,breaks = 100)
 
 As we can see, this is a very *leptokurtic* distribution.
 
-## Cumulative frequency plot
+</details>
+
+<hr>
+
+<br>
+
+<hr>
+
+## Cumulative frequency plot {.tight-top}
 
 A *cumulative frequency plot* shows the overall spread of the data as a cumulative line over the entire dataset. This is another way to see the spread of the data and is often complementary to a histogram.
 
-### If data are not in histogram/frequency format
+<hr>
 
-The use of the Empirical Cumulative Distribution Function, **ecdf()**,can turn a variable into what is needed to create a cumulative frequency plot. This is a base part of *R* and therefore does not require any libraries.
+<details>
+
+<summary>Click to see how to make a cumulative frequency plot if data is not in histogram/frequency format</summary>
+
+The use of the Empirical Cumulative Distribution Function **`ecdf`** can turn a variable into what is needed to create a cumulative frequency plot.
 
 ```{r}
 plot(ecdf(x)) #Creating a cumulative frequency plot
@@ -246,7 +345,13 @@ plot(ecdf(x),
 
 ```
 
-### If data are in histogram/frequency format
+</details>
+
+<hr>
+
+<details>
+
+<summary>Click to see how to make a cumulative frequency plot if data is in histogram/frequency format</summary>
 
 If you have a list of frequencies (say, *for river discharge over several years*), you only need to do the `cumsum` function. For example:
 
@@ -267,11 +372,33 @@ plot(x = 1:length(sum_y), # get length of sum_y, make x index
      type = "l") # make a line plot
 ```
 
-## Homework: Chapter 3
+</details>
 
-From your book, complete problems 3.1, 3.4 & 3.5. Data for these problems are available on *Canvas* and in your book.
+<hr>
 
-### Helpful hint
+<br>
+
+<hr>
+
+## Homework: Visualizing data {.tight-top}
+
+<br>
+
+**Directions:**
+
+Please complete all computer portions in an `rmarkdown` document knitted as an html. Upload any "by hand" calculations as images in the HTML or separately on *Canvas*.
+
+<hr>
+
+<br>
+
+<hr>
+
+### Helpful hint {.tight-top}
+
+<details>
+
+<summary>Click for a useful hint!</summary>
 
 **HINT**: For 3.5, consider just making a vector of the values of interest for a histogram.
 
@@ -292,10 +419,78 @@ barplot(y,
         names.arg = c("Cat 1", "Cat 2", "Cat 3"))
 ```
 
-### Directions
+</details>
 
-Please complete all computer portions in an `rmarkdown` document knitted as an html. Upload any "by hand" calculations as images in the HTML or separately on *Canvas*.
+<br> <br>
 
-## Addendum
+<hr>
 
-With thanks to Hernan Vargas & Riley Grieser for help in formatting this page. Additional comments provided by BIOL 305 classes.
+### Problem 1
+
+The Research Institute Nature and Forest in Brussels, Belgium, conducted a survey of fish from the southern North Sea to help with the identification of fish from seabird diets [@verstraete_photos_2020]. We will be looking at the lengths one specific taxon - the Atlantic Herring *Clupea harengus*.
+
+Copy and run the code below to load in your data. Use the object `clupea.lengths` for this problem.
+
+```{r, message=F}
+# download fish data
+fishes <- read_csv("https://zenodo.org/records/4066594/files/reference_data.csv")
+
+# isolate Clupea harengus
+clupea <- fishes |> 
+  filter(scientific_name == "Clupea harengus")
+
+# get vector of lengths
+# remove missing data
+clupea.lengths <- clupea$fish_length_mm |> 
+  na.omit()
+```
+
+1.  Create a histogram of these data.
+2.  Create a cumulative frequency plot of these data.
+3.  Calculate the kurtosis of these data, and make a conclusion about the kurtosis of the dataset.
+4.  Calculate the skewness of these data, and make a conclusion about the skewness of the dataset.
+5.  Create a boxplot of these data.
+
+### Problem 2
+
+The Fremont Bridge in Seattle is one of the only bridges that connects the north and south sides of the city, crossing the Fremont Cut - a navigational canal between the Puget Sound and Lake Union & Lake Washington. As such, it is an important transportation corridor. We will be looking at counts of bicyclists, taken hourly for the east (predominately northbound) side over a seven year period [@weber_fremont_2019]. This dataset has 56,904 records - thus, this is not something that would be easily done without the use of a program like *R*!
+
+```{r, message=FALSE}
+bicycles <- read_csv("https://zenodo.org/records/2648564/files/Fremont_Bridge_Hourly_Bicycle_Counts_by_Month_October_2012_to_present.csv")
+
+bike.count <- bicycles$`Fremont Bridge East Sidewalk` |> 
+  na.omit()
+```
+
+1.  Create a histogram of these data.
+2.  Create a cumulative frequency plot of these data.
+3.  Calculate the kurtosis of these data, and make a conclusion about the kurtosis of the dataset.
+4.  Calculate the skewness of these data, and make a conclusion about the skewness of the dataset.
+5.  Create a boxplot of these data.
+
+### Problem 3
+
+Take the object `bike.count` from the previous problem and perform a *log transformation* of the data. To do this, we will take the natural log of the dataset plus one. We must add 1 to every value in the dataset, because the natural log of 0 is negative infinity; adding one makes every value in the dataset quantifiable as the minimum value for any count data is 0.
+
+Perform the following action on your computer, replacing `x` with your `bike.data` object. Name your object `log.bikes` instead of `log.x`.
+
+```{r, eval = FALSE}
+log.x <- log(x + 1)
+```
+
+After performing the log transformation, complete the following.
+
+1.  Create a histogram of these data.
+2.  Create a cumulative frequency plot of these data.
+3.  Calculate the kurtosis of these data, and make a conclusion about the kurtosis of the dataset.
+4.  Calculate the skewness of these data, and make a conclusion about the skewness of the dataset.
+5.  Create a boxplot of these data.
+6.  How did the log transformation change these data?
+
+### Problem 4
+
+Is there pseudoreplication in the bicycle dataset? Why or why not?
+
+## Acknowledgment
+
+Thanks to Hernan Vargas & Riley Grieser for help in formatting this page. Additional comments provided by BIOL 305 classes.

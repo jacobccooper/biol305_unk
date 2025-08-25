@@ -5,13 +5,16 @@ project:
 book:
   title: "Biology 305: Biostatistics"
   author: "Dr. Jacob C. Cooper & Dr. Melissa Wuellner"
-  date: "`r format(Sys.time(), '%d %B, %Y')`"
+  date: "Fall 2025"
   chapters:
     - index.qmd
+    - install_r.qmd
     - intro_to_r.qmd
+    - first_analysis.qmd
     - descriptive_stats.qmd
     - visual.qmd
     - normality.qmd
+    - transformations.qmd
     - exam2.qmd
     - probdist.qmd
     - chi.qmd
@@ -19,6 +22,7 @@ book:
     - anova1.qmd
     - anova2.qmd
     - cor_reg.qmd
+    - multivariate.qmd
     - picktest.qmd
     - final_exam.qmd
     - conclusion.qmd

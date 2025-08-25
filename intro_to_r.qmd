@@ -3,113 +3,101 @@ title: "Intro to *R*"
 author: "University of Nebraska at Kearney Biology"
 ---
 
-In this class, we will be using *R* to perform statistical analyses. *R* is a free software program designed for use in a myriad of statistical and computational scenarios. It can handle extremely large datasets, can handle spatial data, and has wrappers for compatibility with *Python*, *Bash*, and other programs (even *Java*!).
+Now that we have installed *RStudio*, we will need to create an *RMarkdown* document that we can use for answering questions and turning in assignments. These documents will also be used for appendices and other materials in future publications you create - *RStudio* can easily knit documents into `.pdf`, `.docx` (i.e., "Word" documents), and `.html`. In this class, we will use almost exclusively `.html` documents, as these are the most compatible with *Canvas*.
 
-## Setup
+-   **Quick note:** Mac keyboards differ from Windows keyboards in that they have more keys; as such, shortcuts will differ!
 
-First, we need to download *R* onto your machine. We are also going to download *RStudio* to assist with creating *R* scripts and documents.
+<!-- -->
 
-### Installing *R*
+-   For both operating systems, I will list keys that have to be pushed together with a "+" between them. (If you need to push the "+" key, I will offset it like `+` so; for example, pushing CONTROL and PLUS on Windows at the same time makes a window's font bigger; I would write this as `CTRL` + `+`).
 
-First, navigate to the [*R* download and install page](https://cloud.r-project.org/). Download the appropriate version for your operating system (Windows, Mac, or Linux). **Note** that coding will be formatted slightly different for Windows than for other operating systems. If you have a Chromebook, you will have to [follow the online instructions for installing both programs on Chrome](https://levente.littvay.hu/chromebook/).
+-   If you need to hit a single key that differs between operating systems, I will always list the Windows/Linux key first and the Mac key second; for example, `Enter`/`return` for inserting a new line.
 
-Follow the installation steps for *R*, and verify that the installation was successful by searching for *R* on your machine. You should be presented with a coding window that looks like the following, but may not be an exact match:
+#### Windows/Linux keys
 
-```         
-R version 4.4.1 (2024-06-14) -- "Race for Your Life"
-Copyright (C) 2024 The R Foundation for Statistical Computing
-Platform: aarch64-apple-darwin20
+-   `CTRL`: Control
 
-R is free software and comes with ABSOLUTELY NO WARRANTY.
-You are welcome to redistribute it under certain conditions.
-Type 'license()' or 'licence()' for distribution details.
+-   `ALT`: Alt
 
-  Natural language support but running in an English locale
+#### Mac keys
 
-R is a collaborative project with many contributors.
-Type 'contributors()' for more information and
-'citation()' on how to cite R or R packages in publications.
+-   ⌘: Command
 
-Type 'demo()' for some demos, 'help()' for on-line help, or
-'help.start()' for an HTML browser interface to help.
-Type 'q()' to quit R.
+-   ⌥: Option
 
->
-```
-
-If that screen appears, congratulations! *R* is properly installed. If the install was not successful, please talk to your instructor and teaching assistant(s) for help with installation.
-
-### Installing *RStudio*
-
-*RStudio* is a GUI (graphics user interface) that helps make *R* easier to use. Furthermore, it allows you to create documents in *R*, including websites (such as this one), PDFs, and even presentations. This can greatly streamline the research pipeline and help you publish your results and associated code in a quick and efficient fashion.
-
-Head over the the [*RStudio* download website](https://posit.co/downloads/) and download "*RStudio* Desktop", which is free. Be sure to pick the correct version for your machine.
-
-Open *RStudio* on your machine. You should be presented with something like the following:
-
-![*RStudio* start window. Note that the screen is split into four different quadrants. Top left: *R* documents; bottom left: *R* program; top right: environment window; bottom right: plots, help, and directories.](images/rstudio_start.png){fig-align="center"}
-
-In *RStudio*, the top left window is always going to be our coding window. This is where we will type all of our code and create our documents. In the bottom left we will see *R* executing the code. This will show what the computer is "thinking" and will help us spot any potential issues. The top right window is the "environment", which shows what variables and datasets are stored within the computers' memory. (It can also show some other things, but we aren't concerned with that at this point). The bottom right window is the "display" window. This is where plots and help windows will appear if they don't appear in the document (top left) window itself.
-
-### Setting up the "native pipe" operator
-
-There are two ways to type commands in *R*: in a "nested" fashion and in a "piped" fashion.
-
-Let's say that we have a random series of 100 numbers from a random normal distribution, which we can get by running the following:
-
-```{r}
-# make repeatable
-set.seed(42)
-# get 100 values from normal
-x <- rnorm(100)
-```
-
-Let's say that we want to get the mean of these values *and* round these values to two decimal places for our final answer. To do this in a nested fashion, we would do the following:
-
-```{r}
-# round mean of x
-round(mean(x), 2)
-```
-
-This works pretty well, but it can get confusion with so many parentheses over each other. Thus, we can use the "pipe" method instead.
-
-In *RStudio*, click on the tabs at the top of the screen to go to Tools \> Global Options, and in the pop up screen select Code. On this screen, you should see a tick box for "Use native pipe operator". Make sure this box is checked. Now, we can use `CTRL` + `SHIFT` + `M` to insert the "pipe" operator `|>`.
-
-The pipe operator takes whatever came previous and puts it through the next command. For example, `mean(x)` could also be written as `x |> mean()`, where `x` would be placed inside of `mean()`.
-
-```{r}
-x |> 
-  mean() |> 
-  round(2)
-```
-
-As you can see, the above breaks things down into a more step-by-step fashion, and makes code easier to follow. We will be using this extensively in this course.
+-   \^: Control
 
 ## Creating an *RMarkdown* document
 
 ### Setup
 
-In this class, we will be creating assignments in what is called *RMarkdown*. This is a rich-text version of *R* that allows us to create documents with the code embedded. In *RStudio*, click the "+" button in the far top left to open the `New Document` menu. Scroll down this list and click on `R Markdown`.
+#### Creating a new document
 
-A screen such as this will appear:
+In this class, we will be creating documents in what is called *RMarkdown*. This is a rich-text version of *R* that allows us to create documents with the code embedded. In *RStudio*, click the "+" button in the far top left to open the `New Document` menu. Scroll down this list and click on `R Markdown`.
+
+A screen like this will appear:
 
 ![A new file window for an *RMarkdown* file.](images/newfile.png)
 
 After entering a title and your name and selecting `document` in the left hand menu, click `OK`.
 
+#### Document setup
+
 ![An example of a markdown script.](images/markdown.png)
 
-In the image above, we can see what a "default" *RMarkdown* script looks like after creating the file. At the top of the document, between all of the dashes, we have the `yaml` header that tells *R* what kind of document will be created, who the author is, and tells it to use today's date. In this class, we will be saving documents as `html` as they are the easiest documents to create and save. These documents will include all of your code, text, and even any plots you may create!
+In the image above, we can see what a "default" *RMarkdown* script looks like after creating the file. At the top of the document, between all of the dashes, we have the `yaml` header that tells *R* what kind of document will be created, who the author is, and what the date is for the document (by default, this is `r Sys.Date()`, which just prints the data on which the code was run). In this class, we will be saving documents as `html` as they are the easiest documents to create and save. These documents will include all of your code, text, and even any plots you may create!
 
-Plain text in the document will be rendered as plain text in the document. (I.e., whatever you type normally will become "normal text" in the finished document). Lines preceded with `#` will become headers, with `##` being a second level header and `###` being a third level header, etc. Words can also be made italic by putting an asterisk on each side of the word (`*italic*`) and bold by putting two asterisks on each side (`**bold**`). URLs are also supported, with `<>` on each side of a URL making it clickable, and words being hyperlinked by typing `[words to show](target URL)`.
+-   **The first thing you should do is save your document**. Since this is a "first go", feel free to save it as `test.rmd` or something to that effect, ***but save the document in the folder you want to use for assignments!***
 
-We also have code "chunks" that are shown above. A code chunk can be manually typed out or inserted by pressing `CTRL` + `ALT` + `I` (Windows, Linux) or `COMMAND` + `OPTION` + `I` (Mac). Everything inside a "code chunk" will be read as *R* code and executed as such. Note that you can have additional commands in the *R* chunks, but we won't cover that for now.
+-   After the document is saved, you can hit the `knit` button at the top of the screen and see what happens. It should create a document in the same location as your saved file that is an `html` format.
 
-### Using code chunks
+-   A new document will appear in a pop up window as well. The information in this document will be the default text loaded above.
 
-In your computer, erase all information except for the `yaml` header between the dashes at the top of the document. `Save` your file in a folder where you want your assignment to be located. It is important you do this step up front as the computer will sometimes save in random places if you don't specify a file location at the beginning. *Don't forget to save your work frequently*!
+-   After running the document once, delete all text below the `---` at the bottom of the `yaml` header so we can create our own document.
 
-After clearing the document, type the following at the top, exactly as shown. You can insert a code chunk (the `{r}` part framing the code with hashes before and after) by clicking `CTRL`+`ALT`+`I` (`CMD`+`OPT`+`I` on a Mac).
+#### Writing text
+
+Plain text in your *RStudio* window will be rendered as plain text in the final document. (i.e., whatever you type normally will become "normal text" in the finished document).
+
+-   **Important shortcut:** An important shortcut is the "double click". Write a word, any word (like `potato`) in your document. If you double click, it will select the whole word. If you have a word or sentence selected, you can hit `"`, `(`, `[`, `{`, or `*` and *RStudio* will automatically put the closing equivalent of the symbol at the end of your selection.
+
+-   **Headers:** Lines preceded with `#` will become headers; the number of `#` determines the level of the header, with `#` being main headers, `##` being a second level header, and `###` being a third level header, etc.
+
+-   **Formatting:** Words can be italicized by putting an asterisk on each side of the word (`*italic*`) and bold by putting two asterisks on each side (`**bold**`).
+
+-   **Hyperlinks:** URLs are also supported, with `<>` on each side of a URL making it clickable. To turn a word into a hyperlink, type `[words to show](https://target_URL.com)`. It is important that the words are in brackets and the URL is in parentheses, or it will not format correctly.
+
+### Coding
+
+In your computer, you should have erased all information except for the `yaml` header between the dashes at the top of the document. Make sure to `save` your file in a folder where you want your assignment to be located. It is important you do this step up front as the computer will sometimes save in random places if you don't specify a file location at the beginning. *Don't forget to save your work frequently*!
+
+#### Code chunks
+
+Code chunks are sections within the document where we can write code and it will be executed. These chunks are always preceded by a series of three "hashes" and the code language specified in brackes (i.e., `{r}`) and are followed by a set of three hashes as well. In your window, these will appear with a greyed-out background to show that the area is a code chunk.
+
+We will create an example set of text, and then insert a code chunk to see how this works.
+
+#### Test text and chunks
+
+-   Type `This is a test of the *Rmarkdown* code.` as plaintext in your document.
+
+-   Hit `Enter` twice.
+
+-   Insert a code chunk by using the correct shortcut:
+
+    -   **Windows/Linux:** `CTRL` + `ALT` + `I`
+
+    -   **Mac:** ⌘ + ⌥ + `I`
+
+-   Push the down arrow until you are between the sets of hashes in the code chunk.
+
+-   Type `print("hello world")`
+
+    -   `print`: a command that returns a `string` of characters. A string is any set of characters that should be read together as a single object or line.
+
+    -   `"hello world"`: placing the letters inside quotes `"` tells *R* that these are *character data* that should be read as a `string`.
+
+    -   The full command should return an output of `"hello world"`.
 
 ![Text to type in your *Rmarkdown* document.](images/test_text.png)
 
@@ -117,55 +105,97 @@ After typing this into the document, hit `knit` near the top of the upper left w
 
 ![The output from the above code knitted into a document.](images/test1.png)
 
-We can see now that the `HTML` document has the title of the document, the author's name, the date on which the code was run, and a greyed-out box with color coded *R* code followed by the output. Let's try something a little more complex. Create a new code chunk and type the following:
+We can see now that the `HTML` document has the `yaml` header at the top of the document for the title of the document, the author's name, the date on which the code was run. The plain text we used has been printed, and the greyed-out box with color coded *R* code is followed by the output we expected.
+
+-   Let's try something a little more complex. Create a new code chunk and type the following:
+
+    -   *NOTE*: Mac users can use ⌥ + `-` to automatically insert `<-`, saving a lot of time. Unfortunately, there is no equivalent shortcut for Windows.
+
+    -   We are avoiding using `=` to create objects as this can lead to issues in saving objects to *R*'s memory in some cases and can lead to confusion between objects and parts of functions.
 
 ```{r}
 x <- 1:10
 ```
 
-This will create a variable in *R*, `x`, that is sequentially each whole number between 1 and 10. We can see this by highlighting or typing only the letter `x` and running that line of code by clicking `CTRL` + `ENTER` (Windows / Linux) or `COMMAND` + `ENTER` (Mac).
+-   `x`: putting a plain letter, character, or word in *R* asks it to refer to something in its memory. If it does not exist in its memory, it can be created by using something like `<-`. When we define a set of characters as numbers or as something else, we are creating an `object`.
+
+-   `1:10`: this will print all whole integers between the listed numbers, inclusive of those numbers. In this case, `1:10` is the same as `c(1,2,3,4,5,6,7,8,9,10)`, where `c` *concatenates* and puts together the numbers in a single `string`.
+
+-   Run your code by placing your cursor on the same line as `x <- 1:10` and pressing `CTRL` + `Enter` / ⌘ + `return`.
+
+-   After running, you will see the following appear in your top right window, showing you that `x` was saved:
+
+![The object x now being saved to the environment, as a set of ten integers.](images/clipboard-4025383944.png){width="489"}
+
+-   Hit `Enter` / `return` to create a new line within the code chunk. Type the letter `x` and hit `CTRL` + `Enter` / ⌘ + `return`. You should see the following:
 
 ```{r}
 x
 ```
 
-If you look at the top right window, you will also see the value `x` in the environment defined as `int [1:10] 1 2 3 4 5 6 7 8 9 10`. This indicates that `x` is integer data spanning ten positions numbered 1 to 10. Since the vector is small, it displays every number in the sequence.
+-   Create a new object, `y`, that is the square of `x`, as follows:
 
-![*RStudio* environment window showing saved objects. These are in the computer's memory.](images/environment.png)
+    -   `^`: this is the "power" symbol; thus, `x^2` is $x^2$, `x^3` is $x^3$, etc.
 
-Let's create another vector `y` that is the squared values of `x`, such that $y=x^2$. We can raise values to an exponent by using `^`.
+    -   Don't forget to use `CTRL` + `Enter` / ⌘ + `return` to run the line of code.
 
 ```{r}
 y <- x^2
+```
+
+After running the code, you should have both objects in your memory, like so:
+
+![*RStudio* environment window showing saved objects. These are in the computer's memory.](images/environment.png)
+
+We can now print `y`, just as we did for `x`, to see what the object contains in the document:
+
+```{r}
 y
 ```
 
-Now we have the value `y` in the environment that is the square of the values of `x`. This is a `numeric` vector of 10 values numbered 1 to 10 where each value corresponds to a square of the `x` value. We can raise things to any value however, including $x^x$!
+-   *Note* that you can multiply objects together as well. When we have strings, the strings will be multiplied together. Try the following:
 
 ```{r}
-x^x
+x*y
 ```
 
-As we can see, since I didn't "store" this value as a variable in *R* using `<-`, the value is not in the environment.
+```{r}
+y-x
+```
+
+-   **Note:** Since I didn't "store" this value as a variable in *R* using `<-`, the value is not in the environment.
+
+#### Taking notes
+
+We can take notes and annotate code within a code chunk by using the character `#` before anything we wish to annotate. *Note* that the color of the text after `#` inside the code chunk will change to show us that the code will not run.
+
+```{r}
+x
+# y
+```
+
+Above, we can see only `x` printed, as `y` was blocked with a `#`. We can use this to add text inside the code as well:
+
+```{r}
+# subtract x from y
+y - x
+```
+
+You are *highly encouraged* to add notes to your code, both to help others understand your logic and to remind yourself of what you did in the future!
 
 ### Plotting
 
-Now, let's try creating a plot. This is easy in *R*, as we just use the command `plot`.
+Now, let's try creating a plot. This is easy in *R*, as we just use the command `plot`. At minimum, we must define an `x` variable and a `y` variable for the command `plot`. It will calculate and make everything else automatically.
+
+-   **Note:** Within commands, we must use `=`.
+
+Type and run the following:
 
 ```{r}
 plot(x = x, y = y)
 ```
 
-By specifying the `y` and `x` components in `plot`, we can quickly generate a point plot. We can alter the visual parameters of this plot using a few different commands. I will outline these below with inline notes. Inline notes in the code can be made by using a `#` symbol before them, which basically tells *R* to ignore everything after the `#`. For example:
-
-```{r}
-print("Test")
-# print("Test 2")
-```
-
-This prints the word `Test`, but doesn't print `Test 2`.
-
-Now let's make the plot with some new visual parameters.
+Now let's make the plot with some new visual parameters. I describe what these arguments do using `#` to make notes within the code chunk. *Note* that you can split commands over multiple lines after typing `,` but that the command must all be enclosed within parentheses `()`.
 
 ```{r}
 plot(x = x, # specify x values
@@ -176,6 +206,26 @@ plot(x = x, # specify x values
      pch = 19, # adjust point style
      col = "red") # make points red
 ```
+
+## Stop touching your mouse
+
+*RStudio* has lots of keyboard shortcuts that will make your life easier. You will be a lot faster if you rely on these shortcuts. I outline some here, but see the [Glossary](https://jacobccooper.github.io/biol305_unk/glossary.html).
+
+-   Use arrow keys to move around your document
+
+-   Highlight code by holding `shift` and pushing the arrow keys
+
+-   Copy text using `CTRL` + `C` / ⌘ + `C`
+
+-   Paste text using `CTRL` + `V` / ⌘ + `V`
+
+-   Cut text using `CTRL` + `X` / ⌘ + `X`
+
+-   Undo last edit or mistake using `CTRL` + `Z` / ⌘ + `Z`
+
+-   Save your document using `CTRL` + `S` / ⌘ + `S`
+
+These shortcuts are worth learning; they will greatly increase the speed at which you get things done.
 
 ### Tab complete
 
@@ -194,171 +244,4 @@ At any point in *R*, you can look up "help" for a specific function by typing `?
 ?mean
 ```
 
-## Working with data
-
-Throughout this course, we are going to have to work with datasets that are from our book or other sources. Here, we are going to work through an example dataset. First, we need to install *libraries*. A *library* is a collated, pre-existing batch of code that is designed to assist with data analysis or to perform specific functions. These *libraries* make life a lot easier, and create short commands for completing relatively complex tasks.
-
-### Libraries
-
-In this class, there is one major library that you will need *almost every week*! First, we need to install this library:
-
-1.  `tidyverse`: this package is actually a [group of packages](https://www.tidyverse.org/) designed to help with data analysis, management, and visualization.
-
-**NOTE: If you leave the install prompts in your RMarkdown document, *it will not knit!***
-
-```{r, eval=FALSE}
-# run this code the first time ONLY
-# DO NOT INCLUDE IN RMD FILE
-# does not need to be run every time you use R!
-
-# tidyverse has a bunch of packages in it!
-# great for data manipulation
-install.packages("tidyverse")
-
-# if you ever need to update:
-# leaving brackets open means "update everything"
-update.packages()
-```
-
-**NOTE: The following is required in EVERY DOCUMENT that uses the `tidyverse` commands!**
-
-After packages are installed, we will need to load them into our *R* environment. While we only need to do `install.packages` once on our machine, **we need to load libraries *every time we restart the program!***
-
-```{r}
-library(tidyverse)
-```
-
-You should have an output like the above. What this means is:
-
-1.  The core packages that comprise the tidyverse loaded successfully, and version numbers for each are shown.
-2.  The conflicts basically means that certain commands will not work as they used to because *R* has "re-learned" a particular word.
-
-#### Conflicts
-
-To clarify the conflicts, pretend that you can only know one definition of a word at a time. You may know the word "cola" as a type of soda pop or as a drink in general. However, in Spanish, "cola" refers to a line or a tail. While we can learn both of these definitions and know which one is which because of context, a computer can't do that. In *R*, we would then have to specify which "cola" we are referring to. We do this by listing the package before the command; in this case, `english::cola` would mean a soda pop and `spanish::cola` would refer to a line or tail. If we just type `cola`, the computer will assume one of these definitions but not even consider the other.
-
-We won't have to deal with conflicts much in this class, and I'll warn you (or help you) if there is a conflict.
-
-### Downloading data
-
-Now, we need to download our first data set. These datasets are stored on GitHub. We are going to be looking at data from Dr. Cooper's dissertation concerning Afrotropical bird distributions [@cooper_biogeographic_2021]. This website is in the data folder on this websites' GitHub page, [accessible here](https://github.com/jacobccooper/biol105_unk/blob/main/datasets/lacustrine_range_size.csv).
-
-```{r}
-# read comma separated file (csv) into R memory
-# reads directly from URL
-ranges <- read_csv("https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/datasets/lacustrine_range_size.csv")
-```
-
-Alternatively, we can use the operator `|>` to simplify this process. `|>` means "take whatever you got from the previous step and *pipe* it into the next step". So, the following does the exact same thing:
-
-```{r}
-ranges <- "https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/datasets/lacustrine_range_size.csv" |>
-  read_csv()
-```
-
-Using the `|>` is preferred as you can better set up a workflow and because it more closely mimics other coding languages, such as `bash`.
-
-Let's view the data to see if it worked. We can use the command `head` to view the first few rows:
-
-```{r}
-head(ranges)
-```
-
-We can perform a lot of summary statistics in *R*. Some of these we can view for multiple columns at once using `summary`.
-
-```{r}
-summary(ranges)
-```
-
-As seen above, we now have information for the following statistics for each variable:
-
--   `Min` = minimum
--   `1st Qu.` = 1st quartile
--   `Median` = middle of the dataset
--   `Mean` = average of the dataset
--   `3rd Qu.` = 3rd quartile
--   `Max.` = maximum
-
-We can also calculate some of these statistics manually to see if we are doing everything correctly. It is easiest to do this by using predefined functions in *R* (code others have written to perform a particular task) or to create our own functions in *R*. We will do both to determine the average of `combined_current_km2`.
-
-### Subsetting data
-
-First, we need to select only the column of interest. In *R*, we have two ways of subsetting data to get a particular column.
-
--   `var[rows,cols]` is a way to look at a particular object (`var` in this case) and choose a specific combination of `row` number and `column` number (`col`). This is great if you know a specific index, but it is better to use a specific name.
--   `var[rows,"cols"]` is a way to do the above but by using a specific column name, like `combined_current_km2`.
--   `var$colname` is a way to call the specific column name directly from the dataset.
-
-```{r}
-# using R functions
-
-ranges$combined_current_km2
-```
-
-As shown above, calling the specific column name with `$` allows us to see only the data of interest. We can also save these data as an object.
-
-```{r}
-current_combined <- ranges$combined_current_km2
-
-current_combined
-```
-
-Now that we have it as an object, specifically a numeric vector, we can perform whatever math operations we need to on the dataset.
-
-```{r}
-mean(current_combined)
-```
-
-Here, we can see the mean for the entire dataset. However, we should always round values to the same number of decimal points as the original data. We can do this with `round`.
-
-```{r}
-round(mean(current_combined),1) # round mean to one decimal
-```
-
-*Note* that the above has a nested set of commands. We can write this exact same thing as follows:
-
-```{r}
-# pipe mean through round
-mean(current_combined)  |> 
-  round(1)
-```
-
-Use the method that is easiest for you to follow!
-
-We can also calculate the mean manually. The mean is $\frac{\sum_{i=1}^nx}{n}$, or the sum of all the values within a vector divided by the number of values in that vector.
-
-```{r}
-# create function
-# use curly brackets to denote function
-# our data goes in place of "x" when finally run
-our_mean <- function(x){
-  sum_x <- sum(x) # sum all values in vector
-  n <- length(x) # get length of vector
-  xbar <- sum_x/n # calculate mean
-  return(xbar) # return the value outside the function
-}
-```
-
-Let's try it.
-
-```{r}
-our_mean(ranges$combined_current_km2)
-```
-
-As we can see, it works just the same as `mean`! We can round this as well.
-
-```{r}
-our_mean(ranges$combined_current_km2) |> 
-  round(1)
-```
-
-## Your turn!
-
-**With a partner or on your own**, try to do the following:
-
-1.  Create an *RMarkdown document* that will save as an `.html`.
-2.  Load the data, as shown here, and print the summary statistics in the document.
-3.  Calculate the value of `combined_current_km2` divided by `2050_combined_km2` and print the results.
-4.  `knit` your results, with your name(s) and date, as an HTML document.
-
-Let me know if you have any issues.
+*NOTE* that you cannot `knit` a document with a help command in it! So you need to remove any lines with them before creating your document or *R* will be very unhappy.

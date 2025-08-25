@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="University of Nebraska at Kearney Biology">
 
-<title>4&nbsp; Normality &amp; hypothesis testing – Biology 305: Biostatistics</title>
+<title>6&nbsp; Normality &amp; hypothesis testing – Biology 305: Biostatistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -84,7 +84,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./exam2.html" rel="next">
+<link href="./transformations.html" rel="next">
 <link href="./visual.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -164,7 +164,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./normality.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Normality &amp; hypothesis testing</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./normality.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Normality &amp; hypothesis testing</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -192,97 +192,121 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Preface</span></a>
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./install_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Installing R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_to_r.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Intro to <em>R</em></span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Intro to <em>R</em></span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./first_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Running your first analysis</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./descriptive_stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Descriptive Statistics</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./visual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Diagnosing data visually</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Diagnosing data visually</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./normality.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Normality &amp; hypothesis testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Normality &amp; hypothesis testing</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./transformations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transforming data</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./exam2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exam 2 practice</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exam 2 practice</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./probdist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Probability distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Probability distributions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chi.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">χ2 (Chi-squared) tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">χ2 (Chi-squared) tests</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Testing means with <span class="math inline">\(t\)</span>-tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Means testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">ANOVA: Part 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ANOVA: Part 1</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ANOVA: Part 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">ANOVA: Part 2</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cor_reg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Multivariate methods</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./picktest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Pick the test</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Pick the test</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./final_exam.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Final exam &amp; review</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Final exam &amp; review</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./conclusion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Conclusions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Conclusions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Functions &amp; Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Functions &amp; Glossary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -301,22 +325,28 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#normal-distributions" id="toc-normal-distributions" class="nav-link active" data-scroll-target="#normal-distributions"><span class="header-section-number">4.1</span> Normal distributions</a>
+  <li><a href="#normal-distributions" id="toc-normal-distributions" class="nav-link active" data-scroll-target="#normal-distributions"><span class="header-section-number">6.1</span> Normal distributions</a>
   <ul class="collapse">
-  <li><a href="#example-in-nature" id="toc-example-in-nature" class="nav-link" data-scroll-target="#example-in-nature"><span class="header-section-number">4.1.1</span> Example in nature</a></li>
-  <li><a href="#effect-of-sampling" id="toc-effect-of-sampling" class="nav-link" data-scroll-target="#effect-of-sampling"><span class="header-section-number">4.1.2</span> Effect of sampling</a></li>
-  <li><a href="#testing-if-data-are-normal" id="toc-testing-if-data-are-normal" class="nav-link" data-scroll-target="#testing-if-data-are-normal"><span class="header-section-number">4.1.3</span> Testing if data are normal</a></li>
+  <li><a href="#example-in-nature" id="toc-example-in-nature" class="nav-link" data-scroll-target="#example-in-nature"><span class="header-section-number">6.1.1</span> Example in nature</a></li>
+  <li><a href="#effect-of-sampling" id="toc-effect-of-sampling" class="nav-link" data-scroll-target="#effect-of-sampling"><span class="header-section-number">6.1.2</span> Effect of sampling</a></li>
   </ul></li>
-  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing"><span class="header-section-number">4.2</span> Hypothesis testing</a>
+  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing"><span class="header-section-number">6.2</span> Hypothesis testing</a>
   <ul class="collapse">
-  <li><a href="#critical-values---alpha" id="toc-critical-values---alpha" class="nav-link" data-scroll-target="#critical-values---alpha"><span class="header-section-number">4.2.1</span> Critical Values - <span class="math inline">\(\alpha\)</span></a></li>
-  <li><a href="#introduction-to-p-values" id="toc-introduction-to-p-values" class="nav-link" data-scroll-target="#introduction-to-p-values"><span class="header-section-number">4.2.2</span> Introduction to <span class="math inline">\(p\)</span> values</a></li>
-  <li><a href="#calculating-a-z-score" id="toc-calculating-a-z-score" class="nav-link" data-scroll-target="#calculating-a-z-score"><span class="header-section-number">4.2.3</span> Calculating a <span class="math inline">\(Z\)</span> score</a></li>
-  <li><a href="#calculated-the-p-value" id="toc-calculated-the-p-value" class="nav-link" data-scroll-target="#calculated-the-p-value"><span class="header-section-number">4.2.4</span> Calculated the <span class="math inline">\(p\)</span> value</a></li>
-  <li><a href="#workthrough-example" id="toc-workthrough-example" class="nav-link" data-scroll-target="#workthrough-example"><span class="header-section-number">4.2.5</span> Workthrough Example</a></li>
+  <li><a href="#critical-values---alpha" id="toc-critical-values---alpha" class="nav-link" data-scroll-target="#critical-values---alpha"><span class="header-section-number">6.2.1</span> Critical Values - <span class="math inline">\(\alpha\)</span></a></li>
+  <li><a href="#introduction-to-p-values" id="toc-introduction-to-p-values" class="nav-link" data-scroll-target="#introduction-to-p-values"><span class="header-section-number">6.2.2</span> Introduction to <span class="math inline">\(p\)</span> values</a></li>
+  <li><a href="#calculating-a-z-score" id="toc-calculating-a-z-score" class="nav-link" data-scroll-target="#calculating-a-z-score"><span class="header-section-number">6.2.3</span> Calculating a <span class="math inline">\(Z\)</span> score</a></li>
+  <li><a href="#calculating-the-p-value" id="toc-calculating-the-p-value" class="nav-link" data-scroll-target="#calculating-the-p-value"><span class="header-section-number">6.2.4</span> Calculating the <span class="math inline">\(p\)</span> value</a></li>
+  <li><a href="#workthrough-example" id="toc-workthrough-example" class="nav-link" data-scroll-target="#workthrough-example"><span class="header-section-number">6.2.5</span> Workthrough Example</a></li>
   </ul></li>
-  <li><a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals"><span class="header-section-number">4.3</span> Confidence Intervals</a></li>
-  <li><a href="#homework-chapter-8" id="toc-homework-chapter-8" class="nav-link" data-scroll-target="#homework-chapter-8"><span class="header-section-number">4.4</span> Homework: Chapter 8</a></li>
+  <li><a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals"><span class="header-section-number">6.3</span> Confidence Intervals</a></li>
+  <li><a href="#homework-normal-distributions" id="toc-homework-normal-distributions" class="nav-link" data-scroll-target="#homework-normal-distributions"><span class="header-section-number">6.4</span> Homework: Normal distributions</a>
+  <ul class="collapse">
+  <li><a href="#z-to-p" id="toc-z-to-p" class="nav-link" data-scroll-target="#z-to-p"><span class="header-section-number">6.4.1</span> <span class="math inline">\(Z\)</span> to <span class="math inline">\(p\)</span></a></li>
+  <li><a href="#p-to-z" id="toc-p-to-z" class="nav-link" data-scroll-target="#p-to-z"><span class="header-section-number">6.4.2</span> <span class="math inline">\(P\)</span> to <span class="math inline">\(z\)</span></a></li>
+  <li><a href="#confidence-intervals-1" id="toc-confidence-intervals-1" class="nav-link" data-scroll-target="#confidence-intervals-1"><span class="header-section-number">6.4.3</span> Confidence intervals</a></li>
+  <li><a href="#italian-climate---spring" id="toc-italian-climate---spring" class="nav-link" data-scroll-target="#italian-climate---spring"><span class="header-section-number">6.4.4</span> Italian climate - spring</a></li>
+  <li><a href="#italian-climate---summer" id="toc-italian-climate---summer" class="nav-link" data-scroll-target="#italian-climate---summer"><span class="header-section-number">6.4.5</span> Italian climate - Summer</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -325,7 +355,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Normality &amp; hypothesis testing</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Normality &amp; hypothesis testing</span></h1>
 </div>
 
 
@@ -348,8 +378,8 @@ window.Quarto = {
 </header>
 
 
-<section id="normal-distributions" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="normal-distributions"><span class="header-section-number">4.1</span> Normal distributions</h2>
+<section id="normal-distributions" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="normal-distributions"><span class="header-section-number">6.1</span> Normal distributions</h2>
 <p>A <em>standard normal distribution</em> is a mathematical model that describes a commonly observed phenomenon in nature. When measuring many different kinds of datasets, the data being measured often becomes something that resembles a standard normal distribution. This distribution is described by the following equation:</p>
 <p><span class="math display">\[f(x)=\frac{1}{\sqrt{2\pi \sigma^2}}e^\frac{(x-\mu)^2}{2\sigma^2}\]</span></p>
 <p>This equation is fairly well defined by the <em>variance</em> (<span class="math inline">\(\sigma^2\)</span>), the overall spread of the data, and by the <em>standard deviation</em> (<span class="math inline">\(\sigma\)</span>), which is defined by the square root of the variance.</p>
@@ -360,8 +390,12 @@ window.Quarto = {
 </figure>
 </div>
 <p>Standard normal distributions have a mean, median, and mode that are <em>equal</em>. The standard normal distribution is a <em>density function</em>, and we are interested in the “area under the curve” (AUC) to understand the relative probability of an event occurring. At the mean/median/mode, the probability on either side of the distribution is <span class="math inline">\(50\)</span>%. When looking at a normal distribution distribution, it is impossible to say the probability of a specific event occurring, but it is possible to state the probability of an event <em>as extreme or more extreme than the event observed</em> occurring. This is known as the <span class="math inline">\(p\)</span> value.</p>
-<section id="example-in-nature" class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1" class="anchored" data-anchor-id="example-in-nature"><span class="header-section-number">4.1.1</span> Example in nature</h3>
+<section id="example-in-nature" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="example-in-nature"><span class="header-section-number">6.1.1</span> Example in nature</h3>
+<details>
+<summary>
+An example of naturally occurring normal distributions
+</summary>
 <p>In order to see an example of the normal distribution in nature, we are going to examine the BeeWalk survey database from the island of Great Britain <span class="citation" data-cites="Comont2020">(<a href="references.html#ref-Comont2020" role="doc-biblioref">Comont 2020</a>)</span>. We are not interested in the bee data at present, however, but in the climatic data from when the surveys were performed.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>beewalk <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://figshare.com/ndownloader/files/44726902"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -489,9 +523,14 @@ dbl (19): RecordKey, established, Precision, Transect.lat, Transect.long, tr...
 </div>
 </div>
 <p>Data do not show any significant kurtosis.</p>
+</details>
 </section>
-<section id="effect-of-sampling" class="level3" data-number="4.1.2">
-<h3 data-number="4.1.2" class="anchored" data-anchor-id="effect-of-sampling"><span class="header-section-number">4.1.2</span> Effect of sampling</h3>
+<section id="effect-of-sampling" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="effect-of-sampling"><span class="header-section-number">6.1.2</span> Effect of sampling</h3>
+<details>
+<summary>
+How sample size effects statistical calculations
+</summary>
 <p>Oftentimes, we will see things approach the normal distribution as we collect more samples. We can model this by subsampling our temperature vector.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make reproducible</span></span>
@@ -541,45 +580,14 @@ dbl (19): RecordKey, established, Precision, Transect.lat, Transect.long, tr...
 </div>
 </div>
 <p>Now the normal distribution is even more clear. As we can also see, the more we sample, the more we approach the true means and distribution of the actual dataset. Because of this, we can perform experiments and observations of small groups and subsamples and make inferences about the whole, given that most systems naturally approach statistical distributions like the normal!</p>
-</section>
-<section id="testing-if-data-are-normal" class="level3" data-number="4.1.3">
-<h3 data-number="4.1.3" class="anchored" data-anchor-id="testing-if-data-are-normal"><span class="header-section-number">4.1.3</span> Testing if data are normal</h3>
-<p>There are two major methods we can use to see if data are normally distributed.</p>
-<section id="qq-plots" class="level4" data-number="4.1.3.1">
-<h4 data-number="4.1.3.1" class="anchored" data-anchor-id="qq-plots"><span class="header-section-number">4.1.3.1</span> QQ Plots</h4>
-<p>Another way to see if data are normal is to use a <a href="https://www.statology.org/q-q-plot-r/">QQ plot</a>. These plots data quantiles to theoretical quantiles to see how well they align, with a perfectly normal distribution having a completely linear QQ plot. Let’s look at these with our <code>beewalk</code> data.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(temps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="normality_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>As we can see above, the data are roughly linear, which means are data are very normal. The “stairsteps” are from the accuracy in measuring temperature, which was likely rounded and thus created a distribution that is not completely continuous.</p>
-</section>
-<section id="shapiro-wilk-test" class="level4" data-number="4.1.3.2">
-<h4 data-number="4.1.3.2" class="anchored" data-anchor-id="shapiro-wilk-test"><span class="header-section-number">4.1.3.2</span> Shapiro-Wilk test</h4>
-<p>Another way to test for normality is to use a Shapiro-Wilk test of normality. We will not get into the specific of this distribution, but this tests the null hypothesis that data originated in a normal distribution, with the alternative hypothesis that the data originated in a non-normal distribution. You will read next about the specifics of hypothesis testing, but this test uses an <span class="math inline">\(\alpha = 0.05\)</span>, and we <em>reject the null hypothesis</em> if our <span class="math inline">\(p &lt; \alpha\)</span>, with <span class="math inline">\(p\)</span> representing the probability of observing something as extreme or more extreme than the result we observe. Our <code>temps</code> dataset is too large, as <code>shapiro.test</code> requires vectors of <span class="math inline">\(&lt; 5000\)</span>. Let’s take a random sample and try again.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(temps, <span class="dv">200</span>) <span class="sc">|&gt;</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shapiro.test</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Shapiro-Wilk normality test
-
-data:  sample(temps, 200)
-W = 0.98922, p-value = 0.1371</code></pre>
-</div>
-</div>
-<p>For our subsets of temperature, we find that the temperature is normally distributed. <strong>Note</strong> that having all <span class="math inline">\(5000\)</span> temperatures included makes this test find a “non-normal” result, likely from the same stairstepping phenomenon from rounding that we discussed before, which may result in <a href="https://en.wikipedia.org/wiki/Overfitting">model overfitting</a> to the rounded data.</p>
+</details>
+<hr>
+<p><br></p>
+<hr>
 </section>
 </section>
-</section>
-<section id="hypothesis-testing" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">4.2</span> Hypothesis testing</h2>
+<section id="hypothesis-testing" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">6.2</span> Hypothesis testing</h2>
 <p>Since we can define specific areas under the curve within these distributions, we can look at the percentage of area within a certain bound to determine how likely a specific outcome would be. Thus, we can begin to test what the <em>probability of observing an event</em> is within a theoretical, probabilistic space. A couple of important conceptual ideas:</p>
 <ol type="1">
 <li>We may not be able to know the probability of a specific event, but we can figure out the probability of events more extreme or less extreme as that event.</li>
@@ -587,8 +595,8 @@ W = 0.98922, p-value = 0.1371</code></pre>
 <li>If we look <em>away</em> from the mean at a certain point, then the area represents the chances of getting a result <em>as extreme or more extreme than what we observe</em>. This probability is known as the <span class="math inline">\(p\)</span> value.</li>
 </ol>
 <p>Once we have a <span class="math inline">\(p\)</span> value, we can make statements about the event that we’ve seen relative to the overall nature of the dataset, but we do not have sufficient information to declare if this result is <em>statistically significant</em>.</p>
-<section id="critical-values---alpha" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="critical-values---alpha"><span class="header-section-number">4.2.1</span> Critical Values - <span class="math inline">\(\alpha\)</span></h3>
+<section id="critical-values---alpha" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="critical-values---alpha"><span class="header-section-number">6.2.1</span> Critical Values - <span class="math inline">\(\alpha\)</span></h3>
 <p>In order to determine if something is significant, we compare things to a <em>critical value</em>, known as <span class="math inline">\(\alpha\)</span>. This value is traditionally defined as <span class="math inline">\(0.05\)</span>, essentially stating that we deem an event as significant if <span class="math inline">\(5\)</span>% or fewer of observed or predicted events are as extreme or more extreme than what we observe.</p>
 <p><strong>Your value should always set your</strong> <span class="math inline">\(\alpha\)</span> <strong>critical value before you do your experiments and analyses.</strong></p>
 <p>Our critical value of <span class="math inline">\(\alpha\)</span> represents our criterion for <em>rejecting the null hypothesis</em>. We set our <span class="math inline">\(\alpha\)</span> to try to minimize the chances of error.</p>
@@ -596,80 +604,92 @@ W = 0.98922, p-value = 0.1371</code></pre>
 <p><strong>Type II Error</strong> is also known as a <strong>false-negative</strong>, and is when we <strong>support the null hypothesis when the null is false</strong>.</p>
 <p>By setting an <span class="math inline">\(\alpha\)</span>, we are creating a threshold of probability at which point we can say, with confidence, that results are different.</p>
 </section>
-<section id="introduction-to-p-values" class="level3" data-number="4.2.2">
-<h3 data-number="4.2.2" class="anchored" data-anchor-id="introduction-to-p-values"><span class="header-section-number">4.2.2</span> Introduction to <span class="math inline">\(p\)</span> values</h3>
+<section id="introduction-to-p-values" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="introduction-to-p-values"><span class="header-section-number">6.2.2</span> Introduction to <span class="math inline">\(p\)</span> values</h3>
 <p>Let’s say that we are looking at a dataset defined by a standard normal distribution with <span class="math inline">\(\mu=0\)</span> and <span class="math inline">\(\sigma=1\)</span>. We draw a random value, <span class="math inline">\(x\)</span>, with <span class="math inline">\(x=1.6\)</span>. What is the probability of drawing a number this extreme or more extreme from the dataset?</p>
 <p>First, let’s visualize this distribution:</p>
+<details>
+<summary>
+Click here to view plot creation code.
+</summary>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">###THIS WILL TAKE A WHILE TO RUN###</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create gigantic normal distribution dataset</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># will be essentially normal for plotting</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># rnorm gets random values</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100000000</span>)</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to data frame</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(x)</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># rename column</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(x) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"values"</span>)</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co"># thank you stack overflow for the following</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating density plot</span></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">ggplot</span>(x, </span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>           <span class="fu">aes</span>(<span class="at">x =</span> values)</span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>          ) <span class="sc">+</span> </span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generic density plot, no fill</span></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill=</span><span class="st">"lightblue"</span>)</span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Building shaded area</span></span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="co"># create new plot object</span></span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>p2  <span class="ot">&lt;-</span>  p <span class="sc">+</span> <span class="co"># add previous step as a "backbone"</span></span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># rename axes</span></span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">1.6</span>) <span class="sc">+</span></span>
-<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Test Statistic"</span>) <span class="sc">+</span></span>
-<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Frequency (Probability)"</span>) <span class="sc">+</span></span>
-<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make it neat and tidy</span></span>
-<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a><span class="co"># plot it</span></span>
-<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a><span class="co"># can use ggsave function to save</span></span>
-<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="do">###THIS WILL TAKE A WHILE TO RUN###</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create gigantic normal distribution dataset</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># will be essentially normal for plotting</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># rnorm gets random values</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100000000</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># convert to data frame</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(x)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co"># rename column</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(x) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"values"</span>)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co"># thank you stack overflow for the following</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating density plot</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">ggplot</span>(x, </span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>           <span class="fu">aes</span>(<span class="at">x =</span> values)</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>          ) <span class="sc">+</span> </span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generic density plot, no fill</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill=</span><span class="st">"lightblue"</span>)</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Building shaded area</span></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a><span class="co"># create new plot object</span></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>p2  <span class="ot">&lt;-</span>  p <span class="sc">+</span> <span class="co"># add previous step as a "backbone"</span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># rename axes</span></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">1.6</span>) <span class="sc">+</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Test Statistic"</span>) <span class="sc">+</span></span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Frequency (Probability)"</span>) <span class="sc">+</span></span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make it neat and tidy</span></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot it</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># can use ggsave function to save</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="normality_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="normality_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Above, the solid black line represents <span class="math inline">\(x\)</span>, with the illustrated standard normal distribution being filled in blue.</p>
 <p>Let’s see how much of the area represents values <em>as extreme or more extreme</em> as our value <span class="math inline">\(x\)</span>.</p>
+<summary>
+<details>
+Click here for code to create figure.
+</details>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="do">### THIS WILL TAKE A WHILE TO RUN </span><span class="al">###</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Getting the values of plot</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># something I wasn't familiar with before making this!</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>d  <span class="ot">&lt;-</span>  <span class="fu">ggplot_build</span>(p)<span class="sc">$</span>data[[<span class="dv">1</span>]]</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Building shaded area</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># create new plot object</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>p2  <span class="ot">&lt;-</span>  p <span class="sc">+</span> <span class="co"># add previous step as a "backbone"</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add new shaded area</span></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> <span class="fu">subset</span>(d, x <span class="sc">&lt;</span> <span class="fl">1.6</span>), <span class="co"># select area</span></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>            <span class="co"># define color, shading intensity, etc.</span></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y), <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add value line</span></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">1.6</span>, <span class="at">colour =</span> <span class="st">"black"</span>, </span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"dashed"</span>,<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># rename axes</span></span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Test Statistic"</span>) <span class="sc">+</span></span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Frequency (Probability)"</span>) <span class="sc">+</span></span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make it neat and tidy</span></span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="co"># plot it</span></span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="co"># can use ggsave function to save</span></span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">### THIS WILL TAKE A WHILE TO RUN </span><span class="al">###</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Getting the values of plot</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># something I wasn't familiar with before making this!</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>d  <span class="ot">&lt;-</span>  <span class="fu">ggplot_build</span>(p)<span class="sc">$</span>data[[<span class="dv">1</span>]]</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Building shaded area</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># create new plot object</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>p2  <span class="ot">&lt;-</span>  p <span class="sc">+</span> <span class="co"># add previous step as a "backbone"</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add new shaded area</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> <span class="fu">subset</span>(d, x <span class="sc">&lt;</span> <span class="fl">1.6</span>), <span class="co"># select area</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>            <span class="co"># define color, shading intensity, etc.</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y), <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add value line</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">1.6</span>, <span class="at">colour =</span> <span class="st">"black"</span>, </span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"dashed"</span>,<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># rename axes</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Test Statistic"</span>) <span class="sc">+</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Frequency (Probability)"</span>) <span class="sc">+</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make it neat and tidy</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</summary>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot it</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># can use ggsave function to save</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -681,60 +701,66 @@ W = 0.98922, p-value = 0.1371</code></pre>
 <p>Now we can see that it is only a portion of the distribution <em>as extreme or more extreme</em> than the value we placed on the graph. The area of this region is our <span class="math inline">\(p\)</span> value. This represents the <em>probability of an event as extreme or more extreme occurring</em> given the random variation observed in the dataset or in the distribution approximating the dataset. This is the value we compare to <span class="math inline">\(\alpha\)</span> - our threshold for rejecting the null hypothesis - to determine whether or not we are going to reject the null hypothesis.</p>
 <p>Let’s look at the above graph again, but let’s visualize a two-tailed <span class="math inline">\(\alpha\)</span> around the mean with a <span class="math inline">\(95\)</span>% confidence interval. First, we need to get the <span class="math inline">\(Z\)</span> scores for our <span class="math inline">\(\alpha=0.05\)</span>, which we calculate by taking <span class="math inline">\(\frac{\alpha}{2}\)</span> to account for the two tails. (Two tails essentially meaning we reject the null mean if we see things <em>greater than</em> or <em>less than</em> our expected value to a significant extent). We can calculate <span class="math inline">\(Z\)</span> scores using <code>qnorm</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>low_alpha <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.025</span>) <span class="co"># looks left</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>hi_alpha <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="co"># looks left</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Our Z scores are: "</span>, </span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>             <span class="fu">round</span>(low_alpha,<span class="dv">2</span>), </span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>             <span class="st">" &amp; "</span>, </span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>             <span class="fu">round</span>(hi_alpha,<span class="dv">2</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>low_alpha <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.025</span>) <span class="co"># looks left</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>hi_alpha <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="co"># looks left</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Our Z scores are: "</span>, </span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>             <span class="fu">round</span>(low_alpha,<span class="dv">2</span>), </span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>             <span class="st">" &amp; "</span>, </span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>             <span class="fu">round</span>(hi_alpha,<span class="dv">2</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Our Z scores are: -1.96 &amp; 1.96"</code></pre>
 </div>
 </div>
 <p>The above values make sense, given the distribution is symmetrical. Our above dashed line is as <span class="math inline">\(Z = 1.96\)</span>, which means we should have a <span class="math inline">\(p = 0.05\)</span>, so the dashed line should be <em>closer</em> to the mean than our cutoffs.</p>
+<details>
+<summary>
+Click here for code to create figure.
+</summary>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="do">### THIS WILL TAKE A WHILE TO RUN </span><span class="al">###</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Getting the values of plot</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># something I wasn't familiar with before making this!</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>d  <span class="ot">&lt;-</span>  <span class="fu">ggplot_build</span>(p)<span class="sc">$</span>data[[<span class="dv">1</span>]]</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Building shaded area</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co"># create new plot object</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>p2  <span class="ot">&lt;-</span>  p <span class="sc">+</span> <span class="co"># add previous step as a "backbone"</span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add new shaded area</span></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> <span class="fu">subset</span>(d, x <span class="sc">&lt;</span> <span class="fl">1.96</span>), <span class="co"># select area</span></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>            <span class="co"># define color, shading intensity, etc.</span></span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y), <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add value line</span></span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">1.96</span>, <span class="at">colour =</span> <span class="st">"black"</span>, </span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"dashed"</span>,<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> low_alpha, <span class="at">colour =</span> <span class="st">"red"</span>, </span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"solid"</span>,<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> hi_alpha, <span class="at">colour =</span> <span class="st">"red"</span>, </span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"solid"</span>,<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># rename axes</span></span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Test Statistic"</span>) <span class="sc">+</span></span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Frequency (Probability)"</span>) <span class="sc">+</span></span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make it neat and tidy</span></span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a><span class="co"># plot it</span></span>
-<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a><span class="co"># can use ggsave function to save</span></span>
-<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="do">### THIS WILL TAKE A WHILE TO RUN </span><span class="al">###</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Getting the values of plot</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># something I wasn't familiar with before making this!</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>d  <span class="ot">&lt;-</span>  <span class="fu">ggplot_build</span>(p)<span class="sc">$</span>data[[<span class="dv">1</span>]]</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Building shaded area</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co"># create new plot object</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>p2  <span class="ot">&lt;-</span>  p <span class="sc">+</span> <span class="co"># add previous step as a "backbone"</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add new shaded area</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> <span class="fu">subset</span>(d, x <span class="sc">&lt;</span> <span class="fl">1.96</span>), <span class="co"># select area</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>            <span class="co"># define color, shading intensity, etc.</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y), <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">alpha =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add value line</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">1.96</span>, <span class="at">colour =</span> <span class="st">"black"</span>, </span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"dashed"</span>,<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> low_alpha, <span class="at">colour =</span> <span class="st">"red"</span>, </span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"solid"</span>,<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> hi_alpha, <span class="at">colour =</span> <span class="st">"red"</span>, </span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>             <span class="at">linetype =</span> <span class="st">"solid"</span>,<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># rename axes</span></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Test Statistic"</span>) <span class="sc">+</span></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Frequency (Probability)"</span>) <span class="sc">+</span></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make it neat and tidy</span></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot it</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># can use ggsave function to save</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="normality_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="normality_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Exactly as we calculated, we see that our <span class="math inline">\(p &lt; \alpha\)</span> and thus we do not see an area (in blue) less than the area that would be further than the mean as defined by the red lines.</p>
 </section>
-<section id="calculating-a-z-score" class="level3" data-number="4.2.3">
-<h3 data-number="4.2.3" class="anchored" data-anchor-id="calculating-a-z-score"><span class="header-section-number">4.2.3</span> Calculating a <span class="math inline">\(Z\)</span> score</h3>
+<section id="calculating-a-z-score" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="calculating-a-z-score"><span class="header-section-number">6.2.3</span> Calculating a <span class="math inline">\(Z\)</span> score</h3>
 <p>When we are trying to compare our data to a normal distribution, we need to calculate a <span class="math inline">\(Z\)</span> score for us to perform the comparison. A <span class="math inline">\(Z\)</span> score is essentially a measurement of the number of standard deviations we are away from the mean on a standard normal distribution. The equation for a <span class="math inline">\(Z\)</span> score is:</p>
 <p><span class="math display">\[
 Z = \frac{\bar{x}-\mu}{\frac{\sigma}{\sqrt{n}}}
@@ -769,17 +795,17 @@ Z = \frac{\bar{x}-\mu}{\frac{\sigma}{\sqrt{n}}}
 </div>
 <p>After rounding, we get <span class="math inline">\(p = 0.03\)</span>, a <span class="math inline">\(p\)</span> that is significant as it is less than our overall <span class="math inline">\(\alpha\)</span>.</p>
 </section>
-<section id="calculated-the-p-value" class="level3" data-number="4.2.4">
-<h3 data-number="4.2.4" class="anchored" data-anchor-id="calculated-the-p-value"><span class="header-section-number">4.2.4</span> Calculated the <span class="math inline">\(p\)</span> value</h3>
+<section id="calculating-the-p-value" class="level3" data-number="6.2.4">
+<h3 data-number="6.2.4" class="anchored" data-anchor-id="calculating-the-p-value"><span class="header-section-number">6.2.4</span> Calculating the <span class="math inline">\(p\)</span> value</h3>
 <p>We have two different methods for calculating a <span class="math inline">\(p\)</span> value:</p>
-<section id="comparing-to-a-z-table" class="level4" data-number="4.2.4.1">
-<h4 data-number="4.2.4.1" class="anchored" data-anchor-id="comparing-to-a-z-table"><span class="header-section-number">4.2.4.1</span> Comparing to a <span class="math inline">\(z\)</span> table</h4>
+<section id="comparing-to-a-z-table" class="level4" data-number="6.2.4.1">
+<h4 data-number="6.2.4.1" class="anchored" data-anchor-id="comparing-to-a-z-table"><span class="header-section-number">6.2.4.1</span> Comparing to a <span class="math inline">\(z\)</span> table</h4>
 <p>We can compare the <span class="math inline">\(z\)</span> value we calculate to a <span class="math inline">\(z\)</span> table, such as the one at <a href="https://www.ztable.net/">ztable.net</a>. On this webpage, you can scroll and find tables for positive and negative <span class="math inline">\(z\)</span> scores. <em>Note</em> that normal distributions are symmetrical, so you can also transform from negative to positive to get an idea of the area as well. Given that a normal distribution is centered at <span class="math inline">\(0\)</span>, a <span class="math inline">\(z\)</span> score of <span class="math inline">\(0\)</span> will have a <span class="math inline">\(p\)</span> value of <span class="math inline">\(0.50\)</span>.</p>
 <p>On the <span class="math inline">\(z\)</span> tables, you will find the tenths place for your decimal in the rows, and then go across to the columns for the hundredths place. For example, go to the website and find the <span class="math inline">\(p\)</span> value for a <span class="math inline">\(z\)</span> score of <span class="math inline">\(-1.33\)</span>. You should find the cell marked <span class="math inline">\(0.09176\)</span>. <em>Note</em> the website uses naked decimals, which we do not use in this class.</p>
 <p>For values that aren’t on the <span class="math inline">\(z\)</span> table, we can approximate its position between different points on the <span class="math inline">\(z\)</span> table or, if it is extremely unlikely, denote that <span class="math inline">\(p &lt; 0.0001\)</span>.</p>
 </section>
-<section id="using-r" class="level4" data-number="4.2.4.2">
-<h4 data-number="4.2.4.2" class="anchored" data-anchor-id="using-r"><span class="header-section-number">4.2.4.2</span> Using <em>R</em></h4>
+<section id="using-r" class="level4" data-number="6.2.4.2">
+<h4 data-number="6.2.4.2" class="anchored" data-anchor-id="using-r"><span class="header-section-number">6.2.4.2</span> Using <em>R</em></h4>
 <p>In <em>R</em>, we can calculate a <span class="math inline">\(p\)</span> value using the function <code>pnorm</code>. This function uses the arguments of <code>p</code> for our <span class="math inline">\(p\)</span> value, <code>mean</code> for the mean of our distribution, <code>sd</code> for the standard deviation of our distribution, and also information on whether we want to log-transform <span class="math inline">\(p\)</span> or if we are testing a specific hypothesis (lower tail, upper tail, or two-tailed). The function <code>pnorm</code> defaults to a standard normal distribution, which would be a <span class="math inline">\(z\)</span> score, but it can also perform the <span class="math inline">\(z\)</span> transformations for us if we define the mean and standard deviation.</p>
 <p>For example, if we have a <span class="math inline">\(z\)</span> score of <span class="math inline">\(-1.33\)</span>:</p>
 <div class="cell">
@@ -792,11 +818,115 @@ Z = \frac{\bar{x}-\mu}{\frac{\sigma}{\sqrt{n}}}
 <p>There are other functions in this family as well in <em>R,</em> including <code>dnorm</code> for quantiles, <code>qnorm</code> for determining the <span class="math inline">\(z\)</span> score for a specific <span class="math inline">\(p\)</span> value, and <code>rnorm</code> for getting random values from a normal distribution with specific dimensions. For now, we will focus on <code>pnorm</code>.</p>
 </section>
 </section>
-<section id="workthrough-example" class="level3" data-number="4.2.5">
-<h3 data-number="4.2.5" class="anchored" data-anchor-id="workthrough-example"><span class="header-section-number">4.2.5</span> Workthrough Example</h3>
+<section id="workthrough-example" class="level3" data-number="6.2.5">
+<h3 data-number="6.2.5" class="anchored" data-anchor-id="workthrough-example"><span class="header-section-number">6.2.5</span> Workthrough Example</h3>
 <p>When this class was being designed, <a href="https://en.wikipedia.org/wiki/Hurricane_Milton">Hurricane Milton</a> was about to make contact with Florida. Hurricane Milton is considered one of the strongest hurricanes of all time, so we can look at historical hurricane data to determine just how powerful this storm really was. We can get information on maximum wind speeds of all recorded Atlantic hurricanes as of 2024 from Wikipedia.</p>
+<details>
+<summary>
+Click here for details on creating the file for this walkthrough.
+</summary>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>hurricanes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/assignments/hurricane_speeds.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># https://stackoverflow.com/questions/59481608/how-to-remove-the-characters-from-a-string-and-leave-only-the-numbers-in-r</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># cocatenating wikipedia files.</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>hurricanes1 <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"~/Downloads/"</span>,<span class="at">pattern =</span> <span class="st">"List_of_Category_1_Atlantic*"</span>)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>speedlist_cat1 <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(hurricanes1)){</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  test <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">paste0</span>(<span class="st">"~/Downloads/"</span>, hurricanes1[j]))</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  test <span class="ot">&lt;-</span> test[<span class="sc">-</span><span class="dv">1</span>,] <span class="co"># remove extra header</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(test)){</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>    speed <span class="ot">&lt;-</span> test<span class="sc">$</span><span class="st">`</span><span class="at">Peak&nbsp;intensity...3</span><span class="st">`</span>[i]</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>    speed2 <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(speed,<span class="st">" "</span>)[[<span class="dv">1</span>]][<span class="dv">1</span>]</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>    speed2 <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">D+"</span>, <span class="st">""</span>, speed2)</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>    speedlist_cat1 <span class="ot">&lt;-</span> <span class="fu">c</span>(speedlist_cat1,speed2)</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>speedlist_cat1 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(speedlist_cat1)</span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a><span class="co"># cocatenating wikipedia files.</span></span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>hurricanes2 <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"~/Downloads/"</span>,<span class="at">pattern =</span> <span class="st">"List_of_Category_2_Atlantic*"</span>)</span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>speedlist_cat2 <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(hurricanes2)){</span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>  test <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">paste0</span>(<span class="st">"~/Downloads/"</span>, hurricanes2[j]))</span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>  test <span class="ot">&lt;-</span> test[<span class="sc">-</span><span class="dv">1</span>,] <span class="co"># remove extra header</span></span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(test)){</span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>    speed <span class="ot">&lt;-</span> test<span class="sc">$</span><span class="st">`</span><span class="at">Peak&nbsp;intensity...3</span><span class="st">`</span>[i]</span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a>    speed2 <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(speed,<span class="st">" "</span>)[[<span class="dv">1</span>]][<span class="dv">1</span>]</span>
+<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a>    speed2 <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">D+"</span>, <span class="st">""</span>, speed2)</span>
+<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a>    speedlist_cat2 <span class="ot">&lt;-</span> <span class="fu">c</span>(speedlist_cat2,speed2)</span>
+<span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb36-33"><a href="#cb36-33" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb36-34"><a href="#cb36-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-35"><a href="#cb36-35" aria-hidden="true" tabindex="-1"></a>speedlist_cat2 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(speedlist_cat2)</span>
+<span id="cb36-36"><a href="#cb36-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-37"><a href="#cb36-37" aria-hidden="true" tabindex="-1"></a><span class="co"># cocatenating wikipedia files.</span></span>
+<span id="cb36-38"><a href="#cb36-38" aria-hidden="true" tabindex="-1"></a>hurricanes3 <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"~/Downloads/"</span>,<span class="at">pattern =</span> <span class="st">"List_of_Category_3_Atlantic*"</span>)</span>
+<span id="cb36-39"><a href="#cb36-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-40"><a href="#cb36-40" aria-hidden="true" tabindex="-1"></a>speedlist_cat3 <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb36-41"><a href="#cb36-41" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(hurricanes3)){</span>
+<span id="cb36-42"><a href="#cb36-42" aria-hidden="true" tabindex="-1"></a>  test <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">paste0</span>(<span class="st">"~/Downloads/"</span>, hurricanes3[j]))</span>
+<span id="cb36-43"><a href="#cb36-43" aria-hidden="true" tabindex="-1"></a>  test <span class="ot">&lt;-</span> test[<span class="sc">-</span><span class="dv">1</span>,] <span class="co"># remove extra header</span></span>
+<span id="cb36-44"><a href="#cb36-44" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(test)){</span>
+<span id="cb36-45"><a href="#cb36-45" aria-hidden="true" tabindex="-1"></a>    speed <span class="ot">&lt;-</span> test<span class="sc">$</span><span class="st">`</span><span class="at">Peak&nbsp;intensity...3</span><span class="st">`</span>[i]</span>
+<span id="cb36-46"><a href="#cb36-46" aria-hidden="true" tabindex="-1"></a>    speed2 <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(speed,<span class="st">" "</span>)[[<span class="dv">1</span>]][<span class="dv">1</span>]</span>
+<span id="cb36-47"><a href="#cb36-47" aria-hidden="true" tabindex="-1"></a>    speed2 <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">D+"</span>, <span class="st">""</span>, speed2)</span>
+<span id="cb36-48"><a href="#cb36-48" aria-hidden="true" tabindex="-1"></a>    speedlist_cat3 <span class="ot">&lt;-</span> <span class="fu">c</span>(speedlist_cat3,speed2)</span>
+<span id="cb36-49"><a href="#cb36-49" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb36-50"><a href="#cb36-50" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb36-51"><a href="#cb36-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-52"><a href="#cb36-52" aria-hidden="true" tabindex="-1"></a>speedlist_cat3 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(speedlist_cat3)</span>
+<span id="cb36-53"><a href="#cb36-53" aria-hidden="true" tabindex="-1"></a>speedlist_cat3 <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(speedlist_cat3) <span class="sc">|&gt;</span></span>
+<span id="cb36-54"><a href="#cb36-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>()</span>
+<span id="cb36-55"><a href="#cb36-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-56"><a href="#cb36-56" aria-hidden="true" tabindex="-1"></a><span class="co"># cocatenating wikipedia files.</span></span>
+<span id="cb36-57"><a href="#cb36-57" aria-hidden="true" tabindex="-1"></a>hurricanes4 <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"~/Downloads/"</span>,<span class="at">pattern =</span> <span class="st">"List_of_Category_4_Atlantic*"</span>)</span>
+<span id="cb36-58"><a href="#cb36-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-59"><a href="#cb36-59" aria-hidden="true" tabindex="-1"></a>speedlist_cat4 <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb36-60"><a href="#cb36-60" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>){</span>
+<span id="cb36-61"><a href="#cb36-61" aria-hidden="true" tabindex="-1"></a>  test <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">paste0</span>(<span class="st">"~/Downloads/"</span>, hurricanes4[j]))</span>
+<span id="cb36-62"><a href="#cb36-62" aria-hidden="true" tabindex="-1"></a>  test <span class="ot">&lt;-</span> test[<span class="sc">-</span><span class="dv">1</span>,] <span class="co"># remove extra header</span></span>
+<span id="cb36-63"><a href="#cb36-63" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(test)){</span>
+<span id="cb36-64"><a href="#cb36-64" aria-hidden="true" tabindex="-1"></a>    speed <span class="ot">&lt;-</span> test<span class="sc">$</span><span class="st">`</span><span class="at">Peak&nbsp;intensity...3</span><span class="st">`</span>[i]</span>
+<span id="cb36-65"><a href="#cb36-65" aria-hidden="true" tabindex="-1"></a>    speed2 <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(speed,<span class="st">" "</span>)[[<span class="dv">1</span>]][<span class="dv">1</span>]</span>
+<span id="cb36-66"><a href="#cb36-66" aria-hidden="true" tabindex="-1"></a>    speed2 <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">D+"</span>, <span class="st">""</span>, speed2)</span>
+<span id="cb36-67"><a href="#cb36-67" aria-hidden="true" tabindex="-1"></a>    speedlist_cat4 <span class="ot">&lt;-</span> <span class="fu">c</span>(speedlist_cat4,speed2)</span>
+<span id="cb36-68"><a href="#cb36-68" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb36-69"><a href="#cb36-69" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb36-70"><a href="#cb36-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-71"><a href="#cb36-71" aria-hidden="true" tabindex="-1"></a>speedlist_cat4 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(speedlist_cat4)</span>
+<span id="cb36-72"><a href="#cb36-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-73"><a href="#cb36-73" aria-hidden="true" tabindex="-1"></a><span class="co"># cocatenating wikipedia files.</span></span>
+<span id="cb36-74"><a href="#cb36-74" aria-hidden="true" tabindex="-1"></a>hurricanes5 <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">"~/Downloads/"</span>,<span class="at">pattern =</span> <span class="st">"List_of_Category_5_Atlantic*"</span>)</span>
+<span id="cb36-75"><a href="#cb36-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-76"><a href="#cb36-76" aria-hidden="true" tabindex="-1"></a>speedlist_cat5 <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb36-77"><a href="#cb36-77" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1</span>){</span>
+<span id="cb36-78"><a href="#cb36-78" aria-hidden="true" tabindex="-1"></a>  test <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">paste0</span>(<span class="st">"~/Downloads/"</span>, hurricanes5[j]))</span>
+<span id="cb36-79"><a href="#cb36-79" aria-hidden="true" tabindex="-1"></a>  test <span class="ot">&lt;-</span> test[<span class="sc">-</span><span class="dv">1</span>,] <span class="co"># remove extra header</span></span>
+<span id="cb36-80"><a href="#cb36-80" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(test)){</span>
+<span id="cb36-81"><a href="#cb36-81" aria-hidden="true" tabindex="-1"></a>    speed <span class="ot">&lt;-</span> test<span class="sc">$</span><span class="st">`</span><span class="at">Peak&nbsp;intensity...4</span><span class="st">`</span>[i]</span>
+<span id="cb36-82"><a href="#cb36-82" aria-hidden="true" tabindex="-1"></a>    speed2 <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(speed,<span class="st">" "</span>)[[<span class="dv">1</span>]][<span class="dv">1</span>]</span>
+<span id="cb36-83"><a href="#cb36-83" aria-hidden="true" tabindex="-1"></a>    speed2 <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">D+"</span>, <span class="st">""</span>, speed2)</span>
+<span id="cb36-84"><a href="#cb36-84" aria-hidden="true" tabindex="-1"></a>    speedlist_cat5 <span class="ot">&lt;-</span> <span class="fu">c</span>(speedlist_cat5,speed2)</span>
+<span id="cb36-85"><a href="#cb36-85" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb36-86"><a href="#cb36-86" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb36-87"><a href="#cb36-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-88"><a href="#cb36-88" aria-hidden="true" tabindex="-1"></a>speedlist_cat5 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(speedlist_cat5)</span>
+<span id="cb36-89"><a href="#cb36-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-90"><a href="#cb36-90" aria-hidden="true" tabindex="-1"></a>speedlist <span class="ot">&lt;-</span> <span class="fu">c</span>(speedlist_cat1,speedlist_cat2,speedlist_cat3,</span>
+<span id="cb36-91"><a href="#cb36-91" aria-hidden="true" tabindex="-1"></a>               speedlist_cat4,speedlist_cat5)</span>
+<span id="cb36-92"><a href="#cb36-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-93"><a href="#cb36-93" aria-hidden="true" tabindex="-1"></a>speedlist <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(speedlist)</span>
+<span id="cb36-94"><a href="#cb36-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-95"><a href="#cb36-95" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(speedlist) <span class="ot">&lt;-</span> <span class="st">"Hurricane_Windspeed"</span></span>
+<span id="cb36-96"><a href="#cb36-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-97"><a href="#cb36-97" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(speedlist,<span class="at">path =</span> <span class="st">"~/Documents/GitHub/biol105_unk/assignments/hurricane_speeds.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</details>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>hurricanes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/assignments/hurricane_speeds.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 889 Columns: 1
 ── Column specification ────────────────────────────────────────────────────────
@@ -809,18 +939,18 @@ dbl (1): Hurricane_Windspeed
 </div>
 <p>Above, we have loaded a <code>.csv</code> of one column that has all the hurricane speeds up to 2024. Hurricane Milton is the last row - the most recent hurricane. Let’s separate this one out. We will use <code>[ , ]</code>, which defines <code>[rows,columns]</code> to subset data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>milton <span class="ot">&lt;-</span> hurricanes<span class="sc">$</span>Hurricane_Windspeed[<span class="fu">nrow</span>(hurricanes)]</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>other_hurricanes <span class="ot">&lt;-</span> hurricanes[<span class="sc">-</span><span class="fu">nrow</span>(hurricanes),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>milton <span class="ot">&lt;-</span> hurricanes<span class="sc">$</span>Hurricane_Windspeed[<span class="fu">nrow</span>(hurricanes)]</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>other_hurricanes <span class="ot">&lt;-</span> hurricanes[<span class="sc">-</span><span class="fu">nrow</span>(hurricanes),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We want to compare the windspeed of Milton (180 mph) to the overall distribution of hurricane speeds. We can visualize this at first.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># all hurricanes</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(hurricanes<span class="sc">$</span>Hurricane_Windspeed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># all hurricanes</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(hurricanes<span class="sc">$</span>Hurricane_Windspeed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="normality_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="normality_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -828,61 +958,61 @@ dbl (1): Hurricane_Windspeed
 <p>Windspeeds are more towards the lower end of the distribution, with strong storms being rarer.</p>
 <p><em>For the sake of this class, we will assume we can use a normal distribution for these data</em>, but if we were doing an official study we would likely need to use a non-parametric test (we will cover these later, but they cover non-normal data).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(other_hurricanes<span class="sc">$</span>Hurricane_Windspeed)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>mu</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(other_hurricanes<span class="sc">$</span>Hurricane_Windspeed)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>mu</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
 </div>
 <p>Hmmm… we need to use <code>na.omit</code> to be sure we do this properly.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>other_hurricanes_windspeed <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(other_hurricanes<span class="sc">$</span>Hurricane_Windspeed)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(other_hurricanes_windspeed)</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(other_hurricanes_windspeed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>other_hurricanes_windspeed <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(other_hurricanes<span class="sc">$</span>Hurricane_Windspeed)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(other_hurricanes_windspeed)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(other_hurricanes_windspeed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 102.5254</code></pre>
 </div>
 </div>
 <p>Next, we need the standard deviation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>sd.hurricane <span class="ot">&lt;-</span> <span class="fu">sd</span>(other_hurricanes_windspeed)</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>sd.hurricane</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>sd.hurricane <span class="ot">&lt;-</span> <span class="fu">sd</span>(other_hurricanes_windspeed)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>sd.hurricane</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 23.08814</code></pre>
 </div>
 </div>
 <p>Now, we can calculate our <span class="math inline">\(Z\)</span> value.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> (milton <span class="sc">-</span> mu)<span class="sc">/</span>sd.hurricane</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>Z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> (milton <span class="sc">-</span> mu)<span class="sc">/</span>sd.hurricane</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>Z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.355603</code></pre>
 </div>
 </div>
 <p>How significant is this?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(Z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(Z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.999604</code></pre>
 </div>
 </div>
 <p>This is greater than <span class="math inline">\(0.5\)</span>, so we need to do <span class="math inline">\(1-p\)</span> to figure things out.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(Z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(Z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.000395961</code></pre>
 </div>
 </div>
 <p>This rounds to <span class="math inline">\(0.0004\)</span>, which means that this is an <em>extremely</em> strong hurricane.</p>
-<section id="non-normality-for-those-curious" class="level4" data-number="4.2.5.1">
-<h4 data-number="4.2.5.1" class="anchored" data-anchor-id="non-normality-for-those-curious"><span class="header-section-number">4.2.5.1</span> Non-normality, for those curious</h4>
+<section id="non-normality-for-those-curious" class="level4" data-number="6.2.5.1">
+<h4 data-number="6.2.5.1" class="anchored" data-anchor-id="non-normality-for-those-curious"><span class="header-section-number">6.2.5.1</span> Non-normality, for those curious</h4>
 <p>We can do a Shapiro-Wilk test of normality to see if this dataset is normal.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(other_hurricanes_windspeed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(other_hurricanes_windspeed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
@@ -894,8 +1024,8 @@ W = 0.88947, p-value &lt; 2.2e-16</code></pre>
 <p>A <span class="math inline">\(p &lt; 0.05\)</span> indicates that these data are <em>non-normal</em>.</p>
 <p>We can do a Wilcoxon-Test since these data are extremely non-normal.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(other_hurricanes_windspeed,</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>            milton)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(other_hurricanes_windspeed,</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>            milton)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon rank sum test with continuity correction
@@ -909,28 +1039,28 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </section>
 </section>
 </section>
-<section id="confidence-intervals" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="confidence-intervals"><span class="header-section-number">4.3</span> Confidence Intervals</h2>
+<section id="confidence-intervals" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="confidence-intervals"><span class="header-section-number">6.3</span> Confidence Intervals</h2>
 <p>Because we can figure out the probability of an event occurring, we can also calculate <em>confidence intervals</em>. A <em>confidence interval</em> provides a range of numbers around a value of interest that indicates where we believe the mean of a population lies and our confidence that it lies within that range. <strong>Note</strong> that nothing is ever 100% certain, but this helps us determine where a mean is and demonstrates our confidence in our results.</p>
 <p>Specifically, if the tails of the distribution, our <span class="math inline">\(\alpha\)</span>, are <span class="math inline">\(0.05\)</span>, then we have an area of <span class="math inline">\(0.95\)</span> around the mean where we do not reject results. Another perspective on this area is that we can say with <span class="math inline">\(95\)</span>% certainty that a mean is within a certain area, and that if values fall within that confidence area then we do not reject the null hypothesis that the means are equal.</p>
 <p>We will cover several different ways to calculate confidence intervals, but for normal distributions, we use the following equation, with the <span class="math inline">\(0.95\)</span> confidence interval shown as an example:</p>
 <p><span class="math display">\[
 CI=\bar{x} \pm Z_{1-\frac{\alpha}{2}}\cdot \frac{\sigma}{\sqrt{n}}
 \]</span></p>
-<p>This interval gives us an idea of where the mean should lie. For example, if we are looking at the aforemention <code>beewalk</code> temperature data, we can calulate a <span class="math inline">\(0.95\)</span> confidence interval around the mean.</p>
+<p>This interval gives us an idea of where the mean should lie. For example, if we are looking at the aforementioned <code>beewalk</code> temperature data, we can calulate a <span class="math inline">\(0.95\)</span> confidence interval around the mean.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>temps <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(beewalk<span class="sc">$</span>temperature)</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(temps)</span>
-<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(temps)</span>
-<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>sdtemp <span class="ot">&lt;-</span> <span class="fu">sd</span>(temps)</span>
-<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Z for 0.95 as P, so for 0.975, 0.025</span></span>
-<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="co"># get value from P</span></span>
-<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>)</span>
-<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>CI <span class="ot">&lt;-</span> Z<span class="sc">*</span>(sdtemp<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
-<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a>CI</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>temps <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(beewalk<span class="sc">$</span>temperature)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(temps)</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(temps)</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>sdtemp <span class="ot">&lt;-</span> <span class="fu">sd</span>(temps)</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Z for 0.95 as P, so for 0.975, 0.025</span></span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a><span class="co"># get value from P</span></span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>)</span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>CI <span class="ot">&lt;-</span> Z<span class="sc">*</span>(sdtemp<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a>CI</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.01458932</code></pre>
 </div>
@@ -938,9 +1068,9 @@ CI=\bar{x} \pm Z_{1-\frac{\alpha}{2}}\cdot \frac{\sigma}{\sqrt{n}}
 <p>We have a very narrow confidence zone, because we have so many measurements. Let’s round everything and present it in a good way.</p>
 <p>If I want numbers to show up <em>in text</em> in RMarkdown, I can add code to a line of plain text using the following syntax:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT RUN</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Format in plaintext</span></span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">r xbar</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># DO NOT RUN</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Format in plaintext</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">r xbar</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -951,25 +1081,95 @@ CI=\bar{x} \pm Z_{1-\frac{\alpha}{2}}\cdot \frac{\sigma}{\sqrt{n}}
 <p>Typing that into the plain text should render as the following: 18.645963. Then I can also type my answer as follows:</p>
 <p>The <span class="math inline">\(95\)</span>% Confidence Interval for the mean for this temperature dataset is:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="fu">round</span>(xbar, <span class="dv">2</span>),</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>      <span class="st">"+/-"</span>,</span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">round</span>(CI, <span class="dv">2</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="fu">round</span>(xbar, <span class="dv">2</span>),</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>      <span class="st">"+/-"</span>,</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">round</span>(CI, <span class="dv">2</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "18.65 +/- 0.01"</code></pre>
 </div>
 </div>
 <p><em>Note</em> that the above is rounded to two decimal places to illustrative purposes ONLY, and should be rounded to one decimal place if it was a homework assignment because the original data has only one decimal place.</p>
 </section>
-<section id="homework-chapter-8" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="homework-chapter-8"><span class="header-section-number">4.4</span> Homework: Chapter 8</h2>
-<p>Please complete problems 8.1, 8.2, 8.3 &amp; 8.6. Follow the directions as written in the book. Submit one <code>html</code> file, as derived from <em>RStudio</em>. For maximum clarity, create headings to separate your problems. (Remember, a header can be invoked by placing ‘<code>#</code>’ in front of a line of text. For example: the header here is written as <code># Homework: Chapter 8</code>).</p>
+<section id="homework-normal-distributions" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="homework-normal-distributions"><span class="header-section-number">6.4</span> Homework: Normal distributions</h2>
+<p>Submit one <code>html</code> file, as created in <em>RStudio</em>, with you answers to the following questions. For maximum clarity, create headings to separate your problems. (Remember, a header can be invoked by placing ‘<code>#</code>’ in front of a line of text. For example: the header here is written as <code># Homework: Chapter 8</code>).</p>
+<section id="z-to-p" class="level3" data-number="6.4.1">
+<h3 data-number="6.4.1" class="anchored" data-anchor-id="z-to-p"><span class="header-section-number">6.4.1</span> <span class="math inline">\(Z\)</span> to <span class="math inline">\(p\)</span></h3>
+<p>For each of the following, report the corresponding <span class="math inline">\(p\)</span> value for the <span class="math inline">\(z\)</span> score.</p>
+<ol type="A">
+<li>2.3</li>
+<li>6.4</li>
+<li>-1.5</li>
+<li>-9.2</li>
+<li>3.2</li>
+</ol>
+</section>
+<section id="p-to-z" class="level3" data-number="6.4.2">
+<h3 data-number="6.4.2" class="anchored" data-anchor-id="p-to-z"><span class="header-section-number">6.4.2</span> <span class="math inline">\(P\)</span> to <span class="math inline">\(z\)</span></h3>
+<p>For the following, report the corresponding <span class="math inline">\(z\)</span> score for the stated <span class="math inline">\(p\)</span> value. For this question, assume every value is “looking left” (<code>lower.tail = T</code>).</p>
+<ol type="A">
+<li>0.96</li>
+<li>0.23</li>
+<li>0.14</li>
+<li>0.0036</li>
+<li>0.47</li>
+<li>0.62</li>
+</ol>
+</section>
+<section id="confidence-intervals-1" class="level3" data-number="6.4.3">
+<h3 data-number="6.4.3" class="anchored" data-anchor-id="confidence-intervals-1"><span class="header-section-number">6.4.3</span> Confidence intervals</h3>
+<p>For the following scenarios, calculate the confidence interval for the mean.</p>
+<ol type="A">
+<li><span class="math inline">\(\bar{x} = 7.6\)</span>, <span class="math inline">\(\sigma = 1.3\)</span>, <span class="math inline">\(n = 5\)</span>, <span class="math inline">\(CI = 99\%\)</span></li>
+<li><span class="math inline">\(\bar{x} = -4.9\)</span>, <span class="math inline">\(\sigma = 0.7\)</span>, <span class="math inline">\(n = 6\)</span>, <span class="math inline">\(CI = 95\%\)</span></li>
+<li><span class="math inline">\(\bar{x} = 2.1\)</span>, <span class="math inline">\(\sigma = 0.4\)</span>, <span class="math inline">\(n = 10\)</span>, <span class="math inline">\(CI = 90\%\)</span></li>
+<li><span class="math inline">\(\bar{x} = 0.1\)</span>, <span class="math inline">\(\sigma = 3\)</span>, <span class="math inline">\(n = 12\)</span>, <span class="math inline">\(CI = 95\%\)</span></li>
+</ol>
+</section>
+<section id="italian-climate---spring" class="level3" data-number="6.4.4">
+<h3 data-number="6.4.4" class="anchored" data-anchor-id="italian-climate---spring"><span class="header-section-number">6.4.4</span> Italian climate - spring</h3>
+<p>As part of a study on how climate affects the weights of Alpine Ibex, researchers recorded the maximum temperature in the spring at their study site <span class="citation" data-cites="brambilla_2024_12749273">(<a href="references.html#ref-brambilla_2024_12749273" role="doc-biblioref">Brambilla et al. 2024</a>)</span>. The researchers find another site with an average spring maximum temperature of 6.2ºC, and claim that it is warmer than their study site. Are the correct?</p>
+<p>Evaluate their claims by:</p>
+<ol type="1">
+<li>Calculating a <span class="math inline">\(z\)</span>-score for their temperature (6.2).</li>
+<li>Calculating a <span class="math inline">\(p\)</span>-value for their temperature (6.2).</li>
+<li>Reporting a 95% confidence interval for the mean for the temperatures reported in their dataset.</li>
+<li>In a single sentence, state whether you find this temperature to be significantly warmer than the mean or not, stating what evidence you are using to make this conclusion.</li>
+</ol>
+<p>The data for this problem will be in the object <code>spring_temps</code> below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load weather data</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://zenodo.org/records/12749273/files/20240505_env_var_dataset.csv"</span>)</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="co"># isolate spring temperatures</span></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>spring_temps <span class="ot">&lt;-</span> weather<span class="sc">$</span>SpringTmax <span class="sc">|&gt;</span></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove NA values</span></span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ensure data are in correct numeric format</span></span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="italian-climate---summer" class="level3" data-number="6.4.5">
+<h3 data-number="6.4.5" class="anchored" data-anchor-id="italian-climate---summer"><span class="header-section-number">6.4.5</span> Italian climate - Summer</h3>
+<p>Using the same dataset (<code>weather</code>) as the previous question, isolate the data for the summer (column <code>SummTmax</code>). The researchers find the average temperature of another site is 13.6ºC, and claim this is warmer than their research site. Are they correct? As with the previous question, complete the following:</p>
+<ol type="1">
+<li>Calculating a <span class="math inline">\(z\)</span>-score for their temperature (6.2).</li>
+<li>Calculating a <span class="math inline">\(p\)</span>-value for their temperature (6.2).</li>
+<li>Reporting a 95% confidence interval for the mean for the temperatures reported in their dataset.</li>
+<li>In a single sentence, state whether you find this temperature to be significantly warmer than the mean or not, stating what evidence you are using to make this conclusion.</li>
+</ol>
+<p><em>Note</em> for this question, you will have to isolate the column and perform all of the analysis steps yourself.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-brambilla_2024_12749273" class="csl-entry" role="listitem">
+Brambilla, A., A. von Hardenberg, B. Bassano, L. Ranghetti, L. Keller, and M. Festa-Bianchet (2024). Data from: Climate drives body mass changes in a mountain ungulate: Shorter winters lead to heavier alpine ibex. [Online.] Available at <a href="https://doi.org/10.5061/dryad.w9ghx3fz6">https://doi.org/10.5061/dryad.w9ghx3fz6</a>.
+</div>
 <div id="ref-Comont2020" class="csl-entry" role="listitem">
 Comont, R. (2020). <span class="nocase">BeeWalk dataset 2008-23</span>. https://doi.org/<a href="https://doi.org/10.6084/m9.figshare.12280547.v4">10.6084/m9.figshare.12280547.v4</a>
 </div>
 </div>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1396,12 +1596,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./visual.html" class="pagination-link" aria-label="Diagnosing data visually">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Diagnosing data visually</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Diagnosing data visually</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./exam2.html" class="pagination-link" aria-label="Exam 2 practice">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Exam 2 practice</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./transformations.html" class="pagination-link" aria-label="Transforming data">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transforming data</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

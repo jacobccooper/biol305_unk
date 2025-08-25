@@ -1,6 +1,6 @@
-# Preface {.unnumbered}
+# Introduction {.unnumbered}
 
-Welcome to Biology 305 at the University of Nebraska at Kearney!
+**Welcome to Biology 305 at the University of Nebraska at Kearney!**
 
 In this class, you will learn:
 
@@ -9,24 +9,20 @@ In this class, you will learn:
 3.  Basic multivariate statistics, including ANOVA, correlation, and regression, for comparing multiple different groups.
 4.  The basics of coding and working in *R* for performing statistical analyses.
 
-This site will help you navigate different homework assignments to perform the necessary *R* tests. Furthermore, this GitHub repository contains most of the homework dataframes, so you will *not* have to manually enter assignments if you use *R* to complete some of your assignments.
+This site will help you navigate different homework assignments to perform the necessary *R* tests.
 
 ***Welcome to class!***
 
-Dr. Jacob C. Cooper, BHS 321
-
-Dr. Melissa Wuellner, BHS 345
-
-## Website authors:
+# Class authors
 
 -   [Dr. Melissa Wuellner](https://scholar.google.com/citations?user=yQDewvEAAAAJ)
 
-Original lecture organizer, author of many of the example problems.
+Primary lecture designer, author of many of the example problems.
 
 -   [Dr. Jacob C. Cooper](https://scholar.google.com/citations?user=Q82K8tsAAAAJ)
 
-Original website designer, primary R coding for site
+Primary website designer, primary *R* coding for site
 
--   Caleb Rother
+-   [Caleb Rother](https://calebrother.github.io/)
 
-Teaching assistant
+Teaching assistant, website designer, works with homework and coding
