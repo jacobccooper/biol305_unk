@@ -121,7 +121,7 @@ The first principal component explains 68% of the variation, and the second 19% 
 
 ### Disentangling microbiomes
 
-These data are from [@couper_2019_4940316].
+This is an example problem. These data are from [@couper_2019_4940316].
 
 ```{r}
 # Run this whole chunk to load data
