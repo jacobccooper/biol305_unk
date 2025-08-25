@@ -147,4 +147,8 @@ If we have multiple response variables, we can use a MANOVA; we do not cover tha
 
 #### Discrete response variable
 
-If our response variable *and* our explanatory variable are discrete (i.e., categorical or nominal), then we are doing a $\chi^2$ **test**. This tests looks at counts in different categories. For example, looking at proportions of men and women who do and do not smoke would be a classic $\chi^2$ test.
+If our response variable *and* our explanatory variable are discrete (i.e., categorical or nominal), then we are doing a $\chi^2$ **test**. This tests looks at counts in different categories. For example, looking at proportions of men and women who do and do not smoke would be a classic $\chi^2$ test.\
+\
+**Other Online Resources**
+
+<https://statkat.com/statistical-technique-selection/tool-for-selecting-a-statistical-technique-step-one.php>

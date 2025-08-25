@@ -10,6 +10,7 @@ library(tidyverse)
 ```
 
 DONT FORGET ROUNDING
+
 ```{r}
 ##8.1
 #A
@@ -37,11 +38,13 @@ zfish <- zscore(xbar = 40,
                 sd.x = 5.49)
 pnorm(zfish, lower.tail = FALSE)
 ```
+
 ```{r}
 #8.2B
 zfish2 <- zscore(40, 34.29, 5.49, n = 10)
 pnorm(zfish2, lower.tail = FALSE)
 ```
+
 ```{r}
 #8.2 C
 zfishH <- zscore(42, 34.29, 5.49) 
@@ -49,7 +52,7 @@ zfishL <- zscore(32, 34.29, 5.49)
 (pnorm(zfishH) - pnorm(zfishL))
 #This is correct, back of book is wrong!
 ```
+
 ```{r}
 
 ```
-
