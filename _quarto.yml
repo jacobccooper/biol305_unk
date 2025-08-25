@@ -15,7 +15,6 @@ book:
     - visual.qmd
     - normality.qmd
     - transformations.qmd
-    - exam2.qmd
     - probdist.qmd
     - chi.qmd
     - ttest.qmd
@@ -24,7 +23,6 @@ book:
     - cor_reg.qmd
     - multivariate.qmd
     - picktest.qmd
-    - final_exam.qmd
     - conclusion.qmd
     - glossary.qmd
     - references.qmd
