@@ -118,3 +118,21 @@ The first principal component explains 68% of the variation, and the second 19% 
 </details>
 
 ## Homework
+
+### Disentangling microbiomes
+
+This is an example problem. These data are from [@couper_2019_4940316].
+
+```{r}
+# Run this whole chunk to load data
+
+microbiome <- read_csv("https://zenodo.org/records/4940316/files/MicrobialCommunityAssembly_Dryad.csv") |> 
+  t() |> 
+  as.data.frame()
+
+colnames.x <- microbiome[1,]
+
+colnames(microbiome) <- colnames.x
+
+microbiome <- microbiome[-1,]
+```

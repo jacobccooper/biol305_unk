@@ -8,7 +8,7 @@
 
 <meta name="author" content="University of Nebraska at Kearney Biology">
 
-<title>10&nbsp; χ2 (Chi-squared) tests – Biology 305: Biostatistics</title>
+<title>9&nbsp; χ2 (Chi-squared) tests – Biology 305: Biostatistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -55,7 +55,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -145,7 +164,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chi.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">χ2 (Chi-squared) tests</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chi.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">χ2 (Chi-squared) tests</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -220,74 +239,62 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exam2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exam 2 practice</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./probdist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Probability distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Probability distributions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chi.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">χ2 (Chi-squared) tests</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">χ2 (Chi-squared) tests</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Means testing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Means testing</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ANOVA: Part 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">ANOVA: Part 1</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./anova2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">ANOVA: Part 2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">ANOVA: Part 2</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cor_reg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./multivariate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Multivariate methods</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Multivariate methods</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./picktest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Pick the test</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./final_exam.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Final exam &amp; review</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Pick the test</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./conclusion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Conclusions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Conclusions</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./glossary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Functions &amp; Glossary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Functions &amp; Glossary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -306,15 +313,18 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#chi2-squared-distribution" id="toc-chi2-squared-distribution" class="nav-link active" data-scroll-target="#chi2-squared-distribution"><span class="header-section-number">10.1</span> <span class="math inline">\(\chi^2\)</span>-squared distribution</a>
+  <li><a href="#chi2-squared-distribution" id="toc-chi2-squared-distribution" class="nav-link active" data-scroll-target="#chi2-squared-distribution"><span class="header-section-number">9.1</span> <span class="math inline">\(\chi^2\)</span>-squared distribution</a>
   <ul class="collapse">
-  <li><a href="#calculating-the-test-statistic" id="toc-calculating-the-test-statistic" class="nav-link" data-scroll-target="#calculating-the-test-statistic"><span class="header-section-number">10.1.1</span> Calculating the test statistic</a></li>
-  <li><a href="#chi2-goodness-of-fit-test" id="toc-chi2-goodness-of-fit-test" class="nav-link" data-scroll-target="#chi2-goodness-of-fit-test"><span class="header-section-number">10.1.2</span> <span class="math inline">\(\chi^2\)</span> goodness-of-fit test</a></li>
-  <li><a href="#chi2-test-of-independence" id="toc-chi2-test-of-independence" class="nav-link" data-scroll-target="#chi2-test-of-independence"><span class="header-section-number">10.1.3</span> <span class="math inline">\(\chi^2\)</span> test of independence</a></li>
+  <li><a href="#calculating-the-test-statistic" id="toc-calculating-the-test-statistic" class="nav-link" data-scroll-target="#calculating-the-test-statistic"><span class="header-section-number">9.1.1</span> Calculating the test statistic</a></li>
+  <li><a href="#chi2-goodness-of-fit-test" id="toc-chi2-goodness-of-fit-test" class="nav-link" data-scroll-target="#chi2-goodness-of-fit-test"><span class="header-section-number">9.1.2</span> <span class="math inline">\(\chi^2\)</span> goodness-of-fit test</a></li>
+  <li><a href="#chi2-test-of-independence" id="toc-chi2-test-of-independence" class="nav-link" data-scroll-target="#chi2-test-of-independence"><span class="header-section-number">9.1.3</span> <span class="math inline">\(\chi^2\)</span> test of independence</a></li>
   </ul></li>
-  <li><a href="#fishers-exact-test" id="toc-fishers-exact-test" class="nav-link" data-scroll-target="#fishers-exact-test"><span class="header-section-number">10.2</span> Fisher’s exact test</a>
+  <li><a href="#fishers-exact-test" id="toc-fishers-exact-test" class="nav-link" data-scroll-target="#fishers-exact-test"><span class="header-section-number">9.2</span> Fisher’s exact test</a></li>
+  <li><a href="#homework-chi2-tests" id="toc-homework-chi2-tests" class="nav-link" data-scroll-target="#homework-chi2-tests"><span class="header-section-number">9.3</span> Homework: <span class="math inline">\(\chi^2\)</span> tests</a>
   <ul class="collapse">
-  <li><a href="#chapter-7" id="toc-chapter-7" class="nav-link" data-scroll-target="#chapter-7"><span class="header-section-number">10.2.1</span> Chapter 7</a></li>
+  <li><a href="#la-selva-bird-counts" id="toc-la-selva-bird-counts" class="nav-link" data-scroll-target="#la-selva-bird-counts"><span class="header-section-number">9.3.1</span> La Selva Bird Counts</a></li>
+  <li><a href="#bicycle-counts-time-of-day" id="toc-bicycle-counts-time-of-day" class="nav-link" data-scroll-target="#bicycle-counts-time-of-day"><span class="header-section-number">9.3.2</span> Bicycle counts: Time of day</a></li>
+  <li><a href="#bicycles-date" id="toc-bicycles-date" class="nav-link" data-scroll-target="#bicycles-date"><span class="header-section-number">9.3.3</span> Bicycles: Date</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -324,7 +334,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">χ2 (Chi-squared) tests</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">χ2 (Chi-squared) tests</span></h1>
 </div>
 
 
@@ -347,8 +357,8 @@ window.Quarto = {
 </header>
 
 
-<section id="chi2-squared-distribution" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="chi2-squared-distribution"><span class="header-section-number">10.1</span> <span class="math inline">\(\chi^2\)</span>-squared distribution</h2>
+<section id="chi2-squared-distribution" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="chi2-squared-distribution"><span class="header-section-number">9.1</span> <span class="math inline">\(\chi^2\)</span>-squared distribution</h2>
 <p><span class="math inline">\(\chi^2\)</span>-squared (pronounced “<em>kai</em>”, and spelled “<em>chi</em>”) is a distribution used to understand if count data between different categories matches our expectation. For example, if we are looking at students in the class and comparing major vs.&nbsp;number of books read, we would expect <em>no association</em>, however we may find an association for a major such as English which required reading more literature. The <span class="math inline">\(\chi^2\)</span> introduces a new term <em>degrees of freedom</em> (<span class="math inline">\(df\)</span>) which reflects the number of individuals in the study. For many tests, <span class="math inline">\(df\)</span> are needed to reflect how a distribution changes with respect the number of individuals (and amount of variation possible) within a dataset. The equation for the <span class="math inline">\(\chi^2\)</span> is as follows, with the <span class="math inline">\(\chi^2\)</span> being a special case of the <em>gamma</em> (<span class="math inline">\(\gamma\)</span> or <span class="math inline">\(\Gamma\)</span>) distribution that is affected by the <span class="math inline">\(df\)</span>, which is defined as the number of rows minus one multiplied by the number of columns minus one <span class="math inline">\(df = (rows-1)(cols-1)\)</span>:</p>
 <p><span class="math display">\[
 f_n(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^\frac{n}{2-1}e^\frac{-x}{2}
@@ -373,13 +383,13 @@ f_n(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^\frac{n}{2-1}e^\frac{-x}{2}
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chi_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="chi_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<section id="calculating-the-test-statistic" class="level3" data-number="10.1.1">
-<h3 data-number="10.1.1" class="anchored" data-anchor-id="calculating-the-test-statistic"><span class="header-section-number">10.1.1</span> Calculating the test statistic</h3>
+<section id="calculating-the-test-statistic" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="calculating-the-test-statistic"><span class="header-section-number">9.1.1</span> Calculating the test statistic</h3>
 <p>We evaluate <span class="math inline">\(\chi^2\)</span> tests by calculating a <span class="math inline">\(\chi^2\)</span> value based on our data and comparing it to an expected <span class="math inline">\(\chi^2\)</span> distribution. This <em>test statistic</em> can be evaluated by looking at a <span class="math inline">\(\chi^2\)</span> table or by using <em>R</em>. <strong>Note</strong> that you need to know the degrees of freedom in order to properly evaluate a <span class="math inline">\(\chi^2\)</span> test. We calculate our test statistic as follows:</p>
 <p><span class="math display">\[
 \chi^2=\Sigma\frac{(o-e)^2}{e}
@@ -391,11 +401,11 @@ f_n(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^\frac{n}{2-1}e^\frac{-x}{2}
 <li><p><span class="math inline">\(\chi^2\)</span> test of independence</p></li>
 </ul>
 </section>
-<section id="chi2-goodness-of-fit-test" class="level3" data-number="10.1.2">
-<h3 data-number="10.1.2" class="anchored" data-anchor-id="chi2-goodness-of-fit-test"><span class="header-section-number">10.1.2</span> <span class="math inline">\(\chi^2\)</span> goodness-of-fit test</h3>
+<section id="chi2-goodness-of-fit-test" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="chi2-goodness-of-fit-test"><span class="header-section-number">9.1.2</span> <span class="math inline">\(\chi^2\)</span> goodness-of-fit test</h3>
 <p>A <span class="math inline">\(\chi^2\)</span> goodness-of-fit test looks at a vector of data, or counts in different categories, and asks if the observed frequencies vary from the expected frequencies.</p>
-<section id="chi2-estimate-by-hand" class="level4" data-number="10.1.2.1">
-<h4 data-number="10.1.2.1" class="anchored" data-anchor-id="chi2-estimate-by-hand"><span class="header-section-number">10.1.2.1</span> <span class="math inline">\(\chi^2\)</span> estimate by hand</h4>
+<section id="chi2-estimate-by-hand" class="level4" data-number="9.1.2.1">
+<h4 data-number="9.1.2.1" class="anchored" data-anchor-id="chi2-estimate-by-hand"><span class="header-section-number">9.1.2.1</span> <span class="math inline">\(\chi^2\)</span> estimate by hand</h4>
 <p>Let’s say, for example, we have the following dataset:</p>
 <table class="caption-top table">
 <thead>
@@ -498,8 +508,8 @@ f_n(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^\frac{n}{2-1}e^\frac{-x}{2}
 </div>
 <p>Here, we get <span class="math inline">\(p = 0.002\)</span>, indicating that there is not an equal probability for selling drinks at different times of day.</p>
 </section>
-<section id="chi2-estimation-by-code" class="level4" data-number="10.1.2.2">
-<h4 data-number="10.1.2.2" class="anchored" data-anchor-id="chi2-estimation-by-code"><span class="header-section-number">10.1.2.2</span> <span class="math inline">\(\chi^2\)</span> estimation by code</h4>
+<section id="chi2-estimation-by-code" class="level4" data-number="9.1.2.2">
+<h4 data-number="9.1.2.2" class="anchored" data-anchor-id="chi2-estimation-by-code"><span class="header-section-number">9.1.2.2</span> <span class="math inline">\(\chi^2\)</span> estimation by code</h4>
 <p>We can use the test <code>chisq.test</code> to perform this analysis as well.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(drinks)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -514,8 +524,8 @@ X-squared = 26.453, df = 9, p-value = 0.001722</code></pre>
 <p>As we can see, these values are exactly the same as we just calculated by hand! <strong><em>Note</em></strong> that we can define the probability <code>p</code> if we want, otherwise it defaults to <code>p = rep(1/length(x), length(x))</code>.</p>
 </section>
 </section>
-<section id="chi2-test-of-independence" class="level3" data-number="10.1.3">
-<h3 data-number="10.1.3" class="anchored" data-anchor-id="chi2-test-of-independence"><span class="header-section-number">10.1.3</span> <span class="math inline">\(\chi^2\)</span> test of independence</h3>
+<section id="chi2-test-of-independence" class="level3" data-number="9.1.3">
+<h3 data-number="9.1.3" class="anchored" data-anchor-id="chi2-test-of-independence"><span class="header-section-number">9.1.3</span> <span class="math inline">\(\chi^2\)</span> test of independence</h3>
 <p>Usually when we use a <span class="math inline">\(\chi^2\)</span>, we are looking at count data. Let’s consider the following hypothetical scenario, comparing experience with <em>R</em> between non-biology majors (who, in this theoretical scenario, do not regularly use <em>R</em>) and Biology majors who are required to take <em>R</em> for this class:</p>
 <table class="caption-top table">
 <caption>The above table of counts is also known as a <strong>contingency table</strong>. Intuitively, we can see a difference, but we want to perform a statistical test to see just how likely these counts would be if both groups were equally likely. We can calculate this both “by hand” and using built in <em>R</em> functions.</caption>
@@ -539,8 +549,8 @@ X-squared = 26.453, df = 9, p-value = 0.001722</code></pre>
 </tr>
 </tbody>
 </table>
-<section id="chi2-estimations-by-hand" class="level4" data-number="10.1.3.1">
-<h4 data-number="10.1.3.1" class="anchored" data-anchor-id="chi2-estimations-by-hand"><span class="header-section-number">10.1.3.1</span> <span class="math inline">\(\chi^2\)</span> estimations by hand</h4>
+<section id="chi2-estimations-by-hand" class="level4" data-number="9.1.3.1">
+<h4 data-number="9.1.3.1" class="anchored" data-anchor-id="chi2-estimations-by-hand"><span class="header-section-number">9.1.3.1</span> <span class="math inline">\(\chi^2\)</span> estimations by hand</h4>
 <p>First, we can enter the data into <em>R</em>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">10</span>,<span class="dv">9</span>,<span class="dv">2</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T)</span>
@@ -683,8 +693,8 @@ Biology     5.5  5.5</code></pre>
 </div>
 <p>As we will see below, is the exact same value as we get for an uncorrected <code>chisq.test</code> from <em>R</em>’s default output.</p>
 </section>
-<section id="chi2-estimations-in-r" class="level4" data-number="10.1.3.2">
-<h4 data-number="10.1.3.2" class="anchored" data-anchor-id="chi2-estimations-in-r"><span class="header-section-number">10.1.3.2</span> <span class="math inline">\(\chi^2\)</span> estimations in <em>R</em></h4>
+<section id="chi2-estimations-in-r" class="level4" data-number="9.1.3.2">
+<h4 data-number="9.1.3.2" class="anchored" data-anchor-id="chi2-estimations-in-r"><span class="header-section-number">9.1.3.2</span> <span class="math inline">\(\chi^2\)</span> estimations in <em>R</em></h4>
 <p>We can calculate this in <em>R</em> by entering in the entire table and using <code>chisq.test</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -732,8 +742,8 @@ X-squared = 6.042, df = 1, p-value = 0.01397</code></pre>
 </section>
 </section>
 </section>
-<section id="fishers-exact-test" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="fishers-exact-test"><span class="header-section-number">10.2</span> Fisher’s exact test</h2>
+<section id="fishers-exact-test" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="fishers-exact-test"><span class="header-section-number">9.2</span> Fisher’s exact test</h2>
 <p><span class="math inline">\(\chi^2\)</span> tests don’t work in scenarios where we have very small count sizes, such as a count size of 1. For these situations with small sample sizes and very small count sizes, we use Fisher’s exact test. This test gives us the <span class="math inline">\(p\)</span> value directly - no need to use a table of any kind! Let’s say we have a <span class="math inline">\(2x2\)</span> contingency table, as follows:</p>
 <table class="caption-top table">
 <tbody>
@@ -801,13 +811,105 @@ odds ratio
 </div>
 </div>
 <p>In this situation, <span class="math inline">\(p = 0.05\)</span> when rounded, so we would fail to reject but note that this is borderline.</p>
-<section id="chapter-7" class="level3" data-number="10.2.1">
-<h3 data-number="10.2.1" class="anchored" data-anchor-id="chapter-7"><span class="header-section-number">10.2.1</span> Chapter 7</h3>
-<p>Complete problems 7.1, 7.2, 7.3, 7.5, and 7.7 as written in your text books. For these problems, please also state your <em>null</em> and <em>alternative</em> hypotheses, as well as a conclusion as to whether you <em>support</em> or <em>reject</em> the null.</p>
-<p>Next, do problems 7.9 and 7.11. For these two problems, pick which test is best and then perform said test. State your hypothesis and make a conclusion with respect to your <span class="math inline">\(p\)</span> value.</p>
-<p>Be sure to submit your homework as a knitted <code>html</code> document.</p>
+</section>
+<section id="homework-chi2-tests" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="homework-chi2-tests"><span class="header-section-number">9.3</span> Homework: <span class="math inline">\(\chi^2\)</span> tests</h2>
+<section id="la-selva-bird-counts" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="la-selva-bird-counts"><span class="header-section-number">9.3.1</span> La Selva Bird Counts</h3>
+<p>The La Selva station in Costa Rica performed Christmas Bird Counts for 23 years between 1989-2011 and used these data to analyze the status and trends of different birds within the region <span class="citation" data-cites="boyle_2016_4979259">(<a href="references.html#ref-boyle_2016_4979259" role="doc-biblioref">Boyle and Sigel 2016</a>)</span>. Here, we will look at their data for some of the “big groundbirds” - namely, members of the families <a href="https://en.wikipedia.org/wiki/Tinamou">Tinamidae</a> and <a href="https://en.wikipedia.org/wiki/Cracidae">Cracidae</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download La Selva data</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>laselva <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://zenodo.org/records/4979259/files/LaSelvaBirdTrendsDatatable.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 202 Columns: 20
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (8): ScientificName, CommonName, QualChg, Prob&gt;ChiSq, Diet_AB, Diet_BS,...
+dbl (10): MaxN, MeanAbund, NYears, TrendEstimate, StdError, L-RChiSquare, Me...
+lgl  (2): Extirpated?, Invading?
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># isolate the big groundbirds</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>big_groundbirds <span class="ot">&lt;-</span> laselva[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The researchers are curious about the following questions; use <span class="math inline">\(\chi^2\)</span> tests to answer them appropriately. For each, don’t forget to also state your <em>null</em> and <em>alternative</em> hypotheses, as well as your conclusion about whether you <em>support</em> or <em>reject</em> the null.</p>
+<ol type="1">
+<li>Is each species equally likely to be encountered across years (<code>NYears</code>)?</li>
+<li>Does each species have an equal high count (<code>MaxN</code>)?</li>
+</ol>
+</section>
+<section id="bicycle-counts-time-of-day" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="bicycle-counts-time-of-day"><span class="header-section-number">9.3.2</span> Bicycle counts: Time of day</h3>
+<p>We are going to revisit the bicycle data of <span class="citation" data-cites="weber_fremont_2019">Weber (<a href="references.html#ref-weber_fremont_2019" role="doc-biblioref">2019</a>)</span> to examine two different temporal patterns in bridge use.</p>
+<p>One question that the authors had was whether equal numbers of people use the bridge at different times of day between 8:00 and 17:00 on March 31st.</p>
+<p>First, run the following to load the whole dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>bicycles <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://zenodo.org/records/2648564/files/Fremont_Bridge_Hourly_Bicycle_Counts_by_Month_October_2012_to_present.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 56904 Columns: 3
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): Date
+dbl (2): Fremont Bridge East Sidewalk, Fremont Bridge West Sidewalk
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>bicycles <span class="ot">&lt;-</span> bicycles <span class="sc">|&gt;</span> </span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert to data frame</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert to date format</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">as.POSIXct</span>(Date, <span class="at">format =</span> <span class="st">"%m/%d/%Y %I:%M:%S %p"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#subset to March 30-31, 2019</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">year</span>(Date) <span class="sc">==</span> <span class="dv">2019</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">month</span>(Date) <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">day</span>(Date) <span class="sc">==</span> <span class="dv">30</span> <span class="sc">|</span> <span class="fu">day</span>(Date) <span class="sc">==</span> <span class="dv">31</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we will isolate the data of interest for 8:00 and 17:00 on March 31st.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>march_31 <span class="ot">&lt;-</span> bicycles <span class="sc">|&gt;</span> </span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">day</span>(Date) <span class="sc">==</span> <span class="dv">31</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">hour</span>(Date) <span class="sc">&gt;</span> <span class="dv">7</span> <span class="sc">&amp;</span> <span class="fu">hour</span>(Date) <span class="sc">&lt;</span> <span class="dv">18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Using a <span class="math inline">\(\chi^2\)</span> test, determine if the bicycle counts are the same for each hour in the <code>march_31</code> object for Eastbound traffic, for Westbound traffic, and for comparing Eastbound and Westbound traffic. Please list your null hypothesis, alternative hypothesis, and your conclusions.</p>
+</section>
+<section id="bicycles-date" class="level3" data-number="9.3.3">
+<h3 data-number="9.3.3" class="anchored" data-anchor-id="bicycles-date"><span class="header-section-number">9.3.3</span> Bicycles: Date</h3>
+<p>The researchers are also curious if the rate of bicyclists crossing the bridge were the same on March 30 and March 31 in 2019 between 8:00-17:00 for eastbound traffic. First, we will create a new comparative data frame. <em>Note how to do this, as you may have to do something similar on an exam</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>march_30 <span class="ot">&lt;-</span> bicycles <span class="sc">|&gt;</span> </span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">day</span>(Date) <span class="sc">==</span> <span class="dv">30</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">hour</span>(Date) <span class="sc">&gt;</span> <span class="dv">7</span> <span class="sc">&amp;</span> <span class="fu">hour</span>(Date) <span class="sc">&lt;</span> <span class="dv">18</span>)</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="co"># combine data frame by hour</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a><span class="co"># convert dates to hours</span></span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>march_30 <span class="ot">&lt;-</span> march_30 <span class="sc">|&gt;</span> </span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">Fremont Bridge West Sidewalk</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">hour</span>(Date)) <span class="sc">|&gt;</span> </span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"March 30"</span> <span class="ot">=</span> <span class="st">`</span><span class="at">Fremont Bridge East Sidewalk</span><span class="st">`</span>)</span>
+<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a>date_compare_data <span class="ot">&lt;-</span> march_31 <span class="sc">|&gt;</span>  </span>
+<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">Fremont Bridge West Sidewalk</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">hour</span>(Date)) <span class="sc">|&gt;</span> </span>
+<span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"March 31"</span> <span class="ot">=</span> <span class="st">`</span><span class="at">Fremont Bridge East Sidewalk</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb54-17"><a href="#cb54-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># combine data frames</span></span>
+<span id="cb54-18"><a href="#cb54-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">full_join</span>(march_30, <span class="at">by =</span> <span class="st">"Date"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb54-19"><a href="#cb54-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"Hour"</span> <span class="ot">=</span> Date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Perform your <span class="math inline">\(\chi^2\)</span> test to compare these dates. Don’t forget your null hypothesis, alternative hypothesis, and conclusion.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-boyle_2016_4979259" class="csl-entry" role="listitem">
+Boyle, W. A., and B. J. Sigel (2016). Data from: Ongoing changes in the avifauna of la selva biological station, costa rica: Twenty-three years of christmas bird counts. [Online.] Available at <a href="https://doi.org/10.5061/dryad.65v10">https://doi.org/10.5061/dryad.65v10</a>.
+</div>
+<div id="ref-weber_fremont_2019" class="csl-entry" role="listitem">
+Weber, G. (2019). Fremont <span>Bridge</span> <span>Hourly</span> <span>Bicycle</span> <span>Counts</span> by <span>Month</span> <span>October</span> 2012 to present. [Online.] Available at <a href="https://zenodo.org/records/2648564">https://zenodo.org/records/2648564</a>.
+</div>
+</div>
 </section>
 </section>
 
@@ -1235,12 +1337,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./probdist.html" class="pagination-link" aria-label="Probability distributions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Probability distributions</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Probability distributions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./ttest.html" class="pagination-link" aria-label="Means testing">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Means testing</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Means testing</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
