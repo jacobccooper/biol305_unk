@@ -5,6 +5,10 @@ format: html
 editor: visual
 ---
 
+```{r, echo = F, message=FALSE}
+library(tidyverse)
+```
+
 ## $\chi^2$-squared distribution
 
 $\chi^2$-squared (pronounced "*kai*", and spelled "*chi*") is a distribution used to understand if count data between different categories matches our expectation. For example, if we are looking at students in the class and comparing major vs. number of books read, we would expect *no association*, however we may find an association for a major such as English which required reading more literature. The $\chi^2$ introduces a new term *degrees of freedom* ($df$) which reflects the number of individuals in the study. For many tests, $df$ are needed to reflect how a distribution changes with respect the number of individuals (and amount of variation possible) within a dataset. The equation for the $\chi^2$ is as follows, with the $\chi^2$ being a special case of the *gamma* ($\gamma$ or $\Gamma$) distribution that is affected by the $df$, which is defined as the number of rows minus one multiplied by the number of columns minus one $df = (rows-1)(cols-1)$:
@@ -334,10 +338,82 @@ fisher.test(stats_students)
 
 In this situation, $p = 0.05$ when rounded, so we would fail to reject but note that this is borderline.
 
-### Chapter 7
+## Homework: $\chi^2$ tests
 
-Complete problems 7.1, 7.2, 7.3, 7.5, and 7.7 as written in your text books. For these problems, please also state your *null* and *alternative* hypotheses, as well as a conclusion as to whether you *support* or *reject* the null.
+### La Selva Bird Counts
 
-Next, do problems 7.9 and 7.11. For these two problems, pick which test is best and then perform said test. State your hypothesis and make a conclusion with respect to your $p$ value.
+The La Selva station in Costa Rica performed Christmas Bird Counts for 23 years between 1989-2011 and used these data to analyze the status and trends of different birds within the region [@boyle_2016_4979259]. Here, we will look at their data for some of the "big groundbirds" - namely, members of the families [Tinamidae](https://en.wikipedia.org/wiki/Tinamou) and [Cracidae](https://en.wikipedia.org/wiki/Cracidae).
 
-Be sure to submit your homework as a knitted `html` document.
+```{r}
+# download La Selva data
+laselva <- read_csv("https://zenodo.org/records/4979259/files/LaSelvaBirdTrendsDatatable.csv")
+
+# isolate the big groundbirds
+big_groundbirds <- laselva[1:6,]
+```
+
+The researchers are curious about the following questions; use $\chi^2$ tests to answer them appropriately. For each, don't forget to also state your *null* and *alternative* hypotheses, as well as your conclusion about whether you *support* or *reject* the null.
+
+1.  Is each species equally likely to be encountered across years (`NYears`)?
+2.  Does each species have an equal high count (`MaxN`)?
+
+### Bicycle counts: Time of day
+
+We are going to revisit the bicycle data of @weber_fremont_2019 to examine two different temporal patterns in bridge use.
+
+One question that the authors had was whether equal numbers of people use the bridge at different times of day between 8:00 and 17:00 on March 31st.
+
+First, run the following to load the whole dataset.
+
+```{r}
+bicycles <- read_csv("https://zenodo.org/records/2648564/files/Fremont_Bridge_Hourly_Bicycle_Counts_by_Month_October_2012_to_present.csv")
+
+bicycles <- bicycles |> 
+  # convert to data frame
+  as.data.frame() |> 
+  # convert to date format
+  mutate(Date = as.POSIXct(Date, format = "%m/%d/%Y %I:%M:%S %p")) |> 
+  #subset to March 30-31, 2019
+  filter(year(Date) == 2019) |> 
+  filter(month(Date) == 3) |> 
+  filter(day(Date) == 30 | day(Date) == 31)
+```
+
+Next, we will isolate the data of interest for 8:00 and 17:00 on March 31st.
+
+```{r}
+march_31 <- bicycles |> 
+  filter(day(Date) == 31) |> 
+  filter(hour(Date) > 7 & hour(Date) < 18)
+```
+
+Using a $\chi^2$ test, determine if the bicycle counts are the same for each hour in the `march_31` object for Eastbound traffic, for Westbound traffic, and for comparing Eastbound and Westbound traffic. Please list your null hypothesis, alternative hypothesis, and your conclusions.
+
+### Bicycles: Date
+
+The researchers are also curious if the rate of bicyclists crossing the bridge were the same on March 30 and March 31 in 2019 between 8:00-17:00 for eastbound traffic. First, we will create a new comparative data frame. *Note how to do this, as you may have to do something similar on an exam*.
+
+```{r}
+march_30 <- bicycles |> 
+  filter(day(Date) == 30) |> 
+  filter(hour(Date) > 7 & hour(Date) < 18)
+
+# combine data frame by hour
+
+# convert dates to hours
+march_30 <- march_30 |> 
+  select(-`Fremont Bridge West Sidewalk`) |> 
+  mutate(Date = hour(Date)) |> 
+  rename("March 30" = `Fremont Bridge East Sidewalk`)
+
+date_compare_data <- march_31 |>  
+  select(-`Fremont Bridge West Sidewalk`) |> 
+  mutate(Date = hour(Date)) |> 
+  rename("March 31" = `Fremont Bridge East Sidewalk`) |> 
+  # combine data frames
+  full_join(march_30, by = "Date") |> 
+  rename("Hour" = Date)
+
+```
+
+Perform your $\chi^2$ test to compare these dates. Don't forget your null hypothesis, alternative hypothesis, and conclusion.

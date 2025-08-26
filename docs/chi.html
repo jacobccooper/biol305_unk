@@ -55,7 +55,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -300,9 +319,12 @@ window.Quarto = {
   <li><a href="#chi2-goodness-of-fit-test" id="toc-chi2-goodness-of-fit-test" class="nav-link" data-scroll-target="#chi2-goodness-of-fit-test"><span class="header-section-number">9.1.2</span> <span class="math inline">\(\chi^2\)</span> goodness-of-fit test</a></li>
   <li><a href="#chi2-test-of-independence" id="toc-chi2-test-of-independence" class="nav-link" data-scroll-target="#chi2-test-of-independence"><span class="header-section-number">9.1.3</span> <span class="math inline">\(\chi^2\)</span> test of independence</a></li>
   </ul></li>
-  <li><a href="#fishers-exact-test" id="toc-fishers-exact-test" class="nav-link" data-scroll-target="#fishers-exact-test"><span class="header-section-number">9.2</span> Fisher’s exact test</a>
+  <li><a href="#fishers-exact-test" id="toc-fishers-exact-test" class="nav-link" data-scroll-target="#fishers-exact-test"><span class="header-section-number">9.2</span> Fisher’s exact test</a></li>
+  <li><a href="#homework-chi2-tests" id="toc-homework-chi2-tests" class="nav-link" data-scroll-target="#homework-chi2-tests"><span class="header-section-number">9.3</span> Homework: <span class="math inline">\(\chi^2\)</span> tests</a>
   <ul class="collapse">
-  <li><a href="#chapter-7" id="toc-chapter-7" class="nav-link" data-scroll-target="#chapter-7"><span class="header-section-number">9.2.1</span> Chapter 7</a></li>
+  <li><a href="#la-selva-bird-counts" id="toc-la-selva-bird-counts" class="nav-link" data-scroll-target="#la-selva-bird-counts"><span class="header-section-number">9.3.1</span> La Selva Bird Counts</a></li>
+  <li><a href="#bicycle-counts-time-of-day" id="toc-bicycle-counts-time-of-day" class="nav-link" data-scroll-target="#bicycle-counts-time-of-day"><span class="header-section-number">9.3.2</span> Bicycle counts: Time of day</a></li>
+  <li><a href="#bicycles-date" id="toc-bicycles-date" class="nav-link" data-scroll-target="#bicycles-date"><span class="header-section-number">9.3.3</span> Bicycles: Date</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -361,7 +383,7 @@ f_n(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^\frac{n}{2-1}e^\frac{-x}{2}
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chi_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="chi_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -789,13 +811,105 @@ odds ratio
 </div>
 </div>
 <p>In this situation, <span class="math inline">\(p = 0.05\)</span> when rounded, so we would fail to reject but note that this is borderline.</p>
-<section id="chapter-7" class="level3" data-number="9.2.1">
-<h3 data-number="9.2.1" class="anchored" data-anchor-id="chapter-7"><span class="header-section-number">9.2.1</span> Chapter 7</h3>
-<p>Complete problems 7.1, 7.2, 7.3, 7.5, and 7.7 as written in your text books. For these problems, please also state your <em>null</em> and <em>alternative</em> hypotheses, as well as a conclusion as to whether you <em>support</em> or <em>reject</em> the null.</p>
-<p>Next, do problems 7.9 and 7.11. For these two problems, pick which test is best and then perform said test. State your hypothesis and make a conclusion with respect to your <span class="math inline">\(p\)</span> value.</p>
-<p>Be sure to submit your homework as a knitted <code>html</code> document.</p>
+</section>
+<section id="homework-chi2-tests" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="homework-chi2-tests"><span class="header-section-number">9.3</span> Homework: <span class="math inline">\(\chi^2\)</span> tests</h2>
+<section id="la-selva-bird-counts" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="la-selva-bird-counts"><span class="header-section-number">9.3.1</span> La Selva Bird Counts</h3>
+<p>The La Selva station in Costa Rica performed Christmas Bird Counts for 23 years between 1989-2011 and used these data to analyze the status and trends of different birds within the region <span class="citation" data-cites="boyle_2016_4979259">(<a href="references.html#ref-boyle_2016_4979259" role="doc-biblioref">Boyle and Sigel 2016</a>)</span>. Here, we will look at their data for some of the “big groundbirds” - namely, members of the families <a href="https://en.wikipedia.org/wiki/Tinamou">Tinamidae</a> and <a href="https://en.wikipedia.org/wiki/Cracidae">Cracidae</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download La Selva data</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>laselva <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://zenodo.org/records/4979259/files/LaSelvaBirdTrendsDatatable.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 202 Columns: 20
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (8): ScientificName, CommonName, QualChg, Prob&gt;ChiSq, Diet_AB, Diet_BS,...
+dbl (10): MaxN, MeanAbund, NYears, TrendEstimate, StdError, L-RChiSquare, Me...
+lgl  (2): Extirpated?, Invading?
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># isolate the big groundbirds</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>big_groundbirds <span class="ot">&lt;-</span> laselva[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The researchers are curious about the following questions; use <span class="math inline">\(\chi^2\)</span> tests to answer them appropriately. For each, don’t forget to also state your <em>null</em> and <em>alternative</em> hypotheses, as well as your conclusion about whether you <em>support</em> or <em>reject</em> the null.</p>
+<ol type="1">
+<li>Is each species equally likely to be encountered across years (<code>NYears</code>)?</li>
+<li>Does each species have an equal high count (<code>MaxN</code>)?</li>
+</ol>
+</section>
+<section id="bicycle-counts-time-of-day" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="bicycle-counts-time-of-day"><span class="header-section-number">9.3.2</span> Bicycle counts: Time of day</h3>
+<p>We are going to revisit the bicycle data of <span class="citation" data-cites="weber_fremont_2019">Weber (<a href="references.html#ref-weber_fremont_2019" role="doc-biblioref">2019</a>)</span> to examine two different temporal patterns in bridge use.</p>
+<p>One question that the authors had was whether equal numbers of people use the bridge at different times of day between 8:00 and 17:00 on March 31st.</p>
+<p>First, run the following to load the whole dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>bicycles <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://zenodo.org/records/2648564/files/Fremont_Bridge_Hourly_Bicycle_Counts_by_Month_October_2012_to_present.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 56904 Columns: 3
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): Date
+dbl (2): Fremont Bridge East Sidewalk, Fremont Bridge West Sidewalk
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>bicycles <span class="ot">&lt;-</span> bicycles <span class="sc">|&gt;</span> </span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert to data frame</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert to date format</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">as.POSIXct</span>(Date, <span class="at">format =</span> <span class="st">"%m/%d/%Y %I:%M:%S %p"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#subset to March 30-31, 2019</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">year</span>(Date) <span class="sc">==</span> <span class="dv">2019</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">month</span>(Date) <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">day</span>(Date) <span class="sc">==</span> <span class="dv">30</span> <span class="sc">|</span> <span class="fu">day</span>(Date) <span class="sc">==</span> <span class="dv">31</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we will isolate the data of interest for 8:00 and 17:00 on March 31st.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>march_31 <span class="ot">&lt;-</span> bicycles <span class="sc">|&gt;</span> </span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">day</span>(Date) <span class="sc">==</span> <span class="dv">31</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">hour</span>(Date) <span class="sc">&gt;</span> <span class="dv">7</span> <span class="sc">&amp;</span> <span class="fu">hour</span>(Date) <span class="sc">&lt;</span> <span class="dv">18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Using a <span class="math inline">\(\chi^2\)</span> test, determine if the bicycle counts are the same for each hour in the <code>march_31</code> object for Eastbound traffic, for Westbound traffic, and for comparing Eastbound and Westbound traffic. Please list your null hypothesis, alternative hypothesis, and your conclusions.</p>
+</section>
+<section id="bicycles-date" class="level3" data-number="9.3.3">
+<h3 data-number="9.3.3" class="anchored" data-anchor-id="bicycles-date"><span class="header-section-number">9.3.3</span> Bicycles: Date</h3>
+<p>The researchers are also curious if the rate of bicyclists crossing the bridge were the same on March 30 and March 31 in 2019 between 8:00-17:00 for eastbound traffic. First, we will create a new comparative data frame. <em>Note how to do this, as you may have to do something similar on an exam</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>march_30 <span class="ot">&lt;-</span> bicycles <span class="sc">|&gt;</span> </span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">day</span>(Date) <span class="sc">==</span> <span class="dv">30</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">hour</span>(Date) <span class="sc">&gt;</span> <span class="dv">7</span> <span class="sc">&amp;</span> <span class="fu">hour</span>(Date) <span class="sc">&lt;</span> <span class="dv">18</span>)</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="co"># combine data frame by hour</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a><span class="co"># convert dates to hours</span></span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>march_30 <span class="ot">&lt;-</span> march_30 <span class="sc">|&gt;</span> </span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">Fremont Bridge West Sidewalk</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">hour</span>(Date)) <span class="sc">|&gt;</span> </span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"March 30"</span> <span class="ot">=</span> <span class="st">`</span><span class="at">Fremont Bridge East Sidewalk</span><span class="st">`</span>)</span>
+<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a>date_compare_data <span class="ot">&lt;-</span> march_31 <span class="sc">|&gt;</span>  </span>
+<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">Fremont Bridge West Sidewalk</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">hour</span>(Date)) <span class="sc">|&gt;</span> </span>
+<span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"March 31"</span> <span class="ot">=</span> <span class="st">`</span><span class="at">Fremont Bridge East Sidewalk</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb54-17"><a href="#cb54-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># combine data frames</span></span>
+<span id="cb54-18"><a href="#cb54-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">full_join</span>(march_30, <span class="at">by =</span> <span class="st">"Date"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb54-19"><a href="#cb54-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"Hour"</span> <span class="ot">=</span> Date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Perform your <span class="math inline">\(\chi^2\)</span> test to compare these dates. Don’t forget your null hypothesis, alternative hypothesis, and conclusion.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-boyle_2016_4979259" class="csl-entry" role="listitem">
+Boyle, W. A., and B. J. Sigel (2016). Data from: Ongoing changes in the avifauna of la selva biological station, costa rica: Twenty-three years of christmas bird counts. [Online.] Available at <a href="https://doi.org/10.5061/dryad.65v10">https://doi.org/10.5061/dryad.65v10</a>.
+</div>
+<div id="ref-weber_fremont_2019" class="csl-entry" role="listitem">
+Weber, G. (2019). Fremont <span>Bridge</span> <span>Hourly</span> <span>Bicycle</span> <span>Counts</span> by <span>Month</span> <span>October</span> 2012 to present. [Online.] Available at <a href="https://zenodo.org/records/2648564">https://zenodo.org/records/2648564</a>.
+</div>
+</div>
 </section>
 </section>
 
