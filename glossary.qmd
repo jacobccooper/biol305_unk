@@ -5,6 +5,58 @@ format: html
 editor: visual
 ---
 
+## Rounding & Formatting
+
+<details>
+
+<summary>Click for information on rounding</summary>
+
+As a reminder, we are following the rounding rules of the *Auk* and *Condor* (now *Ornithology* and *Ornithological Applications*).
+
+Specifically, these rules are as follows:
+
+-   **No naked decimals** (except for caliber)**:**
+
+    -   Preface all decimals with a leading zero; $0.002$ is correct, $.002$ is incorrect.
+
+    -   For caliber, such as with weapons, never have a leading zero; ex., .45 bullet.
+
+-   **Use the same number of decimals as the original data or the precision of the instrument:**
+
+    -   Ex., if precision is $0.01$, then all values should be rounded to hundredths.
+
+-   **Use the same number of decimals for values and uncertainties:**
+
+    -   Ex., $45 \pm 4$, $45.2 \pm 3.8$.
+
+-   **Round percentages to whole numbers\* (or to one decimal):**
+
+    -   For this class, can round to one decimal, but in the referenced publications *always* round to whole number. You will never miss points for rounding percentage to a whole number.
+
+-   **All test statistics should be rounded to two (2) decimal places:**
+
+    -   $F$, $t$, $p$, $\tau$, $\chi^2$, etc. should all be rounded to two decimal places.
+
+-   **All test statistics should show *degrees of freedom*:**
+
+    -   For values with *one* degree of freedom, list like $t_{(9)}=1.56$.
+
+    -   For values with multiple, list them; for ANOVA, put the degrees of freedom for Sum of Squares Between before degrees of freedom for Degrees of Error Within, like $F_{(5,43)}=5.23$.
+
+-   **Round *P*-values as follows:**
+
+    -   $P \ge 0.01$: round to ***two*** decimal places like $P = 0.24$.
+
+    -   $0.01 > P \ge 0.001$: round to ***three*** decimal places like $P = 0.005$.
+
+    -   $0.001 > P \ge 0.0001$: round to ***four*** decimal places like $P = 0.0007$.
+
+    -   $P < 0.0001$: list *exactly* as $P < 0.0001$.
+
+        -   **DO NOT** list without spaces, or as $P<.0001$
+
+</details>
+
 ## Common Commands
 
 ```{r, echo = F, eval = T, message = F}

@@ -1,6 +1,6 @@
 ---
 title: "Chisq_AK"
-author: "Caleb Rother"
+author: "Caleb Rother, Jacob C. Cooper"
 date: "2025-08-26"
 output: html_document
 ---
@@ -8,28 +8,53 @@ output: html_document
 ```{r}
 library(tidyverse)
 ```
+
 ***Question 9.1***
+
 ```{r}
 # download La Selva data
 laselva <- read_csv("https://zenodo.org/records/4979259/files/LaSelvaBirdTrendsDatatable.csv")
 # isolate the big groundbirds
 big_groundbirds <- laselva[1:6,]
+```
 
+
+```{r}
 #Test 1
 bigyearsall <- chisq.test(big_groundbirds$NYears)
-bigyearsp <- (1-bigyearsall$p.value)
-print(round(bigyearsp,3))
+bigyearsall
+```
 
+
+```{r}
+bigyearsp <- bigyearsall$p.value
+print(round(bigyearsp, 2))
+```
+
+
+```{r}
 #Test 2
 bigmaxall <- chisq.test(big_groundbirds$MaxN)
+bigmaxall
+```
+
+
+```{r}
 print(round(bigmaxall$p.value, 4))
 ```
 Null: There is no difference between yearly encounter distribution/high count.
-Alternatitive: There is no difference between yearly encounter distribution/high count.
+Alternative: There is no difference between yearly encounter distribution/high count.
 
-We reject the null in both cases due to p values less than alpha.
+We do not reject the null for different numbers of years being encountered ($\chi^2_{(5)} = 0.71, p = 0.98$).
+
+We do reject the null for high counts ($\chi^2_{(5)} = 76.45, p < 0.0001$).
 
 ***Question 9.2***
+
+Null: There is no difference in traffic depending on time on the east sidewalk.
+Null: There is no difference in traffic depending on time on the west sidewalk.
+Null: There is no difference in traffic between east and west sidewalks. 
+
 ```{r}
 bicycles <- read_csv("https://zenodo.org/records/2648564/files/Fremont_Bridge_Hourly_Bicycle_Counts_by_Month_October_2012_to_present.csv")
 bicycles <- bicycles |> 
@@ -44,41 +69,60 @@ bicycles <- bicycles |>
 march_31 <- bicycles |> 
   filter(day(Date) == 31) |> 
   filter(hour(Date) > 7 & hour(Date) < 18)
-
-#Eastbound
-eastall <- chisq.test(bicycles$`Fremont Bridge East Sidewalk`)
-print(round(eastall$p.value, 4))
-
-#Westbound
-westall <- chisq.test(bicycles$`Fremont Bridge West Sidewalk`)
-print(round(westall$p.value, 4))
-
-#Compared
-table_dir <- rbind(East = bicycles$`Fremont Bridge East Sidewalk`, West = bicycles$`Fremont Bridge West Sidewalk`)
-eastwestall <- chisq.test(table_dir, correct=FALSE)
-print(round(eastwestall$p.value, 4))
 ```
-Null: There is no difference in traffic depending on time on the east sidewalk.
-Null: There is no difference in traffic depending on time on the west sidewalk.
-Null: There is no difference in traffic between east and west sidewalks. 
 
-We reject the first two nulls, and accept the third. 
+
+```{r}
+#Eastbound
+eastall <- chisq.test(march_31$`Fremont Bridge East Sidewalk`)
+eastall
+```
+
+Eastbound traffic is not equally likely at all times of day ($\chi^2_{(9)} = 98.54, p < 0.0001$). We reject $H_0$.
+
+```{r}
+#Westbound
+westall <- chisq.test(march_31$`Fremont Bridge West Sidewalk`)
+westall
+```
+
+```{r}
+print(round(westall$p.value, 4))
+```
+
+Westbound traffic is not equally likely at all times of day ($\chi^2_{(9)} = 106.81, p < 0.0001$). We reject $H_0$.
+
+```{r}
+#Compared
+table_dir <- rbind(East = march_31$`Fremont Bridge East Sidewalk`, 
+                   West = march_31$`Fremont Bridge West Sidewalk`)
+eastwestall <- chisq.test(table_dir, correct=FALSE)
+eastwestall
+```
+
+
+```{r}
+print(round(eastwestall$statistic, 2))
+print(round(eastwestall$p.value, 2))
+```
+
+Traffic at a particular time of day is equally likely between traffic directions ($\chi^2_{(9)}=3.24$, $p = 0.95$). We fail to reject $H_0$.
 
 ***Question 9.3***
 ```{r}
-march_30 <- bicycles %>%
-  filter(day(Date) == 30, hour(Date) > 7 & hour(Date) < 18) %>%
-  select(-`Fremont Bridge West Sidewalk`) %>%
-  mutate(Date = hour(Date)) %>%
+march_30 <- bicycles  |> 
+  filter(day(Date) == 30, hour(Date) > 7 & hour(Date) < 18) |>
+  select(-`Fremont Bridge West Sidewalk`) |>
+  mutate(Date = hour(Date)) |>
   rename("March 30" = `Fremont Bridge East Sidewalk`)
 
-march_31_east <- march_31 %>%
-  select(-`Fremont Bridge West Sidewalk`) %>%
-  mutate(Date = hour(Date)) %>%
+march_31_east <- march_31 |>
+  select(-`Fremont Bridge West Sidewalk`) |>
+  mutate(Date = hour(Date)) |>
   rename("March 31" = `Fremont Bridge East Sidewalk`)
 
-date_compare <- full_join(march_31_east, march_30, by = "Date") %>%
-  rename("Hour" = Date) %>%
+date_compare <- full_join(march_31_east, march_30, by = "Date") |>
+  rename("Hour" = Date) |>
   arrange(Hour)
 
 # Create table for chi-sq
@@ -86,9 +130,10 @@ date_table <- rbind(`March 31` = date_compare$`March 31`,
                     `March 30` = date_compare$`March 30`)
 
 chisq_date <- chisq.test(date_table)
+chisq_date
 print(round((1-chisq_date$p.value), 4))
 ```
 Null: There is no difference of traffic beteween days.
 Alternerative: There is a difference of traffic between days. 
 
-We fail to reject the null. 
+We fail to reject the null. There is no difference between days with respect to traffic ($\chi^2_{(9)}=3.93$, $p = 0.92$).
