@@ -1,0 +1,94 @@
+---
+title: "Chisq_AK"
+author: "Caleb Rother"
+date: "2025-08-26"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+```
+***Question 9.1***
+```{r}
+# download La Selva data
+laselva <- read_csv("https://zenodo.org/records/4979259/files/LaSelvaBirdTrendsDatatable.csv")
+# isolate the big groundbirds
+big_groundbirds <- laselva[1:6,]
+
+#Test 1
+bigyearsall <- chisq.test(big_groundbirds$NYears)
+bigyearsp <- (1-bigyearsall$p.value)
+print(round(bigyearsp,3))
+
+#Test 2
+bigmaxall <- chisq.test(big_groundbirds$MaxN)
+print(round(bigmaxall$p.value, 4))
+```
+Null: There is no difference between yearly encounter distribution/high count.
+Alternatitive: There is no difference between yearly encounter distribution/high count.
+
+We reject the null in both cases due to p values less than alpha.
+
+***Question 9.2***
+```{r}
+bicycles <- read_csv("https://zenodo.org/records/2648564/files/Fremont_Bridge_Hourly_Bicycle_Counts_by_Month_October_2012_to_present.csv")
+bicycles <- bicycles |> 
+  # convert to data frame
+  as.data.frame() |> 
+  # convert to date format
+  mutate(Date = as.POSIXct(Date, format = "%m/%d/%Y %I:%M:%S %p")) |> 
+  #subset to March 30-31, 2019
+  filter(year(Date) == 2019) |> 
+  filter(month(Date) == 3) |> 
+  filter(day(Date) == 30 | day(Date) == 31)
+march_31 <- bicycles |> 
+  filter(day(Date) == 31) |> 
+  filter(hour(Date) > 7 & hour(Date) < 18)
+
+#Eastbound
+eastall <- chisq.test(bicycles$`Fremont Bridge East Sidewalk`)
+print(round(eastall$p.value, 4))
+
+#Westbound
+westall <- chisq.test(bicycles$`Fremont Bridge West Sidewalk`)
+print(round(westall$p.value, 4))
+
+#Compared
+table_dir <- rbind(East = bicycles$`Fremont Bridge East Sidewalk`, West = bicycles$`Fremont Bridge West Sidewalk`)
+eastwestall <- chisq.test(table_dir, correct=FALSE)
+print(round(eastwestall$p.value, 4))
+```
+Null: There is no difference in traffic depending on time on the east sidewalk.
+Null: There is no difference in traffic depending on time on the west sidewalk.
+Null: There is no difference in traffic between east and west sidewalks. 
+
+We reject the first two nulls, and accept the third. 
+
+***Question 9.3***
+```{r}
+march_30 <- bicycles %>%
+  filter(day(Date) == 30, hour(Date) > 7 & hour(Date) < 18) %>%
+  select(-`Fremont Bridge West Sidewalk`) %>%
+  mutate(Date = hour(Date)) %>%
+  rename("March 30" = `Fremont Bridge East Sidewalk`)
+
+march_31_east <- march_31 %>%
+  select(-`Fremont Bridge West Sidewalk`) %>%
+  mutate(Date = hour(Date)) %>%
+  rename("March 31" = `Fremont Bridge East Sidewalk`)
+
+date_compare <- full_join(march_31_east, march_30, by = "Date") %>%
+  rename("Hour" = Date) %>%
+  arrange(Hour)
+
+# Create table for chi-sq
+date_table <- rbind(`March 31` = date_compare$`March 31`,
+                    `March 30` = date_compare$`March 30`)
+
+chisq_date <- chisq.test(date_table)
+print(round((1-chisq_date$p.value), 4))
+```
+Null: There is no difference of traffic beteween days.
+Alternerative: There is a difference of traffic between days. 
+
+We fail to reject the null. 
