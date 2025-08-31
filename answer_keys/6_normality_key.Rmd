@@ -1,0 +1,241 @@
+---
+title: "Normal Key"
+author: "UNK Bio"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+
+## Homework: Normal distributions
+
+Submit one `html` file, as created in *RStudio*, with you answers to the following questions. For maximum clarity, create headings to separate your problems. (Remember, a header can be invoked by placing '`#`' in front of a line of text. For example: the header here is written as `# Homework: Chapter 8`).
+
+### $Z$ to $p$ 
+
+For each of the following, report the corresponding $p$ value for the $z$ score.
+
+A.  2.3
+
+```{r}
+pnorm(q = 2.3) |> round(2)
+```
+
+B.  6.4
+
+```{r}
+pnorm(q = 6.4) |> round(2)
+```
+
+C.  -1.5
+
+```{r}
+pnorm(q = -1.5) |> round(2)
+```
+
+
+D.  -9.2
+
+```{r}
+pnorm(q = -9.2) |> round(2)
+```
+
+
+E.  0.3
+
+```{r}
+pnorm(q = 0.3) |> round(2)
+```
+
+
+### $P$ to $z$
+
+For the following, report the corresponding $z$ score for the stated $p$ value. For this question, assume every value is "looking left" (`lower.tail = T`).
+
+A.  0.96
+
+```{r}
+qnorm(p = 0.96) |> round(2)
+```
+
+B.  0.23
+
+```{r}
+qnorm(p = 0.23) |> round(2)
+```
+
+C.  0.14
+
+```{r}
+qnorm(p = 0.14) |> round(2)
+```
+
+D.  0.0036
+
+```{r}
+qnorm(p = 0.0036) |> round(2)
+```
+
+E.  0.47
+
+```{r}
+qnorm(p = 0.47) |> round(2)
+```
+
+F.  0.62
+
+```{r}
+qnorm(p = 0.62) |> round(2)
+```
+
+### Confidence intervals
+
+For the following scenarios, calculate the confidence interval for the mean.
+
+```{r}
+# CI <- Z*(sdtemp/sqrt(n))
+
+# CI
+```
+
+
+A.  $\bar{x} = 7.6$, $\sigma = 1.3$, $n = 5$, $CI = 99\%$
+
+```{r}
+CI <- (qnorm(p = 0.995)*(1.3/sqrt(5))) |> round(2)
+
+print(paste0("7.6 +/- ",CI))
+```
+
+B.  $\bar{x} = -4.9$, $\sigma = 0.7$, $n = 6$, $CI = 95\%$
+
+```{r}
+CI <- (qnorm(p = 0.975)*(0.7/sqrt(6))) |> round(2)
+
+print(paste0("-4.9 +/- ",CI))
+```
+
+C.  $\bar{x} = 2.1$, $\sigma = 0.4$, $n = 10$, $CI = 90\%$
+
+```{r}
+CI <- (qnorm(p = 0.95)*(0.4/sqrt(10))) |> round(2)
+
+print(paste0("2.1 +/- ",CI))
+```
+
+D.  $\bar{x} = 0.1$, $\sigma = 3$, $n = 12$, $CI = 95\%$
+
+```{r}
+CI <- (qnorm(p = 0.975)*(3/sqrt(12))) |> round(2)
+
+print(paste0("0.1 +/- ",CI))
+```
+
+### Italian climate - spring
+
+As part of a study on how climate affects the weights of Alpine Ibex, researchers recorded the maximum temperature in the spring at their study site [@brambilla_2024_12749273]. The researchers find another site with an average spring maximum temperature of 6.2ºC, and claim that it is warmer than their study site. Are the correct?
+
+The data for this problem will be in the object `spring_temps` below:
+
+```{r}
+# load weather data
+weather <- read_csv("https://zenodo.org/records/12749273/files/20240505_env_var_dataset.csv")
+
+# isolate spring temperatures
+spring_temps <- weather$SpringTmax |>
+  # remove NA values
+  na.omit() |> 
+  # ensure data are in correct numeric format
+  as.numeric()
+```
+
+Evaluate their claims by:
+
+1.  Calculating a $z$-score for their temperature (6.2).
+
+```{r}
+zscore <- function(xbar, mu, sd.x, n = 1){
+  z <- (xbar - mu)/(sd.x/sqrt(n))
+  return(z)
+}
+
+mu <- mean(spring_temps)
+sd.x <- sd(spring_temps)
+n <- length(spring_temps)
+
+xbar <- 6.2
+
+Z <- zscore(xbar = xbar, mu = mu, sd.x = sd.x, n = n)
+
+Z |> round(2)
+```
+
+
+2.  Calculating a $p$-value for their temperature (6.2).
+
+```{r}
+pnorm(q = Z) |> round(2)
+```
+
+3.  Reporting a 95% confidence interval for the mean for the temperatures reported in their dataset.
+
+```{r}
+CI <- (qnorm(p = 0.975)*(sd.x/sqrt(n))) |> round(2)
+
+print(paste0(round(mu, 2), " +/- ", CI))
+```
+
+4.  In a single sentence, state whether you find this temperature to be significantly warmer than the mean or not, stating what evidence you are using to make this conclusion.
+
+The temperature is not abnormal and falls within the range of expected temperatures for the study site ($p = 0.07$, $Z = 1.44$).
+
+### Italian climate - Summer
+
+Using the same dataset (`weather`) as the previous question, isolate the data for the summer (column `SummTmax`). The researchers find the average temperature of another site is 13.6ºC, and claim this is warmer than their research site. Are they correct? As with the previous question, complete the following:
+
+1.  Calculating a $z$-score for their temperature (13.6ºC).
+
+```{r}
+summer_temps <- weather$SummTmax |> 
+  na.omit() |> 
+  as.numeric()
+
+zscore <- function(xbar, mu, sd.x, n = 1){
+  z <- (xbar - mu)/(sd.x/sqrt(n))
+  return(z)
+}
+
+mu <- mean(summer_temps)
+sd.x <- sd(summer_temps)
+n <- length(summer_temps)
+
+xbar <- 13.6
+
+Z <- zscore(xbar = xbar, mu = mu, sd.x = sd.x, n = n)
+
+Z |> round(2)
+```
+
+
+2.  Calculating a $p$-value for their temperature (13.6ºC).
+
+```{r}
+pnorm(q = Z) |> round(2)
+```
+
+3.  Reporting a 95% confidence interval for the mean for the temperatures reported in their dataset.
+
+```{r}
+CI <- (qnorm(p = 0.975)*(sd.x/sqrt(n))) |> round(2)
+
+print(paste0(round(mu, 2), " +/- ", CI))
+```
+
+4.  In a single sentence, state whether you find this temperature to be significantly warmer than the mean or not, stating what evidence you are using to make this conclusion.
+
+The temperature of 13.6 is significantly higher than the normal range of variation for the site ($Z = 2.42$, $p = 0.01$).
+
+*Note* for this question, you will have to isolate the column and perform all of the analysis steps yourself.
