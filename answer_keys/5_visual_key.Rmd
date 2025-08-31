@@ -1,0 +1,224 @@
+---
+title: "5_visual_key"
+author: "UNK Bio"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(moments)
+```
+
+## Homework: Visualizing data
+
+**Directions:**
+
+Please complete all computer portions in an `rmarkdown` document knitted as an html. Upload any "by hand" calculations as images in the HTML or separately on *Canvas*.
+
+### Helpful hint
+
+**HINT**: For 3.5, consider just making a vector of the values of interest for a histogram.
+
+For example, see the following. For reference:
+
+-   `c` means "concatenate", or place things together in an object.
+
+```{r}
+# numeric vector data for counts
+y <- c(17,24,16)
+
+# manually create a histogram using barplot
+barplot(y, 
+        # axis names must be true
+        axisnames = T, 
+        # input names here
+        # each category as a separate quoted character string
+        names.arg = c("Cat 1", "Cat 2", "Cat 3"))
+```
+
+### Problem 1
+
+The Research Institute Nature and Forest in Brussels, Belgium, conducted a survey of fish from the southern North Sea to help with the identification of fish from seabird diets [@verstraete_photos_2020]. We will be looking at the lengths one specific taxon - the Atlantic Herring *Clupea harengus*.
+
+Copy and run the code below to load in your data. Use the object `clupea.lengths` for this problem.
+
+```{r, message=F}
+# download fish data
+fishes <- read_csv("https://zenodo.org/records/4066594/files/reference_data.csv")
+
+# isolate Clupea harengus
+clupea <- fishes |> 
+  filter(scientific_name == "Clupea harengus")
+
+# get vector of lengths
+# remove missing data
+clupea.lengths <- clupea$fish_length_mm |> 
+  na.omit()
+```
+
+1.  Create a histogram of these data.
+
+```{r}
+hist(clupea.lengths,
+     xlab = "Clupea lengths")
+```
+
+
+2.  Create a cumulative frequency plot of these data.
+
+```{r}
+plot(ecdf(clupea.lengths),
+     # change y lab
+     ylab = "Frequency (%)",
+     # change x lab
+     xlab = "Length (mm)",
+     # change title
+     main = "Cumulative frequency of Clupea lengths")
+```
+
+3.  Calculate the kurtosis of these data, and make a conclusion about the kurtosis of the dataset.
+
+```{r}
+(kurtosis(clupea.lengths) - 3) |> round(2)
+```
+
+The kurtosis of the *Clupea* lengths is 4.26, which is leptokurtic.
+
+4.  Calculate the skewness of these data, and make a conclusion about the skewness of the dataset.
+
+```{r}
+skewness(clupea.lengths) |> round(2)
+```
+
+These data are positively skewed (i.e., skewed to the right).
+
+5.  Create a boxplot of these data.
+
+```{r}
+boxplot(clupea.lengths,
+        ylim = c(0,300),
+        pch = 19)
+```
+
+
+### Problem 2
+
+The Fremont Bridge in Seattle is one of the only bridges that connects the north and south sides of the city, crossing the Fremont Cut - a navigational canal between the Puget Sound and Lake Union & Lake Washington. As such, it is an important transportation corridor. We will be looking at counts of bicyclists, taken hourly for the east (predominately northbound) side over a seven year period [@weber_fremont_2019]. This dataset has 56,904 records - thus, this is not something that would be easily done without the use of a program like *R*!
+
+```{r, message=FALSE}
+bicycles <- read_csv("https://zenodo.org/records/2648564/files/Fremont_Bridge_Hourly_Bicycle_Counts_by_Month_October_2012_to_present.csv")
+
+bike.count <- bicycles$`Fremont Bridge East Sidewalk` |> 
+  na.omit()
+```
+
+1.  Create a histogram of these data.
+
+```{r}
+hist(bike.count,
+     xlab = "Bicycle count",
+     main = "Fremont bridge biker count (Eastbound)")
+```
+
+
+2.  Create a cumulative frequency plot of these data.
+
+```{r}
+plot(ecdf(bike.count),
+     xlab = "Number of bikes per hour",
+     ylab = "Frequency (%)",
+     main = "Cumulative frequency of bike counts")
+```
+
+3.  Calculate the kurtosis of these data, and make a conclusion about the kurtosis of the dataset.
+
+```{r}
+(kurtosis(bike.count)-3) |> round(2)
+```
+
+These data are significantly leptokurtic.
+
+4.  Calculate the skewness of these data, and make a conclusion about the skewness of the dataset.
+
+```{r}
+skewness(bike.count) |> round(2)
+```
+
+These data are significantly skewed to the right (i.e., positively).
+
+5.  Create a boxplot of these data.
+
+```{r}
+boxplot(bike.count, pch = ".")
+```
+
+We have lots of positive outliers.
+
+### Problem 3
+
+Take the object `bike.count` from the previous problem and perform a *log transformation* of the data. To do this, we will take the natural log of the dataset plus one. We must add 1 to every value in the dataset, because the natural log of 0 is negative infinity; adding one makes every value in the dataset quantifiable as the minimum value for any count data is 0.
+
+Perform the following action on your computer, replacing `x` with your `bike.data` object. Name your object `log.bikes` instead of `log.x`.
+
+```{r, eval = FALSE}
+log.x <- log(x + 1)
+```
+
+After performing the log transformation, complete the following.
+
+```{r}
+log.bike.count <- log(bike.count + 1)
+```
+
+1.  Create a histogram of these data.
+
+```{r}
+hist(log.bike.count,
+     xlab = "Bike Count (Log)",
+     main = "Histogram of log of bike count per hour")
+```
+
+
+2.  Create a cumulative frequency plot of these data.
+
+```{r}
+plot(ecdf(log.bike.count),
+     ylab = "Frequency (%)",
+     xlab = "Log of Bike Count per Hour",
+     main = "Cumulative Frequency of Log Bike Counts")
+```
+
+3.  Calculate the kurtosis of these data, and make a conclusion about the kurtosis of the dataset.
+
+```{r}
+(kurtosis(log.bike.count)-3) |> round(2)
+```
+
+These data show no significant kurtosis, and are mesokurtic.
+
+4.  Calculate the skewness of these data, and make a conclusion about the skewness of the dataset.
+
+```{r}
+skewness(log.bike.count)
+```
+
+These data are not significantly skewed.
+
+5.  Create a boxplot of these data.
+
+```{r}
+boxplot(log.bike.count)
+```
+
+There are no outliers in the dataset.
+
+6.  How did the log transformation change these data?
+
+The log transformation made the data much more normal and easier to analyze.
+
+### Problem 4
+
+Is there pseudoreplication in the bicycle dataset? Why or why not?
+
+There is potentially pseudoreplication, as we don't know if the same people are crossing the bridge multiple times in a day or multiple times within the study period.
