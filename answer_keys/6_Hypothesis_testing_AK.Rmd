@@ -1,0 +1,219 @@
+---
+title: "6_Hypothesis_testing_AK"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+zscore <- function(xbar, mu, sd.x, n = 1){
+  z <- (xbar - mu)/(sd.x/sqrt(n))
+  return(z)
+}
+library(dplyr)
+```
+
+###Question 1
+
+#A
+
+```{r}
+pnorm(2.3, lower.tail = FALSE)
+```
+
+#B
+
+```{r}
+pnorm(6.4, lower.tail = FALSE)
+```
+
+#C
+
+```{r}
+pnorm(-1.5)
+```
+
+#D
+
+```{r}
+pnorm(-9.2)
+```
+
+#E
+
+```{r}
+pnorm(0.3, lower.tail = FALSE)
+```
+
+###Question 2
+
+#A
+
+```{r}
+qnorm(0.96, lower.tail = TRUE)
+```
+
+#B
+
+```{r}
+qnorm(0.23, lower.tail = TRUE)
+```
+
+#C
+
+```{r}
+qnorm(0.14, lower.tail = TRUE)
+```
+
+#D
+
+```{r}
+qnorm(0.0036, lower.tail = TRUE)
+```
+
+#E
+
+```{r}
+qnorm(0.47, lower.tail = TRUE)
+```
+
+#F
+
+```{r}
+qnorm(0.62, lower.tail = TRUE)
+```
+
+###Question 3
+
+#A
+
+```{r}
+xbar=7.6
+n=5
+sd=1.3
+Z <- qnorm(0.99)
+
+CI <- Z*(sd/sqrt(n))
+
+print(paste(round(xbar, 2),
+      "+/-",
+      round(CI, 2)))
+```
+
+#B
+
+```{r}
+xbar=-4.9
+n=6
+sd=0.7
+Z <- qnorm(0.95)
+
+CI <- Z*(sd/sqrt(n))
+
+print(paste(round(xbar, 2),
+      "+/-",
+      round(CI, 2)))
+```
+
+#C
+
+```{r}
+xbar=2.1
+n=10
+sd=0.4
+Z <- qnorm(0.90)
+
+CI <- Z*(sd/sqrt(n))
+
+print(paste(round(xbar, 2),
+      "+/-",
+      round(CI, 2)))
+```
+
+#D
+
+```{r}
+xbar=0.1
+n=12
+sd=3
+Z <- qnorm(0.95)
+
+CI <- Z*(sd/sqrt(n))
+
+print(paste(round(xbar, 2),
+      "+/-",
+      round(CI, 2)))
+```
+
+###Question 4
+
+```{r}
+# load weather data
+weather <- read_csv("https://zenodo.org/records/12749273/files/20240505_env_var_dataset.csv")
+
+# isolate spring temperatures
+spring_temps <- weather$SpringTmax |>
+  # remove NA values
+  na.omit() |> 
+  # ensure data are in correct numeric format
+  as.numeric()
+```
+
+```{r}
+z_spring <- zscore(xbar = 6.2, mu = (mean(spring_temps)), sd.x = sd(spring_temps), n=length(spring_temps))
+
+print(z_spring)
+```
+```{r}
+pnorm(z_spring, lower.tail= FALSE)
+```
+```{r}
+xbar= (mean(spring_temps))
+n= (length(spring_temps))
+sd= (sd(spring_temps))
+Z <- (qnorm(0.95))
+
+CI <- Z*(sd/sqrt(n))
+
+print(paste(round(xbar, 2),
+      "+/-",
+      round(CI, 2)))
+```
+This temperature is not significantly warmer. We can tell because it lies within the confidence interval and the p-value is not less than alpha. 
+
+###Question 5
+
+```{r}
+# load weather data
+weather <- read_csv("https://zenodo.org/records/12749273/files/20240505_env_var_dataset.csv")
+
+# isolate spring temperatures
+summer_temps <- weather$SummTmax |>
+  # remove NA values
+  na.omit() |> 
+  # ensure data are in correct numeric format
+  as.numeric()
+```
+
+```{r}
+z_summer <- zscore(xbar = 13.6, mu = (mean(summer_temps)), sd.x = sd(summer_temps), n=length(summer_temps))
+
+print(z_summer)
+```
+```{r}
+pnorm(z_summer, lower.tail= FALSE)
+```
+```{r}
+xbar= (mean(summer_temps))
+n= (length(summer_temps))
+sd= (sd(summer_temps))
+Z <- (qnorm(0.95))
+
+CI <- Z*(sd/sqrt(n))
+
+print(paste(round(xbar, 2),
+      "+/-",
+      round(CI, 2)))
+```
+This temperature is significantly warmer. We can tell because it does not lie within the confidence interval and the p-value is less than alpha. 
+
+
