@@ -5,7 +5,6 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
-
 # 8.6.1 Problem 1
 
 There is a claw machine at the local fair that is notoriously difficult to use. In fact, it is estimated that only 1 in 50 attempts are successful at getting a toy out of the machine. What is the probability that you would try it 50 times and win thrice?
@@ -18,7 +17,7 @@ The probability is low - 7.9% (round to 8%).
 
 # 8.6.2 Problem 2
 
-Whooping Cranes Grus americanus are some of the most endangered birds in North America, with only 557 birds in the population that migrates through Nebraska. Conversely, approximately 736,000 Sandhill Cranes Antigone canadensis migrate through Nebraska. Assuming that census counts of flocks of 5000 cranes have the expected average ratio of cranes, what are the odds of finding a crane flock with two or more Whooping Cranes?
+Whooping Cranes *Grus americanus* are some of the most endangered birds in North America, with only 557 birds in the population that migrates through Nebraska. Conversely, approximately 736,000 Sandhill Cranes *Antigone canadensis* migrate through Nebraska. Assuming that census counts of flocks of 5000 cranes have the expected average ratio of cranes, what are the odds of finding a crane flock with two or more Whooping Cranes?
 
 ```{r}
 lower <- sum(dbinom(x = 0:1, size = 5000, prob = (557/736000)))
@@ -72,6 +71,8 @@ There are approximately 3 severe storm warnings per 16 week semester at UNK. Wha
 dbinom(x = 0, size = 16, prob = 3/16)
 ```
 
+Around 3.6%.
+
 # 8.6.7 Problem 7
 
 You are giving mice an experimental treatment that is designed to change their fur color. In a trial of 500 mice, 15 had their fur change color. Using this precedent, are the odds of having 6 mice have their fur change color in another trial of 500 individuals?
@@ -80,18 +81,18 @@ You are giving mice an experimental treatment that is designed to change their f
 dbinom(x = 6, size = 500, prob = 15/500)
 ```
 
-8.6.8 Problem 8
+# 8.6.8 Problem 8
 
 What are the odds of rolling no fours on two twenty-sided die?
 
 ```{r}
-# odds of succeeding
-success <- dbinom(x = 1, size = 2, prob = 1/20)
+# odds of not getting a four
+success <- dbinom(x = 0, size = 2, prob = 1/20)
 
-(1-success)
+print(success)
 ```
 
-90.5% chance of not rolling that.
+90.25% chance of not rolling that.
 
 # 8.6.9 Problem 9
 
