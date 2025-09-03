@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Melissa Wuellner, Jacob C. Cooper">
 
-<title>15&nbsp; Multivariate methods – Biology 305: Biostatistics</title>
+<title>8&nbsp; Exam 2 Practice – Biology 305: Biostatistics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -54,26 +55,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -83,8 +65,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./picktest.html" rel="next">
-<link href="./cor_reg.html" rel="prev">
+<link href="./probdist.html" rel="next">
+<link href="./transformations.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -122,6 +104,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -134,7 +145,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./multivariate.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Multivariate methods</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./exam2practice.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exam 2 Practice</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -209,7 +220,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exam2practice.html" class="sidebar-item-text sidebar-link">
+  <a href="./exam2practice.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exam 2 Practice</span></span></a>
   </div>
 </li>
@@ -251,7 +262,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./multivariate.html" class="sidebar-item-text sidebar-link active">
+  <a href="./multivariate.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Multivariate methods</span></span></a>
   </div>
 </li>
@@ -289,17 +300,8 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#multivariate-analyses" id="toc-multivariate-analyses" class="nav-link active" data-scroll-target="#multivariate-analyses"><span class="header-section-number">15.1</span> Multivariate analyses</a></li>
-  <li><a href="#principal-components" id="toc-principal-components" class="nav-link" data-scroll-target="#principal-components"><span class="header-section-number">15.2</span> Principal components</a></li>
-  <li><a href="#clustering" id="toc-clustering" class="nav-link" data-scroll-target="#clustering"><span class="header-section-number">15.3</span> Clustering</a>
-  <ul class="collapse">
-  <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link" data-scroll-target="#k-means-clustering"><span class="header-section-number">15.3.1</span> K-means clustering</a></li>
-  <li><a href="#hierarchical-clustering" id="toc-hierarchical-clustering" class="nav-link" data-scroll-target="#hierarchical-clustering"><span class="header-section-number">15.3.2</span> Hierarchical clustering</a></li>
-  </ul></li>
-  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework"><span class="header-section-number">15.4</span> Homework</a>
-  <ul class="collapse">
-  <li><a href="#disentangling-microbiomes" id="toc-disentangling-microbiomes" class="nav-link" data-scroll-target="#disentangling-microbiomes"><span class="header-section-number">15.4.1</span> Disentangling microbiomes</a></li>
-  </ul></li>
+  <li><a href="#cyclones" id="toc-cyclones" class="nav-link active" data-scroll-target="#cyclones"><span class="header-section-number">8.1</span> Cyclones</a></li>
+  <li><a href="#minnows" id="toc-minnows" class="nav-link" data-scroll-target="#minnows"><span class="header-section-number">8.2</span> Minnows</a></li>
   </ul>
 </nav>
     </div>
@@ -308,13 +310,19 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Multivariate methods</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exam 2 Practice</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Melissa Wuellner, Jacob C. Cooper </p>
+          </div>
+  </div>
     
   
     
@@ -325,214 +333,205 @@ div.csl-indent {
 </header>
 
 
-<section id="multivariate-analyses" class="level2" data-number="15.1">
-<h2 data-number="15.1" class="anchored" data-anchor-id="multivariate-analyses"><span class="header-section-number">15.1</span> Multivariate analyses</h2>
-<p>Multivariate analyses are commonly used to help understand the variation that exists in large, multidimensional datasets. These analyses can help us understand relationships among individuals and help us determine how many groups (and what groups) exist in a dataset.</p>
-<p>For this particular walkthrough, we will be using data on the Northern Double-collared Sunbird <em>Cinnyris reichenowi sensu lato</em> complex from equatorial Afromontane regions <span class="citation" data-cites="cooper_multiple_2021 cooper_data_2021">(<a href="references.html#ref-cooper_multiple_2021" role="doc-biblioref">Cooper et al. 2021a</a>, <a href="references.html#ref-cooper_data_2021" role="doc-biblioref">b</a>)</span>.</p>
+<p>Please complete the following problems as practice for Exam 2. <em>Note</em> that you may need to load specific packages from the previous exercises to get your code to work.</p>
+<section id="cyclones" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="cyclones"><span class="header-section-number">8.1</span> Cyclones</h2>
+<p>Consider the following dataset collected in the same year:</p>
+<table class="caption-top table">
+<caption>Counts of cyclones per latitudinal band.</caption>
+<thead>
+<tr class="header">
+<th>Latitudinal Band</th>
+<th>Season</th>
+<th>Number of cyclones</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>40 - 49º S</td>
+<td>Fall</td>
+<td>370</td>
+</tr>
+<tr class="even">
+<td>40 - 49º S</td>
+<td>Winter</td>
+<td>452</td>
+</tr>
+<tr class="odd">
+<td>40 - 49º S</td>
+<td>Spring</td>
+<td>273</td>
+</tr>
+<tr class="even">
+<td>40 - 49º S</td>
+<td>Summer</td>
+<td>422</td>
+</tr>
+<tr class="odd">
+<td>50 - 59º S</td>
+<td>Fall</td>
+<td>526</td>
+</tr>
+<tr class="even">
+<td>50 - 59º S</td>
+<td>Winter</td>
+<td>624</td>
+</tr>
+<tr class="odd">
+<td>50 - 59º S</td>
+<td>Spring</td>
+<td>513</td>
+</tr>
+<tr class="even">
+<td>50 - 59º S</td>
+<td>Summer</td>
+<td>1059</td>
+</tr>
+<tr class="odd">
+<td>60 - 69º S</td>
+<td>Fall</td>
+<td>980</td>
+</tr>
+<tr class="even">
+<td>60 - 69º S</td>
+<td>Winter</td>
+<td>1200</td>
+</tr>
+<tr class="odd">
+<td>60 - 69º S</td>
+<td>Spring</td>
+<td>995</td>
+</tr>
+<tr class="even">
+<td>60 - 69º S</td>
+<td>Summer</td>
+<td>1751</td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li>Classify each of the three variables as either an explanatory or a response variable. Justify your answer.</li>
+<li>Classify each of the three variables as <em>nominal</em>, <em>ordinal</em>, <em>interval</em> or <em>ratio</em> data. Justify your answer.</li>
+<li>State the null and alternative hypotheses for this scenario. <em>Note</em>: there are two sets of null/alternative hypotheses.</li>
+<li>Calculate the mean, median, and mode of your response variable. Based on your results, would you expect your data to be normally distributed or not? Justify your answer.</li>
+</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note - you can combine numbers into a vector like so</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>cinnyris <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.github.com/jacobccooper/biol305_unk/main/datasets/cinnyris.csv"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>male_cinnyris <span class="ot">&lt;-</span> cinnyris <span class="sc">|&gt;</span> </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Genus =</span> <span class="fu">as.factor</span>(Genus)) <span class="sc">|&gt;</span> </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Species =</span> <span class="fu">as.factor</span>(Species)) <span class="sc">|&gt;</span> </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Subspecies =</span> <span class="fu">as.factor</span>(Subspecies)) <span class="sc">|&gt;</span> </span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">==</span> <span class="st">"Adult"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">"Male"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">Collection Name</span><span class="st">`</span>, <span class="sc">-</span>Locality, <span class="sc">-</span>Country, <span class="sc">-</span>Age, </span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>         <span class="sc">-</span><span class="st">`</span><span class="at">Notes / Existing Damage Precluding Measurements</span><span class="st">`</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="principal-components" class="level2" data-number="15.2">
-<h2 data-number="15.2" class="anchored" data-anchor-id="principal-components"><span class="header-section-number">15.2</span> Principal components</h2>
-<details>
-<summary>
-Click here for an overview of PCA
-</summary>
-<p>A very common method of visualizing variation in population is using principal components analyses (PCA). Principal components help collapse multidimensional data into a few dimensions that explain the most variation possible across the dataset.</p>
-<p>For principal components, we want to use the library <code>vegan</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: permute</code></pre>
-</div>
-</div>
-<p>The function for principal components in <code>vegan</code> is <code>rda</code>, which will only work on a whole dataframe with no non-numeric data. Thus, we must create a new object of only numerical data and then re-merge it with the original dataframe. The row order is maintained, so this will not be an issue.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>male.cinnyris.data <span class="ot">&lt;-</span> male_cinnyris <span class="sc">|&gt;</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Genus, <span class="sc">-</span>Species, <span class="sc">-</span>Subspecies, </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>         <span class="sc">-</span>Collection, <span class="sc">-</span>Catalog, <span class="sc">-</span>Locality2, <span class="sc">-</span>Sex)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>cinnyris.pca <span class="ot">&lt;-</span> <span class="fu">rda</span>(male.cinnyris.data)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>cinnyris.pca</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-Call: rda(X = male.cinnyris.data)
-
-              Inertia Rank
-Total              23     
-Unconstrained      23    6
-
-Inertia is variance
-
-Eigenvalues for unconstrained axes:
-   PC1    PC2    PC3    PC4    PC5    PC6 
-15.620  4.443  1.940  0.877  0.076  0.040 </code></pre>
+<pre><code>[1] 1 2 3 4 5 6</code></pre>
 </div>
 </div>
-<p>Above, we can see that we now have a complex object that contains our PCA. We can use the function <code>biplot</code> to see how our data look and how our variables contributed to the principal components.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(cinnyris.pca)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ordihull</span>(cinnyris.pca,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">group =</span> male_cinnyris<span class="sc">$</span>Subspecies)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="multivariate_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>We can also do a <code>ggplot</code> to color our data and see how it works. Let’s combine our datasets so we can do this.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cinnyris.male.pca <span class="ot">&lt;-</span> <span class="fu">cbind</span>(male_cinnyris, </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                           <span class="co"># extract PC values</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                           cinnyris.pca<span class="sc">$</span>CA<span class="sc">$</span>u)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cinnyris.male.pca, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2)) <span class="sc">+</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="multivariate_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>To the naked eye, these data seem to fall into two major clusters. This can be examined again, this time assigning colors to one of our explanatory variables: subspecies.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cinnyris.male.pca, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">colour =</span> Subspecies)) <span class="sc">+</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ellipse</span>() <span class="sc">+</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Too few points to calculate an ellipse</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 1 row containing missing values or values outside the scale range
-(`geom_path()`).</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="multivariate_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>As we can see, many of these birds fall into one of the two groups. Only one population - <em>genderuensis</em> - seems to really bridge both groups.</p>
-<p>The following shows how each variable contributed to each principal component:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>cinnyris.pca<span class="sc">$</span>CA<span class="sc">$</span>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                                                  PC1          PC2         PC3
-Right.wing.chord                          -0.61936877  0.498711666  0.60193981
-Tail.length                               -0.69190828 -0.709947486 -0.12739287
-Culmen.length                             -0.33598591  0.419621089 -0.62835637
-Bill.depth..base.of.feathers.on.mandible. -0.01633872  0.004353418 -0.01231269
-Bill.width..base.of.feathers.on.maxilla.  -0.05865394  0.061714372 -0.09962101
-Left.Tarsus                               -0.14509132  0.259522190 -0.46532983
-                                                  PC4          PC5
-Right.wing.chord                           0.07304690 -0.001241684
-Tail.length                                0.02988534 -0.008716903
-Culmen.length                             -0.53855805 -0.161236784
-Bill.depth..base.of.feathers.on.mandible. -0.05951994  0.216257889
-Bill.width..base.of.feathers.on.maxilla.  -0.08219923  0.962867346
-Left.Tarsus                                0.83272259  0.006646209
-                                                    PC6
-Right.wing.chord                          -0.0002699604
-Tail.length                               -0.0062803042
-Culmen.length                             -0.0125622441
-Bill.depth..base.of.feathers.on.mandible.  0.9742958451
-Bill.width..base.of.feathers.on.maxilla.  -0.2212610835
-Left.Tarsus                                0.0399226008</code></pre>
-</div>
-</div>
-<p>We can also see the percent variance explained by each axis, which is contained within the eigenvectors of the PCA:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cinnyris.pca<span class="sc">$</span>CA<span class="sc">$</span>eig<span class="sc">/</span><span class="fu">sum</span>(cinnyris.pca<span class="sc">$</span>CA<span class="sc">$</span>eig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>        PC1         PC2         PC3         PC4         PC5         PC6 
-0.679234583 0.193214694 0.084367157 0.038143954 0.003291025 0.001748588 </code></pre>
-</div>
-</div>
-<p>The first principal component explains 68% of the variation, and the second 19% of the variation.</p>
-</details>
+<ol start="5" type="1">
+<li>Let’s say now that you’re testing the null hypothesis that the mean number of cyclones in this one year is similar to the average year. The mean number of cyclones per year across all years of data collected is 650 cyclones with a standard deviation of 425. Calculate the <span class="math inline">\(z\)</span>-score and make a decision regarding the null hypothesis.</li>
+</ol>
 </section>
-<section id="clustering" class="level2" data-number="15.3">
-<h2 data-number="15.3" class="anchored" data-anchor-id="clustering"><span class="header-section-number">15.3</span> Clustering</h2>
-<section id="k-means-clustering" class="level3" data-number="15.3.1">
-<h3 data-number="15.3.1" class="anchored" data-anchor-id="k-means-clustering"><span class="header-section-number">15.3.1</span> K-means clustering</h3>
-<details>
-<summary>
-Click here for K-means clustering
-</summary>
-</details>
-</section>
-<section id="hierarchical-clustering" class="level3" data-number="15.3.2">
-<h3 data-number="15.3.2" class="anchored" data-anchor-id="hierarchical-clustering"><span class="header-section-number">15.3.2</span> Hierarchical clustering</h3>
-<details>
-<summary>
-Click here for hierarchical clustering
-</summary>
-</details>
-</section>
-</section>
-<section id="homework" class="level2" data-number="15.4">
-<h2 data-number="15.4" class="anchored" data-anchor-id="homework"><span class="header-section-number">15.4</span> Homework</h2>
-<section id="disentangling-microbiomes" class="level3" data-number="15.4.1">
-<h3 data-number="15.4.1" class="anchored" data-anchor-id="disentangling-microbiomes"><span class="header-section-number">15.4.1</span> Disentangling microbiomes</h3>
-<p>This is an example problem. These data are from <span class="citation" data-cites="couper_2019_4940316">(<a href="references.html#ref-couper_2019_4940316" role="doc-biblioref">Couper et al. 2019</a>)</span>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run this whole chunk to load data</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>microbiome <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://zenodo.org/records/4940316/files/MicrobialCommunityAssembly_Dryad.csv"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>New names:
-Rows: 36 Columns: 69
-── Column specification
-──────────────────────────────────────────────────────── Delimiter: "," chr
-(69): ...1, PW001, PW005, PW012, PW013, PW014, PW015, PW016, PW017, PW01...
-ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
-Specify the column types or set `show_col_types = FALSE` to quiet this message.
-• `` -&gt; `...1`</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>colnames.x <span class="ot">&lt;-</span> microbiome[<span class="dv">1</span>,]</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(microbiome) <span class="ot">&lt;-</span> colnames.x</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>microbiome <span class="ot">&lt;-</span> microbiome[<span class="sc">-</span><span class="dv">1</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="minnows" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="minnows"><span class="header-section-number">8.2</span> Minnows</h2>
+<p>Consider this scenario: You have discovered a never-before-documented population of minnow in the Kearney Canal near campus. During your first sampling trip, you notice that the total length (i.e., measured from the tip of the snout to the very tip of the tail) of the fish you measure appear to be smaller than the average total length of the species as recorded among all known individuals across their range. The mean total length noted in one publication is 85.00 mm with a standard deviation of 4.50. Below is your data the data from 20 minnows that you captured during your first sampling trip to the Kearney Canal:</p>
+<table class="caption-top table">
+<caption>Fish data for this problem.</caption>
+<thead>
+<tr class="header">
+<th>Fish ID</th>
+<th>Length (mm)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>89.58</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>75.44</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>86.86</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>74.71</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>69.70</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>100.34</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>73.70</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>69.56</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>96.24</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>79.35</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>61.37</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>62.82</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>95.45</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>98.71</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>100.34</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>57.57</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>70.54</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>78.65</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>65.39</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>65.57</td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li>State the null and alternative hypotheses for this study.</li>
+<li>Calculate the first quartile, median, third quartile, and interquartile range of your response variable. Create a boxplot. Based on your results, are there any outliers in your data? Explain.</li>
+<li>Calculate the <span class="math inline">\(z\)</span>-score for this scenario.</li>
+<li>What is the probability that, by random chance alone, you would find your observed mean or something more extreme?</li>
+<li>Assume that you set your <span class="math inline">\(\alpha\)</span> for your study prior to your data collection to 0.05. Based on this information and the <span class="math inline">\(p\)</span> value you obtained, is your null hypothesis supported or rejected?</li>
+</ol>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
-<div id="ref-cooper_data_2021" class="csl-entry" role="listitem">
-Cooper, J. C., J. D. Maddox, K. McKague, and J. M. Bates (2021b). Data from: <span>Multiple</span> lines of evidence indicate ongoing allopatric and parapatric diversification in an <span>Afromontane</span> sunbird (<em><span>Cinnyris</span> reichenowi</em>). https://doi.org/<a href="https://doi.org/10.5061/dryad.34tmpg4j0">10.5061/dryad.34tmpg4j0</a>
-</div>
-<div id="ref-cooper_multiple_2021" class="csl-entry" role="listitem">
-Cooper, J. C., J. D. Maddox, K. McKague, and J. M. Bates (2021a). <a href="https://doi.org/10.1093/ornithology/ukaa081">Multiple lines of evidence indicate ongoing allopatric and parapatric diversification in an <span>Afromontane</span> sunbird (<em><span>Cinnyris</span> reichenowi</em>)</a>. Ornithology 138:ukaa081.
-</div>
-<div id="ref-couper_2019_4940316" class="csl-entry" role="listitem">
-Couper, L. I., J. Y. Kwan, J. Ma, and A. Swei (2019). Data from: Drivers and patterns of microbial community assembly in a lyme disease vector. [Online.] Available at <a href="https://doi.org/10.5061/dryad.2nv32qh">https://doi.org/10.5061/dryad.2nv32qh</a>.
-</div>
-</div>
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -958,13 +957,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./cor_reg.html" class="pagination-link" aria-label="Correlation &amp; regression">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Correlation &amp; regression</span></span>
+      <a href="./transformations.html" class="pagination-link" aria-label="Transforming data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transforming data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./picktest.html" class="pagination-link" aria-label="Pick the test">
-        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Pick the test</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./probdist.html" class="pagination-link" aria-label="Probability distributions">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Probability distributions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

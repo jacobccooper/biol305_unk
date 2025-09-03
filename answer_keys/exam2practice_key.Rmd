@@ -1,0 +1,181 @@
+---
+title: "Exam 2 Practice Key"
+author: "UNK Bio"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+Please complete the following problems as practice for Exam 2. *Note* that you may need to load specific packages from the previous exercises to get your code to work.
+
+## Cyclones
+
+Consider the following dataset collected in the same year:
+
+| Latitudinal Band | Season | Number of cyclones |
+|------------------|--------|--------------------|
+| 40 - 49º S       | Fall   | 370                |
+| 40 - 49º S       | Winter | 452                |
+| 40 - 49º S       | Spring | 273                |
+| 40 - 49º S       | Summer | 422                |
+| 50 - 59º S       | Fall   | 526                |
+| 50 - 59º S       | Winter | 624                |
+| 50 - 59º S       | Spring | 513                |
+| 50 - 59º S       | Summer | 1059               |
+| 60 - 69º S       | Fall   | 980                |
+| 60 - 69º S       | Winter | 1200               |
+| 60 - 69º S       | Spring | 995                |
+| 60 - 69º S       | Summer | 1751               |
+
+: Counts of cyclones per latitudinal band.
+
+1.  Classify each of the three variables as either an explanatory or a response variable. Justify your answer.
+
+Explanatory: Latitude, Season
+Response: Number of cyclones
+
+2.  Classify each of the three variables as *nominal*, *ordinal*, *interval* or *ratio* data. Justify your answer.
+
+Latitudinal band - Interval
+Season - Ordinal (nominal with enough justification)
+Number of cyclones - interval or ratio, with justification
+
+3.  State the null and alternative hypotheses for this scenario. *Note*: there are two sets of null/alternative hypotheses.
+
+$H_0$: There is no difference between latitudinal bands and the number of cyclones.
+$H_A$: There is a difference between latitudinal bands and the number of cyclones.
+
+$H_0$: There is no difference between seasons and the number of cyclones.
+$H_A$: There is a difference between seasons and the number of cyclones.
+
+$H_0$: There is no difference in the interaction of season and latitudinal band and the number of cyclones.
+$H_A$: There is a difference in the interaction of season and latitudinal band and the number of cyclones.
+
+4.  Calculate the mean, median, and mode of your response variable. Based on your results, would you expect your data to be normally distributed or not? Justify your answer.
+
+```{r}
+# note - you can combine numbers into a vector like so
+
+x <- c(1,2,3,4,5,6)
+
+x
+```
+
+```{r}
+library(DescTools)
+
+cyclones <- c(370, 452, 273, 422, 526, 624, 513, 1059, 980, 1200, 995, 1751)
+```
+
+The mean number of cyclones is `r round(mean(cyclones), 0)`.
+
+The median number of cyclones is `r round(median(cyclones),0)`.
+
+The mode number of cyclones is `r Mode(cyclones)`.
+
+I would not expect these data to be normal.
+
+5.  Let's say now that you're testing the null hypothesis that the mean number of cyclones in this one year is similar to the average year. The mean number of cyclones per year across all years of data collected is 650 cyclones with a standard deviation of 425. Calculate the $z$-score and make a decision regarding the null hypothesis.
+
+```{r}
+zscore <- function(xbar, mu, sd.x, n = 1){
+  z <- (xbar - mu)/(sd.x/sqrt(n))
+  return(z)
+}
+
+z <- (mean(cyclones) - 650)/(425)
+
+round(z,2)
+```
+
+```{r}
+pnorm(z) |> round(2)
+```
+
+This year is not unusual. We fail to reject the null.
+
+## Minnows
+
+Consider this scenario: You have discovered a never-before-documented population of minnow in the Kearney Canal near campus. During your first sampling trip, you notice that the total length (i.e., measured from the tip of the snout to the very tip of the tail) of the fish you measure appear to be smaller than the average total length of the species as recorded among all known individuals across their range. The mean total length noted in one publication is 85.00 mm with a standard deviation of 4.50. Below is your data the data from 20 minnows that you captured during your first sampling trip to the Kearney Canal:
+
+| Fish ID | Length (mm) |
+|---------|-------------|
+| 1       | 89.58       |
+| 2       | 75.44       |
+| 3       | 86.86       |
+| 4       | 74.71       |
+| 5       | 69.70       |
+| 6       | 100.34      |
+| 7       | 73.70       |
+| 8       | 69.56       |
+| 9       | 96.24       |
+| 10      | 79.35       |
+| 11      | 61.37       |
+| 12      | 62.82       |
+| 13      | 95.45       |
+| 14      | 98.71       |
+| 15      | 100.34      |
+| 16      | 57.57       |
+| 17      | 70.54       |
+| 18      | 78.65       |
+| 19      | 65.39       |
+| 20      | 65.57       |
+
+: Fish data for this problem.
+
+1.  State the null and alternative hypotheses for this study.
+
+$H_0$: There is no difference in size between minnow populations.
+$H_A$: There is a difference in size between minnow populations.
+
+2.  Calculate the first quartile, median, third quartile, and interquartile range of your response variable. Create a boxplot. Based on your results, are there any outliers in your data? Explain.
+
+```{r}
+mu <- 85.00
+sd.pop <- 4.50
+
+minnows <- c(89.58, 75.44, 86.86, 74.71, 69.70, 
+             100.34, 73.70, 69.56, 96.24, 79.35, 
+             61.37, 62.82, 95.45, 98.71, 100.34,
+             57.57, 70.54, 78.65, 65.39, 65.57)
+```
+
+```{r}
+quantile(minnows, 0.25, type = 6) |> round(2)
+```
+
+```{r}
+quantile(minnows, 0.5, type = 6) |> round(2)
+```
+
+```{r}
+quantile(minnows, 0.75, type = 6) |> round(2)
+```
+
+```{r}
+IQR(minnows, type = 6) |> round(2)
+```
+
+```{r}
+boxplot(minnows)
+```
+
+There are no outliers.
+
+3.  Calculate the $z$-score for this scenario.
+
+```{r}
+z <- zscore(xbar = mean(minnows), mu = mu, 
+       sd.x = sd(minnows), n = length(minnows))
+
+round(z, 2)
+```
+
+4.  What is the probability that, by random chance alone, you would find your observed mean or something more extreme?
+
+```{r}
+pnorm(z) |> round(2)
+```
+
+5.  Assume that you set your $\alpha$ for your study prior to your data collection to 0.05. Based on this information and the $p$ value you obtained, is your null hypothesis supported or rejected?
+
+We reject the null; the populations are not the same size.

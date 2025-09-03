@@ -15,6 +15,7 @@ book:
     - visual.qmd
     - normality.qmd
     - transformations.qmd
+    - exam2practice.qmd
     - probdist.qmd
     - chi.qmd
     - ttest.qmd
