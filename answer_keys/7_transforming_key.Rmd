@@ -1,0 +1,70 @@
+---
+title: "Transforming data key"
+author: "UNK Bio"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+
+# 7.4.1
+
+This will vary by student. Just look at their code.
+
+# 7.4.2
+
+```{r}
+## Job advert data
+
+jobs <- read_csv("https://zenodo.org/records/14771706/files/adzuna_month_ttwa_vacancies_with_hourly_wage_panel.csv")
+
+# take a subset
+# whole dataset is too large!
+hourly.jobs.homework <- jobs$vacancies_offering_an_hourly_wage[200:300]
+```
+
+```{r}
+mean(hourly.jobs.homework) |> round(0)
+```
+
+```{r}
+median(hourly.jobs.homework) |> round(0)
+```
+
+```{r}
+library(DescTools)
+Mode(hourly.jobs.homework)
+```
+
+```{r}
+library(moments)
+
+(kurtosis(hourly.jobs.homework)-3) |> round(2)
+```
+
+Heavily leptokurtic.
+
+```{r}
+skewness(hourly.jobs.homework)
+```
+
+```{r}
+hist(hourly.jobs.homework)
+```
+
+```{r}
+shapiro.test(hourly.jobs.homework)
+```
+
+Data are non-normal.
+
+```{r}
+shapiro.test(log(hourly.jobs.homework+1))
+```
+
+Log transform is normal.
+
+Data are normal when log transformed.
