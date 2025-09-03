@@ -1,5 +1,5 @@
 ---
-title: "8_prob_distributions"
+title: "9_prob_distributions"
 author: "UNK Bio"
 date: "`r Sys.Date()`"
 output: html_document
