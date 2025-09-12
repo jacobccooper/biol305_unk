@@ -51,7 +51,7 @@ study_hours <- c(0.5, 3.0, 2.5, 4.5, 3.0, 1.5, 2.0, 3.5, 6, 1.0)
 
 -   Do students spend more or less time studying per week, if there is a difference?
 
-### **Question 5:**
+### **Question 3:**
 
 The following dataset records the reaction times of people who have had less than three hours of sleep on the night before this test. Using the reaction time column, perform a T-test to determine if these people have a statistically different reaction time than the human average (250 ms).
 
