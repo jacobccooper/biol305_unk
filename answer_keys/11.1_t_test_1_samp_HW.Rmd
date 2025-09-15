@@ -1,0 +1,187 @@
+---
+title: "t_test_1_samp_HW"
+output: html_document
+---
+
+### Answer each question. Perform all necessary tests. Perform transformations on the data if required.
+
+```{r}
+# install.packages("lme4")   # required for "sleepstudy" dataset
+library(lme4)
+data("sleepstudy")
+head(sleepstudy)
+
+# install.packages("MASS")   # required for "galaxies" dataset
+library(MASS)
+data("galaxies")
+head(galaxies)
+
+```
+
+### **Question 1:**
+
+These are the test scores of 12 students on a quiz. The quiz was out of 100 points. Suppose we want to test whether the mean score differs significantly from a predicted average of 70.
+
+```{r}
+quiz_scores <- c(75, 82, 68, 90, 73, 85, 77, 79, 88, 91, 83, 80)  
+```
+
+-   State the **null and alternative hypotheses**.
+
+$H_0:\mu=70$
+$H_A:\mu\ne70$
+
+-   Are these data normal?
+
+```{r}
+shapiro.test(quiz_scores)
+```
+
+Yes these are normal.
+
+```{r}
+t.test(x = quiz_scores, mu = 70)
+```
+
+
+-   Is the mean score significantly different from the expected result?
+
+Yes, $p = 0.0002$.
+
+-   Did the students do better or worse than expected, if there is a difference?
+
+Better, value is higher.
+
+### **Question 2:**
+
+The following is a list of reported study hours for Biostats per week. We expect the class average to be about three hours a week. Using this dataset, answer the following questions:
+
+```{r}
+study_hours <- c(0.5, 3.0, 2.5, 4.5, 3.0, 1.5, 2.0, 3.5, 6, 1.0)  
+```
+
+-   State the **null and alternative hypotheses**.
+
+$H_0:\mu=3$
+$H_A:\mu\ne3$
+
+-   Are these data normal?
+
+```{r}
+shapiro.test(study_hours)
+```
+
+```{r}
+t.test(study_hours, mu = 3)
+```
+
+
+-   Do students spend the expected amount of time studying per week?
+
+Yes, the spend 3 hours on average studying.
+
+-   Do students spend more or less time studying per week, if there is a difference?
+
+There is no significant difference; mean is slightly lower.
+
+### **Question 3:**
+
+The following dataset records the reaction times of people who have had less than three hours of sleep on the night before this test. Using the reaction time column, perform a $t$-test to determine if these people have a statistically different reaction time than the human average (250 ms).
+
+```{r}
+reaction_times <- sleepstudy$Reaction
+```
+
+-   State the **null and alternative hypotheses**.
+
+$H_0:\mu=250$
+$H_A:\mu\ne250$
+
+-   Are these data normal?
+
+```{r}
+shapiro.test(reaction_times)
+```
+
+These data are not normal.
+
+```{r}
+shapiro.test(log(reaction_times+1))
+```
+
+Log transformation needed.
+
+```{r}
+t.test(log(reaction_times + 1), mu = log(250 + 1))
+```
+
+-   Is the mean score significantly different from the expected result?
+
+Yes, the score is different. $p < 0.0001$.
+
+-   Are the people in the dataset slower or faster than average, if there is a difference? What might be the reason for this?
+
+The reaction time is slower; `r exp(5.685031)-1`.
+
+### **Question 4:**
+
+Whole milk is expected to be around 3.25% fat. Researchers from Florida wanted to determine if this was the case and used two methods to measure the fat percentage in the milk they tested. Using the enzymatic method (\$triglyceride), determine if the fat percentage of this milk was significantly different from the 3.25% expected.
+
+```{r}
+milk <- read.csv("https://users.stat.ufl.edu/~winner/data/milkfat_measure.csv")
+milk_fats <- milk$triglyceride
+
+milk_fats
+```
+
+-   State the **null and alternative hypotheses**.
+
+$H_0:\mu=3.25$
+$H_A:\mu\ne3.25$
+
+-   Is the mean score significantly different from the expected result?
+
+```{r}
+shapiro.test(milk_fats)
+```
+
+```{r}
+t.test(milk_fats, mu = 3.25)
+```
+
+-   Is the milk fattier or leaner than expected, if there is a difference?
+
+Leaner; p = 0.02, mu = 2.80.
+
+### **Question 5:**
+
+Galaxies are rapidly moving away from us at various speeds. Previous studies had offered an average recession rate of 20,000 km/s. Data collected using redshift allows us to calculate the actual speed of recession of a galaxy. Using the data from R. J. Roeder (1990), saved as "galaxies", determine if the average galaxy is actually receding at the previously estimated rate.
+
+```{r}
+head(galaxies)
+```
+
+-   State the **null and alternative hypotheses**.
+
+$H_0:\mu=20,000$
+$H_A:\mu\ne20,000$
+
+-   Is the mean score significantly different from the expected result?
+
+```{r}
+shapiro.test(galaxies)
+```
+
+```{r}
+shapiro.test(sqrt(galaxies))
+```
+
+Not normal! No transformation works.
+
+```{r}
+wilcox.test(galaxies, 20000)
+```
+
+-   Are the galaxies moving away faster or slower, if there is a difference?
+
+No, they are not. p = 0.69.
