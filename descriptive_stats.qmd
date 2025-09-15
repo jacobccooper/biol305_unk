@@ -43,6 +43,7 @@ library(DescTools)
 For this week, we will be using a hypothetical dataset on the number of drinks sold by hour at Starbucks.
 
 ```{r, message=FALSE, warning=FALSE, results='hide'}
+# download data
 starbucks <- read_csv("https://raw.githubusercontent.com/jacobccooper/biol105_unk/main/datasets/starbucks.csv")
 ```
 
@@ -79,6 +80,8 @@ We use Greek lettering for *populations* and Roman lettering for samples. For ex
 ### Mean
 
 The mean is the "average" value within a set of data, specifically, the sum of all values divided by the length of those values: $\frac{\sum_{i=1}^nx}{n}$.
+
+<details>
 
 <summary>Click to see how to calculate *Mean*</summary>
 
@@ -356,7 +359,7 @@ tab
 Get the highest value.
 
 ```{r}
-u[tab==max(tab)]
+u[tab == max(tab)]
 ```
 
 Notice this uses `==`. This is a logical argument that means "is equal to" or "is the same as". For example:
@@ -374,13 +377,13 @@ These values are the same, so `TRUE` is returned.
 These values are unequal, so `FALSE` is returned. *R* will read `TRUE` as `1` and `FALSE` as `ZERO`, such that:
 
 ```{r}
-sum(2==2)
+sum(2 == 2)
 ```
 
 and
 
 ```{r}
-sum(2==3)
+sum(2 == 3)
 ```
 
 This allows you to find how many arguments match your condition quickly, and even allows you to subset based on these indices as well. Keep in mind you can use greater than `<`, less than `>`, greater than or equal to `<=`, less than or equal to `>=`, is equal to `==`, and is not equal to `!=` to identify numerical relationships. Other logical arguments include:
