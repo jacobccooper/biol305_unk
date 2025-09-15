@@ -9,13 +9,10 @@ output: html_document
 # install.packages("lme4")   # required for "sleepstudy" dataset
 library(lme4)
 data("sleepstudy")
-head(sleepstudy)
 
 # install.packages("MASS")   # required for "galaxies" dataset
 library(MASS)
 data("galaxies")
-head(galaxies)
-
 ```
 
 ### **Question 1:**
@@ -151,7 +148,7 @@ t.test(milk_fats, mu = 3.25)
 
 -   Is the milk fattier or leaner than expected, if there is a difference?
 
-Leaner; p = 0.02, mu = 2.80.
+Leaner; $p = 0.02$, $mu = 2.80$.
 
 ### **Question 5:**
 
@@ -184,4 +181,4 @@ wilcox.test(galaxies, 20000)
 
 -   Are the galaxies moving away faster or slower, if there is a difference?
 
-No, they are not. p = 0.69.
+No, they are not. $p = 0.69$.
