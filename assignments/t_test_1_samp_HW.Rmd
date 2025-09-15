@@ -28,7 +28,7 @@ quiz_scores <- c(75, 82, 68, 90, 73, 85, 77, 79, 88, 91, 83, 80)
 
 -   State the **null and alternative hypotheses**.
 
--   Is this data normal?
+-   Are these data normal?
 
 -   Is the mean score significantly different from the expected result?
 
@@ -45,7 +45,7 @@ study_hours <- c(0.5, 3.0, 2.5, 4.5, 3.0, 1.5, 2.0, 3.5, 6, 1.0)
 
 -   State the **null and alternative hypotheses**.
 
--   Is this data normal?
+-   Are these data normal?
 
 -   Do students spend the expected amount of time studying per week?
 
@@ -53,16 +53,15 @@ study_hours <- c(0.5, 3.0, 2.5, 4.5, 3.0, 1.5, 2.0, 3.5, 6, 1.0)
 
 ### **Question 3:**
 
-The following dataset records the reaction times of people who have had less than three hours of sleep on the night before this test. Using the reaction time column, perform a T-test to determine if these people have a statistically different reaction time than the human average (250 ms).
+The following dataset records the reaction times of people who have had less than three hours of sleep on the night before this test. Using the reaction time column, perform a $t$-test to determine if these people have a statistically different reaction time than the human average (250 ms).
 
 ```{r}
 reaction_times <- sleepstudy$Reaction
-
 ```
 
 -   State the **null and alternative hypotheses**.
 
--   Is this data normal?
+-   Are these data normal?
 
 -   Is the mean score significantly different from the expected result?
 
@@ -82,8 +81,6 @@ milk_fats
 
 -   State the **null and alternative hypotheses**.
 
--   Is this data normal?
-
 -   Is the mean score significantly different from the expected result?
 
 -   Is the milk fattier or leaner than expected, if there is a difference?
@@ -97,8 +94,6 @@ head(galaxies)
 ```
 
 -   State the **null and alternative hypotheses**.
-
--   Is this data normal?
 
 -   Is the mean score significantly different from the expected result?
 
