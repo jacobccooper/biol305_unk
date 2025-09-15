@@ -272,9 +272,103 @@ This is very similar to the CI we calculated with the $Z$ statistic. **Remember*
 qt(0.975, df = 10)
 ```
 
-## Homework: Chapter 9
+## Homework: One Sample
 
-For Chapter 9, complete problems 9.1, 9.3, 9.4, 9.5, 9.6, 9.7, 9.8, 9.9, and 9.10.  For problems 9.3 - 9.8, be sure to state the null and alternative hypotheses and whether the test is one- or two-tailed.
+### Answer each question. Perform all necessary tests. Perform transformations on the data if required.
+
+```{r}
+# install.packages("lme4")   # required for "sleepstudy" dataset
+library(lme4)
+data("sleepstudy")
+head(sleepstudy)
+
+# install.packages("MASS")   # required for "galaxies" dataset
+library(MASS)
+data("galaxies")
+head(galaxies)
+
+```
+
+### **Question 1:**
+
+These are the test scores of 12 students on a quiz. The quiz was out of 100 points. Suppose we want to test whether the mean score differs significantly from a predicted average of 70.
+
+```{r}
+quiz_scores <- c(75, 82, 68, 90, 73, 85, 77, 79, 88, 91, 83, 80)  
+```
+
+-   State the **null and alternative hypotheses**.
+
+-   Are these data normal?
+
+-   Is the mean score significantly different from the expected result?
+
+-   Did the students do better or worse than expected, if there is a difference?
+
+### **Question 2:**
+
+The following is a list of reported study hours for Biostats per week. We expect the class average to be about three hours a week. Using this dataset, answer the following questions:
+
+```{r}
+study_hours <- c(0.5, 3.0, 2.5, 4.5, 3.0, 1.5, 2.0, 3.5, 6, 1.0)  
+
+```
+
+-   State the **null and alternative hypotheses**.
+
+-   Are these data normal?
+
+-   Do students spend the expected amount of time studying per week?
+
+-   Do students spend more or less time studying per week, if there is a difference?
+
+### **Question 3:**
+
+The following dataset records the reaction times of people who have had less than three hours of sleep on the night before this test. Using the reaction time column, perform a $t$-test to determine if these people have a statistically different reaction time than the human average (250 ms).
+
+```{r}
+reaction_times <- sleepstudy$Reaction
+```
+
+-   State the **null and alternative hypotheses**.
+
+-   Are these data normal?
+
+-   Is the mean score significantly different from the expected result?
+
+-   Are the people in the dataset slower or faster than average, if there is a difference? What might be the reason for this?
+
+### **Question 4:**
+
+Whole milk is expected to be around 3.25% fat. Researchers from Florida wanted to determine if this was the case and used two methods to measure the fat percentage in the milk they tested. Using the enzymatic method (\$triglyceride), determine if the fat percentage of this milk was significantly different from the 3.25% expected.
+
+```{r}
+milk <- read.csv("https://users.stat.ufl.edu/~winner/data/milkfat_measure.csv")
+milk_fats <- milk$triglyceride
+
+milk_fats
+
+```
+
+-   State the **null and alternative hypotheses**.
+
+-   Is the mean score significantly different from the expected result?
+
+-   Is the milk fattier or leaner than expected, if there is a difference?
+
+### **Question 5:**
+
+Galaxies are rapidly moving away from us at various speeds. Previous studies had offered an average recession rate of 20,000 km/s. Data collected using redshift allows us to calculate the actual speed of recession of a galaxy. Using the data from R. J. Roeder (1990), saved as "galaxies", determine if the average galaxy is actually receding at the previously estimated rate.
+
+```{r}
+head(galaxies)
+```
+
+-   State the **null and alternative hypotheses**.
+
+-   Is the mean score significantly different from the expected result?
+
+-   Are the galaxies moving away faster or slower, if there is a difference?
 
 ## Homework: Chapter 10
 

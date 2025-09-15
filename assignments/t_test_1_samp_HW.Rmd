@@ -6,12 +6,12 @@ output: html_document
 ### Answer each question. Perform all necessary tests. Perform transformations on the data if required.
 
 ```{r}
-install.packages("lme4")   # required for "sleepstudy" dataset
+# install.packages("lme4")   # required for "sleepstudy" dataset
 library(lme4)
 data("sleepstudy")
 head(sleepstudy)
 
-install.packages("MASS")   # required for "galaxies" dataset
+# install.packages("MASS")   # required for "galaxies" dataset
 library(MASS)
 data("galaxies")
 head(galaxies)
