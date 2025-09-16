@@ -26,13 +26,13 @@ These are the test scores of 12 students on a quiz. The quiz was out of 100 poin
 quiz_scores <- c(75, 82, 68, 90, 73, 85, 77, 79, 88, 91, 83, 80)  
 ```
 
--   State the **null and alternative hypotheses**.
+-   State the **null and alternative hypotheses**. (2 pts)
 
--   Are these data normal?
+-   Are these data normal? (2 pts)
 
--   Is the mean score significantly different from the expected result?
+-   Is the mean score significantly different from the expected result? (2 pts)
 
--   Did the students do better or worse than expected, if there is a difference?
+-   Did the students do better or worse than expected, if there is a difference? (2 pts)
 
 ### **Question 2:**
 
@@ -43,13 +43,13 @@ study_hours <- c(0.5, 3.0, 2.5, 4.5, 3.0, 1.5, 2.0, 3.5, 6, 1.0)
 
 ```
 
--   State the **null and alternative hypotheses**.
+-   State the **null and alternative hypotheses**. (2 pts)
 
--   Are these data normal?
+-   Are these data normal? (2 pts)
 
--   Do students spend the expected amount of time studying per week?
+-   Do students spend the expected amount of time studying per week? (2 pts)
 
--   Do students spend more or less time studying per week, if there is a difference?
+-   Do students spend more or less time studying per week, if there is a difference? (2 pts)
 
 ### **Question 3:**
 
@@ -59,13 +59,13 @@ The following dataset records the reaction times of people who have had less tha
 reaction_times <- sleepstudy$Reaction
 ```
 
--   State the **null and alternative hypotheses**.
+-   State the **null and alternative hypotheses**. (2 pts)
 
--   Are these data normal?
+-   Are these data normal? (2 pts)
 
--   Is the mean score significantly different from the expected result?
+-   Is the mean score significantly different from the expected result? (2 pts)
 
--   Are the people in the dataset slower or faster than average, if there is a difference? What might be the reason for this?
+-   Are the people in the dataset slower or faster than average, if there is a difference? What might be the reason for this? (2 pts)
 
 ### **Question 4:**
 
@@ -79,11 +79,11 @@ milk_fats
 
 ```
 
--   State the **null and alternative hypotheses**.
+-   State the **null and alternative hypotheses**.(2 pts)
 
--   Is the mean score significantly different from the expected result?
+-   Is the mean score significantly different from the expected result? (4 pts)
 
--   Is the milk fattier or leaner than expected, if there is a difference?
+-   Is the milk fattier or leaner than expected, if there is a difference? (2 pts)
 
 ### **Question 5:**
 
@@ -93,8 +93,8 @@ Galaxies are rapidly moving away from us at various speeds. Previous studies had
 head(galaxies)
 ```
 
--   State the **null and alternative hypotheses**.
+-   State the **null and alternative hypotheses**. (2 pts)
 
--   Is the mean score significantly different from the expected result?
+-   Is the mean score significantly different from the expected result? (4 pts)
 
--   Are the galaxies moving away faster or slower, if there is a difference?
+-   Are the galaxies moving away faster or slower, if there is a difference? (2 pts)
