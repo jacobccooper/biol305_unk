@@ -82,10 +82,10 @@ I have written a custom code to produce all of the above values, which I called 
 key_maker <- function(x, # specify data
                       roundval){ # specify rounding!
   
-  # calcualte and print mean value
+  # calculate and print mean value
   print(paste0("Mean: ", round(mean(x),roundval)))
   
-  # calcualte and print median value
+  # calculate and print median value
   print(paste0("Median: ", round(median(x),roundval)))
   
   # calculate and print range

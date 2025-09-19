@@ -340,8 +340,15 @@ window.Quarto = {
   <li><a href="#wilcoxon-signed-rank-test" id="toc-wilcoxon-signed-rank-test" class="nav-link" data-scroll-target="#wilcoxon-signed-rank-test"><span class="header-section-number">11.4.3</span> Wilcoxon signed rank test</a></li>
   </ul></li>
   <li><a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals"><span class="header-section-number">11.5</span> Confidence intervals</a></li>
-  <li><a href="#homework-chapter-9" id="toc-homework-chapter-9" class="nav-link" data-scroll-target="#homework-chapter-9"><span class="header-section-number">11.6</span> Homework: Chapter 9</a></li>
-  <li><a href="#homework-chapter-10" id="toc-homework-chapter-10" class="nav-link" data-scroll-target="#homework-chapter-10"><span class="header-section-number">11.7</span> Homework: Chapter 10</a></li>
+  <li><a href="#homework-one-sample" id="toc-homework-one-sample" class="nav-link" data-scroll-target="#homework-one-sample"><span class="header-section-number">11.6</span> Homework: One Sample</a>
+  <ul class="collapse">
+  <li><a href="#answer-each-question.-perform-all-necessary-tests.-perform-transformations-on-the-data-if-required." id="toc-answer-each-question.-perform-all-necessary-tests.-perform-transformations-on-the-data-if-required." class="nav-link" data-scroll-target="#answer-each-question.-perform-all-necessary-tests.-perform-transformations-on-the-data-if-required."><span class="header-section-number">11.6.1</span> Answer each question. Perform all necessary tests. Perform transformations on the data if required.</a></li>
+  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1"><span class="header-section-number">11.6.2</span> <strong>Question 1:</strong></a></li>
+  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2"><span class="header-section-number">11.6.3</span> <strong>Question 2:</strong></a></li>
+  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3"><span class="header-section-number">11.6.4</span> <strong>Question 3:</strong></a></li>
+  <li><a href="#question-4" id="toc-question-4" class="nav-link" data-scroll-target="#question-4"><span class="header-section-number">11.6.5</span> <strong>Question 4:</strong></a></li>
+  <li><a href="#question-5" id="toc-question-5" class="nav-link" data-scroll-target="#question-5"><span class="header-section-number">11.6.6</span> <strong>Question 5:</strong></a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -675,13 +682,130 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
 </section>
-<section id="homework-chapter-9" class="level2" data-number="11.6">
-<h2 data-number="11.6" class="anchored" data-anchor-id="homework-chapter-9"><span class="header-section-number">11.6</span> Homework: Chapter 9</h2>
-<p>For Chapter 9, complete problems 9.1, 9.3, 9.4, 9.5, 9.6, 9.7, 9.8, 9.9, and 9.10.&nbsp; For problems 9.3 - 9.8, be sure to state the null and alternative hypotheses and whether the test is one- or two-tailed.</p>
+<section id="homework-one-sample" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="homework-one-sample"><span class="header-section-number">11.6</span> Homework: One Sample</h2>
+<section id="answer-each-question.-perform-all-necessary-tests.-perform-transformations-on-the-data-if-required." class="level3" data-number="11.6.1">
+<h3 data-number="11.6.1" class="anchored" data-anchor-id="answer-each-question.-perform-all-necessary-tests.-perform-transformations-on-the-data-if-required."><span class="header-section-number">11.6.1</span> Answer each question. Perform all necessary tests. Perform transformations on the data if required.</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("lme4")   # required for "sleepstudy" dataset</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: Matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'Matrix'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:tidyr':
+
+    expand, pack, unpack</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"sleepstudy"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sleepstudy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Reaction Days Subject
+1 249.5600    0     308
+2 258.7047    1     308
+3 250.8006    2     308
+4 321.4398    3     308
+5 356.8519    4     308
+6 414.6901    5     308</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("MASS")   # required for "galaxies" dataset</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'MASS'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    select</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"galaxies"</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(galaxies)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  9172  9350  9483  9558  9775 10227</code></pre>
+</div>
+</div>
 </section>
-<section id="homework-chapter-10" class="level2" data-number="11.7">
-<h2 data-number="11.7" class="anchored" data-anchor-id="homework-chapter-10"><span class="header-section-number">11.7</span> Homework: Chapter 10</h2>
-<p>Two-sample means are practiced in Chapter 10. Please see <em>Canvas</em> for more information.</p>
+<section id="question-1" class="level3" data-number="11.6.2">
+<h3 data-number="11.6.2" class="anchored" data-anchor-id="question-1"><span class="header-section-number">11.6.2</span> <strong>Question 1:</strong></h3>
+<p>These are the test scores of 12 students on a quiz. The quiz was out of 100 points. Suppose we want to test whether the mean score differs significantly from a predicted average of 70.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>quiz_scores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">75</span>, <span class="dv">82</span>, <span class="dv">68</span>, <span class="dv">90</span>, <span class="dv">73</span>, <span class="dv">85</span>, <span class="dv">77</span>, <span class="dv">79</span>, <span class="dv">88</span>, <span class="dv">91</span>, <span class="dv">83</span>, <span class="dv">80</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>State the <strong>null and alternative hypotheses</strong>. (2 pts)</p></li>
+<li><p>Are these data normal? (2 pts)</p></li>
+<li><p>Is the mean score significantly different from the expected result? (2 pts)</p></li>
+<li><p>Did the students do better or worse than expected, if there is a difference? (2 pts)</p></li>
+</ul>
+</section>
+<section id="question-2" class="level3" data-number="11.6.3">
+<h3 data-number="11.6.3" class="anchored" data-anchor-id="question-2"><span class="header-section-number">11.6.3</span> <strong>Question 2:</strong></h3>
+<p>The following is a list of reported study hours for Biostats per week. We expect the class average to be about three hours a week. Using this dataset, answer the following questions:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>study_hours <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">3.0</span>, <span class="fl">2.5</span>, <span class="fl">4.5</span>, <span class="fl">3.0</span>, <span class="fl">1.5</span>, <span class="fl">2.0</span>, <span class="fl">3.5</span>, <span class="dv">6</span>, <span class="fl">1.0</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>State the <strong>null and alternative hypotheses</strong>. (2 pts)</p></li>
+<li><p>Are these data normal? (2 pts)</p></li>
+<li><p>Do students spend the expected amount of time studying per week? (2 pts)</p></li>
+<li><p>Do students spend more or less time studying per week, if there is a difference? (2 pts)</p></li>
+</ul>
+</section>
+<section id="question-3" class="level3" data-number="11.6.4">
+<h3 data-number="11.6.4" class="anchored" data-anchor-id="question-3"><span class="header-section-number">11.6.4</span> <strong>Question 3:</strong></h3>
+<p>The following dataset records the reaction times of people who have had less than three hours of sleep on the night before this test. Using the reaction time column, perform a <span class="math inline">\(t\)</span>-test to determine if these people have a statistically different reaction time than the human average (250 ms).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>reaction_times <span class="ot">&lt;-</span> sleepstudy<span class="sc">$</span>Reaction</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>State the <strong>null and alternative hypotheses</strong>. (2 pts)</p></li>
+<li><p>Are these data normal? (2 pts)</p></li>
+<li><p>Is the mean score significantly different from the expected result? (2 pts)</p></li>
+<li><p>Are the people in the dataset slower or faster than average, if there is a difference? What might be the reason for this? (2 pts)</p></li>
+</ul>
+</section>
+<section id="question-4" class="level3" data-number="11.6.5">
+<h3 data-number="11.6.5" class="anchored" data-anchor-id="question-4"><span class="header-section-number">11.6.5</span> <strong>Question 4:</strong></h3>
+<p>Whole milk is expected to be around 3.25% fat. Researchers from Florida wanted to determine if this was the case and used two methods to measure the fat percentage in the milk they tested. Using the enzymatic method ($triglyceride), determine if the fat percentage of this milk was significantly different from the 3.25% expected.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>milk <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://users.stat.ufl.edu/~winner/data/milkfat_measure.csv"</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>milk_fats <span class="ot">&lt;-</span> milk<span class="sc">$</span>triglyceride</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>milk_fats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.96 1.16 0.97 1.01 1.25 1.22 1.46 1.66 1.75 1.72 1.67 1.67 1.93 1.99 2.01
+[16] 2.28 2.15 2.29 2.45 2.40 2.79 2.77 2.64 2.73 2.67 2.61 3.01 2.93 3.18 3.18
+[31] 3.19 3.12 3.33 3.51 3.66 3.95 4.20 4.05 4.30 4.74 4.71 4.71 4.74 5.23 6.21</code></pre>
+</div>
+</div>
+<ul>
+<li><p>State the <strong>null and alternative hypotheses</strong>.(2 pts)</p></li>
+<li><p>Is the mean score significantly different from the expected result? (4 pts)</p></li>
+<li><p>Is the milk fattier or leaner than expected, if there is a difference? (2 pts)</p></li>
+</ul>
+</section>
+<section id="question-5" class="level3" data-number="11.6.6">
+<h3 data-number="11.6.6" class="anchored"><span class="header-section-number">11.6.6</span> <strong>Question 5:</strong></h3>
+<p>Galaxies are rapidly moving away from us at various speeds. Previous studies had offered an average recession rate of 20,000 km/s. Data collected using redshift allows us to calculate the actual speed of recession of a galaxy. Using the data from R. J. Roeder (1990), saved as “galaxies”, determine if the average galaxy is actually receding at the previously estimated rate.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(galaxies)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  9172  9350  9483  9558  9775 10227</code></pre>
+</div>
+</div>
+<ul>
+<li><p>State the <strong>null and alternative hypotheses</strong>. (2 pts)</p></li>
+<li><p>Is the mean score significantly different from the expected result? (4 pts)</p></li>
+<li><p>Are the galaxies moving away faster or slower, if there is a difference? (2 pts)</p>
+<h2 id="homework-chapter-10" data-number="11.7" class="anchored" data-anchor-id="question-5"><span class="header-section-number">11.7</span> Homework: Chapter 10</h2></li>
+</ul>
+<section id="two-sample-means-are-practiced-in-chapter-10.-please-see-canvas-for-more-information." class="level4" data-number="11.7.0.1">
+<h4 data-number="11.7.0.1" class="anchored" data-anchor-id="two-sample-means-are-practiced-in-chapter-10.-please-see-canvas-for-more-information."><span class="header-section-number">11.7.0.1</span> Two-sample means are practiced in Chapter 10. Please see <em>Canvas</em> for more information.</h4>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
@@ -692,6 +816,8 @@ Courtenay, L. (2019). <span class="nocase">Measurements on Canid Tooth Scores</s
 Ruxton, G. D. (2006). <a href="https://doi.org/10.1093/beheco/ark016">The unequal variance <em>t</em>-test is an underused alternative to <span>Student</span>’s <em>t</em>-test and the <span>Mann</span>–<span>Whitney</span> <em>u</em> test</a>. Behavioral Ecology 17:688–690.
 </div>
 </div>
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
