@@ -705,35 +705,13 @@ Now that we've covered these basic statistics, it's your turn!
 
 ### Homework instructions {.tight-top}
 
-Please create an *RMarkdown* document that will render as an `.html` file. You will submit this file to show your coding and your work. Please refer to the [Introduction to *R*](https://jacobccooper.github.io/biol105_unk/intro_to_r.html) for refreshers on how to create an `.html` document in *RMarkdown*. You will need to do the following for each of these datasets:
-
--   mean
-
--   median
-
--   range
-
--   interquartile range
-
--   variance
-
--   standard deviation
-
--   coefficient of variation
-
--   standard error
-
--   whether there are any "outliers"
+Please create an *RMarkdown* document that will render as an `.html` file. You will submit this file to show your coding and your work. Please refer to the [Introduction to *R*](https://jacobccooper.github.io/biol105_unk/intro_to_r.html) for refreshers on how to create an `.html` document in *RMarkdown*.
 
 **Please show all of your work for full credit.**
 
 <hr>
 
 ### Data for homework problems {.tight-top}
-
-<details>
-
-<summary>Click for homework data</summary>
 
 For each question, calculate the mean, median, range, interquartile range, variance, standard deviation, coefficient of variation, standard error, and whether there are any "outliers".
 
@@ -776,23 +754,23 @@ mean(nebraskans) |>
 
 **Now, calculate the following for `nebraskans`**:
 
--   mean
+-   mean - `mean()`
 
--   median
+-   median - `median()`
 
--   range
+-   range - `range()`
 
--   interquartile range
+-   interquartile range - `IQR()`
 
--   variance
+-   variance - `var()`
 
--   standard deviation
+-   standard deviation - `sd()`
 
--   coefficient of variation
+-   coefficient of variation - `cv()` function defined above
 
--   standard error
+-   standard error - `sd()`
 
--   whether there are any "outliers"
+-   whether there are any "outliers" - `Outliers()`
 
 **Synthesis question**: Do you think that there are any really anomalous years? Do you feel data are similar between years? *Note* we are not looking at trends through time but whether any years are outliers.
 
@@ -828,7 +806,7 @@ pirates <- read_csv("https://figshare.com/ndownloader/files/42314604")
 
 #### 3: Patient ages at presentation
 
-The following is a dataset on skin sores in different communities in Australia and Oceania, specifically looking at the amount of time that passes between skin infections [@lydeamore_estimation_2020]. This file includes multiple different datasets, and focuses on data from children in the first five years of their life, on househould visits, and on data collected during targeted studies [@Lydeamore2020].
+The following is a dataset on skin sores in different communities in Australia and Oceania, specifically looking at the amount of time that passes between skin infections [@lydeamore_estimation_2020]. This file includes multiple different datasets, and focuses on data from children in the first five years of their life, on household visits, and on data collected during targeted studies [@Lydeamore2020].
 
 ```{r}
 ages <- read_csv("https://doi.org/10.1371/journal.pcbi.1007838.s006")
@@ -862,6 +840,4 @@ As you can see, this file has only two columns but 17,150 rows! For the column `
 
 -   whether there are any "outliers"
 
-**Synthesis question**: Folks will often think about probabilities of events being "low but never zero". What does that mean in the context of these data? What about these data make you feel like probabilities may decrease through time but never become zero?
-
-</details>
+**Synthesis question**: Folks will often think about probabilities of events being "low but never zero". What does that mean in the context of secondary infection? What about these data make you think that a secondary infection is always possible?

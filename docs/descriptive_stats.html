@@ -1056,27 +1056,12 @@ Click to see DescTools method
 <hr>
 <section id="homework-instructions" class="level3 tight-top" data-number="4.5.1">
 <h3 class="tight-top anchored" data-number="4.5.1" data-anchor-id="homework-instructions"><span class="header-section-number">4.5.1</span> Homework instructions</h3>
-<p>Please create an <em>RMarkdown</em> document that will render as an <code>.html</code> file. You will submit this file to show your coding and your work. Please refer to the <a href="https://jacobccooper.github.io/biol105_unk/intro_to_r.html">Introduction to <em>R</em></a> for refreshers on how to create an <code>.html</code> document in <em>RMarkdown</em>. You will need to do the following for each of these datasets:</p>
-<ul>
-<li><p>mean</p></li>
-<li><p>median</p></li>
-<li><p>range</p></li>
-<li><p>interquartile range</p></li>
-<li><p>variance</p></li>
-<li><p>standard deviation</p></li>
-<li><p>coefficient of variation</p></li>
-<li><p>standard error</p></li>
-<li><p>whether there are any “outliers”</p></li>
-</ul>
+<p>Please create an <em>RMarkdown</em> document that will render as an <code>.html</code> file. You will submit this file to show your coding and your work. Please refer to the <a href="https://jacobccooper.github.io/biol105_unk/intro_to_r.html">Introduction to <em>R</em></a> for refreshers on how to create an <code>.html</code> document in <em>RMarkdown</em>.</p>
 <p><strong>Please show all of your work for full credit.</strong></p>
 <hr>
 </section>
 <section id="data-for-homework-problems" class="level3 tight-top" data-number="4.5.2">
 <h3 class="tight-top anchored" data-number="4.5.2" data-anchor-id="data-for-homework-problems"><span class="header-section-number">4.5.2</span> Data for homework problems</h3>
-<details>
-<summary>
-Click for homework data
-</summary>
 <p>For each question, calculate the mean, median, range, interquartile range, variance, standard deviation, coefficient of variation, standard error, and whether there are any “outliers”.</p>
 <p>Please also write your own short response to the <em>Synthesis question</em> posed, which will involve thinking about the data and metrics you just analyzed.</p>
 <section id="unk-nebraskans" class="level4" data-number="4.5.2.1">
@@ -1129,15 +1114,15 @@ Click for homework data
 </div>
 <p><strong>Now, calculate the following for <code>nebraskans</code></strong>:</p>
 <ul>
-<li><p>mean</p></li>
-<li><p>median</p></li>
-<li><p>range</p></li>
-<li><p>interquartile range</p></li>
-<li><p>variance</p></li>
-<li><p>standard deviation</p></li>
-<li><p>coefficient of variation</p></li>
-<li><p>standard error</p></li>
-<li><p>whether there are any “outliers”</p></li>
+<li><p>mean - <code>mean()</code></p></li>
+<li><p>median - <code>median()</code></p></li>
+<li><p>range - <code>range()</code></p></li>
+<li><p>interquartile range - <code>IQR()</code></p></li>
+<li><p>variance - <code>var()</code></p></li>
+<li><p>standard deviation - <code>sd()</code></p></li>
+<li><p>coefficient of variation - <code>cv()</code> function defined above</p></li>
+<li><p>standard error - <code>sd()</code></p></li>
+<li><p>whether there are any “outliers” - <code>Outliers()</code></p></li>
 </ul>
 <p><strong>Synthesis question</strong>: Do you think that there are any really anomalous years? Do you feel data are similar between years? <em>Note</em> we are not looking at trends through time but whether any years are outliers.</p>
 </section>
@@ -1175,7 +1160,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </section>
 <section id="patient-ages-at-presentation" class="level4" data-number="4.5.2.3">
 <h4 data-number="4.5.2.3" class="anchored" data-anchor-id="patient-ages-at-presentation"><span class="header-section-number">4.5.2.3</span> 3: Patient ages at presentation</h4>
-<p>The following is a dataset on skin sores in different communities in Australia and Oceania, specifically looking at the amount of time that passes between skin infections <span class="citation" data-cites="lydeamore_estimation_2020">(<a href="references.html#ref-lydeamore_estimation_2020" role="doc-biblioref">Lydeamore et al. 2020a</a>)</span>. This file includes multiple different datasets, and focuses on data from children in the first five years of their life, on househould visits, and on data collected during targeted studies <span class="citation" data-cites="Lydeamore2020">(<a href="references.html#ref-Lydeamore2020" role="doc-biblioref">Lydeamore et al. 2020b</a>)</span>.</p>
+<p>The following is a dataset on skin sores in different communities in Australia and Oceania, specifically looking at the amount of time that passes between skin infections <span class="citation" data-cites="lydeamore_estimation_2020">(<a href="references.html#ref-lydeamore_estimation_2020" role="doc-biblioref">Lydeamore et al. 2020a</a>)</span>. This file includes multiple different datasets, and focuses on data from children in the first five years of their life, on household visits, and on data collected during targeted studies <span class="citation" data-cites="Lydeamore2020">(<a href="references.html#ref-Lydeamore2020" role="doc-biblioref">Lydeamore et al. 2020b</a>)</span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://doi.org/10.1371/journal.pcbi.1007838.s006"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -1209,8 +1194,7 @@ dbl (1): time_difference
 <li><p>standard error</p></li>
 <li><p>whether there are any “outliers”</p></li>
 </ul>
-<p><strong>Synthesis question</strong>: Folks will often think about probabilities of events being “low but never zero”. What does that mean in the context of these data? What about these data make you feel like probabilities may decrease through time but never become zero?</p>
-</section></details>
+<p><strong>Synthesis question</strong>: Folks will often think about probabilities of events being “low but never zero”. What does that mean in the context of secondary infection? What about these data make you think that a secondary infection is always possible?</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
@@ -1226,7 +1210,7 @@ Moura, R., N. P. Santos, and A. Rocha (2023). <span class="nocase">Processed csv
 </div>
 </section>
 </section>
-
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
