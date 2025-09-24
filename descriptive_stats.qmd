@@ -774,6 +774,26 @@ mean(nebraskans) |>
   round(0) # don't forget to round!
 ```
 
+**Now, calculate the following for `nebraskans`**:
+
+-   mean
+
+-   median
+
+-   range
+
+-   interquartile range
+
+-   variance
+
+-   standard deviation
+
+-   coefficient of variation
+
+-   standard error
+
+-   whether there are any "outliers"
+
 **Synthesis question**: Do you think that there are any really anomalous years? Do you feel data are similar between years? *Note* we are not looking at trends through time but whether any years are outliers.
 
 #### 2: Piracy in the Gulf of Guinea
@@ -783,6 +803,26 @@ The following is a dataset looking at oceanic conditions and other variables ass
 ```{r}
 pirates <- read_csv("https://figshare.com/ndownloader/files/42314604")
 ```
+
+**Now, calculate the following for `Distance_from_Coast`**:
+
+-   mean
+
+-   median
+
+-   range
+
+-   interquartile range
+
+-   variance
+
+-   standard deviation
+
+-   coefficient of variation
+
+-   standard error
+
+-   whether there are any "outliers"
 
 **Synthesis question**: Do you notice any patterns in distance from shore? What may be responsible for these patterns? *Hint*: Think about what piracy entails and also what other columns are available as other variables in the above dataset.
 
@@ -801,6 +841,26 @@ dim(ages)
 ```
 
 As you can see, this file has only two columns but 17,150 rows! For the column `time_difference`, please calculate the mean, median, range, interquartile range, variance, standard deviation, coefficient of variation, standard error, and whether there are any "outliers".
+
+**Calculate the following for the `time_difference`**:
+
+-   mean
+
+-   median
+
+-   range
+
+-   interquartile range
+
+-   variance
+
+-   standard deviation
+
+-   coefficient of variation
+
+-   standard error
+
+-   whether there are any "outliers"
 
 **Synthesis question**: Folks will often think about probabilities of events being "low but never zero". What does that mean in the context of these data? What about these data make you feel like probabilities may decrease through time but never become zero?
 
