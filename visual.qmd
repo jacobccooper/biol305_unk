@@ -26,6 +26,12 @@ Before we start, we must load our *R* libraries.
 library(tidyverse)
 ```
 
+We will need one additional *R* library this week as well - `moments`. You will need to install this library on your machine if you have not done so already.
+
+```{r, message = F, warning = F, results = 'hide'}
+library(moments)
+```
+
 <hr>
 
 <br>
@@ -230,12 +236,9 @@ On the above plot, *outliers* for the dataset are shown as dots beyond the ends 
 
 <summary>Click to read about skewness</summary>
 
-Skew is a measure of how much a dataset "leans" to the positive or negative directions (*i.e.*, to the "left" or to the "right"). To calculate skew, we are going to use the `moments` library.
+Skew is a measure of how much a dataset "leans" to the positive or negative directions (*i.e.*, to the "left" or to the "right"). This is a function from the `moments` library.
 
 ```{r}
-# don't forget to install if needed!
-library(moments)
-
 skewness(x)
 ```
 
@@ -279,6 +282,8 @@ Kurtosis refers to how sharp or shallow the peak of the distribution is (*platyk
 Much like skewness, **kurtosis values of** $> 2$ **and** $< -2$ **are generally considered extreme**, and thus not mesokurtic. This threshold can vary a bit based on source, but for this class, we will use a threshold of $\pm 2$ for both skewness and kurtosis.
 
 Let's see the kurtosis of `x`. ***Note*** that when doing the equation, a normal distribution actually has a kurtosis of $3$; **thus, we are doing kurtosis** $-3$ **to "zero" the distribution and make it comparable to skewness**.
+
+*Note*: `kurtosis` is a function from the `moments` library.
 
 ```{r}
 hist(x)
@@ -388,40 +393,11 @@ plot(x = 1:length(sum_y), # get length of sum_y, make x index
 
 Please complete all computer portions in an `rmarkdown` document knitted as an html. Upload any "by hand" calculations as images in the HTML or separately on *Canvas*.
 
+**Remember:** you will need to load the `tidyverse` and `moments` libraries!
+
 <hr>
 
 <br>
-
-<hr>
-
-### Helpful hint {.tight-top}
-
-<details>
-
-<summary>Click for a useful hint!</summary>
-
-**HINT**: For 3.5, consider just making a vector of the values of interest for a histogram.
-
-For example, see the following. For reference:
-
--   `c` means "concatenate", or place things together in an object.
-
-```{r}
-# numeric vector data for counts
-y <- c(17,24,16)
-
-# manually create a histogram using barplot
-barplot(y, 
-        # axis names must be true
-        axisnames = T, 
-        # input names here
-        # each category as a separate quoted character string
-        names.arg = c("Cat 1", "Cat 2", "Cat 3"))
-```
-
-</details>
-
-<br> <br>
 
 <hr>
 
@@ -440,8 +416,8 @@ clupea <- fishes |>
   filter(scientific_name == "Clupea harengus")
 
 # get vector of lengths
-# remove missing data
 clupea.lengths <- clupea$fish_length_mm |> 
+  # remove missing data
   na.omit()
 ```
 
@@ -449,7 +425,8 @@ clupea.lengths <- clupea$fish_length_mm |>
 2.  Create a cumulative frequency plot of these data.
 3.  Calculate the kurtosis of these data, and make a conclusion about the kurtosis of the dataset.
 4.  Calculate the skewness of these data, and make a conclusion about the skewness of the dataset.
-5.  Create a boxplot of these data.
+5.  Create a boxplot of these data. Are there any outliers in this dataset?
+6.  Compare the methods used to examine the data above. How do these methods help you understand the data? Do the numerical results from parts like skewness and kurtosis make sense with your plots?
 
 ### Problem 2
 
@@ -466,11 +443,12 @@ bike.count <- bicycles$`Fremont Bridge East Sidewalk` |>
 2.  Create a cumulative frequency plot of these data.
 3.  Calculate the kurtosis of these data, and make a conclusion about the kurtosis of the dataset.
 4.  Calculate the skewness of these data, and make a conclusion about the skewness of the dataset.
-5.  Create a boxplot of these data.
+5.  Create a boxplot of these data. Are there any outliers in this dataset?
+6.  Compare the methods used to examine the data above. How do these methods help you understand the data? Do the numerical results from parts like skewness and kurtosis make sense with your plots?
 
 ### Problem 3
 
-Take the object `bike.count` from the previous problem and perform a *log transformation* of the data. To do this, we will take the natural log of the dataset plus one. We must add 1 to every value in the dataset, because the natural log of 0 is negative infinity; adding one makes every value in the dataset quantifiable as the minimum value for any count data is 0.
+Take the object `bike.count` from the previous problem and perform a *log transformation* of the data. To do this, we will take the natural log of the dataset plus one. We must add 1 to every value in the dataset, because the natural log of 0 is negative infinity ($-\infty$); adding one makes every value in the dataset quantifiable as the minimum value for any count data will become 0.
 
 Perform the following action on your computer, replacing `x` with your `bike.data` object. Name your object `log.bikes` instead of `log.x`.
 
@@ -484,13 +462,13 @@ After performing the log transformation, complete the following.
 2.  Create a cumulative frequency plot of these data.
 3.  Calculate the kurtosis of these data, and make a conclusion about the kurtosis of the dataset.
 4.  Calculate the skewness of these data, and make a conclusion about the skewness of the dataset.
-5.  Create a boxplot of these data.
+5.  Create a boxplot of these data. Are there any outliers in this dataset?
 6.  How did the log transformation change these data?
 
 ### Problem 4
 
 Is there pseudoreplication in the bicycle dataset? Why or why not?
 
-## Acknowledgment
+## Acknowledgments
 
 Thanks to Hernan Vargas & Riley Grieser for help in formatting this page. Additional comments provided by BIOL 305 classes.

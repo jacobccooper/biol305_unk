@@ -756,9 +756,11 @@ mean(nebraskans) |>
 
 -   mean - `mean()`
 
+-   25th and 50th percentiles - `quantile()`
+
 -   median - `median()`
 
--   range - `range()`
+-   range - `max()-min()`
 
 -   interquartile range - `IQR()`
 
@@ -787,6 +789,8 @@ pirates <- read_csv("https://figshare.com/ndownloader/files/42314604")
 -   mean
 
 -   median
+
+-   25th and 75th percentiles
 
 -   range
 
@@ -825,6 +829,8 @@ As you can see, this file has only two columns but 17,150 rows! For the column `
 -   mean
 
 -   median
+
+-   25th and 75th percentiles
 
 -   range
 
