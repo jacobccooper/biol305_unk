@@ -338,6 +338,7 @@ window.Quarto = {
   <li><a href="#problem-2" id="toc-problem-2" class="nav-link" data-scroll-target="#problem-2"><span class="header-section-number">5.8.2</span> Problem 2</a></li>
   <li><a href="#problem-3" id="toc-problem-3" class="nav-link" data-scroll-target="#problem-3"><span class="header-section-number">5.8.3</span> Problem 3</a></li>
   <li><a href="#problem-4" id="toc-problem-4" class="nav-link" data-scroll-target="#problem-4"><span class="header-section-number">5.8.4</span> Problem 4</a></li>
+  <li><a href="#problem-5" id="toc-problem-5" class="nav-link" data-scroll-target="#problem-5"><span class="header-section-number">5.8.5</span> Problem 5</a></li>
   </ul></li>
   <li><a href="#acknowledgments" id="toc-acknowledgments" class="nav-link" data-scroll-target="#acknowledgments"><span class="header-section-number">5.9</span> Acknowledgments</a></li>
   </ul>
@@ -651,6 +652,7 @@ Click to read about skewness
 </div>
 </div>
 <p>Generally, a <strong>value between</strong> <span class="math inline">\(-1\)</span> <strong>and</strong> <span class="math inline">\(+1\)</span> <strong>for skewness is “acceptable”</strong> and not considered overly skewed. Positive values indicate “right” skew and negative values indicate a “left” skew. If something is too skewed, it may violate assumptions of normality and thus need <em>non-parametric</em> tests rather than our standard parametric tests - something we will cover later!</p>
+<p><strong>The following is not required for skewness and is an example to show greater skew.</strong></p>
 <p>Let’s look at a skewed dataset. We are going to artificially create a skewed dataset from our <code>x</code> vector.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create more positive values</span></span>
@@ -717,7 +719,9 @@ Click to read about kurtosis
 </div>
 </div>
 <p><em>Note</em> when rounding a calculation, the calculation must be in brackets or it will only round the last value.</p>
-<p>As expected, out values drawn from a normal distribution are not overly skewed. Let’s compare these to a more kurtic distribution:</p>
+<p>As expected, out values drawn from a normal distribution are <em>mesokurtic</em>.</p>
+<p><strong>The following is not required for calculating kurtosis, and this is an example to show something more kurtic.</strong></p>
+<p>Let’s compare these to a more kurtic distribution:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>xk <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">3</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -749,7 +753,7 @@ Click to read about kurtosis
 <hr>
 <details>
 <summary>
-Click to see how to make a cumulative frequency plot if data is not in histogram/frequency format
+Click to see how to make a cumulative frequency plot if data are a numeric vector
 </summary>
 <p>The use of the Empirical Cumulative Distribution Function <strong><code>ecdf</code></strong> can turn a variable into what is needed to create a cumulative frequency plot.</p>
 <div class="cell">
@@ -779,7 +783,7 @@ Click to see how to make a cumulative frequency plot if data is not in histogram
 <hr>
 <details>
 <summary>
-Click to see how to make a cumulative frequency plot if data is in histogram/frequency format
+Click to see how to make a cumulative frequency plot if data are in count format
 </summary>
 <p>If you have a list of frequencies (say, <em>for river discharge over several years</em>), you only need to do the <code>cumsum</code> function. For example:</p>
 <div class="cell">
@@ -887,6 +891,24 @@ Click to see how to make a cumulative frequency plot if data is in histogram/fre
 <section id="problem-4" class="level3" data-number="5.8.4">
 <h3 data-number="5.8.4" class="anchored" data-anchor-id="problem-4"><span class="header-section-number">5.8.4</span> Problem 4</h3>
 <p>Is there pseudoreplication in the bicycle dataset? Why or why not?</p>
+</section>
+<section id="problem-5" class="level3" data-number="5.8.5">
+<h3 data-number="5.8.5" class="anchored" data-anchor-id="problem-5"><span class="header-section-number">5.8.5</span> Problem 5</h3>
+<p>This last problem will require you to practice <a href="#histograms-on-frequency-counts">Histograms on frequency counts</a> and <a href="#cumulative-frequency-plot">Cumulative frequency plot</a> on count data. In this dataset, you will be looking at the counts of the <code>response</code> variable for each level of the <code>treatment</code> variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>treatment <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>response <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">11</span>,<span class="dv">21</span>,<span class="dv">28</span>,<span class="dv">33</span>,<span class="dv">39</span>,<span class="dv">32</span>,<span class="dv">21</span>,<span class="dv">17</span>,<span class="dv">2</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>random_data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(treatment, response) <span class="sc">|&gt;</span> </span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li>Create a histogram of these data.</li>
+<li>Create a cumulative frequency plot of these data.</li>
+<li>Calculate the kurtosis of these data, and make a conclusion about the kurtosis.</li>
+<li>Calculate the skewness of these data, and make a conclusion about the skewness.</li>
+<li>Create a boxplot of these data. Are there any outliers?</li>
+</ol>
 </section>
 </section>
 <section id="acknowledgments" class="level2" data-number="5.9">

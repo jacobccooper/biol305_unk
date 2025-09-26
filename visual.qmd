@@ -244,6 +244,8 @@ skewness(x)
 
 Generally, a **value between** $-1$ **and** $+1$ **for skewness is "acceptable"** and not considered overly skewed. Positive values indicate "right" skew and negative values indicate a "left" skew. If something is too skewed, it may violate assumptions of normality and thus need *non-parametric* tests rather than our standard parametric tests - something we will cover later!
 
+**The following is not required for skewness and is an example to show greater skew.**
+
 Let's look at a skewed dataset. We are going to artificially create a skewed dataset from our `x` vector.
 
 ```{r}
@@ -302,7 +304,11 @@ kurtosis(x) |> round(2)
 
 *Note* when rounding a calculation, the calculation must be in brackets or it will only round the last value.
 
-As expected, out values drawn from a normal distribution are not overly skewed. Let's compare these to a more kurtic distribution:
+As expected, out values drawn from a normal distribution are *mesokurtic*.
+
+**The following is not required for calculating kurtosis, and this is an example to show something more kurtic.**
+
+Let's compare these to a more kurtic distribution:
 
 ```{r}
 xk <- x^3
@@ -334,7 +340,7 @@ A *cumulative frequency plot* shows the overall spread of the data as a cumulati
 
 <details>
 
-<summary>Click to see how to make a cumulative frequency plot if data is not in histogram/frequency format</summary>
+<summary>Click to see how to make a cumulative frequency plot if data are a numeric vector</summary>
 
 The use of the Empirical Cumulative Distribution Function **`ecdf`** can turn a variable into what is needed to create a cumulative frequency plot.
 
@@ -356,7 +362,7 @@ plot(ecdf(x),
 
 <details>
 
-<summary>Click to see how to make a cumulative frequency plot if data is in histogram/frequency format</summary>
+<summary>Click to see how to make a cumulative frequency plot if data are in count format</summary>
 
 If you have a list of frequencies (say, *for river discharge over several years*), you only need to do the `cumsum` function. For example:
 
@@ -468,6 +474,24 @@ After performing the log transformation, complete the following.
 ### Problem 4
 
 Is there pseudoreplication in the bicycle dataset? Why or why not?
+
+### Problem 5
+
+This last problem will require you to practice [Histograms on frequency counts] and [Cumulative frequency plot] on count data. In this dataset, you will be looking at the counts of the `response` variable for each level of the `treatment` variable.
+
+```{r}
+treatment <- 1:10
+response <- c(1,11,21,28,33,39,32,21,17,2)
+
+random_data <- cbind(treatment, response) |> 
+  as.data.frame()
+```
+
+1.  Create a histogram of these data.
+2.  Create a cumulative frequency plot of these data.
+3.  Calculate the kurtosis of these data, and make a conclusion about the kurtosis.
+4.  Calculate the skewness of these data, and make a conclusion about the skewness.
+5.  Create a boxplot of these data. Are there any outliers?
 
 ## Acknowledgments
 
