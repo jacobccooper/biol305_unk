@@ -292,11 +292,6 @@ hist(x)
 ```
 
 ```{r}
-# non-zeroed
-kurtosis(x) |> round(2)
-```
-
-```{r}
 # zeroed
 # put whole thing to be rounded in brackets
 (kurtosis(x)-3) |> round(2)
@@ -306,9 +301,13 @@ kurtosis(x) |> round(2)
 
 As expected, out values drawn from a normal distribution are *mesokurtic*.
 
-**The following is not required for calculating kurtosis, and this is an example to show something more kurtic.**
+> **The following is not required for calculating kurtosis, and this is an example to show something more leptokurtic.**
 
-Let's compare these to a more kurtic distribution:
+<details>
+
+<summary>Click here to see code for calculating on a more leptokurtic example</summary>
+
+Let's compare these to a more leptokurtic distribution:
 
 ```{r}
 xk <- x^3
@@ -323,6 +322,8 @@ hist(xk,breaks = 100)
 ```
 
 As we can see, this is a very *leptokurtic* distribution.
+
+</details>
 
 </details>
 
