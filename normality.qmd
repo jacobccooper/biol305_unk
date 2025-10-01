@@ -657,7 +657,7 @@ Submit one `html` file, as created in *RStudio*, with you answers to the followi
 
 ### $Z$ to $p$
 
-For each of the following, report the corresponding $p$ value for the $z$ score.
+For each of the following, report the corresponding $p$ value for the $z$ score. List exactly as displayed, keeping in mind that it defaults to "looking left" (`lower.tail = TRUE`).
 
 A.  2.3
 B.  6.4
@@ -687,7 +687,7 @@ D.  $\bar{x} = 0.1$, $\sigma = 3$, $n = 12$, $CI = 95\%$
 
 ### Italian climate - spring
 
-As part of a study on how climate affects the weights of Alpine Ibex, researchers recorded the maximum temperature in the spring at their study site [@brambilla_2024_12749273]. The researchers find another site with an average spring maximum temperature of 6.2ºC, and claim that it is warmer than their study site. Are the correct?
+As part of a study on how climate affects the weights of Alpine Ibex, researchers recorded the maximum temperature in the spring at their study site [@brambilla_2024_12749273]. The researchers find another site with an average spring maximum temperature of 6.2ºC, and claim that it is significantly different than their study site. Are they correct? Assume that $\alpha=0.05$ and determine whether this is a *one-tailed* (unidirectional) or *two-tailed* (bidirectional) test.
 
 The data for this problem will be in the object `spring_temps` below:
 
@@ -703,6 +703,8 @@ spring_temps <- weather$SpringTmax |>
   as.numeric()
 ```
 
+HINT: $x = 6.2$, $\bar{x}$ is the mean of the `spring_temps` above. We are comparing a *single value* to the dataset, so $n=1$.
+
 Evaluate their claims by:
 
 1.  Calculating a $z$-score for their temperature (6.2ºC).
@@ -712,11 +714,13 @@ Evaluate their claims by:
 
 ### Italian climate - Summer
 
-Using the same dataset (`weather`) as the previous question, isolate the data for the summer (column `SummTmax`). The researchers find the average temperature of another site is 13.6ºC, and claim this is warmer than their research site. Are they correct? As with the previous question, complete the following:
+Using the same dataset (`weather`) as the previous question, isolate the data for the summer (column `SummTmax`). The researchers find the average temperature of another site is 13.6ºC, and claim this is warmer than their research site. Are they correct? Assume that $\alpha=0.05$ and determine whether this is a *one-tailed* (unidirectional) or *two-tailed* (bidirectional) test.
+
+***Note*** for this question, you will have to isolate the column for summer temperatures from the `weather` dataframe and perform all of the analysis steps yourself.
+
+As with the previous question, complete the following:
 
 1.  Calculating a $z$-score for their temperature (13.6ºC).
 2.  Calculating a $p$-value for their temperature (13.6ºC).
 3.  Reporting a 95% confidence interval for the mean for the temperatures reported in their dataset.
 4.  In a single sentence, state whether you find this temperature to be significantly warmer than the mean or not, stating what evidence you are using to make this conclusion.
-
-*Note* for this question, you will have to isolate the column for summer temperatures from the `weather` dataframe and perform all of the analysis steps yourself.
