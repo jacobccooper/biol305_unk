@@ -703,7 +703,7 @@ spring_temps <- weather$SpringTmax |>
   as.numeric()
 ```
 
-HINT: $x = 6.2$, $\bar{x}$ is the mean of the `spring_temps` above. We are comparing a *single value* to the dataset, so $n=1$.
+HINT: $n$ is the length of the `spring_temps` vector, which you can find using `length`. You *must* use the `zscore` function ([Calculating a \$Z\$ score]) from this page *or* calculate the $Z$-score by hand.
 
 Evaluate their claims by:
 

@@ -1135,7 +1135,7 @@ CI=\bar{x} \pm Z_{1-\frac{\alpha}{2}}\cdot \frac{\sigma}{\sqrt{n}}
 <span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ensure data are in correct numeric format</span></span>
 <span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>HINT: <span class="math inline">\(x = 6.2\)</span>, <span class="math inline">\(\bar{x}\)</span> is the mean of the <code>spring_temps</code> above. We are comparing a <em>single value</em> to the dataset, so <span class="math inline">\(n=1\)</span>.</p>
+<p>HINT: <span class="math inline">\(n\)</span> is the length of the <code>spring_temps</code> vector, which you can find using <code>length</code>. You <em>must</em> use the <code>zscore</code> function ([Calculating a $Z$ score]) from this page <em>or</em> calculate the <span class="math inline">\(Z\)</span>-score by hand.</p>
 <p>Evaluate their claims by:</p>
 <ol type="1">
 <li>Calculating a <span class="math inline">\(z\)</span>-score for their temperature (6.2ºC).</li>
