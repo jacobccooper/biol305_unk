@@ -762,10 +762,13 @@ Z = \frac{\bar{x}-\mu}{\frac{\sigma}{\sqrt{n}}}
 <p>Where <span class="math inline">\(\bar{x}\)</span> is either a sample mean or a sample value, <span class="math inline">\(\mu\)</span> is the population mean, <span class="math inline">\(\sigma\)</span> is the population standard deviation and <span class="math inline">\(n\)</span> is the number of individuals in your sample (<span class="math inline">\(1\)</span> if comparing to a single value).</p>
 <p>We can calculate this in <em>R</em> using the following function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>zscore <span class="ot">&lt;-</span> <span class="cf">function</span>(xbar, mu, sd.x, <span class="at">n =</span> <span class="dv">1</span>){</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu)<span class="sc">/</span>(sd.x<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(z)</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="do">### DO NOT EDIT </span><span class="al">###</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># RUN EXACTLY AS IS #</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Use as function like mean#</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>zscore <span class="ot">&lt;-</span> <span class="cf">function</span>(xbar, mu, sd.x, <span class="at">n =</span> <span class="dv">1</span>){</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu)<span class="sc">/</span>(sd.x<span class="sc">/</span><span class="fu">sqrt</span>(n))</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(z)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>NOTE</strong> that is the above isn’t working for you, <em>you have a mistake somewhere in your code</em>. Try comparing - character by character - what is listed above to what you have.</p>
 <p>Let’s work through an example, where we have a sample mean of <span class="math inline">\(62\)</span> with <span class="math inline">\(5\)</span> samples compared to a sample mean of <span class="math inline">\(65\)</span> with a standard deviation of <span class="math inline">\(3.5\)</span>.</p>
@@ -1136,6 +1139,7 @@ CI=\bar{x} \pm Z_{1-\frac{\alpha}{2}}\cdot \frac{\sigma}{\sqrt{n}}
 <span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>HINT: <span class="math inline">\(n\)</span> is the length of the <code>spring_temps</code> vector, which you can find using <code>length</code>. You <em>must</em> use the <code>zscore</code> function ([Calculating a $Z$ score]) from this page <em>or</em> calculate the <span class="math inline">\(Z\)</span>-score by hand.</p>
+<p>SECOND HINT: Here, the <span class="math inline">\(p\)</span> value should <em>always</em> be less than 0.5, since we are looking <em>away</em> from the mean to see how <em>extreme</em> values are.</p>
 <p>Evaluate their claims by:</p>
 <ol type="1">
 <li>Calculating a <span class="math inline">\(z\)</span>-score for their temperature (6.2ºC).</li>

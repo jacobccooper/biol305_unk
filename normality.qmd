@@ -348,6 +348,9 @@ Where $\bar{x}$ is either a sample mean or a sample value, $\mu$ is the populati
 We can calculate this in *R* using the following function:
 
 ```{r}
+### DO NOT EDIT ###
+# RUN EXACTLY AS IS #
+# Use as function like mean#
 zscore <- function(xbar, mu, sd.x, n = 1){
   z <- (xbar - mu)/(sd.x/sqrt(n))
   return(z)
@@ -704,6 +707,8 @@ spring_temps <- weather$SpringTmax |>
 ```
 
 HINT: $n$ is the length of the `spring_temps` vector, which you can find using `length`. You *must* use the `zscore` function ([Calculating a \$Z\$ score]) from this page *or* calculate the $Z$-score by hand.
+
+SECOND HINT: Here, the $p$ value should *always* be less than 0.5, since we are looking *away* from the mean to see how *extreme* values are.
 
 Evaluate their claims by:
 
