@@ -341,6 +341,12 @@ window.Quarto = {
   <li><a href="#italian-climate---spring" id="toc-italian-climate---spring" class="nav-link" data-scroll-target="#italian-climate---spring"><span class="header-section-number">6.4.4</span> Italian climate - spring</a></li>
   <li><a href="#italian-climate---summer" id="toc-italian-climate---summer" class="nav-link" data-scroll-target="#italian-climate---summer"><span class="header-section-number">6.4.5</span> Italian climate - Summer</a></li>
   </ul></li>
+  <li><a href="#homework-hypothesis-testing-part-2" id="toc-homework-hypothesis-testing-part-2" class="nav-link" data-scroll-target="#homework-hypothesis-testing-part-2"><span class="header-section-number">6.5</span> Homework: Hypothesis Testing Part 2</a>
+  <ul class="collapse">
+  <li><a href="#clupea-revisited" id="toc-clupea-revisited" class="nav-link" data-scroll-target="#clupea-revisited"><span class="header-section-number">6.5.1</span> <em>Clupea</em> revisited</a></li>
+  <li><a href="#confidence-intervals-2" id="toc-confidence-intervals-2" class="nav-link" data-scroll-target="#confidence-intervals-2"><span class="header-section-number">6.5.2</span> Confidence intervals</a></li>
+  <li><a href="#ammodytes" id="toc-ammodytes" class="nav-link" data-scroll-target="#ammodytes"><span class="header-section-number">6.5.3</span> <em>Ammodytes</em></a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -1158,6 +1164,78 @@ CI=\bar{x} \pm Z_{1-\frac{\alpha}{2}}\cdot \frac{\sigma}{\sqrt{n}}
 <li>Calculating a <span class="math inline">\(p\)</span>-value for their temperature (13.6ºC).</li>
 <li>Reporting a 95% confidence interval for the mean for the temperatures reported in their dataset.</li>
 <li>In a single sentence, state whether you find this temperature to be significantly warmer than the mean or not, stating what evidence you are using to make this conclusion.</li>
+</ol>
+</section>
+</section>
+<section id="homework-hypothesis-testing-part-2" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="homework-hypothesis-testing-part-2"><span class="header-section-number">6.5</span> Homework: Hypothesis Testing Part 2</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>fishes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://zenodo.org/records/4066594/files/reference_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 814 Columns: 13
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (8): fish_id, family, scientific_name, vernacular_name, sampling_date, s...
+dbl (5): fish_length_mm, left_otolith_lenght_µm, left_otolith_width_µm, righ...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># isolate Clupea harengus</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>clupea <span class="ot">&lt;-</span> fishes <span class="sc">|&gt;</span> </span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(scientific_name <span class="sc">==</span> <span class="st">"Clupea harengus"</span>)</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a><span class="co"># get vector of lengths</span></span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>clupea.lengths <span class="ot">&lt;-</span> clupea<span class="sc">$</span>fish_length_mm <span class="sc">|&gt;</span> </span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove missing data</span></span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="clupea-revisited" class="level3" data-number="6.5.1">
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="clupea-revisited"><span class="header-section-number">6.5.1</span> <em>Clupea</em> revisited</h3>
+<p>The researchers who were working with the <em>Clupea harengus</em> dataset caught two individuals - one <span class="math inline">\(89 mm\)</span> long and one <span class="math inline">\(92 mm\)</span> long. The authors are trying to see if these individuals belong to a different population or if they are within the range of expected variation for the known <em>Clupea</em> population.</p>
+<ol type="1">
+<li>What is are the <em>null</em> and <em>alternative</em> hypotheses for what is described above?</li>
+<li>Are these <em>one-tailed</em> or <em>two-tailed</em> hypotheses? Explain.</li>
+<li>Calculate a <span class="math inline">\(P\)</span> value for each individual. Use the equation provided above (<code>zscore</code>) for getting your <span class="math inline">\(Z\)</span> value.</li>
+<li>Assuming the authors use <span class="math inline">\(\alpha = 0.05\)</span>, state a conclusion as to whether each of the individuals is outside of the range of expected variation for <em>Clupea harengus</em>.</li>
+<li>Now assume that the authors change their question to be whether the two individuals are larger than is expected for <em>Clupea harengus</em>, and maintain an <span class="math inline">\(\alpha = 0.05\)</span>. Does this change their conclusion? How so?</li>
+</ol>
+</section>
+<section id="confidence-intervals-2" class="level3" data-number="6.5.2">
+<h3 data-number="6.5.2" class="anchored" data-anchor-id="confidence-intervals-2"><span class="header-section-number">6.5.2</span> Confidence intervals</h3>
+<ol type="1">
+<li>Calculate the 95% confidence interval around the mean for <em>Alosa fallax</em> and for <em>Ammodytes tobianus</em>. Adjust the following code to get these data:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># adjust for the other fish species!</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Alosa fallax and Ammodytes tobianus</span></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="co"># isolate Clupea harengus</span></span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>clupea <span class="ot">&lt;-</span> fishes <span class="sc">|&gt;</span> </span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(scientific_name <span class="sc">==</span> <span class="st">"Clupea harengus"</span>)</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a><span class="co"># get vector of lengths</span></span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>clupea.lengths <span class="ot">&lt;-</span> clupea<span class="sc">$</span>fish_length_mm <span class="sc">|&gt;</span> </span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove missing data</span></span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li>Why is the confidence interval for <em>Alosa fallax</em> so much larger than <em>Ammodytes tobianus</em>? (Pretend that this is number 2, I can’t get the right number to pop up for some reason).</li>
+</ol>
+</section>
+<section id="ammodytes" class="level3" data-number="6.5.3">
+<h3 data-number="6.5.3" class="anchored" data-anchor-id="ammodytes"><span class="header-section-number">6.5.3</span> <em>Ammodytes</em></h3>
+<p>Folks are trying to evaluate whether the average size of <em>Ammodytes marinus</em> falls outside the range of <em>Ammodytes tobianus</em>.</p>
+<p>Use the steps above to isolate the lengths of <em>Ammodytes marinus</em> and <em>Ammodytes tobianus</em>. Don’t forget to <code>remove.na</code> to ensure you don’t have missing data.</p>
+<ol type="1">
+<li>What are the null and alternative hypotheses for this scenario?</li>
+<li>Is this a one-sided or a two sided test?</li>
+<li>Choose an <span class="math inline">\(\alpha\)</span> value. Why did you choose that number? How may this affect your results?</li>
+<li>What is the average length of <em>Ammodytes marinus</em>?</li>
+<li>What is the <span class="math inline">\(Z\)</span> score of the mean of <em>Ammodytes marinus</em> compared to the entire population of <em>Ammodytes tobianus</em>?</li>
+<li>Do you accept or reject the null hypothesis?</li>
+<li>Write out a sentence outlining your answer, stating your statistical values.</li>
 </ol>
 
 

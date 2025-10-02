@@ -706,7 +706,7 @@ spring_temps <- weather$SpringTmax |>
   as.numeric()
 ```
 
-HINT: $n$ is the length of the `spring_temps` vector, which you can find using `length`. You *must* use the `zscore` function ([Calculating a \$Z\$ score]) from this page *or* calculate the $Z$-score by hand.
+HINT: $n$ is the length of the `spring_temps` vector, which you can find using `length`. You *must* use the `zscore` function (\[Calculating a \$Z\$ score\]) from this page *or* calculate the $Z$-score by hand.
 
 SECOND HINT: Here, the $p$ value should *always* be less than 0.5, since we are looking *away* from the mean to see how *extreme* values are.
 
@@ -729,3 +729,84 @@ As with the previous question, complete the following:
 2.  Calculating a $p$-value for their temperature (13.6ºC).
 3.  Reporting a 95% confidence interval for the mean for the temperatures reported in their dataset.
 4.  In a single sentence, state whether you find this temperature to be significantly warmer than the mean or not, stating what evidence you are using to make this conclusion.
+
+## Homework: Hypothesis Testing Part 2
+
+```{r}
+fishes <- read_csv("https://zenodo.org/records/4066594/files/reference_data.csv")
+
+# isolate Clupea harengus
+clupea <- fishes |> 
+  filter(scientific_name == "Clupea harengus")
+
+# get vector of lengths
+clupea.lengths <- clupea$fish_length_mm |> 
+  # remove missing data
+  na.omit() |> 
+  as.numeric()
+```
+
+### *Clupea* revisited
+
+The researchers who were working with the *Clupea harengus* dataset caught two individuals - one $89 mm$ long and one $92 mm$ long. The authors are trying to see if these individuals belong to a different population or if they are within the range of expected variation for the known *Clupea* population.
+
+```{r, echo = F, eval = F}
+zscore(92, mu = mean(clupea.lengths), 
+       sd = sd(clupea.lengths), 
+       n = length(clupea.lengths)) |> 
+  pnorm(lower.tail = F)
+```
+
+1.  What is are the *null* and *alternative* hypotheses for what is described above?
+2.  Are these *one-tailed* or *two-tailed* hypotheses? Explain.
+3.  Calculate a $P$ value for each individual. Use the equation provided above (`zscore`) for getting your $Z$ value.
+4.  Assuming the authors use $\alpha = 0.05$, state a conclusion as to whether each of the individuals is outside of the range of expected variation for *Clupea harengus*.
+5.  Now assume that the authors change their question to be whether the two individuals are larger than is expected for *Clupea harengus*, and maintain an $\alpha = 0.05$. Does this change their conclusion? How so?
+
+```{r, eval = F, echo = F}
+summary(as.factor(fishes$scientific_name))
+```
+
+### Confidence intervals
+
+1.  Calculate the 95% confidence interval around the mean for *Alosa fallax* and for *Ammodytes tobianus*. Adjust the following code to get these data:
+
+```{r, eval = F}
+# adjust for the other fish species!
+# Alosa fallax and Ammodytes tobianus
+# isolate Clupea harengus
+clupea <- fishes |> 
+  filter(scientific_name == "Clupea harengus")
+
+# get vector of lengths
+clupea.lengths <- clupea$fish_length_mm |> 
+  # remove missing data
+  na.omit() |> 
+  as.numeric()
+```
+
+1.  Why is the confidence interval for *Alosa fallax* so much larger than *Ammodytes tobianus*? (Pretend that this is number 2, I can't get the right number to pop up for some reason).
+
+### *Ammodytes*
+
+Folks are trying to evaluate whether the average size of *Ammodytes marinus* falls outside the range of *Ammodytes tobianus*.
+
+Use the steps above to isolate the lengths of *Ammodytes marinus* and *Ammodytes tobianus*. Don't forget to `remove.na` to ensure you don't have missing data.
+
+1.  What are the null and alternative hypotheses for this scenario?
+2.  Is this a one-sided or a two sided test?
+3.  Choose an $\alpha$ value. Why did you choose that number? How may this affect your results?
+4.  What is the average length of *Ammodytes marinus*?
+5.  What is the $Z$ score of the mean of *Ammodytes marinus* compared to the entire population of *Ammodytes tobianus*?
+6.  Do you accept or reject the null hypothesis?
+7.  Write out a sentence outlining your answer, stating your statistical values.
+
+```{r, eval = F, echo = F}
+alosa.lengths <- fishes$fish_length_mm[which(fishes$scientific_name=="Alosa fallax")]
+
+CI <- qnorm(0.975)*(sd(alosa.lengths)/sqrt(length(alosa.lengths)))
+
+ammodytes.lengths <- fishes$fish_length_mm[which(fishes$scientific_name=="Ammodytes tobianus")]
+
+CI <- qnorm(0.975)*(sd(ammodytes.lengths)/sqrt(length(ammodytes.lengths)))
+```
