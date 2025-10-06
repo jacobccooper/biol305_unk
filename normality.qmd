@@ -789,9 +789,11 @@ clupea.lengths <- clupea$fish_length_mm |>
 
 ### *Ammodytes*
 
-Folks are trying to evaluate whether the average size of *Ammodytes marinus* falls outside the range of *Ammodytes tobianus*.
+Folks are trying to evaluate whether the average size of *Ammodytes marinus* falls outside the range of *Ammodytes tobianus*. (*Note*: this example is for this problem; we will cover more accurate ways to compare two populations in a later section).
 
 Use the steps above to isolate the lengths of *Ammodytes marinus* and *Ammodytes tobianus*. Don't forget to `remove.na` to ensure you don't have missing data.
+
+**Use the average length of *Ammodytes marinus* as your** $\bar{x}$, **and *Ammodytes tobianus* as your population for** $\mu$, $sd$, $n$.
 
 1.  What are the null and alternative hypotheses for this scenario?
 2.  Is this a one-sided or a two sided test?

@@ -333,7 +333,7 @@ window.Quarto = {
   <li><a href="#workthrough-example" id="toc-workthrough-example" class="nav-link" data-scroll-target="#workthrough-example"><span class="header-section-number">6.2.5</span> Workthrough Example</a></li>
   </ul></li>
   <li><a href="#confidence-intervals" id="toc-confidence-intervals" class="nav-link" data-scroll-target="#confidence-intervals"><span class="header-section-number">6.3</span> Confidence Intervals</a></li>
-  <li><a href="#homework-normal-distributions" id="toc-homework-normal-distributions" class="nav-link" data-scroll-target="#homework-normal-distributions"><span class="header-section-number">6.4</span> Homework: Normal distributions</a>
+  <li><a href="#homework-normal-distributions-part-1" id="toc-homework-normal-distributions-part-1" class="nav-link" data-scroll-target="#homework-normal-distributions-part-1"><span class="header-section-number">6.4</span> Homework: Normal distributions Part 1</a>
   <ul class="collapse">
   <li><a href="#z-to-p" id="toc-z-to-p" class="nav-link" data-scroll-target="#z-to-p"><span class="header-section-number">6.4.1</span> <span class="math inline">\(Z\)</span> to <span class="math inline">\(p\)</span></a></li>
   <li><a href="#p-to-z" id="toc-p-to-z" class="nav-link" data-scroll-target="#p-to-z"><span class="header-section-number">6.4.2</span> <span class="math inline">\(P\)</span> to <span class="math inline">\(z\)</span></a></li>
@@ -1093,8 +1093,8 @@ CI=\bar{x} \pm Z_{1-\frac{\alpha}{2}}\cdot \frac{\sigma}{\sqrt{n}}
 </div>
 <p><em>Note</em> that the above is rounded to two decimal places to illustrative purposes ONLY, and should be rounded to one decimal place if it was a homework assignment because the original data has only one decimal place.</p>
 </section>
-<section id="homework-normal-distributions" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="homework-normal-distributions"><span class="header-section-number">6.4</span> Homework: Normal distributions</h2>
+<section id="homework-normal-distributions-part-1" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="homework-normal-distributions-part-1"><span class="header-section-number">6.4</span> Homework: Normal distributions Part 1</h2>
 <p>Submit one <code>html</code> file, as created in <em>RStudio</em>, with you answers to the following questions. For maximum clarity, create headings to separate your problems. (Remember, a header can be invoked by placing ‘<code>#</code>’ in front of a line of text. For example: the header here is written as <code># Homework: Chapter 8</code>).</p>
 <section id="z-to-p" class="level3" data-number="6.4.1">
 <h3 data-number="6.4.1" class="anchored" data-anchor-id="z-to-p"><span class="header-section-number">6.4.1</span> <span class="math inline">\(Z\)</span> to <span class="math inline">\(p\)</span></h3>
@@ -1226,8 +1226,9 @@ dbl (5): fish_length_mm, left_otolith_lenght_µm, left_otolith_width_µm, righ..
 </section>
 <section id="ammodytes" class="level3" data-number="6.5.3">
 <h3 data-number="6.5.3" class="anchored" data-anchor-id="ammodytes"><span class="header-section-number">6.5.3</span> <em>Ammodytes</em></h3>
-<p>Folks are trying to evaluate whether the average size of <em>Ammodytes marinus</em> falls outside the range of <em>Ammodytes tobianus</em>.</p>
+<p>Folks are trying to evaluate whether the average size of <em>Ammodytes marinus</em> falls outside the range of <em>Ammodytes tobianus</em>. (<em>Note</em>: this example is for this problem; we will cover more accurate ways to compare two populations in a later section).</p>
 <p>Use the steps above to isolate the lengths of <em>Ammodytes marinus</em> and <em>Ammodytes tobianus</em>. Don’t forget to <code>remove.na</code> to ensure you don’t have missing data.</p>
+<p><strong>Use the average length of <em>Ammodytes marinus</em> as your</strong> <span class="math inline">\(\bar{x}\)</span>, <strong>and <em>Ammodytes tobianus</em> as your population for</strong> <span class="math inline">\(\mu\)</span>, <span class="math inline">\(sd\)</span>, <span class="math inline">\(n\)</span>.</p>
 <ol type="1">
 <li>What are the null and alternative hypotheses for this scenario?</li>
 <li>Is this a one-sided or a two sided test?</li>
