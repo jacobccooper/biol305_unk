@@ -751,7 +751,7 @@ clupea.lengths <- clupea$fish_length_mm |>
 The researchers who were working with the *Clupea harengus* dataset caught two individuals - one $89 mm$ long and one $92 mm$ long. The authors are trying to see if these individuals belong to a different population or if they are within the range of expected variation for the known *Clupea* population.
 
 ```{r, echo = F, eval = F}
-zscore(92, mu = mean(clupea.lengths), 
+zscore(89, mu = mean(clupea.lengths), 
        sd = sd(clupea.lengths), 
        n = length(clupea.lengths)) |> 
   pnorm(lower.tail = F)
@@ -805,7 +805,7 @@ Use the steps above to isolate the lengths of *Ammodytes marinus* and *Ammodytes
 
 Your answer should be formatted like so (***imaginary example answer here***):
 
-> The mean length of *Ammodytes marinus* ($X \pm Y mm$) is no different than the mean length of *Ammodytes tobianus* ($X \pm Ymm$, $Z_{(n)} = 1.2$, $p = 0.12$).
+> The mean length of *Ammodytes marinus* ($X$) is no different than the mean length of *Ammodytes tobianus* ($X \pm Ymm$, $Z_{(n)} = 1.2$, $p = 0.12$).
 
 Note that $n$ above would be replaced with your sample size for *Ammodytes tobianus,* and the X's replaced with the values of the means from your dataset and the Y's replaced with your confidence interval value corresponding to your $\alpha$.
 
