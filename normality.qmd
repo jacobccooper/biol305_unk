@@ -654,7 +654,7 @@ print(paste(round(xbar, 2),
 
 *Note* that the above is rounded to two decimal places to illustrative purposes ONLY, and should be rounded to one decimal place if it was a homework assignment because the original data has only one decimal place.
 
-## Homework: Normal distributions
+## Homework: Normal distributions Part 1
 
 Submit one `html` file, as created in *RStudio*, with you answers to the following questions. For maximum clarity, create headings to separate your problems. (Remember, a header can be invoked by placing '`#`' in front of a line of text. For example: the header here is written as `# Homework: Chapter 8`).
 
@@ -801,6 +801,12 @@ Use the steps above to isolate the lengths of *Ammodytes marinus* and *Ammodytes
 6.  Do you accept or reject the null hypothesis?
 7.  Write out a sentence outlining your answer, stating your statistical values.
 
+Your answer should be formatted like so (***imaginary example answer here***):
+
+> The mean length of *Ammodytes marinus* ($X \pm Y mm$) is no different than the mean length of *Ammodytes tobianus* ($X \pm Ymm$, $Z_{(n)} = 1.2$, $p = 0.12$).
+
+Note that $n$ above would be replaced with your sample size for *Ammodytes tobianus,* and the X's replaced with the values of the means from your dataset and the Y's replaced with your confidence interval value corresponding to your $\alpha$.
+
 ```{r, eval = F, echo = F}
 alosa.lengths <- fishes$fish_length_mm[which(fishes$scientific_name=="Alosa fallax")]
 
@@ -809,4 +815,6 @@ CI <- qnorm(0.975)*(sd(alosa.lengths)/sqrt(length(alosa.lengths)))
 ammodytes.lengths <- fishes$fish_length_mm[which(fishes$scientific_name=="Ammodytes tobianus")]
 
 CI <- qnorm(0.975)*(sd(ammodytes.lengths)/sqrt(length(ammodytes.lengths)))
+
+1-pnorm(1.2)
 ```

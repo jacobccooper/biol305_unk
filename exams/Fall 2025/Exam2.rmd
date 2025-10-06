@@ -1,0 +1,129 @@
+---
+title: "Exam 2: 105 points possible"
+author: "BIOL 305"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+**General point penalties**: You will lose 1 pt for each:
+
+-   incorrectly rounded value
+-   incorrectly rounded test statistic (i.e., $Z$)
+-   incorrectly reported $p$-value
+
+# Libraries go here
+
+```{r}
+# tidyverse always required
+library(tidyverse)
+# need anything else...?
+```
+
+# 1 [18 pts] Comparing yourself to others
+
+As a kid, your parents often tell you not to compare yourself to others. However, you now have the statistical tools to compare yourself to others scientifically, and you decide to compare your exam scores to your classmates. You are convinced that you are doing exceptionally well in the class, as you got an 80.0% on the last exam and the average was a 70.0%. You find out from your professor that the standard deviation for the class was 8.0%.
+
+## A: [4 pts] Choose an $\alpha$ value for evaluating your test, and choose whether you want to use a one-tailed or a two-tailed test to evaluate your results. Justify your choice, and explain why choosing an alpha value is important.
+
+## B: [4 pts] $Z$-score Calculate a $Z$-score for your exam score.
+
+## C: [2 pts] Calculate a $p$ value for your $Z$-score.
+
+## D: [4 pts] What is your conclusion about your exam? Are you exceptionally good or are you still roughly "average" for the class?
+
+## E: [4] Write out a conclusion about your test. It should contain (1) a full sentence stating your conclusion and (2) your $Z$-score and your $p$-value in parentheses.
+
+# 2 [54 pts] Fish watchin'
+
+You go to the Bonneville Dam and discover they have windows for watching the fish swim through the fish ladder. Much to the chagrin of your family, you decide to do 15 minute counts on the number of salmon passing through the fish ladder for 3 hours, obtaining the following data:
+
+```{r}
+fish_counts <- c(16,18,25,24,
+                 18,11,6,17,
+                 21,16,32,26)
+times <- c("9:00", "9:15", "9:30", "9:45",
+           "10:00", "10:15", "10:30", "10:45",
+           "11:00", "11:15", "11:30", "11:45")
+
+fish_data <- cbind(times, fish_counts) |> 
+  as.data.frame() |> 
+  mutate(fish_counts = as.numeric(fish_counts))
+
+fish_data
+```
+
+## A: [2 pts] What did the command "mutate" do in the above code block?
+
+## B: [5 pts] What is the explanatory variable in the above dataset? [2 pts] What type of data are these? [3 pts] (Nominal, ordinal, integer, or ratio? Also, categorical or continuous?)
+
+## C: [5 pts] What is the response variable in the above dataset? [2 pts] What type of data are these? [3 pts]
+
+## D: [4 pts] Plot a histogram of the response data. [3 pts] Use the arguments `main =` and `xlab =` to make the histogram prettier and to have it make more sense; you will have to designate names in "quotes". [1 pt]
+
+## E: [4 pts] Plot a cumulative frequency plot of these data. [3 pts] Use the arguments `main =` and `xlab =` to make the graph prettier and to have it make more sense; you will have to designate names in "quotes". [1 pt]
+
+## F: [2 pts] What is the kurtosis of the response variable?
+
+## G: [2 pts] What is the skew of the response variable?
+
+## H: [4 pts] Are there any outliers in these data? Create the appropriate graph [3 pts] and perform the appropriate analyses to find out [1 pt].
+
+## I: [4 pts] Are the data normally distributed? Explain, referencing the evidence you've obtained above.
+
+## J: [2 pts] Now perform a `shapiro.test` on the response variable. A Shapiro test is a test of normality, where $p < 0.05$ indicates non-normal data. Does this test conform with your above assessment?
+
+## K: [6 pts] Your annoying friend who is always trying to one-up you says they saw 35 fish in 15 minutes. You think they are lying, but want to show scientifically why you doubt their claim. What test would you use to evaluate this claim? Describe the kind of test [2 pts], the $\alpha$ value you would use and why [2 pts], and whether this would be a one-tailed or a two-tailed test [2 pts]. (Note: the salmon are one-tailed, but this does not affect the statistical test).
+
+## L: [4 pts] What are the *null* and *alternative* hypotheses for part K?
+
+## M: [5 pts] Perform the test you outlined in parts K & L; report the test statistic (i.e., $Z$) and the $P$ value.
+
+## N: [5 pts] What is the statistical conclusion of this test? State both a statistical conclusion, with a $Z$ value and a $P$ value, as well as a statement relating back to your original hypothesis in part K.
+
+# 3 [11 pts] A statistical disagreement
+
+You and your friends are discussing the number of cookies you eat on average every day. Between the eight of you, you find that you eat 3 cookies on average, with a standard deviation of 2 cookies.
+
+You then find out that Dr. Cooper eats 6 cookies on average every day (if his wife is out of town). You decide to see how unusual this is by using a one-tailed test to see if the number of cookies Dr. Cooper consumes is higher than your group's average.
+
+## A: [2 pts] What are the null and alternative hypotheses in this situation?
+
+## B: [9 pts] You run the test with $\alpha = 0.05$. One of your friends says no, Dr. Cooper's behavior is not unusual with $p = 0.07$, whereas another friend says Dr. Cooper eats way too many cookies with $p < 0.0001$. Perform the test yourself, and determine why your friends got different answers. (Full points for performing the test [3], correctly interpreting the test [2], and correctly identifying why the two answers disagree [4]).
+
+# 4 [22 pts] Belltower traffic
+
+You are counting the number of students passing the belltower every passing period, obtaining the following dataset:
+
+```{r}
+people_passing <- c(2,1,6,13,30,22,15,10,5,11,1,14,
+                    23,6,25,134,4,8,1,13,8,5,6,12,6) 
+
+belltower_data <- people_passing |> 
+  as.data.frame() |> 
+  mutate(time = 1:25) |> 
+  select(time, people_passing)
+
+belltower_data
+```
+
+## A: [2 pts] Which variable is the response variable? What type of data are these?
+
+## B: [7 pts] Is the response variable normally distributed? [2 pts] Support your answer with a histogram [1 pt], a cumulative frequency plot [1 pt], assessments of skewness and kurtosis [2 pts], an indication of if outliers exist [1 pt]. You will lose 1 pt overall if you do *not* change the histogram and plot titles and axes labels as per the previous problems.
+
+## C: [7 pts] If a transformation is needed, what transformation is required? Show your work, and provide evidence for your transformation being the most appropriate transformation.
+
+**NOTE**: Test only the following transformations:
+
+-   $\sqrt{x}$
+-   $x^2$
+-   $x^3$
+-   $log(x + 1)$ (can be done with function `log1p` or manually as `log(x+1)`)
+
+## D: [6 pts] What is the 95% confidence interval for the mean of these data?
+
+**HINT**: You may have to *back-transform* your answers using one of the following commands:
+
+-   $\sqrt{x}$: $x^2$
+-   $x^2$: $\sqrt{x}$
+-   $x^3$: $x^\frac{1}{3}$
+-   $log(x + 1)$: $exp(1)^x-1$ (can be done with function `expm1(x)`)
