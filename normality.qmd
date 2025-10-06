@@ -805,9 +805,9 @@ Use the steps above to isolate the lengths of *Ammodytes marinus* and *Ammodytes
 
 Your answer should be formatted like so (***imaginary example answer here***):
 
-> The mean length of *Ammodytes marinus* ($X$) is no different than the mean length of *Ammodytes tobianus* ($X \pm Ymm$, $Z_{(n)} = 1.2$, $p = 0.12$).
+> The mean length of *Ammodytes marinus* ($X$) is no different than the mean length of *Ammodytes tobianus* ($X \pm CI_{95}mm$, $Z_{(n)} = 1.2$, $p = 0.12$).
 
-Note that $n$ above would be replaced with your sample size for *Ammodytes tobianus,* and the X's replaced with the values of the means from your dataset and the Y's replaced with your confidence interval value corresponding to your $\alpha$.
+Note that $n$ above would be replaced with your sample size for *Ammodytes tobianus,* and the X's replaced with the values of the means from your dataset.
 
 ```{r, eval = F, echo = F}
 alosa.lengths <- fishes$fish_length_mm[which(fishes$scientific_name=="Alosa fallax")]
@@ -818,5 +818,5 @@ ammodytes.lengths <- fishes$fish_length_mm[which(fishes$scientific_name=="Ammody
 
 CI <- qnorm(0.975)*(sd(ammodytes.lengths)/sqrt(length(ammodytes.lengths)))
 
-1-pnorm(1.2)
+1-pnorm(0.83)
 ```
