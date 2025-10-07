@@ -81,7 +81,11 @@ With forty breaks, the pattern becomes even more clear. Let's see what a *standa
 ```{r}
 # save temperature vector without NA values
 temps <- beewalk$temperature |> na.omit()
+```
 
+
+```{r}
+### copy this chunk for confidence interval calculations
 mu <- mean(temps)
 t.sd <- sd(temps)
 
