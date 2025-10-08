@@ -205,7 +205,7 @@ Using the `bird` dataset above, pick two other species of birds and do the follo
 2.  Create a histogram of the data.
 3.  Run a `shapiro.test` on the data.
 4.  Determine if the data are normally distributed. If the data are normally distributed, you are done - go to the next species. **Provide at least three pieces of evidence.**
-5.  Explain if the data appear normal or not. **If the data appear normal except for excessive skew, do a log transformation *only*. Otherwise, try *at least* two transformations to see if data are made normal.** Transformations to try include $x^2$, $log(x+1)$, $\sqrt{x}$.
+5.  **If the data appear normal except for excessive skew, do a log transformation *only*. Otherwise, try *at least* two transformations to see if data are made normal.** Transformations to try include $x^2$, $log(x+1)$, $\sqrt{x}$.
 6.  For each transformation, show a histogram, skewness, kurtosis, and a `shapiro.test`.
 7.  Provide an assessment if the transformation achieves normality or not, citing *three* pieces of evidence.
 
