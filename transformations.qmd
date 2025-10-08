@@ -201,15 +201,17 @@ This homework assignment is designed to help you become more familiar with manip
 
 Using the `bird` dataset above, pick two other species of birds and do the following:
 
-1.  Provide information on the mean, median, mode, kurtosis, and skewness
-2.  Create a histogram plot
-3.  Determine if the data are normally distributed
-4.  If data are *not* normally distributed, see if a square, log, or square root transformation will make the data normal.
-5.  Provide an overall assessment of the data's normality.
+1.  Provide information on the mean, median, mode, kurtosis, and skewness.
+2.  Create a histogram of the data.
+3.  Run a `shapiro.test` on the data.
+4.  Determine if the data are normally distributed. If the data are normally distributed, you are done - go to the next species. **Provide at least three pieces of evidence.**
+5.  Explain if the data appear normal or not. **If the data appear normal except for excessive skew, do a log transformation *only*. Otherwise, try *at least* two transformations to see if data are made normal.** Transformations to try include $x^2$, $log(x+1)$, $\sqrt{x}$.
+6.  For each transformation, show a histogram, skewness, kurtosis, and a `shapiro.test`.
+7.  Provide an assessment if the transformation achieves normality or not, citing *three* pieces of evidence.
 
 ### Transforming Data
 
-Using the below newly created data object, perform all the same steps as you did for the bird data above.
+Using the below newly created data object, **perform all the same steps as you did for the bird data above**.
 
 ```{r}
 hourly.jobs.homework <- jobs$vacancies_offering_an_hourly_wage[200:300]

@@ -590,16 +590,18 @@ W = 0.98204, p-value = 0.1911</code></pre>
 <h3 data-number="7.4.1" class="anchored" data-anchor-id="analyzing-data"><span class="header-section-number">7.4.1</span> Analyzing data</h3>
 <p>Using the <code>bird</code> dataset above, pick two other species of birds and do the following:</p>
 <ol type="1">
-<li>Provide information on the mean, median, mode, kurtosis, and skewness</li>
-<li>Create a histogram plot</li>
-<li>Determine if the data are normally distributed</li>
-<li>If data are <em>not</em> normally distributed, see if a square, log, or square root transformation will make the data normal.</li>
-<li>Provide an overall assessment of the data’s normality.</li>
+<li>Provide information on the mean, median, mode, kurtosis, and skewness.</li>
+<li>Create a histogram of the data.</li>
+<li>Run a <code>shapiro.test</code> on the data.</li>
+<li>Determine if the data are normally distributed. If the data are normally distributed, you are done - go to the next species. <strong>Provide at least three pieces of evidence.</strong></li>
+<li>Explain if the data appear normal or not. <strong>If the data appear normal except for excessive skew, do a log transformation <em>only</em>. Otherwise, try <em>at least</em> two transformations to see if data are made normal.</strong> Transformations to try include <span class="math inline">\(x^2\)</span>, <span class="math inline">\(log(x+1)\)</span>, <span class="math inline">\(\sqrt{x}\)</span>.</li>
+<li>For each transformation, show a histogram, skewness, kurtosis, and a <code>shapiro.test</code>.</li>
+<li>Provide an assessment if the transformation achieves normality or not, citing <em>three</em> pieces of evidence.</li>
 </ol>
 </section>
 <section id="transforming-data-1" class="level3" data-number="7.4.2">
 <h3 data-number="7.4.2" class="anchored" data-anchor-id="transforming-data-1"><span class="header-section-number">7.4.2</span> Transforming Data</h3>
-<p>Using the below newly created data object, perform all the same steps as you did for the bird data above.</p>
+<p>Using the below newly created data object, <strong>perform all the same steps as you did for the bird data above</strong>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>hourly.jobs.homework <span class="ot">&lt;-</span> jobs<span class="sc">$</span>vacancies_offering_an_hourly_wage[<span class="dv">200</span><span class="sc">:</span><span class="dv">300</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
