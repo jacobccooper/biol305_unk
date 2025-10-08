@@ -512,24 +512,26 @@ W = 0.39393, p-value &lt; 2.2e-16</code></pre>
 <summary>
 Walkthrough of a transformation for normality
 </summary>
-<p>We know that our <code>hourly.jobs</code> dataset is non-normally distributed, so we need to perform a transformation to see if we can achieve normality. Here, we will perform a log transformation. In <em>R</em>, the function <code>log</code> performs a <em>natural log</em> (<span class="math inline">\(ln\)</span>) by default. Because <span class="math inline">\(ln(0)\)</span> is <span class="math inline">\(-Infinity\)</span>, folks will often add <span class="math inline">\(+1\)</span> to their entire dataset to avoid zero values. This is not necessary if your entire dataset is non-zero and positive.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check if any values are below zero</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># function will return # vals at or below 0</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(hourly.jobs <span class="sc">&lt;=</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0</code></pre>
-</div>
-</div>
-<p>There are no values less than or equal to zero in this dataset. However, if we wanted to add one to them, we could do so by just taking <code>hourly.jobs + 1</code> and creating a new object.</p>
+<p>We know that our <code>hourly.jobs</code> dataset is non-normally distributed, so we need to perform a transformation to see if we can achieve normality. Here, we will perform a log transformation. In <em>R</em>, the function <code>log</code> performs a <em>natural log</em> (<span class="math inline">\(ln\)</span>) by default. Because <span class="math inline">\(ln(0)\)</span> is <span class="math inline">\(-Infinity\)</span>, folks will often add <span class="math inline">\(+1\)</span> to their entire dataset to avoid zero values. We can do this by using the command <code>log1p</code>, which has the back-transformation of <code>expm1</code>.</p>
 <p>Next, let’s perform the log transformation:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>log.hourly.jobs <span class="ot">&lt;-</span> hourly.jobs <span class="sc">|&gt;</span> </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>log.hourly.jobs <span class="ot">&lt;-</span> hourly.jobs <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log1p</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Very straightforward! How do these data look?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(log.hourly.jobs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(log.hourly.jobs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="transformations_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>These data appear far more normal. What about on a qqplot?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(log.hourly.jobs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -538,46 +540,35 @@ Walkthrough of a transformation for normality
 </div>
 </div>
 </div>
-<p>These data appear far more normal. What about on a qqplot?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(log.hourly.jobs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="transformations_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
 <p>The line is much straighter, as is expected for a normal distribution.</p>
 <p>Now, for the Shapiro-Wilk test:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(log.hourly.jobs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(log.hourly.jobs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
 
 data:  log.hourly.jobs
-W = 0.98204, p-value = 0.1911</code></pre>
+W = 0.97964, p-value = 0.1245</code></pre>
 </div>
 </div>
-<p>We now have a <span class="math inline">\(p&gt;\alpha\)</span> with <span class="math inline">\(0.19&gt;0.05\)</span>, indicating that these data are now normally distributed. We can now proceed with our analyses!</p>
+<p>We now have a <span class="math inline">\(p&gt;\alpha\)</span> with <span class="math inline">\(0.13&gt;0.05\)</span>, indicating that these data are now normally distributed. We can now proceed with our analyses!</p>
 <p><strong>Note, however, that you must <em>back transform</em> your data after a transformation!</strong></p>
 <p>A back transformation of <span class="math inline">\(ln(x)\)</span> is <span class="math inline">\(e^x\)</span>. In <em>R</em>, <span class="math inline">\(e\)</span> is found by entering <code>exp(1)</code>. Thus we would do the following if looking at the mean from the logs:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>log.mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(log.hourly.jobs)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>log.mean <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>log.mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(log.hourly.jobs)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>log.mean <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5.05</code></pre>
+<pre><code>[1] 5.08</code></pre>
 </div>
 </div>
 <p>And back transformed:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>transformed.log.mean <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="dv">1</span>)<span class="sc">^</span>log.mean</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>transformed.log.mean <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>transformed.log.mean <span class="ot">&lt;-</span> <span class="fu">expm1</span>(log.mean)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>transformed.log.mean <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 156</code></pre>
+<pre><code>[1] 159</code></pre>
 </div>
 </div>
 </details>
@@ -601,10 +592,11 @@ W = 0.98204, p-value = 0.1911</code></pre>
 </section>
 <section id="transforming-data-1" class="level3" data-number="7.4.2">
 <h3 data-number="7.4.2" class="anchored" data-anchor-id="transforming-data-1"><span class="header-section-number">7.4.2</span> Transforming Data</h3>
-<p>Using the below newly created data object, <strong>perform all the same steps as you did for the bird data above</strong>.</p>
+<p>Using the below newly created data object, <strong>perform all the same steps as you did for the bird data above</strong>. Start with a log transformation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>hourly.jobs.homework <span class="ot">&lt;-</span> jobs<span class="sc">$</span>vacancies_offering_an_hourly_wage[<span class="dv">200</span><span class="sc">:</span><span class="dv">300</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>hourly.jobs.homework <span class="ot">&lt;-</span> jobs<span class="sc">$</span>vacancies_offering_an_hourly_wage[<span class="dv">200</span><span class="sc">:</span><span class="dv">300</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><em>Note</em> that <code>hourly.jobs.homework</code> is already a numeric vector, so you can just run <code>mean(hourly.jobs.homework)</code>.</p>
 </section>
 <section id="submitting-assignment" class="level3" data-number="7.4.3">
 <h3 data-number="7.4.3" class="anchored" data-anchor-id="submitting-assignment"><span class="header-section-number">7.4.3</span> Submitting assignment</h3>

@@ -135,21 +135,13 @@ The process for all transformations is the same, so this walkthrough will only p
 
 <summary>Walkthrough of a transformation for normality</summary>
 
-We know that our `hourly.jobs` dataset is non-normally distributed, so we need to perform a transformation to see if we can achieve normality. Here, we will perform a log transformation. In *R*, the function `log` performs a *natural log* ($ln$) by default. Because $ln(0)$ is $-Infinity$, folks will often add $+1$ to their entire dataset to avoid zero values. This is not necessary if your entire dataset is non-zero and positive.
-
-```{r}
-# check if any values are below zero
-# function will return # vals at or below 0
-sum(hourly.jobs <= 0)
-```
-
-There are no values less than or equal to zero in this dataset. However, if we wanted to add one to them, we could do so by just taking `hourly.jobs + 1` and creating a new object.
+We know that our `hourly.jobs` dataset is non-normally distributed, so we need to perform a transformation to see if we can achieve normality. Here, we will perform a log transformation. In *R*, the function `log` performs a *natural log* ($ln$) by default. Because $ln(0)$ is $-Infinity$, folks will often add $+1$ to their entire dataset to avoid zero values. We can do this by using the command `log1p`, which has the back-transformation of `expm1`.
 
 Next, let's perform the log transformation:
 
 ```{r}
 log.hourly.jobs <- hourly.jobs |> 
-  log()
+  log1p()
 ```
 
 Very straightforward! How do these data look?
@@ -172,7 +164,7 @@ Now, for the Shapiro-Wilk test:
 shapiro.test(log.hourly.jobs)
 ```
 
-We now have a $p>\alpha$ with $0.19>0.05$, indicating that these data are now normally distributed. We can now proceed with our analyses!
+We now have a $p>\alpha$ with $0.13>0.05$, indicating that these data are now normally distributed. We can now proceed with our analyses!
 
 **Note, however, that you must *back transform* your data after a transformation!**
 
@@ -187,7 +179,7 @@ log.mean |> round(2)
 And back transformed:
 
 ```{r}
-transformed.log.mean <- exp(1)^log.mean
+transformed.log.mean <- expm1(log.mean)
 transformed.log.mean |> round(0)
 ```
 
@@ -211,11 +203,13 @@ Using the `bird` dataset above, pick two other species of birds and do the follo
 
 ### Transforming Data
 
-Using the below newly created data object, **perform all the same steps as you did for the bird data above**.
+Using the below newly created data object, **perform all the same steps as you did for the bird data above**. Start with a log transformation.
 
 ```{r}
 hourly.jobs.homework <- jobs$vacancies_offering_an_hourly_wage[200:300]
 ```
+
+*Note* that `hourly.jobs.homework` is already a numeric vector, so you can just run `mean(hourly.jobs.homework)`.
 
 ### Submitting assignment
 
