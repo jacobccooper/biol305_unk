@@ -110,7 +110,7 @@ belltower_data
 
 ## B: [7 pts] Is the response variable normally distributed? [2 pts] Support your answer with a histogram [1 pt], a cumulative frequency plot [1 pt], assessments of skewness and kurtosis [2 pts], an indication of if outliers exist [1 pt]. You will lose 1 pt overall if you do *not* change the histogram and plot titles and axes labels as per the previous problems.
 
-## C: [7 pts] If a transformation is needed, what transformation is required? Show your work, and provide evidence for your transformation being the most appropriate transformation.
+## C: [7 pts] If a transformation is needed, what transformation is required? Note that as soon as you find a transformation that works, you do not need to do any others.
 
 **NOTE**: Test only the following transformations:
 

@@ -1,13 +1,9 @@
 ---
-title: "Exam 2 Practice"
-author: "Melissa Wuellner, Jacob C. Cooper"
-format: html
-editor: visual
+title: "Exam 2 Practice Key (code)"
+author: "BIOL 305"
+date: "`r Sys.Date()`"
+output: pdf_document
 ---
-
-```{r, echo=F, message=F, warning=F}
-library(tidyverse)
-```
 
 Please complete the following problems as practice for Exam 2. *Note* that you may need to load specific packages from the previous exercises to get your code to work.
 
@@ -55,11 +51,66 @@ x <- c(1,5,8,9)
 x
 ```
 
+```{r}
+minnow.length <- c(89.58,75.44,86.86,74.71,69.70,
+                   100.34,73.70,69.56,96.24,79.35,
+                   61.37,62.82,95.45,98.71,100.34,
+                   57.57,70.54,78.65,65.39,65.57)
+```
+
+
 1.  State the null and alternative hypotheses for this study.
+
+$H_0$: The mean length of minnows in the Kearney Canal is not smaller than the mean length of other minnow populations.
+$H_A$: The mean length of minnows in the Kearney Canal is less than the length of other minnow populations.
+
 2.  Calculate the first quartile, median, third quartile, and interquartile range of your response variable. Create a boxplot. Based on your results, are there any outliers in your data? Explain.
+
+```{r}
+quantile(minnow.length, type = 6) |> round(2)
+```
+
+```{r}
+IQR(minnow.length, type = 6) |> round(2)
+```
+
+```{r}
+boxplot(minnow.length, ylab = "Minnow length (mm)")
+```
+
+The median length of minnows is 75.07 mm, with a lower quartile of 66.57 mm and an upper quartile of 93.98 mm. The interquartile range is 27.42 mm. There are no outliers.
+
 3.  Calculate the $z$-score for this scenario.
+
+```{r}
+### DO NOT EDIT ###
+# RUN EXACTLY AS IS #
+# Use as function like mean#
+zscore <- function(xbar, mu, sd.x, n = 1){
+  z <- (xbar - mu)/(sd.x/sqrt(n))
+  return(z)
+}
+```
+
+```{r}
+Z <- zscore(xbar = 85, mu = mean(minnow.length),
+       sd.x = sd(minnow.length), n = length(minnow.length))
+Z |> round(2)
+```
+
+The $Z$ score is 2.04.
+
 4.  What is the probability that, by random chance alone, you would find your observed mean or something more extreme?
+
+```{r}
+pnorm(Z, lower.tail = F)
+```
+
+The $p$ value is 0.02.
+
 5.  Assume that you set your $\alpha$ for your study prior to your data collection to 0.05. Based on this information and the $p$ value you obtained, is your null hypothesis supported or rejected? Report your conclusion in a full sentence, including the $Z$ score and the $p$ value in your answer.
+
+The mean length of minnows in the Kearney Canal is less than the mean length of published minnow populations ($Z = 2.04$, $p = 0.02$).
 
 ## Time spent on canvas
 

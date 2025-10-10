@@ -1,0 +1,42 @@
+---
+title: "exam2_scratchproblems"
+author: "JCC & MW"
+format: html
+editor: visual
+---
+
+## Cyclones
+
+Consider the following dataset collected in the same year:
+
+| Latitudinal Band | Season | Number of cyclones |
+|------------------|--------|--------------------|
+| 40 - 49º S       | Fall   | 370                |
+| 40 - 49º S       | Winter | 452                |
+| 40 - 49º S       | Spring | 273                |
+| 40 - 49º S       | Summer | 422                |
+| 50 - 59º S       | Fall   | 526                |
+| 50 - 59º S       | Winter | 624                |
+| 50 - 59º S       | Spring | 513                |
+| 50 - 59º S       | Summer | 1059               |
+| 60 - 69º S       | Fall   | 980                |
+| 60 - 69º S       | Winter | 1200               |
+| 60 - 69º S       | Spring | 995                |
+| 60 - 69º S       | Summer | 1751               |
+
+: Counts of cyclones per latitudinal band.
+
+1.  Classify each of the three variables as either an explanatory or a response variable. Justify your answer.
+2.  Classify each of the three variables as *nominal*, *ordinal*, *interval* or *ratio* data. Justify your answer.
+3.  State the null and alternative hypotheses for this scenario. *Note*: there are two sets of null/alternative hypotheses.
+4.  Calculate the mean, median, and mode of your response variable. Based on your results, would you expect your data to be normally distributed or not? Justify your answer.
+
+```{r}
+# note - you can combine numbers into a vector like so
+
+x <- c(1,2,3,4,5,6)
+
+x
+```
+
+5.  Let's say now that you're testing the null hypothesis that the mean number of cyclones in this one year is similar to the average year. The mean number of cyclones per year across all years of data collected is 650 cyclones with a standard deviation of 425. Calculate the $z$-score and make a decision regarding the null hypothesis. State your conclusion in a full sentence, providing the $Z$ score and $p$ value.
