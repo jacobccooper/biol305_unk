@@ -85,4 +85,4 @@ head(time_on_canvas)
 1.  Which variable is the response variable? What type of data are these?
 2.  Is the response variable normally distributed? Support your answer with a histogram, a cumulative frequency plot, assessments of skewness and kurtosis, and an indication of if outliers exist. Change the title and axes labels of the plots to make them intelligible.
 3.  If a transformation is needed, which transformation is required? *Note* - you only have to do a histogram and a `shapiro.test` to assess a transformation. As soon as you find a transformation that works, you do not have to do another.
-4.  What is the 95% confidence interval for the mean of these data? Report as the mean +/- the confidence interval, and answer in a full sentence. Don't forget to mention the units of your answer. HINT: you may have to back-transform your data.
+4.  What is the 95% confidence interval for the mean of these data? Report the upper and lower confidence limits as well as the mean in a full sentence. Don't forget to mention the units of your answer. HINT: you may have to back-transform your data.
