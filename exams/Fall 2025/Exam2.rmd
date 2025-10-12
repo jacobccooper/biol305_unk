@@ -1,15 +1,27 @@
 ---
 title: "Exam 2: 105 points possible"
-author: "BIOL 305"
+author: "YOUR NAME HERE"
 date: "`r Sys.Date()`"
 output: html_document
 ---
+
+This is a take home exam for BIOL 305. It will be graded out of 100 points, such that the maximum possible grade is 105%. Please read each question thoroughly and be sure to address all parts of the question posed. A slight departure from the homeworks, but each question *must* be answered with a complete sentence communicating the answer, even if this sentence is brief.
+
+**I want you to do these exams on your own**. This is an honor system for the exams, but please work on your own. This is an assessment of *your* understanding of the material. The exam is open resource, just please tell me what resources you used if you rely on one heavily.
 
 **General point penalties**: You will lose 1 pt for each:
 
 -   incorrectly rounded value
 -   incorrectly rounded test statistic (i.e., $Z$)
 -   incorrectly reported $p$-value
+-   incomplete sentences / answers that are only a code output (even if that output is correct - you *must* contextualize and communicate your answer)
+-   **Please use spellcheck**; I will not take off for minor mistakes, but if there are lot of mistakes I will take off points. *RStudio has a built in spellcheck just like Word!*
+
+**Communicating results:**
+
+For questions that want you to communicate all the results, please ensure that you are reporting your *test statistics* and your *p-values* as well. For example:
+
+\| Kearney minnows are significantly smaller than minnows in other populations ($Z=6.37$, $p < 0.0001$).
 
 # Libraries go here
 
@@ -19,21 +31,21 @@ library(tidyverse)
 # need anything else...?
 ```
 
-# 1 [18 pts] Comparing yourself to others
+# 1 [16 pts] Comparing yourself to others
 
 As a kid, your parents often tell you not to compare yourself to others. However, you now have the statistical tools to compare yourself to others scientifically, and you decide to compare your exam scores to your classmates. You are convinced that you are doing exceptionally well in the class, as you got an 80.0% on the last exam and the average was a 70.0%. You find out from your professor that the standard deviation for the class was 8.0%.
 
-## A: [4 pts] Choose an $\alpha$ value for evaluating your test, and choose whether you want to use a one-tailed or a two-tailed test to evaluate your results. Justify your choice, and explain why choosing an alpha value is important.
+## A: [4 pts] Choose an $\alpha$ value for evaluating your test, and choose whether you want to use a one-tailed or a two-tailed test to evaluate your results. Justify your choice.
 
-## B: [4 pts] $Z$-score Calculate a $Z$-score for your exam score.
+## B: [4 pts] Calculate a $Z$-score for your exam score. What does a $Z$-score represent?
 
 ## C: [2 pts] Calculate a $p$ value for your $Z$-score.
 
-## D: [4 pts] What is your conclusion about your exam? Are you exceptionally good or are you still roughly "average" for the class?
+## D: [4 pts] Write out a conclusion about your test. It should contain (1) a full sentence stating your conclusion and (2) your $Z$-score and your $p$-value in parentheses. See instructions for an example.
 
-## E: [4] Write out a conclusion about your test. It should contain (1) a full sentence stating your conclusion and (2) your $Z$-score and your $p$-value in parentheses.
+## E: [2] What is the grade that corresponds to your $\alpha$ value? I.e., translate your $\alpha$ value back into an exam score.
 
-# 2 [54 pts] Fish watchin'
+# 2 [56 pts] Fish watchin'
 
 You go to the Bonneville Dam and discover they have windows for watching the fish swim through the fish ladder. Much to the chagrin of your family, you decide to do 15 minute counts on the number of salmon passing through the fish ladder for 3 hours, obtaining the following data:
 
@@ -58,19 +70,19 @@ fish_data
 
 ## C: [5 pts] What is the response variable in the above dataset? [2 pts] What type of data are these? [3 pts]
 
-## D: [4 pts] Plot a histogram of the response data. [3 pts] Use the arguments `main =` and `xlab =` to make the histogram prettier and to have it make more sense; you will have to designate names in "quotes". [1 pt]
+## D: [5 pts] Plot a histogram of the response data. [3 pts] Use the arguments `main =` and `xlab =` to make the histogram prettier and to have it make more sense; you will have to designate names in "quotes". [2 pts]
 
-## E: [4 pts] Plot a cumulative frequency plot of these data. [3 pts] Use the arguments `main =` and `xlab =` to make the graph prettier and to have it make more sense; you will have to designate names in "quotes". [1 pt]
+## E: [5 pts] Plot a cumulative frequency plot of these data. [3 pts] Use the arguments `main =` and `xlab =` to make the graph prettier and to have it make more sense; you will have to designate names in "quotes". [2 pt]
 
 ## F: [2 pts] What is the kurtosis of the response variable?
 
 ## G: [2 pts] What is the skew of the response variable?
 
-## H: [4 pts] Are there any outliers in these data? Create the appropriate graph [3 pts] and perform the appropriate analyses to find out [1 pt].
+## H: [4 pts] Are there any outliers in these data? Create the appropriate graph [3 pts] and perform the appropriate command to find out [1 pt].
 
-## I: [4 pts] Are the data normally distributed? Explain, referencing the evidence you've obtained above.
+## I: [2 pts] Now perform and interpret a Shapiro-Wilkes test on the response variable. 
 
-## J: [2 pts] Now perform a `shapiro.test` on the response variable. A Shapiro test is a test of normality, where $p < 0.05$ indicates non-normal data. Does this test conform with your above assessment?
+## J: [4 pts] Are the data normally distributed? Explain, referencing the *three* pieces of evidence you've obtained above.
 
 ## K: [6 pts] Your annoying friend who is always trying to one-up you says they saw 35 fish in 15 minutes. You think they are lying, but want to show scientifically why you doubt their claim. What test would you use to evaluate this claim? Describe the kind of test [2 pts], the $\alpha$ value you would use and why [2 pts], and whether this would be a one-tailed or a two-tailed test [2 pts]. (Note: the salmon are one-tailed, but this does not affect the statistical test).
 
@@ -101,6 +113,7 @@ people_passing <- c(2,1,6,13,30,22,15,10,5,11,1,14,
 belltower_data <- people_passing |> 
   as.data.frame() |> 
   mutate(time = 1:25) |> 
+  # this command re-orders the columns
   select(time, people_passing)
 
 belltower_data
@@ -108,9 +121,9 @@ belltower_data
 
 ## A: [2 pts] Which variable is the response variable? What type of data are these?
 
-## B: [7 pts] Is the response variable normally distributed? [2 pts] Support your answer with a histogram [1 pt], a cumulative frequency plot [1 pt], assessments of skewness and kurtosis [2 pts], an indication of if outliers exist [1 pt]. You will lose 1 pt overall if you do *not* change the histogram and plot titles and axes labels as per the previous problems.
+## B: [7 pts] Is the response variable normally distributed? [2 pts] Support your answer with a histogram [1 pt], a cumulative frequency plot [1 pt], assessments of skewness and kurtosis [2 pts], an indication of if outliers exist [1 pt]. You will lose 1 pt overall if you do *not* change the histogram and plot titles and axes labels as per the previous problem(s).
 
-## C: [7 pts] If a transformation is needed, what transformation is required? Note that as soon as you find a transformation that works, you do not need to do any others.
+## C: [7 pts] If a transformation is needed, what transformation is required? Note that as soon as you find a transformation that works, you do not need to do any others. Confirm your transformation works by using at least *three* methods to check the distribution (i.e., histogram, qqplot, cumulative frequency plot, Shapiro-Wilkes test, etc.)
 
 **NOTE**: Test only the following transformations:
 

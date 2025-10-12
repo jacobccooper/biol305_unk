@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 output: pdf_document
 ---
 
-```{r}
+```{r, echo = F}
 library(tidyverse)
 library(moments)
 library(DescTools)
@@ -52,12 +52,12 @@ Consider this scenario: You have discovered a never-before-documented population
 
 NOTE: you will have to create the numeric object for this problem. use `c` to link things together; e.g.:
 
-```{r}
+```{r, echo = F}
 x <- c(1,5,8,9)
 x
 ```
 
-```{r}
+```{r, echo = F}
 minnow.length <- c(89.58,75.44,86.86,74.71,69.70,
                    100.34,73.70,69.56,96.24,79.35,
                    61.37,62.82,95.45,98.71,100.34,
@@ -66,19 +66,21 @@ minnow.length <- c(89.58,75.44,86.86,74.71,69.70,
 
 1.  State the null and alternative hypotheses for this study.
 
-$H_0$: The mean length of minnows in the Kearney Canal is not smaller than the mean length of other minnow populations. $H_A$: The mean length of minnows in the Kearney Canal is less than the length of other minnow populations.
+$H_0$: The mean length of minnows in the Kearney Canal is not smaller than the mean length of other minnow populations. 
+
+$H_A$: The mean length of minnows in the Kearney Canal is less than the length of other minnow populations.
 
 2.  Calculate the first quartile, median, third quartile, and interquartile range of your response variable. Create a boxplot. Based on your results, are there any outliers in your data? Explain.
 
-```{r}
+```{r, echo = F}
 quantile(minnow.length, type = 6) |> round(2)
 ```
 
-```{r}
+```{r, echo = F}
 IQR(minnow.length, type = 6) |> round(2)
 ```
 
-```{r}
+```{r, echo = F}
 boxplot(minnow.length, ylab = "Minnow length (mm)")
 ```
 
@@ -86,7 +88,7 @@ The median length of minnows is 75.07 mm, with a lower quartile of 66.57 mm and 
 
 3.  Calculate the $z$-score for this scenario.
 
-```{r}
+```{r, echo = F}
 ### DO NOT EDIT ###
 # RUN EXACTLY AS IS #
 # Use as function like mean#
@@ -96,7 +98,7 @@ zscore <- function(xbar, mu, sd.x, n = 1){
 }
 ```
 
-```{r}
+```{r, echo = F}
 Z <- zscore(xbar = mean(minnow.length), mu = 85,
        sd.x = 4.50, n = length(minnow.length))
 Z |> round(2)
@@ -106,11 +108,11 @@ The $Z$ score is -6.37.
 
 4.  What is the probability that, by random chance alone, you would find your observed mean or something more extreme?
 
-```{r}
+```{r, echo = F}
 pnorm(Z)
 ```
 
-The $p$ value is \< 0.0001.
+The $p$ value is $< 0.0001$.
 
 5.  Assume that you set your $\alpha$ for your study prior to your data collection to 0.05. Based on this information and the $p$ value you obtained, is your null hypothesis supported or rejected? Report your conclusion in a full sentence, including the $Z$ score and the $p$ value in your answer.
 
@@ -120,7 +122,7 @@ The mean length of minnows in the Kearney Canal is less than the mean length of 
 
 You are curious about how much time your classmates spend on Canvas for BIOL305. Let's say you get the following data for the amount of time folks spend on Canvas:
 
-```{r}
+```{r, echo = F}
 time.hrs <- c(19.65, 69.29, 6.83, 5.50, 17.98,
               19.89, 8.52, 71.37, 12.62, 4.62,
               3.00, 5.69, 10.79, 6.59, 32.56, 
@@ -140,60 +142,60 @@ head(time_on_canvas)
 1.  Which variable is the response variable? What type of data are these?
 2.  Is the response variable normally distributed? Support your answer with a histogram, a cumulative frequency plot, assessments of skewness and kurtosis, and an indication of if outliers exist. Change the title and axes labels of the plots to make them intelligible.
 
-```{r}
+```{r, echo = F}
 hist(time.hrs, main = "Time (hrs)", xlab = "Hours")
 ```
 
-```{r}
+```{r, echo = F}
 plot(ecdf(time.hrs), main = "Cumulative summary (time in hours)",
      xlab = "Hours")
 ```
 
-```{r}
+```{r, echo = F}
 boxplot(time.hrs, ylab = "Time (hrs)")
 ```
 
 Shapiro-Wilkes test:
 
-```{r}
+```{r, echo = F}
 shapiro.test(time.hrs)
 ```
 
 Kurtosis:
 
-```{r}
+```{r, echo = F}
 (kurtosis(time.hrs)-3) |> round(2)
 ```
 
 Skewness:
 
-```{r}
+```{r, echo = F}
 skewness(time.hrs) |> round(2)
 ```
 
 Outliers:
 
-```{r}
+```{r, echo = F}
 Outlier(time.hrs)
 ```
 
-The data are not normal.
+The data are not normal. (NOTE - you will have to cite THREE pieces of evidence above in *your* answer).
 
 1.  If a transformation is needed, which transformation is required? *Note* - you only have to do a histogram and a `shapiro.test` to assess a transformation. As soon as you find a transformation that works, you do not have to do another.
 
 **Transformation**:
 
-```{r}
+```{r, echo = F}
 log.hrs <- log1p(time.hrs)
 
 hist(log.hrs, xlab = "Hours (log transformed)", main = "Histogram of Log of Hours")
 ```
 
-```{r}
+```{r, echo = F}
 plot(ecdf(log.hrs), main = "Cumulative Frequency of Time in Hours", xlab = "Log of Hours")
 ```
 
-```{r}
+```{r, echo = F}
 shapiro.test(log.hrs)
 ```
 
@@ -201,8 +203,13 @@ A log transformation successfully makes the data normal.
 
 1.  What is the 95% confidence interval for the mean of these data? Report as the mean +/- the confidence interval, and answer in a full sentence. Don't forget to mention the units of your answer. HINT: you may have to back-transform your data.
 
-```{r}
+```{r, echo = F}
 ci.log <- qnorm(0.975)*(sd(log.hrs)/sqrt(length(log.hrs)))
 
-ci <- expm1(ci.log)
+mu <- mean(log.hrs)
+
+ucl <- (mu+ci.log) |> expm1()
+lcl <- (mu-ci.log) |> expm1()
 ```
+
+The average is `r expm1(mu) |> round(2)` hours, with a confidence interval of `r lcl |> round(2)` to `r ucl |> round(2)` hours.

@@ -9,9 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="BIOL 305" />
+<meta name="author" content="YOUR NAME HERE" />
 
-<meta name="date" content="2025-10-10" />
+<meta name="date" content="2025-10-12" />
 
 <title>Exam 2: 105 points possible</title>
 
@@ -351,19 +351,42 @@ display: none;
 
 
 <h1 class="title toc-ignore">Exam 2: 105 points possible</h1>
-<h4 class="author">BIOL 305</h4>
-<h4 class="date">2025-10-10</h4>
+<h4 class="author">YOUR NAME HERE</h4>
+<h4 class="date">2025-10-12</h4>
 
 </div>
 
 
+<p>This is a take home exam for BIOL 305. It will be graded out of 100
+points, such that the maximum possible grade is 105%. Please read each
+question thoroughly and be sure to address all parts of the question
+posed. A slight departure from the homeworks, but each question
+<em>must</em> be answered with a complete sentence communicating the
+answer, even if this sentence is brief.</p>
+<p><strong>I want you to do these exams on your own</strong>. This is an
+honor system for the exams, but please work on your own. This is an
+assessment of <em>your</em> understanding of the material. The exam is
+open resource, just please tell me what resources you used if you rely
+on one heavily.</p>
 <p><strong>General point penalties</strong>: You will lose 1 pt for
 each:</p>
 <ul>
 <li>incorrectly rounded value</li>
 <li>incorrectly rounded test statistic (i.e., <span class="math inline">\(Z\)</span>)</li>
 <li>incorrectly reported <span class="math inline">\(p\)</span>-value</li>
+<li>incomplete sentences / answers that are only a code output (even if
+that output is correct - you <em>must</em> contextualize and communicate
+your answer)</li>
+<li><strong>Please use spellcheck</strong>; I will not take off for
+minor mistakes, but if there are lot of mistakes I will take off points.
+<em>RStudio has a built in spellcheck just like Word!</em></li>
 </ul>
+<p><strong>Communicating results:</strong></p>
+<p>For questions that want you to communicate all the results, please
+ensure that you are reporting your <em>test statistics</em> and your
+<em>p-values</em> as well. For example:</p>
+<p>| Kearney minnows are significantly smaller than minnows in other
+populations (<span class="math inline">\(Z=6.37\)</span>, <span class="math inline">\(p &lt; 0.0001\)</span>).</p>
 <div id="libraries-go-here" class="section level1">
 <h1>Libraries go here</h1>
 <pre class="r"><code># tidyverse always required
@@ -381,7 +404,7 @@ library(tidyverse)</code></pre>
 <pre class="r"><code># need anything else...?</code></pre>
 </div>
 <div id="pts-comparing-yourself-to-others" class="section level1">
-<h1>1 [18 pts] Comparing yourself to others</h1>
+<h1>1 [16 pts] Comparing yourself to others</h1>
 <p>As a kid, your parents often tell you not to compare yourself to
 others. However, you now have the statistical tools to compare yourself
 to others scientifically, and you decide to compare your exam scores to
@@ -389,32 +412,32 @@ your classmates. You are convinced that you are doing exceptionally well
 in the class, as you got an 80.0% on the last exam and the average was a
 70.0%. You find out from your professor that the standard deviation for
 the class was 8.0%.</p>
-<div id="a-4-pts-choose-an-alpha-value-for-evaluating-your-test-and-choose-whether-you-want-to-use-a-one-tailed-or-a-two-tailed-test-to-evaluate-your-results.-justify-your-choice-and-explain-why-choosing-an-alpha-value-is-important." class="section level2">
+<div id="a-4-pts-choose-an-alpha-value-for-evaluating-your-test-and-choose-whether-you-want-to-use-a-one-tailed-or-a-two-tailed-test-to-evaluate-your-results.-justify-your-choice." class="section level2">
 <h2>A: [4 pts] Choose an <span class="math inline">\(\alpha\)</span>
 value for evaluating your test, and choose whether you want to use a
 one-tailed or a two-tailed test to evaluate your results. Justify your
-choice, and explain why choosing an alpha value is important.</h2>
+choice.</h2>
 </div>
-<div id="b-4-pts-z-score-calculate-a-z-score-for-your-exam-score." class="section level2">
-<h2>B: [4 pts] <span class="math inline">\(Z\)</span>-score Calculate a
-<span class="math inline">\(Z\)</span>-score for your exam score.</h2>
+<div id="b-4-pts-calculate-a-z-score-for-your-exam-score.-what-does-a-z-score-represent" class="section level2">
+<h2>B: [4 pts] Calculate a <span class="math inline">\(Z\)</span>-score
+for your exam score. What does a <span class="math inline">\(Z\)</span>-score represent?</h2>
 </div>
 <div id="c-2-pts-calculate-a-p-value-for-your-z-score." class="section level2">
 <h2>C: [2 pts] Calculate a <span class="math inline">\(p\)</span> value
 for your <span class="math inline">\(Z\)</span>-score.</h2>
 </div>
-<div id="d-4-pts-what-is-your-conclusion-about-your-exam-are-you-exceptionally-good-or-are-you-still-roughly-average-for-the-class" class="section level2">
-<h2>D: [4 pts] What is your conclusion about your exam? Are you
-exceptionally good or are you still roughly “average” for the
-class?</h2>
+<div id="d-4-pts-write-out-a-conclusion-about-your-test.-it-should-contain-1-a-full-sentence-stating-your-conclusion-and-2-your-z-score-and-your-p-value-in-parentheses.-see-instructions-for-an-example." class="section level2">
+<h2>D: [4 pts] Write out a conclusion about your test. It should contain
+(1) a full sentence stating your conclusion and (2) your <span class="math inline">\(Z\)</span>-score and your <span class="math inline">\(p\)</span>-value in parentheses. See instructions
+for an example.</h2>
 </div>
-<div id="e-4-write-out-a-conclusion-about-your-test.-it-should-contain-1-a-full-sentence-stating-your-conclusion-and-2-your-z-score-and-your-p-value-in-parentheses." class="section level2">
-<h2>E: [4] Write out a conclusion about your test. It should contain (1)
-a full sentence stating your conclusion and (2) your <span class="math inline">\(Z\)</span>-score and your <span class="math inline">\(p\)</span>-value in parentheses.</h2>
+<div id="e-2-what-is-the-grade-that-corresponds-to-your-alpha-value-i.e.-translate-your-alpha-value-back-into-an-exam-score." class="section level2">
+<h2>E: [2] What is the grade that corresponds to your <span class="math inline">\(\alpha\)</span> value? I.e., translate your <span class="math inline">\(\alpha\)</span> value back into an exam
+score.</h2>
 </div>
 </div>
 <div id="pts-fish-watchin" class="section level1">
-<h1>2 [54 pts] Fish watchin’</h1>
+<h1>2 [56 pts] Fish watchin’</h1>
 <p>You go to the Bonneville Dam and discover they have windows for
 watching the fish swim through the fish ladder. Much to the chagrin of
 your family, you decide to do 15 minute counts on the number of salmon
@@ -458,17 +481,17 @@ ratio? Also, categorical or continuous?)</h2>
 <h2>C: [5 pts] What is the response variable in the above dataset? [2
 pts] What type of data are these? [3 pts]</h2>
 </div>
-<div id="d-4-pts-plot-a-histogram-of-the-response-data.-3-pts-use-the-arguments-main-and-xlab-to-make-the-histogram-prettier-and-to-have-it-make-more-sense-you-will-have-to-designate-names-in-quotes.-1-pt" class="section level2">
-<h2>D: [4 pts] Plot a histogram of the response data. [3 pts] Use the
+<div id="d-5-pts-plot-a-histogram-of-the-response-data.-3-pts-use-the-arguments-main-and-xlab-to-make-the-histogram-prettier-and-to-have-it-make-more-sense-you-will-have-to-designate-names-in-quotes.-2-pts" class="section level2">
+<h2>D: [5 pts] Plot a histogram of the response data. [3 pts] Use the
 arguments <code>main =</code> and <code>xlab =</code> to make the
 histogram prettier and to have it make more sense; you will have to
-designate names in “quotes”. [1 pt]</h2>
+designate names in “quotes”. [2 pts]</h2>
 </div>
-<div id="e-4-pts-plot-a-cumulative-frequency-plot-of-these-data.-3-pts-use-the-arguments-main-and-xlab-to-make-the-graph-prettier-and-to-have-it-make-more-sense-you-will-have-to-designate-names-in-quotes.-1-pt" class="section level2">
-<h2>E: [4 pts] Plot a cumulative frequency plot of these data. [3 pts]
+<div id="e-5-pts-plot-a-cumulative-frequency-plot-of-these-data.-3-pts-use-the-arguments-main-and-xlab-to-make-the-graph-prettier-and-to-have-it-make-more-sense-you-will-have-to-designate-names-in-quotes.-2-pt" class="section level2">
+<h2>E: [5 pts] Plot a cumulative frequency plot of these data. [3 pts]
 Use the arguments <code>main =</code> and <code>xlab =</code> to make
 the graph prettier and to have it make more sense; you will have to
-designate names in “quotes”. [1 pt]</h2>
+designate names in “quotes”. [2 pt]</h2>
 </div>
 <div id="f-2-pts-what-is-the-kurtosis-of-the-response-variable" class="section level2">
 <h2>F: [2 pts] What is the kurtosis of the response variable?</h2>
@@ -476,19 +499,18 @@ designate names in “quotes”. [1 pt]</h2>
 <div id="g-2-pts-what-is-the-skew-of-the-response-variable" class="section level2">
 <h2>G: [2 pts] What is the skew of the response variable?</h2>
 </div>
-<div id="h-4-pts-are-there-any-outliers-in-these-data-create-the-appropriate-graph-3-pts-and-perform-the-appropriate-analyses-to-find-out-1-pt." class="section level2">
+<div id="h-4-pts-are-there-any-outliers-in-these-data-create-the-appropriate-graph-3-pts-and-perform-the-appropriate-command-to-find-out-1-pt." class="section level2">
 <h2>H: [4 pts] Are there any outliers in these data? Create the
-appropriate graph [3 pts] and perform the appropriate analyses to find
+appropriate graph [3 pts] and perform the appropriate command to find
 out [1 pt].</h2>
 </div>
-<div id="i-4-pts-are-the-data-normally-distributed-explain-referencing-the-evidence-youve-obtained-above." class="section level2">
-<h2>I: [4 pts] Are the data normally distributed? Explain, referencing
-the evidence you’ve obtained above.</h2>
+<div id="i-2-pts-now-perform-and-interpret-a-shapiro-wilkes-test-on-the-response-variable." class="section level2">
+<h2>I: [2 pts] Now perform and interpret a Shapiro-Wilkes test on the
+response variable.</h2>
 </div>
-<div id="j-2-pts-now-perform-a-shapiro.test-on-the-response-variable.-a-shapiro-test-is-a-test-of-normality-where-p-0.05-indicates-non-normal-data.-does-this-test-conform-with-your-above-assessment" class="section level2">
-<h2>J: [2 pts] Now perform a <code>shapiro.test</code> on the response
-variable. A Shapiro test is a test of normality, where <span class="math inline">\(p &lt; 0.05\)</span> indicates non-normal data.
-Does this test conform with your above assessment?</h2>
+<div id="j-4-pts-are-the-data-normally-distributed-explain-referencing-the-three-pieces-of-evidence-youve-obtained-above." class="section level2">
+<h2>J: [4 pts] Are the data normally distributed? Explain, referencing
+the <em>three</em> pieces of evidence you’ve obtained above.</h2>
 </div>
 <div id="k-6-pts-your-annoying-friend-who-is-always-trying-to-one-up-you-says-they-saw-35-fish-in-15-minutes.-you-think-they-are-lying-but-want-to-show-scientifically-why-you-doubt-their-claim.-what-test-would-you-use-to-evaluate-this-claim-describe-the-kind-of-test-2-pts-the-alpha-value-you-would-use-and-why-2-pts-and-whether-this-would-be-a-one-tailed-or-a-two-tailed-test-2-pts.-note-the-salmon-are-one-tailed-but-this-does-not-affect-the-statistical-test." class="section level2">
 <h2>K: [6 pts] Your annoying friend who is always trying to one-up you
@@ -547,6 +569,7 @@ passing period, obtaining the following dataset:</p>
 belltower_data &lt;- people_passing |&gt; 
   as.data.frame() |&gt; 
   mutate(time = 1:25) |&gt; 
+  # this command re-orders the columns
   select(time, people_passing)
 
 belltower_data</code></pre>
@@ -586,12 +609,15 @@ Support your answer with a histogram [1 pt], a cumulative frequency plot
 [1 pt], assessments of skewness and kurtosis [2 pts], an indication of
 if outliers exist [1 pt]. You will lose 1 pt overall if you do
 <em>not</em> change the histogram and plot titles and axes labels as per
-the previous problems.</h2>
+the previous problem(s).</h2>
 </div>
-<div id="c-7-pts-if-a-transformation-is-needed-what-transformation-is-required-note-that-as-soon-as-you-find-a-transformation-that-works-you-do-not-need-to-do-any-others." class="section level2">
+<div id="c-7-pts-if-a-transformation-is-needed-what-transformation-is-required-note-that-as-soon-as-you-find-a-transformation-that-works-you-do-not-need-to-do-any-others.-confirm-your-transformation-works-by-using-at-least-three-methods-to-check-the-distribution-i.e.-histogram-qqplot-cumulative-frequency-plot-shapiro-wilkes-test-etc." class="section level2">
 <h2>C: [7 pts] If a transformation is needed, what transformation is
 required? Note that as soon as you find a transformation that works, you
-do not need to do any others.</h2>
+do not need to do any others. Confirm your transformation works by using
+at least <em>three</em> methods to check the distribution (i.e.,
+histogram, qqplot, cumulative frequency plot, Shapiro-Wilkes test,
+etc.)</h2>
 <p><strong>NOTE</strong>: Test only the following transformations:</p>
 <ul>
 <li><span class="math inline">\(\sqrt{x}\)</span></li>

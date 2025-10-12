@@ -7,10 +7,6 @@ editor: visual
 
 ## Rounding & Formatting
 
-<details>
-
-<summary>Click for information on rounding</summary>
-
 As a reminder, we are following the rounding rules of the *Auk* and *Condor* (now *Ornithology* and *Ornithological Applications*).
 
 Specifically, these rules are as follows:
@@ -54,8 +50,6 @@ Specifically, these rules are as follows:
     -   $P < 0.0001$: list *exactly* as $P < 0.0001$.
 
         -   **DO NOT** list without spaces, or as $P<.0001$
-
-</details>
 
 ## Common Commands
 
