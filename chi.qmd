@@ -340,9 +340,11 @@ In this situation, $p = 0.05$ when rounded, so we would fail to reject but note 
 
 ## Homework: $\chi^2$ tests
 
+**For all homework problems, assume $\alpha = 0.05$.
+
 ### La Selva Bird Counts
 
-The La Selva station in Costa Rica performed Christmas Bird Counts for 23 years between 1989-2011 and used these data to analyze the status and trends of different birds within the region [@boyle_2016_4979259]. Here, we will look at their data for some of the "big groundbirds" - namely, members of the families [Tinamidae](https://en.wikipedia.org/wiki/Tinamou) and [Cracidae](https://en.wikipedia.org/wiki/Cracidae).
+The La Selva station in Costa Rica performed Christmas Bird Counts for 23 years between 1989-2011 and used these data to analyze the status and trends of different birds within the region [@boyle_2016_4979259]. Here, we will look at their data for some of the "big groundbirds" - namely, members of the families [Tinamidae](https://en.wikipedia.org/wiki/Tinamou) and [Cracidae](https://en.wikipedia.org/wiki/Cracidae) that are isolated in the object `big_groundbirds` below.
 
 ```{r}
 # download La Selva data
@@ -355,7 +357,20 @@ big_groundbirds <- laselva[1:6,]
 The researchers are curious about the following questions; use $\chi^2$ tests to answer them appropriately. For each, don't forget to also state your *null* and *alternative* hypotheses, as well as your conclusion about whether you *support* or *reject* the null.
 
 1.  Is each species equally likely to be encountered across years (`NYears`)?
+
+-   state a null and alternative hypothesis for this scenario
+
+-   Perform the appropriate $\chi^2$ test
+
+-   Interpret the test, stating your conclusions and listing the test statistics and the $p$ value
+
 2.  Does each species have an equal high count (`MaxN`)?
+
+-   state a null and alternative hypothesis for this scenario
+
+-   Perform the appropriate $\chi^2$ test
+
+-   Interpret the test, stating your conclusions and listing the test statistics and the $p$ value
 
 ### Bicycle counts: Time of day
 
@@ -382,12 +397,35 @@ bicycles <- bicycles |>
 Next, we will isolate the data of interest for 8:00 and 17:00 on March 31st.
 
 ```{r}
+# isolate data during the day on March 31
 march_31 <- bicycles |> 
   filter(day(Date) == 31) |> 
   filter(hour(Date) > 7 & hour(Date) < 18)
 ```
 
-Using a $\chi^2$ test, determine if the bicycle counts are the same for each hour in the `march_31` object for Eastbound traffic, for Westbound traffic, and for comparing Eastbound and Westbound traffic. Please list your null hypothesis, alternative hypothesis, and your conclusions.
+1. Are bicycle counts the same for each hour in Eastbound traffic?
+
+-   state a null and alternative hypothesis for this scenario
+
+-   Perform the appropriate $\chi^2$ test
+
+-   Interpret the test, stating your conclusions and listing the test statistics and the $p$ value
+
+2. Are bicycle counts the same for each hour in Westbound traffic?
+
+-   state a null and alternative hypothesis for this scenario
+
+-   Perform the appropriate $\chi^2$ test
+
+-   Interpret the test, stating your conclusions and listing the test statistics and the $p$ value
+
+3. Are bicycle counts the same per hour for comparing eastbound to westbound traffic?
+
+-   state a null and alternative hypothesis for this scenario
+
+-   Perform the appropriate $\chi^2$ test
+
+-   Interpret the test, stating your conclusions and listing the test statistics and the $p$ value
 
 ### Bicycles: Date
 
@@ -416,4 +454,10 @@ date_compare_data <- march_31 |>
 
 ```
 
-Perform your $\chi^2$ test to compare these dates. Don't forget your null hypothesis, alternative hypothesis, and conclusion.
+1. Are the counts the same per hour between dates for eastbound traffic?
+
+-   state a null and alternative hypothesis for this scenario
+
+-   Perform the appropriate $\chi^2$ test
+
+-   Interpret the test, stating your conclusions and listing the test statistics and the $p$ value

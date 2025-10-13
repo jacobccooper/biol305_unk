@@ -820,9 +820,10 @@ odds ratio
 </section>
 <section id="homework-chi2-tests" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="homework-chi2-tests"><span class="header-section-number">10.3</span> Homework: <span class="math inline">\(\chi^2\)</span> tests</h2>
+<p>**For all homework problems, assume <span class="math inline">\(\alpha = 0.05\)</span>.</p>
 <section id="la-selva-bird-counts" class="level3" data-number="10.3.1">
 <h3 data-number="10.3.1" class="anchored" data-anchor-id="la-selva-bird-counts"><span class="header-section-number">10.3.1</span> La Selva Bird Counts</h3>
-<p>The La Selva station in Costa Rica performed Christmas Bird Counts for 23 years between 1989-2011 and used these data to analyze the status and trends of different birds within the region <span class="citation" data-cites="boyle_2016_4979259">(<a href="references.html#ref-boyle_2016_4979259" role="doc-biblioref">Boyle and Sigel 2016</a>)</span>. Here, we will look at their data for some of the “big groundbirds” - namely, members of the families <a href="https://en.wikipedia.org/wiki/Tinamou">Tinamidae</a> and <a href="https://en.wikipedia.org/wiki/Cracidae">Cracidae</a>.</p>
+<p>The La Selva station in Costa Rica performed Christmas Bird Counts for 23 years between 1989-2011 and used these data to analyze the status and trends of different birds within the region <span class="citation" data-cites="boyle_2016_4979259">(<a href="references.html#ref-boyle_2016_4979259" role="doc-biblioref">Boyle and Sigel 2016</a>)</span>. Here, we will look at their data for some of the “big groundbirds” - namely, members of the families <a href="https://en.wikipedia.org/wiki/Tinamou">Tinamidae</a> and <a href="https://en.wikipedia.org/wiki/Cracidae">Cracidae</a> that are isolated in the object <code>big_groundbirds</code> below.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download La Selva data</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>laselva <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://zenodo.org/records/4979259/files/LaSelvaBirdTrendsDatatable.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -843,8 +844,20 @@ lgl  (2): Extirpated?, Invading?
 <p>The researchers are curious about the following questions; use <span class="math inline">\(\chi^2\)</span> tests to answer them appropriately. For each, don’t forget to also state your <em>null</em> and <em>alternative</em> hypotheses, as well as your conclusion about whether you <em>support</em> or <em>reject</em> the null.</p>
 <ol type="1">
 <li>Is each species equally likely to be encountered across years (<code>NYears</code>)?</li>
+</ol>
+<ul>
+<li><p>state a null and alternative hypothesis for this scenario</p></li>
+<li><p>Perform the appropriate <span class="math inline">\(\chi^2\)</span> test</p></li>
+<li><p>Interpret the test, stating your conclusions and listing the test statistics and the <span class="math inline">\(p\)</span> value</p></li>
+</ul>
+<ol start="2" type="1">
 <li>Does each species have an equal high count (<code>MaxN</code>)?</li>
 </ol>
+<ul>
+<li><p>state a null and alternative hypothesis for this scenario</p></li>
+<li><p>Perform the appropriate <span class="math inline">\(\chi^2\)</span> test</p></li>
+<li><p>Interpret the test, stating your conclusions and listing the test statistics and the <span class="math inline">\(p\)</span> value</p></li>
+</ul>
 </section>
 <section id="bicycle-counts-time-of-day" class="level3" data-number="10.3.2">
 <h3 data-number="10.3.2" class="anchored" data-anchor-id="bicycle-counts-time-of-day"><span class="header-section-number">10.3.2</span> Bicycle counts: Time of day</h3>
@@ -875,11 +888,35 @@ dbl (2): Fremont Bridge East Sidewalk, Fremont Bridge West Sidewalk
 </div>
 <p>Next, we will isolate the data of interest for 8:00 and 17:00 on March 31st.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>march_31 <span class="ot">&lt;-</span> bicycles <span class="sc">|&gt;</span> </span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">day</span>(Date) <span class="sc">==</span> <span class="dv">31</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">hour</span>(Date) <span class="sc">&gt;</span> <span class="dv">7</span> <span class="sc">&amp;</span> <span class="fu">hour</span>(Date) <span class="sc">&lt;</span> <span class="dv">18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># isolate data during the day on March 31</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>march_31 <span class="ot">&lt;-</span> bicycles <span class="sc">|&gt;</span> </span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">day</span>(Date) <span class="sc">==</span> <span class="dv">31</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">hour</span>(Date) <span class="sc">&gt;</span> <span class="dv">7</span> <span class="sc">&amp;</span> <span class="fu">hour</span>(Date) <span class="sc">&lt;</span> <span class="dv">18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Using a <span class="math inline">\(\chi^2\)</span> test, determine if the bicycle counts are the same for each hour in the <code>march_31</code> object for Eastbound traffic, for Westbound traffic, and for comparing Eastbound and Westbound traffic. Please list your null hypothesis, alternative hypothesis, and your conclusions.</p>
+<ol type="1">
+<li>Are bicycle counts the same for each hour in Eastbound traffic?</li>
+</ol>
+<ul>
+<li><p>state a null and alternative hypothesis for this scenario</p></li>
+<li><p>Perform the appropriate <span class="math inline">\(\chi^2\)</span> test</p></li>
+<li><p>Interpret the test, stating your conclusions and listing the test statistics and the <span class="math inline">\(p\)</span> value</p></li>
+</ul>
+<ol start="2" type="1">
+<li>Are bicycle counts the same for each hour in Westbound traffic?</li>
+</ol>
+<ul>
+<li><p>state a null and alternative hypothesis for this scenario</p></li>
+<li><p>Perform the appropriate <span class="math inline">\(\chi^2\)</span> test</p></li>
+<li><p>Interpret the test, stating your conclusions and listing the test statistics and the <span class="math inline">\(p\)</span> value</p></li>
+</ul>
+<ol start="3" type="1">
+<li>Are bicycle counts the same per hour for comparing eastbound to westbound traffic?</li>
+</ol>
+<ul>
+<li><p>state a null and alternative hypothesis for this scenario</p></li>
+<li><p>Perform the appropriate <span class="math inline">\(\chi^2\)</span> test</p></li>
+<li><p>Interpret the test, stating your conclusions and listing the test statistics and the <span class="math inline">\(p\)</span> value</p></li>
+</ul>
 </section>
 <section id="bicycles-date" class="level3" data-number="10.3.3">
 <h3 data-number="10.3.3" class="anchored" data-anchor-id="bicycles-date"><span class="header-section-number">10.3.3</span> Bicycles: Date</h3>
@@ -905,7 +942,14 @@ dbl (2): Fremont Bridge East Sidewalk, Fremont Bridge West Sidewalk
 <span id="cb54-18"><a href="#cb54-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">full_join</span>(march_30, <span class="at">by =</span> <span class="st">"Date"</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb54-19"><a href="#cb54-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"Hour"</span> <span class="ot">=</span> Date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Perform your <span class="math inline">\(\chi^2\)</span> test to compare these dates. Don’t forget your null hypothesis, alternative hypothesis, and conclusion.</p>
+<ol type="1">
+<li>Are the counts the same per hour between dates for eastbound traffic?</li>
+</ol>
+<ul>
+<li><p>state a null and alternative hypothesis for this scenario</p></li>
+<li><p>Perform the appropriate <span class="math inline">\(\chi^2\)</span> test</p></li>
+<li><p>Interpret the test, stating your conclusions and listing the test statistics and the <span class="math inline">\(p\)</span> value</p></li>
+</ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
