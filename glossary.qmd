@@ -51,6 +51,38 @@ Specifically, these rules are as follows:
 
         -   **DO NOT** list without spaces, or as $P<.0001$
 
+## Plaintext formatting
+
+### Equations
+
+For equations, put `$` on either side of the equation being typed. For example:
+
+`$4$` becomes $4$ and `$pi$` becomes $\pi$.
+
+-   Subscripts: `$Z_{34}$` becomes $Z_{34}$
+
+-   Superscripts: `$Z^2$` becomes $Z^2$
+
+-   Fractions: `$\frac{1}{2}$` becomes $\frac{1}{2}$
+
+-   Common letters and commands:
+
+    -   $\alpha$: `\alpha`
+
+    -   $\beta$: `\beta`
+
+    -   $\sigma$: `\sigma`
+
+### In-line code
+
+You can also put code within your plain text. For example, consider the following entered code text and the following output:
+
+```         
+Here is an example of in line code: `r 3.456 |> round(1)`.
+```
+
+Here is an example of in line code: `r 3.456 |> round(1)`.
+
 ## Common Commands
 
 ```{r, echo = F, eval = T, message = F}
