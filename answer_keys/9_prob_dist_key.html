@@ -11,7 +11,7 @@
 
 <meta name="author" content="UNK Bio" />
 
-<meta name="date" content="2025-09-03" />
+<meta name="date" content="2025-10-24" />
 
 <title>9_prob_distributions</title>
 
@@ -352,7 +352,7 @@ display: none;
 
 <h1 class="title toc-ignore">9_prob_distributions</h1>
 <h4 class="author">UNK Bio</h4>
-<h4 class="date">2025-09-03</h4>
+<h4 class="date">2025-10-24</h4>
 
 </div>
 
@@ -363,19 +363,8 @@ display: none;
 difficult to use. In fact, it is estimated that only 1 in 50 attempts
 are successful at getting a toy out of the machine. What is the
 probability that you would try it 50 times and win thrice?</p>
-<pre class="r"><code>binom.test(x = 3, n = 50, p = 1/50)</code></pre>
-<pre><code>## 
-##  Exact binomial test
-## 
-## data:  3 and 50
-## number of successes = 3, number of trials = 50, p-value = 0.07843
-## alternative hypothesis: true probability of success is not equal to 0.02
-## 95 percent confidence interval:
-##  0.01254859 0.16548195
-## sample estimates:
-## probability of success 
-##                   0.06</code></pre>
-<p>The probability is low - 7.9% (round to 8%).</p>
+<pre><code>## [1] 0.06066967</code></pre>
+<p>The probability is low: 0.06.</p>
 </div>
 <div id="problem-2" class="section level1">
 <h1>8.6.2 Problem 2</h1>
@@ -386,62 +375,40 @@ Sandhill Cranes <em>Antigone canadensis</em> migrate through Nebraska.
 Assuming that census counts of flocks of 5000 cranes have the expected
 average ratio of cranes, what are the odds of finding a crane flock with
 two or more Whooping Cranes?</p>
-<pre class="r"><code>lower &lt;- sum(dbinom(x = 0:1, size = 5000, prob = (557/736000)))
-
-(1-lower) |&gt; round(2)</code></pre>
-<pre><code>## [1] 0.89</code></pre>
-<p>Probability is 89%.</p>
+<pre><code>## [1] 0.8912</code></pre>
+<p>Assuming they are randomly distributed, the probability should be
+0.89.</p>
 </div>
 <div id="problem-3" class="section level1">
 <h1>8.6.3 Problem 3</h1>
 <p>Your friend has a twenty-sided dice that you suspect to be unfair.
 They have rolled a 20 four times in the past thirty rolls. Is the dice
 unfair?</p>
-<pre class="r"><code>binom.test(x = 4, n = 30, p = 1/20)</code></pre>
-<pre><code>## 
-##  Exact binomial test
-## 
-## data:  4 and 30
-## number of successes = 4, number of trials = 30, p-value = 0.06077
-## alternative hypothesis: true probability of success is not equal to 0.05
-## 95 percent confidence interval:
-##  0.0375535 0.3072184
-## sample estimates:
-## probability of success 
-##              0.1333333</code></pre>
-<p>No, the dice may be fair.</p>
+<pre><code>## [1] 0.06077156</code></pre>
+<p>No, the dice may be fair. Probability is 0.06.</p>
 </div>
 <div id="problem-4" class="section level1">
 <h1>8.6.4 Problem 4</h1>
 <p>You roll three die at a single time. What are the odds of getting
 exactly two fours?</p>
-<pre class="r"><code>dbinom(x = 2, # two rolls
-       size = 3, # three die at once
-       1/6) |&gt; # 1/6 chance on each die 
-  round(2) # round answer</code></pre>
 <pre><code>## [1] 0.07</code></pre>
-<p>Approx. a 7% chance.</p>
+<p>The probability is 0.07.</p>
 </div>
 <div id="problem-5" class="section level1">
 <h1>8.6.5 Problem 5</h1>
 <p>You notice that in a class of 200 people, the odds of any given
 student being absent is approximately 3%. What are the odds that 5
 people miss a given class?</p>
-<pre class="r"><code>dbinom(x = 5,
-       size = 200,
-       prob = 3/100) |&gt; 
-  round(2)</code></pre>
 <pre><code>## [1] 0.16</code></pre>
-<p>Approximately 16%.</p>
+<p>Approximately 16%. Report as 0.16.</p>
 </div>
 <div id="problem-6" class="section level1">
 <h1>8.6.6 Problem 6</h1>
 <p>There are approximately 3 severe storm warnings per 16 week semester
 at UNK. What are the odds of having a semester with no severe storm
 warnings?</p>
-<pre class="r"><code>dbinom(x = 0, size = 16, prob = 3/16)</code></pre>
 <pre><code>## [1] 0.03607231</code></pre>
-<p>Around 3.6%.</p>
+<p>The probability is 0.04.</p>
 </div>
 <div id="problem-7" class="section level1">
 <h1>8.6.7 Problem 7</h1>
@@ -449,18 +416,14 @@ warnings?</p>
 change their fur color. In a trial of 500 mice, 15 had their fur change
 color. Using this precedent, are the odds of having 6 mice have their
 fur change color in another trial of 500 individuals?</p>
-<pre class="r"><code>dbinom(x = 6, size = 500, prob = 15/500)</code></pre>
 <pre><code>## [1] 0.004481</code></pre>
+<p>The probability is 0.004.</p>
 </div>
 <div id="problem-8" class="section level1">
 <h1>8.6.8 Problem 8</h1>
 <p>What are the odds of rolling no fours on two twenty-sided die?</p>
-<pre class="r"><code># odds of not getting a four
-success &lt;- dbinom(x = 0, size = 2, prob = 1/20)
-
-print(success)</code></pre>
 <pre><code>## [1] 0.9025</code></pre>
-<p>90.25% chance of not rolling that.</p>
+<p>The probability is 0.90.</p>
 </div>
 <div id="problem-9" class="section level1">
 <h1>8.6.9 Problem 9</h1>
@@ -468,9 +431,8 @@ print(success)</code></pre>
 the shelves at a gas station while they were traveling. Assuming his mom
 was able to shake 10% of the sodas before getting caught, what are the
 odds of getting three or more shaken sodas if you buy 20 sodas?</p>
-<pre class="r"><code>1 - sum(dbinom(x = 0:2, size = 20, prob = 0.1))</code></pre>
 <pre><code>## [1] 0.3230732</code></pre>
-<p>32% chance.</p>
+<p>The probability is 0.32.</p>
 </div>
 
 

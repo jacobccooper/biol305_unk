@@ -5,13 +5,13 @@ date: "2025-08-26"
 output: pdf_document
 ---
 
-```{r}
+```{r, eval = F, echo = F}
 library(tidyverse)
 ```
 
 # Question 9.1
 
-```{r}
+```{r, eval = F, echo = F}
 # download La Selva data
 laselva <- read_csv("https://zenodo.org/records/4979259/files/LaSelvaBirdTrendsDatatable.csv")
 # isolate the big groundbirds
@@ -19,27 +19,27 @@ big_groundbirds <- laselva[1:6,]
 ```
 
 
-```{r}
+```{r, eval = F, echo = F}
 #Test 1
 bigyearsall <- chisq.test(big_groundbirds$NYears)
 bigyearsall
 ```
 
 
-```{r}
+```{r, eval = F, echo = F}
 bigyearsp <- bigyearsall$p.value
 print(round(bigyearsp, 2))
 ```
 
 
-```{r}
+```{r, eval = F, echo = F}
 #Test 2
 bigmaxall <- chisq.test(big_groundbirds$MaxN)
 bigmaxall
 ```
 
 
-```{r}
+```{r, eval = F, echo = F}
 print(round(bigmaxall$p.value, 4))
 ```
 
@@ -57,7 +57,7 @@ Null: There is no difference in traffic depending on time on the east sidewalk.
 Null: There is no difference in traffic depending on time on the west sidewalk.
 Null: There is no difference in traffic between east and west sidewalks. 
 
-```{r}
+```{r, eval = F, echo = F}
 bicycles <- read_csv("https://zenodo.org/records/2648564/files/Fremont_Bridge_Hourly_Bicycle_Counts_by_Month_October_2012_to_present.csv")
 bicycles <- bicycles |> 
   # convert to data frame
@@ -74,7 +74,7 @@ march_31 <- bicycles |>
 ```
 
 
-```{r}
+```{r, eval = F, echo = F}
 #Eastbound
 eastall <- chisq.test(march_31$`Fremont Bridge East Sidewalk`)
 eastall
@@ -86,13 +86,13 @@ Eastbound traffic is not equally likely at all times of day ($\chi^2_{(9)} = 98.
 
 ## Part 2
 
-```{r}
+```{r, eval = F, echo = F}
 #Westbound
 westall <- chisq.test(march_31$`Fremont Bridge West Sidewalk`)
 westall
 ```
 
-```{r}
+```{r, eval = F, echo = F}
 print(round(westall$p.value, 4))
 ```
 
@@ -100,7 +100,7 @@ Westbound traffic is not equally likely at all times of day ($\chi^2_{(9)} = 106
 
 ## Part 3: Method 1 (Table)
 
-```{r}
+```{r, eval = F, echo = F}
 #Compared
 table_dir <- rbind(East = march_31$`Fremont Bridge East Sidewalk`, 
                    West = march_31$`Fremont Bridge West Sidewalk`)
@@ -112,7 +112,7 @@ Traffic at a particular time of day is equally likely between traffic directions
 
 ## Part 2: Method 2 (putting each separately)
 
-```{r}
+```{r, eval = F, echo = F}
 chisq.test(march_31$`Fremont Bridge East Sidewalk`, march_31$`Fremont Bridge West Sidewalk`)
 ```
 
@@ -122,7 +122,7 @@ Traffic at a particular time of day is equally likely between traffic directions
 
 ## Method 1: Table
 
-```{r}
+```{r, eval = F, echo = F}
 march_30 <- bicycles  |> 
   filter(day(Date) == 30, hour(Date) > 7 & hour(Date) < 18) |>
   select(-`Fremont Bridge West Sidewalk`) |>
@@ -150,7 +150,7 @@ We fail to reject the null. There is no difference between days with respect to 
 
 ## Method 2: Listing values
 
-```{r}
+```{r, eval = F, echo = F}
 chisq.test(date_compare$`March 31`, date_compare$`March 30`)
 ```
 

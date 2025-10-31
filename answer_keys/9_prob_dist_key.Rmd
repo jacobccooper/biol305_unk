@@ -9,97 +9,105 @@ output: html_document
 
 There is a claw machine at the local fair that is notoriously difficult to use. In fact, it is estimated that only 1 in 50 attempts are successful at getting a toy out of the machine. What is the probability that you would try it 50 times and win thrice?
 
-```{r}
-binom.test(x = 3, n = 50, p = 1/50)
+```{r, echo = F}
+a <- dbinom(x = 3, size = 50, p = 1/50)
+
+a
 ```
 
-The probability is low - 7.9% (round to 8%).
+The probability is low: 0.06.
 
 # 8.6.2 Problem 2
 
 Whooping Cranes *Grus americanus* are some of the most endangered birds in North America, with only 557 birds in the population that migrates through Nebraska. Conversely, approximately 736,000 Sandhill Cranes *Antigone canadensis* migrate through Nebraska. Assuming that census counts of flocks of 5000 cranes have the expected average ratio of cranes, what are the odds of finding a crane flock with two or more Whooping Cranes?
 
-```{r}
-lower <- sum(dbinom(x = 0:1, size = 5000, prob = (557/736000)))
+```{r, echo = F}
+lambda <- 557/(736000+557)*5000
 
-(1-lower) |> round(2)
+lower <- dpois(x = c(0:1), lambda = lambda) |> 
+  sum()
+
+(1-lower) |> round(4)
 ```
 
-Probability is 89%.
+Assuming they are randomly distributed, the probability should be 0.89.
 
 # 8.6.3 Problem 3
 
 Your friend has a twenty-sided dice that you suspect to be unfair. They have rolled a 20 four times in the past thirty rolls. Is the dice unfair?
 
-```{r}
-binom.test(x = 4, n = 30, p = 1/20)
+```{r, echo = F}
+a <- dbinom(x = 4, size = 30, p = 1/20)
+a |> round(2)
 ```
 
-No, the dice may be fair.
+No, the dice may be fair. Probability is 0.06.
 
 # 8.6.4 Problem 4
 
 You roll three die at a single time. What are the odds of getting exactly two fours?
 
-```{r}
+```{r, echo = F}
 dbinom(x = 2, # two rolls
        size = 3, # three die at once
        1/6) |> # 1/6 chance on each die 
   round(2) # round answer
 ```
 
-Approx. a 7% chance.
+The probability is 0.07.
 
 # 8.6.5 Problem 5
 
 You notice that in a class of 200 people, the odds of any given student being absent is approximately 3%. What are the odds that 5 people miss a given class?
 
-```{r}
+```{r, echo = F}
 dbinom(x = 5,
        size = 200,
        prob = 3/100) |> 
   round(2)
 ```
 
-Approximately 16%.
+Approximately 16%. Report as 0.16.
 
 # 8.6.6 Problem 6
 
 There are approximately 3 severe storm warnings per 16 week semester at UNK. What are the odds of having a semester with no severe storm warnings?
 
-```{r}
+```{r, echo = F}
 dbinom(x = 0, size = 16, prob = 3/16)
 ```
 
-Around 3.6%.
+The probability is 0.04.
 
 # 8.6.7 Problem 7
 
 You are giving mice an experimental treatment that is designed to change their fur color. In a trial of 500 mice, 15 had their fur change color. Using this precedent, are the odds of having 6 mice have their fur change color in another trial of 500 individuals?
 
-```{r}
+```{r, echo = F}
 dbinom(x = 6, size = 500, prob = 15/500)
 ```
+
+The probability is 0.004.
 
 # 8.6.8 Problem 8
 
 What are the odds of rolling no fours on two twenty-sided die?
 
-```{r}
+```{r, echo = F}
 # odds of not getting a four
 success <- dbinom(x = 0, size = 2, prob = 1/20)
 
 print(success)
 ```
 
-90.25% chance of not rolling that.
+The probability is 0.90.
 
 # 8.6.9 Problem 9
 
 Dr. Cooper once caught his mom shaking sodas and putting them back at the shelves at a gas station while they were traveling. Assuming his mom was able to shake 10% of the sodas before getting caught, what are the odds of getting three or more shaken sodas if you buy 20 sodas?
 
-```{r}
+```{r, echo = F}
 1 - sum(dbinom(x = 0:2, size = 20, prob = 0.1))
 ```
 
-32% chance.
+The probability is 0.32.

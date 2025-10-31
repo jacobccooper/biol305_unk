@@ -357,197 +357,31 @@ display: none;
 </div>
 
 
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.4     ✔ readr     2.1.5
-## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ ggplot2   3.5.2     ✔ tibble    3.3.0
-## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-## ✔ purrr     1.1.0     
-## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<div id="question-9.1" class="section level1">
-<h1>Question 9.1</h1>
-<pre class="r"><code># download La Selva data
-laselva &lt;- read_csv(&quot;https://zenodo.org/records/4979259/files/LaSelvaBirdTrendsDatatable.csv&quot;)</code></pre>
-<pre><code>## Rows: 202 Columns: 20
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr  (8): ScientificName, CommonName, QualChg, Prob&gt;ChiSq, Diet_AB, Diet_BS,...
-## dbl (10): MaxN, MeanAbund, NYears, TrendEstimate, StdError, L-RChiSquare, Me...
-## lgl  (2): Extirpated?, Invading?
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code># isolate the big groundbirds
-big_groundbirds &lt;- laselva[1:6,]</code></pre>
-<pre class="r"><code>#Test 1
-bigyearsall &lt;- chisq.test(big_groundbirds$NYears)
-bigyearsall</code></pre>
-<pre><code>## 
-##  Chi-squared test for given probabilities
-## 
-## data:  big_groundbirds$NYears
-## X-squared = 0.70769, df = 5, p-value = 0.9825</code></pre>
-<pre class="r"><code>bigyearsp &lt;- bigyearsall$p.value
-print(round(bigyearsp, 2))</code></pre>
-<pre><code>## [1] 0.98</code></pre>
-<pre class="r"><code>#Test 2
-bigmaxall &lt;- chisq.test(big_groundbirds$MaxN)
-bigmaxall</code></pre>
-<pre><code>## 
-##  Chi-squared test for given probabilities
-## 
-## data:  big_groundbirds$MaxN
-## X-squared = 76.447, df = 5, p-value = 4.64e-15</code></pre>
-<pre class="r"><code>print(round(bigmaxall$p.value, 4))</code></pre>
-<pre><code>## [1] 0</code></pre>
-<div id="part-1" class="section level2">
-<h2>Part 1</h2>
+<p><strong><em>Question 9.1</em></strong></p>
+<p>Null: There is no difference between yearly encounter
+distribution/high count. Alternative: There is difference between yearly
+encounter distribution/high count.</p>
 <p>We do not reject the null for different numbers of years being
 encountered (<span class="math inline">\(\chi^2_{(5)} = 0.71, p =
 0.98\)</span>).</p>
-</div>
-<div id="part-2" class="section level2">
-<h2>Part 2</h2>
 <p>We do reject the null for high counts (<span class="math inline">\(\chi^2_{(5)} = 76.45, p &lt; 0.0001\)</span>).</p>
-</div>
-</div>
-<div id="question-9.2" class="section level1">
-<h1>Question 9.2</h1>
+<p><strong><em>Question 9.2</em></strong></p>
 <p>Null: There is no difference in traffic depending on time on the east
 sidewalk. Null: There is no difference in traffic depending on time on
 the west sidewalk. Null: There is no difference in traffic between east
 and west sidewalks.</p>
-<pre class="r"><code>bicycles &lt;- read_csv(&quot;https://zenodo.org/records/2648564/files/Fremont_Bridge_Hourly_Bicycle_Counts_by_Month_October_2012_to_present.csv&quot;)</code></pre>
-<pre><code>## Rows: 56904 Columns: 3
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr (1): Date
-## dbl (2): Fremont Bridge East Sidewalk, Fremont Bridge West Sidewalk
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>bicycles &lt;- bicycles |&gt; 
-  # convert to data frame
-  as.data.frame() |&gt; 
-  # convert to date format
-  mutate(Date = as.POSIXct(Date, format = &quot;%m/%d/%Y %I:%M:%S %p&quot;)) |&gt; 
-  #subset to March 30-31, 2019
-  filter(year(Date) == 2019) |&gt; 
-  filter(month(Date) == 3) |&gt; 
-  filter(day(Date) == 30 | day(Date) == 31)
-march_31 &lt;- bicycles |&gt; 
-  filter(day(Date) == 31) |&gt; 
-  filter(hour(Date) &gt; 7 &amp; hour(Date) &lt; 18)</code></pre>
-<pre class="r"><code>#Eastbound
-eastall &lt;- chisq.test(march_31$`Fremont Bridge East Sidewalk`)
-eastall</code></pre>
-<pre><code>## 
-##  Chi-squared test for given probabilities
-## 
-## data:  march_31$`Fremont Bridge East Sidewalk`
-## X-squared = 98.542, df = 9, p-value &lt; 2.2e-16</code></pre>
-<div id="part-1-1" class="section level2">
-<h2>Part 1</h2>
 <p>Eastbound traffic is not equally likely at all times of day (<span class="math inline">\(\chi^2_{(9)} = 98.54, p &lt; 0.0001\)</span>). We
 reject <span class="math inline">\(H_0\)</span>.</p>
-</div>
-<div id="part-2-1" class="section level2">
-<h2>Part 2</h2>
-<pre class="r"><code>#Westbound
-westall &lt;- chisq.test(march_31$`Fremont Bridge West Sidewalk`)
-westall</code></pre>
-<pre><code>## 
-##  Chi-squared test for given probabilities
-## 
-## data:  march_31$`Fremont Bridge West Sidewalk`
-## X-squared = 106.81, df = 9, p-value &lt; 2.2e-16</code></pre>
-<pre class="r"><code>print(round(westall$p.value, 4))</code></pre>
-<pre><code>## [1] 0</code></pre>
 <p>Westbound traffic is not equally likely at all times of day (<span class="math inline">\(\chi^2_{(9)} = 106.81, p &lt; 0.0001\)</span>). We
 reject <span class="math inline">\(H_0\)</span>.</p>
-</div>
-<div id="part-3-method-1-table" class="section level2">
-<h2>Part 3: Method 1 (Table)</h2>
-<pre class="r"><code>#Compared
-table_dir &lt;- rbind(East = march_31$`Fremont Bridge East Sidewalk`, 
-                   West = march_31$`Fremont Bridge West Sidewalk`)
-eastwestall &lt;- chisq.test(table_dir, correct=FALSE)
-eastwestall</code></pre>
-<pre><code>## 
-##  Pearson&#39;s Chi-squared test
-## 
-## data:  table_dir
-## X-squared = 3.2449, df = 9, p-value = 0.9538</code></pre>
 <p>Traffic at a particular time of day is equally likely between traffic
 directions (<span class="math inline">\(\chi^2_{(9)}=3.24\)</span>,
 <span class="math inline">\(p = 0.95\)</span>). We fail to reject <span class="math inline">\(H_0\)</span>.</p>
-</div>
-<div id="part-2-method-2-putting-each-separately" class="section level2">
-<h2>Part 2: Method 2 (putting each separately)</h2>
-<pre class="r"><code>chisq.test(march_31$`Fremont Bridge East Sidewalk`, march_31$`Fremont Bridge West Sidewalk`)</code></pre>
-<pre><code>## Warning in chisq.test(march_31$`Fremont Bridge East Sidewalk`,
-## march_31$`Fremont Bridge West Sidewalk`): Chi-squared approximation may be
-## incorrect</code></pre>
-<pre><code>## 
-##  Pearson&#39;s Chi-squared test
-## 
-## data:  march_31$`Fremont Bridge East Sidewalk` and march_31$`Fremont Bridge West Sidewalk`
-## X-squared = 90, df = 81, p-value = 0.2313</code></pre>
-<p>Traffic at a particular time of day is equally likely between traffic
-directions (<span class="math inline">\(\chi^2_{(81)}=90\)</span>, <span class="math inline">\(p = 0.23\)</span>). We fail to reject <span class="math inline">\(H_0\)</span>.</p>
-</div>
-</div>
-<div id="question-9.3" class="section level1">
-<h1>Question 9.3</h1>
-<div id="method-1-table" class="section level2">
-<h2>Method 1: Table</h2>
-<pre class="r"><code>march_30 &lt;- bicycles  |&gt; 
-  filter(day(Date) == 30, hour(Date) &gt; 7 &amp; hour(Date) &lt; 18) |&gt;
-  select(-`Fremont Bridge West Sidewalk`) |&gt;
-  mutate(Date = hour(Date)) |&gt;
-  rename(&quot;March 30&quot; = `Fremont Bridge East Sidewalk`)
-
-march_31_east &lt;- march_31 |&gt;
-  select(-`Fremont Bridge West Sidewalk`) |&gt;
-  mutate(Date = hour(Date)) |&gt;
-  rename(&quot;March 31&quot; = `Fremont Bridge East Sidewalk`)
-
-date_compare &lt;- full_join(march_31_east, march_30, by = &quot;Date&quot;) |&gt;
-  rename(&quot;Hour&quot; = Date) |&gt;
-  arrange(Hour)
-
-# Create table for chi-sq
-date_table &lt;- rbind(`March 31` = date_compare$`March 31`,
-                    `March 30` = date_compare$`March 30`)
-
-chisq_date &lt;- chisq.test(date_table)
-chisq_date</code></pre>
-<pre><code>## 
-##  Pearson&#39;s Chi-squared test
-## 
-## data:  date_table
-## X-squared = 3.9253, df = 9, p-value = 0.9163</code></pre>
+<p><strong><em>Question 9.3</em></strong></p>
+<p>Null: There is no difference of traffic beteween days. Alternerative:
+There is a difference of traffic between days.</p>
 <p>We fail to reject the null. There is no difference between days with
 respect to traffic (<span class="math inline">\(\chi^2_{(9)}=3.93\)</span>, <span class="math inline">\(p = 0.92\)</span>).</p>
-</div>
-<div id="method-2-listing-values" class="section level2">
-<h2>Method 2: Listing values</h2>
-<pre class="r"><code>chisq.test(date_compare$`March 31`, date_compare$`March 30`)</code></pre>
-<pre><code>## Warning in chisq.test(date_compare$`March 31`, date_compare$`March 30`):
-## Chi-squared approximation may be incorrect</code></pre>
-<pre><code>## 
-##  Pearson&#39;s Chi-squared test
-## 
-## data:  date_compare$`March 31` and date_compare$`March 30`
-## X-squared = 80, df = 72, p-value = 0.2424</code></pre>
-<p>We fail to reject the null. There is no difference between days with
-respect to traffic (<span class="math inline">\(\chi^2_{(72)}=80\)</span>, <span class="math inline">\(p = 0.24\)</span>).</p>
-</div>
-</div>
 
 
 
