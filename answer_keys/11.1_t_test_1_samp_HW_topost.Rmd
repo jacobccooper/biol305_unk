@@ -154,7 +154,7 @@ shapiro.test(milk_fats)
 t.test(milk_fats, mu = 3.25)
 ```
 
-The milk is significantly different than the expected mean ($t_{-2.37}$, $p = 0.02$).
+The milk is significantly different than the expected mean ($t_{44}$ = -2.37, $p = 0.02$).
 
 -   Is the milk fattier or leaner than expected, if there is a difference?
 
@@ -189,9 +189,9 @@ shapiro.test(sqrt(galaxies))
 ```
 
 ```{r, echo=FALSE, message=FALSE, results=FALSE}
-wilcox.test(galaxies, 20000)
+wilcox.test(galaxies, mu = 20000)
 ```
 
 -   Are the galaxies moving away faster or slower, if there is a difference?
 
-No, they are not. $p = 0.69$.
+No, they are not. $p = 0.003$.

@@ -342,7 +342,7 @@ reaction_times <- sleepstudy$Reaction
 
 -   Are the people in the dataset slower or faster than average, if there is a difference? What might be the reason for this? (2 pts)
 
--   If applicable, perform the above as a *one-tailed test* to see if reactions times are *faster* than expected. How does this change the results?
+-   If applicable, perform the above as a *one-tailed test* to see if reactions times are *faster* or *slower* than expected. How does this change the results?
 
 ### **Question 4:**
 
