@@ -121,7 +121,7 @@ Yes, the score is different ($t_{179} = 11.59$, $p < 0.0001$).
 
 -   Are the people in the dataset slower or faster than average, if there is a difference? What might be the reason for this?
 
-The reaction time is slower; `r exp(5.685031)-1` ms.
+The reaction time is slower; `r (expm1(mean(log1p(reaction_times)))-1) |> round(4)` ms.
 
 - One-tailed test
 
@@ -194,4 +194,4 @@ wilcox.test(galaxies, mu = 20000)
 
 -   Are the galaxies moving away faster or slower, if there is a difference?
 
-No, they are not. $p = 0.003$.
+They are moving significantly faster. $p = 0.003$.
