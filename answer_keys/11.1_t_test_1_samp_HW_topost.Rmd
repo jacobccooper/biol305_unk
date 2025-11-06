@@ -121,7 +121,7 @@ Yes, the score is different ($t_{179} = 11.59$, $p < 0.0001$).
 
 -   Are the people in the dataset slower or faster than average, if there is a difference? What might be the reason for this?
 
-The reaction time is slower; `r (expm1(mean(log1p(reaction_times)))-1) |> round(4)` ms.
+The reaction time is slower; `r (expm1(mean(log1p(reaction_times)))) |> round(4)` ms.
 
 - One-tailed test
 

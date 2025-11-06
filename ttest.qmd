@@ -401,3 +401,121 @@ dog_data <- cbind(owner_name, owner_sight) |>
 -   Perform the appropriate test for this dataset. Don't forget to check for normality and do the other necessary steps; *you will not be reminded to do this on future questions*.
 
 -   State your conclusion for this study.
+
+### Question 2: The maximum airspeed velocity of a swallow
+
+Inspired by *Monty Python and the Holy Grail*, you decide to compare the maximum airspeed velocity of African and European swallows, namely, the European Red-rumped Swallow *Cecropis rufula* African Red-rumped Swallow *Cecropis melanocrissus* to see if they differ in some way. You measure one group of each of these swallows and get the following dataset:
+
+```{r}
+rufula <- c(68.6,71.7,69.9,74.9,70.2,64.9,70.8,74.2,67.1,70.8,75.0,70.7)
+melanocrissus <- c(73.8,82.1,70.5,75.4,73.4,67.4,71.5,75.9,68.6,72.4,67.5,73.8)
+
+swallows <- cbind(rufula, melanocrissus) |> 
+  as.data.frame()
+```
+
+-   What is the goal of this study?
+
+-   What are the null and alternative hypotheses for this test? Write them mathematically or as sentences, whichever is easiest for you.
+
+-   Perform the appropriate test for the dataset.
+
+-   State your conclusion for this study.
+
+### Question 3: Heart rate and salsa
+
+You decide to compare the heart rate of two different groups of volunteers, one where the students were fed habañero salsa and one where the students were fed jalapeño salsa. You predict that students' heart rates will be higher with the jalapeño salsa. You obtain the following data:
+
+```{r}
+habanero <- c(105.5,100.7,96.5,107.3,100.6,96.3,99.5,
+              98.9,107.4,103.8,109.3,107.7,103.2,104.5,
+              95.4,103.3,107.5,101.8,106.1,102.6)
+jalapeño <- c(109.1,111.7,118.6,111.1,100.5,118.7,117.5,
+              102.1,94.9,104.0,109.2,101.1,113.0,111.3,97.6,
+              109.2,93.4,103.4,90.3,109.2)
+  
+peppers <- cbind(jalapeño, habanero) |> as.data.frame()
+```
+
+### Question 4: Iris
+
+You are interested in seeing if the petal width of *Iris setosa* is different than that of *Iris virginica*. **Note:** for this problem, you will have to:
+
+-   Isolate the species of interest
+
+-   Isolate the variables of interest
+
+-   Perform the relevant test
+
+The dataset is available in base R:
+
+```{r}
+iris
+```
+
+-   What is the goal of this study?
+
+-   What are the hypotheses of this study?
+
+-   Perform the relevant test for assessing the hypotheses.
+
+-   Write out your conclusion for the test.
+
+### Question 5: Bacteria counts
+
+You are tasked by your biology professor to compare the counts of bacteria grown from two-different media, media *A* and media *B*. Your professor thinks that media *A* will have more bacteria than media *B*. You count the number of colony forming units (CFUs) on each media and get the following data.
+
+```{r}
+media_A <- c(16,14,12,16,16,16,13,16,15,15,
+             15,15,15,15,17,15,16,15,15,13,
+             15,15,15,14,14,14,15,15,15,15,
+             14,14,14,16,17,15,13,14,16,16)
+
+media_B <- c(12,12,12,12,11,11,11,13,12,11,
+             11,11,10,11,13,10,10,11,17,15,
+             13,14,18,16,19,15,16,16,15,19,
+             16,17,16,20,16,15,19,16,18,18)
+```
+
+-   What is the goal for this study?
+
+-   What are the hypotheses for this study?
+
+-   Perform the relevant test for assessing the hypotheses.
+
+-   Write out your conclusion for the test.
+
+### Question 6: Flint, Michigan
+
+In 2014, the city of Flint, Michigan changed their water source from Lake Huron and the Detroit River to the nearby Flint River. This change in water source resulted in an elevation of lead levels in the water, exposing approximately 100,000 people to lead poisoning. It took six years and more than \$400 million in funds to fix the water issue in Flint, Michigan, and the human health effects may take years to quantify.
+
+The code below will section off actual data from the lead water crisis in Flint, Michigan into two groups. Your goal is to determine if lead levels are similar between those groups; lead levels are contained in the column `lead` and are given in parts per billion.
+
+```{r}
+library(tidytuesdayR)
+
+tuesdata <- tidytuesdayR::tt_load('2025-11-04')
+flint_mdeq <- tuesdata$flint_mdeq |> 
+  dplyr::select(-notes) |> 
+  na.omit() |> 
+  dplyr::select(-lead2)
+
+group1 <- flint_mdeq[1:20,]
+group2 <- flint_mdeq[21:40,]
+```
+
+-   What is the goal of the analysis above?
+
+-   State the hypotheses for the analysis above.
+
+-   Perform the appropriate test.
+
+-   State a conclusion for the test.
+
+[According to the EPA](https://www.epa.gov/ground-water-and-drinking-water/basic-information-about-lead-drinking-water), if more than 10% of tap water samples exceed the lead action level of 15 parts per billion, then further actions must be taken to mitigate and help control the lead, as well as to educate the public.
+
+-   What is the percent of samples in the `flint_mdeq` that are above the 15 parts per billion threshold?
+
+-   What is the average lead level in the town?
+
+-   Is the average lead level below the 15 parts per billion threshold? State a null and alternative hypothesis for this test, and then perform the relative hypothesis.\`
