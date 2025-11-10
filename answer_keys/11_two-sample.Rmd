@@ -34,7 +34,7 @@ melanocrissus <- c(73.8,82.1,70.5,75.4,73.4,67.4,71.5,75.9,68.6,72.4,67.5,73.8)
 swallows <- cbind(rufula, melanocrissus) |> 
   as.data.frame()
 
-t.test(rufula, melanocrissus)
+t.test(rufula, melanocrissus, alternative = "two.sided")
 ```
 
 The test is not significant ($p = 0.20$).
@@ -66,7 +66,7 @@ virginica <- iris |>
 
 # DATA CANNOT BE NORMALIZED
 
-wilcox.test(versicolor$Petal.Width, virginica$Petal.Width)
+wilcox.test(versicolor$Petal.Width, virginica$Petal.Width, alternative = "two.sided")
 ```
 
 The test is significant ($p < 0.0001$).
