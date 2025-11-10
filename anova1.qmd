@@ -10,8 +10,10 @@ editor: visual
 When we are comparing multiple (2+) populations, we perform what is called an *analysis of variance* - or an ANOVA. We opt for this different method because we are trying to minimize error. As you'll recall, we use $\alpha$ to minimize our chances of making an error and coming to an incorrect conclusion regarding our data. In our previous tests ($t$-tests) we are comparing the means between two different populations, such that $H_0: \mu_1 = \mu_2$. When comparing multiple populations, comparing the means in this direct fashion can increase the probability of introducing error into a system. Consider the following:
 
 ```{r,message=FALSE}
-library(tidyverse)
+# plyr needed for examples on this page
 library(plyr)
+# load tidyverse
+library(tidyverse)
 
 # need for stats
 # see glossary for install instructions
@@ -337,9 +339,12 @@ Given how small our $p$ value is, we want to round this to $p<0.0001$. As we can
 For this, we need to use the dataframe where we have all data in a single column and all ID's in the other columns. We then show how we want the ANOVA to operate across the data using the `~` symbol.
 
 ```{r}
-data_aov <- aov(Response ~ Explanatory, data = data)
+data_aov <- run_oneway(data = data,
+                       dv = "Response",
+                       group = "Explanatory",
+                       parametric = TRUE)
 
-summary(data_aov)
+data_aov
 ```
 
 These numbers match the *by hand* methodology from the previous section, showing that the math is the same.
@@ -425,128 +430,17 @@ When we graph things, we want to label this group as different. We will cover th
 
 ### Tukey test in *R*
 
-Tukey tests in the *R* program are a bit more straightforward.
+Tukey is included in the `run_oneway` function; if you want to do it separately, you can do the following.
 
 ```{r}
-TukeyHSD(data_aov)
+data_aov$posthoc
 ```
 
-As we can see above, only three comparisons have a *p* value of $< 0.05$, and thus only those three are significantly different. All involve `x1`.
-
-We can also use `HSD.test` to get more specific results:
+## Plotting
 
 ```{r}
-tukey_data_aov <- HSD.test(data_aov,
-                           # what to group by?
-                           "Explanatory",
-                           # significance level?
-                           alpha = 0.05, 
-                           # are data unbalanced
-                           unbalanced = FALSE,
-                           # show answer?
-                           console = TRUE)
-
-print(tukey_data_aov)
+data_aov$plot
 ```
-
-This output is nice because it labels groups based on which groups belong together! **This will be important for plotting, and is cumbersome if you have a lot of means.**
-
-## Plotting our ANOVA results
-
-When we plot our ANOVAs, we want to show which mean is different from all of the others. Below, I will show the full pipeline for performing an ANOVA on a dataset and plotting the data at the end using out `data` object.
-
-```{r}
-data_aov <- aov(Response ~ Explanatory,data)
-
-summary(data_aov)
-```
-
-Now, we need to summarize things based on our `plyr` function.
-
-```{r}
-# summarize by group
-summary_data <- ddply(data, "Explanatory", summarise,
-                 N = length(Response),
-                 mean = mean(Response),
-                 sd = sd(Response),
-                 se = sd / sqrt(N))
-```
-
-Now, we can use the aforementioned Tukey results to assign to groups. Because `agricolae` functions define the groups in a `$groups` slot, we can pull out these data and perform some minimal transformations to make them ready to plot. *This will save us a lot of time and hassle*.
-
-```{r}
-# note first group must be EXACT MATCH to your summary_data object
-# groups are saved in the Tukey object
-# this is true for Tukey later as well
-
-# the following is a function that will make the significant label table
-sig.label.maker <- function(tukey_test, group_name){
-  sig.labels <- tukey_test$groups |> 
-    # convert to a data.frame
-    as.data.frame() |>
-    # create a new column - place rownames into the column
-    # converts to a format better for ggplot
-    mutate(Explanatorys = rownames(tukey_test$groups)) |>
-    # rename column to prevent confusion
-    # specify dplyr; default function may be from plyr and not work
-    dplyr::rename(significance = groups)
-  colnames(sig.labels)[which(colnames(sig.labels) == "Explanatorys")] <- group_name
-  return(sig.labels)
-}
-
-# pull out the groups slot from tukey
-# same for Kruskal later on!
-sig.labels <- sig.label.maker(tukey_data_aov, "Explanatory")
-
-sig.labels
-```
-
-Note that in the above, the row labels and the column `Explanatory` are identical. We moved these data into a column to make it easier to use `ggplot`. If you want letters to be different - capitalized or something else - you will have to do this yourself. Now we can plot our data and add the labels!
-
-```{r}
-ggplot(summary_data, # plot summary data
-       # Define plotting - x by group, y is mean, grouping by group
-       aes(x = Explanatory, y = mean, group = Explanatory)) +
-  # add points to plot for y values
-  geom_point() +
-  # add error bars around points
-  geom_errorbar(data = summary_data, 
-                # define error bars
-                aes(ymin = mean - 2*se, ymax = mean+2*se,
-                    # define color, size
-                                    color = Explanatory), width = 0.1) +
-  # add line at average for the main group
-  # this is not always known - nor requires!
-  geom_hline(yintercept = 0, col = "black", linewidth = 0.5) +
-  # set vertical limits for plot
-  ylim(c(-3,3)) +
-  # make it a classic theme - more legible
-  theme_classic() +
-  # add text to plot
-  geom_text(data = sig.labels,
-            # make bold
-            fontface = "bold",
-            # define where labels should go
-            aes(x = Explanatory, 
-                # define height of label
-                y = -2, 
-                # what are the labels?
-                label = paste0(significance))) +
-  xlab("Explanatory Name") +
-  ylab("Mean") +
-  # remove legend - not needed here
-  theme(legend.position = "none",
-        # make label text vertical, easier to read
-        axis.text.x = element_text(angle = 90, 
-                                   # vertical offset of text
-                                   vjust = 0.5, 
-                                   # text size
-                                   size = 12))
-```
-
-**Note** that I place the labels below here, but they could also be placed above. You have to position them based on your own judgment.
-
-**Addendum:** if you see a mean labeled `a` and `b`, it would be statistically indistinguishable from means labeled `a` and means labeled `b`, despite means with only an `a` or a `b` being different from each other.
 
 ## Kruskal-Wallis tests
 
@@ -603,17 +497,28 @@ ggplot(summary_data, aes(x = Explanatory, y = mean, group = Explanatory)) +
         axis.text.x = element_text(angle = 90, vjust = 0.5, size = 5))
 ```
 
-We can confirm these data are non-normal with Shapiro-Wilk tests and histograms. Demonstrating with the first column only:
+### Confirming normality
+
+We can confirm these data are non-normal with Shapiro-Wilk tests and histograms.
 
 ```{r}
-hist(data[,1])
+data |> 
+  group_by(Explanatory) |> 
+  dplyr::summarise(p.value = shapiro.test(Response)$p.value)
 ```
+
+While these data came out normal, for the purposes of this example, we will proceed with a non-normal test.
+
+### Performing the test
 
 ```{r}
-shapiro.test(data[,1])
-```
+kruskal_oneway <- run_oneway(data,
+                             dv = "Response",
+                             group = "Explanatory",
+                             parametric = F)
 
-The above histogram appears non-normal, and the Shapiro-Wilk also indicates this is non-normal.
+kruskal_oneway
+```
 
 ### By hand
 
@@ -682,44 +587,127 @@ As we can see, the probability is extremely low with $p < 0.0001$. One distribut
 
 </details>
 
-### Using *R*
+## Homework: One-way ANOVA
 
-We can also use *R* for this test.
+Complete the following problems. You must complete *one* problem *by hand* in addition to using the *R* method.
 
-```{r}
-kruskal_data <- kruskal.test(Response ~ Explanatory, data)
+### **Question 1:**
 
-print(kruskal_data)
-```
-
-This test is similar, but not quite the same, as what we calculated above. The package `agricolae` provides a more in-depth Kruskal-Wallis test that gives us more metadata. We have to use the wrapper `with` to get this to work properly, per the help page.
+Researchers want to test a new drug when given at different dosages. They are also including a placebo. They are measuring the score on a psychological examination, and are hoping to find the most effective dose to reduce score. Run the proper tests to determine if each group is unique and what effects they have.
 
 ```{r}
-# use "with", defining your dataset first
-data_kruskal <- with(data,
-                     # define parameters for Kruskal-Wallis test
-                     # First, variable of interest
-                     kruskal(Response,
-                             # second, grouping variable
-                             Explanatory,
-                             # do you want group designations returned?
-                             group = TRUE,
-                             # what is this being done on?
-                             # must match dataset name in "with"!!!
-                             main = "data"))
-
-# display results
-# summary WILL NOT show the right thing
-print(data_kruskal)
+drug <- tibble(
+  Dose = rep(c("Placebo","Low","Med","High"), each = 12),
+  Score = c(
+    # Placebo 
+    0.90,0.82,1.00,1.12,0.74,0.93,1.02,1.21,0.84,0.91,1.08,0.86,
+    # Low
+    0.10,0.00,-0.10,0.20,0.05,-0.05,0.15,0.00,-0.10,0.12,0.06,0.01,
+    # Med 
+    -0.30,-0.42,-0.22,-0.50,-0.35,-0.27,-0.31,-0.46,-0.38,-0.20,-0.36,-0.29,
+    # High 
+    0.40,0.32,0.50,0.36,0.25,0.46,0.41,0.52,0.35,0.30,0.44,0.39
+  )
+)
 ```
 
-As we can see, the above gives us our group designations under the `$group` section. This is what we need to be able to plot things, as with ANOVA above. I do not repeat those steps here.
+1.  State the null and alternative hypotheses.
+2.  Are these data normal? How can you tell?
+3.  Which dosage/dosages are most effective at reducing the score?
+4.  What might the biological implications of this test be?
 
-## Homework: Chapter 11
+### **Question 2:**
 
-Your homework is to complete problems 11.1, 11.2, 11.3, and 11.4. The first two will require ANOVA, and the last two will require Kruskal-Wallis tests. For each pair of tests, you must also complete the problem by hand in addition to using the default *R* methods. For *all* problems:
+Professors at UNK are debating if labs should be kept in Biology 105. They want to see if exam scores are higher in classes taught with only lecture, only lab, or both. Run the proper tests to determine if each group is unique and what effects they have.
 
--   State your hypothesis in words
--   State your hypothesis mathematically (hint: $\mu$)
--   **Answer in complete sentences** and don't forget to round your answers.
--   If you reject the null hypothesis, you must plot the results and label them to show which means are different.
+```{r}
+teach <- tibble(
+  Method = rep(c("Lab","Both","Lecture"), each = 15),
+  Exam = c(
+    # Lab
+    76,79,82,77,75,80,81,78,76,79,77,83,74,80,78,
+    # Both
+    84,85,82,88,83,86,84,87,81,86,85,83,84,89,82,
+    # Lecture
+    80,82,79,83,81,80,82,81,84,78,83,80,81,79,82
+  )
+)
+```
+
+1.  State the null and alternative hypotheses.
+2.  Are these data normal?
+3.  Which teaching method is most effective? How do you know this?
+4.  What might the teaching implications of this test be?
+
+### **Question 3:**
+
+Researchers are testing weight gain drugs in comparison to each other. They are also comparing the effects of these drugs to a placebo. Run the proper tests to determine if each group is unique and what effects they have.
+
+```{r}
+diet <- tibble(
+  Diet = rep(c("A","B","C", "Placebo"), each = 14),
+  WeightGain = c(
+    # A 
+    1.1,0.9,1.5,1.2,0.8,1.0,1.4,0.9,1.0,1.2,1.5,0.9,1.3,1.4,
+    # B 
+    1.3,1.5,1.2,0.8,1.6,1.5,1.0,2.0,1.5,1.4,1.6,1.2,1.5,1.4,
+    # C
+    2.1,2.0,1.6,2.3,2.1,2.0,1.6,2.1,2.5,1.7,2.2,2.1,2.3,2.7,
+    # Placebo
+    0.2,0.2,-0.2,0.0,-0.8,-.4,0.4,0.2,1.0,0.0,-0.1,-0.2,-0.7,0.6
+  )
+)
+```
+
+1.  State the null and alternative hypotheses.
+2.  Are these data normal?
+3.  Interpret the meaning of the assigned letters. How were they found, and what do they mean?
+4.  Which diet plan was most effective for gaining weight?
+
+### **Question 4:**
+
+A field study is measuring time-to-first-foraging (minutes) for four bird colonies. Run the proper tests to determine if each group is unique.
+
+```{r}
+set.seed(4517)
+
+n_per <- 18
+Colonies_data <- data.frame(
+  Colony = rep(c("North","East","South","West"), each = n_per),
+  Minutes = c(
+    round(rexp(n_per, rate = 1.0), 1),  
+    round(rexp(n_per, rate = 1.3), 1),  
+    round(rexp(n_per, rate = 0.7), 1),  
+    round(rexp(n_per, rate = 1.0), 1)   
+  )
+)
+```
+
+1.  State the null and alternative hypotheses.
+2.  Are these data normal?
+3.  Interpret the meaning of the assigned letters. How were they found, and what do they mean?
+4.  Which colony/colonies were the fastest foragers?
+
+### **Question 5:**
+
+A team of behavioral ecologists recorded the number of aggressive interactions among four populations of prairie voles raised in different social environments. They want to know if social upbringing influences aggression levels in male voles.
+
+```{r}
+set.seed(9913)
+
+n_per <- 16
+vole <- tibble(
+  Environment = rep(c("Isolated","Paired","Group","Crowded"), each = n_per),
+  Aggression = c(
+    round(rnorm(n_per, mean = 8, sd = 3)),
+    round(rnorm(n_per, mean = 6, sd = 1.5)),
+    round(rnorm(n_per, mean = 4, sd = 2)),
+    round(rnorm(n_per, mean = 7, sd = 4))
+  )
+)
+```
+
+1.  State the null and alternative hypotheses.
+2.  Are these data normal?
+3.  Interpret the meaning of the assigned letters. How were they found, and what do they mean?
+4.  What else is unique about this data and might explain the results? *Hint*: Look at the final plot
