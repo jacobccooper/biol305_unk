@@ -2,16 +2,15 @@
 title: "One-way ANOVA Homework"
 author: "Caleb Rother"
 date: "2025-10-22"
-output: html_document
+output: pdf_document
 ---
 
 ```{r}
 # remove # from line below if you need to install UNKstats package
 # remotes::install_github("CalebRother/UNKstats")
 
-library(UNKstats)
 library(tidyverse)
-library(dplyr)
+library(UNKstats)
 ```
 
 ### **Question 1:**
@@ -45,8 +44,16 @@ drug |>
 
 3.  Which dosage/dosages are most effective at reducing the score?
 
-```{r}
+```{r, echo = F, results=F}
+a <- run_oneway(data = drug,
+           dv = "Score",
+           group = "Dose",
+           parametric = T)
+```
 
+
+```{r, echo = F}
+a$anova_table
 ```
 
 
@@ -71,8 +78,25 @@ teach <- tibble(
 ```
 
 1.  State the null and alternative hypotheses.
-2.  Is this data normal?
+2.  Are these data normal?
+
+```{r, echo = F, results=F}
+teach |> 
+  group_by(Method) |> 
+  summarise(p_value = shapiro.test(Exam)$p.value)
+```
+
 3.  Which teaching method is most effective? How do you know this?
+
+```{r, echo = F}
+a <- run_oneway(data = teach,
+           dv = "Exam",
+           group = "Method",
+           parametric = T)
+
+a$anova_table
+```
+
 4.  What might the teaching implications of this test be?
 
 ###  **Question 3:**
@@ -96,7 +120,25 @@ diet <- tibble(
 ```
 
 1.  State the null and alternative hypotheses.
-2.  Is this data normal?
+2.  Are these data normal?
+
+```{r}
+diet |> 
+  group_by(Diet) |> 
+  summarise(p_value = shapiro.test(WeightGain)$p.value)
+```
+
+
+```{r, echo = F}
+a <- run_oneway(data = diet,
+                group = "Diet",
+                dv = "WeightGain",
+                parametric = T)
+
+a$anova_table
+```
+
+
 3.  Interpret the meaning of the assigned letters. How were they found, and what do they mean?
 4.  Which diet plan was most effective for gaining weight?
 
@@ -120,7 +162,23 @@ Colonies_data <- data.frame(
 ```
 
 1.  State the null and alternative hypotheses.
-2.  Is this data normal?
+2.  Are these data normal?
+
+```{r, echo = F, results=F}
+Colonies_data |> 
+  group_by(Colony) |> 
+  summarise(p.value = shapiro.test(sqrt(Minutes))$p.value)
+```
+
+```{r, echo = F}
+Colonies_data |> 
+  mutate(Minutes_sqrt = sqrt(Minutes)) |> 
+  run_oneway(dv = "Minutes_sqrt", group = "Colony", parametric = T) ->
+  a
+
+a$anova_table
+```
+
 3.  Interpret the meaning of the assigned letters. How were they found, and what do they mean?
 4.  Which colony/colonies were the fastest foragers?
 
@@ -144,7 +202,25 @@ vole <- tibble(
 ```
 
 1.  State the null and alternative hypotheses.
-2.  Is this data normal?
+2.  Are these data normal?
+
+```{r, echo = F, results = F}
+vole |> 
+  group_by(Environment) |> 
+  summarise(p.value = shapiro.test(Aggression)$p.value)
+```
+
+```{r, echo = F}
+run_oneway(data = vole,
+           dv = "Aggression",
+           group = "Environment",
+           parametric = T) ->
+  a
+
+a$anova_table
+```
+
+
 3.  Interpret the meaning of the assigned letters. How were they found, and what do they mean?
 4.  What else is unique about this data and might explain the results? *Hint*: Look at the final plot
 

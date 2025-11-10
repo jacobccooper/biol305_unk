@@ -11,7 +11,7 @@ When we are comparing multiple (2+) populations, we perform what is called an *a
 
 ```{r,message=FALSE}
 library(tidyverse)
-library(dplyr)
+library(plyr)
 
 # need for stats
 # see glossary for install instructions

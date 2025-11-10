@@ -5,6 +5,10 @@ date: "`r Sys.Date()`"
 output: pdf_document
 ---
 
+**NOTE**: Don't forget to write down your *t*-values, *df*, and *p* values in your answer. Your full sentence conclusion should relate back to the original hypothesis.
+
+This is a minimal document to guide you; data other than *p* have been omitted to not bias you on your approaches.
+
 # Question 1
 
 ```{r, echo = F, results = F}
@@ -19,7 +23,7 @@ dog_data <- cbind(owner_name, owner_sight) |>
 t.test(owner_name, owner_sight, paired = T, alternative = "less")
 ```
 
-The test is significant ($t = -4.03$, $p = 0.001$).
+The test is significant ($p = 0.001$).
 
 # Question 2
 
@@ -33,7 +37,7 @@ swallows <- cbind(rufula, melanocrissus) |>
 t.test(rufula, melanocrissus)
 ```
 
-The test is not significant ($t = -1.32$, $p = 0.20$).
+The test is not significant ($p = 0.20$).
 
 # Question 3
 
@@ -50,7 +54,7 @@ peppers <- cbind(jalapeño, habanero) |> as.data.frame()
 t.test(jalapeño, habanero, alternative = "greater")
 ```
 
-The test is not significant ($t = 1.64$, $p = 0.06$).
+The test is not significant ($p = 0.06$).
 
 # Question 4
 
