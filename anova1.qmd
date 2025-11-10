@@ -11,12 +11,11 @@ When we are comparing multiple (2+) populations, we perform what is called an *a
 
 ```{r,message=FALSE}
 library(tidyverse)
+library(dplyr)
 
-# needed for summarizing data
-library(plyr)
-
-# needed for better Tukey tests
-library(agricolae)
+# need for stats
+# see glossary for install instructions
+library(UNKstats)
 ```
 
 ```{r}

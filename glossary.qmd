@@ -5,6 +5,12 @@ format: html
 editor: visual
 ---
 
+## Installing `UNKstats`
+
+```{r, eval = F}
+remotes::install_github("CalebRother/UNKstats")
+```
+
 ## Rounding & Formatting
 
 As a reminder, we are following the rounding rules of the *Auk* and *Condor* (now *Ornithology* and *Ornithological Applications*).

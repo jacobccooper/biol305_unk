@@ -1,0 +1,197 @@
+---
+title: "t_test_1_samp_HW"
+output: pdf_document
+---
+
+**This is a minimal key to help you check if you did the tests properly.**
+
+### Answer each question. Perform all necessary tests. Perform transformations on the data if required.
+
+```{r, echo=FALSE, message=FALSE, results=FALSE}
+# install.packages("lme4")   # required for "sleepstudy" dataset
+library(lme4)
+data("sleepstudy")
+
+# install.packages("MASS")   # required for "galaxies" dataset
+library(MASS)
+data("galaxies")
+```
+
+### **Question 1:**
+
+These are the test scores of 12 students on a quiz. The quiz was out of 100 points. Suppose we want to test whether the mean score differs significantly from a predicted average of 70.
+
+```{r}
+quiz_scores <- c(75, 82, 68, 90, 73, 85, 77, 79, 88, 91, 83, 80)  
+```
+
+-   State the **null and alternative hypotheses**.
+
+-   Are these data normal?
+
+```{r, echo=FALSE, message=FALSE, results=FALSE}
+shapiro.test(quiz_scores)
+```
+
+Yes these are normal.
+
+```{r, echo=FALSE, message=FALSE, results=FALSE}
+t.test(x = quiz_scores, mu = 70)
+```
+
+
+-   Is the mean score significantly different from the expected result?
+
+Yes, the test score is significantly different than expected ($t_{11} = 5.39$, $p = 0.0002$).
+
+-   Did the students do better or worse than expected, if there is a difference?
+
+Better, value is higher.
+
+- Perform one-sided test
+
+```{r, echo=FALSE, message=FALSE, results=FALSE}
+t.test(x = quiz_scores, mu = 70, alternative = "greater")
+```
+
+One-tailed is still significant ($t_{11} = 5.39$, $p = 0.0001$).
+
+### **Question 2:**
+
+The following is a list of reported study hours for Biostats per week. We expect the class average to be about three hours a week. Using this dataset, answer the following questions:
+
+```{r, echo=FALSE, message=FALSE, results=FALSE}
+study_hours <- c(0.5, 3.0, 2.5, 4.5, 3.0, 1.5, 2.0, 3.5, 6, 1.0)  
+```
+
+-   State the **null and alternative hypotheses**.
+
+-   Are these data normal?
+
+```{r, echo=FALSE, message=FALSE, results=FALSE}
+shapiro.test(study_hours)
+```
+
+Yes, these data are normal.
+
+```{r, echo=FALSE, message=FALSE, results=FALSE}
+t.test(study_hours, mu = 3)
+```
+
+
+-   Do students spend the expected amount of time studying per week?
+
+Yes, they spend 3 hours on average studying ($t_9=-0.48$, $p = 0.64$).
+
+-   Do students spend more or less time studying per week, if there is a difference?
+
+There is no significant difference; mean is slightly lower.
+
+### **Question 3:**
+
+The following dataset records the reaction times of people who have had less than three hours of sleep on the night before this test. Using the reaction time column, perform a $t$-test to determine if these people have a statistically different reaction time than the human average (250 ms).
+
+```{r, echo=FALSE, message=FALSE, results=FALSE}
+reaction_times <- sleepstudy$Reaction
+```
+
+-   State the **null and alternative hypotheses**.
+
+-   Are these data normal?
+
+```{r, echo=FALSE, message=FALSE, results=FALSE}
+shapiro.test(reaction_times)
+```
+
+These data are not normal ($W = 0.97$, $p = 0.0008$).
+
+```{r, echo=FALSE, message=FALSE, results=FALSE}
+shapiro.test(log1p(reaction_times))
+```
+
+A transformation is needed, and one specific transformation is successful.
+
+```{r, echo=FALSE, message=FALSE, results=FALSE}
+t.test(log1p(reaction_times ), mu = log1p(250))
+```
+
+-   Is the mean score significantly different from the expected result?
+
+Yes, the score is different ($t_{179} = 11.59$, $p < 0.0001$).
+
+-   Are the people in the dataset slower or faster than average, if there is a difference? What might be the reason for this?
+
+The reaction time is slower; `r (expm1(mean(log1p(reaction_times)))) |> round(4)` ms.
+
+- One-tailed test
+
+```{r, echo=FALSE, message=FALSE, results=FALSE}
+t.test(log1p(reaction_times ), mu = log1p(250), alternative = "greater")
+```
+
+The reaction time is significantly greater than expected ($t_{179} = 11.59$, $p < 0.0001$).
+
+### **Question 4:**
+
+Whole milk is expected to be around 3.25% fat. Researchers from Florida wanted to determine if this was the case and used two methods to measure the fat percentage in the milk they tested. Using the enzymatic method (\$triglyceride), determine if the fat percentage of this milk was significantly different from the 3.25% expected.
+
+```{r, echo=FALSE, message=FALSE, results=FALSE}
+milk <- read.csv("https://users.stat.ufl.edu/~winner/data/milkfat_measure.csv")
+milk_fats <- milk$triglyceride
+
+milk_fats
+```
+
+-   State the **null and alternative hypotheses**.
+
+-   Is the mean score significantly different from the expected result?
+
+```{r, echo=FALSE, message=FALSE, results=FALSE}
+shapiro.test(milk_fats)
+```
+
+```{r, echo=FALSE, message=FALSE, results=FALSE}
+t.test(milk_fats, mu = 3.25)
+```
+
+The milk is significantly different than the expected mean ($t_{44}$ = -2.37, $p = 0.02$).
+
+-   Is the milk fattier or leaner than expected, if there is a difference?
+
+Leaner; $p = 0.02$, $mu = 2.80$.
+
+- One-tailed
+
+```{r, echo=FALSE, message=FALSE, results=FALSE}
+t.test(milk_fats, mu = 3.25, alternative = "less")
+```
+
+It is less ($t_{44} = -2.37$, $0.01$)
+
+### **Question 5:**
+
+Galaxies are rapidly moving away from us at various speeds. Previous studies had offered an average recession rate of 20,000 km/s. Data collected using redshift allows us to calculate the actual speed of recession of a galaxy. Using the data from R. J. Roeder (1990), saved as "galaxies", determine if the average galaxy is actually receding at the previously estimated rate.
+
+```{r, echo=FALSE, message=FALSE, results=FALSE}
+head(galaxies)
+```
+
+-   State the **null and alternative hypotheses**.
+
+-   Is the mean score significantly different from the expected result?
+
+```{r, echo=FALSE, message=FALSE, results=FALSE}
+shapiro.test(galaxies)
+```
+
+```{r, echo=FALSE, message=FALSE, results=FALSE}
+shapiro.test(sqrt(galaxies))
+```
+
+```{r, echo=FALSE, message=FALSE, results=FALSE}
+wilcox.test(galaxies, mu = 20000)
+```
+
+-   Are the galaxies moving away faster or slower, if there is a difference?
+
+They are moving significantly faster. $p = 0.003$.
