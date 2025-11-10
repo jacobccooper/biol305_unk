@@ -382,6 +382,10 @@ head(galaxies)
 
 ## Homework: Two-sample means testing
 
+**NOTE:** Assume$\alpha = 0.05$ for every question.
+
+If you need to do a transformation, *try every transformation* and make sure you choose the one that achieves normality the best.
+
 ### Question 1: Tail wagging
 
 The speed at which dogs wag their tail is often considered to be a proxy for how happy the dogs are, and they note that dogs seem happiest when they see their owners. Researchers gathered ten dogs and measured the rate of their tail wags per second (1) when they were told their owners name vs. (2) when they saw their owner approaching. They obtained the following dataset:
@@ -439,7 +443,7 @@ peppers <- cbind(jalapeño, habanero) |> as.data.frame()
 
 ### Question 4: Iris
 
-You are interested in seeing if the petal width of *Iris setosa* is different than that of *Iris virginica*. **Note:** for this problem, you will have to:
+You are interested in seeing if the petal width of *Iris versicolor* is different than that of *Iris virginica*. **Note:** for this problem, you will have to:
 
 -   Isolate the species of interest
 
@@ -450,7 +454,7 @@ You are interested in seeing if the petal width of *Iris setosa* is different th
 The dataset is available in base R:
 
 ```{r}
-iris
+head(iris)
 ```
 
 -   What is the goal of this study?
@@ -518,4 +522,4 @@ group2 <- flint_mdeq[21:40,]
 
 -   What is the average lead level in the town?
 
--   Is the average lead level below the 15 parts per billion threshold? State a null and alternative hypothesis for this test, and then perform the relative hypothesis.\`
+-   Is the average lead level below the 15 parts per billion threshold? State a null and alternative hypothesis for this test, and then perform the relative hypothesis.
