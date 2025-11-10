@@ -25,6 +25,8 @@ t.test(owner_name, owner_sight, paired = T, alternative = "less")
 
 The test is significant ($p = 0.001$).
 
+The test statistic is -4.03.
+
 # Question 2
 
 ```{r, echo = F, results = F}
@@ -38,6 +40,8 @@ t.test(rufula, melanocrissus, alternative = "two.sided")
 ```
 
 The test is not significant ($p = 0.20$).
+
+The test statistic is -1.32.
 
 # Question 3
 
@@ -56,6 +60,8 @@ t.test(jalapeño, habanero, alternative = "greater")
 
 The test is not significant ($p = 0.06$).
 
+The test statistic is 1.64.
+
 # Question 4
 
 ```{r, echo = F, results = F}
@@ -70,6 +76,8 @@ wilcox.test(versicolor$Petal.Width, virginica$Petal.Width, alternative = "two.si
 ```
 
 The test is significant ($p < 0.0001$).
+
+The test statistic is 49.
 
 # Question 5: Bacteria counts
 
@@ -90,6 +98,8 @@ wilcox.test(media_A, media_B, alternative = "greater")
 ```
 
 The test is not significant ($p = 0.15$).
+
+The test statistic is 907.5.
 
 # Question 6: Flint, Michigan
 
@@ -112,6 +122,8 @@ t.test(log1p(group1$lead), log1p(group2$lead))
 ```
 
 The groups are significantly different ($p = 0.007$).
+
+The test statistic is -2.86.
 
 ```{r, echo = F, results = F}
 sum(flint_mdeq$lead>15)/nrow(flint_mdeq)

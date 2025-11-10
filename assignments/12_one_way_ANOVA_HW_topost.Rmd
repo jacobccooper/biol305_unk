@@ -39,7 +39,7 @@ drug <- tibble(
 ```{r, echo = F, results=F}
 drug |> 
   group_by(Dose) |> 
-  summarise(p_value = shapiro.test(Score)$p.value)
+  dplyr::summarise(p_value = shapiro.test(Score)$p.value)
 ```
 
 3.  Which dosage/dosages are most effective at reducing the score?
