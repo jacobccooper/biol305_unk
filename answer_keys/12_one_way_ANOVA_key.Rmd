@@ -43,12 +43,10 @@ res_A <- run_oneway(drug,
                     parametric = TRUE)
 print(res_A)
 res_A$plot
-
-
 ```
 
 1.  State the null and alternative hypotheses.
-2.  Is this data normal? How can you tell?
+2.  Are these data normal? How can you tell?
 3.  Which dosage/dosages are most effective at reducing the score?
 4.  What might the biological implications of this test be?
 
@@ -69,7 +67,9 @@ teach <- tibble(
   )
 )
 
-shapiro.test(teach$Exam)
+teach %>%
+  group_by(Method) %>%
+  summarise(p_value = shapiro.test(Exam)$p.value)
 
 res_B <- run_oneway(teach, 
                     dv = "Exam", 
@@ -81,7 +81,7 @@ res_B$plot
 ```
 
 1.  State the null and alternative hypotheses.
-2.  Is this data normal?
+2.  Are these data normal?
 3.  Which teaching method is most effective? How do you know this?
 4.  What might the teaching implications of this test be?
 
@@ -104,7 +104,9 @@ diet <- tibble(
   )
 )
 
-shapiro.test(diet$WeightGain)
+diet %>%
+  group_by(Diet) %>%
+  summarise(p_value = shapiro.test(WeightGain)$p.value)
 
 res_C <- run_oneway(diet, 
                     dv = "WeightGain", 
@@ -116,7 +118,7 @@ res_C$plot
 ```
 
 1.  State the null and alternative hypotheses.
-2.  Is this data normal?
+2.  Are these data normal?
 3.  Interpret the meaning of the assigned letters. How were they found, and what do they mean?
 4.  Which diet plan was most effective for gaining weight?
 
@@ -138,23 +140,26 @@ Colonies_data <- data.frame(
   )
 )
 
-hist(df_q5$Minutes[df_q5$Colony=="South"])
-shapiro.test(df_q5$Minutes[df_q5$Colony=="South"])
+Colonies_data %>%
+  group_by(Colony) %>%
+  summarise(p_value = shapiro.test(sqrt(Minutes))$p.value)
+
+Colonies_data <- Colonies_data %>%
+  mutate(Sqrt_Minutes = sqrt(Minutes))
 
 res_q5 <- run_oneway(
   data    = Colonies_data,
-  dv      = "Minutes",
+  dv      = "Sqrt_Minutes",
   group   = "Colony",
-  parametric = FALSE
+  parametric = TRUE
 )
 
 res_q5$posthoc
 res_q5$plot
-
 ```
 
 1.  State the null and alternative hypotheses.
-2.  Is this data normal?
+2.  Are these data normal?
 3.  Interpret the meaning of the assigned letters. How were they found, and what do they mean?
 4.  Which colony/colonies were the fastest foragers?
 
@@ -193,7 +198,7 @@ res_5$plot
 ```
 
 1.  State the null and alternative hypotheses.
-2.  Is this data normal?
+2.  Are these data normal?
 3.  Interpret the meaning of the assigned letters. How were they found, and what do they mean?
 4.  What else is unique about this data and might explain the results? *Hint*: Look at the final plot
 
