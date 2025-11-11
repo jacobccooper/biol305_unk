@@ -1,0 +1,50 @@
+---
+title: "Multivariate Walkthrough"
+author: "UNK Stats"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r}
+library(tidyverse)
+library(UNKstats)
+
+summary(iris)
+```
+
+```{r}
+iris_data_only <- iris |> 
+  select(-Species)
+```
+
+```{r}
+iris_pca <- princomp(iris_data_only)
+
+summary(iris_pca)
+```
+
+```{r}
+iris_expanded <- cbind(iris, iris_pca$scores)
+
+ggplot(iris_expanded, aes(x = Comp.1, 
+                          y = Comp.2, 
+                          colour = Species, 
+                          shape = Species)) +
+  geom_point(size = 3) + 
+  theme_minimal() +
+  ylab("PC 2") +
+  xlab("PC 1") +
+  # make colorblind friendly
+  scale_color_viridis_d()
+```
+
+```{r}
+
+```
+
+```{r}
+data(afromontane)
+
+summary(afromontane)
+```
+

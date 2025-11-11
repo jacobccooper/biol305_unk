@@ -382,50 +382,7 @@ head(galaxies)
 
 ## Homework: Two-sample means testing
 
-**NOTE:** Assume$\alpha = 0.05$ for every question.
-
-If you need to do a transformation, *try every transformation* and make sure you choose the one that achieves normality the best.
-
-### A faster way to check normality
-
-Checking the normality can be a pain. Thankfully, there is an easier way we can check. Take, for example, the `penguins` dataset built into *R*.
-
-```{r}
-head(penguins)
-```
-
-Let's say we want to check if the bill length is normally distributed between all species.
-
-First, we have to remove `NA` values for this example only to make sure things work right.
-
-```{r}
-# FOR THIS EXAMPLE ONLY
-# remove NA values
-penguins2 <- penguins |> 
-  na.omit()
-```
-
-Next, we can test for normality by species in bill length.
-
-```{r}
-penguins2 |> 
-  group_by(species) |> 
-  dplyr::summarize(p.value = shapiro.test(bill_len)$p.value)
-```
-
-As we can see above, two species are normally distributed, but Gentoo Penguin is not.
-
-**NOTE** that I ran `dplyr::summarize` and *not* `summarize` - there is an error in the libraries used in this class where summarize is sometimes overwritten, so specifying the `dplyr` library (part of `tidyverse`) ensures that we always get the right function.
-
-We can test a transformation like so:
-
-```{r}
-penguins2 |> 
-  group_by(species) |> 
-  dplyr::summarize(p.value = shapiro.test(log1p(bill_len))$p.value)
-```
-
-As we can see, a `log1p` transformation is sufficient.
+**NOTE:** Assume $\alpha = 0.05$ for every question.
 
 **Be sure to check *every* transformation on *every* problem - it's not that hard, and this will help you do it quickly. If more than one transformation works, go with the one that works best.**
 

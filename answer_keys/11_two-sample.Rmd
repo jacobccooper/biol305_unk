@@ -126,7 +126,15 @@ The groups are significantly different ($p = 0.007$).
 The test statistic is -2.86.
 
 ```{r, echo = F, results = F}
-sum(flint_mdeq$lead>15)/nrow(flint_mdeq)
+mean(flint_mdeq$lead>15)
 ```
 
 No, there is only 8.7% (0.09) of households with bad lead in this sample.
+
+```{r, echo = F, results = F}
+flint_mdeq$lead |> log1p() |> shapiro.test()
+
+wilcox.test(flint_mdeq$lead, mu = 15, alternative = "l")
+```
+
+Yes, it is below the threshold.

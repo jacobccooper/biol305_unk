@@ -356,13 +356,12 @@ window.Quarto = {
   </ul></li>
   <li><a href="#homework-two-sample-means-testing" id="toc-homework-two-sample-means-testing" class="nav-link" data-scroll-target="#homework-two-sample-means-testing"><span class="header-section-number">11.7</span> Homework: Two-sample means testing</a>
   <ul class="collapse">
-  <li><a href="#a-faster-way-to-check-normality" id="toc-a-faster-way-to-check-normality" class="nav-link" data-scroll-target="#a-faster-way-to-check-normality"><span class="header-section-number">11.7.1</span> A faster way to check normality</a></li>
-  <li><a href="#question-1-tail-wagging" id="toc-question-1-tail-wagging" class="nav-link" data-scroll-target="#question-1-tail-wagging"><span class="header-section-number">11.7.2</span> Question 1: Tail wagging</a></li>
-  <li><a href="#question-2-the-maximum-airspeed-velocity-of-a-swallow" id="toc-question-2-the-maximum-airspeed-velocity-of-a-swallow" class="nav-link" data-scroll-target="#question-2-the-maximum-airspeed-velocity-of-a-swallow"><span class="header-section-number">11.7.3</span> Question 2: The maximum airspeed velocity of a swallow</a></li>
-  <li><a href="#question-3-heart-rate-and-salsa" id="toc-question-3-heart-rate-and-salsa" class="nav-link" data-scroll-target="#question-3-heart-rate-and-salsa"><span class="header-section-number">11.7.4</span> Question 3: Heart rate and salsa</a></li>
-  <li><a href="#question-4-iris" id="toc-question-4-iris" class="nav-link" data-scroll-target="#question-4-iris"><span class="header-section-number">11.7.5</span> Question 4: Iris</a></li>
-  <li><a href="#question-5-bacteria-counts" id="toc-question-5-bacteria-counts" class="nav-link" data-scroll-target="#question-5-bacteria-counts"><span class="header-section-number">11.7.6</span> Question 5: Bacteria counts</a></li>
-  <li><a href="#question-6-flint-michigan" id="toc-question-6-flint-michigan" class="nav-link" data-scroll-target="#question-6-flint-michigan"><span class="header-section-number">11.7.7</span> Question 6: Flint, Michigan</a></li>
+  <li><a href="#question-1-tail-wagging" id="toc-question-1-tail-wagging" class="nav-link" data-scroll-target="#question-1-tail-wagging"><span class="header-section-number">11.7.1</span> Question 1: Tail wagging</a></li>
+  <li><a href="#question-2-the-maximum-airspeed-velocity-of-a-swallow" id="toc-question-2-the-maximum-airspeed-velocity-of-a-swallow" class="nav-link" data-scroll-target="#question-2-the-maximum-airspeed-velocity-of-a-swallow"><span class="header-section-number">11.7.2</span> Question 2: The maximum airspeed velocity of a swallow</a></li>
+  <li><a href="#question-3-heart-rate-and-salsa" id="toc-question-3-heart-rate-and-salsa" class="nav-link" data-scroll-target="#question-3-heart-rate-and-salsa"><span class="header-section-number">11.7.3</span> Question 3: Heart rate and salsa</a></li>
+  <li><a href="#question-4-iris" id="toc-question-4-iris" class="nav-link" data-scroll-target="#question-4-iris"><span class="header-section-number">11.7.4</span> Question 4: Iris</a></li>
+  <li><a href="#question-5-bacteria-counts" id="toc-question-5-bacteria-counts" class="nav-link" data-scroll-target="#question-5-bacteria-counts"><span class="header-section-number">11.7.5</span> Question 5: Bacteria counts</a></li>
+  <li><a href="#question-6-flint-michigan" id="toc-question-6-flint-michigan" class="nav-link" data-scroll-target="#question-6-flint-michigan"><span class="header-section-number">11.7.6</span> Question 6: Flint, Michigan</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -827,73 +826,17 @@ Attaching package: 'MASS'</code></pre>
 </section>
 <section id="homework-two-sample-means-testing" class="level2" data-number="11.7">
 <h2 data-number="11.7" class="anchored" data-anchor-id="homework-two-sample-means-testing"><span class="header-section-number">11.7</span> Homework: Two-sample means testing</h2>
-<p><strong>NOTE:</strong> Assume<span class="math inline">\(\alpha = 0.05\)</span> for every question.</p>
-<p>If you need to do a transformation, <em>try every transformation</em> and make sure you choose the one that achieves normality the best.</p>
-<section id="a-faster-way-to-check-normality" class="level3" data-number="11.7.1">
-<h3 data-number="11.7.1" class="anchored" data-anchor-id="a-faster-way-to-check-normality"><span class="header-section-number">11.7.1</span> A faster way to check normality</h3>
-<p>Checking the normality can be a pain. Thankfully, there is an easier way we can check. Take, for example, the <code>penguins</code> dataset built into <em>R</em>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  species    island bill_len bill_dep flipper_len body_mass    sex year
-1  Adelie Torgersen     39.1     18.7         181      3750   male 2007
-2  Adelie Torgersen     39.5     17.4         186      3800 female 2007
-3  Adelie Torgersen     40.3     18.0         195      3250 female 2007
-4  Adelie Torgersen       NA       NA          NA        NA   &lt;NA&gt; 2007
-5  Adelie Torgersen     36.7     19.3         193      3450 female 2007
-6  Adelie Torgersen     39.3     20.6         190      3650   male 2007</code></pre>
-</div>
-</div>
-<p>Let’s say we want to check if the bill length is normally distributed between all species.</p>
-<p>First, we have to remove <code>NA</code> values for this example only to make sure things work right.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># FOR THIS EXAMPLE ONLY</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># remove NA values</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>penguins2 <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Next, we can test for normality by species in bill length.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>penguins2 <span class="sc">|&gt;</span> </span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">|&gt;</span> </span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">p.value =</span> <span class="fu">shapiro.test</span>(bill_len)<span class="sc">$</span>p.value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 2
-  species   p.value
-  &lt;fct&gt;       &lt;dbl&gt;
-1 Adelie     0.685 
-2 Chinstrap  0.194 
-3 Gentoo     0.0199</code></pre>
-</div>
-</div>
-<p>As we can see above, two species are normally distributed, but Gentoo Penguin is not.</p>
-<p><strong>NOTE</strong> that I ran <code>dplyr::summarize</code> and <em>not</em> <code>summarize</code> - there is an error in the libraries used in this class where summarize is sometimes overwritten, so specifying the <code>dplyr</code> library (part of <code>tidyverse</code>) ensures that we always get the right function.</p>
-<p>We can test a transformation like so:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>penguins2 <span class="sc">|&gt;</span> </span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">|&gt;</span> </span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">p.value =</span> <span class="fu">shapiro.test</span>(<span class="fu">log1p</span>(bill_len))<span class="sc">$</span>p.value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 2
-  species   p.value
-  &lt;fct&gt;       &lt;dbl&gt;
-1 Adelie      0.863
-2 Chinstrap   0.121
-3 Gentoo      0.202</code></pre>
-</div>
-</div>
-<p>As we can see, a <code>log1p</code> transformation is sufficient.</p>
+<p><strong>NOTE:</strong> Assume <span class="math inline">\(\alpha = 0.05\)</span> for every question.</p>
 <p><strong>Be sure to check <em>every</em> transformation on <em>every</em> problem - it’s not that hard, and this will help you do it quickly. If more than one transformation works, go with the one that works best.</strong></p>
-</section>
-<section id="question-1-tail-wagging" class="level3" data-number="11.7.2">
-<h3 data-number="11.7.2" class="anchored" data-anchor-id="question-1-tail-wagging"><span class="header-section-number">11.7.2</span> Question 1: Tail wagging</h3>
+<section id="question-1-tail-wagging" class="level3" data-number="11.7.1">
+<h3 data-number="11.7.1" class="anchored" data-anchor-id="question-1-tail-wagging"><span class="header-section-number">11.7.1</span> Question 1: Tail wagging</h3>
 <p>The speed at which dogs wag their tail is often considered to be a proxy for how happy the dogs are, and they note that dogs seem happiest when they see their owners. Researchers gathered ten dogs and measured the rate of their tail wags per second (1) when they were told their owners name vs.&nbsp;(2) when they saw their owner approaching. They obtained the following dataset:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>owner_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.0</span>,<span class="fl">1.3</span>,<span class="fl">3.4</span>,<span class="fl">2.6</span>,<span class="fl">2.6</span>,<span class="fl">0.8</span>,<span class="fl">2.6</span>,<span class="fl">1.9</span>,<span class="fl">0.3</span>,<span class="fl">0.9</span>)</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>owner_sight <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.8</span>,<span class="fl">4.3</span>,<span class="fl">3.0</span>,<span class="fl">3.9</span>,<span class="fl">2.7</span>,<span class="fl">3.4</span>,<span class="fl">3.3</span>,<span class="fl">3.7</span>,<span class="fl">2.8</span>,<span class="fl">3.4</span>)</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>dog_data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(owner_name, owner_sight) <span class="sc">|&gt;</span> </span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>owner_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.0</span>,<span class="fl">1.3</span>,<span class="fl">3.4</span>,<span class="fl">2.6</span>,<span class="fl">2.6</span>,<span class="fl">0.8</span>,<span class="fl">2.6</span>,<span class="fl">1.9</span>,<span class="fl">0.3</span>,<span class="fl">0.9</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>owner_sight <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.8</span>,<span class="fl">4.3</span>,<span class="fl">3.0</span>,<span class="fl">3.9</span>,<span class="fl">2.7</span>,<span class="fl">3.4</span>,<span class="fl">3.3</span>,<span class="fl">3.7</span>,<span class="fl">2.8</span>,<span class="fl">3.4</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>dog_data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(owner_name, owner_sight) <span class="sc">|&gt;</span> </span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li><p>What is the goal of this study?</p></li>
@@ -902,15 +845,15 @@ Attaching package: 'MASS'</code></pre>
 <li><p>State your conclusion for this study.</p></li>
 </ul>
 </section>
-<section id="question-2-the-maximum-airspeed-velocity-of-a-swallow" class="level3" data-number="11.7.3">
-<h3 data-number="11.7.3" class="anchored" data-anchor-id="question-2-the-maximum-airspeed-velocity-of-a-swallow"><span class="header-section-number">11.7.3</span> Question 2: The maximum airspeed velocity of a swallow</h3>
+<section id="question-2-the-maximum-airspeed-velocity-of-a-swallow" class="level3" data-number="11.7.2">
+<h3 data-number="11.7.2" class="anchored" data-anchor-id="question-2-the-maximum-airspeed-velocity-of-a-swallow"><span class="header-section-number">11.7.2</span> Question 2: The maximum airspeed velocity of a swallow</h3>
 <p>Inspired by <em>Monty Python and the Holy Grail</em>, you decide to compare the maximum airspeed velocity of African and European swallows, namely, the European Red-rumped Swallow <em>Cecropis rufula</em> African Red-rumped Swallow <em>Cecropis melanocrissus</em> to see if they differ in some way. You measure one group of each of these swallows and get the following dataset:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>rufula <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">68.6</span>,<span class="fl">71.7</span>,<span class="fl">69.9</span>,<span class="fl">74.9</span>,<span class="fl">70.2</span>,<span class="fl">64.9</span>,<span class="fl">70.8</span>,<span class="fl">74.2</span>,<span class="fl">67.1</span>,<span class="fl">70.8</span>,<span class="fl">75.0</span>,<span class="fl">70.7</span>)</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>melanocrissus <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">73.8</span>,<span class="fl">82.1</span>,<span class="fl">70.5</span>,<span class="fl">75.4</span>,<span class="fl">73.4</span>,<span class="fl">67.4</span>,<span class="fl">71.5</span>,<span class="fl">75.9</span>,<span class="fl">68.6</span>,<span class="fl">72.4</span>,<span class="fl">67.5</span>,<span class="fl">73.8</span>)</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>swallows <span class="ot">&lt;-</span> <span class="fu">cbind</span>(rufula, melanocrissus) <span class="sc">|&gt;</span> </span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>rufula <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">68.6</span>,<span class="fl">71.7</span>,<span class="fl">69.9</span>,<span class="fl">74.9</span>,<span class="fl">70.2</span>,<span class="fl">64.9</span>,<span class="fl">70.8</span>,<span class="fl">74.2</span>,<span class="fl">67.1</span>,<span class="fl">70.8</span>,<span class="fl">75.0</span>,<span class="fl">70.7</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>melanocrissus <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">73.8</span>,<span class="fl">82.1</span>,<span class="fl">70.5</span>,<span class="fl">75.4</span>,<span class="fl">73.4</span>,<span class="fl">67.4</span>,<span class="fl">71.5</span>,<span class="fl">75.9</span>,<span class="fl">68.6</span>,<span class="fl">72.4</span>,<span class="fl">67.5</span>,<span class="fl">73.8</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>swallows <span class="ot">&lt;-</span> <span class="fu">cbind</span>(rufula, melanocrissus) <span class="sc">|&gt;</span> </span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li><p>What is the goal of this study?</p></li>
@@ -919,22 +862,22 @@ Attaching package: 'MASS'</code></pre>
 <li><p>State your conclusion for this study.</p></li>
 </ul>
 </section>
-<section id="question-3-heart-rate-and-salsa" class="level3" data-number="11.7.4">
-<h3 data-number="11.7.4" class="anchored" data-anchor-id="question-3-heart-rate-and-salsa"><span class="header-section-number">11.7.4</span> Question 3: Heart rate and salsa</h3>
+<section id="question-3-heart-rate-and-salsa" class="level3" data-number="11.7.3">
+<h3 data-number="11.7.3" class="anchored" data-anchor-id="question-3-heart-rate-and-salsa"><span class="header-section-number">11.7.3</span> Question 3: Heart rate and salsa</h3>
 <p>You decide to compare the heart rate of two different groups of volunteers, one where the students were fed habañero salsa and one where the students were fed jalapeño salsa. You predict that students’ heart rates will be higher with the jalapeño salsa. You obtain the following data:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>habanero <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">105.5</span>,<span class="fl">100.7</span>,<span class="fl">96.5</span>,<span class="fl">107.3</span>,<span class="fl">100.6</span>,<span class="fl">96.3</span>,<span class="fl">99.5</span>,</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>              <span class="fl">98.9</span>,<span class="fl">107.4</span>,<span class="fl">103.8</span>,<span class="fl">109.3</span>,<span class="fl">107.7</span>,<span class="fl">103.2</span>,<span class="fl">104.5</span>,</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>              <span class="fl">95.4</span>,<span class="fl">103.3</span>,<span class="fl">107.5</span>,<span class="fl">101.8</span>,<span class="fl">106.1</span>,<span class="fl">102.6</span>)</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>jalapeño <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">109.1</span>,<span class="fl">111.7</span>,<span class="fl">118.6</span>,<span class="fl">111.1</span>,<span class="fl">100.5</span>,<span class="fl">118.7</span>,<span class="fl">117.5</span>,</span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>              <span class="fl">102.1</span>,<span class="fl">94.9</span>,<span class="fl">104.0</span>,<span class="fl">109.2</span>,<span class="fl">101.1</span>,<span class="fl">113.0</span>,<span class="fl">111.3</span>,<span class="fl">97.6</span>,</span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>              <span class="fl">109.2</span>,<span class="fl">93.4</span>,<span class="fl">103.4</span>,<span class="fl">90.3</span>,<span class="fl">109.2</span>)</span>
-<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>peppers <span class="ot">&lt;-</span> <span class="fu">cbind</span>(jalapeño, habanero) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>habanero <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">105.5</span>,<span class="fl">100.7</span>,<span class="fl">96.5</span>,<span class="fl">107.3</span>,<span class="fl">100.6</span>,<span class="fl">96.3</span>,<span class="fl">99.5</span>,</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>              <span class="fl">98.9</span>,<span class="fl">107.4</span>,<span class="fl">103.8</span>,<span class="fl">109.3</span>,<span class="fl">107.7</span>,<span class="fl">103.2</span>,<span class="fl">104.5</span>,</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>              <span class="fl">95.4</span>,<span class="fl">103.3</span>,<span class="fl">107.5</span>,<span class="fl">101.8</span>,<span class="fl">106.1</span>,<span class="fl">102.6</span>)</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>jalapeño <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">109.1</span>,<span class="fl">111.7</span>,<span class="fl">118.6</span>,<span class="fl">111.1</span>,<span class="fl">100.5</span>,<span class="fl">118.7</span>,<span class="fl">117.5</span>,</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>              <span class="fl">102.1</span>,<span class="fl">94.9</span>,<span class="fl">104.0</span>,<span class="fl">109.2</span>,<span class="fl">101.1</span>,<span class="fl">113.0</span>,<span class="fl">111.3</span>,<span class="fl">97.6</span>,</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>              <span class="fl">109.2</span>,<span class="fl">93.4</span>,<span class="fl">103.4</span>,<span class="fl">90.3</span>,<span class="fl">109.2</span>)</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>peppers <span class="ot">&lt;-</span> <span class="fu">cbind</span>(jalapeño, habanero) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="question-4-iris" class="level3" data-number="11.7.5">
-<h3 data-number="11.7.5" class="anchored" data-anchor-id="question-4-iris"><span class="header-section-number">11.7.5</span> Question 4: Iris</h3>
+<section id="question-4-iris" class="level3" data-number="11.7.4">
+<h3 data-number="11.7.4" class="anchored" data-anchor-id="question-4-iris"><span class="header-section-number">11.7.4</span> Question 4: Iris</h3>
 <p>You are interested in seeing if the petal width of <em>Iris versicolor</em> is different than that of <em>Iris virginica</em>. <strong>Note:</strong> for this problem, you will have to:</p>
 <ul>
 <li><p>Isolate the species of interest</p></li>
@@ -943,7 +886,7 @@ Attaching package: 'MASS'</code></pre>
 </ul>
 <p>The dataset is available in base R:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 1          5.1         3.5          1.4         0.2  setosa
@@ -961,19 +904,19 @@ Attaching package: 'MASS'</code></pre>
 <li><p>Write out your conclusion for the test.</p></li>
 </ul>
 </section>
-<section id="question-5-bacteria-counts" class="level3" data-number="11.7.6">
-<h3 data-number="11.7.6" class="anchored" data-anchor-id="question-5-bacteria-counts"><span class="header-section-number">11.7.6</span> Question 5: Bacteria counts</h3>
+<section id="question-5-bacteria-counts" class="level3" data-number="11.7.5">
+<h3 data-number="11.7.5" class="anchored" data-anchor-id="question-5-bacteria-counts"><span class="header-section-number">11.7.5</span> Question 5: Bacteria counts</h3>
 <p>You are tasked by your biology professor to compare the counts of bacteria grown from two-different media, media <em>A</em> and media <em>B</em>. Your professor thinks that media <em>A</em> will have more bacteria than media <em>B</em>. You count the number of colony forming units (CFUs) on each media and get the following data.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>media_A <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">16</span>,<span class="dv">14</span>,<span class="dv">12</span>,<span class="dv">16</span>,<span class="dv">16</span>,<span class="dv">16</span>,<span class="dv">13</span>,<span class="dv">16</span>,<span class="dv">15</span>,<span class="dv">15</span>,</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>             <span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">17</span>,<span class="dv">15</span>,<span class="dv">16</span>,<span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">13</span>,</span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>             <span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">14</span>,<span class="dv">14</span>,<span class="dv">14</span>,<span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">15</span>,</span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>             <span class="dv">14</span>,<span class="dv">14</span>,<span class="dv">14</span>,<span class="dv">16</span>,<span class="dv">17</span>,<span class="dv">15</span>,<span class="dv">13</span>,<span class="dv">14</span>,<span class="dv">16</span>,<span class="dv">16</span>)</span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>media_B <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">12</span>,<span class="dv">12</span>,<span class="dv">12</span>,<span class="dv">11</span>,<span class="dv">11</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">12</span>,<span class="dv">11</span>,</span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>             <span class="dv">11</span>,<span class="dv">11</span>,<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">17</span>,<span class="dv">15</span>,</span>
-<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>             <span class="dv">13</span>,<span class="dv">14</span>,<span class="dv">18</span>,<span class="dv">16</span>,<span class="dv">19</span>,<span class="dv">15</span>,<span class="dv">16</span>,<span class="dv">16</span>,<span class="dv">15</span>,<span class="dv">19</span>,</span>
-<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>             <span class="dv">16</span>,<span class="dv">17</span>,<span class="dv">16</span>,<span class="dv">20</span>,<span class="dv">16</span>,<span class="dv">15</span>,<span class="dv">19</span>,<span class="dv">16</span>,<span class="dv">18</span>,<span class="dv">18</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>media_A <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">16</span>,<span class="dv">14</span>,<span class="dv">12</span>,<span class="dv">16</span>,<span class="dv">16</span>,<span class="dv">16</span>,<span class="dv">13</span>,<span class="dv">16</span>,<span class="dv">15</span>,<span class="dv">15</span>,</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>             <span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">17</span>,<span class="dv">15</span>,<span class="dv">16</span>,<span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">13</span>,</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>             <span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">14</span>,<span class="dv">14</span>,<span class="dv">14</span>,<span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">15</span>,<span class="dv">15</span>,</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>             <span class="dv">14</span>,<span class="dv">14</span>,<span class="dv">14</span>,<span class="dv">16</span>,<span class="dv">17</span>,<span class="dv">15</span>,<span class="dv">13</span>,<span class="dv">14</span>,<span class="dv">16</span>,<span class="dv">16</span>)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>media_B <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">12</span>,<span class="dv">12</span>,<span class="dv">12</span>,<span class="dv">11</span>,<span class="dv">11</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">12</span>,<span class="dv">11</span>,</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>             <span class="dv">11</span>,<span class="dv">11</span>,<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">10</span>,<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">17</span>,<span class="dv">15</span>,</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>             <span class="dv">13</span>,<span class="dv">14</span>,<span class="dv">18</span>,<span class="dv">16</span>,<span class="dv">19</span>,<span class="dv">15</span>,<span class="dv">16</span>,<span class="dv">16</span>,<span class="dv">15</span>,<span class="dv">19</span>,</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>             <span class="dv">16</span>,<span class="dv">17</span>,<span class="dv">16</span>,<span class="dv">20</span>,<span class="dv">16</span>,<span class="dv">15</span>,<span class="dv">19</span>,<span class="dv">16</span>,<span class="dv">18</span>,<span class="dv">18</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li><p>What is the goal for this study?</p></li>
@@ -982,14 +925,14 @@ Attaching package: 'MASS'</code></pre>
 <li><p>Write out your conclusion for the test.</p></li>
 </ul>
 </section>
-<section id="question-6-flint-michigan" class="level3" data-number="11.7.7">
-<h3 data-number="11.7.7" class="anchored" data-anchor-id="question-6-flint-michigan"><span class="header-section-number">11.7.7</span> Question 6: Flint, Michigan</h3>
+<section id="question-6-flint-michigan" class="level3" data-number="11.7.6">
+<h3 data-number="11.7.6" class="anchored" data-anchor-id="question-6-flint-michigan"><span class="header-section-number">11.7.6</span> Question 6: Flint, Michigan</h3>
 <p>In 2014, the city of Flint, Michigan changed their water source from Lake Huron and the Detroit River to the nearby Flint River. This change in water source resulted in an elevation of lead levels in the water, exposing approximately 100,000 people to lead poisoning. It took six years and more than $400 million in funds to fix the water issue in Flint, Michigan, and the human health effects may take years to quantify.</p>
 <p>The code below will section off actual data from the lead water crisis in Flint, Michigan into two groups. Your goal is to determine if lead levels are similar between those groups; lead levels are contained in the column <code>lead</code> and are given in parts per billion.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytuesdayR)</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="st">'2025-11-04'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytuesdayR)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="st">'2025-11-04'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>---- Compiling #TidyTuesday Information for 2025-11-04 ----
 --- There are 2 files available ---
@@ -1000,13 +943,13 @@ Attaching package: 'MASS'</code></pre>
   1 of 2: "flint_mdeq.csv"
   2 of 2: "flint_vt.csv"</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>flint_mdeq <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>flint_mdeq <span class="sc">|&gt;</span> </span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>notes) <span class="sc">|&gt;</span> </span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>lead2)</span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>group1 <span class="ot">&lt;-</span> flint_mdeq[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,]</span>
-<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>group2 <span class="ot">&lt;-</span> flint_mdeq[<span class="dv">21</span><span class="sc">:</span><span class="dv">40</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>flint_mdeq <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>flint_mdeq <span class="sc">|&gt;</span> </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>notes) <span class="sc">|&gt;</span> </span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>lead2)</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>group1 <span class="ot">&lt;-</span> flint_mdeq[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,]</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>group2 <span class="ot">&lt;-</span> flint_mdeq[<span class="dv">21</span><span class="sc">:</span><span class="dv">40</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li><p>What is the goal of the analysis above?</p></li>
