@@ -336,7 +336,32 @@ Given how small our $p$ value is, we want to round this to $p<0.0001$. As we can
 
 ## ANOVA: By *R*
 
-For this, we need to use the dataframe where we have all data in a single column and all ID's in the other columns. We then show how we want the ANOVA to operate across the data using the `~` symbol.
+For this, we need to use the dataframe where we have all data in a single column and all ID's in the other columns. This can be done easily with *tibble*, as shown below.
+
+```{r}
+plant_data <- tibble(
+  Fertilizer = c(
+    rep("A", 5), #repeat 'A' 5 times (So there will be 5 'A' values)
+    rep("B", 7), #repeat 'B' 7 times
+    rep("C", 6)  #repeat 'C' 6 times
+  ),
+  Growth = c(
+    12, 14, 13, 11, 12,   # Fertilizer A
+    16, 17, 15, 14, 16, 15, 17,   # Fertilizer B
+    20, 19, 21, 22, 18, 22    # Fertilizer C
+  )
+)
+
+head(plant_data)
+```
+
+Once the data is in this format, it can be ran through the `run_oneway` function from the *UNKstats* package. This function needs: data = (the data frame you are trying analyse)
+
+dv = (dependent variable, it will be the column with the numbers)
+
+group = (the grouping factor)
+
+If the test needs to be parametric, you must specify that as it defaults to a non-parametric test.
 
 ```{r}
 data_aov <- run_oneway(data = data,
@@ -430,13 +455,15 @@ When we graph things, we want to label this group as different. We will cover th
 
 ### Tukey test in *R*
 
-Tukey is included in the `run_oneway` function; if you want to do it separately, you can do the following.
+Tukey is included in the `run_oneway` function; if you want to show it separately, you can do the following.
 
 ```{r}
 data_aov$posthoc
 ```
 
 ## Plotting
+
+Plotting is automatically done by the `run_oneway` function. It can be found by saving the output of the function as a variable, then calling upon it like so:
 
 ```{r}
 data_aov$plot
@@ -515,7 +542,7 @@ While these data came out normal, for the purposes of this example, we will proc
 kruskal_oneway <- run_oneway(data,
                              dv = "Response",
                              group = "Explanatory",
-                             parametric = F)
+                             parametric = F) #This is what makes it run the non-parametric test!
 
 kruskal_oneway
 ```
