@@ -9,6 +9,7 @@ editor: visual
 
 ```{r,echo=F,error=FALSE,warning=FALSE,message=FALSE}
 library(tidyverse)
+library(UNKstats)
 ```
 
 A *standard normal distribution* is a mathematical model that describes a commonly observed phenomenon in nature. When measuring many different kinds of datasets, the data being measured often becomes something that resembles a standard normal distribution. This distribution is described by the following equation:
@@ -346,23 +347,9 @@ $$
 Z = \frac{\bar{x}-\mu}{\frac{\sigma}{\sqrt{n}}}
 $$
 
-Where $\bar{x}$ is either a sample mean or a sample value, $\mu$ is the population mean, $\sigma$ is the population standard deviation and $n$ is the number of individuals in your sample ($1$ if comparing to a single value).
+Where $\bar{x}$ is either a sample mean or a sample value, $\mu$ is the population mean, $\sigma$ is the population standard deviation and $n$ is the number of individuals in your sample ($1$ if comparing to a single value)
 
-We can calculate this in *R* using the following function:
-
-```{r}
-### DO NOT EDIT ###
-# RUN EXACTLY AS IS #
-# Use as function like mean#
-zscore <- function(xbar, mu, sd.x, n = 1){
-  z <- (xbar - mu)/(sd.x/sqrt(n))
-  return(z)
-}
-```
-
-**NOTE** that is the above isn't working for you, *you have a mistake somewhere in your code*. Try comparing - character by character - what is listed above to what you have.
-
-Let's work through an example, where we have a sample mean of $62$ with $5$ samples compared to a sample mean of $65$ with a standard deviation of $3.5$.
+We can calculate this in *R* using the function `zscore`. Let's work through an example, where we have a sample mean of $62$ with $5$ samples compared to a sample mean of $65$ with a standard deviation of $3.5$.
 
 ```{r}
 Z <- zscore(xbar = 62, # sample mean
@@ -373,7 +360,7 @@ Z <- zscore(xbar = 62, # sample mean
 print(Z)
 ```
 
-Now, we can calculate the $p$ value for this $Z$ score.
+**NOTE** that is the above isn't working for you, *you have a mistake somewhere in your code **or** you have not loaded* `UNKstats`*!*. Try comparing - character by character - what is listed above to what you have.
 
 ```{r}
 pnorm(Z)

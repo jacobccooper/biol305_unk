@@ -21,7 +21,7 @@ Throughout this course, we are going to have to work with datasets that are from
 
 ### Libraries
 
-In this class, there is one major library that you will need *almost every week*! **Even if I don't declare this library, you should load it in your documents**.
+In this class, there is one major library that you will need *almost every week*! **Even if I don't declare these libraries, you should load them in your documents**.
 
 -   Libraries are declared at the very beginning of the document
 
@@ -30,6 +30,7 @@ In this class, there is one major library that you will need *almost every week*
     -   Make sure you read your error codes - many times it will say that your command is not found, and that often means your library is not loaded. That, or you misspelled something.
 
 1.  `tidyverse`: this package is actually a [group of packages](https://www.tidyverse.org/) designed to help with data analysis, management, and visualization.
+2.  `UNKstats`: this package was specifically designed for this class, and includes many helper functions for calculating specific statistics.
 
 **NOTE: If you leave the install prompts in your RMarkdown document, *it will not knit!* Install the following using the bottom left coding window of your *RStudio* session.**
 
@@ -42,6 +43,10 @@ In this class, there is one major library that you will need *almost every week*
 # great for data manipulation
 install.packages("tidyverse")
 
+# UNKstats is very useful for this course!
+# many important plotting and descriptive functions
+remotes::install_github("CalebRother/UNKstats")
+
 # if you ever need to update:
 # leaving brackets open means "update everything"
 update.packages()
@@ -49,12 +54,13 @@ update.packages()
 
 -   After packages are installed, we will need to load them into our *R* environment. While we only need to do `install.packages` ***once*** on our machine, **we need to load libraries *every time we restart the program!***
 
-**NOTE: The following is required in EVERY DOCUMENT that uses the `tidyverse` commands!**
+**NOTE: The following is required in EVERY DOCUMENT that uses the `tidyverse` or `UNKstats` commands!**
 
 ```{r}
 ### MUST BE RUN AT THE TOP OF EVERY DOCUMENT ###
 # Load tidyverse into R session / document
 library(tidyverse)
+library(UNKstats)
 ```
 
 You should have an output like the above. What this means is:
