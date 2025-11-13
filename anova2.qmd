@@ -449,8 +449,24 @@ As we can see, some pairs are inseparable and others are separable. We can now p
 
 ## Homework: Chapter 12
 
-For problems 12.1, 12.2, 12.3, 12.4, and 12.5, state your hypotheses in sentence form and mathematically. Then, identify the appropriate ANOVA and perform the analysis. If you reject the null, complete a Tukey test and plot your results, showing letters denoting each group. **Note** that 12.4 requires a Friedman's test, but all other problems require some form of ANOVA.
-
-Next, for problems 12.7, 12.8, and 12.9, identify the appropriate test and justify your reasoning. State the null and alternative hypothesis in word form and mathematically, and perform your analysis. If you perform an ANOVA *and* you reject the null hypothesis, plot your results and label the groups by letter.
+State your hypotheses in sentence form and mathematically. Then, identify the appropriate ANOVA and perform the analysis. If you *reject* the null, evaluate a Tukey test and plot your results, showing letters denoting each group. **Note** that some questions may be non-parametric.
 
 **Remember, only plot the results if you reject your *primary hypothesis*.**
+
+### Question 1
+
+```{r}
+tuesdata <- tidytuesdayR::tt_load(2025, week = 13)
+
+pokemon_df <- tuesdata$pokemon_df
+
+pokemon_df |> 
+  dplyr::mutate(attack_defense = attack/defense) ->
+  pokemon_df
+```
+
+```{r, eval = F, results = F}
+poke_aov <- aov(data = pokemon_df, attack_defense ~ type_1 + egg_group_1)
+
+summary(poke_aov)
+```
