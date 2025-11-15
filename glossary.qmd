@@ -331,6 +331,47 @@ where $\beta$ is the slope.
 
 </details>
 
+## Reshaping data
+
+Consider the defaulr `iris` dataset in *R*.
+
+```{r}
+head(iris)
+```
+
+This data frame is in "long format", where the grouping variables are all in a single column. This is the format *R* prefers, but it is harder for humans to do statistics on it. Humans prefer "wide" data for a single variable. Let's consider a subset of the dataframe for only `Sepal.Length`.
+
+```{r}
+iris_sepal_length <- iris |> 
+  select(Species, Sepal.Length)
+
+head(iris_sepal_length)
+```
+
+The above is in "long format". We can now transition to "wide format" using `pivot_wider`.
+
+```{r}
+iris_wide <- iris_sepal_length |> 
+  # add ID column if needed
+  # add ID number by explanatory variable
+  # here, that is "Species"
+  mutate(id = row_number(), .by = Species) |> 
+  pivot_wider(names_from = Species, 
+              values_from = Sepal.Length, 
+              id_cols = id)
+
+head(iris_wide)
+```
+
+We can also convert back to "long format" for ease with *R*.
+
+```{r}
+iris_long <- iris_wide |> 
+  pivot_longer(!id, names_to = "Species", values_to = "Sepal.Length")
+
+head(iris_long)
+```
+
 ## Custom functions from class and elsewhere
 
 ### Normal distributions

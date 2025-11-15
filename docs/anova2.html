@@ -317,7 +317,10 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#using-r" id="toc-using-r" class="nav-link" data-scroll-target="#using-r"><span class="header-section-number">13.3.1</span> Using <em>R</em></a></li>
   </ul></li>
-  <li><a href="#homework-chapter-12" id="toc-homework-chapter-12" class="nav-link" data-scroll-target="#homework-chapter-12"><span class="header-section-number">13.4</span> Homework: Chapter 12</a></li>
+  <li><a href="#homework-chapter-12" id="toc-homework-chapter-12" class="nav-link" data-scroll-target="#homework-chapter-12"><span class="header-section-number">13.4</span> Homework: Chapter 12</a>
+  <ul class="collapse">
+  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1"><span class="header-section-number">13.4.1</span> Question 1</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -660,7 +663,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(lme_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            numDF denDF  F-value p-value
-(Intercept)     1     4 900.1654  &lt;.0001
+(Intercept)     1     4 900.1652  &lt;.0001
 Visits          2     4  89.7894   5e-04</code></pre>
 </div>
 </div>
@@ -849,80 +852,80 @@ Group 3-Group 1  1.7283333  0.9245299 2.5321368 0.0000928
 Group 3-Group 2  1.9994444  1.1956410 2.8032479 0.0000159
 
 $`factor(Treatments):factor(Blocking_Variable)`
-                                                     diff         lwr
-Explanatory_2:Group 1-Explanatory_1:Group 1  1.931667e+00  0.02027781
-Explanatory_3:Group 1-Explanatory_1:Group 1  1.118333e+00 -0.79305553
-Explanatory_1:Group 2-Explanatory_1:Group 1 -7.116667e-01 -2.62305553
-Explanatory_2:Group 2-Explanatory_1:Group 1  2.948333e+00  1.03694447
-Explanatory_3:Group 2-Explanatory_1:Group 1 -1.776357e-15 -1.91138886
-Explanatory_1:Group 3-Explanatory_1:Group 1  1.016667e+00 -0.89472219
-Explanatory_2:Group 3-Explanatory_1:Group 1  5.388333e+00  3.47694447
-Explanatory_3:Group 3-Explanatory_1:Group 1  1.830000e+00 -0.08138886
-Explanatory_3:Group 1-Explanatory_2:Group 1 -8.133333e-01 -2.72472219
-Explanatory_1:Group 2-Explanatory_2:Group 1 -2.643333e+00 -4.55472219
-Explanatory_2:Group 2-Explanatory_2:Group 1  1.016667e+00 -0.89472219
-Explanatory_3:Group 2-Explanatory_2:Group 1 -1.931667e+00 -3.84305553
-Explanatory_1:Group 3-Explanatory_2:Group 1 -9.150000e-01 -2.82638886
-Explanatory_2:Group 3-Explanatory_2:Group 1  3.456667e+00  1.54527781
-Explanatory_3:Group 3-Explanatory_2:Group 1 -1.016667e-01 -2.01305553
-Explanatory_1:Group 2-Explanatory_3:Group 1 -1.830000e+00 -3.74138886
-Explanatory_2:Group 2-Explanatory_3:Group 1  1.830000e+00 -0.08138886
-Explanatory_3:Group 2-Explanatory_3:Group 1 -1.118333e+00 -3.02972219
-Explanatory_1:Group 3-Explanatory_3:Group 1 -1.016667e-01 -2.01305553
-Explanatory_2:Group 3-Explanatory_3:Group 1  4.270000e+00  2.35861114
-Explanatory_3:Group 3-Explanatory_3:Group 1  7.116667e-01 -1.19972219
-Explanatory_2:Group 2-Explanatory_1:Group 2  3.660000e+00  1.74861114
-Explanatory_3:Group 2-Explanatory_1:Group 2  7.116667e-01 -1.19972219
-Explanatory_1:Group 3-Explanatory_1:Group 2  1.728333e+00 -0.18305553
-Explanatory_2:Group 3-Explanatory_1:Group 2  6.100000e+00  4.18861114
-Explanatory_3:Group 3-Explanatory_1:Group 2  2.541667e+00  0.63027781
-Explanatory_3:Group 2-Explanatory_2:Group 2 -2.948333e+00 -4.85972219
-Explanatory_1:Group 3-Explanatory_2:Group 2 -1.931667e+00 -3.84305553
-Explanatory_2:Group 3-Explanatory_2:Group 2  2.440000e+00  0.52861114
-Explanatory_3:Group 3-Explanatory_2:Group 2 -1.118333e+00 -3.02972219
-Explanatory_1:Group 3-Explanatory_3:Group 2  1.016667e+00 -0.89472219
-Explanatory_2:Group 3-Explanatory_3:Group 2  5.388333e+00  3.47694447
-Explanatory_3:Group 3-Explanatory_3:Group 2  1.830000e+00 -0.08138886
-Explanatory_2:Group 3-Explanatory_1:Group 3  4.371667e+00  2.46027781
-Explanatory_3:Group 3-Explanatory_1:Group 3  8.133333e-01 -1.09805553
-Explanatory_3:Group 3-Explanatory_2:Group 3 -3.558333e+00 -5.46972219
-                                                    upr     p adj
-Explanatory_2:Group 1-Explanatory_1:Group 1  3.84305553 0.0464895
-Explanatory_3:Group 1-Explanatory_1:Group 1  3.02972219 0.5317567
-Explanatory_1:Group 2-Explanatory_1:Group 1  1.19972219 0.9173224
-Explanatory_2:Group 2-Explanatory_1:Group 1  4.85972219 0.0010200
-Explanatory_3:Group 2-Explanatory_1:Group 1  1.91138886 1.0000000
-Explanatory_1:Group 3-Explanatory_1:Group 1  2.92805553 0.6439270
-Explanatory_2:Group 3-Explanatory_1:Group 1  7.29972219 0.0000003
-Explanatory_3:Group 3-Explanatory_1:Group 1  3.74138886 0.0667267
-Explanatory_3:Group 1-Explanatory_2:Group 1  1.09805553 0.8457970
-Explanatory_1:Group 2-Explanatory_2:Group 1 -0.73194447 0.0032271
-Explanatory_2:Group 2-Explanatory_2:Group 1  2.92805553 0.6439270
-Explanatory_3:Group 2-Explanatory_2:Group 1 -0.02027781 0.0464895
-Explanatory_1:Group 3-Explanatory_2:Group 1  0.99638886 0.7519790
-Explanatory_2:Group 3-Explanatory_2:Group 1  5.36805553 0.0001577
-Explanatory_3:Group 3-Explanatory_2:Group 1  1.80972219 0.9999999
-Explanatory_1:Group 2-Explanatory_3:Group 1  0.08138886 0.0667267
-Explanatory_2:Group 2-Explanatory_3:Group 1  3.74138886 0.0667267
-Explanatory_3:Group 2-Explanatory_3:Group 1  0.79305553 0.5317567
-Explanatory_1:Group 3-Explanatory_3:Group 1  1.80972219 0.9999999
-Explanatory_2:Group 3-Explanatory_3:Group 1  6.18138886 0.0000097
-Explanatory_3:Group 3-Explanatory_3:Group 1  2.62305553 0.9173224
-Explanatory_2:Group 2-Explanatory_1:Group 2  5.57138886 0.0000766
-Explanatory_3:Group 2-Explanatory_1:Group 2  2.62305553 0.9173224
-Explanatory_1:Group 3-Explanatory_1:Group 2  3.63972219 0.0947841
-Explanatory_2:Group 3-Explanatory_1:Group 2  8.01138886 0.0000000
-Explanatory_3:Group 3-Explanatory_1:Group 2  4.45305553 0.0047491
-Explanatory_3:Group 2-Explanatory_2:Group 2 -1.03694447 0.0010200
-Explanatory_1:Group 3-Explanatory_2:Group 2 -0.02027781 0.0464895
-Explanatory_2:Group 3-Explanatory_2:Group 2  4.35138886 0.0069891
-Explanatory_3:Group 3-Explanatory_2:Group 2  0.79305553 0.5317567
-Explanatory_1:Group 3-Explanatory_3:Group 2  2.92805553 0.6439270
-Explanatory_2:Group 3-Explanatory_3:Group 2  7.29972219 0.0000003
-Explanatory_3:Group 3-Explanatory_3:Group 2  3.74138886 0.0667267
-Explanatory_2:Group 3-Explanatory_1:Group 3  6.28305553 0.0000070
-Explanatory_3:Group 3-Explanatory_1:Group 3  2.72472219 0.8457970
-Explanatory_3:Group 3-Explanatory_2:Group 3 -1.64694447 0.0001097</code></pre>
+                                                  diff         lwr         upr
+Explanatory_2:Group 1-Explanatory_1:Group 1  1.9316667  0.02027781  3.84305553
+Explanatory_3:Group 1-Explanatory_1:Group 1  1.1183333 -0.79305553  3.02972219
+Explanatory_1:Group 2-Explanatory_1:Group 1 -0.7116667 -2.62305553  1.19972219
+Explanatory_2:Group 2-Explanatory_1:Group 1  2.9483333  1.03694447  4.85972219
+Explanatory_3:Group 2-Explanatory_1:Group 1  0.0000000 -1.91138886  1.91138886
+Explanatory_1:Group 3-Explanatory_1:Group 1  1.0166667 -0.89472219  2.92805553
+Explanatory_2:Group 3-Explanatory_1:Group 1  5.3883333  3.47694447  7.29972219
+Explanatory_3:Group 3-Explanatory_1:Group 1  1.8300000 -0.08138886  3.74138886
+Explanatory_3:Group 1-Explanatory_2:Group 1 -0.8133333 -2.72472219  1.09805553
+Explanatory_1:Group 2-Explanatory_2:Group 1 -2.6433333 -4.55472219 -0.73194447
+Explanatory_2:Group 2-Explanatory_2:Group 1  1.0166667 -0.89472219  2.92805553
+Explanatory_3:Group 2-Explanatory_2:Group 1 -1.9316667 -3.84305553 -0.02027781
+Explanatory_1:Group 3-Explanatory_2:Group 1 -0.9150000 -2.82638886  0.99638886
+Explanatory_2:Group 3-Explanatory_2:Group 1  3.4566667  1.54527781  5.36805553
+Explanatory_3:Group 3-Explanatory_2:Group 1 -0.1016667 -2.01305553  1.80972219
+Explanatory_1:Group 2-Explanatory_3:Group 1 -1.8300000 -3.74138886  0.08138886
+Explanatory_2:Group 2-Explanatory_3:Group 1  1.8300000 -0.08138886  3.74138886
+Explanatory_3:Group 2-Explanatory_3:Group 1 -1.1183333 -3.02972219  0.79305553
+Explanatory_1:Group 3-Explanatory_3:Group 1 -0.1016667 -2.01305553  1.80972219
+Explanatory_2:Group 3-Explanatory_3:Group 1  4.2700000  2.35861114  6.18138886
+Explanatory_3:Group 3-Explanatory_3:Group 1  0.7116667 -1.19972219  2.62305553
+Explanatory_2:Group 2-Explanatory_1:Group 2  3.6600000  1.74861114  5.57138886
+Explanatory_3:Group 2-Explanatory_1:Group 2  0.7116667 -1.19972219  2.62305553
+Explanatory_1:Group 3-Explanatory_1:Group 2  1.7283333 -0.18305553  3.63972219
+Explanatory_2:Group 3-Explanatory_1:Group 2  6.1000000  4.18861114  8.01138886
+Explanatory_3:Group 3-Explanatory_1:Group 2  2.5416667  0.63027781  4.45305553
+Explanatory_3:Group 2-Explanatory_2:Group 2 -2.9483333 -4.85972219 -1.03694447
+Explanatory_1:Group 3-Explanatory_2:Group 2 -1.9316667 -3.84305553 -0.02027781
+Explanatory_2:Group 3-Explanatory_2:Group 2  2.4400000  0.52861114  4.35138886
+Explanatory_3:Group 3-Explanatory_2:Group 2 -1.1183333 -3.02972219  0.79305553
+Explanatory_1:Group 3-Explanatory_3:Group 2  1.0166667 -0.89472219  2.92805553
+Explanatory_2:Group 3-Explanatory_3:Group 2  5.3883333  3.47694447  7.29972219
+Explanatory_3:Group 3-Explanatory_3:Group 2  1.8300000 -0.08138886  3.74138886
+Explanatory_2:Group 3-Explanatory_1:Group 3  4.3716667  2.46027781  6.28305553
+Explanatory_3:Group 3-Explanatory_1:Group 3  0.8133333 -1.09805553  2.72472219
+Explanatory_3:Group 3-Explanatory_2:Group 3 -3.5583333 -5.46972219 -1.64694447
+                                                p adj
+Explanatory_2:Group 1-Explanatory_1:Group 1 0.0464895
+Explanatory_3:Group 1-Explanatory_1:Group 1 0.5317567
+Explanatory_1:Group 2-Explanatory_1:Group 1 0.9173224
+Explanatory_2:Group 2-Explanatory_1:Group 1 0.0010200
+Explanatory_3:Group 2-Explanatory_1:Group 1 1.0000000
+Explanatory_1:Group 3-Explanatory_1:Group 1 0.6439270
+Explanatory_2:Group 3-Explanatory_1:Group 1 0.0000003
+Explanatory_3:Group 3-Explanatory_1:Group 1 0.0667267
+Explanatory_3:Group 1-Explanatory_2:Group 1 0.8457970
+Explanatory_1:Group 2-Explanatory_2:Group 1 0.0032271
+Explanatory_2:Group 2-Explanatory_2:Group 1 0.6439270
+Explanatory_3:Group 2-Explanatory_2:Group 1 0.0464895
+Explanatory_1:Group 3-Explanatory_2:Group 1 0.7519790
+Explanatory_2:Group 3-Explanatory_2:Group 1 0.0001577
+Explanatory_3:Group 3-Explanatory_2:Group 1 0.9999999
+Explanatory_1:Group 2-Explanatory_3:Group 1 0.0667267
+Explanatory_2:Group 2-Explanatory_3:Group 1 0.0667267
+Explanatory_3:Group 2-Explanatory_3:Group 1 0.5317567
+Explanatory_1:Group 3-Explanatory_3:Group 1 0.9999999
+Explanatory_2:Group 3-Explanatory_3:Group 1 0.0000097
+Explanatory_3:Group 3-Explanatory_3:Group 1 0.9173224
+Explanatory_2:Group 2-Explanatory_1:Group 2 0.0000766
+Explanatory_3:Group 2-Explanatory_1:Group 2 0.9173224
+Explanatory_1:Group 3-Explanatory_1:Group 2 0.0947841
+Explanatory_2:Group 3-Explanatory_1:Group 2 0.0000000
+Explanatory_3:Group 3-Explanatory_1:Group 2 0.0047491
+Explanatory_3:Group 2-Explanatory_2:Group 2 0.0010200
+Explanatory_1:Group 3-Explanatory_2:Group 2 0.0464895
+Explanatory_2:Group 3-Explanatory_2:Group 2 0.0069891
+Explanatory_3:Group 3-Explanatory_2:Group 2 0.5317567
+Explanatory_1:Group 3-Explanatory_3:Group 2 0.6439270
+Explanatory_2:Group 3-Explanatory_3:Group 2 0.0000003
+Explanatory_3:Group 3-Explanatory_3:Group 2 0.0667267
+Explanatory_2:Group 3-Explanatory_1:Group 3 0.0000070
+Explanatory_3:Group 3-Explanatory_1:Group 3 0.8457970
+Explanatory_3:Group 3-Explanatory_2:Group 3 0.0001097</code></pre>
 </div>
 </div>
 <p>I do not plot this here, but it would be similar to the other parts of this test.</p>
@@ -1042,11 +1045,35 @@ P value adjustment method: bonferroni</code></pre>
 </section>
 <section id="homework-chapter-12" class="level2" data-number="13.4">
 <h2 data-number="13.4" class="anchored" data-anchor-id="homework-chapter-12"><span class="header-section-number">13.4</span> Homework: Chapter 12</h2>
-<p>For problems 12.1, 12.2, 12.3, 12.4, and 12.5, state your hypotheses in sentence form and mathematically. Then, identify the appropriate ANOVA and perform the analysis. If you reject the null, complete a Tukey test and plot your results, showing letters denoting each group. <strong>Note</strong> that 12.4 requires a Friedman’s test, but all other problems require some form of ANOVA.</p>
-<p>Next, for problems 12.7, 12.8, and 12.9, identify the appropriate test and justify your reasoning. State the null and alternative hypothesis in word form and mathematically, and perform your analysis. If you perform an ANOVA <em>and</em> you reject the null hypothesis, plot your results and label the groups by letter.</p>
+<p>State your hypotheses in sentence form and mathematically. Then, identify the appropriate ANOVA and perform the analysis. If you <em>reject</em> the null, evaluate a Tukey test and plot your results, showing letters denoting each group. <strong>Note</strong> that some questions may be non-parametric.</p>
 <p><strong>Remember, only plot the results if you reject your <em>primary hypothesis</em>.</strong></p>
+<section id="question-1" class="level3" data-number="13.4.1">
+<h3 data-number="13.4.1" class="anchored" data-anchor-id="question-1"><span class="header-section-number">13.4.1</span> Question 1</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2025</span>, <span class="at">week =</span> <span class="dv">13</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>---- Compiling #TidyTuesday Information for 2025-04-01 ----
+--- There is 1 file available ---
 
 
+── Downloading files ───────────────────────────────────────────────────────────
+
+  1 of 1: "pokemon_df.csv"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>pokemon_df <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>pokemon_df</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>pokemon_df <span class="sc">|&gt;</span> </span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">attack_defense =</span> attack<span class="sc">/</span>defense) <span class="ot">-&gt;</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  pokemon_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>poke_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(<span class="at">data =</span> pokemon_df, attack_defense <span class="sc">~</span> type_1 <span class="sc">+</span> egg_group_1)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(poke_aov)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+
+</section>
 </section>
 
 </main> <!-- /main -->
