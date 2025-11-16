@@ -333,7 +333,7 @@ where $\beta$ is the slope.
 
 ## Reshaping data
 
-Consider the defaulr `iris` dataset in *R*.
+Consider the default `iris` dataset in *R*.
 
 ```{r}
 head(iris)
