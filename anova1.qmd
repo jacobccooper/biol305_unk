@@ -661,7 +661,7 @@ Complete the following problems. You must complete *one* problem *by hand* in ad
 
 ### **Question 1:**
 
-Researchers want to test a new drug when given at different dosages. They are also including a placebo. They are measuring the score on a psychological examination, and are hoping to find the most effective dose to reduce score. Run the proper tests to determine if each group is unique and what effects they have.
+Researchers want to test a new drug when given at different dosages. They are also including a placebo. They are measuring the score on a psychological examination, where a lower score indicates better mental condition, and are hoping to find the most effective dose to reduce score. Run the proper tests to determine if each group is unique and what effects they have.
 
 ```{r}
 drug <- tibble(
