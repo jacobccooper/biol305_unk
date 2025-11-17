@@ -778,4 +778,3 @@ vole <- tibble(
 1.  State the null and alternative hypotheses.
 2.  Are these data normal?
 3.  Interpret the meaning of the assigned letters. How were they found, and what do they mean?
-4.  What else is unique about this data and might explain the results? *Hint*: Look at the final plot
