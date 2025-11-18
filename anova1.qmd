@@ -146,103 +146,41 @@ We are predominately going to be using the default function `aov` to perform ANO
 
 <summary>Click here to see the manual method.</summary>
 
-For this workthrough, we will use the following psuedorandom dataset:
+For this workthrough, we will use the following portion of the `iris` dataset built in the base *R*.
 
 ```{r}
-set.seed(8675309)
+iris_subset <- iris |> 
+  select(Sepal.Length, Species)
 
-for(i in 1:4){
-  x <- rnorm(10)
-  if(i == 1){
-    x <- rnorm(10, mean = 2)
-    data <- x |> as.data.frame()
-    colnames(data) <- "Response"
-    data$Explanatory <- paste0("x",i)
-  }else{
-    newdat <- x |> as.data.frame()
-    colnames(newdat) <- "Response"
-    newdat$Explanatory <- paste0("x",i)
-    data <- rbind(data,newdat)
-  }
-}
-
-# split into "typical" table
-expanded_data <- NULL
-expanded_data$x1 <- data$Response[which(data$Explanatory=="x1")]
-expanded_data$x2 <- data$Response[which(data$Explanatory=="x2")]
-expanded_data$x3 <- data$Response[which(data$Explanatory=="x3")]
-expanded_data$x4 <- data$Response[which(data$Explanatory=="x4")]
-
-expanded_data <- expanded_data |>
-  as.data.frame()
-
-# summarize by group
-summary_data <- ddply(data, "Explanatory", summarise,
-                 N = length(Response),
-                 mean = mean(Response),
-                 sd = sd(Response),
-                 se = sd / sqrt(N))
-
-ggplot(summary_data, aes(x = Explanatory, y = mean, group = Explanatory)) +
-  geom_point() +
-  geom_errorbar(data = summary_data, aes(ymin = mean - 2*se, ymax = mean+2*se,
-                                    color = Explanatory), width = 0.1) +
-  geom_hline(yintercept = 0, col = "black", linewidth = 0.5) +
-  ylim(c(-3,3)) +
-  theme_classic() +
-  theme(legend.position = "none",
-        axis.text.x = element_text(angle = 90, vjust = 0.5, size = 5))
+summary(iris_subset)
 ```
-
-```{r}
-expanded_data |> round(2)
-```
-
-Above, we can see the made-up dataset where it appears as though one population differs from the other populations in our measurements. Let's calculate an ANOVA and find out if this is the case!
 
 **NOTE** throughout this process that I am trying to name variables in a straightforward fashion so as not to lose my way.
 
 ### Calculate group means and Grand Mean
 
-Let us assume we have a dataset, $x$, that is $k$ columns and $n$ rows, with $N$ data points in the entire data frame. We first want to take the column means for each group $k$, such that we have $\bar{x}_k$. We also need to find the mean of the entire dataset, $\bar{x}_n$. We can calculate this by taking $\frac{\Sigma x}{n}$, which we have to calculate by column as follows.
+First, we can calculate the group means across the dataset. We can use the function `aggregate` to do this across all of our data.
 
 ```{r}
-# calculate the mean of each group
-# each group is in a single column
-group_means <- colMeans(expanded_data)
+group_means <- iris_subset |> 
+  aggregate(Sepal.Length ~ Species, FUN = mean)
 
-# rounding to two decimal places
-group_means |> round(2)
+group_means
 ```
 
-Next, we need to calculate the number of total entries in the dataset. We have written a function to accomplish this incase some rows have different numbers of entries from others.
+Secondly, we can calculate the grand mean for the entire dataset. We can do this by summing the entire variable column in which we are interested.
 
 ```{r}
-n <- 0
-
-for(i in 1:ncol(expanded_data)){
-  # account for unequal row length, if exists
-  sample <- expanded_data[,i] |> 
-    as.numeric() |>
-    na.omit()
-  n <- n + length(sample)
-}
-
-n
+# calculate the grand mean
+grand_mean <- mean(iris_subset$Sepal.Length)
 ```
 
-Next, we can calculate the `grand_mean` of all of the data.
+### *N*
+
+Next, we can get the total number of individuals in the study. This is done by getting the number of rows in the dataset.
 
 ```{r}
-# sum up all the data
-dataset_sum <- colSums(expanded_data) |>
-  sum()
-
-# divide by the number of data points
-grand_mean <- dataset_sum/n
-
-# display mean
-grand_mean |> round(2)
+N <- nrow(iris_subset)
 ```
 
 ### Total sum of squares
@@ -252,15 +190,16 @@ To calculate the *total sum of squares* (TSS), we need to take the deviations (d
 ```{r}
 # calculate deviates
 # can calculate across all table at once
-grand_deviates_squared <- (expanded_data - grand_mean)^2
+grand_deviates_squared <- (iris_subset$Sepal.Length - grand_mean)^2
 
 # round output for here
-grand_deviates_squared |> round(2)
+# head to just view the first few
+grand_deviates_squared |> round(2) |> head()
 ```
 
 ```{r}
 # calculate the sum of all the deviates
-ss_total <- rowSums(grand_deviates_squared) |>
+ss_total <- grand_deviates_squared |>
   sum()
 
 ss_total |> round(2)
@@ -268,34 +207,19 @@ ss_total |> round(2)
 
 ### Within-group sum of squares
 
-For each data point, we need to calculate its deviation from its own group mean, squaring these deviations and then summing them together. We can't calcualte this quite as elegantly as the aforementioned data, but we can write a function that will operate across the table and create a new dataset on our behalf.
+For each data point, we need to calculate its deviation from its own group mean, squaring these deviations and then summing them together. We can't calculate this quite as elegantly as the aforementioned data, and specific aspects - like the number of times each value is repeated - will need to change based on the data that *you* are using.
 
 ```{r}
-# replicate dataset
-# replace columns with deviate data
-group_deviates <- expanded_data
+group_means_expanded <- c(rep(group_means$Sepal.Length[1], 
+                              nrow(iris_subset)/3),
+                          rep(group_means$Sepal.Length[2],
+                              nrow(iris_subset)/3),
+                          rep(group_means$Sepal.Length[3],
+                              nrow(iris_subset)/3))
 
-# loop through each column
-for(i in 1:ncol(group_deviates)){
-  # get the data in each group
-  dat <- group_deviates[,i]
-  # calculate the group mean
-  mu <- mean(dat)
-  # calculate the group deviates
-  dev.dat <- (dat - mu)^2
-  # save into table
-  group_deviates[,i] <- dev.dat
-}
+group_deviates <- iris_subset$Sepal.Length - group_means_expanded
 
-group_deviates |> round(2)
-```
-
-```{r}
-# calculate sum of data table
-ss_within <- colSums(group_deviates) |> 
-  sum()
-
-ss_within |> round(2)
+ss_within <- sum(group_deviates^2)
 ```
 
 ### Among-group sum of squares
@@ -313,7 +237,7 @@ ss_among |> round(2)
 Our degrees of freedom for the "between" group is the number of categories minus one ($K-1$).
 
 ```{r}
-ss_among_df <- ncol(expanded_data) - 1
+ss_among_df <- length(unique(iris_subset$Species)) - 1
 
 ss_among_df
 ```
@@ -321,7 +245,7 @@ ss_among_df
 Our degrees of freedom for the within group are the number of total samples minus the number of categories ($N - K$).
 
 ```{r}
-ss_within_df <- n - ncol(expanded_data)
+ss_within_df <- N - ncol(iris_subset)
 
 ss_within_df
 ```
@@ -329,7 +253,7 @@ ss_within_df
 Our degrees of freedom for the total sum of squares is the number of samples minus one ($N-1$).
 
 ```{r}
-ss_total_df <- n - 1
+ss_total_df <- N - 1
 
 ss_total_df
 ```
@@ -380,20 +304,7 @@ Given how small our $p$ value is, we want to round this to $p<0.0001$. As we can
 For this, we need to use the dataframe where we have all data in a single column and all ID's in the other columns. This can be done easily with *tibble*, as shown below.
 
 ```{r}
-plant_data <- tibble(
-  Fertilizer = c(
-    rep("A", 5), #repeat 'A' 5 times (So there will be 5 'A' values)
-    rep("B", 7), #repeat 'B' 7 times
-    rep("C", 6)  #repeat 'C' 6 times
-  ),
-  Growth = c(
-    12, 14, 13, 11, 12,   # Fertilizer A
-    16, 17, 15, 14, 16, 15, 17,   # Fertilizer B
-    20, 19, 21, 22, 18, 22    # Fertilizer C
-  )
-)
-
-head(plant_data)
+head(iris_subset)
 ```
 
 Once the data is in this format, it can be ran through the `run_oneway` function from the *UNKstats* package. This function needs: data = (the data frame you are trying analyse)
@@ -405,15 +316,17 @@ group = (the grouping factor)
 If the test needs to be parametric, you must specify that as it defaults to a non-parametric test.
 
 ```{r}
-data_aov <- run_oneway(data = data,
-                       dv = "Response",
-                       group = "Explanatory",
+data_aov <- run_oneway(data = iris_subset,
+                       dv = "Sepal.Length",
+                       group = "Species",
                        parametric = TRUE)
 
 data_aov
 ```
 
 These numbers match the *by hand* methodology from the previous section, showing that the math is the same.
+
+\*NOTE these numbers are close, but not quite. I need to troubleshoot this a little more.
 
 ## Post-hoc Tukey test
 
@@ -427,9 +340,11 @@ To do this by hand, we will need a lot of data from our aforementioned ANOVA tes
 
 <summary>Click here to see the by-hand method.</summary>
 
+**Under construction...**
+
 We need to calculate pairwise differences between each set of means.
 
-```{r}
+```{r, eval = F}
 x1_mean <- mean(data$Response[data$Explanatory == "x1"])
 x2_mean <- mean(data$Response[data$Explanatory == "x2"])
 x3_mean <- mean(data$Response[data$Explanatory == "x3"])
@@ -445,11 +360,11 @@ pairwise_mean_diffs |> round(2)
 
 Next, we need a critical $Q$ value against which we can compare. For Tukey, our degrees of freedom are the same as the degrees of freedom for $SS_{within}$: $N - K$.
 
-```{r}
+```{r, eval = F}
 # set p value
 tukey_q <- qtukey(p = 0.95,
                   # get length of categories / columns
-                  nmeans = ncol(expanded_data),
+                  nmeans = ncol(iris_subset),
                   df = ss_within_df)
 
 tukey_q |> round(2)
@@ -457,7 +372,7 @@ tukey_q |> round(2)
 
 We need to multiply $Q$ by the pooled variance.This is the same as the average of the variances for each group.
 
-```{r}
+```{r, eval = F}
 var_data <- 0
 
 # calculate pooled variance
@@ -472,7 +387,7 @@ pooled_var_dat |> round(2)
 
 We can calculate the Tukey critical value by multiplying the pooled variance by $Q$.
 
-```{r}
+```{r, eval = F}
 tukey_critical <- tukey_q*pooled_var_dat
 
 tukey_critical |> round(2)
@@ -482,7 +397,7 @@ Remember, we are comparing to the actual value, not the rounded value.
 
 Which mean differences are difference compared to our critical value?
 
-```{r}
+```{r, eval = F}
 pairwise_mean_diffs[pairwise_mean_diffs < tukey_critical] <- 0
 
 pairwise_mean_diffs
@@ -514,65 +429,14 @@ data_aov$plot
 
 The Kruskal-Wallis test is the non-parametric version of an ANOVA. To demonstrate this, we will be creating a non-normal distribution by pulling random values from a *uniform* distribution, using the random uniform function `runif`. **Note** we are rounding the data here to make it more similar to non-normal datasets you may encounter, and to increase the probability of ties.
 
-```{r}
-## COPY THIS WHOLE CHUNK ##
-# will load example data
-
-set.seed(8675309)
-
-for(i in 1:4){
-  x <- runif(10, min = -1, max = 1) |>
-    round(2)
-  if(i == 1){
-    x <- runif(10, min = 1, max = 2) |>
-      round(2)
-    data <- x |> as.data.frame()
-    colnames(data) <- "Response"
-    data$Explanatory <- paste0("x",i)
-  }else{
-    newdat <- x |> as.data.frame()
-    colnames(newdat) <- "Response"
-    newdat$Explanatory <- paste0("x",i)
-    data <- rbind(data,newdat)
-  }
-}
-
-# split into "typical" table
-expanded_data <- NULL
-expanded_data$x1 <- data$Response[which(data$Explanatory=="x1")]
-expanded_data$x2 <- data$Response[which(data$Explanatory=="x2")]
-expanded_data$x3 <- data$Response[which(data$Explanatory=="x3")]
-expanded_data$x4 <- data$Response[which(data$Explanatory=="x4")]
-
-expanded_data <- expanded_data |>
-  as.data.frame()
-
-# summarize by group
-summary_data <- ddply(data, "Explanatory", summarise,
-                 N = length(Response),
-                 mean = mean(Response),
-                 sd = sd(Response),
-                 se = sd / sqrt(N))
-
-ggplot(summary_data, aes(x = Explanatory, y = mean, group = Explanatory)) +
-  geom_point() +
-  geom_errorbar(data = summary_data, aes(ymin = mean - 2*se, ymax = mean+2*se,
-                                    color = Explanatory), width = 0.1) +
-  geom_hline(yintercept = 0, col = "black", linewidth = 0.5) +
-  ylim(c(-3,3)) +
-  theme_classic() +
-  theme(legend.position = "none",
-        axis.text.x = element_text(angle = 90, vjust = 0.5, size = 5))
-```
-
 ### Confirming normality
 
 We can confirm these data are non-normal with Shapiro-Wilk tests and histograms.
 
 ```{r}
-data |> 
-  group_by(Explanatory) |> 
-  dplyr::summarise(p.value = shapiro.test(Response)$p.value)
+iris_subset |> 
+  group_by(Species) |> 
+  dplyr::summarise(p.value = shapiro.test(Sepal.Length)$p.value)
 ```
 
 While these data came out normal, for the purposes of this example, we will proceed with a non-normal test.
@@ -580,9 +444,9 @@ While these data came out normal, for the purposes of this example, we will proc
 ### Performing the test
 
 ```{r}
-kruskal_oneway <- run_oneway(data,
-                             dv = "Response",
-                             group = "Explanatory",
+kruskal_oneway <- run_oneway(iris_subset,
+                             dv = "Sepal.Length",
+                             group = "Species",
                              parametric = F) #This is what makes it run the non-parametric test!
 
 kruskal_oneway
@@ -597,46 +461,37 @@ kruskal_oneway
 First, we need to order all the data in the entire dataset. **This is easiest to do if we use the dataset with all data in a single column.**
 
 ```{r}
-data$ranks <- rank(data$Response, ties.method = "average")
+iris_subset$ranks <- rank(iris_subset$Sepal.Length, ties.method = "average")
 
 # view first couple of rows
-head(data)
+head(iris_subset)
 ```
 
-Now, we need to calculate the sum of the ranks for each category. The below function will take the sum of the ranks for the rows which match the condition of having the group be `x1`.
+Now, we need to calculate the sum of the ranks for each category.
 
 ```{r}
-x1_sum <- sum(data$ranks[which(data$Explanatory=="x1")])
-x2_sum <- sum(data$ranks[which(data$Explanatory=="x2")])
-x3_sum <- sum(data$ranks[which(data$Explanatory=="x3")])
-x4_sum <- sum(data$ranks[which(data$Explanatory=="x4")])
+rank_sums <- aggregate(iris_subset, Sepal.Length ~ Species, FUN = sum)
+
+rank_sums
 ```
 
 Now, we need to calculate our test statistic. The test statistic is $H$, with: $$H = \frac{12}{N(N+1)} \cdot \Sigma \frac{R_j^2}{n_j}-3(N+1)$$In this equation, $R$ is the sum of the ranks for a given category. This follows a $\chi^2$ distribution with $k-1$ degrees of freedom, with $k$ referring to categories.
 
-For these, we need to know what $n$ is for each category.
+For these, we need to know what $n$ is for each category. This is the same `N` as calculated above divided by the number of categories (3).
 
 ```{r}
-n1 <- length(data$ranks[which(data$Explanatory=="x1")])
-n2 <- length(data$ranks[which(data$Explanatory=="x2")])
-n3 <- length(data$ranks[which(data$Explanatory=="x3")])
-n4 <- length(data$ranks[which(data$Explanatory=="x4")])
+n <- N/3
 ```
 
 Next, we can calculate the sums of the $\frac{R^2}{n}$ term.
 
 ```{r}
-r2_sum <- sum(x1_sum^2/n,
-              x2_sum^2,n,
-              x3_sum^2/n,
-              x4_sum^2/n)
+r2_sum <- (rank_sums$Sepal.Length/n) |> sum()
 ```
 
 Now, we can calculate $H$.
 
 ```{r}
-N <- sum(n1, n2, n3, n4)
-
 H <- ((12/(N*(N+1)))*r2_sum)-(3*(N+1))
 
 H |> round(2)

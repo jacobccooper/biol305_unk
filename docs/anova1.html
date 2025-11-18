@@ -312,13 +312,14 @@ window.Quarto = {
   <li><a href="#anova-by-hand" id="toc-anova-by-hand" class="nav-link" data-scroll-target="#anova-by-hand"><span class="header-section-number">12.2</span> ANOVA: By hand</a>
   <ul class="collapse">
   <li><a href="#calculate-group-means-and-grand-mean" id="toc-calculate-group-means-and-grand-mean" class="nav-link" data-scroll-target="#calculate-group-means-and-grand-mean"><span class="header-section-number">12.2.1</span> Calculate group means and Grand Mean</a></li>
-  <li><a href="#total-sum-of-squares" id="toc-total-sum-of-squares" class="nav-link" data-scroll-target="#total-sum-of-squares"><span class="header-section-number">12.2.2</span> Total sum of squares</a></li>
-  <li><a href="#within-group-sum-of-squares" id="toc-within-group-sum-of-squares" class="nav-link" data-scroll-target="#within-group-sum-of-squares"><span class="header-section-number">12.2.3</span> Within-group sum of squares</a></li>
-  <li><a href="#among-group-sum-of-squares" id="toc-among-group-sum-of-squares" class="nav-link" data-scroll-target="#among-group-sum-of-squares"><span class="header-section-number">12.2.4</span> Among-group sum of squares</a></li>
-  <li><a href="#calculate-degrees-of-freedom" id="toc-calculate-degrees-of-freedom" class="nav-link" data-scroll-target="#calculate-degrees-of-freedom"><span class="header-section-number">12.2.5</span> Calculate degrees of freedom</a></li>
-  <li><a href="#calculate-mean-squares" id="toc-calculate-mean-squares" class="nav-link" data-scroll-target="#calculate-mean-squares"><span class="header-section-number">12.2.6</span> Calculate mean squares</a></li>
-  <li><a href="#get-f-statistic" id="toc-get-f-statistic" class="nav-link" data-scroll-target="#get-f-statistic"><span class="header-section-number">12.2.7</span> Get <span class="math inline">\(F\)</span> statistic</a></li>
-  <li><a href="#get-p-value" id="toc-get-p-value" class="nav-link" data-scroll-target="#get-p-value"><span class="header-section-number">12.2.8</span> Get <span class="math inline">\(p\)</span> value</a></li>
+  <li><a href="#n" id="toc-n" class="nav-link" data-scroll-target="#n"><span class="header-section-number">12.2.2</span> <em>N</em></a></li>
+  <li><a href="#total-sum-of-squares" id="toc-total-sum-of-squares" class="nav-link" data-scroll-target="#total-sum-of-squares"><span class="header-section-number">12.2.3</span> Total sum of squares</a></li>
+  <li><a href="#within-group-sum-of-squares" id="toc-within-group-sum-of-squares" class="nav-link" data-scroll-target="#within-group-sum-of-squares"><span class="header-section-number">12.2.4</span> Within-group sum of squares</a></li>
+  <li><a href="#among-group-sum-of-squares" id="toc-among-group-sum-of-squares" class="nav-link" data-scroll-target="#among-group-sum-of-squares"><span class="header-section-number">12.2.5</span> Among-group sum of squares</a></li>
+  <li><a href="#calculate-degrees-of-freedom" id="toc-calculate-degrees-of-freedom" class="nav-link" data-scroll-target="#calculate-degrees-of-freedom"><span class="header-section-number">12.2.6</span> Calculate degrees of freedom</a></li>
+  <li><a href="#calculate-mean-squares" id="toc-calculate-mean-squares" class="nav-link" data-scroll-target="#calculate-mean-squares"><span class="header-section-number">12.2.7</span> Calculate mean squares</a></li>
+  <li><a href="#get-f-statistic" id="toc-get-f-statistic" class="nav-link" data-scroll-target="#get-f-statistic"><span class="header-section-number">12.2.8</span> Get <span class="math inline">\(F\)</span> statistic</a></li>
+  <li><a href="#get-p-value" id="toc-get-p-value" class="nav-link" data-scroll-target="#get-p-value"><span class="header-section-number">12.2.9</span> Get <span class="math inline">\(p\)</span> value</a></li>
   </ul></li>
   <li><a href="#anova-by-r" id="toc-anova-by-r" class="nav-link" data-scroll-target="#anova-by-r"><span class="header-section-number">12.3</span> ANOVA: By <em>R</em></a></li>
   <li><a href="#post-hoc-tukey-test" id="toc-post-hoc-tukey-test" class="nav-link" data-scroll-target="#post-hoc-tukey-test"><span class="header-section-number">12.4</span> Post-hoc Tukey test</a>
@@ -535,290 +536,177 @@ window.Quarto = {
 <summary>
 Click here to see the manual method.
 </summary>
-<p>For this workthrough, we will use the following psuedorandom dataset:</p>
+<p>For this workthrough, we will use the following portion of the <code>iris</code> dataset built in the base <em>R</em>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">8675309</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>){</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(i <span class="sc">==</span> <span class="dv">1</span>){</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">2</span>)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> x <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="st">"Response"</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>Explanatory <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    newdat <span class="ot">&lt;-</span> x <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(newdat) <span class="ot">&lt;-</span> <span class="st">"Response"</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    newdat<span class="sc">$</span>Explanatory <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(data,newdat)</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co"># split into "typical" table</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>expanded_data <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x1 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x1"</span>)]</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x2 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x2"</span>)]</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x3 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x3"</span>)]</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x4 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x4"</span>)]</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>expanded_data <span class="ot">&lt;-</span> expanded_data <span class="sc">|&gt;</span></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize by group</span></span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> <span class="fu">ddply</span>(data, <span class="st">"Explanatory"</span>, summarise,</span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>                 <span class="at">N =</span> <span class="fu">length</span>(Response),</span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>                 <span class="at">mean =</span> <span class="fu">mean</span>(Response),</span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sd =</span> <span class="fu">sd</span>(Response),</span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>                 <span class="at">se =</span> sd <span class="sc">/</span> <span class="fu">sqrt</span>(N))</span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summary_data, <span class="fu">aes</span>(<span class="at">x =</span> Explanatory, <span class="at">y =</span> mean, <span class="at">group =</span> Explanatory)) <span class="sc">+</span></span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data =</span> summary_data, <span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>se, <span class="at">ymax =</span> mean<span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>se,</span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">color =</span> Explanatory), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>)) <span class="sc">+</span></span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
-<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="anova1_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>expanded_data <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>iris_subset <span class="ot">&lt;-</span> iris <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Sepal.Length, Species)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iris_subset)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     x1    x2    x3    x4
-1  0.45  1.99  0.38 -0.64
-2  3.02  0.04  1.15  0.00
-3  2.15 -0.40  1.57  0.05
-4  1.34 -0.47  0.59  0.68
-5  1.01 -0.41 -0.62 -0.25
-6  3.97  0.68 -0.23 -0.15
-7  1.56  0.69  0.06 -0.87
-8  1.10  0.53 -0.31 -1.98
-9  1.85 -0.19 -0.25  0.24
-10 1.17  0.38 -0.15  0.04</code></pre>
+<pre><code>  Sepal.Length         Species  
+ Min.   :4.300   setosa    :50  
+ 1st Qu.:5.100   versicolor:50  
+ Median :5.800   virginica :50  
+ Mean   :5.843                  
+ 3rd Qu.:6.400                  
+ Max.   :7.900                  </code></pre>
 </div>
 </div>
-<p>Above, we can see the made-up dataset where it appears as though one population differs from the other populations in our measurements. Let’s calculate an ANOVA and find out if this is the case!</p>
 <p><strong>NOTE</strong> throughout this process that I am trying to name variables in a straightforward fashion so as not to lose my way.</p>
 <section id="calculate-group-means-and-grand-mean" class="level3" data-number="12.2.1">
 <h3 data-number="12.2.1" class="anchored" data-anchor-id="calculate-group-means-and-grand-mean"><span class="header-section-number">12.2.1</span> Calculate group means and Grand Mean</h3>
-<p>Let us assume we have a dataset, <span class="math inline">\(x\)</span>, that is <span class="math inline">\(k\)</span> columns and <span class="math inline">\(n\)</span> rows, with <span class="math inline">\(N\)</span> data points in the entire data frame. We first want to take the column means for each group <span class="math inline">\(k\)</span>, such that we have <span class="math inline">\(\bar{x}_k\)</span>. We also need to find the mean of the entire dataset, <span class="math inline">\(\bar{x}_n\)</span>. We can calculate this by taking <span class="math inline">\(\frac{\Sigma x}{n}\)</span>, which we have to calculate by column as follows.</p>
+<p>First, we can calculate the group means across the dataset. We can use the function <code>aggregate</code> to do this across all of our data.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the mean of each group</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># each group is in a single column</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>group_means <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(expanded_data)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># rounding to two decimal places</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>group_means <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>group_means <span class="ot">&lt;-</span> iris_subset <span class="sc">|&gt;</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aggregate</span>(Sepal.Length <span class="sc">~</span> Species, <span class="at">FUN =</span> mean)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>group_means</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   x1    x2    x3    x4 
- 1.76  0.28  0.22 -0.29 </code></pre>
+<pre><code>     Species Sepal.Length
+1     setosa        5.006
+2 versicolor        5.936
+3  virginica        6.588</code></pre>
 </div>
 </div>
-<p>Next, we need to calculate the number of total entries in the dataset. We have written a function to accomplish this incase some rows have different numbers of entries from others.</p>
+<p>Secondly, we can calculate the grand mean for the entire dataset. We can do this by summing the entire variable column in which we are interested.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(expanded_data)){</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># account for unequal row length, if exists</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  sample <span class="ot">&lt;-</span> expanded_data[,i] <span class="sc">|&gt;</span> </span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.numeric</span>() <span class="sc">|&gt;</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">na.omit</span>()</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> n <span class="sc">+</span> <span class="fu">length</span>(sample)</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>n</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 40</code></pre>
-</div>
-</div>
-<p>Next, we can calculate the <code>grand_mean</code> of all of the data.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sum up all the data</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>dataset_sum <span class="ot">&lt;-</span> <span class="fu">colSums</span>(expanded_data) <span class="sc">|&gt;</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># divide by the number of data points</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>grand_mean <span class="ot">&lt;-</span> dataset_sum<span class="sc">/</span>n</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># display mean</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>grand_mean <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.49</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the grand mean</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>grand_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(iris_subset<span class="sc">$</span>Sepal.Length)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="total-sum-of-squares" class="level3" data-number="12.2.2">
-<h3 data-number="12.2.2" class="anchored" data-anchor-id="total-sum-of-squares"><span class="header-section-number">12.2.2</span> Total sum of squares</h3>
+<section id="n" class="level3" data-number="12.2.2">
+<h3 data-number="12.2.2" class="anchored" data-anchor-id="n"><span class="header-section-number">12.2.2</span> <em>N</em></h3>
+<p>Next, we can get the total number of individuals in the study. This is done by getting the number of rows in the dataset.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(iris_subset)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="total-sum-of-squares" class="level3" data-number="12.2.3">
+<h3 data-number="12.2.3" class="anchored" data-anchor-id="total-sum-of-squares"><span class="header-section-number">12.2.3</span> Total sum of squares</h3>
 <p>To calculate the <em>total sum of squares</em> (TSS), we need to take the deviations (differences) of each point from the grand mean <span class="math inline">\(\bar{x}_n\)</span>, square them, and them take the sum of them.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate deviates</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># can calculate across all table at once</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>grand_deviates_squared <span class="ot">&lt;-</span> (expanded_data <span class="sc">-</span> grand_mean)<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># round output for here</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>grand_deviates_squared <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate deviates</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># can calculate across all table at once</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>grand_deviates_squared <span class="ot">&lt;-</span> (iris_subset<span class="sc">$</span>Sepal.Length <span class="sc">-</span> grand_mean)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># round output for here</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># head to just view the first few</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>grand_deviates_squared <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>) <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      x1   x2   x3   x4
-1   0.00 2.22 0.01 1.28
-2   6.39 0.20 0.43 0.25
-3   2.74 0.81 1.17 0.20
-4   0.72 0.94 0.01 0.04
-5   0.26 0.83 1.23 0.56
-6  12.10 0.04 0.52 0.42
-7   1.13 0.04 0.19 1.87
-8   0.37 0.00 0.65 6.11
-9   1.84 0.46 0.55 0.07
-10  0.46 0.01 0.42 0.21</code></pre>
+<pre><code>[1] 0.55 0.89 1.31 1.55 0.71 0.20</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the sum of all the deviates</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>ss_total <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(grand_deviates_squared) <span class="sc">|&gt;</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>ss_total <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the sum of all the deviates</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>ss_total <span class="ot">&lt;-</span> grand_deviates_squared <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>ss_total <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 47.73</code></pre>
+<pre><code>[1] 102.17</code></pre>
 </div>
 </div>
 </section>
-<section id="within-group-sum-of-squares" class="level3" data-number="12.2.3">
-<h3 data-number="12.2.3" class="anchored" data-anchor-id="within-group-sum-of-squares"><span class="header-section-number">12.2.3</span> Within-group sum of squares</h3>
-<p>For each data point, we need to calculate its deviation from its own group mean, squaring these deviations and then summing them together. We can’t calcualte this quite as elegantly as the aforementioned data, but we can write a function that will operate across the table and create a new dataset on our behalf.</p>
+<section id="within-group-sum-of-squares" class="level3" data-number="12.2.4">
+<h3 data-number="12.2.4" class="anchored" data-anchor-id="within-group-sum-of-squares"><span class="header-section-number">12.2.4</span> Within-group sum of squares</h3>
+<p>For each data point, we need to calculate its deviation from its own group mean, squaring these deviations and then summing them together. We can’t calculate this quite as elegantly as the aforementioned data, and specific aspects - like the number of times each value is repeated - will need to change based on the data that <em>you</em> are using.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># replicate dataset</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># replace columns with deviate data</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>group_deviates <span class="ot">&lt;-</span> expanded_data</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># loop through each column</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(group_deviates)){</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get the data in each group</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  dat <span class="ot">&lt;-</span> group_deviates[,i]</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate the group mean</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(dat)</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate the group deviates</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  dev.dat <span class="ot">&lt;-</span> (dat <span class="sc">-</span> mu)<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># save into table</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  group_deviates[,i] <span class="ot">&lt;-</span> dev.dat</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>group_deviates <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     x1   x2   x3   x4
-1  1.72 2.90 0.02 0.12
-2  1.59 0.06 0.87 0.08
-3  0.15 0.47 1.84 0.11
-4  0.18 0.57 0.14 0.95
-5  0.57 0.49 0.70 0.00
-6  4.89 0.16 0.20 0.02
-7  0.04 0.16 0.02 0.34
-8  0.44 0.06 0.28 2.85
-9  0.01 0.22 0.22 0.28
-10 0.35 0.01 0.14 0.11</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate sum of data table</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>ss_within <span class="ot">&lt;-</span> <span class="fu">colSums</span>(group_deviates) <span class="sc">|&gt;</span> </span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>ss_within <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 24.33</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>group_means_expanded <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(group_means<span class="sc">$</span>Sepal.Length[<span class="dv">1</span>], </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">nrow</span>(iris_subset)<span class="sc">/</span><span class="dv">3</span>),</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">rep</span>(group_means<span class="sc">$</span>Sepal.Length[<span class="dv">2</span>],</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">nrow</span>(iris_subset)<span class="sc">/</span><span class="dv">3</span>),</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">rep</span>(group_means<span class="sc">$</span>Sepal.Length[<span class="dv">3</span>],</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">nrow</span>(iris_subset)<span class="sc">/</span><span class="dv">3</span>))</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>group_deviates <span class="ot">&lt;-</span> iris_subset<span class="sc">$</span>Sepal.Length <span class="sc">-</span> group_means_expanded</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>ss_within <span class="ot">&lt;-</span> <span class="fu">sum</span>(group_deviates<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="among-group-sum-of-squares" class="level3" data-number="12.2.4">
-<h3 data-number="12.2.4" class="anchored" data-anchor-id="among-group-sum-of-squares"><span class="header-section-number">12.2.4</span> Among-group sum of squares</h3>
+<section id="among-group-sum-of-squares" class="level3" data-number="12.2.5">
+<h3 data-number="12.2.5" class="anchored" data-anchor-id="among-group-sum-of-squares"><span class="header-section-number">12.2.5</span> Among-group sum of squares</h3>
 <p>The total sum of squares is equal to the among groups sum of squares and the within groups sum of squares added together; thus, we can solve this part with some easy arithmetic.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ss_among <span class="ot">&lt;-</span> ss_total <span class="sc">-</span> ss_within</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>ss_among <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ss_among <span class="ot">&lt;-</span> ss_total <span class="sc">-</span> ss_within</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>ss_among <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 23.4</code></pre>
+<pre><code>[1] 63.21</code></pre>
 </div>
 </div>
 </section>
-<section id="calculate-degrees-of-freedom" class="level3" data-number="12.2.5">
-<h3 data-number="12.2.5" class="anchored" data-anchor-id="calculate-degrees-of-freedom"><span class="header-section-number">12.2.5</span> Calculate degrees of freedom</h3>
+<section id="calculate-degrees-of-freedom" class="level3" data-number="12.2.6">
+<h3 data-number="12.2.6" class="anchored" data-anchor-id="calculate-degrees-of-freedom"><span class="header-section-number">12.2.6</span> Calculate degrees of freedom</h3>
 <p>Our degrees of freedom for the “between” group is the number of categories minus one (<span class="math inline">\(K-1\)</span>).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>ss_among_df <span class="ot">&lt;-</span> <span class="fu">ncol</span>(expanded_data) <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>ss_among_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ss_among_df <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(iris_subset<span class="sc">$</span>Species)) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>ss_among_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
+<pre><code>[1] 2</code></pre>
 </div>
 </div>
 <p>Our degrees of freedom for the within group are the number of total samples minus the number of categories (<span class="math inline">\(N - K\)</span>).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>ss_within_df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="fu">ncol</span>(expanded_data)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>ss_within_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>ss_within_df <span class="ot">&lt;-</span> N <span class="sc">-</span> <span class="fu">ncol</span>(iris_subset)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>ss_within_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 36</code></pre>
+<pre><code>[1] 148</code></pre>
 </div>
 </div>
 <p>Our degrees of freedom for the total sum of squares is the number of samples minus one (<span class="math inline">\(N-1\)</span>).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>ss_total_df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>ss_total_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ss_total_df <span class="ot">&lt;-</span> N <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>ss_total_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 39</code></pre>
+<pre><code>[1] 149</code></pre>
 </div>
 </div>
 </section>
-<section id="calculate-mean-squares" class="level3" data-number="12.2.6">
-<h3 data-number="12.2.6" class="anchored" data-anchor-id="calculate-mean-squares"><span class="header-section-number">12.2.6</span> Calculate mean squares</h3>
+<section id="calculate-mean-squares" class="level3" data-number="12.2.7">
+<h3 data-number="12.2.7" class="anchored" data-anchor-id="calculate-mean-squares"><span class="header-section-number">12.2.7</span> Calculate mean squares</h3>
 <p>For each category (among and within), the mean square is equal to the sum of squares divided by the degrees of freedom.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>ms_among <span class="ot">&lt;-</span> ss_among<span class="sc">/</span>ss_among_df</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>ms_among <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>ms_among <span class="ot">&lt;-</span> ss_among<span class="sc">/</span>ss_among_df</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>ms_among <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 7.8</code></pre>
+<pre><code>[1] 31.61</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>ms_within <span class="ot">&lt;-</span> ss_within<span class="sc">/</span>ss_within_df</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>ms_within <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>ms_within <span class="ot">&lt;-</span> ss_within<span class="sc">/</span>ss_within_df</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>ms_within <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.68</code></pre>
+<pre><code>[1] 0.26</code></pre>
 </div>
 </div>
 </section>
-<section id="get-f-statistic" class="level3" data-number="12.2.7">
-<h3 data-number="12.2.7" class="anchored" data-anchor-id="get-f-statistic"><span class="header-section-number">12.2.7</span> Get <span class="math inline">\(F\)</span> statistic</h3>
+<section id="get-f-statistic" class="level3" data-number="12.2.8">
+<h3 data-number="12.2.8" class="anchored" data-anchor-id="get-f-statistic"><span class="header-section-number">12.2.8</span> Get <span class="math inline">\(F\)</span> statistic</h3>
 <p>We divide the sum of squares among data point by the sum of squares within data points to obtain our <span class="math inline">\(F\)</span> statistic.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>f_stat <span class="ot">&lt;-</span> ms_among<span class="sc">/</span>ms_within</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>f_stat <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>f_stat <span class="ot">&lt;-</span> ms_among<span class="sc">/</span>ms_within</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>f_stat <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 11.54</code></pre>
+<pre><code>[1] 120.08</code></pre>
 </div>
 </div>
 </section>
-<section id="get-p-value" class="level3" data-number="12.2.8">
-<h3 data-number="12.2.8" class="anchored" data-anchor-id="get-p-value"><span class="header-section-number">12.2.8</span> Get <span class="math inline">\(p\)</span> value</h3>
+<section id="get-p-value" class="level3" data-number="12.2.9">
+<h3 data-number="12.2.9" class="anchored" data-anchor-id="get-p-value"><span class="header-section-number">12.2.9</span> Get <span class="math inline">\(p\)</span> value</h3>
 <p>We can use the function <code>pf</code> to calculate the <span class="math inline">\(p\)</span> value for any given <span class="math inline">\(F\)</span>. <em>Note</em> that this function requires two different degrees of freedom to work correctly, <strong>and we are always looking right</strong> since this is a unidirectional distribution.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pf</span>(f_stat, </span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">df1 =</span> ss_among_df, </span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">df2 =</span> ss_within_df, </span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">lower.tail =</span> F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pf</span>(f_stat, </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">df1 =</span> ss_among_df, </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">df2 =</span> ss_within_df, </span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">lower.tail =</span> F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.894073e-05</code></pre>
+<pre><code>[1] 1.031005e-31</code></pre>
 </div>
 </div>
 <p>Given how small our <span class="math inline">\(p\)</span> value is, we want to round this to <span class="math inline">\(p&lt;0.0001\)</span>. As we can see, it is very unlikely that these are the same population.</p>
@@ -829,30 +717,15 @@ Click here to see the manual method.
 <h2 data-number="12.3" class="anchored" data-anchor-id="anova-by-r"><span class="header-section-number">12.3</span> ANOVA: By <em>R</em></h2>
 <p>For this, we need to use the dataframe where we have all data in a single column and all ID’s in the other columns. This can be done easily with <em>tibble</em>, as shown below.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>plant_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Fertilizer =</span> <span class="fu">c</span>(</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rep</span>(<span class="st">"A"</span>, <span class="dv">5</span>), <span class="co">#repeat 'A' 5 times (So there will be 5 'A' values)</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rep</span>(<span class="st">"B"</span>, <span class="dv">7</span>), <span class="co">#repeat 'B' 7 times</span></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rep</span>(<span class="st">"C"</span>, <span class="dv">6</span>)  <span class="co">#repeat 'C' 6 times</span></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Growth =</span> <span class="fu">c</span>(</span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>    <span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">13</span>, <span class="dv">11</span>, <span class="dv">12</span>,   <span class="co"># Fertilizer A</span></span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>    <span class="dv">16</span>, <span class="dv">17</span>, <span class="dv">15</span>, <span class="dv">14</span>, <span class="dv">16</span>, <span class="dv">15</span>, <span class="dv">17</span>,   <span class="co"># Fertilizer B</span></span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>    <span class="dv">20</span>, <span class="dv">19</span>, <span class="dv">21</span>, <span class="dv">22</span>, <span class="dv">18</span>, <span class="dv">22</span>    <span class="co"># Fertilizer C</span></span>
-<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(plant_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris_subset)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 2
-  Fertilizer Growth
-  &lt;chr&gt;       &lt;dbl&gt;
-1 A              12
-2 A              14
-3 A              13
-4 A              11
-5 A              12
-6 B              16</code></pre>
+<pre><code>  Sepal.Length Species
+1          5.1  setosa
+2          4.9  setosa
+3          4.7  setosa
+4          4.6  setosa
+5          5.0  setosa
+6          5.4  setosa</code></pre>
 </div>
 </div>
 <p>Once the data is in this format, it can be ran through the <code>run_oneway</code> function from the <em>UNKstats</em> package. This function needs: data = (the data frame you are trying analyse)</p>
@@ -860,12 +733,12 @@ Click here to see the manual method.
 <p>group = (the grouping factor)</p>
 <p>If the test needs to be parametric, you must specify that as it defaults to a non-parametric test.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>data_aov <span class="ot">&lt;-</span> <span class="fu">run_oneway</span>(<span class="at">data =</span> data,</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">dv =</span> <span class="st">"Response"</span>,</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">group =</span> <span class="st">"Explanatory"</span>,</span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">parametric =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>data_aov</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>data_aov <span class="ot">&lt;-</span> <span class="fu">run_oneway</span>(<span class="at">data =</span> iris_subset,</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">dv =</span> <span class="st">"Sepal.Length"</span>,</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">group =</span> <span class="st">"Species"</span>,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">parametric =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>data_aov</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$test_info
 $test_info$test
@@ -880,46 +753,42 @@ Call:
    stats::aov(formula = fml, data = df)
 
 Terms:
-                Explanatory Residuals
-Sum of Squares     23.40293  24.32949
-Deg. of Freedom           3        36
+                 Species Residuals
+Sum of Squares  63.21213  38.95620
+Deg. of Freedom        2       147
 
-Residual standard error: 0.8220822
+Residual standard error: 0.5147894
 Estimated effects may be unbalanced
 
 $anova_table
 # A tibble: 2 × 6
-  term           df sumsq meansq statistic    p.value
-  &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
-1 Explanatory     3  23.4  7.80       11.5  0.0000189
-2 Residuals      36  24.3  0.676      NA   NA        
+  term         df sumsq meansq statistic   p.value
+  &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 Species       2  63.2 31.6        119.  1.67e-31
+2 Residuals   147  39.0  0.265       NA  NA       
 
 $posthoc
-# A tibble: 6 × 7
-  contrast    diff   lwr    upr     p.adj group2 group1
-  &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; 
-1 x2-x1    -1.48   -2.47 -0.488 0.00156   x2     x1    
-2 x3-x1    -1.54   -2.53 -0.552 0.000939  x3     x1    
-3 x4-x1    -2.05   -3.04 -1.06  0.0000147 x4     x1    
-4 x3-x2    -0.0644 -1.05  0.926 0.998     x3     x2    
-5 x4-x2    -0.573  -1.56  0.417 0.414     x4     x2    
-6 x4-x3    -0.509  -1.50  0.481 0.517     x4     x3    
+# A tibble: 3 × 7
+  contrast              diff   lwr   upr    p.adj group2     group1    
+  &lt;chr&gt;                &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;     
+1 versicolor-setosa    0.930 0.686 1.17  3.31e-14 versicolor setosa    
+2 virginica-setosa     1.58  1.34  1.83  2.22e-15 virginica  setosa    
+3 virginica-versicolor 0.652 0.408 0.896 8.29e- 9 virginica  versicolor
 
 $letters
-# A tibble: 4 × 2
-  Explanatory .group
-  &lt;chr&gt;       &lt;chr&gt; 
-1 x1          a     
-2 x2          b     
-3 x3          b     
-4 x4          b     
+# A tibble: 3 × 2
+  Species    .group
+  &lt;chr&gt;      &lt;chr&gt; 
+1 setosa     a     
+2 versicolor b     
+3 virginica  c     
 
 $plot</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="anova1_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="anova1_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -932,11 +801,11 @@ attr(,"meta")$design
 [1] "oneway_between"
 
 attr(,"meta")$dv
-[1] "Response"
+[1] "Sepal.Length"
 
 attr(,"meta")$factors
 attr(,"meta")$factors$between
-[1] "Explanatory"
+[1] "Species"
 
 
 attr(,"meta")$adjust
@@ -947,6 +816,7 @@ attr(,"meta")$parametric
 </div>
 </div>
 <p>These numbers match the <em>by hand</em> methodology from the previous section, showing that the math is the same.</p>
+<p>*NOTE these numbers are close, but not quite. I need to troubleshoot this a little more.</p>
 </section>
 <section id="post-hoc-tukey-test" class="level2" data-number="12.4">
 <h2 data-number="12.4" class="anchored" data-anchor-id="post-hoc-tukey-test"><span class="header-section-number">12.4</span> Post-hoc Tukey test</h2>
@@ -958,76 +828,56 @@ attr(,"meta")$parametric
 <summary>
 Click here to see the by-hand method.
 </summary>
+<p><strong>Under construction…</strong></p>
 <p>We need to calculate pairwise differences between each set of means.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>x1_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Response[data<span class="sc">$</span>Explanatory <span class="sc">==</span> <span class="st">"x1"</span>])</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>x2_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Response[data<span class="sc">$</span>Explanatory <span class="sc">==</span> <span class="st">"x2"</span>])</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>x3_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Response[data<span class="sc">$</span>Explanatory <span class="sc">==</span> <span class="st">"x3"</span>])</span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>x4_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Response[data<span class="sc">$</span>Explanatory <span class="sc">==</span> <span class="st">"x4"</span>])</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>group_means <span class="ot">&lt;-</span> <span class="fu">c</span>(x1_mean, x2_mean, x3_mean, x4_mean)</span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate all pairwise differences</span></span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>pairwise_mean_diffs <span class="ot">&lt;-</span> <span class="fu">dist</span>(group_means)</span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>pairwise_mean_diffs <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     1    2    3
-2 1.48          
-3 1.54 0.06     
-4 2.05 0.57 0.51</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>x1_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Response[data<span class="sc">$</span>Explanatory <span class="sc">==</span> <span class="st">"x1"</span>])</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>x2_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Response[data<span class="sc">$</span>Explanatory <span class="sc">==</span> <span class="st">"x2"</span>])</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>x3_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Response[data<span class="sc">$</span>Explanatory <span class="sc">==</span> <span class="st">"x3"</span>])</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>x4_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Response[data<span class="sc">$</span>Explanatory <span class="sc">==</span> <span class="st">"x4"</span>])</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>group_means <span class="ot">&lt;-</span> <span class="fu">c</span>(x1_mean, x2_mean, x3_mean, x4_mean)</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate all pairwise differences</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>pairwise_mean_diffs <span class="ot">&lt;-</span> <span class="fu">dist</span>(group_means)</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>pairwise_mean_diffs <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Next, we need a critical <span class="math inline">\(Q\)</span> value against which we can compare. For Tukey, our degrees of freedom are the same as the degrees of freedom for <span class="math inline">\(SS_{within}\)</span>: <span class="math inline">\(N - K\)</span>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set p value</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>tukey_q <span class="ot">&lt;-</span> <span class="fu">qtukey</span>(<span class="at">p =</span> <span class="fl">0.95</span>,</span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>                  <span class="co"># get length of categories / columns</span></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">nmeans =</span> <span class="fu">ncol</span>(expanded_data),</span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">df =</span> ss_within_df)</span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>tukey_q <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.81</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set p value</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>tukey_q <span class="ot">&lt;-</span> <span class="fu">qtukey</span>(<span class="at">p =</span> <span class="fl">0.95</span>,</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>                  <span class="co"># get length of categories / columns</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">nmeans =</span> <span class="fu">ncol</span>(iris_subset),</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">df =</span> ss_within_df)</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>tukey_q <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We need to multiply <span class="math inline">\(Q\)</span> by the pooled variance.This is the same as the average of the variances for each group.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>var_data <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate pooled variance</span></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(expanded_data)){</span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  var_data <span class="ot">&lt;-</span> var_data <span class="sc">+</span> <span class="fu">var</span>(expanded_data[,i])</span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>pooled_var_dat <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(var_data<span class="sc">/</span>n)</span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>pooled_var_dat <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.26</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>var_data <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate pooled variance</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(expanded_data)){</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  var_data <span class="ot">&lt;-</span> var_data <span class="sc">+</span> <span class="fu">var</span>(expanded_data[,i])</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>pooled_var_dat <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(var_data<span class="sc">/</span>n)</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>pooled_var_dat <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can calculate the Tukey critical value by multiplying the pooled variance by <span class="math inline">\(Q\)</span>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>tukey_critical <span class="ot">&lt;-</span> tukey_q<span class="sc">*</span>pooled_var_dat</span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>tukey_critical <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.99</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>tukey_critical <span class="ot">&lt;-</span> tukey_q<span class="sc">*</span>pooled_var_dat</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>tukey_critical <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Remember, we are comparing to the actual value, not the rounded value.</p>
 <p>Which mean differences are difference compared to our critical value?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>pairwise_mean_diffs[pairwise_mean_diffs <span class="sc">&lt;</span> tukey_critical] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>pairwise_mean_diffs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>         1        2        3
-2 1.477866                  
-3 1.542282 0.000000         
-4 2.051068 0.000000 0.000000</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>pairwise_mean_diffs[pairwise_mean_diffs <span class="sc">&lt;</span> tukey_critical] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>pairwise_mean_diffs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>As we can see above, three differences cross our threshold - all associated with <code>x1</code>.</p>
 <p>When we graph things, we want to label this group as different. We will cover this a little later in the tutorial.</p>
@@ -1037,17 +887,14 @@ Click here to see the by-hand method.
 <h3 data-number="12.4.2" class="anchored" data-anchor-id="tukey-test-in-r"><span class="header-section-number">12.4.2</span> Tukey test in <em>R</em></h3>
 <p>Tukey is included in the <code>run_oneway</code> function; if you want to show it separately, you can do the following.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>data_aov<span class="sc">$</span>posthoc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>data_aov<span class="sc">$</span>posthoc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 7
-  contrast    diff   lwr    upr     p.adj group2 group1
-  &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; 
-1 x2-x1    -1.48   -2.47 -0.488 0.00156   x2     x1    
-2 x3-x1    -1.54   -2.53 -0.552 0.000939  x3     x1    
-3 x4-x1    -2.05   -3.04 -1.06  0.0000147 x4     x1    
-4 x3-x2    -0.0644 -1.05  0.926 0.998     x3     x2    
-5 x4-x2    -0.573  -1.56  0.417 0.414     x4     x2    
-6 x4-x3    -0.509  -1.50  0.481 0.517     x4     x3    </code></pre>
+<pre><code># A tibble: 3 × 7
+  contrast              diff   lwr   upr    p.adj group2     group1    
+  &lt;chr&gt;                &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;     
+1 versicolor-setosa    0.930 0.686 1.17  3.31e-14 versicolor setosa    
+2 virginica-setosa     1.58  1.34  1.83  2.22e-15 virginica  setosa    
+3 virginica-versicolor 0.652 0.408 0.896 8.29e- 9 virginica  versicolor</code></pre>
 </div>
 </div>
 </section>
@@ -1056,11 +903,11 @@ Click here to see the by-hand method.
 <h2 data-number="12.5" class="anchored" data-anchor-id="plotting"><span class="header-section-number">12.5</span> Plotting</h2>
 <p>Plotting is automatically done by the <code>run_oneway</code> function. It can be found by saving the output of the function as a variable, then calling upon it like so:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>data_aov<span class="sc">$</span>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>data_aov<span class="sc">$</span>plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="anova1_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="anova1_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1069,78 +916,20 @@ Click here to see the by-hand method.
 <section id="kruskal-wallis-tests" class="level2" data-number="12.6">
 <h2 data-number="12.6" class="anchored" data-anchor-id="kruskal-wallis-tests"><span class="header-section-number">12.6</span> Kruskal-Wallis tests</h2>
 <p>The Kruskal-Wallis test is the non-parametric version of an ANOVA. To demonstrate this, we will be creating a non-normal distribution by pulling random values from a <em>uniform</em> distribution, using the random uniform function <code>runif</code>. <strong>Note</strong> we are rounding the data here to make it more similar to non-normal datasets you may encounter, and to increase the probability of ties.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="do">## COPY THIS WHOLE CHUNK ##</span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="co"># will load example data</span></span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">8675309</span>)</span>
-<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>){</span>
-<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10</span>, <span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
-<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="dv">2</span>)</span>
-<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(i <span class="sc">==</span> <span class="dv">1</span>){</span>
-<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
-<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">round</span>(<span class="dv">2</span>)</span>
-<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> x <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="st">"Response"</span></span>
-<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>Explanatory <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
-<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span>{</span>
-<span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a>    newdat <span class="ot">&lt;-</span> x <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span>
-<span id="cb62-17"><a href="#cb62-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(newdat) <span class="ot">&lt;-</span> <span class="st">"Response"</span></span>
-<span id="cb62-18"><a href="#cb62-18" aria-hidden="true" tabindex="-1"></a>    newdat<span class="sc">$</span>Explanatory <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"x"</span>,i)</span>
-<span id="cb62-19"><a href="#cb62-19" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> <span class="fu">rbind</span>(data,newdat)</span>
-<span id="cb62-20"><a href="#cb62-20" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb62-21"><a href="#cb62-21" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb62-22"><a href="#cb62-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-23"><a href="#cb62-23" aria-hidden="true" tabindex="-1"></a><span class="co"># split into "typical" table</span></span>
-<span id="cb62-24"><a href="#cb62-24" aria-hidden="true" tabindex="-1"></a>expanded_data <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb62-25"><a href="#cb62-25" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x1 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x1"</span>)]</span>
-<span id="cb62-26"><a href="#cb62-26" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x2 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x2"</span>)]</span>
-<span id="cb62-27"><a href="#cb62-27" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x3 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x3"</span>)]</span>
-<span id="cb62-28"><a href="#cb62-28" aria-hidden="true" tabindex="-1"></a>expanded_data<span class="sc">$</span>x4 <span class="ot">&lt;-</span> data<span class="sc">$</span>Response[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x4"</span>)]</span>
-<span id="cb62-29"><a href="#cb62-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-30"><a href="#cb62-30" aria-hidden="true" tabindex="-1"></a>expanded_data <span class="ot">&lt;-</span> expanded_data <span class="sc">|&gt;</span></span>
-<span id="cb62-31"><a href="#cb62-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
-<span id="cb62-32"><a href="#cb62-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-33"><a href="#cb62-33" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize by group</span></span>
-<span id="cb62-34"><a href="#cb62-34" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> <span class="fu">ddply</span>(data, <span class="st">"Explanatory"</span>, summarise,</span>
-<span id="cb62-35"><a href="#cb62-35" aria-hidden="true" tabindex="-1"></a>                 <span class="at">N =</span> <span class="fu">length</span>(Response),</span>
-<span id="cb62-36"><a href="#cb62-36" aria-hidden="true" tabindex="-1"></a>                 <span class="at">mean =</span> <span class="fu">mean</span>(Response),</span>
-<span id="cb62-37"><a href="#cb62-37" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sd =</span> <span class="fu">sd</span>(Response),</span>
-<span id="cb62-38"><a href="#cb62-38" aria-hidden="true" tabindex="-1"></a>                 <span class="at">se =</span> sd <span class="sc">/</span> <span class="fu">sqrt</span>(N))</span>
-<span id="cb62-39"><a href="#cb62-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-40"><a href="#cb62-40" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summary_data, <span class="fu">aes</span>(<span class="at">x =</span> Explanatory, <span class="at">y =</span> mean, <span class="at">group =</span> Explanatory)) <span class="sc">+</span></span>
-<span id="cb62-41"><a href="#cb62-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb62-42"><a href="#cb62-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="at">data =</span> summary_data, <span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>se, <span class="at">ymax =</span> mean<span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>se,</span>
-<span id="cb62-43"><a href="#cb62-43" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">color =</span> Explanatory), <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb62-44"><a href="#cb62-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb62-45"><a href="#cb62-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>)) <span class="sc">+</span></span>
-<span id="cb62-46"><a href="#cb62-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb62-47"><a href="#cb62-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
-<span id="cb62-48"><a href="#cb62-48" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="anova1_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
 <section id="confirming-normality" class="level3" data-number="12.6.1">
 <h3 data-number="12.6.1" class="anchored" data-anchor-id="confirming-normality"><span class="header-section-number">12.6.1</span> Confirming normality</h3>
 <p>We can confirm these data are non-normal with Shapiro-Wilk tests and histograms.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> </span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Explanatory) <span class="sc">|&gt;</span> </span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">p.value =</span> <span class="fu">shapiro.test</span>(Response)<span class="sc">$</span>p.value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>iris_subset <span class="sc">|&gt;</span> </span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Species) <span class="sc">|&gt;</span> </span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">p.value =</span> <span class="fu">shapiro.test</span>(Sepal.Length)<span class="sc">$</span>p.value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 2
-  Explanatory p.value
-  &lt;chr&gt;         &lt;dbl&gt;
-1 x1            0.193
-2 x2            0.120
-3 x3            0.560
-4 x4            0.348</code></pre>
+<pre><code># A tibble: 3 × 2
+  Species    p.value
+  &lt;fct&gt;        &lt;dbl&gt;
+1 setosa       0.460
+2 versicolor   0.465
+3 virginica    0.258</code></pre>
 </div>
 </div>
 <p>While these data came out normal, for the purposes of this example, we will proceed with a non-normal test.</p>
@@ -1148,12 +937,12 @@ Click here to see the by-hand method.
 <section id="performing-the-test" class="level3" data-number="12.6.2">
 <h3 data-number="12.6.2" class="anchored" data-anchor-id="performing-the-test"><span class="header-section-number">12.6.2</span> Performing the test</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>kruskal_oneway <span class="ot">&lt;-</span> <span class="fu">run_oneway</span>(data,</span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">dv =</span> <span class="st">"Response"</span>,</span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">group =</span> <span class="st">"Explanatory"</span>,</span>
-<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">parametric =</span> F) <span class="co">#This is what makes it run the non-parametric test!</span></span>
-<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>kruskal_oneway</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>kruskal_oneway <span class="ot">&lt;-</span> <span class="fu">run_oneway</span>(iris_subset,</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">dv =</span> <span class="st">"Sepal.Length"</span>,</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">group =</span> <span class="st">"Species"</span>,</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">parametric =</span> F) <span class="co">#This is what makes it run the non-parametric test!</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>kruskal_oneway</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$test_info
 $test_info$test
@@ -1168,36 +957,32 @@ NULL
 
 $anova_table
 # A tibble: 1 × 5
-  term        statistic    df   p.value method        
-  &lt;chr&gt;           &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;         
-1 Explanatory      22.1     3 0.0000607 Kruskal–Wallis
+  term    statistic    df  p.value method        
+  &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt;    &lt;dbl&gt; &lt;chr&gt;         
+1 Species      96.9     2 8.92e-22 Kruskal–Wallis
 
 $posthoc
-# A tibble: 6 × 3
-  group1 group2    p.adj
-  &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;
-1 x1     x2     0.000276
-2 x1     x3     0.000428
-3 x1     x4     0.000428
-4 x2     x3     0.851   
-5 x2     x4     0.851   
-6 x3     x4     1       
+# A tibble: 3 × 3
+  group1     group2        p.adj
+  &lt;chr&gt;      &lt;chr&gt;         &lt;dbl&gt;
+1 setosa     versicolor 1.53e- 9
+2 setosa     virginica  6.00e-22
+3 versicolor virginica  2.77e- 4
 
 $letters
-# A tibble: 4 × 2
-  Explanatory .group
-  &lt;chr&gt;       &lt;chr&gt; 
-1 x1          a     
-2 x2          b     
-3 x3          b     
-4 x4          b     
+# A tibble: 3 × 2
+  Species    .group
+  &lt;chr&gt;      &lt;chr&gt; 
+1 setosa     a     
+2 versicolor b     
+3 virginica  c     
 
 $plot</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="anova1_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="anova1_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1210,11 +995,11 @@ attr(,"meta")$design
 [1] "oneway_between"
 
 attr(,"meta")$dv
-[1] "Response"
+[1] "Sepal.Length"
 
 attr(,"meta")$factors
 attr(,"meta")$factors$between
-[1] "Explanatory"
+[1] "Species"
 
 
 attr(,"meta")$adjust
@@ -1233,61 +1018,58 @@ Click here to see the Kruskal-Wallis by hand.
 </summary>
 <p>First, we need to order all the data in the entire dataset. <strong>This is easiest to do if we use the dataset with all data in a single column.</strong></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>ranks <span class="ot">&lt;-</span> <span class="fu">rank</span>(data<span class="sc">$</span>Response, <span class="at">ties.method =</span> <span class="st">"average"</span>)</span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="co"># view first couple of rows</span></span>
-<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>iris_subset<span class="sc">$</span>ranks <span class="ot">&lt;-</span> <span class="fu">rank</span>(iris_subset<span class="sc">$</span>Sepal.Length, <span class="at">ties.method =</span> <span class="st">"average"</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="co"># view first couple of rows</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris_subset)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Response Explanatory ranks
-1     1.84          x1    39
-2     1.58          x1    34
-3     1.51          x1    33
-4     1.26          x1    32
-5     1.75          x1    37
-6     1.92          x1    40</code></pre>
+<pre><code>  Sepal.Length Species ranks
+1          5.1  setosa  37.0
+2          4.9  setosa  19.5
+3          4.7  setosa  10.5
+4          4.6  setosa   7.5
+5          5.0  setosa  27.5
+6          5.4  setosa  49.5</code></pre>
 </div>
 </div>
-<p>Now, we need to calculate the sum of the ranks for each category. The below function will take the sum of the ranks for the rows which match the condition of having the group be <code>x1</code>.</p>
+<p>Now, we need to calculate the sum of the ranks for each category.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>x1_sum <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x1"</span>)])</span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>x2_sum <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x2"</span>)])</span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>x3_sum <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x3"</span>)])</span>
-<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>x4_sum <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x4"</span>)])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>rank_sums <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(iris_subset, Sepal.Length <span class="sc">~</span> Species, <span class="at">FUN =</span> sum)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>rank_sums</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Species Sepal.Length
+1     setosa        250.3
+2 versicolor        296.8
+3  virginica        329.4</code></pre>
+</div>
 </div>
 <p>Now, we need to calculate our test statistic. The test statistic is <span class="math inline">\(H\)</span>, with: <span class="math display">\[H = \frac{12}{N(N+1)} \cdot \Sigma \frac{R_j^2}{n_j}-3(N+1)\]</span>In this equation, <span class="math inline">\(R\)</span> is the sum of the ranks for a given category. This follows a <span class="math inline">\(\chi^2\)</span> distribution with <span class="math inline">\(k-1\)</span> degrees of freedom, with <span class="math inline">\(k\)</span> referring to categories.</p>
-<p>For these, we need to know what <span class="math inline">\(n\)</span> is for each category.</p>
+<p>For these, we need to know what <span class="math inline">\(n\)</span> is for each category. This is the same <code>N</code> as calculated above divided by the number of categories (3).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="fu">length</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x1"</span>)])</span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="fu">length</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x2"</span>)])</span>
-<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>n3 <span class="ot">&lt;-</span> <span class="fu">length</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x3"</span>)])</span>
-<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>n4 <span class="ot">&lt;-</span> <span class="fu">length</span>(data<span class="sc">$</span>ranks[<span class="fu">which</span>(data<span class="sc">$</span>Explanatory<span class="sc">==</span><span class="st">"x4"</span>)])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> N<span class="sc">/</span><span class="dv">3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Next, we can calculate the sums of the <span class="math inline">\(\frac{R^2}{n}\)</span> term.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>r2_sum <span class="ot">&lt;-</span> <span class="fu">sum</span>(x1_sum<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n,</span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>              x2_sum<span class="sc">^</span><span class="dv">2</span>,n,</span>
-<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>              x3_sum<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n,</span>
-<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>              x4_sum<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>r2_sum <span class="ot">&lt;-</span> (rank_sums<span class="sc">$</span>Sepal.Length<span class="sc">/</span>n) <span class="sc">|&gt;</span> <span class="fu">sum</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now, we can calculate <span class="math inline">\(H\)</span>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">sum</span>(n1, n2, n3, n4)</span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>H <span class="ot">&lt;-</span> ((<span class="dv">12</span><span class="sc">/</span>(N<span class="sc">*</span>(N<span class="sc">+</span><span class="dv">1</span>)))<span class="sc">*</span>r2_sum)<span class="sc">-</span>(<span class="dv">3</span><span class="sc">*</span>(N<span class="sc">+</span><span class="dv">1</span>))</span>
-<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>H <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>H <span class="ot">&lt;-</span> ((<span class="dv">12</span><span class="sc">/</span>(N<span class="sc">*</span>(N<span class="sc">+</span><span class="dv">1</span>)))<span class="sc">*</span>r2_sum)<span class="sc">-</span>(<span class="dv">3</span><span class="sc">*</span>(N<span class="sc">+</span><span class="dv">1</span>))</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>H <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 57.43</code></pre>
+<pre><code>[1] -452.99</code></pre>
 </div>
 </div>
 <p>Now, we can evaluate this with a <span class="math inline">\(\chi^2\)</span> <span class="math inline">\(p\)</span> value.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="at">q =</span> H, </span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">df =</span> <span class="fu">ncol</span>(data)<span class="sc">-</span><span class="dv">1</span>, </span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>       <span class="co"># remember, looking right!</span></span>
-<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="at">q =</span> H, </span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">df =</span> <span class="fu">ncol</span>(data)<span class="sc">-</span><span class="dv">1</span>, </span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>       <span class="co"># remember, looking right!</span></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.382831e-13</code></pre>
+<pre><code>[1] 1</code></pre>
 </div>
 </div>
 <p>As we can see, the probability is extremely low with <span class="math inline">\(p &lt; 0.0001\)</span>. One distribution is different, and we can proceed with Tukey tests.</p>
@@ -1301,19 +1083,19 @@ Click here to see the Kruskal-Wallis by hand.
 <h3 data-number="12.7.1" class="anchored" data-anchor-id="question-1-drug-dosage-effectiveness"><span class="header-section-number">12.7.1</span> <strong>Question 1: Drug dosage effectiveness</strong></h3>
 <p>Researchers want to test a new drug when given at different dosages. They are also including a placebo. They are measuring the score on a psychological examination, where a lower score indicates better mental condition, and are hoping to find the most effective dose to reduce score. Run the proper tests to determine if each group is unique and what effects they have.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>drug <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Dose =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Placebo"</span>,<span class="st">"Low"</span>,<span class="st">"Med"</span>,<span class="st">"High"</span>), <span class="at">each =</span> <span class="dv">12</span>),</span>
-<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Score =</span> <span class="fu">c</span>(</span>
-<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Placebo </span></span>
-<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.90</span>,<span class="fl">0.82</span>,<span class="fl">1.00</span>,<span class="fl">1.12</span>,<span class="fl">0.74</span>,<span class="fl">0.93</span>,<span class="fl">1.02</span>,<span class="fl">1.21</span>,<span class="fl">0.84</span>,<span class="fl">0.91</span>,<span class="fl">1.08</span>,<span class="fl">0.86</span>,</span>
-<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Low</span></span>
-<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.10</span>,<span class="fl">0.00</span>,<span class="sc">-</span><span class="fl">0.10</span>,<span class="fl">0.20</span>,<span class="fl">0.05</span>,<span class="sc">-</span><span class="fl">0.05</span>,<span class="fl">0.15</span>,<span class="fl">0.00</span>,<span class="sc">-</span><span class="fl">0.10</span>,<span class="fl">0.12</span>,<span class="fl">0.06</span>,<span class="fl">0.01</span>,</span>
-<span id="cb77-8"><a href="#cb77-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Med </span></span>
-<span id="cb77-9"><a href="#cb77-9" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">0.30</span>,<span class="sc">-</span><span class="fl">0.42</span>,<span class="sc">-</span><span class="fl">0.22</span>,<span class="sc">-</span><span class="fl">0.50</span>,<span class="sc">-</span><span class="fl">0.35</span>,<span class="sc">-</span><span class="fl">0.27</span>,<span class="sc">-</span><span class="fl">0.31</span>,<span class="sc">-</span><span class="fl">0.46</span>,<span class="sc">-</span><span class="fl">0.38</span>,<span class="sc">-</span><span class="fl">0.20</span>,<span class="sc">-</span><span class="fl">0.36</span>,<span class="sc">-</span><span class="fl">0.29</span>,</span>
-<span id="cb77-10"><a href="#cb77-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># High </span></span>
-<span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.40</span>,<span class="fl">0.32</span>,<span class="fl">0.50</span>,<span class="fl">0.36</span>,<span class="fl">0.25</span>,<span class="fl">0.46</span>,<span class="fl">0.41</span>,<span class="fl">0.52</span>,<span class="fl">0.35</span>,<span class="fl">0.30</span>,<span class="fl">0.44</span>,<span class="fl">0.39</span></span>
-<span id="cb77-12"><a href="#cb77-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb77-13"><a href="#cb77-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>drug <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Dose =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Placebo"</span>,<span class="st">"Low"</span>,<span class="st">"Med"</span>,<span class="st">"High"</span>), <span class="at">each =</span> <span class="dv">12</span>),</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Score =</span> <span class="fu">c</span>(</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Placebo </span></span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.90</span>,<span class="fl">0.82</span>,<span class="fl">1.00</span>,<span class="fl">1.12</span>,<span class="fl">0.74</span>,<span class="fl">0.93</span>,<span class="fl">1.02</span>,<span class="fl">1.21</span>,<span class="fl">0.84</span>,<span class="fl">0.91</span>,<span class="fl">1.08</span>,<span class="fl">0.86</span>,</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Low</span></span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.10</span>,<span class="fl">0.00</span>,<span class="sc">-</span><span class="fl">0.10</span>,<span class="fl">0.20</span>,<span class="fl">0.05</span>,<span class="sc">-</span><span class="fl">0.05</span>,<span class="fl">0.15</span>,<span class="fl">0.00</span>,<span class="sc">-</span><span class="fl">0.10</span>,<span class="fl">0.12</span>,<span class="fl">0.06</span>,<span class="fl">0.01</span>,</span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Med </span></span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">0.30</span>,<span class="sc">-</span><span class="fl">0.42</span>,<span class="sc">-</span><span class="fl">0.22</span>,<span class="sc">-</span><span class="fl">0.50</span>,<span class="sc">-</span><span class="fl">0.35</span>,<span class="sc">-</span><span class="fl">0.27</span>,<span class="sc">-</span><span class="fl">0.31</span>,<span class="sc">-</span><span class="fl">0.46</span>,<span class="sc">-</span><span class="fl">0.38</span>,<span class="sc">-</span><span class="fl">0.20</span>,<span class="sc">-</span><span class="fl">0.36</span>,<span class="sc">-</span><span class="fl">0.29</span>,</span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># High </span></span>
+<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.40</span>,<span class="fl">0.32</span>,<span class="fl">0.50</span>,<span class="fl">0.36</span>,<span class="fl">0.25</span>,<span class="fl">0.46</span>,<span class="fl">0.41</span>,<span class="fl">0.52</span>,<span class="fl">0.35</span>,<span class="fl">0.30</span>,<span class="fl">0.44</span>,<span class="fl">0.39</span></span>
+<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol type="1">
 <li>State the null and alternative hypotheses.</li>
@@ -1326,17 +1108,17 @@ Click here to see the Kruskal-Wallis by hand.
 <h3 data-number="12.7.2" class="anchored" data-anchor-id="question-2-105-labs"><span class="header-section-number">12.7.2</span> <strong>Question 2: 105 Labs</strong></h3>
 <p>Professors at UNK are debating if labs should be kept in Biology 105. They want to see if exam scores are higher in classes taught with only lecture, only lab, or both. Run the proper tests to determine if each group is unique and what effects they have.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>teach <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Method =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Lab"</span>,<span class="st">"Both"</span>,<span class="st">"Lecture"</span>), <span class="at">each =</span> <span class="dv">15</span>),</span>
-<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Exam =</span> <span class="fu">c</span>(</span>
-<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Lab</span></span>
-<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">76</span>,<span class="dv">79</span>,<span class="dv">82</span>,<span class="dv">77</span>,<span class="dv">75</span>,<span class="dv">80</span>,<span class="dv">81</span>,<span class="dv">78</span>,<span class="dv">76</span>,<span class="dv">79</span>,<span class="dv">77</span>,<span class="dv">83</span>,<span class="dv">74</span>,<span class="dv">80</span>,<span class="dv">78</span>,</span>
-<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Both</span></span>
-<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a>    <span class="dv">84</span>,<span class="dv">85</span>,<span class="dv">82</span>,<span class="dv">88</span>,<span class="dv">83</span>,<span class="dv">86</span>,<span class="dv">84</span>,<span class="dv">87</span>,<span class="dv">81</span>,<span class="dv">86</span>,<span class="dv">85</span>,<span class="dv">83</span>,<span class="dv">84</span>,<span class="dv">89</span>,<span class="dv">82</span>,</span>
-<span id="cb78-8"><a href="#cb78-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Lecture</span></span>
-<span id="cb78-9"><a href="#cb78-9" aria-hidden="true" tabindex="-1"></a>    <span class="dv">80</span>,<span class="dv">82</span>,<span class="dv">79</span>,<span class="dv">83</span>,<span class="dv">81</span>,<span class="dv">80</span>,<span class="dv">82</span>,<span class="dv">81</span>,<span class="dv">84</span>,<span class="dv">78</span>,<span class="dv">83</span>,<span class="dv">80</span>,<span class="dv">81</span>,<span class="dv">79</span>,<span class="dv">82</span></span>
-<span id="cb78-10"><a href="#cb78-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb78-11"><a href="#cb78-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>teach <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Method =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Lab"</span>,<span class="st">"Both"</span>,<span class="st">"Lecture"</span>), <span class="at">each =</span> <span class="dv">15</span>),</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Exam =</span> <span class="fu">c</span>(</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Lab</span></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">76</span>,<span class="dv">79</span>,<span class="dv">82</span>,<span class="dv">77</span>,<span class="dv">75</span>,<span class="dv">80</span>,<span class="dv">81</span>,<span class="dv">78</span>,<span class="dv">76</span>,<span class="dv">79</span>,<span class="dv">77</span>,<span class="dv">83</span>,<span class="dv">74</span>,<span class="dv">80</span>,<span class="dv">78</span>,</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Both</span></span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>    <span class="dv">84</span>,<span class="dv">85</span>,<span class="dv">82</span>,<span class="dv">88</span>,<span class="dv">83</span>,<span class="dv">86</span>,<span class="dv">84</span>,<span class="dv">87</span>,<span class="dv">81</span>,<span class="dv">86</span>,<span class="dv">85</span>,<span class="dv">83</span>,<span class="dv">84</span>,<span class="dv">89</span>,<span class="dv">82</span>,</span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Lecture</span></span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a>    <span class="dv">80</span>,<span class="dv">82</span>,<span class="dv">79</span>,<span class="dv">83</span>,<span class="dv">81</span>,<span class="dv">80</span>,<span class="dv">82</span>,<span class="dv">81</span>,<span class="dv">84</span>,<span class="dv">78</span>,<span class="dv">83</span>,<span class="dv">80</span>,<span class="dv">81</span>,<span class="dv">79</span>,<span class="dv">82</span></span>
+<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol type="1">
 <li>State the null and alternative hypotheses.</li>
@@ -1349,19 +1131,19 @@ Click here to see the Kruskal-Wallis by hand.
 <h3 data-number="12.7.3" class="anchored" data-anchor-id="question-3-weight-gain-drugs"><span class="header-section-number">12.7.3</span> <strong>Question 3: Weight gain drugs</strong></h3>
 <p>Researchers are testing weight gain drugs in comparison to each other. They are also comparing the effects of these drugs to a placebo. Run the proper tests to determine if each group is unique and what effects they have.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Diet =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>, <span class="st">"Placebo"</span>), <span class="at">each =</span> <span class="dv">14</span>),</span>
-<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">WeightGain =</span> <span class="fu">c</span>(</span>
-<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># A </span></span>
-<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.1</span>,<span class="fl">0.9</span>,<span class="fl">1.5</span>,<span class="fl">1.2</span>,<span class="fl">0.8</span>,<span class="fl">1.0</span>,<span class="fl">1.4</span>,<span class="fl">0.9</span>,<span class="fl">1.0</span>,<span class="fl">1.2</span>,<span class="fl">1.5</span>,<span class="fl">0.9</span>,<span class="fl">1.3</span>,<span class="fl">1.4</span>,</span>
-<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># B </span></span>
-<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.3</span>,<span class="fl">1.5</span>,<span class="fl">1.2</span>,<span class="fl">0.8</span>,<span class="fl">1.6</span>,<span class="fl">1.5</span>,<span class="fl">1.0</span>,<span class="fl">2.0</span>,<span class="fl">1.5</span>,<span class="fl">1.4</span>,<span class="fl">1.6</span>,<span class="fl">1.2</span>,<span class="fl">1.5</span>,<span class="fl">1.4</span>,</span>
-<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># C</span></span>
-<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2.1</span>,<span class="fl">2.0</span>,<span class="fl">1.6</span>,<span class="fl">2.3</span>,<span class="fl">2.1</span>,<span class="fl">2.0</span>,<span class="fl">1.6</span>,<span class="fl">2.1</span>,<span class="fl">2.5</span>,<span class="fl">1.7</span>,<span class="fl">2.2</span>,<span class="fl">2.1</span>,<span class="fl">2.3</span>,<span class="fl">2.7</span>,</span>
-<span id="cb79-10"><a href="#cb79-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Placebo</span></span>
-<span id="cb79-11"><a href="#cb79-11" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.2</span>,<span class="fl">0.2</span>,<span class="sc">-</span><span class="fl">0.2</span>,<span class="fl">0.0</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="sc">-</span>.<span class="dv">4</span>,<span class="fl">0.4</span>,<span class="fl">0.2</span>,<span class="fl">1.0</span>,<span class="fl">0.0</span>,<span class="sc">-</span><span class="fl">0.1</span>,<span class="sc">-</span><span class="fl">0.2</span>,<span class="sc">-</span><span class="fl">0.7</span>,<span class="fl">0.6</span></span>
-<span id="cb79-12"><a href="#cb79-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb79-13"><a href="#cb79-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Diet =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>, <span class="st">"Placebo"</span>), <span class="at">each =</span> <span class="dv">14</span>),</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">WeightGain =</span> <span class="fu">c</span>(</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># A </span></span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.1</span>,<span class="fl">0.9</span>,<span class="fl">1.5</span>,<span class="fl">1.2</span>,<span class="fl">0.8</span>,<span class="fl">1.0</span>,<span class="fl">1.4</span>,<span class="fl">0.9</span>,<span class="fl">1.0</span>,<span class="fl">1.2</span>,<span class="fl">1.5</span>,<span class="fl">0.9</span>,<span class="fl">1.3</span>,<span class="fl">1.4</span>,</span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># B </span></span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>    <span class="fl">1.3</span>,<span class="fl">1.5</span>,<span class="fl">1.2</span>,<span class="fl">0.8</span>,<span class="fl">1.6</span>,<span class="fl">1.5</span>,<span class="fl">1.0</span>,<span class="fl">2.0</span>,<span class="fl">1.5</span>,<span class="fl">1.4</span>,<span class="fl">1.6</span>,<span class="fl">1.2</span>,<span class="fl">1.5</span>,<span class="fl">1.4</span>,</span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># C</span></span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2.1</span>,<span class="fl">2.0</span>,<span class="fl">1.6</span>,<span class="fl">2.3</span>,<span class="fl">2.1</span>,<span class="fl">2.0</span>,<span class="fl">1.6</span>,<span class="fl">2.1</span>,<span class="fl">2.5</span>,<span class="fl">1.7</span>,<span class="fl">2.2</span>,<span class="fl">2.1</span>,<span class="fl">2.3</span>,<span class="fl">2.7</span>,</span>
+<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Placebo</span></span>
+<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.2</span>,<span class="fl">0.2</span>,<span class="sc">-</span><span class="fl">0.2</span>,<span class="fl">0.0</span>,<span class="sc">-</span><span class="fl">0.8</span>,<span class="sc">-</span>.<span class="dv">4</span>,<span class="fl">0.4</span>,<span class="fl">0.2</span>,<span class="fl">1.0</span>,<span class="fl">0.0</span>,<span class="sc">-</span><span class="fl">0.1</span>,<span class="sc">-</span><span class="fl">0.2</span>,<span class="sc">-</span><span class="fl">0.7</span>,<span class="fl">0.6</span></span>
+<span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol type="1">
 <li>State the null and alternative hypotheses.</li>
@@ -1374,18 +1156,18 @@ Click here to see the Kruskal-Wallis by hand.
 <h3 data-number="12.7.4" class="anchored" data-anchor-id="question-4-bird-foraging-times"><span class="header-section-number">12.7.4</span> <strong>Question 4: Bird foraging times</strong></h3>
 <p>A field study is measuring time-to-first-foraging (minutes) for four bird colonies. Run the proper tests to determine if each group is unique.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4517</span>)</span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>n_per <span class="ot">&lt;-</span> <span class="dv">18</span></span>
-<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>Colonies_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Colony =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"North"</span>,<span class="st">"East"</span>,<span class="st">"South"</span>,<span class="st">"West"</span>), <span class="at">each =</span> n_per),</span>
-<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Minutes =</span> <span class="fu">c</span>(</span>
-<span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">rexp</span>(n_per, <span class="at">rate =</span> <span class="fl">1.0</span>), <span class="dv">1</span>),  </span>
-<span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">rexp</span>(n_per, <span class="at">rate =</span> <span class="fl">1.3</span>), <span class="dv">1</span>),  </span>
-<span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">rexp</span>(n_per, <span class="at">rate =</span> <span class="fl">0.7</span>), <span class="dv">1</span>),  </span>
-<span id="cb80-10"><a href="#cb80-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">rexp</span>(n_per, <span class="at">rate =</span> <span class="fl">1.0</span>), <span class="dv">1</span>)   </span>
-<span id="cb80-11"><a href="#cb80-11" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb80-12"><a href="#cb80-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4517</span>)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>n_per <span class="ot">&lt;-</span> <span class="dv">18</span></span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>Colonies_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Colony =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"North"</span>,<span class="st">"East"</span>,<span class="st">"South"</span>,<span class="st">"West"</span>), <span class="at">each =</span> n_per),</span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Minutes =</span> <span class="fu">c</span>(</span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">rexp</span>(n_per, <span class="at">rate =</span> <span class="fl">1.0</span>), <span class="dv">1</span>),  </span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">rexp</span>(n_per, <span class="at">rate =</span> <span class="fl">1.3</span>), <span class="dv">1</span>),  </span>
+<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">rexp</span>(n_per, <span class="at">rate =</span> <span class="fl">0.7</span>), <span class="dv">1</span>),  </span>
+<span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">rexp</span>(n_per, <span class="at">rate =</span> <span class="fl">1.0</span>), <span class="dv">1</span>)   </span>
+<span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb69-12"><a href="#cb69-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol type="1">
 <li>State the null and alternative hypotheses.</li>
@@ -1398,18 +1180,18 @@ Click here to see the Kruskal-Wallis by hand.
 <h3 data-number="12.7.5" class="anchored" data-anchor-id="question-5-prairie-vole-ecology"><span class="header-section-number">12.7.5</span> <strong>Question 5: Prairie vole ecology</strong></h3>
 <p>A team of behavioral ecologists recorded the number of aggressive interactions among four populations of prairie voles raised in different social environments. They want to know if social upbringing influences aggression levels in male voles.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">9913</span>)</span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>n_per <span class="ot">&lt;-</span> <span class="dv">16</span></span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>vole <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Environment =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Isolated"</span>,<span class="st">"Paired"</span>,<span class="st">"Group"</span>,<span class="st">"Crowded"</span>), <span class="at">each =</span> n_per),</span>
-<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Aggression =</span> <span class="fu">c</span>(</span>
-<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">rnorm</span>(n_per, <span class="at">mean =</span> <span class="dv">8</span>, <span class="at">sd =</span> <span class="dv">3</span>)),</span>
-<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">rnorm</span>(n_per, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="fl">1.5</span>)),</span>
-<span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">rnorm</span>(n_per, <span class="at">mean =</span> <span class="dv">4</span>, <span class="at">sd =</span> <span class="dv">2</span>)),</span>
-<span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">rnorm</span>(n_per, <span class="at">mean =</span> <span class="dv">7</span>, <span class="at">sd =</span> <span class="dv">4</span>))</span>
-<span id="cb81-11"><a href="#cb81-11" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb81-12"><a href="#cb81-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">9913</span>)</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>n_per <span class="ot">&lt;-</span> <span class="dv">16</span></span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>vole <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Environment =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Isolated"</span>,<span class="st">"Paired"</span>,<span class="st">"Group"</span>,<span class="st">"Crowded"</span>), <span class="at">each =</span> n_per),</span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Aggression =</span> <span class="fu">c</span>(</span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">rnorm</span>(n_per, <span class="at">mean =</span> <span class="dv">8</span>, <span class="at">sd =</span> <span class="dv">3</span>)),</span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">rnorm</span>(n_per, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="fl">1.5</span>)),</span>
+<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">rnorm</span>(n_per, <span class="at">mean =</span> <span class="dv">4</span>, <span class="at">sd =</span> <span class="dv">2</span>)),</span>
+<span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">rnorm</span>(n_per, <span class="at">mean =</span> <span class="dv">7</span>, <span class="at">sd =</span> <span class="dv">4</span>))</span>
+<span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb70-12"><a href="#cb70-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol type="1">
 <li>State the null and alternative hypotheses.</li>
