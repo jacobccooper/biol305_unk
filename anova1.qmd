@@ -659,7 +659,7 @@ As we can see, the probability is extremely low with $p < 0.0001$. One distribut
 
 Complete the following problems. You must complete *one* problem *by hand* in addition to using the *R* method.
 
-### **Question 1:**
+### **Question 1: Drug dosage effectiveness**
 
 Researchers want to test a new drug when given at different dosages. They are also including a placebo. They are measuring the score on a psychological examination, where a lower score indicates better mental condition, and are hoping to find the most effective dose to reduce score. Run the proper tests to determine if each group is unique and what effects they have.
 
@@ -684,7 +684,7 @@ drug <- tibble(
 3.  Which dosage/dosages are most effective at reducing the score?
 4.  What might the biological implications of this test be?
 
-### **Question 2:**
+### **Question 2: 105 Labs**
 
 Professors at UNK are debating if labs should be kept in Biology 105. They want to see if exam scores are higher in classes taught with only lecture, only lab, or both. Run the proper tests to determine if each group is unique and what effects they have.
 
@@ -707,7 +707,7 @@ teach <- tibble(
 3.  Which teaching method is most effective? How do you know this?
 4.  What might the teaching implications of this test be?
 
-### **Question 3:**
+### **Question 3: Weight gain drugs**
 
 Researchers are testing weight gain drugs in comparison to each other. They are also comparing the effects of these drugs to a placebo. Run the proper tests to determine if each group is unique and what effects they have.
 
@@ -732,7 +732,7 @@ diet <- tibble(
 3.  Interpret the meaning of the assigned letters. How were they found, and what do they mean?
 4.  Which diet plan was most effective for gaining weight?
 
-### **Question 4:**
+### **Question 4: Bird foraging times**
 
 A field study is measuring time-to-first-foraging (minutes) for four bird colonies. Run the proper tests to determine if each group is unique.
 
@@ -756,7 +756,7 @@ Colonies_data <- data.frame(
 3.  Interpret the meaning of the assigned letters. How were they found, and what do they mean?
 4.  Which colony/colonies were the fastest foragers?
 
-### **Question 5:**
+### **Question 5: Prairie vole ecology**
 
 A team of behavioral ecologists recorded the number of aggressive interactions among four populations of prairie voles raised in different social environments. They want to know if social upbringing influences aggression levels in male voles.
 
