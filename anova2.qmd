@@ -574,6 +574,42 @@ aov <- run_twoway(data = malaria, dv = "deaths", factor_a = "entity", factor_b =
 aov$plot
 ```
 
+### Question 5: Incarceration Rates (Bad Guys?)
+
+It is well known that male driver insurance costs more than female's. But did you know those who live in urban areas also pay more? You want to see if this translates to incarceration rates as well, to truly be able to tell if males are "Bad Guys".
+
+Load the `pretrial` dataset below, and:
+
+1.  Filter for the `male` and `female` populations to exclude total incarceration rates
+2.  Compare incarceration rates between `male` and `female` populations, and determine if `urbanicity` plays a role in incarceration rates between these two populations.
+3.  *These data are non-normal, but for the purposes of this problem, perform a standard ANOVA on the non-transformed data. **Provide a potential explanation as to why this data is not normal.***
+
+```{r, message=FALSE, eval = F}
+pretrial <- readr::read_csv(
+  "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-01-22/pretrial_summary.csv"
+)
+
+pretrial_anova <- pretrial %>%
+  filter(pop_category %in% c("Male", "Female")) %>% 
+  mutate(
+    urbanicity   = factor(urbanicity),
+    pop_category = factor(pop_category)
+  )
+```
+
+```{r, eval = F, results = F, echo = F}
+res_pretrial <- run_twoway(
+  data                = pretrial_anova,
+  dv                  = "rate_per_100000",
+  factor_a            = "urbanicity",      
+  factor_b            = "pop_category",   
+  include_interaction = TRUE,
+  which_factor        = "urbanicity:pop_category" 
+)
+
+res_pretrial$plot
+```
+
 ### Question 6: Your turn!
 
 Using datasets from `tidytuesdayR` ([viewable here](https://github.com/rfordatascience/tidytuesday)), create your own two-way ANOVA homework problem.
