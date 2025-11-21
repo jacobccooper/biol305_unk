@@ -9,25 +9,11 @@ editor: visual
 
 Previously, we discussed one-way ANOVAs, where we are looking at a single factor split across three or more groups and trying to determine if the means of these groups are equal (*i.e.*, $H_0: \mu_1=\mu_2=...\mu_i$). ANOVA specifically allows us to analyze the variance of these different groups to ascertain which factors are most responsible for the variation we observe in the data. Because of the way ANOVA operates, we can actually test multiple different combinations of variables simultaneously in what we call a *two-way ANOVA*.
 
-Don't forget to load your required packages - some we have used before, like `agricolae`, `plyr`, and `tidyverse`, but others are new for this section: `multcomp` and `nlme`! As a reminder, these packages are designed for the following:
+Don't forget to load your required packages - `tidyverse` and `UNKstats`!
 
--   `agricolae`: originally written as a Master's thesis at the Universidad Nacional de Ingeniería (Lima, Perú), this package is designed to help with agricultural research.
--   `plyr`: tools for common problems, including splitting data, applying functions across data, and combining datasets together.
--   `tidyverse`: one we are already familiar with; a wrapper for installing `ggplot2`, `dplyr`, `tidyr`, `readr`, `purrr`, `tibble`, `stringr`, and `forcats`.
--   `multcomp`: more in depth and better **MULT**iple **COMP**arisons via linear models and related models.
--   `nlme`: a package for fitting Gaussian and **n**on-**l**inear **m**ixed-**e**ffect models.
--   `PMCMRplus`: a math package with post-hoc tests for Friedman's test
-
-```{r, message = F}
-library(agricolae)
-library(plyr)
+```{r, message = F, echo = F}
 library(tidyverse)
-
-# NEW PACKAGES NEEDED
-# Don't forget to install these on your machine
-library(multcomp)
-library(nlme)
-library(PMCMRplus)
+library(UNKstats)
 ```
 
 ## Designs
@@ -78,7 +64,7 @@ data <- data_expanded |>
   # values_to = what the measurements should be called
   pivot_longer(!Blocking_Variable, names_to = "Explanatory_Variables", values_to = "Measurements")
 
-data
+data[["Measurements"]] <- as.numeric(data[["Measurements"]])
 ```
 
 Now we can do our ANOVA. ***Note*** that I put `factor` around the blocking variable.
@@ -86,9 +72,17 @@ Now we can do our ANOVA. ***Note*** that I put `factor` around the blocking vari
 ```{r}
 # mark block by factor
 # best to always use
-data_aov <- aov(Measurements ~ Explanatory_Variables + factor(Blocking_Variable), data)
+data_aov <- run_oneway(data = data, 
+                       dv = "Measurements", 
+                       group = "Explanatory_Variables", 
+                       blocking = "Blocking_Variable", 
+                       parametric = T)
 
-summary(data_aov)
+data_aov$anova_table
+```
+
+```{r}
+data_aov$plot
 ```
 
 In this particular example, the blocking variable does not significantly differ, however the explanatory variable does differ.
@@ -96,100 +90,6 @@ In this particular example, the blocking variable does not significantly differ,
 **Remember, the columns represent your *primary hypothesis*. You will only plot your results if your *primary hypothesis is significant!***
 
 Given that our primary null hypothesis is rejected (that is to say, not all means are equal), we need to plot our results.
-
-To determine which mean(s) differ, we will use a Tukey Test. Unfortunately, the `agricolae` function `HSD.test` does not work as well for these multi-directional ANOVAs, so we need to use `TukeyHSD`.
-
-```{r}
-tukey_data_aov <- TukeyHSD(data_aov)
-
-tukey_data_aov
-```
-
-As we can see above, each pairwise comparison is given a $p$ value for the level of difference. We need to manually label these groups based on these $p$ values, with groups being considered different if $p < 0.05$. We can do this as follows, but unfortunately, we need to do it by hand since we don't have a short-form code (*yet*) for this conversion.
-
-```{r}
-# change Explanatory_Variables to your data
-Treatments <- unique(data$Explanatory_Variables)
-
-sig_labels <- Treatments |> 
-  as.data.frame() |> 
-  mutate(Significance = rep(NA, length(Treatments)))
-
-# Change Explanatory_Variables to your data
-colnames(sig_labels) <- c("Explanatory_Variables", # MUST BE SAME AS DATA
-                          "Significance")
-
-tukey_data_aov$Explanatory_Variables
-```
-
-**NOTE** that I am going to have to adjust column names and variable names a few times. Based on the above, we can see that `Explanatory_3` and `Explanatory_1` are not different from each other, but everything else is in a different group relative to each other. We can label these by hand.
-
-```{r}
-sig_labels$Significance <- c("A", "B", "A")
-
-sig_labels
-```
-
-As we can see above, now only `Explanatory_2` is given a different letter category.
-
-Now, we can plot these different factors.
-
-```{r}
-# summarize by group
-# slight adjustment from previous
-summary_data <- ddply(data, "Explanatory_Variables", summarise,
-                          N = length(as.numeric(Measurements)),
-                          mean = mean(as.numeric(Measurements)),
-                          sd = sd(as.numeric(Measurements)),
-                          se = sd / sqrt(N))
-
-summary_data
-```
-
-```{r}
-# SET Y LIMITS
-# change based on observed data
-ylims <- c(0, 20)
-
-# set label height, can change before plotting function
-label_height <- 4
-
-ggplot(summary_data, # plot summary data
-       # Define plotting - x by group, y is mean, grouping by group
-       aes(x = Explanatory_Variables, y = mean)) +
-  # add points to plot for y values
-  geom_point() +
-  # add error bars around points
-  geom_errorbar(data = summary_data, 
-                # define error bars
-                aes(ymin = mean - 2*se, ymax = mean+2*se), 
-                # width of bar
-                width = 0.1) +
-  # set vertical limits for plot
-  ylim(ylims) +
-  # make it a classic theme - more legible
-  theme_classic() +
-  # add text to plot
-  geom_text(data = sig_labels,
-            # make bold
-            fontface = "bold",
-            # define where labels should go
-            aes(x = Explanatory_Variables, 
-                # define height of label
-                y = 4, 
-                # what are the labels?
-                label = paste0(Significance))) +
-  xlab("Treatment") +
-  ylab("Mean") +
-  # remove legend - not needed here
-  theme(legend.position = "none",
-        # make label text vertical, easier to read
-        axis.text.x = element_text(angle = 90, 
-                                   # vertical offset of text
-                                   vjust = 0.5, 
-                                   # text size
-                                   size = 12))
-```
 
 ### Repeated measures
 
@@ -211,113 +111,25 @@ data <- cbind(Individuals,
                names_to = "Visits",
                values_to = "Measurements")
 
+data[["Measurements"]] <- as.numeric(data[["Measurements"]])
+
 data
 ```
 
 We need to perform the ANOVA again, but we need to account for the factor of which locations are repeated.
 
 ```{r}
-repeated_aov <- aov(Measurements ~ factor(Visits) + Error(factor(Individuals)), data)
+repeated_aov <- run_rm(data = data, 
+                       dv = "Measurements", 
+                       id = "Individuals", 
+                       within = "Visits", 
+                       which_within = "Visits")
 
-summary(repeated_aov)
-```
-
-Unfortunately, because of the model this is, we cannot perform a Tukey Test on the "object" that is created from this ANOVA analysis. We can, however, approach this from a different direction and get our Tukey results ([thanks to Henrik on StackOverflow!](https://stats.stackexchange.com/questions/14078/post-hoc-test-after-anova-with-repeated-measures-using-r)). **For this to work, we need to install the packages `nlme` and `multcomp`.**
-
-```{r}
-# ensure data is proper format
-data$Individuals <- as.factor(data$Individuals)
-data$Visits <- as.factor(data$Visits)
-data$Measurements <- as.numeric(data$Measurements)
-```
-
-The next part of the code fits a *linear model* to the data. A linear model, which we will cover later in the class, is mathematically very similar to an ANOVa. However, we can data from this model and extract the ANOVA data to understand more about the interactions. We need to use a linear model for this to account with the relationships between the two.
-
-```{r}
-# fit a linear mixed-effects model
-# similar to ANOVA
-
-lme_data <- lme(Measurements ~ Visits, 
-                         data = data, 
-                         # define repeated section
-                         random = ~1|Individuals)
-
-# perform ANOVA on model
-anova(lme_data)
-```
-
-As we can see above, we can get the ANOVA results from this linear mixed-effects model fit to the dataset. Now, we need to know post-hoc which sets are different:
-
-```{r}
-lme_data |>
-  # "general linear hypothesis"
-  # define a comparison to make
-  # can add corrections like test = adjusted (type = "bonferroni")
-  glht(linfct = mcp(Visits = "Tukey")) |>
-  # return a summary of the above
-  summary()
-```
-
-We can see that every visit is different.
-
-```{r}
-# manually labeling
-
-sig_levels_repeated <- matrix(data = c("Visit_1", "A",
-                                       "Visit_2", "B",
-                                       "Visit_3", "C"), 
-                              byrow = T, ncol = 2) |> as.data.frame()
-
-# make labels match!
-colnames(sig_levels_repeated) <- c("Visits", "Significance")
-```
-
-Let's plot these. *Note* that we are not summarizing these the same way, since things are varying based on individual as well.
-
-*Note*: For reasons I am not certain, you need to put the locations and then `ggplot` uses these colors to define everything. I really don't know why this is happening, so if you have a solution, let me know.
-
-```{r}
-summary_data <- ddply(data, "Visits", summarise,
-                          N = length(as.numeric(Measurements)),
-                          mean = mean(as.numeric(Measurements)),
-                          sd = sd(as.numeric(Measurements)),
-                          se = sd / sqrt(N))
-
+repeated_aov$anova_table
 ```
 
 ```{r}
-ggplot(summary_data,
-       aes(x = Visits, y = mean)) +
-  geom_point() +
-  geom_errorbar(data = summary_data, 
-                # define error bars
-                aes(ymin = mean - 2*se, ymax = mean+2*se), 
-                # width of bar
-                width = 0.1) +
-  # set vertical limits for plot
-  ylim(c(0,10)) +
-  # make it a classic theme - more legible
-  theme_classic() +
-  # add text to plot
-  geom_text(data = sig_levels_repeated,
-            # make bold
-            fontface = "bold",
-            # define where labels should go
-            aes(x = Visits, 
-                # define height of label
-                y = 2, 
-                # what are the labels?
-                label = paste0(Significance))) +
-  xlab("Visits") +
-  ylab("Measurement") +
-  # remove legend - not needed here
-  theme(legend.position = "none",
-        # make label text vertical, easier to read
-        axis.text.x = element_text(angle = 90, 
-                                   # vertical offset of text
-                                   vjust = 0.5, 
-                                   # text size
-                                   size = 12))
+repeated_aov$plot
 ```
 
 ### Factorial ANOVA
@@ -362,25 +174,29 @@ data <- data_expanded |>
   # !by column for aggregating
   # names_to = what to name column aggregation
   # values_to = what the measurements should be called
-  pivot_longer(!Blocking_Variable, names_to = "Treatments", values_to = "Measurements")
-
-# specifying factor to be safe
-
-interactive_aov <- aov(Measurements ~ factor(Treatments) + 
-                         factor(Blocking_Variable) + 
-                         factor(Treatments)*factor(Blocking_Variable), 
-                       data)
-
-summary(interactive_aov)
+  pivot_longer(!Blocking_Variable, 
+               names_to = "Treatments", 
+               values_to = "Measurements")
 ```
-
-As we can see above, we have very significant effects for `Treatment` and `Blocking_Variable`, but a less significant effect for the interaction between the two. **Remember - we only need to plot our primary hypothesis**. **Note** however, that Tukey gives us our differences and $p$ values for each set of tests and comparisons:
 
 ```{r}
-TukeyHSD(interactive_aov)
+# specifying factor to be safe
+
+interactive_aov <- run_twoway(data = data, 
+                              dv = "Measurements", 
+                              factor_a = "Treatments", 
+                              factor_b = "Blocking_Variable", 
+                              include_interaction = TRUE, 
+                              which_factor = "Treatments:Blocking_Variable")
 ```
 
-I do not plot this here, but it would be similar to the other parts of this test.
+```{r}
+interactive_aov$anova_table
+```
+
+```{r}
+interactive_aov$plot
+```
 
 ## Friedman's test
 
@@ -438,6 +254,8 @@ print(friedman_long_data)
 We can use the following, from package `PMCMRplus`, to find the adjacent and non-adjacent groups.
 
 ```{r}
+library(PMCMRplus)
+
 # find differences
 frdAllPairsConoverTest(y = long_data$Measurements,
                        groups = long_data$Treatments,
@@ -492,6 +310,8 @@ aov$plot
 ### Question 2: All alone...
 
 You and your study group are binge-watching the TV show [*Alone*](https://www.history.com/shows/alone) while studying for your history final (it is on the *History* channel, so it has to help somehow, right?). One of your buddies says that the show is inherently unfair, because men are better at survival techniques than women are. This rubs you the wrong way, so you want to see if there is any merit to his claims. You decide to analyze the number of days people are able to last in the show, divided by gender. You also realize that there are cultural differences between countries, so you want to account for any error due to cultural background when you perform your test.
+
+*NOTE:* if you cannot transform this to normal, just run the test on the data "as is".
 
 -   Gender of participant = `gender`
 
