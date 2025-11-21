@@ -62,7 +62,9 @@ data <- data_expanded |>
   # !by column for aggregating
   # names_to = what to name column aggregation
   # values_to = what the measurements should be called
-  pivot_longer(!Blocking_Variable, names_to = "Explanatory_Variables", values_to = "Measurements")
+  pivot_longer(!Blocking_Variable, 
+               names_to = "Explanatory_Variables", 
+               values_to = "Measurements")
 
 data[["Measurements"]] <- as.numeric(data[["Measurements"]])
 ```
