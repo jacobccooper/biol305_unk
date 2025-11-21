@@ -317,9 +317,13 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#using-r" id="toc-using-r" class="nav-link" data-scroll-target="#using-r"><span class="header-section-number">13.3.1</span> Using <em>R</em></a></li>
   </ul></li>
-  <li><a href="#homework-chapter-12" id="toc-homework-chapter-12" class="nav-link" data-scroll-target="#homework-chapter-12"><span class="header-section-number">13.4</span> Homework: Chapter 12</a>
+  <li><a href="#homework-two-way-anova" id="toc-homework-two-way-anova" class="nav-link" data-scroll-target="#homework-two-way-anova"><span class="header-section-number">13.4</span> Homework: Two-way ANOVA</a>
   <ul class="collapse">
-  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1"><span class="header-section-number">13.4.1</span> Question 1</a></li>
+  <li><a href="#question-1-stat-y-spice" id="toc-question-1-stat-y-spice" class="nav-link" data-scroll-target="#question-1-stat-y-spice"><span class="header-section-number">13.4.1</span> Question 1: Stat-y Spice</a></li>
+  <li><a href="#question-2-all-alone" id="toc-question-2-all-alone" class="nav-link" data-scroll-target="#question-2-all-alone"><span class="header-section-number">13.4.2</span> Question 2: All alone…</a></li>
+  <li><a href="#question-3-penguins-not-of-madagascar" id="toc-question-3-penguins-not-of-madagascar" class="nav-link" data-scroll-target="#question-3-penguins-not-of-madagascar"><span class="header-section-number">13.4.3</span> Question 3: Penguins (not of Madagascar)</a></li>
+  <li><a href="#question-4-mankinds-biggest-foe" id="toc-question-4-mankinds-biggest-foe" class="nav-link" data-scroll-target="#question-4-mankinds-biggest-foe"><span class="header-section-number">13.4.4</span> Question 4: Mankind’s biggest foe</a></li>
+  <li><a href="#question-6-your-turn" id="toc-question-6-your-turn" class="nav-link" data-scroll-target="#question-6-your-turn"><span class="header-section-number">13.4.5</span> Question 6: Your turn!</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1043,34 +1047,76 @@ P value adjustment method: bonferroni</code></pre>
 <p>As we can see, some pairs are inseparable and others are separable. We can now plot as for the other problems.</p>
 </section>
 </section>
-<section id="homework-chapter-12" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="homework-chapter-12"><span class="header-section-number">13.4</span> Homework: Chapter 12</h2>
-<p>State your hypotheses in sentence form and mathematically. Then, identify the appropriate ANOVA and perform the analysis. If you <em>reject</em> the null, evaluate a Tukey test and plot your results, showing letters denoting each group. <strong>Note</strong> that some questions may be non-parametric.</p>
-<p><strong>Remember, only plot the results if you reject your <em>primary hypothesis</em>.</strong></p>
-<section id="question-1" class="level3" data-number="13.4.1">
-<h3 data-number="13.4.1" class="anchored" data-anchor-id="question-1"><span class="header-section-number">13.4.1</span> Question 1</h3>
+<section id="homework-two-way-anova" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="homework-two-way-anova"><span class="header-section-number">13.4</span> Homework: Two-way ANOVA</h2>
+<p>This homework requires you to install <code>tidytuesdayR</code>.</p>
+<p><strong>For each question</strong>:</p>
+<ol type="1">
+<li>State your null and alternative hypotheses</li>
+<li>Justify what type of ANOVA you think this is and why.</li>
+<li>Test for normality relative to the <em>primary hypothesis</em></li>
+<li>Perform the appropriate ANOVA</li>
+<li>Interpret the results and provide a conclusion</li>
+<li>If there are any additional questions, be sure to address them</li>
+</ol>
+<section id="question-1-stat-y-spice" class="level3" data-number="13.4.1">
+<h3 data-number="13.4.1" class="anchored" data-anchor-id="question-1-stat-y-spice"><span class="header-section-number">13.4.1</span> Question 1: Stat-y Spice</h3>
+<p>You and your friends are jamming out to the <em>Spice Girls</em>, like you do every Tuesday night, when you get into a heated debate about which of their songs are the most danceable. Amidst all the bickering, you make out that some of your friends are fixated on the year the song came out, while others are arguing that they have more success making “bangers” in major keys than they do in minor keys. In order to save your friend group from infighting, you decide to perform a two-way ANOVA on release year and whether the song is in a major or a minor key and how those factors affect danceability.</p>
+<p>Load the following table, where:</p>
+<ul>
+<li><p>Release year = <code>album_release_year</code></p></li>
+<li><p>Major or minor key = <code>mode_name</code></p></li>
+<li><p>Danceability = <code>danceability</code></p></li>
+</ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2025</span>, <span class="at">week =</span> <span class="dv">13</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>---- Compiling #TidyTuesday Information for 2025-04-01 ----
---- There is 1 file available ---
-
-
-── Downloading files ───────────────────────────────────────────────────────────
-
-  1 of 1: "pokemon_df.csv"</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2021</span>, <span class="at">week =</span> <span class="dv">51</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>studio_album_tracks <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>studio_album_tracks</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>pokemon_df <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>pokemon_df</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>pokemon_df <span class="sc">|&gt;</span> </span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">attack_defense =</span> attack<span class="sc">/</span>defense) <span class="ot">-&gt;</span></span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  pokemon_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+</section>
+<section id="question-2-all-alone" class="level3" data-number="13.4.2">
+<h3 data-number="13.4.2" class="anchored" data-anchor-id="question-2-all-alone"><span class="header-section-number">13.4.2</span> Question 2: All alone…</h3>
+<p>You and your study group are binge-watching the TV show <a href="https://www.history.com/shows/alone"><em>Alone</em></a> while studying for your history final (it is on the <em>History</em> channel, so it has to help somehow, right?). One of your buddies says that the show is inherently unfair, because men are better at survival techniques than women are. This rubs you the wrong way, so you want to see if there is any merit to his claims. You decide to analyze the number of days people are able to last in the show, divided by gender. You also realize that there are cultural differences between countries, so you want to account for any error due to cultural background when you perform your test.</p>
+<ul>
+<li><p>Gender of participant = <code>gender</code></p></li>
+<li><p>Country of origin = <code>country</code></p></li>
+<li><p>Length of time lasted = <code>days_lasted</code></p></li>
+</ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>poke_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(<span class="at">data =</span> pokemon_df, attack_defense <span class="sc">~</span> type_1 <span class="sc">+</span> egg_group_1)</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(poke_aov)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2023</span>, <span class="at">week =</span> <span class="dv">4</span>)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>alone <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>survivalists<span class="sc">|&gt;</span> </span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"United States"</span> <span class="sc">|</span> country <span class="sc">==</span> <span class="st">"Canada"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</section>
+<section id="question-3-penguins-not-of-madagascar" class="level3" data-number="13.4.3">
+<h3 data-number="13.4.3" class="anchored" data-anchor-id="question-3-penguins-not-of-madagascar"><span class="header-section-number">13.4.3</span> Question 3: Penguins (not of Madagascar)</h3>
+<p>Talking to Dr.&nbsp;Cooper after class about niche ecology, you become fascinated by the idea of similar species having morphological differences to allow them to co-occur in different areas. You decide to see if there are any morphological differences between penguin species on Antarctic islands. You decide to examine populations of thee congeneric penguins that are regionally sympatric: Adelie Penguin <em>Pygoscelis adeliae</em>, Chinstrap Penguin <em>P. antarcticus</em>, and Gentoo Penguin <em>P.</em> [<em>papua</em>] <em>ellsworthi</em>. You anticipate that there will be differences in bill length among species, but you also know that there is intraspecific competition within species because you did not fall asleep in your evolution class and know that this may also have an effect on bill lengths. In your conclusion, be sure to state which groups are (or are not) different.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-04-15/penguins.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="question-4-mankinds-biggest-foe" class="level3" data-number="13.4.4">
+<h3 data-number="13.4.4" class="anchored" data-anchor-id="question-4-mankinds-biggest-foe"><span class="header-section-number">13.4.4</span> Question 4: Mankind’s biggest foe</h3>
+<p>Mosquitoes kill more people than any other animal every year. One of the ways in which humans die from mosquitoes is by infecting them with malaria. While malaria has been largely eradicated in North America, it still persists in the Caribbean, Central America, and South America.</p>
+<p>Load the <code>malaria</code> dataset below, and:</p>
+<ol type="1">
+<li>Filter for the <code>entity</code> of <code>Andean Latin America</code>, <code>Caribbean</code>, <code>Central Latin America</code>, <code>Southern Latin America</code>, and <code>Tropical Latin America</code>.</li>
+<li>Filter only for years that are 2012 or more recently.</li>
+<li>Compare malaria deaths by country, taking into account that year may also be a source of variation for deaths (i.e., via outbreaks).</li>
+<li><em>These data are non-normal, but for the purposes of this problem, perform a standard ANOVA on the non-transformed data.</em></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>malaria <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2018/2018-11-13/malaria_deaths_age.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="question-6-your-turn" class="level3" data-number="13.4.5">
+<h3 data-number="13.4.5" class="anchored" data-anchor-id="question-6-your-turn"><span class="header-section-number">13.4.5</span> Question 6: Your turn!</h3>
+<p>Using datasets from <code>tidytuesdayR</code> (<a href="https://github.com/rfordatascience/tidytuesday">viewable here</a>), create your own two-way ANOVA homework problem.</p>
+<ul>
+<li><p>You are allowed to work with others, but you <em>must</em> say who you worked with if you do. Please keep group sizes ≤ 4.</p></li>
+<li><p>Your problem <em>must</em> include a worked through “key” showing how the homework problem should be done based on the prompt.</p></li>
+</ul>
 
 
 </section>
