@@ -315,6 +315,8 @@ You and your study group are binge-watching the TV show [*Alone*](https://www.hi
 
 *NOTE:* if you cannot transform this to normal, just run the test on the data "as is".
 
+**Do not transform these data - perform as is.**
+
 -   Gender of participant = `gender`
 
 -   Country of origin = `country`
@@ -329,6 +331,10 @@ alone <- tuesdata$survivalists|>
 ```
 
 ```{r, echo = F, eval = F}
+alone |> 
+  group_by(gender) |> 
+  summarise(pv = shapiro.test((days_lasted)^(1/2))$p.value)
+
 aov2 <- run_oneway(data = alone,
                    dv = "days_lasted",
                    group = "gender",
