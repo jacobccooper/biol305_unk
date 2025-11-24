@@ -329,7 +329,16 @@ alone <- tuesdata$survivalists|>
 ```
 
 ```{r, echo = F, eval = F}
-aov <- run_rm(data = alone, dv = "days_lasted", id = "country", within = "gender", which_within = "gender")
+aov2 <- run_oneway(data = alone,
+                   dv = "days_lasted",
+                   group = "gender",
+                   blocking = "country",
+                   parametric = TRUE)
+              
+
+aov2$plot
+
+#aov <- run_rm(data = alone, dv = "days_lasted", id = "country", within = "gender", which_within = "gender")
 
 #aov <- run_twoway(data = alone2, 
 #                  dv = "days_lasted", 
