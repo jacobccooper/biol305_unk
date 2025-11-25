@@ -775,10 +775,11 @@ P value adjustment method: bonferroni</code></pre>
 <section id="question-3-penguins-not-of-madagascar" class="level3" data-number="13.4.3">
 <h3 data-number="13.4.3" class="anchored" data-anchor-id="question-3-penguins-not-of-madagascar"><span class="header-section-number">13.4.3</span> Question 3: Penguins (not of Madagascar)</h3>
 <p>Talking to Dr.&nbsp;Cooper after class about niche ecology, you become fascinated by the idea of similar species having morphological differences to allow them to co-occur in different areas. You decide to see if there are any morphological differences between penguin species on Antarctic islands. You decide to examine populations of thee congeneric penguins that are regionally sympatric: Adelie Penguin <em>Pygoscelis adeliae</em>, Chinstrap Penguin <em>P. antarcticus</em>, and Gentoo Penguin <em>P.</em> [<em>papua</em>] <em>ellsworthi</em>. You anticipate that there will be differences in bill length among species, but you also know that there is intraspecific competition within species because you did not fall asleep in your evolution class and know that this may also have an effect on bill lengths. In your conclusion, be sure to state which groups are (or are not) different.</p>
+<p><strong><em>HINT</em></strong>: the intraspecific variation should be accounted for by a column in the dataset that shows variation within each species by some categorical measure.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-04-15/penguins.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>There is a significant effect of species (<span class="math inline">\(F_{2,327} = 650.21\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>) and sex (<span class="math inline">\(F_{1,327} = 208.06\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>).</p>
+<p>There is a significant effect of species (<span class="math inline">\(F_{2,327} = 650.21\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>) and the intraspecific variable (<span class="math inline">\(F_{1,327} = 208.06\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>).</p>
 </section>
 <section id="question-4-mankinds-biggest-foe" class="level3" data-number="13.4.4">
 <h3 data-number="13.4.4" class="anchored" data-anchor-id="question-4-mankinds-biggest-foe"><span class="header-section-number">13.4.4</span> Question 4: Mankind’s biggest foe</h3>
@@ -820,10 +821,11 @@ P value adjustment method: bonferroni</code></pre>
 </section>
 <section id="question-6-your-turn" class="level3" data-number="13.4.6">
 <h3 data-number="13.4.6" class="anchored" data-anchor-id="question-6-your-turn"><span class="header-section-number">13.4.6</span> Question 6: Your turn!</h3>
-<p>Using datasets from <code>tidytuesdayR</code> (<a href="https://github.com/rfordatascience/tidytuesday">viewable here</a>), create your own two-way ANOVA homework problem.</p>
+<p>Using datasets from <code>tidytuesdayR</code> (<a href="https://github.com/rfordatascience/tidytuesday">viewable here</a>) or a different dataset of your choosing, create your own two-way ANOVA homework problem.</p>
 <ul>
 <li><p>You are allowed to work with others, but you <em>must</em> say who you worked with if you do. Please keep group sizes ≤ 4.</p></li>
 <li><p>Your problem <em>must</em> include a worked through “key” showing how the homework problem should be done based on the prompt.</p></li>
+<li><p>I want you to do a <em>good faith effort</em> at this problem; if you get stuck or cannot figure out how to get a problem to work, show which datasets you tried to use and where you might get homework data in the future if these don’t work.</p></li>
 </ul>
 
 

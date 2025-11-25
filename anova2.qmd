@@ -370,6 +370,8 @@ There is not a significant effect of gender or country, with $p = 0.09$ for both
 
 Talking to Dr. Cooper after class about niche ecology, you become fascinated by the idea of similar species having morphological differences to allow them to co-occur in different areas. You decide to see if there are any morphological differences between penguin species on Antarctic islands. You decide to examine populations of thee congeneric penguins that are regionally sympatric: Adelie Penguin *Pygoscelis adeliae*, Chinstrap Penguin *P. antarcticus*, and Gentoo Penguin *P.* \[*papua*\] *ellsworthi*. You anticipate that there will be differences in bill length among species, but you also know that there is intraspecific competition within species because you did not fall asleep in your evolution class and know that this may also have an effect on bill lengths. In your conclusion, be sure to state which groups are (or are not) different.
 
+***HINT***: the intraspecific variation should be accounted for by a column in the dataset that shows variation within each species by some categorical measure.
+
 ```{r, message=FALSE, eval = F}
 penguins <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-04-15/penguins.csv')
 ```
@@ -388,7 +390,7 @@ aov <- run_twoway(data = penguins, dv = "bill_len", factor_a = "species", factor
 aov$anova_table
 ```
 
-There is a significant effect of species ($F_{2,327} = 650.21$, $p < 0.001$) and sex ($F_{1,327} = 208.06$, $p < 0.001$).
+There is a significant effect of species ($F_{2,327} = 650.21$, $p < 0.001$) and the intraspecific variable ($F_{1,327} = 208.06$, $p < 0.001$).
 
 ### Question 4: Mankind's biggest foe
 
@@ -473,8 +475,10 @@ There is an effect of sex ($F_{1,360} = 583.65$), urbanicity ($F_{3,360} = 8.68$
 
 ### Question 6: Your turn!
 
-Using datasets from `tidytuesdayR` ([viewable here](https://github.com/rfordatascience/tidytuesday)), create your own two-way ANOVA homework problem.
+Using datasets from `tidytuesdayR` ([viewable here](https://github.com/rfordatascience/tidytuesday)) or a different dataset of your choosing, create your own two-way ANOVA homework problem.
 
 -   You are allowed to work with others, but you *must* say who you worked with if you do. Please keep group sizes ≤ 4.
 
 -   Your problem *must* include a worked through "key" showing how the homework problem should be done based on the prompt.
+
+-   I want you to do a *good faith effort* at this problem; if you get stuck or cannot figure out how to get a problem to work, show which datasets you tried to use and where you might get homework data in the future if these don't work.
