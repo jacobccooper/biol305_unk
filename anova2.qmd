@@ -274,11 +274,18 @@ This homework requires you to install `tidytuesdayR`.
 **For each question**:
 
 1.  State your null and alternative hypotheses
-2.  Justify what type of ANOVA you think this is and why.
-3.  Test for normality relative to the *primary hypothesis*
+    -   There will be a hypothesis for *each thing* being tested - primary hypothesis, secondary hypothesis (or blocking variable), and interaction *if tested*
+2.  Justify what type of ANOVA you think this is and why
+    -   Randomized Block / Factorial ANOVA (`run_oneway` with blocking indicated)
+    -   Interactive ANOVA (`run_twoway`)
+    -   Two-way ANOVA (`run_twoway`)
+    -   Repeated Measures ANOVA
+3.  Test for normality relative to the primary hypothesis *only*. Do not transform problems that tell you to ignore normality requirements.
 4.  Perform the appropriate ANOVA
 5.  Interpret the results and provide a conclusion
-6.  If there are any additional questions, be sure to address them
+    -   Focus on your *primary hypothesis*, and then address your secondary hypothesis if needed
+    -   If there is an interaction, focus on the interaction
+6.  If there are any additional questions within the problem, be sure to address them
 
 ### Question 1: Stat-y Spice
 
@@ -306,8 +313,10 @@ aov <- run_twoway(data = studio_album_tracks,dv = "danceability",
 
 studio_album_tracks |> filter(track_name == "Who Do You Think You Are")
 
-aov$plot
+aov$anova_table
 ```
+
+You answer should find that there is an effect of year ($F_{2,25} = 4.42$, $p = 0.02$), major/minor key ($F_{1,25} = 10.23$, $p = 0.004$), and an interaction between the two ($F_{2,25} = 4.37$, $p = 0.02$).
 
 ### Question 2: All alone...
 
@@ -342,7 +351,7 @@ aov2 <- run_oneway(data = alone,
                    parametric = TRUE)
               
 
-aov2$plot
+aov2$anova_table
 
 #aov <- run_rm(data = alone, dv = "days_lasted", id = "country", within = "gender", which_within = "gender")
 
@@ -355,6 +364,8 @@ aov2$plot
 
 ```
 
+There is not a significant effect of gender or country, with $p = 0.09$ for both.
+
 ### Question 3: Penguins (not of Madagascar)
 
 Talking to Dr. Cooper after class about niche ecology, you become fascinated by the idea of similar species having morphological differences to allow them to co-occur in different areas. You decide to see if there are any morphological differences between penguin species on Antarctic islands. You decide to examine populations of thee congeneric penguins that are regionally sympatric: Adelie Penguin *Pygoscelis adeliae*, Chinstrap Penguin *P. antarcticus*, and Gentoo Penguin *P.* \[*papua*\] *ellsworthi*. You anticipate that there will be differences in bill length among species, but you also know that there is intraspecific competition within species because you did not fall asleep in your evolution class and know that this may also have an effect on bill lengths. In your conclusion, be sure to state which groups are (or are not) different.
@@ -364,19 +375,24 @@ penguins <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/t
 ```
 
 ```{r, eval = F, echo = F}
-penguins |> group_by(species) |> summarise(pv = shapiro.test(log1p(bill_len))$p.value)
+penguins |> 
+  group_by(species) |> 
+  summarise(pv = shapiro.test(log1p(bill_len))$p.value)
 
-penguins <- penguins |> mutate(log_bill = log1p(bill_len))
+penguins <- penguins |> 
+  mutate(log_bill = log1p(bill_len))
 
 aov <- run_twoway(data = penguins, dv = "bill_len", factor_a = "species", factor_b = "sex",
                   include_interaction = T, which_factor = "species:sex")
 
-aov$plot
+aov$anova_table
 ```
+
+There is a significant effect of species ($F_{2,327} = 650.21$, $p < 0.001$) and sex ($F_{1,327} = 208.06$, $p < 0.001$).
 
 ### Question 4: Mankind's biggest foe
 
-Mosquitoes kill more people than any other animal every year. One of the ways in which humans die from mosquitoes is by infecting them with malaria. While malaria has been largely eradicated in North America, it still persists in the Caribbean, Central America, and South America.
+Mosquitoes kill more people than any other animal every year. One of the ways in which humans die from mosquitoes is by infecting them with malaria. While malaria has been largely eradicated in North America, it still persists in the Caribbean, Central America, and South America. You are curious if mortality rates have been consistent between years within the Americas, or if there have been any "outbreak" years.
 
 Load the `malaria` dataset below, and:
 
@@ -406,14 +422,20 @@ malaria |>
   group_by(entity) |> 
   summarise(pv = shapiro.test(log1p(deaths))$p.value)
 
-aov <- run_twoway(data = malaria, dv = "deaths", factor_a = "entity", factor_b = "year", include_interaction = T, which_factor = "entity")
+aov <- run_rm(data = malaria,
+              dv = "deaths", 
+              id = "entity", 
+              within = "year", 
+              which_within = "year")
 
-aov$plot
+aov$anova_table
 ```
+
+There is no difference in means between years ($F_{1.67, 6.70} = 2.25$, $p = 0.18$).
 
 ### Question 5: Incarceration Rates (Bad Guys?)
 
-It is well known that male driver insurance costs more than female's. But did you know those who live in urban areas also pay more? You want to see if this translates to incarceration rates as well, to truly be able to tell if males are "Bad Guys".
+It is well known that male driver insurance costs more than female's - but did you know those who live in urban areas also pay more? You want to see if these trends translate to incarceration rates as well, to truly be able to tell if males are "Bad Guys".
 
 Load the `pretrial` dataset below, and:
 
@@ -438,14 +460,16 @@ pretrial_anova <- pretrial %>%
 res_pretrial <- run_twoway(
   data                = pretrial_anova,
   dv                  = "rate_per_100000",
-  factor_a            = "urbanicity",      
-  factor_b            = "pop_category",   
+  factor_a            = "pop_category",      
+  factor_b            = "urbanicity",   
   include_interaction = TRUE,
-  which_factor        = "urbanicity:pop_category" 
+  which_factor        = "pop_category:pop_category" 
 )
 
-res_pretrial$plot
+res_pretrial$anova_table
 ```
+
+There is an effect of sex ($F_{1,360} = 583.65$), urbanicity ($F_{3,360} = 8.68$), and the interaction between the two ($F_{3,360} = 6.05$). All $p < 0.001$.
 
 ### Question 6: Your turn!
 

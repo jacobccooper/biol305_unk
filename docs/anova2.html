@@ -718,12 +718,25 @@ P value adjustment method: bonferroni</code></pre>
 <p>This homework requires you to install <code>tidytuesdayR</code>.</p>
 <p><strong>For each question</strong>:</p>
 <ol type="1">
-<li>State your null and alternative hypotheses</li>
-<li>Justify what type of ANOVA you think this is and why.</li>
-<li>Test for normality relative to the <em>primary hypothesis</em></li>
+<li>State your null and alternative hypotheses
+<ul>
+<li>There will be a hypothesis for <em>each thing</em> being tested - primary hypothesis, secondary hypothesis (or blocking variable), and interaction <em>if tested</em></li>
+</ul></li>
+<li>Justify what type of ANOVA you think this is and why
+<ul>
+<li>Randomized Block / Factorial ANOVA (<code>run_oneway</code> with blocking indicated)</li>
+<li>Interactive ANOVA (<code>run_twoway</code>)</li>
+<li>Two-way ANOVA (<code>run_twoway</code>)</li>
+<li>Repeated Measures ANOVA</li>
+</ul></li>
+<li>Test for normality relative to the primary hypothesis <em>only</em>. Do not transform problems that tell you to ignore normality requirements.</li>
 <li>Perform the appropriate ANOVA</li>
-<li>Interpret the results and provide a conclusion</li>
-<li>If there are any additional questions, be sure to address them</li>
+<li>Interpret the results and provide a conclusion
+<ul>
+<li>Focus on your <em>primary hypothesis</em>, and then address your secondary hypothesis if needed</li>
+<li>If there is an interaction, focus on the interaction</li>
+</ul></li>
+<li>If there are any additional questions within the problem, be sure to address them</li>
 </ol>
 <section id="question-1-stat-y-spice" class="level3" data-number="13.4.1">
 <h3 data-number="13.4.1" class="anchored" data-anchor-id="question-1-stat-y-spice"><span class="header-section-number">13.4.1</span> Question 1: Stat-y Spice</h3>
@@ -739,6 +752,7 @@ P value adjustment method: bonferroni</code></pre>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>studio_album_tracks <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>studio_album_tracks</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>You answer should find that there is an effect of year (<span class="math inline">\(F_{2,25} = 4.42\)</span>, <span class="math inline">\(p = 0.02\)</span>), major/minor key (<span class="math inline">\(F_{1,25} = 10.23\)</span>, <span class="math inline">\(p = 0.004\)</span>), and an interaction between the two (<span class="math inline">\(F_{2,25} = 4.37\)</span>, <span class="math inline">\(p = 0.02\)</span>).</p>
 </section>
 <section id="question-2-all-alone" class="level3" data-number="13.4.2">
 <h3 data-number="13.4.2" class="anchored" data-anchor-id="question-2-all-alone"><span class="header-section-number">13.4.2</span> Question 2: All alone…</h3>
@@ -756,6 +770,7 @@ P value adjustment method: bonferroni</code></pre>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>alone <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>survivalists<span class="sc">|&gt;</span> </span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">"United States"</span> <span class="sc">|</span> country <span class="sc">==</span> <span class="st">"Canada"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>There is not a significant effect of gender or country, with <span class="math inline">\(p = 0.09\)</span> for both.</p>
 </section>
 <section id="question-3-penguins-not-of-madagascar" class="level3" data-number="13.4.3">
 <h3 data-number="13.4.3" class="anchored" data-anchor-id="question-3-penguins-not-of-madagascar"><span class="header-section-number">13.4.3</span> Question 3: Penguins (not of Madagascar)</h3>
@@ -763,10 +778,11 @@ P value adjustment method: bonferroni</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-04-15/penguins.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>There is a significant effect of species (<span class="math inline">\(F_{2,327} = 650.21\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>) and sex (<span class="math inline">\(F_{1,327} = 208.06\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>).</p>
 </section>
 <section id="question-4-mankinds-biggest-foe" class="level3" data-number="13.4.4">
 <h3 data-number="13.4.4" class="anchored" data-anchor-id="question-4-mankinds-biggest-foe"><span class="header-section-number">13.4.4</span> Question 4: Mankind’s biggest foe</h3>
-<p>Mosquitoes kill more people than any other animal every year. One of the ways in which humans die from mosquitoes is by infecting them with malaria. While malaria has been largely eradicated in North America, it still persists in the Caribbean, Central America, and South America.</p>
+<p>Mosquitoes kill more people than any other animal every year. One of the ways in which humans die from mosquitoes is by infecting them with malaria. While malaria has been largely eradicated in North America, it still persists in the Caribbean, Central America, and South America. You are curious if mortality rates have been consistent between years within the Americas, or if there have been any “outbreak” years.</p>
 <p>Load the <code>malaria</code> dataset below, and:</p>
 <ol type="1">
 <li>Filter for the <code>entity</code> of <code>Andean Latin America</code>, <code>Caribbean</code>, <code>Central Latin America</code>, <code>Southern Latin America</code>, and <code>Tropical Latin America</code>.</li>
@@ -777,10 +793,11 @@ P value adjustment method: bonferroni</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>malaria <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2018/2018-11-13/malaria_deaths_age.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>There is no difference in means between years (<span class="math inline">\(F_{1.67, 6.70} = 2.25\)</span>, <span class="math inline">\(p = 0.18\)</span>).</p>
 </section>
 <section id="question-5-incarceration-rates-bad-guys" class="level3" data-number="13.4.5">
 <h3 data-number="13.4.5" class="anchored" data-anchor-id="question-5-incarceration-rates-bad-guys"><span class="header-section-number">13.4.5</span> Question 5: Incarceration Rates (Bad Guys?)</h3>
-<p>It is well known that male driver insurance costs more than female’s. But did you know those who live in urban areas also pay more? You want to see if this translates to incarceration rates as well, to truly be able to tell if males are “Bad Guys”.</p>
+<p>It is well known that male driver insurance costs more than female’s - but did you know those who live in urban areas also pay more? You want to see if these trends translate to incarceration rates as well, to truly be able to tell if males are “Bad Guys”.</p>
 <p>Load the <code>pretrial</code> dataset below, and:</p>
 <ol type="1">
 <li>Filter for the <code>male</code> and <code>female</code> populations to exclude total incarceration rates</li>
@@ -799,6 +816,7 @@ P value adjustment method: bonferroni</code></pre>
 <span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">pop_category =</span> <span class="fu">factor</span>(pop_category)</span>
 <span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>There is an effect of sex (<span class="math inline">\(F_{1,360} = 583.65\)</span>), urbanicity (<span class="math inline">\(F_{3,360} = 8.68\)</span>), and the interaction between the two (<span class="math inline">\(F_{3,360} = 6.05\)</span>). All <span class="math inline">\(p &lt; 0.001\)</span>.</p>
 </section>
 <section id="question-6-your-turn" class="level3" data-number="13.4.6">
 <h3 data-number="13.4.6" class="anchored" data-anchor-id="question-6-your-turn"><span class="header-section-number">13.4.6</span> Question 6: Your turn!</h3>
