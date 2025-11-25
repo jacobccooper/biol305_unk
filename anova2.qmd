@@ -384,13 +384,13 @@ penguins |>
 penguins <- penguins |> 
   mutate(log_bill = log1p(bill_len))
 
-aov <- run_twoway(data = penguins, dv = "bill_len", factor_a = "species", factor_b = "sex",
+aov <- run_twoway(data = penguins, dv = "log_bill", factor_a = "species", factor_b = "sex",
                   include_interaction = T, which_factor = "species:sex")
 
 aov$anova_table
 ```
 
-There is a significant effect of species ($F_{2,327} = 650.21$, $p < 0.001$) and the intraspecific variable ($F_{1,327} = 208.06$, $p < 0.001$).
+There is a significant effect of species ($F_{2,327} = 673.82$, $p < 0.001$) and the intraspecific variable ($F_{1,327} = 199.47$, $p < 0.001$).
 
 ### Question 4: Mankind's biggest foe
 
@@ -468,7 +468,7 @@ res_pretrial <- run_twoway(
   which_factor        = "pop_category:pop_category" 
 )
 
-res_pretrial$anova_table
+res_pretrial$plot
 ```
 
 There is an effect of sex ($F_{1,360} = 583.65$), urbanicity ($F_{3,360} = 8.68$), and the interaction between the two ($F_{3,360} = 6.05$). All $p < 0.001$.
