@@ -21,6 +21,8 @@ When we are comparing *two continuous variables*, we use two forms of tests: *co
 
 Correlation - denoted by $\rho$ ("rho") and not to be confused with $p$ - is a measure of how closely related to continuous variables appear to be. This can vary from a purely negative relationship to a purely positive relationship, such that $-1 \le \rho \le 1$ with $\rho = 0$ indicating a random relationship between data.
 
+### Examples of correlation
+
 We can visualize these as follows:
 
 ```{r}
@@ -170,6 +172,22 @@ Spearman's correlation is one of the non-parametric methods for our correlation 
 
 To be expanded upon, but not necessary for the class at present.
 
+### Reporting correlation
+
+Per different [online resources](https://www.statology.org/what-is-a-strong-correlation/), we are defining the strength of relationships as follows. Be sure to use these terms in your conclusions! *Note* that this is unrelated to *significance* - which is *p*, and instead is noting the strength of the positive (or negative) correlation. These terms should only be used when $p < 0.05$.
+
+**The values shown below are for** $|r|$**. You will have to mention whether is it *positive* or *negative*.**
+
+| Absolute value of *r* / $\rho$ | Strength of relationship |
+|----|----|
+| $r < 0.25$ | Very weak relationship / very weakly correlated |
+| $0.25 ≤ r < 0.5$ | Weak relationship / weakly correlated |
+| $0.5 ≤ r < 0.75$ | Moderate relationship / moderately correlated |
+| $0.75 ≤ r < 0.9$ | Strong relationship / strongly correlated |
+| $0.9 ≤ r$ | Very strong relationship / very strong correlation (can also just say "strong relationship") |
+
+: Definitions for strength of correlation for this class, from StackOverflow.
+
 ## Regression
 
 Regression is used when we want to know *what* the relationship is between two variables. Regression operates similar to ANOVA and correlation, providing us with the nature of the relationship, the strength of the relationship, and gives us values for calculating the relationship. **For this class, we are only focusing on linear regression for relationships between linear variables**.
@@ -234,8 +252,211 @@ As we can see above, our points follow the line from the plot. By using this for
 
 We are not doing non-parametric linear regression in this class.
 
-## Homework
+## Correlation Homework
 
-### Chapter 13
+For all problems, make sure that you:
 
-### Chapter 14
+-   List the null and alternative hypothesis
+
+-   Determine which correlation test needs to be performed
+
+    -   When transforming data, you *do not* have to transform both variables at the same time - can relate a normally distributed variable to the square of another, etc.
+
+-   Perform the appropriate correlation test
+
+-   Plot your results using a scatterplot
+
+    -   Can use either `plot` or `ggplot`
+
+    -   Remember, *no regression lines for correlation!*
+
+-   Report your conclusion
+
+    -   Remember, this needs to be a concise sentence (or sentences) and *must* have the test statistic, degrees of freedom, and p value listed parenthetically
+
+    -   Be sure to use the correct language for describing the strength of your relationship as seen in [Reporting correlation]
+
+-   Compare your results to the listed answers; not that I use $r$ in all instances for correlation, regardless of correlation test used
+
+### Q1: The Boeoegg
+
+Per the *tidytuesday* website:
+
+> The Boeoegg is a snowman effigy made of cotton wool and stuffed with fireworks, created every year for Zurich's "Sechselaeuten" spring festival. The saying goes that the quicker the Boeoeg's head explodes, the finer the summer will be.
+
+For this particular problem, we are interested in whether the time until the snowman's head explodes (`duration`) is correlated with the average monthly temperature for a given year (`tre200m0`), the total sunshine duration hours (`sre000m0`), and the total monthly precipitation (`rre150m0`).
+
+```{r, message = F}
+tuesdata <- tidytuesdayR::tt_load('2025-12-02')
+
+sechselaeuten <- tuesdata$sechselaeuten
+```
+
+#### Answers to this problem are as follows:
+
+#### 1.1: Monthly temperature
+
+```{r, eval = F, echo = F}
+# must log transform duration
+shapiro.test(log1p(sechselaeuten$duration))
+
+shapiro.test(log1p(sechselaeuten$tre200m0))
+
+cor.test(log1p(sechselaeuten$duration), log1p(sechselaeuten$tre200m0))
+```
+
+Two possible answers:
+
+-   $statistic = 1.61$, $p = 0.11$, $r = 0.20$
+
+-   $statistic = 1.65$, $p = 0.10$, $r = 0.20$
+
+#### 1.2: Total sunshine duration
+
+```{r, echo = F, eval = F}
+shapiro.test(sechselaeuten$sre000m0)
+
+cor.test(log1p(sechselaeuten$duration), log1p(sechselaeuten$sre000m0))
+```
+
+Two possible answers:
+
+-   $statistic = 0.45$, $p = 0.65$, $r = 0.06$
+
+-   $statistic = 0.39$, $p = 0.70$, $r = 0.05$
+
+#### 1.3: Monthly precipitation
+
+```{r, echo = F, eval = F}
+shapiro.test(sechselaeuten$rre150m0)
+
+cor.test(log1p(sechselaeuten$duration), log1p(sechselaeuten$rre150m0))
+```
+
+Two possible answers:
+
+-   $statistic = -0.76$, $p = 0.45$, $r = -0.10$
+
+-   $statistic = -1.12$, $p = 0.27$, $r = -0.14$
+
+#### 1.4: Based on all your answers above, is the snowman festival related to better weather?
+
+### Q2: Oops, more penguins
+
+Reading more about penguins in Antarctica, you become fascinated by the Adelie Penguins that occur on multiple different islands. Specifically, you are interested in whether:
+
+-   There is a relationship between bill length and bill depth, given that these are both related to diet
+
+-   There is a relationship between bill length and flipper length, given that bill length is likely related to diet and flipper length may be related to foraging batter
+
+```{r, message = F}
+penguins <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-04-15/penguins.csv')
+```
+
+```{r, echo = F, eval = F}
+table(penguins$species, penguins$island)
+```
+
+#### 2.1: Bill metrics
+
+```{r, echo = F, eval = F}
+adelie <- penguins |> filter(species == "Adelie")
+
+cor.test(adelie$bill_len, adelie$bill_dep)
+
+plot(adelie$bill_len, adelie$bill_dep, asp = 1)
+```
+
+-   $statistic = 5.19$, $p < 0.0001$, $r = 0.39$
+
+#### 2.2: Bill length vs. flipper length
+
+```{r, echo = F, eval = F}
+shapiro.test(adelie$flipper_len)
+
+cor.test(adelie$bill_len, adelie$flipper_len)
+```
+
+-   $t_{149}=4.21$, $p < 0.0001$, $r = 0.33$
+
+### Q3: Gotta analyze them all!
+
+You become interested in how video game designers balance different features to keep games enjoyable and competitive. You decide to analyze data for the Pokémon games to understand how different aspects of the characters are (or are not) balanced. Specifically, you decide to compare the hp stats, attack stats, defense stats, and special attack stats for each Pokémon.
+
+#### 3.1: Perform the correlation tests
+
+*Note* that there is a fast way to plot all correlations... See if you can figure it out.
+
+```{r, message = F}
+tuesdata <- tidytuesdayR::tt_load(2025, week = 13)
+
+pokemon_df <- tuesdata$pokemon_df
+```
+
+*NOTE:* this will involve multiple pairwise comparisons. Values for $r$ are as follows:
+
+```{r, eval = F}
+poke_stats <- pokemon_df |> 
+  select(hp, attack, defense, special_attack)
+
+## NON PARAMETRIC FOR HP
+## NON PARAMETRIC FOR ATTACK
+## NON PARAMETRIC FOR DEFENSE
+## NON PARAMETRIC FOR SPECIAL ATTACK
+```
+
+```{r, echo = F}
+pokemon_df |> 
+  select(hp, attack, defense, special_attack) |> 
+  cor(method = "spearman") |> round(2)
+```
+
+```{r, echo = F, eval = F}
+cor.test(poke_stats$defense, poke_stats$special_attack, method = "spearman")
+
+plot(poke_stats, pch = ".")
+```
+
+-   HP vs. attack: $stat = 62094825$, $p < 0.0001$
+
+-   HP vs. defense: $stat = 79004420$, $p < 0.0001$
+
+-   HP vs. special: $stat = 73478110$, $p < 0.0001$
+
+-   Attack vs. defense: $stat = 70515649$, $p < 0.0001$
+
+-   Attack vs. special: $stat = 91138612$, $p < 0.0001$
+
+-   Defense vs. special: $stat = 98148814$, $p < 0.0001$
+
+#### 3.2: Do these correlations make sense from a game-making perspective? How or how not?
+
+### Q4: Pixar films
+
+You often check *Rotten Tomatoes* to see if a movie is worth watching or not, but you are aware that the *Rotten Tomatoes* score is from movie critics who review the movie. However, there are other sources like *Metacritic* that seem to source their reviews from other places. You want to see how related these different review systems are for Pixar films.
+
+```{r, message = F}
+tuesdata <- tidytuesdayR::tt_load(2025, week = 10)
+
+public_response <- tuesdata$public_response
+```
+
+```{r, echo = F, eval = F}
+# normalized most efficiently
+cor.test(public_response$rotten_tomatoes^17, 
+         public_response$metacritic)
+
+cor.test(public_response$rotten_tomatoes, 
+         public_response$metacritic, 
+         method = "spearman")
+```
+
+A few possible results:
+
+-   1 pt extra credit if you can figure out how to normalize the *Rotten Tomatoes* data! It is possible.
+
+-   $stat = 7.33$, $p < 0.0001$, $r = 0.85$
+
+-   $stat = 363.02$, $p < 0.0001$, $r = 0.82$
+
+## Regression Homework

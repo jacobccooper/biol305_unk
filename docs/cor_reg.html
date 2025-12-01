@@ -308,20 +308,25 @@ window.Quarto = {
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">14.1</span> Introduction</a></li>
   <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation"><span class="header-section-number">14.2</span> Correlation</a>
   <ul class="collapse">
-  <li><a href="#pearsons" id="toc-pearsons" class="nav-link" data-scroll-target="#pearsons"><span class="header-section-number">14.2.1</span> Pearson’s</a></li>
-  <li><a href="#spearmans" id="toc-spearmans" class="nav-link" data-scroll-target="#spearmans"><span class="header-section-number">14.2.2</span> Spearman’s</a></li>
-  <li><a href="#other-non-parametric-methods" id="toc-other-non-parametric-methods" class="nav-link" data-scroll-target="#other-non-parametric-methods"><span class="header-section-number">14.2.3</span> Other non-parametric methods</a></li>
+  <li><a href="#examples-of-correlation" id="toc-examples-of-correlation" class="nav-link" data-scroll-target="#examples-of-correlation"><span class="header-section-number">14.2.1</span> Examples of correlation</a></li>
+  <li><a href="#pearsons" id="toc-pearsons" class="nav-link" data-scroll-target="#pearsons"><span class="header-section-number">14.2.2</span> Pearson’s</a></li>
+  <li><a href="#spearmans" id="toc-spearmans" class="nav-link" data-scroll-target="#spearmans"><span class="header-section-number">14.2.3</span> Spearman’s</a></li>
+  <li><a href="#other-non-parametric-methods" id="toc-other-non-parametric-methods" class="nav-link" data-scroll-target="#other-non-parametric-methods"><span class="header-section-number">14.2.4</span> Other non-parametric methods</a></li>
+  <li><a href="#reporting-correlation" id="toc-reporting-correlation" class="nav-link" data-scroll-target="#reporting-correlation"><span class="header-section-number">14.2.5</span> Reporting correlation</a></li>
   </ul></li>
   <li><a href="#regression" id="toc-regression" class="nav-link" data-scroll-target="#regression"><span class="header-section-number">14.3</span> Regression</a>
   <ul class="collapse">
   <li><a href="#parametric" id="toc-parametric" class="nav-link" data-scroll-target="#parametric"><span class="header-section-number">14.3.1</span> Parametric</a></li>
   <li><a href="#non-parametric" id="toc-non-parametric" class="nav-link" data-scroll-target="#non-parametric"><span class="header-section-number">14.3.2</span> Non-parametric</a></li>
   </ul></li>
-  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework"><span class="header-section-number">14.4</span> Homework</a>
+  <li><a href="#correlation-homework" id="toc-correlation-homework" class="nav-link" data-scroll-target="#correlation-homework"><span class="header-section-number">14.4</span> Correlation Homework</a>
   <ul class="collapse">
-  <li><a href="#chapter-13" id="toc-chapter-13" class="nav-link" data-scroll-target="#chapter-13"><span class="header-section-number">14.4.1</span> Chapter 13</a></li>
-  <li><a href="#chapter-14" id="toc-chapter-14" class="nav-link" data-scroll-target="#chapter-14"><span class="header-section-number">14.4.2</span> Chapter 14</a></li>
+  <li><a href="#q1-the-boeoegg" id="toc-q1-the-boeoegg" class="nav-link" data-scroll-target="#q1-the-boeoegg"><span class="header-section-number">14.4.1</span> Q1: The Boeoegg</a></li>
+  <li><a href="#q2-oops-more-penguins" id="toc-q2-oops-more-penguins" class="nav-link" data-scroll-target="#q2-oops-more-penguins"><span class="header-section-number">14.4.2</span> Q2: Oops, more penguins</a></li>
+  <li><a href="#q3-gotta-analyze-them-all" id="toc-q3-gotta-analyze-them-all" class="nav-link" data-scroll-target="#q3-gotta-analyze-them-all"><span class="header-section-number">14.4.3</span> Q3: Gotta analyze them all!</a></li>
+  <li><a href="#q4-pixar-films" id="toc-q4-pixar-films" class="nav-link" data-scroll-target="#q4-pixar-films"><span class="header-section-number">14.4.4</span> Q4: Pixar films</a></li>
   </ul></li>
+  <li><a href="#regression-homework" id="toc-regression-homework" class="nav-link" data-scroll-target="#regression-homework"><span class="header-section-number">14.5</span> Regression Homework</a></li>
   </ul>
 </nav>
     </div>
@@ -359,11 +364,11 @@ window.Quarto = {
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+✔ dplyr     1.1.4     ✔ readr     2.1.6
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.1     ✔ tibble    3.3.0
 ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.1.0     
+✔ purrr     1.2.0     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
@@ -378,6 +383,8 @@ window.Quarto = {
 <section id="correlation" class="level2" data-number="14.2">
 <h2 data-number="14.2" class="anchored" data-anchor-id="correlation"><span class="header-section-number">14.2</span> Correlation</h2>
 <p>Correlation - denoted by <span class="math inline">\(\rho\)</span> (“rho”) and not to be confused with <span class="math inline">\(p\)</span> - is a measure of how closely related to continuous variables appear to be. This can vary from a purely negative relationship to a purely positive relationship, such that <span class="math inline">\(-1 \le \rho \le 1\)</span> with <span class="math inline">\(\rho = 0\)</span> indicating a random relationship between data.</p>
+<section id="examples-of-correlation" class="level3" data-number="14.2.1">
+<h3 data-number="14.2.1" class="anchored" data-anchor-id="examples-of-correlation"><span class="header-section-number">14.2.1</span> Examples of correlation</h3>
 <p>We can visualize these as follows:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">### ILLUSTRATIVE PURPOSES ONLY</span></span>
@@ -438,11 +445,12 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(y, x) <span class="sc">|&gt;</span> </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.09</code></pre>
+<pre><code>[1] 0.22</code></pre>
 </div>
 </div>
-<section id="pearsons" class="level3" data-number="14.2.1">
-<h3 data-number="14.2.1" class="anchored" data-anchor-id="pearsons"><span class="header-section-number">14.2.1</span> Pearson’s</h3>
+</section>
+<section id="pearsons" class="level3" data-number="14.2.2">
+<h3 data-number="14.2.2" class="anchored" data-anchor-id="pearsons"><span class="header-section-number">14.2.2</span> Pearson’s</h3>
 <p>Pearson’s correlation coefficient is our value for <em>parametric tests</em>. We often denote our correlation coefficient as <span class="math inline">\(r\)</span> and not <span class="math inline">\(\rho\)</span> for this particular test. It is calculated as follows:</p>
 <p><span class="math display">\[
 r = \frac{\Sigma xy - (\frac{\Sigma x \Sigma y}{n})}{\sqrt{(\Sigma x^2 - \frac{(\Sigma x)^2}{n}})(\Sigma y^2 - \frac{(\Sigma y)^2}{n})}
@@ -541,13 +549,53 @@ r = \frac{\Sigma xy - (\frac{\Sigma x \Sigma y}{n})}{\sqrt{(\Sigma x^2 - \frac{(
 </div>
 <p>There we go! Our function printed out everything that we need.</p>
 </section>
-<section id="spearmans" class="level3" data-number="14.2.2">
-<h3 data-number="14.2.2" class="anchored" data-anchor-id="spearmans"><span class="header-section-number">14.2.2</span> Spearman’s</h3>
+<section id="spearmans" class="level3" data-number="14.2.3">
+<h3 data-number="14.2.3" class="anchored" data-anchor-id="spearmans"><span class="header-section-number">14.2.3</span> Spearman’s</h3>
 <p>Spearman’s correlation is one of the non-parametric methods for our correlation tests. We can use this for ranked data or for non-parametric datasets. We do this the exact same way, except we change <code>method = "spearman"</code>.</p>
 </section>
-<section id="other-non-parametric-methods" class="level3" data-number="14.2.3">
-<h3 data-number="14.2.3" class="anchored" data-anchor-id="other-non-parametric-methods"><span class="header-section-number">14.2.3</span> Other non-parametric methods</h3>
+<section id="other-non-parametric-methods" class="level3" data-number="14.2.4">
+<h3 data-number="14.2.4" class="anchored" data-anchor-id="other-non-parametric-methods"><span class="header-section-number">14.2.4</span> Other non-parametric methods</h3>
 <p>To be expanded upon, but not necessary for the class at present.</p>
+</section>
+<section id="reporting-correlation" class="level3" data-number="14.2.5">
+<h3 data-number="14.2.5" class="anchored" data-anchor-id="reporting-correlation"><span class="header-section-number">14.2.5</span> Reporting correlation</h3>
+<p>Per different <a href="https://www.statology.org/what-is-a-strong-correlation/">online resources</a>, we are defining the strength of relationships as follows. Be sure to use these terms in your conclusions! <em>Note</em> that this is unrelated to <em>significance</em> - which is <em>p</em>, and instead is noting the strength of the positive (or negative) correlation. These terms should only be used when <span class="math inline">\(p &lt; 0.05\)</span>.</p>
+<p><strong>The values shown below are for</strong> <span class="math inline">\(|r|\)</span><strong>. You will have to mention whether is it <em>positive</em> or <em>negative</em>.</strong></p>
+<table class="caption-top table">
+<caption>Definitions for strength of correlation for this class, from StackOverflow.</caption>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Absolute value of <em>r</em> / <span class="math inline">\(\rho\)</span></th>
+<th>Strength of relationship</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(r &lt; 0.25\)</span></td>
+<td>Very weak relationship / very weakly correlated</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(0.25 ≤ r &lt; 0.5\)</span></td>
+<td>Weak relationship / weakly correlated</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(0.5 ≤ r &lt; 0.75\)</span></td>
+<td>Moderate relationship / moderately correlated</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(0.75 ≤ r &lt; 0.9\)</span></td>
+<td>Strong relationship / strongly correlated</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(0.9 ≤ r\)</span></td>
+<td>Very strong relationship / very strong correlation (can also just say “strong relationship”)</td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 <section id="regression" class="level2" data-number="14.3">
@@ -665,16 +713,157 @@ F-statistic: 37.04 on 1 and 13 DF,  p-value: 3.867e-05</code></pre>
 <p>We are not doing non-parametric linear regression in this class.</p>
 </section>
 </section>
-<section id="homework" class="level2" data-number="14.4">
-<h2 data-number="14.4" class="anchored" data-anchor-id="homework"><span class="header-section-number">14.4</span> Homework</h2>
-<section id="chapter-13" class="level3" data-number="14.4.1">
-<h3 data-number="14.4.1" class="anchored" data-anchor-id="chapter-13"><span class="header-section-number">14.4.1</span> Chapter 13</h3>
+<section id="correlation-homework" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="correlation-homework"><span class="header-section-number">14.4</span> Correlation Homework</h2>
+<p>For all problems, make sure that you:</p>
+<ul>
+<li><p>List the null and alternative hypothesis</p></li>
+<li><p>Determine which correlation test needs to be performed</p>
+<ul>
+<li>When transforming data, you <em>do not</em> have to transform both variables at the same time - can relate a normally distributed variable to the square of another, etc.</li>
+</ul></li>
+<li><p>Perform the appropriate correlation test</p></li>
+<li><p>Plot your results using a scatterplot</p>
+<ul>
+<li><p>Can use either <code>plot</code> or <code>ggplot</code></p></li>
+<li><p>Remember, <em>no regression lines for correlation!</em></p></li>
+</ul></li>
+<li><p>Report your conclusion</p>
+<ul>
+<li><p>Remember, this needs to be a concise sentence (or sentences) and <em>must</em> have the test statistic, degrees of freedom, and p value listed parenthetically</p></li>
+<li><p>Be sure to use the correct language for describing the strength of your relationship as seen in <a href="#reporting-correlation">Reporting correlation</a></p></li>
+</ul></li>
+<li><p>Compare your results to the listed answers; not that I use <span class="math inline">\(r\)</span> in all instances for correlation, regardless of correlation test used</p></li>
+</ul>
+<section id="q1-the-boeoegg" class="level3" data-number="14.4.1">
+<h3 data-number="14.4.1" class="anchored" data-anchor-id="q1-the-boeoegg"><span class="header-section-number">14.4.1</span> Q1: The Boeoegg</h3>
+<p>Per the <em>tidytuesday</em> website:</p>
+<blockquote class="blockquote">
+<p>The Boeoegg is a snowman effigy made of cotton wool and stuffed with fireworks, created every year for Zurich’s “Sechselaeuten” spring festival. The saying goes that the quicker the Boeoeg’s head explodes, the finer the summer will be.</p>
+</blockquote>
+<p>For this particular problem, we are interested in whether the time until the snowman’s head explodes (<code>duration</code>) is correlated with the average monthly temperature for a given year (<code>tre200m0</code>), the total sunshine duration hours (<code>sre000m0</code>), and the total monthly precipitation (<code>rre150m0</code>).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="st">'2025-12-02'</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>sechselaeuten <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>sechselaeuten</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="answers-to-this-problem-are-as-follows" class="level4" data-number="14.4.1.1">
+<h4 data-number="14.4.1.1" class="anchored" data-anchor-id="answers-to-this-problem-are-as-follows"><span class="header-section-number">14.4.1.1</span> Answers to this problem are as follows:</h4>
 </section>
-<section id="chapter-14" class="level3" data-number="14.4.2">
-<h3 data-number="14.4.2" class="anchored" data-anchor-id="chapter-14"><span class="header-section-number">14.4.2</span> Chapter 14</h3>
+<section id="monthly-temperature" class="level4" data-number="14.4.1.2">
+<h4 data-number="14.4.1.2" class="anchored" data-anchor-id="monthly-temperature"><span class="header-section-number">14.4.1.2</span> 1.1: Monthly temperature</h4>
+<p>Two possible answers:</p>
+<ul>
+<li><p><span class="math inline">\(statistic = 1.61\)</span>, <span class="math inline">\(p = 0.11\)</span>, <span class="math inline">\(r = 0.20\)</span></p></li>
+<li><p><span class="math inline">\(statistic = 1.65\)</span>, <span class="math inline">\(p = 0.10\)</span>, <span class="math inline">\(r = 0.20\)</span></p></li>
+</ul>
+</section>
+<section id="total-sunshine-duration" class="level4" data-number="14.4.1.3">
+<h4 data-number="14.4.1.3" class="anchored" data-anchor-id="total-sunshine-duration"><span class="header-section-number">14.4.1.3</span> 1.2: Total sunshine duration</h4>
+<p>Two possible answers:</p>
+<ul>
+<li><p><span class="math inline">\(statistic = 0.45\)</span>, <span class="math inline">\(p = 0.65\)</span>, <span class="math inline">\(r = 0.06\)</span></p></li>
+<li><p><span class="math inline">\(statistic = 0.39\)</span>, <span class="math inline">\(p = 0.70\)</span>, <span class="math inline">\(r = 0.05\)</span></p></li>
+</ul>
+</section>
+<section id="monthly-precipitation" class="level4" data-number="14.4.1.4">
+<h4 data-number="14.4.1.4" class="anchored" data-anchor-id="monthly-precipitation"><span class="header-section-number">14.4.1.4</span> 1.3: Monthly precipitation</h4>
+<p>Two possible answers:</p>
+<ul>
+<li><p><span class="math inline">\(statistic = -0.76\)</span>, <span class="math inline">\(p = 0.45\)</span>, <span class="math inline">\(r = -0.10\)</span></p></li>
+<li><p><span class="math inline">\(statistic = -1.12\)</span>, <span class="math inline">\(p = 0.27\)</span>, <span class="math inline">\(r = -0.14\)</span></p></li>
+</ul>
+</section>
+<section id="based-on-all-your-answers-above-is-the-snowman-festival-related-to-better-weather" class="level4" data-number="14.4.1.5">
+<h4 data-number="14.4.1.5" class="anchored" data-anchor-id="based-on-all-your-answers-above-is-the-snowman-festival-related-to-better-weather"><span class="header-section-number">14.4.1.5</span> 1.4: Based on all your answers above, is the snowman festival related to better weather?</h4>
+</section>
+</section>
+<section id="q2-oops-more-penguins" class="level3" data-number="14.4.2">
+<h3 data-number="14.4.2" class="anchored" data-anchor-id="q2-oops-more-penguins"><span class="header-section-number">14.4.2</span> Q2: Oops, more penguins</h3>
+<p>Reading more about penguins in Antarctica, you become fascinated by the Adelie Penguins that occur on multiple different islands. Specifically, you are interested in whether:</p>
+<ul>
+<li><p>There is a relationship between bill length and bill depth, given that these are both related to diet</p></li>
+<li><p>There is a relationship between bill length and flipper length, given that bill length is likely related to diet and flipper length may be related to foraging batter</p></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-04-15/penguins.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="bill-metrics" class="level4" data-number="14.4.2.1">
+<h4 data-number="14.4.2.1" class="anchored" data-anchor-id="bill-metrics"><span class="header-section-number">14.4.2.1</span> 2.1: Bill metrics</h4>
+<ul>
+<li><span class="math inline">\(statistic = 5.19\)</span>, <span class="math inline">\(p &lt; 0.0001\)</span>, <span class="math inline">\(r = 0.39\)</span></li>
+</ul>
+</section>
+<section id="bill-length-vs.-flipper-length" class="level4" data-number="14.4.2.2">
+<h4 data-number="14.4.2.2" class="anchored" data-anchor-id="bill-length-vs.-flipper-length"><span class="header-section-number">14.4.2.2</span> 2.2: Bill length vs.&nbsp;flipper length</h4>
+<ul>
+<li><span class="math inline">\(t_{149}=4.21\)</span>, <span class="math inline">\(p &lt; 0.0001\)</span>, <span class="math inline">\(r = 0.33\)</span></li>
+</ul>
+</section>
+</section>
+<section id="q3-gotta-analyze-them-all" class="level3" data-number="14.4.3">
+<h3 data-number="14.4.3" class="anchored" data-anchor-id="q3-gotta-analyze-them-all"><span class="header-section-number">14.4.3</span> Q3: Gotta analyze them all!</h3>
+<p>You become interested in how video game designers balance different features to keep games enjoyable and competitive. You decide to analyze data for the Pokémon games to understand how different aspects of the characters are (or are not) balanced. Specifically, you decide to compare the hp stats, attack stats, defense stats, and special attack stats for each Pokémon.</p>
+<section id="perform-the-correlation-tests" class="level4" data-number="14.4.3.1">
+<h4 data-number="14.4.3.1" class="anchored" data-anchor-id="perform-the-correlation-tests"><span class="header-section-number">14.4.3.1</span> 3.1: Perform the correlation tests</h4>
+<p><em>Note</em> that there is a fast way to plot all correlations… See if you can figure it out.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2025</span>, <span class="at">week =</span> <span class="dv">13</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>pokemon_df <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>pokemon_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><em>NOTE:</em> this will involve multiple pairwise comparisons. Values for <span class="math inline">\(r\)</span> are as follows:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>poke_stats <span class="ot">&lt;-</span> pokemon_df <span class="sc">|&gt;</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hp, attack, defense, special_attack)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="do">## NON PARAMETRIC FOR HP</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="do">## NON PARAMETRIC FOR ATTACK</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="do">## NON PARAMETRIC FOR DEFENSE</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="do">## NON PARAMETRIC FOR SPECIAL ATTACK</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                 hp attack defense special_attack
+hp             1.00   0.56    0.45           0.48
+attack         0.56   1.00    0.50           0.36
+defense        0.45   0.50    1.00           0.31
+special_attack 0.48   0.36    0.31           1.00</code></pre>
+</div>
+</div>
+<ul>
+<li><p>HP vs.&nbsp;attack: <span class="math inline">\(stat = 62094825\)</span>, <span class="math inline">\(p &lt; 0.0001\)</span></p></li>
+<li><p>HP vs.&nbsp;defense: <span class="math inline">\(stat = 79004420\)</span>, <span class="math inline">\(p &lt; 0.0001\)</span></p></li>
+<li><p>HP vs.&nbsp;special: <span class="math inline">\(stat = 73478110\)</span>, <span class="math inline">\(p &lt; 0.0001\)</span></p></li>
+<li><p>Attack vs.&nbsp;defense: <span class="math inline">\(stat = 70515649\)</span>, <span class="math inline">\(p &lt; 0.0001\)</span></p></li>
+<li><p>Attack vs.&nbsp;special: <span class="math inline">\(stat = 91138612\)</span>, <span class="math inline">\(p &lt; 0.0001\)</span></p></li>
+<li><p>Defense vs.&nbsp;special: <span class="math inline">\(stat = 98148814\)</span>, <span class="math inline">\(p &lt; 0.0001\)</span></p></li>
+</ul>
+</section>
+<section id="do-these-correlations-make-sense-from-a-game-making-perspective-how-or-how-not" class="level4" data-number="14.4.3.2">
+<h4 data-number="14.4.3.2" class="anchored" data-anchor-id="do-these-correlations-make-sense-from-a-game-making-perspective-how-or-how-not"><span class="header-section-number">14.4.3.2</span> 3.2: Do these correlations make sense from a game-making perspective? How or how not?</h4>
+</section>
+</section>
+<section id="q4-pixar-films" class="level3" data-number="14.4.4">
+<h3 data-number="14.4.4" class="anchored" data-anchor-id="q4-pixar-films"><span class="header-section-number">14.4.4</span> Q4: Pixar films</h3>
+<p>You often check <em>Rotten Tomatoes</em> to see if a movie is worth watching or not, but you are aware that the <em>Rotten Tomatoes</em> score is from movie critics who review the movie. However, there are other sources like <em>Metacritic</em> that seem to source their reviews from other places. You want to see how related these different review systems are for Pixar films.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2025</span>, <span class="at">week =</span> <span class="dv">10</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>public_response <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>public_response</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A few possible results:</p>
+<ul>
+<li><p>1 pt extra credit if you can figure out how to normalize the <em>Rotten Tomatoes</em> data! It is possible.</p></li>
+<li><p><span class="math inline">\(stat = 7.33\)</span>, <span class="math inline">\(p &lt; 0.0001\)</span>, <span class="math inline">\(r = 0.85\)</span></p></li>
+<li><p><span class="math inline">\(stat = 363.02\)</span>, <span class="math inline">\(p &lt; 0.0001\)</span>, <span class="math inline">\(r = 0.82\)</span></p></li>
+</ul>
+</section>
+</section>
+<section id="regression-homework" class="level2" data-number="14.5">
+<h2 data-number="14.5" class="anchored" data-anchor-id="regression-homework"><span class="header-section-number">14.5</span> Regression Homework</h2>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
