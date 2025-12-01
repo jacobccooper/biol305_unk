@@ -179,7 +179,7 @@ Per different [online resources](https://www.statology.org/what-is-a-strong-corr
 **The values shown below are for** $|r|$**. You will have to mention whether is it *positive* or *negative*.**
 
 | Absolute value of *r* / $\rho$ | Strength of relationship |
-|----|----|
+|------------------------------------|------------------------------------|
 | $r < 0.25$ | Very weak relationship / very weakly correlated |
 | $0.25 ≤ r < 0.5$ | Weak relationship / weakly correlated |
 | $0.5 ≤ r < 0.75$ | Moderate relationship / moderately correlated |
@@ -460,3 +460,104 @@ A few possible results:
 -   $stat = 363.02$, $p < 0.0001$, $r = 0.82$
 
 ## Regression Homework
+
+### Question 1:
+
+UNK releases data on many metrics each year, including both budgetary and enrollment information. This data is publicly available via the STAR report.
+
+##### a.
+
+```{r, message=FALSE, eval = F}
+# Year
+year <- c(2016, 2017, 2018, 2019, 2020,
+          2021, 2022, 2023, 2024, 2025)
+
+# Tuition remission as a percent of gross tuition
+remission_pct <- c(20.79, 21.28, 20.61, 22.09, 21.53,
+                   22.54, 22.54, 22.46, 25.65, 28.56)
+
+# Total first-time freshman enrollment
+enrollment <- c(1008, 904, 944, 863, 833,
+                958, 863, 910, 875, 803)
+
+unk_enroll <- data.frame(year, remission_pct, enrollment)
+unk_enroll
+
+```
+
+```{r, eval = F, results = F, echo = F}
+model_enroll <- lm(enrollment ~ remission_pct)
+summary(model_enroll)
+```
+
+```{r, eval = F, results = F, echo = F}
+ggplot(unk_enroll, aes(x = remission_pct, y = enrollment)) +
+  geom_point() +
+  stat_smooth(method = "lm") +
+  theme_minimal()
+
+```
+
+##### b.
+
+```{r}
+# Year
+year <- c(2016, 2017, 2018, 2019, 2020,
+          2021, 2022, 2023, 2024)
+
+# Excluding 2025 due to ACT scores not being out for 2025
+remission_pct <- c(20.79, 21.28, 20.61, 22.09, 21.53,
+                   22.54, 22.54, 22.46, 25.65)
+
+# Percent of first-time freshmen with ACT score 22 or above
+ACT22plus_pct <- c(52.97619048, 52.76548673, 49.04661017,
+                   51.68018540, 47.89915966, 42.37995825,
+                   47.85631518, 41.86813187, 45.48571429)
+
+unk_act <- data.frame(year, remission_pct, ACT22plus_pct)
+unk_act
+
+```
+
+```{r, eval = F, results = F, echo = F}
+model_act <- lm(ACT22plus_pct ~ remission_pct)
+summary(model_act)
+
+```
+
+```{r, eval = F, results = F, echo = F}
+ggplot(unk_act, aes(x = remission_pct, y = ACT22plus_pct)) +
+  geom_point() +
+  stat_smooth(method = "lm") +
+  theme_minimal()
+```
+
+##### c.
+
+```{r}
+year <- c(2016, 2017, 2018, 2019,
+          2020, 2021, 2022, 2023)
+
+remission_pct <- c(20.79, 21.28, 20.61, 22.09,
+                   21.53, 22.54, 22.54, 22.46)
+
+# General first-year retention
+RetentionYear1 <- c(75.70, 76.10, 76.90, 81.10,
+                    75.80, 74.30, 76.60, 80.00)
+
+unk_ret <- data.frame(year, remission_pct, RetentionYear1)
+unk_ret
+
+```
+
+```{r, eval = F, results = F, echo = F}
+model_ret <- lm(RetentionYear1 ~ remission_pct)
+summary(model_ret)
+```
+
+```{r, eval = F, results = F, echo = F}
+ggplot(unk_ret, aes(x = remission_pct, y = RetentionYear1)) +
+  geom_point() +
+  stat_smooth(method = "lm") +
+  theme_minimal()
+```
