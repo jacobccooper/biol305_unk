@@ -463,9 +463,13 @@ A few possible results:
 
 ### Question 1:
 
-UNK releases data on many metrics each year, including both budgetary and enrollment information. This data is publicly available via the STAR report.
+UNK releases data on many metrics each year, including both budgetary and enrollment information. This data is publicly available via the STAR report. You want to use this data to see how recent scholarship budgeting changes have impacts different metrics.
+
+For each part of this question, state if tuition spending has significantly changed the response variable. Make sure to include your statistics and $p$-value.
 
 ##### a.
+
+Tuition remission spending has increased dramatically in the last few years. You want to know if this increased spending has increased the total number of first-time freshman.
 
 ```{r, message=FALSE, eval = F}
 # Year
@@ -500,6 +504,8 @@ ggplot(unk_enroll, aes(x = remission_pct, y = enrollment)) +
 
 ##### b.
 
+Next, you want to see if this increased spending has led to an increase in quality of student. To measure this, you are going to use the ACT score. Since 2025 ACT scores for first-time freshman has not yet been released, you won't be using 2025 data.
+
 ```{r}
 # Year
 year <- c(2016, 2017, 2018, 2019, 2020,
@@ -533,6 +539,8 @@ ggplot(unk_act, aes(x = remission_pct, y = ACT22plus_pct)) +
 ```
 
 ##### c.
+
+Finally, you want to see if this increase in tuition spending is improving overall first-year retention. This data only goes to 2023. 
 
 ```{r}
 year <- c(2016, 2017, 2018, 2019,
