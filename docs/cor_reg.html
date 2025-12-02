@@ -445,7 +445,7 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(y, x) <span class="sc">|&gt;</span> </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.16</code></pre>
+<pre><code>[1] -0.56</code></pre>
 </div>
 </div>
 </section>
@@ -864,9 +864,11 @@ special_attack 0.48   0.36    0.31           1.00</code></pre>
 <h2 data-number="14.5" class="anchored" data-anchor-id="regression-homework"><span class="header-section-number">14.5</span> Regression Homework</h2>
 <section id="question-1" class="level3" data-number="14.5.1">
 <h3 data-number="14.5.1" class="anchored" data-anchor-id="question-1"><span class="header-section-number">14.5.1</span> Question 1:</h3>
-<p>UNK releases data on many metrics each year, including both budgetary and enrollment information. This data is publicly available via the STAR report.</p>
+<p>UNK releases data on many metrics each year, including both budgetary and enrollment information. This data is publicly available via the STAR report. You want to use this data to see how recent scholarship budgeting changes have impacts different metrics.</p>
+<p>For each part of this question, state if tuition spending has significantly changed the response variable. Make sure to include your statistics and <span class="math inline">\(p\)</span>-value.</p>
 <section id="a." class="level5" data-number="14.5.1.0.1">
 <h5 data-number="14.5.1.0.1" class="anchored" data-anchor-id="a."><span class="header-section-number">14.5.1.0.1</span> a.</h5>
+<p>Tuition remission spending has increased dramatically in the last few years. You want to know if this increased spending has increased the total number of first-time freshman.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Year</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>year <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2016</span>, <span class="dv">2017</span>, <span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>,</span>
@@ -886,6 +888,7 @@ special_attack 0.48   0.36    0.31           1.00</code></pre>
 </section>
 <section id="b." class="level5" data-number="14.5.1.0.2">
 <h5 data-number="14.5.1.0.2" class="anchored" data-anchor-id="b."><span class="header-section-number">14.5.1.0.2</span> b.</h5>
+<p>Next, you want to see if this increased spending has led to an increase in quality of student. To measure this, you are going to use the ACT score. Since 2025 ACT scores for first-time freshman has not yet been released, you won’t be using 2025 data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Year</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>year <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2016</span>, <span class="dv">2017</span>, <span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>,</span>
@@ -918,6 +921,7 @@ special_attack 0.48   0.36    0.31           1.00</code></pre>
 </section>
 <section id="c." class="level5" data-number="14.5.1.0.3">
 <h5 data-number="14.5.1.0.3" class="anchored" data-anchor-id="c."><span class="header-section-number">14.5.1.0.3</span> c.</h5>
+<p>Finally, you want to see if this increase in tuition spending is improving overall first-year retention. This data only goes to 2023.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>year <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2016</span>, <span class="dv">2017</span>, <span class="dv">2018</span>, <span class="dv">2019</span>,</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>          <span class="dv">2020</span>, <span class="dv">2021</span>, <span class="dv">2022</span>, <span class="dv">2023</span>)</span>
