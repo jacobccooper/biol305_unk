@@ -461,9 +461,9 @@ A few possible results:
 
 ## Regression Homework
 
-### Question 1:
+### Q1: UNK Remissions
 
-UNK releases data on many metrics each year, including both budgetary and enrollment information. This data is publicly available via the STAR report. You want to use this data to see how recent scholarship budgeting changes have impacts different metrics.
+UNK releases data on many metrics each year, including both budgetary and enrollment information. These data are publicly available via the STAR report. You want to use these data to see how recent scholarship budgeting changes have impacts different metrics.
 
 For each part of this question, state if tuition spending has significantly changed the response variable. Make sure to include your statistics and $p$-value.
 
@@ -504,7 +504,7 @@ ggplot(unk_enroll, aes(x = remission_pct, y = enrollment)) +
 
 ##### b.
 
-Next, you want to see if this increased spending has led to an increase in quality of student. To measure this, you are going to use the ACT score. Since 2025 ACT scores for first-time freshman has not yet been released, you won't be using 2025 data.
+Next, you want to see if this increased spending has led to an increase in quality of students. To measure this, you are going to use the ACT score. Since 2025 ACT scores for first-time freshman has not yet been released, you won't be using 2025 data.
 
 ```{r}
 # Year
@@ -528,7 +528,6 @@ unk_act
 ```{r, eval = F, results = F, echo = F}
 model_act <- lm(ACT22plus_pct ~ remission_pct)
 summary(model_act)
-
 ```
 
 ```{r, eval = F, results = F, echo = F}
@@ -540,7 +539,7 @@ ggplot(unk_act, aes(x = remission_pct, y = ACT22plus_pct)) +
 
 ##### c.
 
-Finally, you want to see if this increase in tuition spending is improving overall first-year retention. This data only goes to 2023. 
+Finally, you want to see if this increase in tuition spending is improving overall first-year retention. This data only goes to 2023.
 
 ```{r}
 year <- c(2016, 2017, 2018, 2019,
@@ -555,7 +554,6 @@ RetentionYear1 <- c(75.70, 76.10, 76.90, 81.10,
 
 unk_ret <- data.frame(year, remission_pct, RetentionYear1)
 unk_ret
-
 ```
 
 ```{r, eval = F, results = F, echo = F}
@@ -568,4 +566,106 @@ ggplot(unk_ret, aes(x = remission_pct, y = RetentionYear1)) +
   geom_point() +
   stat_smooth(method = "lm") +
   theme_minimal()
+```
+
+### Q2: Prison incarceration rates
+
+You are listening to local politicians on the news talk about what they are going to do regarding crime in central Nebraska. Curious about the data behind their claims, you download a dataset on prison populations in the tri-city area of Kearney (Buffalo County), Grand Island (Hall County), and Hastings (Adams County).
+
+Given that an incarceration rate is the same as a slope of prisoners vs. total population, you decide to compare `population` to `prison_population` for each county independently and for the region as a whole.
+
+*Remember*, you can look at groups individually by doing `response ~ explanatory:group` for your formula.
+
+**Assume data are normally distributed**.
+
+```{r, message = F}
+## This takes a while to load
+
+prison <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2019/2019-01-22/prison_population.csv") |> 
+  filter(state == "NE" & pop_category == "Total") |> 
+  filter(county_name %in% c("Buffalo County", 
+                            "Hall County", 
+                            "Adams County")) |> 
+  select(year, county_name, population, prison_population) |> 
+  na.omit()
+```
+
+```{r, echo = F, eval = F}
+by_county <- lm(prison_population ~ population:county_name, data = prison)
+
+summary(by_county)
+```
+
+```{r, echo = F}
+ggplot(prison, aes(population, prison_population, 
+                   shape = county_name, colour = county_name)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_classic() +
+  scale_colour_viridis_d()
+```
+
+*Note* that the above plot also uses the `ggplot` commands `theme_classic` and `scale_colour_viridis_d`. Within the `aes` part of `ggplot`, you can tell it to separate things out by `shape` or `colour`. And yes, many commands do have Indian / African / British / Canadian English naming conventions, since these are more widespread.
+
+-   Which county has the fastest increasing prison population?
+-   Which county has the slowest increasing prison population?
+-   What are the overall trends for the region?
+
+```{r, eval = F, echo = F}
+mod <- lm(prison_population ~ population, data = prison)
+
+summary(mod)
+```
+
+```{r, eval = F, echo = F}
+ggplot(prison, aes(population, prison_population)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_classic()
+```
+
+### Q3: Population Density
+
+You have heard that many cities and urban areas are worse off than rural areas, but as someone who has talked to people from rural and urban areas, you are not sure if that's true. You decide to compare the total poverty rate for different counties (`percpovertyknown`) to the log of the population density (`popdensity`) in each county in Illinois, home to many rural farm counties as well as some of the largest cities in the country.
+
+```{r, message = F}
+# dataset in tidyverse
+# if you load tidyverse, you have the dataset
+
+midwest |> filter(state == "IL") ->
+  IL
+```
+
+```{r, echo = F}
+ggplot(IL, aes(log1p(popdensity), percpovertyknown)) +
+  geom_point() + geom_smooth(method = "lm") +
+  theme_classic() +
+  ylab("Percent Poverty (Known)") +
+  xlab("Log of Population Density")
+```
+
+Based on what you find, how are poverty rates affected by population density?
+
+### Q4: Fertilizer
+
+You want to see just how effective fertilizer is at increasing crop yields. You decide to compare nitrogen fertilizer use to cereal yield (in tonnes per acre) in the Canada, Mexico, and the United States. You wanted to see (1) what overall trends exist in the overall dataset and (2) what trends exist within each country separately, since the countries likely have different approaches to farming and different geographic challenges.
+
+*In order to see if slopes are different, you will have to do an ANCOVA - a two-way ANOVA with interaction!*
+
+```{r}
+tuesdata <- tidytuesdayR::tt_load(2020, week = 36)
+
+fertilizer <- tuesdata$cereal_crop_yield_vs_fertilizer_application |> 
+  na.omit() |> 
+  filter(Entity == "United States" | Entity == "Canada" | Entity == "Mexico")
+```
+
+```{r, echo = F}
+ggplot(fertilizer, aes(`Nitrogen fertilizer use (kilograms per hectare)`, 
+                       `Cereal yield (tonnes per hectare)`, 
+                       shape = Entity, colour = Entity)) +
+  geom_point() +
+  scale_colour_viridis_d() +
+  geom_smooth(method = "lm") +
+  theme_classic()
 ```
