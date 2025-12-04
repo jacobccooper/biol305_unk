@@ -179,7 +179,7 @@ Per different [online resources](https://www.statology.org/what-is-a-strong-corr
 **The values shown below are for** $|r|$**. You will have to mention whether is it *positive* or *negative*.**
 
 | Absolute value of *r* / $\rho$ | Strength of relationship |
-|------------------------------------|------------------------------------|
+|----|----|
 | $r < 0.25$ | Very weak relationship / very weakly correlated |
 | $0.25 ≤ r < 0.5$ | Weak relationship / weakly correlated |
 | $0.5 ≤ r < 0.75$ | Moderate relationship / moderately correlated |
