@@ -451,7 +451,7 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(y, x) <span class="sc">|&gt;</span> </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.27</code></pre>
+<pre><code>[1] -0.29</code></pre>
 </div>
 </div>
 </section>
@@ -1020,6 +1020,21 @@ special_attack 0.48   0.36    0.31           1.00</code></pre>
 <h3 data-number="14.5.4" class="anchored" data-anchor-id="q4-fertilizer"><span class="header-section-number">14.5.4</span> Q4: Fertilizer</h3>
 <p>You want to see just how effective fertilizer is at increasing crop yields. You decide to compare nitrogen fertilizer use to cereal yield (in tonnes per acre) in the Canada, Mexico, and the United States. You wanted to see (1) what overall trends exist in the overall dataset and (2) what trends exist within each country separately, since the countries likely have different approaches to farming and different geographic challenges.</p>
 <p><em>In order to see if slopes are different, you will have to do an ANCOVA - a two-way ANOVA with interaction!</em></p>
+<p>To run an ANCOVA:</p>
+<ul>
+<li><p>run your model as you would usually, but show the interaction using <code>*</code></p>
+<ul>
+<li><code>lm.mod &lt;- lm(y ~ x*block, data)</code></li>
+</ul></li>
+<li><p>view the interaction using the command <code>anova</code></p>
+<ul>
+<li><code>anova(lm.mod)</code></li>
+</ul></li>
+<li><p>You will see lines for the effect of <code>x</code>, the effect of <code>group</code>, and the effect of <code>x:group</code></p>
+<ul>
+<li>Check for the line showing <code>x:group</code> to see if slopes differ</li>
+</ul></li>
+</ul>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2020</span>, <span class="at">week =</span> <span class="dv">36</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
@@ -1046,7 +1061,7 @@ special_attack 0.48   0.36    0.31           1.00</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="cor_reg_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="cor_reg_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

@@ -654,12 +654,35 @@ You want to see just how effective fertilizer is at increasing crop yields. You 
 
 *In order to see if slopes are different, you will have to do an ANCOVA - a two-way ANOVA with interaction!*
 
+To run an ANCOVA:
+
+-   run your model as you would usually, but show the interaction using `*`
+
+    -   `lm.mod <- lm(y ~ x*block, data)`
+
+-   view the interaction using the command `anova`
+
+    -   `anova(lm.mod)`
+
+-   You will see lines for the effect of `x`, the effect of `group`, and the effect of `x:group`
+
+    -   Check for the line showing `x:group` to see if slopes differ
+
 ```{r}
 tuesdata <- tidytuesdayR::tt_load(2020, week = 36)
 
 fertilizer <- tuesdata$cereal_crop_yield_vs_fertilizer_application |> 
   na.omit() |> 
   filter(Entity == "United States" | Entity == "Canada" | Entity == "Mexico")
+```
+
+```{r, eval = F, echo = F}
+# colnames(fertilizer)
+
+lm.mod <- lm(`Cereal yield (tonnes per hectare)` ~ `Nitrogen fertilizer use (kilograms per hectare)`*Entity, 
+             fertilizer)
+
+anova(lm.mod)
 ```
 
 ```{r, echo = F}
