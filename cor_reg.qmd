@@ -636,8 +636,8 @@ Only normalize `popdensity` - leave `percpovertyknown`.
 # dataset in tidyverse
 # if you load tidyverse, you have the dataset
 
-midwest |> filter(state == "IL") ->
-  IL
+IL <- midwest |> filter(state == "IL")
+  
 ```
 
 ```{r, echo = F}
