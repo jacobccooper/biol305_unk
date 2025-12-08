@@ -681,17 +681,25 @@ fertilizer <- tuesdata$cereal_crop_yield_vs_fertilizer_application |>
 ```{r, eval = F, echo = F}
 # colnames(fertilizer)
 
-lm.mod <- lm(`Cereal yield (tonnes per hectare)` ~ `Nitrogen fertilizer use (kilograms per hectare)`*Entity, 
+fertilizer |> 
+  group_by(Entity) |> 
+  summarise(pv = shapiro.test((`Cereal yield (tonnes per hectare)`))$p.value)
+
+lm.mod <- lm(`Cereal yield (tonnes per hectare)` ~ log1p(`Nitrogen fertilizer use (kilograms per hectare)`)*Entity, 
              fertilizer)
 
 anova(lm.mod)
 ```
 
 ```{r, echo = F}
-ggplot(fertilizer, aes(`Nitrogen fertilizer use (kilograms per hectare)`, 
+fertilizer <- fertilizer |> 
+  mutate(log_nit = log1p(`Nitrogen fertilizer use (kilograms per hectare)`))
+
+ggplot(fertilizer, aes(log_nit, 
                        `Cereal yield (tonnes per hectare)`, 
                        shape = Entity, colour = Entity)) +
   geom_point() +
+  xlab("Log Nitrogen Used (kg per ha)") +
   scale_colour_viridis_d() +
   geom_smooth(method = "lm") +
   theme_classic()
