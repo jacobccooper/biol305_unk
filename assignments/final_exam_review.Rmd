@@ -1,0 +1,138 @@
+---
+title: "Final Exam Review"
+author: "BIOL 305"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+## Introduction
+
+These are questions that are posed as they would be on a final. Please complete each part of each question; we will review the answers. The following data are either imaginary or pulled from publicly available sources like [Wikipedia](https://wikipedia.org).
+
+For each question:
+
+- Determine which test should be used
+- Write your null and alternative hypotheses
+- Perform the appropriate test
+- Evaluate the results using an $\alpha = 0.05$
+- Write a conclusion that relates back to the biological hypothesis
+- If needed, plot the data - Don't forget a title and/or detailed caption and appropriate axes names
+
+```{r, R.options=F}
+library(tidyverse)
+library(UNKstats)
+```
+
+## Happiness
+
+You decide to ask your friends to rate their happiness on a scale of 0-100 before and after you bother them to ask how happy they are, thereby inciting an existential crises within each of them. You predict that asking this question will decrease the happiness they are feeling at that moment. These data are ranked data, but assume they are parametric given the size of the scale being used.
+
+```{r}
+before_asking <- c(96,80,86,92,100,92,95,91,87)
+after_asking <- c(72,53,90,85,90,86,83,79,62)
+
+happiness <- cbind(before_asking, after_asking) |> 
+  as.data.frame()
+
+happiness
+```
+
+```{r, echo = F, eval = F}
+# normally distributed
+shapiro.test(happiness$before_asking - happiness$after_asking)
+
+t.test(happiness$before_asking, 
+       happiness$after_asking, 
+       paired = T,
+       alternative = "greater")
+```
+
+statistic = 3.86, p = 0.002
+
+## Running and grades
+
+You hear that going running is good for your grades. You decide to look and see if the amount of time people spend running is related to their grades. You obtain the following data:
+
+```{r}
+run_time <- c(20,25,22,50,30,10,6)
+grade <- c(94,84,95,72,88,90,85)
+
+run_grades <- cbind(run_time, grade) |> 
+  as.data.frame()
+
+run_grades
+```
+
+```{r, eval = F, echo = F}
+cor.test(run_grades$run_time, run_grades$grade)
+```
+
+Test statistic = -1.92, p = 0.11, other value = -0.65
+
+## Fosbury Flop
+
+High-jumpers use the "Fosbury Flop" because it improves their performance by allowing their center of mass to pass *under* the high-jump bar while their bodies pass *over* the bar. Below are jump heights (in meters) for world records from before the Fosbury Flop was widely used and after the Fosbury Flop was widely used. Does the flop significantly improve athlete performace?
+
+```{r}
+pre_flop <- c(2.09,2.12,2.15,2.18,2.17,2.28,2.29)
+post_flop <- c(2.30,2.33,2.39,2.34,2.42,2.45,2.44)
+
+jump_heights <- cbind(pre_flop, post_flop) |> 
+  as.data.frame()
+
+jump_heights
+```
+
+```{r, echo = F, eval = F}
+# normal
+shapiro.test(jump_heights$post_flop)
+
+t.test(jump_heights$pre_flop, 
+       jump_heights$post_flop,
+       alternative = "l")
+```
+
+Stat = -5.47, p < 0.0001
+
+## Sandhills, Stonehills
+
+You decide to look at concentrations of Greater Prairie-Chickens *Tympanuchus cupido* in fields a set amount of years after control burns. The following table shows the count of prairie-chickens in each field from the year of the burn until 5 years after the burn. Conditions are lettered to ensure sorting is performed correctly.
+
+Assume these data are normally distributed.
+
+```{r}
+Location <- c(rep("Sandhills", 4), rep("Stonehills", 4))
+a_burn_year <- c(1,0,3,2,1,0,0,2)
+b_one_year_post_burn <- c(3,5,7,6,5,3,2,5)
+c_five_years_post_burn <- c(20,21,15,8,8,7,10,8)
+
+burn_counts <- c(a_burn_year, b_one_year_post_burn, c_five_years_post_burn)
+
+# prairie_chickens <- cbind(Location, a_burn_year, b_one_year_post_burn, c_five_years_post_burn) |> 
+  # as.data.frame()
+
+time <- c(rep("a_burn_year", 8),
+          rep("b_one_year_post_burn", 8),
+          rep("c_five_years_post_burn", 8))
+
+
+prairie_chickens <- cbind(Location, time, burn_counts) |> 
+  as.data.frame() |> 
+  mutate(Location = as.factor(Location)) |> 
+  mutate(time = as.factor(time)) |> 
+  mutate(burn_counts = as.numeric(burn_counts))
+
+prairie_chickens
+```
+
+```{r, echo = F, eval = F}
+a <- run_oneway(data = prairie_chickens,
+                dv = "burn_counts", 
+                group = "time", 
+                blocking = "Location",
+                parametric = T)
+
+a$anova_table
+```
+
+Statistic = 26.31, p < 0.0001.

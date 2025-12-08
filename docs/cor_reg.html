@@ -451,7 +451,7 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(y, x) <span class="sc">|&gt;</span> </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.29</code></pre>
+<pre><code>[1] 0.4</code></pre>
 </div>
 </div>
 </section>
@@ -995,6 +995,7 @@ special_attack 0.48   0.36    0.31           1.00</code></pre>
 <section id="q3-population-density" class="level3" data-number="14.5.3">
 <h3 data-number="14.5.3" class="anchored" data-anchor-id="q3-population-density"><span class="header-section-number">14.5.3</span> Q3: Population Density</h3>
 <p>You have heard that many cities and urban areas are worse off than rural areas, but as someone who has talked to people from rural and urban areas, you are not sure if that’s true. You decide to compare the total poverty rate for different counties (<code>percpovertyknown</code>) to the log of the population density (<code>popdensity</code>) in each county in Illinois, home to many rural farm counties as well as some of the largest cities in the country.</p>
+<p>Only normalize <code>popdensity</code> - leave <code>percpovertyknown</code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dataset in tidyverse</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># if you load tidyverse, you have the dataset</span></span>

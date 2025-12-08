@@ -630,6 +630,8 @@ ggplot(prison, aes(population, prison_population)) +
 
 You have heard that many cities and urban areas are worse off than rural areas, but as someone who has talked to people from rural and urban areas, you are not sure if that's true. You decide to compare the total poverty rate for different counties (`percpovertyknown`) to the log of the population density (`popdensity`) in each county in Illinois, home to many rural farm counties as well as some of the largest cities in the country.
 
+Only normalize `popdensity` - leave `percpovertyknown`.
+
 ```{r, message = F}
 # dataset in tidyverse
 # if you load tidyverse, you have the dataset
