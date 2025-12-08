@@ -597,7 +597,7 @@ summary(by_county)
 ```
 
 ```{r, echo = F}
-ggplot(prison, aes(population, prison_population, 
+ggplot(prison, aes(x = population, y = prison_population, group = county_name,
                    shape = county_name, colour = county_name)) +
   geom_point() +
   geom_smooth(method = "lm") +
@@ -671,8 +671,8 @@ To run an ANCOVA:
 ```{r}
 tuesdata <- tidytuesdayR::tt_load(2020, week = 36)
 
-fertilizer <- tuesdata$cereal_crop_yield_vs_fertilizer_application |> 
-  na.omit() |> 
+fertilizer <- tuesdata$cereal_crop_yield_vs_fertilizer_application |> na.omit() |> 
+  as.data.frame() |> 
   filter(Entity == "United States" | Entity == "Canada" | Entity == "Mexico")
 ```
 
@@ -681,7 +681,7 @@ fertilizer <- tuesdata$cereal_crop_yield_vs_fertilizer_application |>
 
 fertilizer |> 
   group_by(Entity) |> 
-  summarise(pv = shapiro.test((`Cereal yield (tonnes per hectare)`))$p.value)
+  summarise(pv = shapiro.test(log1p(`Nitrogen fertilizer use (kilograms per hectare)`))$p.value)
 
 lm.mod <- lm(`Cereal yield (tonnes per hectare)` ~ log1p(`Nitrogen fertilizer use (kilograms per hectare)`)*Entity, 
              fertilizer)

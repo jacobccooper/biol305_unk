@@ -451,7 +451,7 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(y, x) <span class="sc">|&gt;</span> </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.19</code></pre>
+<pre><code>[1] -0.11</code></pre>
 </div>
 </div>
 </section>
@@ -1048,8 +1048,8 @@ special_attack 0.48   0.36    0.31           1.00</code></pre>
   4 of 5: "key_crop_yields.csv"
   5 of 5: "land_use_vs_yield_change_in_cereal_production.csv"</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>fertilizer <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>cereal_crop_yield_vs_fertilizer_application <span class="sc">|&gt;</span> </span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">|&gt;</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>fertilizer <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>cereal_crop_yield_vs_fertilizer_application <span class="sc">|&gt;</span> <span class="fu">na.omit</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Entity <span class="sc">==</span> <span class="st">"United States"</span> <span class="sc">|</span> Entity <span class="sc">==</span> <span class="st">"Canada"</span> <span class="sc">|</span> Entity <span class="sc">==</span> <span class="st">"Mexico"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
