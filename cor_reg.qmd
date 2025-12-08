@@ -287,9 +287,7 @@ Per the *tidytuesday* website:
 For this particular problem, we are interested in whether the time until the snowman's head explodes (`duration`) is correlated with the average monthly temperature for a given year (`tre200m0`), the total sunshine duration hours (`sre000m0`), and the total monthly precipitation (`rre150m0`).
 
 ```{r, message = F}
-tuesdata <- tidytuesdayR::tt_load('2025-12-02')
-
-sechselaeuten <- tuesdata$sechselaeuten
+sechselaeuten <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-12-02/sechselaeuten.csv')
 ```
 
 #### Answers to this problem are as follows:
@@ -588,7 +586,7 @@ prison <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesda
   filter(county_name %in% c("Buffalo County", 
                             "Hall County", 
                             "Adams County")) |> 
-  select(year, county_name, population, prison_population) |> 
+  dplyr::select(year, county_name, population, prison_population) |> 
   na.omit()
 ```
 
@@ -630,7 +628,7 @@ ggplot(prison, aes(population, prison_population)) +
 
 You have heard that many cities and urban areas are worse off than rural areas, but as someone who has talked to people from rural and urban areas, you are not sure if that's true. You decide to compare the total poverty rate for different counties (`percpovertyknown`) to the log of the population density (`popdensity`) in each county in Illinois, home to many rural farm counties as well as some of the largest cities in the country.
 
-Only normalize `popdensity` - leave `percpovertyknown`.
+Only log transform `popdensity` - leave `percpovertyknown`. Don't worry about normality.
 
 ```{r, message = F}
 # dataset in tidyverse
@@ -652,7 +650,7 @@ Based on what you find, how are poverty rates affected by population density?
 
 ### Q4: Fertilizer
 
-You want to see just how effective fertilizer is at increasing crop yields. You decide to compare nitrogen fertilizer use to cereal yield (in tonnes per acre) in the Canada, Mexico, and the United States. You wanted to see (1) what overall trends exist in the overall dataset and (2) what trends exist within each country separately, since the countries likely have different approaches to farming and different geographic challenges.
+You want to see just how effective fertilizer is at increasing crop yields. You decide to compare nitrogen fertilizer use to cereal yield (in tonnes per acre) in the Canada, Mexico, and the United States. You wanted to see (1) what overall trends exist in the overall dataset and (2) whether slopes are different between different countries.
 
 *In order to see if slopes are different, you will have to do an ANCOVA - a two-way ANOVA with interaction!*
 

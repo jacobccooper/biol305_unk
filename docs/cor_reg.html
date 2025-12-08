@@ -451,7 +451,7 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(y, x) <span class="sc">|&gt;</span> </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.04</code></pre>
+<pre><code>[1] -0.19</code></pre>
 </div>
 </div>
 </section>
@@ -749,9 +749,7 @@ F-statistic: 37.04 on 1 and 13 DF,  p-value: 3.867e-05</code></pre>
 </blockquote>
 <p>For this particular problem, we are interested in whether the time until the snowman’s head explodes (<code>duration</code>) is correlated with the average monthly temperature for a given year (<code>tre200m0</code>), the total sunshine duration hours (<code>sre000m0</code>), and the total monthly precipitation (<code>rre150m0</code>).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="st">'2025-12-02'</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>sechselaeuten <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>sechselaeuten</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>sechselaeuten <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-12-02/sechselaeuten.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="answers-to-this-problem-are-as-follows" class="level4" data-number="14.4.1.1">
 <h4 data-number="14.4.1.1" class="anchored" data-anchor-id="answers-to-this-problem-are-as-follows"><span class="header-section-number">14.4.1.1</span> Answers to this problem are as follows:</h4>
@@ -970,7 +968,7 @@ special_attack 0.48   0.36    0.31           1.00</code></pre>
 <span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(county_name <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Buffalo County"</span>, </span>
 <span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"Hall County"</span>, </span>
 <span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"Adams County"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, county_name, population, prison_population) <span class="sc">|&gt;</span> </span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(year, county_name, population, prison_population) <span class="sc">|&gt;</span> </span>
 <span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
@@ -995,7 +993,7 @@ special_attack 0.48   0.36    0.31           1.00</code></pre>
 <section id="q3-population-density" class="level3" data-number="14.5.3">
 <h3 data-number="14.5.3" class="anchored" data-anchor-id="q3-population-density"><span class="header-section-number">14.5.3</span> Q3: Population Density</h3>
 <p>You have heard that many cities and urban areas are worse off than rural areas, but as someone who has talked to people from rural and urban areas, you are not sure if that’s true. You decide to compare the total poverty rate for different counties (<code>percpovertyknown</code>) to the log of the population density (<code>popdensity</code>) in each county in Illinois, home to many rural farm counties as well as some of the largest cities in the country.</p>
-<p>Only normalize <code>popdensity</code> - leave <code>percpovertyknown</code>.</p>
+<p>Only log transform <code>popdensity</code> - leave <code>percpovertyknown</code>. Don’t worry about normality.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dataset in tidyverse</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># if you load tidyverse, you have the dataset</span></span>
@@ -1018,7 +1016,7 @@ special_attack 0.48   0.36    0.31           1.00</code></pre>
 </section>
 <section id="q4-fertilizer" class="level3" data-number="14.5.4">
 <h3 data-number="14.5.4" class="anchored" data-anchor-id="q4-fertilizer"><span class="header-section-number">14.5.4</span> Q4: Fertilizer</h3>
-<p>You want to see just how effective fertilizer is at increasing crop yields. You decide to compare nitrogen fertilizer use to cereal yield (in tonnes per acre) in the Canada, Mexico, and the United States. You wanted to see (1) what overall trends exist in the overall dataset and (2) what trends exist within each country separately, since the countries likely have different approaches to farming and different geographic challenges.</p>
+<p>You want to see just how effective fertilizer is at increasing crop yields. You decide to compare nitrogen fertilizer use to cereal yield (in tonnes per acre) in the Canada, Mexico, and the United States. You wanted to see (1) what overall trends exist in the overall dataset and (2) whether slopes are different between different countries.</p>
 <p><em>In order to see if slopes are different, you will have to do an ANCOVA - a two-way ANOVA with interaction!</em></p>
 <p>To run an ANCOVA:</p>
 <ul>
