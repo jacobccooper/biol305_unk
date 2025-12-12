@@ -98,7 +98,7 @@ Stat = -5.47, p < 0.0001
 
 You decide to look at concentrations of Greater Prairie-Chickens *Tympanuchus cupido* in fields a set amount of years after control burns. The following table shows the count of prairie-chickens in each field from the year of the burn until 5 years after the burn. Conditions are lettered to ensure sorting is performed correctly.
 
-Assume these data are normally distributed.
+Assume these data are normally distributed. For the purposes of this study, it does *not* count as a "repeated measures / paired" survey, since we do not know if surveys were the same across all years, we only know that they were performed in the same regions with approximately the same amount of effort.
 
 ```{r}
 Location <- c(rep("Sandhills", 4), rep("Stonehills", 4))
