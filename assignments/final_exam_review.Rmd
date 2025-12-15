@@ -136,3 +136,75 @@ a$anova_table
 ```
 
 Statistic = 26.31, p < 0.0001.
+
+## Range vs. Body Size
+
+Multiple studies have shown there is a correlation between range and body size. These studies have been so correlated, in fact, that researchers hypothesize that you can predict an organisms' range size based on its body size. Use the data below to assess this hypothesis.
+
+The URL is: https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/assignments/final_exam_bodysizes.csv
+
+Round your answers to *two* decimal places, even though the datasheet shows more precision.
+
+```{r}
+# download data from github
+body_range <- read_csv("https://raw.githubusercontent.com/jacobccooper/biol305_unk/main/assignments/final_exam_bodysizes.csv")
+```
+
+```{r}
+summary(body_range)
+```
+
+```{r}
+plot(log1p(body_range))
+```
+
+
+
+
+
+
+
+
+
+```{r, echo = F, eval = F}
+body_range <- body_range |> 
+  mutate(log_range_size = log1p(range_size)) |> 
+  mutate(log_body_size = log1p(body_size))
+
+a <- lm(log_range_size ~ log_body_size,
+        body_range)
+
+summary(a)
+```
+
+*NOTE*: Can only do correlation and regression on things with a *linear* relationship.
+
+stat = 70.44, p < 0.0001, other val = 1.89
+
+### Applying what you know
+
+How many square kilometers would the range of an animal weighing 4500 kg be?
+
+HINT: use the following to define your new range size:
+
+```{r, eval = F}
+newdat = data.frame(explanatory_variable = 123)
+```
+
+You can then use `predict` to get your value:
+
+```{r, eval = F}
+predict(model, newdat)
+```
+
+```{r, eval = F, echo = F}
+# create the new data
+# name must be the same as your explanatory
+newdat = data.frame(log_body_size = log1p(4500))
+
+predict(a,         # linear model
+        newdat) |> # using the new data
+  expm1()          # back transform
+```
+
+The range would be 11.01 $km^2$.
