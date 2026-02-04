@@ -49,7 +49,7 @@ Head over the the [*RStudio* download website](https://posit.co/downloads/) and 
 
 Open *RStudio* on your machine. You should be presented with something like the following:
 
-![*RStudio* start window. Note that the screen is split into four different quadrants. Top left: *R* documents; bottom left: *R* program; top right: environment window; bottom right: plots, help, and directories.](images/rstudio_start.png){alt="RStudio start window. Note that the screen is split into four different quadrants. Top left: R documents; bottom left: R program; top right: environment window; bottom right: plots, help, and directories." fig-align="center"}
+![RStudio start window. Note that the screen is split into four different quadrants. Top left: R documents; bottom left: R program; top right: environment window; bottom right: plots, help, and directories.](images/rstudio_start.png){fig-align="center"}
 
 In *RStudio*, the top left window is always going to be our coding window. This is where we will type all of our code and create our documents. In the bottom left we will see *R* executing the code. This will show what the computer is "thinking" and will help us spot any potential issues. The top right window is the "environment", which shows what variables and datasets are stored within the computers' memory. (It can also show some other things, but we aren't concerned with that at this point). The bottom right window is the "display" window. This is where plots and help windows will appear if they don't appear in the document (top left) window itself.
 
@@ -104,4 +104,26 @@ As you can see, the above breaks things down into a more step-by-step fashion, a
 
 ![Visual settings on Dr. Cooper's machine. Note that the colors make the numbers and commands stand out, and the font and color scheme are easily legible.](images/clipboard-4270314754.png){width="530"}
 
-**CONGRATS!** You now have *R* installed on your computer.
+## PDF Compatability
+
+### Mac Installation
+
+In order to make PDFs on your mac, you will need to install HomeBrew and then install the MacTex distribution. You can do that by running the following commands in your Terminal app. Keep in mind you may be asked for your password at several points throughout the process.
+
+#### Install HomeBrew
+
+```{bash, eval = F}
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+Pay attention at the end of the HomeBrew installation; you will be asked to copy and paste some lines into your terminal. *If you do not do this, HomeBrew will not work!*
+
+#### Install MacTex
+
+Only run this portion AFTER you have run MacTex.
+
+```{bash, eval = F}
+brew install --cask mactex
+```
+
+## **CONGRATS!** You now have *R* installed on your computer.
