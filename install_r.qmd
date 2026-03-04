@@ -106,24 +106,11 @@ As you can see, the above breaks things down into a more step-by-step fashion, a
 
 ## PDF Compatability
 
-### Mac Installation
+In order to make `pdf` documents, you will need to have a `tinytex` distribution installed. You can do this with the following commands in the console (bottom left) window.
 
-In order to make PDFs on your mac, you will need to install HomeBrew and then install the MacTex distribution. You can do that by running the following commands in your Terminal app. Keep in mind you may be asked for your password at several points throughout the process.
-
-#### Install HomeBrew
-
-```{bash, eval = F}
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-Pay attention at the end of the HomeBrew installation; you will be asked to copy and paste some lines into your terminal. *If you do not do this, HomeBrew will not work!*
-
-#### Install MacTex
-
-Only run this portion AFTER you have run MacTex.
-
-```{bash, eval = F}
-brew install --cask mactex
+```{r, eval = F}
+install.packages('tinytex')
+tinytex::install_tinytex()
 ```
 
 ## **CONGRATS!** You now have *R* installed on your computer.

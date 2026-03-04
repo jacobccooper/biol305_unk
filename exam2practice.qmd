@@ -15,7 +15,7 @@ Please complete the following problems as practice for Exam 2. *Note* that you m
 
 **Example answers**: For your conclusion, answers should look like this:
 
-| The mean height of the class is significantly higher than the height of the general population (\$Z\$ = 2.50, $p = 0.006$).
+| The mean height of the class is significantly higher than the height of the general population ($Z = 2.50$, $p = 0.006$).
 
 | The mean length of the leg of the high-elevation Woodhouse's Toads (*Anaxyrus woodhousii*) is indistinguishable from those of the general population ($Z = 0.12$, $p = 0.45$).
 
@@ -55,11 +55,30 @@ x <- c(1,5,8,9)
 x
 ```
 
-1.  State the null and alternative hypotheses for this study.
-2.  Calculate the first quartile, median, third quartile, and interquartile range of your response variable. Create a boxplot. Based on your results, are there any outliers in your data? Explain.
-3.  Calculate the $z$-score for this scenario.
-4.  What is the probability that, by random chance alone, you would find your observed mean or something more extreme?
-5.  Assume that you set your $\alpha$ for your study prior to your data collection to 0.05. Based on this information and the $p$ value you obtained, is your null hypothesis supported or rejected? Report your conclusion in a full sentence, including the $Z$ score and the $p$ value in your answer.
+1.  Why type of data are each of the variables (i.e., `fish ID` and `length`) – nominal, ordinal, interval, or ratio? Provide your answer along with a brief justification.
+2.  Calculate the following for the `length` variable, rounding to the appropriate number of significant digits in all answers. Be sure to provide a written description of your answers as well as the code output.
+    -   Mean
+    -   Median
+    -   Mode
+    -   Q1
+    -   Q2
+    -   IQR
+    -   Variance
+    -   Standard deviation
+    -   Standard error
+    -   Coefficient of variation
+3.  Calculate skewness and kurtosis for the `length` data. Provide an interpretation of these values.
+4.  Create and compute the following for the `length` data:
+    -   Frequency histogram
+    -   Cumulative frequency plot
+    -   Shapiro-Wilkes test
+    -   Using the above, provide an interpretation of whether data are normally distributed, and be sure to justify your answer
+5.  Let's say the mean and standard deviation of `length` across *all* populations of this minnow are $\mu = 85.00$ and $\sigma = 4.50$.
+    -   State the null and alternative hypotheses for this scenario.
+    -   Run the appropriate $Z$-test and report the $p$-value.
+    -   State the final conclusion of whether or not you *support* or *reject* the null hypothesis. **Assume** $\alpha = 0.05$. Justify your answer.
+
+*Be sure to answer all questions in full sentences!*
 
 ## Time spent on canvas
 
@@ -82,7 +101,27 @@ time_on_canvas <- cbind(student, time.hrs) |>
 head(time_on_canvas)
 ```
 
-1.  Which variable is the response variable? What type of data are these?
-2.  Is the response variable normally distributed? Support your answer with a histogram, a cumulative frequency plot, assessments of skewness and kurtosis, and an indication of if outliers exist. Change the title and axes labels of the plots to make them intelligible.
-3.  If a transformation is needed, which transformation is required? *Note* - you only have to do a histogram and a `shapiro.test` to assess a transformation. As soon as you find a transformation that works, you do not have to do another.
-4.  What is the 95% confidence interval for the mean of these data? Report the upper and lower confidence limits as well as the mean in a full sentence. Don't forget to mention the units of your answer. HINT: you may have to back-transform your data.
+1.  What type of data are each of these variables (i.e., student ID \[`student`\] and time spent in hours \[`time.hrs`\]) – nominal, ordinal, interval, or ratio? Provide your answer along with a brief justification.
+2.  Calculate the following for the `time.hrs` variable, rounding to the appropriate number of significant digits in all answers. Be sure to provide a written description of your answers as well as the code output.
+    -   Mean
+    -   Median
+    -   Mode
+    -   Q1
+    -   Q2
+    -   IQR
+    -   Variance
+    -   Standard deviation
+    -   Standard error
+    -   Coefficient of variation
+3.  Calculate skewness and kurtosis for the `length` data. Provide an interpretation of these values.
+4.  Create and compute the following for the `length` data:
+    -   Frequency histogram
+    -   Cumulative frequency plot
+    -   Shapiro-Wilkes test
+    -   Using the above, provide an interpretation of whether data are normally distributed, and be sure to justify your answer
+5.  Let's say Canvas has been tracking users across all of the classes ever put in their software platform. This includes many universities and many classes across all of those schools. The mean and standard deviation from this population-level dataset are $\mu = 12.22$ and $\sigma = 2.10$. You personally spend 15.45 hours on Canvas for one of your UNK classes. Is the number of hours you spent expected or not expected based on this information from the larger Canvas population? **Assume** $\alpha = 0.05$. For this scenario, be sure to do the following:
+    -   State the null and alternative hypotheses
+    -   Run the appropriate $Z$-test and report the $p$-value
+    -   State the final conclusion of whether you *support* or *reject* the null hypothesis – be sure to support your answer!
+    -   Calculate the 95% confidence interval around the population mean
+6.  **Optional:** Repeat steps 4 and 5 after performing a natural log transformation on the `time.hrs` data (use the command `log1p`). Don't forget to back-transform your confidence intervals using `expm1`.

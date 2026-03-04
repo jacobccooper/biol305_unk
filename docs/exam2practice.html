@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.28">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -70,14 +70,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./transformations.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-b719d3d4935f2b08311a76135e2bf442.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c27fdc8e5b00b532d2d5a75ada188648.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-22e83d4e5eff2a99ccc45532742ac980.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -120,7 +121,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -338,7 +339,7 @@ window.Quarto = {
 <p>Please complete the following problems as practice for Exam 2. <em>Note</em> that you may need to load specific packages from the previous exercises to get your code to work.</p>
 <p><strong>All questions must be answered in full sentences</strong>.</p>
 <p><strong>Example answers</strong>: For your conclusion, answers should look like this:</p>
-<div class="line-block">The mean height of the class is significantly higher than the height of the general population ($Z$ = 2.50, <span class="math inline">\(p = 0.006\)</span>).</div>
+<div class="line-block">The mean height of the class is significantly higher than the height of the general population (<span class="math inline">\(Z = 2.50\)</span>, <span class="math inline">\(p = 0.006\)</span>).</div>
 <div class="line-block">The mean length of the leg of the high-elevation Woodhouse’s Toads (<em>Anaxyrus woodhousii</em>) is indistinguishable from those of the general population (<span class="math inline">\(Z = 0.12\)</span>, <span class="math inline">\(p = 0.45\)</span>).</div>
 <section id="minnows" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="minnows"><span class="header-section-number">8.1</span> Minnows</h2>
@@ -436,25 +437,49 @@ window.Quarto = {
 </table>
 <p>NOTE: you will have to create the numeric object for this problem. use <code>c</code> to link things together; e.g.:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">8</span>,<span class="dv">9</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">8</span>,<span class="dv">9</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 5 8 9</code></pre>
 </div>
 </div>
 <ol type="1">
-<li>State the null and alternative hypotheses for this study.</li>
-<li>Calculate the first quartile, median, third quartile, and interquartile range of your response variable. Create a boxplot. Based on your results, are there any outliers in your data? Explain.</li>
-<li>Calculate the <span class="math inline">\(z\)</span>-score for this scenario.</li>
-<li>What is the probability that, by random chance alone, you would find your observed mean or something more extreme?</li>
-<li>Assume that you set your <span class="math inline">\(\alpha\)</span> for your study prior to your data collection to 0.05. Based on this information and the <span class="math inline">\(p\)</span> value you obtained, is your null hypothesis supported or rejected? Report your conclusion in a full sentence, including the <span class="math inline">\(Z\)</span> score and the <span class="math inline">\(p\)</span> value in your answer.</li>
+<li>Why type of data are each of the variables (i.e., <code>fish ID</code> and <code>length</code>) – nominal, ordinal, interval, or ratio? Provide your answer along with a brief justification.</li>
+<li>Calculate the following for the <code>length</code> variable, rounding to the appropriate number of significant digits in all answers. Be sure to provide a written description of your answers as well as the code output.
+<ul>
+<li>Mean</li>
+<li>Median</li>
+<li>Mode</li>
+<li>Q1</li>
+<li>Q2</li>
+<li>IQR</li>
+<li>Variance</li>
+<li>Standard deviation</li>
+<li>Standard error</li>
+<li>Coefficient of variation</li>
+</ul></li>
+<li>Calculate skewness and kurtosis for the <code>length</code> data. Provide an interpretation of these values.</li>
+<li>Create and compute the following for the <code>length</code> data:
+<ul>
+<li>Frequency histogram</li>
+<li>Cumulative frequency plot</li>
+<li>Shapiro-Wilkes test</li>
+<li>Using the above, provide an interpretation of whether data are normally distributed, and be sure to justify your answer</li>
+</ul></li>
+<li>Let’s say the mean and standard deviation of <code>length</code> across <em>all</em> populations of this minnow are <span class="math inline">\(\mu = 85.00\)</span> and <span class="math inline">\(\sigma = 4.50\)</span>.
+<ul>
+<li>State the null and alternative hypotheses for this scenario.</li>
+<li>Run the appropriate <span class="math inline">\(Z\)</span>-test and report the <span class="math inline">\(p\)</span>-value.</li>
+<li>State the final conclusion of whether or not you <em>support</em> or <em>reject</em> the null hypothesis. <strong>Assume</strong> <span class="math inline">\(\alpha = 0.05\)</span>. Justify your answer.</li>
+</ul></li>
 </ol>
+<p><em>Be sure to answer all questions in full sentences!</em></p>
 </section>
 <section id="time-spent-on-canvas" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="time-spent-on-canvas"><span class="header-section-number">8.2</span> Time spent on canvas</h2>
 <p>You are curious about how much time your classmates spend on Canvas for BIOL305. Let’s say you get the following data for the amount of time folks spend on Canvas:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>time.hrs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">19.65</span>, <span class="fl">69.29</span>, <span class="fl">6.83</span>, <span class="fl">5.50</span>, <span class="fl">17.98</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>time.hrs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">19.65</span>, <span class="fl">69.29</span>, <span class="fl">6.83</span>, <span class="fl">5.50</span>, <span class="fl">17.98</span>,</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>              <span class="fl">19.89</span>, <span class="fl">8.52</span>, <span class="fl">71.37</span>, <span class="fl">12.62</span>, <span class="fl">4.62</span>,</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>              <span class="fl">3.00</span>, <span class="fl">5.69</span>, <span class="fl">10.79</span>, <span class="fl">6.59</span>, <span class="fl">32.56</span>, </span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>              <span class="fl">15.72</span>, <span class="fl">3.67</span>, <span class="fl">10.04</span>, <span class="fl">5.45</span>, <span class="fl">3.69</span>, </span>
@@ -467,7 +492,7 @@ window.Quarto = {
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time.hrs =</span> <span class="fu">as.numeric</span>(time.hrs)) <span class="sc">|&gt;</span> </span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">student =</span> <span class="fu">as.numeric</span>(student))</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(time_on_canvas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(time_on_canvas)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  student time.hrs
 1       1    19.65
@@ -479,10 +504,36 @@ window.Quarto = {
 </div>
 </div>
 <ol type="1">
-<li>Which variable is the response variable? What type of data are these?</li>
-<li>Is the response variable normally distributed? Support your answer with a histogram, a cumulative frequency plot, assessments of skewness and kurtosis, and an indication of if outliers exist. Change the title and axes labels of the plots to make them intelligible.</li>
-<li>If a transformation is needed, which transformation is required? <em>Note</em> - you only have to do a histogram and a <code>shapiro.test</code> to assess a transformation. As soon as you find a transformation that works, you do not have to do another.</li>
-<li>What is the 95% confidence interval for the mean of these data? Report the upper and lower confidence limits as well as the mean in a full sentence. Don’t forget to mention the units of your answer. HINT: you may have to back-transform your data.</li>
+<li>What type of data are each of these variables (i.e., student ID [<code>student</code>] and time spent in hours [<code>time.hrs</code>]) – nominal, ordinal, interval, or ratio? Provide your answer along with a brief justification.</li>
+<li>Calculate the following for the <code>time.hrs</code> variable, rounding to the appropriate number of significant digits in all answers. Be sure to provide a written description of your answers as well as the code output.
+<ul>
+<li>Mean</li>
+<li>Median</li>
+<li>Mode</li>
+<li>Q1</li>
+<li>Q2</li>
+<li>IQR</li>
+<li>Variance</li>
+<li>Standard deviation</li>
+<li>Standard error</li>
+<li>Coefficient of variation</li>
+</ul></li>
+<li>Calculate skewness and kurtosis for the <code>length</code> data. Provide an interpretation of these values.</li>
+<li>Create and compute the following for the <code>length</code> data:
+<ul>
+<li>Frequency histogram</li>
+<li>Cumulative frequency plot</li>
+<li>Shapiro-Wilkes test</li>
+<li>Using the above, provide an interpretation of whether data are normally distributed, and be sure to justify your answer</li>
+</ul></li>
+<li>Let’s say Canvas has been tracking users across all of the classes ever put in their software platform. This includes many universities and many classes across all of those schools. The mean and standard deviation from this population-level dataset are <span class="math inline">\(\mu = 12.22\)</span> and <span class="math inline">\(\sigma = 2.10\)</span>. You personally spend 15.45 hours on Canvas for one of your UNK classes. Is the number of hours you spent expected or not expected based on this information from the larger Canvas population? <strong>Assume</strong> <span class="math inline">\(\alpha = 0.05\)</span>. For this scenario, be sure to do the following:
+<ul>
+<li>State the null and alternative hypotheses</li>
+<li>Run the appropriate <span class="math inline">\(Z\)</span>-test and report the <span class="math inline">\(p\)</span>-value</li>
+<li>State the final conclusion of whether you <em>support</em> or <em>reject</em> the null hypothesis – be sure to support your answer!</li>
+<li>Calculate the 95% confidence interval around the population mean</li>
+</ul></li>
+<li><strong>Optional:</strong> Repeat steps 4 and 5 after performing a natural log transformation on the <code>time.hrs</code> data (use the command <code>log1p</code>). Don’t forget to back-transform your confidence intervals using <code>expm1</code>.</li>
 </ol>
 
 
@@ -540,13 +591,14 @@ window.Quarto = {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
