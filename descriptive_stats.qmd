@@ -71,9 +71,9 @@ Using the `starbucks` dataset, we can look at some of these descriptive statisti
 
 We use Greek lettering for *populations* and Roman lettering for samples. For example:
 
--   $\sigma$ is a population, but $s$ is a sample (both these variables refer to *standard deviation*).
+- $\sigma$ is a population, but $s$ is a sample (both these variables refer to *standard deviation*).
 
--   $\mu$ is a population, but $\bar{x}$ is a sample (both of these variables refer to the *mean*).
+- $\mu$ is a population, but $\bar{x}$ is a sample (both of these variables refer to the *mean*).
 
 ### Mean
 
@@ -386,15 +386,15 @@ sum(2 == 3)
 
 This allows you to find how many arguments match your condition quickly, and even allows you to subset based on these indices as well. Keep in mind you can use greater than `<`, less than `>`, greater than or equal to `<=`, less than or equal to `>=`, is equal to `==`, and is not equal to `!=` to identify numerical relationships. Other logical arguments include:
 
--   `&`: both conditions must be `TRUE` to match (e.g., `c(10,20) & c(20,10)`). Try the following as well: `fraps < 10 & fraps > 3`.
+- `&`: both conditions must be `TRUE` to match (e.g., `c(10,20) & c(20,10)`). Try the following as well: `fraps < 10 & fraps > 3`.
 
--   `&&`: and, but works with single elements and allows for better parsing. Often used with `if`. E.g., `fraps < 10 && fraps > 3`. This will not work on our multi-element `frap` vector.
+- `&&`: and, but works with single elements and allows for better parsing. Often used with `if`. E.g., `fraps < 10 && fraps > 3`. This will not work on our multi-element `frap` vector.
 
--   `|`: or, saying at least one condition must be true. Try: `fraps > 10 | fraps < 3`.
+- `|`: or, saying at least one condition must be true. Try: `fraps > 10 | fraps < 3`.
 
--   `||`: or, but for a single element, like `&&` above.
+- `||`: or, but for a single element, like `&&` above.
 
--   `!`: not, so "not equal to" would be `!=`.
+- `!`: not, so "not equal to" would be `!=`.
 
 </details>
 
@@ -536,9 +536,7 @@ As you can see, we calculated this correctly!
 
 The standard error is used to help understand the spread of data and to help estimate the accuracy of our measurements for things like the mean. The standard error is calculated thusly:
 
-$$
-SE = \frac{\sigma}{\sqrt{n}}
-$$
+$$SE = \frac{\sigma}{\sqrt{n}}$$
 
 <details>
 
@@ -564,9 +562,7 @@ se(frap_order)
 
 The coefficient of variation, another measure of data spread and location, is calculated by the following:
 
-$$
-CV = \frac{\sigma}{\mu}*100
-$$
+$$CV = \frac{\sigma}{\mu}*100$$
 
 If we were to calculate this by hand, it would be done with this function:
 
@@ -719,25 +715,25 @@ mean(nebraskans) |>
 
 **Now, calculate the following for `nebraskans`**:
 
--   mean - `mean()`
+- mean - `mean()`
 
--   25th and 50th percentiles - `quantile()`
+- 25th and 50th percentiles - `quantile()`
 
--   median - `median()`
+- median - `median()`
 
--   range - `max()-min()`
+- range - `max()-min()`
 
--   interquartile range - `IQR()`
+- interquartile range - `IQR()`
 
--   variance - `var()`
+- variance - `var()`
 
--   standard deviation - `sd()`
+- standard deviation - `sd()`
 
--   coefficient of variation - `cv()` function defined above
+- coefficient of variation - `cv()` function defined above
 
--   standard error - `sd()`
+- standard error - `sd()`
 
--   whether there are any "outliers" - `Outliers()`
+- whether there are any "outliers" - `Outliers()`
 
 **Synthesis question**: Do you think that there are any really anomalous years? Do you feel data are similar between years? *Note* we are not looking at trends through time but whether any years are outliers.
 
@@ -751,25 +747,25 @@ pirates <- read_csv("https://figshare.com/ndownloader/files/42314604")
 
 **Now, calculate the following for `Distance_from_Coast`**:
 
--   mean
+- mean
 
--   median
+- median
 
--   25th and 75th percentiles
+- 25th and 75th percentiles
 
--   range
+- range
 
--   interquartile range
+- interquartile range
 
--   variance
+- variance
 
--   standard deviation
+- standard deviation
 
--   coefficient of variation
+- coefficient of variation
 
--   standard error
+- standard error
 
--   whether there are any "outliers"
+- whether there are any "outliers"
 
 **Synthesis question**: Do you notice any patterns in distance from shore? What may be responsible for these patterns? *Hint*: Think about what piracy entails and also what other columns are available as other variables in the above dataset.
 
@@ -791,24 +787,24 @@ As you can see, this file has only two columns but 17,150 rows! For the column `
 
 **Calculate the following for the `time_difference`**:
 
--   mean
+- mean
 
--   median
+- median
 
--   25th and 75th percentiles
+- 25th and 75th percentiles
 
--   range
+- range
 
--   interquartile range
+- interquartile range
 
--   variance
+- variance
 
--   standard deviation
+- standard deviation
 
--   coefficient of variation
+- coefficient of variation
 
--   standard error
+- standard error
 
--   whether there are any "outliers"
+- whether there are any "outliers"
 
 **Synthesis question**: Folks will often think about probabilities of events being "low but never zero". What does that mean in the context of secondary infection? What about these data make you think that a secondary infection is always possible?

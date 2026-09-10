@@ -29,21 +29,19 @@ If we are looking at things that could be one thing *and* another thing, we mult
 
 A *binomial distribution* is one in which only two outcomes are possible - often coded as $0$ and $1$ and usually representing failure and success, respectively. The binomial is described by the following function:
 
-$$
-p(x)=\binom{n}{x}p^{x}(1-p)^{n-x}
-$$
+$$p(x)=\binom{n}{x}p^{x}(1-p)^{n-x}$$
 
 where $n =$ number of trials, $x =$ the number of successes, and $p =$ the probability of a success under random conditions.
 
 In *R*, the binomial distribution is represented by the following functions:
 
--   `dbinom`: the density of a binomial distribution
+- `dbinom`: the density of a binomial distribution
 
--   `pbinom`: the distribution function, or the probability of a specific observation
+- `pbinom`: the distribution function, or the probability of a specific observation
 
--   `qbinom`: the value at which a specific probability is found (the *quantile function*)
+- `qbinom`: the value at which a specific probability is found (the *quantile function*)
 
--   `rbinom`: generates random values according to a binomial.
+- `rbinom`: generates random values according to a binomial.
 
 ### Binomial examples
 
@@ -132,15 +130,15 @@ As we increase the number of flips, we can see that the probability of success f
 
 We can perform exact binomial tests by using the *R* function `binom.test`. This is a built in function within *R*. This test requires the following arguments:
 
--   `x`: number of successes (success = outcome of interest)
+- `x`: number of successes (success = outcome of interest)
 
--   `n`: number of trials (number of events)
+- `n`: number of trials (number of events)
 
--   `p`: probability of success in a typical situation (*i.e.*, for a fair coin, this is $50$%)
+- `p`: probability of success in a typical situation (*i.e.*, for a fair coin, this is $50$%)
 
--   `alternative`: the hypothesis to be tested, whether `two.sided`, `greater`, or `less`.
+- `alternative`: the hypothesis to be tested, whether `two.sided`, `greater`, or `less`.
 
--   `conf.level` is the *confidence level* to be returned; default is $95$%.
+- `conf.level` is the *confidence level* to be returned; default is $95$%.
 
 Let's say you flip a coin ten times, randomly assigning one side as a "success" and one side as a "failure". We do ten flips, and get 3 "successes". How likely is this outcome?
 
@@ -180,19 +178,17 @@ This test is easily implemented, but always double check and make sure you are s
 
 The *Poisson distribution* is used to reflect random count data. Specifically, the Poisson is used to determine if success events are *overdispersed* (*i.e.*, regularly spaced), *random*, or *underdispersed* (i.e., *clustered*). The Poisson introduces the variable *lambda* ($\lambda$) which represents the mean ($\mu$) and the variance ($\sigma^2$), which are equal in a Poisson distribution. A Poisson distribution is described by the following function:
 
-$$
-p(x)=\frac{\lambda^{x}e^{-\lambda}}{x!}
-$$
+$$p(x)=\frac{\lambda^{x}e^{-\lambda}}{x!}$$
 
 The Poisson is represented by the following functions in *R* which closely resemble the functions for the normal and binomial distributions:
 
--   `dpois`: the log density function
+- `dpois`: the log density function
 
--   `ppois`: log distribution (probability) function
+- `ppois`: log distribution (probability) function
 
--   `qpois`: quantile function
+- `qpois`: quantile function
 
--   `rpois`: random values from a Poisson.
+- `rpois`: random values from a Poisson.
 
 ### Poisson example
 
@@ -214,13 +210,13 @@ As we can see, the probability of rare events is high, whereas the probability q
 
 Much like the Binomial Distribution and its `binom.test`, we can use `poisson.test` to analyze data via a Poisson Distribution. This command uses the arguments:
 
--   `x`: number of events of interest
+- `x`: number of events of interest
 
--   `T`: time base (if for an event count)
+- `T`: time base (if for an event count)
 
--   `r`: hypothesized rate or ratio
+- `r`: hypothesized rate or ratio
 
--   `alternative` and `conf.level` are the same as for `binom.test`
+- `alternative` and `conf.level` are the same as for `binom.test`
 
 We will not often use the `poisson.test` in this class, but it is good to be aware of.
 
@@ -299,9 +295,9 @@ The probability is only about 9%.
 
 ## Homework
 
-Remember - your homework must be completed in an `rmarkdown` document submitted as an `html` file.
+For each question, you must determine whether a *binomial* or a *Poisson* distribution is most appropriate. (Provide justification on your document for why you chose the distribution you did). After picking the correct distribution, answer the statistical question posed.
 
-For each question, you must determine whether a binomial or a Poisson distribution is most appropriate. (Provide justification on your document for why you chose the distribution you did). After picking the correct distribution, answer the statistical question posed.
+**Answers are provided at the end to help guide you, but you will be graded on whether you show your work!**
 
 Some of the inspiration for these problems is drawn from [Statology](https://www.statology.org/binomial-distribution-real-life-examples/).
 
@@ -309,34 +305,99 @@ Some of the inspiration for these problems is drawn from [Statology](https://www
 
 There is a claw machine at the local fair that is notoriously difficult to use. In fact, it is estimated that only 1 in 50 attempts are successful at getting a toy out of the machine. What is the probability that you would try it 50 times and win thrice?
 
+```{r, echo = F, eval = F}
+bt <- binom.test(x = 3, # number of successes
+           n = 50, # number of trials
+           p = 1/50) # odds of winning
+
+bt$p.value
+```
+
 ### Problem 2
 
-Whooping Cranes *Grus americanus* are some of the most endangered birds in North America, with only 557 birds in the population that migrates through Nebraska. Conversely, approximately 736,000 Sandhill Cranes *Antigone canadensis* migrate through Nebraska. Assuming that census counts of flocks of 5000 cranes have the expected average ratio of cranes, what are the odds of finding a crane flock with two or more Whooping Cranes?
+Whooping Cranes *Grus americanus* are some of the most endangered birds in North America, with only 557 birds in the population that migrates through Nebraska. Conversely, approximately 736,000 Sandhill Cranes *Antigone canadensis* migrate through Nebraska. Assuming that census counts of flocks of 5000 cranes have the expected average ratio of cranes, what are the odds of finding a crane flock with 5 or more Whooping Cranes?
+
+```{r, echo = F, eval = F}
+# poisson test for random encounters
+1-(dpois(x = c(0,1,2,3,4), lambda = 557/(557+736000)*5000) |> sum())
+```
 
 ### Problem 3
 
 Your friend has a twenty-sided dice that you suspect to be unfair. They have rolled a 20 four times in the past thirty rolls. Is the dice unfair?
 
+```{r, eval = F, echo = F}
+binom.test(x = 4,
+           n = 30,
+           p = 1/20)
+```
+
 ### Problem 4
 
 You roll three die at a single time. What are the odds of getting exactly two fours?
+
+```{r, echo = F, eval = F}
+dbinom(2, size = 3, prob = 1/6)
+
+binom.test(x = 2, n = 3, p = 1/6)
+```
 
 ### Problem 5
 
 You notice that in a class of 200 people, the odds of any given student being absent is approximately 3%. What are the odds that 5 people miss a given class?
 
+```{r, echo = F, eval = F}
+dbinom(x = 5, size = 200, 0.03)
+```
+
 ### Problem 6
 
-There are approximately 3 severe storm warnings per 16 week semester at UNK. What are the odds of having a semester with no severe storm warnings?
+Down on your luck, you decide to look for some four-leaf clovers. You notice that you seem to find 1 four-leaf clover out of every 5,000 that you check (based on [Reader's Digest article](https://www.rd.com/article/four-leaf-clover/)). What are the odds of checking 2,500 clovers and finding *any* clovers? (Round to the first decimal place with a non-zero integer).
+
+```{r, echo = F, eval = F}
+1-dpois(x = c(0), lambda = 1/2500)
+```
 
 ### Problem 7
 
-You are giving mice an experimental treatment that is designed to change their fur color. In a trial of 500 mice, 15 had their fur change color. Using this precedent, are the odds of having 6 mice have their fur change color in another trial of 500 individuals?
+You are giving mice an experimental treatment that is designed to change their fur color. In a trial of 500 mice, 15 had their fur change color. Using this precedent, are the odds of having 8 mice have their fur change color in another trial of 500 individuals?
+
+```{r, echo = F, eval = F}
+dbinom(x = 8, size = 500, prob = 15/500)
+```
 
 ### Problem 8
 
 What are the odds of rolling no fours on two twenty-sided die?
 
+```{r, eval = F, echo = F}
+(19/20)^2
+```
+
 ### Problem 9
 
 Dr. Cooper once caught his mom shaking sodas and putting them back at the shelves at a gas station while they were traveling. Assuming his mom was able to shake 10% of the sodas before getting caught, what are the odds of getting three or more shaken sodas if you buy 20 sodas?
+
+```{r, echo = F, eval = F}
+dbinom(x = c(0:2), size = 20, prob = 0.10) |> sum() -> soda_prob
+
+1 - soda_prob
+```
+
+### Answers
+
+<details>
+
+<summary>Answers to previous questions.</summary>
+
+1.  The probability is 0.08.
+2.  The probability is 0.33.
+3.  The probability is 0.06.
+4.  The probability is 0.07. (NOTE: some variation depending on exact calculator).
+5.  The probability is 0.16.
+6.  The probability is 0.0004.
+7.  The probability is 0.02.
+8.  The probability is 0.90.
+9.  The probability is 0.32.
+
+</details>

@@ -72,9 +72,7 @@ cor(y, x) |>
 
 Pearson's correlation coefficient is our value for *parametric tests*. We often denote our correlation coefficient as $r$ and not $\rho$ for this particular test. It is calculated as follows:
 
-$$
-r = \frac{\Sigma xy - (\frac{\Sigma x \Sigma y}{n})}{\sqrt{(\Sigma x^2 - \frac{(\Sigma x)^2}{n}})(\Sigma y^2 - \frac{(\Sigma y)^2}{n})}
-$$
+$$r = \frac{\Sigma xy - (\frac{\Sigma x \Sigma y}{n})}{\sqrt{(\Sigma x^2 - \frac{(\Sigma x)^2}{n}})(\Sigma y^2 - \frac{(\Sigma y)^2}{n})}$$
 
 where $x$ is variable 1, $y$ is variable 2, and $n$ is the total number of data point pairs.
 
@@ -256,27 +254,27 @@ We are not doing non-parametric linear regression in this class.
 
 For all problems, make sure that you:
 
--   List the null and alternative hypothesis
+- List the null and alternative hypothesis
 
--   Determine which correlation test needs to be performed
+- Determine which correlation test needs to be performed
 
-    -   When transforming data, you *do not* have to transform both variables at the same time - can relate a normally distributed variable to the square of another, etc.
+  - When transforming data, you *do not* have to transform both variables at the same time - can relate a normally distributed variable to the square of another, etc.
 
--   Perform the appropriate correlation test
+- Perform the appropriate correlation test
 
--   Plot your results using a scatterplot
+- Plot your results using a scatterplot
 
-    -   Can use either `plot` or `ggplot`
+  - Can use either `plot` or `ggplot`
 
-    -   Remember, *no regression lines for correlation!*
+  - Remember, *no regression lines for correlation!*
 
--   Report your conclusion
+- Report your conclusion
 
-    -   Remember, this needs to be a concise sentence (or sentences) and *must* have the test statistic, degrees of freedom, and p value listed parenthetically
+  - Remember, this needs to be a concise sentence (or sentences) and *must* have the test statistic, degrees of freedom, and p value listed parenthetically
 
-    -   Be sure to use the correct language for describing the strength of your relationship as seen in [Reporting correlation]
+  - Be sure to use the correct language for describing the strength of your relationship as seen in [Reporting correlation]
 
--   Compare your results to the listed answers; not that I use $r$ in all instances for correlation, regardless of correlation test used
+- Compare your results to the listed answers; not that I use $r$ in all instances for correlation, regardless of correlation test used
 
 ### Q1: The Boeoegg
 
@@ -287,7 +285,7 @@ Per the *tidytuesday* website:
 For this particular problem, we are interested in whether the time until the snowman's head explodes (`duration`) is correlated with the average monthly temperature for a given year (`tre200m0`), the total sunshine duration hours (`sre000m0`), and the total monthly precipitation (`rre150m0`).
 
 ```{r, message = F}
-sechselaeuten <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-12-02/sechselaeuten.csv')
+sechselaeuten <- sechselaeuten <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-12-02/sechselaeuten.csv')
 ```
 
 #### Answers to this problem are as follows:
@@ -305,9 +303,9 @@ cor.test(log1p(sechselaeuten$duration), log1p(sechselaeuten$tre200m0))
 
 Two possible answers:
 
--   $statistic = 1.61$, $p = 0.11$, $r = 0.20$
+- $statistic = 1.61$, $p = 0.11$, $r = 0.20$
 
--   $statistic = 1.65$, $p = 0.10$, $r = 0.20$
+- $statistic = 1.65$, $p = 0.10$, $r = 0.20$
 
 #### 1.2: Total sunshine duration
 
@@ -319,9 +317,9 @@ cor.test(log1p(sechselaeuten$duration), log1p(sechselaeuten$sre000m0))
 
 Two possible answers:
 
--   $statistic = 0.45$, $p = 0.65$, $r = 0.06$
+- $statistic = 0.45$, $p = 0.65$, $r = 0.06$
 
--   $statistic = 0.39$, $p = 0.70$, $r = 0.05$
+- $statistic = 0.39$, $p = 0.70$, $r = 0.05$
 
 #### 1.3: Monthly precipitation
 
@@ -333,9 +331,9 @@ cor.test(log1p(sechselaeuten$duration), log1p(sechselaeuten$rre150m0))
 
 Two possible answers:
 
--   $statistic = -0.76$, $p = 0.45$, $r = -0.10$
+- $statistic = -0.76$, $p = 0.45$, $r = -0.10$
 
--   $statistic = -1.12$, $p = 0.27$, $r = -0.14$
+- $statistic = -1.12$, $p = 0.27$, $r = -0.14$
 
 #### 1.4: Based on all your answers above, is the snowman festival related to better weather?
 
@@ -343,9 +341,9 @@ Two possible answers:
 
 Reading more about penguins in Antarctica, you become fascinated by the Adelie Penguins that occur on multiple different islands. Specifically, you are interested in whether:
 
--   There is a relationship between bill length and bill depth, given that these are both related to diet
+- There is a relationship between bill length and bill depth, given that these are both related to diet
 
--   There is a relationship between bill length and flipper length, given that bill length is likely related to diet and flipper length may be related to foraging batter
+- There is a relationship between bill length and flipper length, given that bill length is likely related to diet and flipper length may be related to foraging batter
 
 ```{r, message = F}
 penguins <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-04-15/penguins.csv')
@@ -365,7 +363,7 @@ cor.test(adelie$bill_len, adelie$bill_dep)
 plot(adelie$bill_len, adelie$bill_dep, asp = 1)
 ```
 
--   $statistic = 5.19$, $p < 0.0001$, $r = 0.39$
+- $statistic = 5.19$, $p < 0.0001$, $r = 0.39$
 
 #### 2.2: Bill length vs. flipper length
 
@@ -375,7 +373,7 @@ shapiro.test(adelie$flipper_len)
 cor.test(adelie$bill_len, adelie$flipper_len)
 ```
 
--   $t_{149}=4.21$, $p < 0.0001$, $r = 0.33$
+- $t_{149}=4.21$, $p < 0.0001$, $r = 0.33$
 
 ### Q3: Gotta analyze them all!
 
@@ -386,9 +384,7 @@ You become interested in how video game designers balance different features to 
 *Note* that there is a fast way to plot all correlations... See if you can figure it out.
 
 ```{r, message = F}
-tuesdata <- tidytuesdayR::tt_load(2025, week = 13)
-
-pokemon_df <- tuesdata$pokemon_df
+pokemon_df <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-04-01/pokemon_df.csv')
 ```
 
 *NOTE:* this will involve multiple pairwise comparisons. Values for $r$ are as follows:
@@ -415,17 +411,17 @@ cor.test(poke_stats$defense, poke_stats$special_attack, method = "spearman")
 plot(poke_stats, pch = ".")
 ```
 
--   HP vs. attack: $stat = 62094825$, $p < 0.0001$
+- HP vs. attack: $stat = 62094825$, $p < 0.0001$
 
--   HP vs. defense: $stat = 79004420$, $p < 0.0001$
+- HP vs. defense: $stat = 79004420$, $p < 0.0001$
 
--   HP vs. special: $stat = 73478110$, $p < 0.0001$
+- HP vs. special: $stat = 73478110$, $p < 0.0001$
 
--   Attack vs. defense: $stat = 70515649$, $p < 0.0001$
+- Attack vs. defense: $stat = 70515649$, $p < 0.0001$
 
--   Attack vs. special: $stat = 91138612$, $p < 0.0001$
+- Attack vs. special: $stat = 91138612$, $p < 0.0001$
 
--   Defense vs. special: $stat = 98148814$, $p < 0.0001$
+- Defense vs. special: $stat = 98148814$, $p < 0.0001$
 
 #### 3.2: Do these correlations make sense from a game-making perspective? How or how not?
 
@@ -434,9 +430,7 @@ plot(poke_stats, pch = ".")
 You often check *Rotten Tomatoes* to see if a movie is worth watching or not, but you are aware that the *Rotten Tomatoes* score is from movie critics who review the movie. However, there are other sources like *Metacritic* that seem to source their reviews from other places. You want to see how related these different review systems are for Pixar films.
 
 ```{r, message = F}
-tuesdata <- tidytuesdayR::tt_load(2025, week = 10)
-
-public_response <- tuesdata$public_response
+public_response <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-03-11/public_response.csv')
 ```
 
 ```{r, echo = F, eval = F}
@@ -451,11 +445,11 @@ cor.test(public_response$rotten_tomatoes,
 
 A few possible results:
 
--   1 pt extra credit if you can figure out how to normalize the *Rotten Tomatoes* data! It is possible.
+- 1 pt extra credit if you can figure out how to normalize the *Rotten Tomatoes* data! It is possible.
 
--   $stat = 7.33$, $p < 0.0001$, $r = 0.85$
+- $stat = 7.33$, $p < 0.0001$, $r = 0.85$
 
--   $stat = 363.02$, $p < 0.0001$, $r = 0.82$
+- $stat = 363.02$, $p < 0.0001$, $r = 0.82$
 
 ## Regression Homework
 
@@ -607,9 +601,9 @@ ggplot(prison, aes(x = population, y = prison_population, group = county_name,
 
 *Note* that the above plot also uses the `ggplot` commands `theme_classic` and `scale_colour_viridis_d`. Within the `aes` part of `ggplot`, you can tell it to separate things out by `shape` or `colour`. And yes, many commands do have Indian / African / British / Canadian English naming conventions, since these are more widespread.
 
--   Which county has the fastest increasing prison population?
--   Which county has the slowest increasing prison population?
--   What are the overall trends for the region?
+- Which county has the fastest increasing prison population?
+- Which county has the slowest increasing prison population?
+- What are the overall trends for the region?
 
 ```{r, eval = F, echo = F}
 mod <- lm(prison_population ~ population, data = prison)
@@ -656,22 +650,21 @@ You want to see just how effective fertilizer is at increasing crop yields. You 
 
 To run an ANCOVA:
 
--   run your model as you would usually, but show the interaction using `*`
+- run your model as you would usually, but show the interaction using `*`
 
-    -   `lm.mod <- lm(y ~ x*block, data)`
+  - `lm.mod <- lm(y ~ x*block, data)`
 
--   view the interaction using the command `anova`
+- view the interaction using the command `anova`
 
-    -   `anova(lm.mod)`
+  - `anova(lm.mod)`
 
--   You will see lines for the effect of `x`, the effect of `group`, and the effect of `x:group`
+- You will see lines for the effect of `x`, the effect of `group`, and the effect of `x:group`
 
-    -   Check for the line showing `x:group` to see if slopes differ
+  - Check for the line showing `x:group` to see if slopes differ
 
 ```{r}
-tuesdata <- tidytuesdayR::tt_load(2020, week = 36)
-
-fertilizer <- tuesdata$cereal_crop_yield_vs_fertilizer_application |> na.omit() |> 
+fertilizer <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2020/2020-09-01/cereal_crop_yield_vs_fertilizer_application.csv') |> 
+  na.omit() |> 
   as.data.frame() |> 
   filter(Entity == "United States" | Entity == "Canada" | Entity == "Mexico")
 ```

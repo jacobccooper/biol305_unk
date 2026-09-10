@@ -15,14 +15,14 @@ This site will help you navigate different homework assignments to perform the n
 
 # Class authors
 
--   [Dr. Melissa Wuellner](https://scholar.google.com/citations?user=yQDewvEAAAAJ)
+- [Dr. Melissa Wuellner](https://scholar.google.com/citations?user=yQDewvEAAAAJ)
 
 Primary lecture designer, author of many of the example problems.
 
--   [Dr. Jacob C. Cooper](https://scholar.google.com/citations?user=Q82K8tsAAAAJ)
+- [Dr. Jacob C. Cooper](https://scholar.google.com/citations?user=Q82K8tsAAAAJ)
 
 Primary website designer, primary *R* coding for site
 
--   [Caleb Rother](https://calebrother.github.io/)
+- [Caleb Rother](https://calebrother.github.io/)
 
 Teaching assistant, website designer, works with homework and coding

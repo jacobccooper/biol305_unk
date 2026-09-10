@@ -374,9 +374,7 @@ window.Quarto = {
 <section id="chi2-squared-distribution" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="chi2-squared-distribution"><span class="header-section-number">10.1</span> <span class="math inline">\(\chi^2\)</span>-squared distribution</h2>
 <p><span class="math inline">\(\chi^2\)</span>-squared (pronounced “<em>kai</em>”, and spelled “<em>chi</em>”) is a distribution used to understand if count data between different categories matches our expectation. For example, if we are looking at students in the class and comparing major vs.&nbsp;number of books read, we would expect <em>no association</em>, however we may find an association for a major such as English which required reading more literature. The <span class="math inline">\(\chi^2\)</span> introduces a new term <em>degrees of freedom</em> (<span class="math inline">\(df\)</span>) which reflects the number of individuals in the study. For many tests, <span class="math inline">\(df\)</span> are needed to reflect how a distribution changes with respect the number of individuals (and amount of variation possible) within a dataset. The equation for the <span class="math inline">\(\chi^2\)</span> is as follows, with the <span class="math inline">\(\chi^2\)</span> being a special case of the <em>gamma</em> (<span class="math inline">\(\gamma\)</span> or <span class="math inline">\(\Gamma\)</span>) distribution that is affected by the <span class="math inline">\(df\)</span>, which is defined as the number of rows minus one multiplied by the number of columns minus one <span class="math inline">\(df = (rows-1)(cols-1)\)</span>:</p>
-<p><span class="math display">\[
-f_n(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^\frac{n}{2-1}e^\frac{-x}{2}
-\]</span></p>
+<p><span class="math display">\[f_n(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^\frac{n}{2-1}e^\frac{-x}{2}\]</span></p>
 <p>The <span class="math inline">\(\chi^2\)</span>-squared distribution is also represented by the following functions, which perform the same things as the previous outlined equivalents for Poisson and binomial:</p>
 <ul>
 <li><p><code>dchisq</code></p></li>
@@ -405,9 +403,7 @@ f_n(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^\frac{n}{2-1}e^\frac{-x}{2}
 <section id="calculating-the-test-statistic" class="level3" data-number="10.1.1">
 <h3 data-number="10.1.1" class="anchored" data-anchor-id="calculating-the-test-statistic"><span class="header-section-number">10.1.1</span> Calculating the test statistic</h3>
 <p>We evaluate <span class="math inline">\(\chi^2\)</span> tests by calculating a <span class="math inline">\(\chi^2\)</span> value based on our data and comparing it to an expected <span class="math inline">\(\chi^2\)</span> distribution. This <em>test statistic</em> can be evaluated by looking at a <span class="math inline">\(\chi^2\)</span> table or by using <em>R</em>. <strong>Note</strong> that you need to know the degrees of freedom in order to properly evaluate a <span class="math inline">\(\chi^2\)</span> test. We calculate our test statistic as follows:</p>
-<p><span class="math display">\[
-\chi^2=\Sigma\frac{(o-e)^2}{e}
-\]</span></p>
+<p><span class="math display">\[\chi^2=\Sigma\frac{(o-e)^2}{e}\]</span></p>
 <p>where <span class="math inline">\(e =\)</span> the number of expected individuals and <span class="math inline">\(o =\)</span> the number of observed individuals in each category. Since we are squaring these values, we will only have positive values, and thus this will <strong>always be a one-tailed test</strong>.</p>
 <p>There are multiple types of <span class="math inline">\(\chi^2\)</span> test, including the following we will cover here:</p>
 <ul>
@@ -659,9 +655,7 @@ Biology     1.5 2.666667</code></pre>
 </div>
 </div>
 <p>Alternatively, we can calculate this using <em>expected counts</em>. For many situations, we don’t know what the baseline probability <em>should</em> be, so we calculate the expected counts based on what we do know. Expected counts are calculated as follows:</p>
-<p><span class="math display">\[
-Exp(x)=\frac{\Sigma(row_x)\cdot\Sigma(col_x)}{N}
-\]</span></p>
+<p><span class="math display">\[Exp(x)=\frac{\Sigma(row_x)\cdot\Sigma(col_x)}{N}\]</span></p>
 <p>where <span class="math inline">\(N\)</span> is the sum of all individuals in the table. For the above example, this would look like this:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>data_colsums <span class="ot">&lt;-</span> <span class="fu">colSums</span>(data)</span>
@@ -772,9 +766,7 @@ X-squared = 6.042, df = 1, p-value = 0.01397</code></pre>
 </tbody>
 </table>
 <p>Where row totals are <span class="math inline">\(a+b\)</span> and <span class="math inline">\(c + d\)</span> and column totals are <span class="math inline">\(a + c\)</span> and <span class="math inline">\(b + d\)</span>, and <span class="math inline">\(n = a + b + c + d\)</span>. We can calculate <span class="math inline">\(p\)</span> as follows:</p>
-<p><span class="math display">\[
-p = \frac{(a+b)!(c+d)!(a+c)!(b+d)!}{a!b!c!d!n!}
-\]</span></p>
+<p><span class="math display">\[p = \frac{(a+b)!(c+d)!(a+c)!(b+d)!}{a!b!c!d!n!}\]</span></p>
 <p>In <em>R</em>, we can use the command <code>fisher.test</code> to perform these calculations. For example, we have the following contingency table, looking at the number of undergrads and graduate students in introductory and graduate level statistics courses:</p>
 <table class="caption-top table">
 <thead>

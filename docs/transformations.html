@@ -587,22 +587,37 @@ W = 0.97964, p-value = 0.1245</code></pre>
 <p>This homework assignment is designed to help you become more familiar with manipulating data and with transforming data.</p>
 <section id="analyzing-data" class="level3" data-number="7.4.1">
 <h3 data-number="7.4.1" class="anchored" data-anchor-id="analyzing-data"><span class="header-section-number">7.4.1</span> Analyzing data</h3>
-<p>Using the <code>bird</code> dataset above, pick two other species of birds and do the following:</p>
+<p>For each of the following small datasets, perform each of the following steps:</p>
 <ol type="1">
 <li>Provide information on the mean, median, mode, kurtosis, and skewness.</li>
 <li>Create a histogram of the data.</li>
 <li>Run a <code>shapiro.test</code> on the data.</li>
-<li>Determine if the data are normally distributed. If the data are normally distributed, you are done - go to the next species. <strong>Provide at least three pieces of evidence.</strong></li>
-<li><strong>If the data appear normal except for excessive skew, do a log transformation <em>only</em>. Otherwise, try <em>at least</em> two transformations to see if data are made normal.</strong> Transformations to try include <span class="math inline">\(x^2\)</span>, <span class="math inline">\(log(x+1)\)</span>, <span class="math inline">\(\sqrt{x}\)</span>.</li>
-<li>For each transformation, show a histogram, skewness, kurtosis, and a <code>shapiro.test</code>.</li>
-<li>Provide an assessment if the transformation achieves normality or not, citing <em>three</em> pieces of evidence.</li>
+<li>Determine if the data are normally distributed. Provide at least three pieces of evidence for why you think the data are normally distributed.</li>
 </ol>
+<p>Datasets (note each one will have only one column of data to be analyzed):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>birds <span class="sc">|&gt;</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SPECIES, sex, WING, BILL.LENGTH, TAIL) <span class="sc">|&gt;</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(SPECIES <span class="sc">==</span> <span class="st">"BAND-TAILED BARBTHROAT"</span> <span class="sc">|</span> SPECIES <span class="sc">==</span> <span class="st">"BLUE-BLACK GROSBEAK"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="ot">-&gt;</span> </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  birds2</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="do">#### DATASET 1 ####</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>dataset1 <span class="ot">&lt;-</span> birds2 <span class="sc">|&gt;</span> </span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SPECIES, sex, WING) <span class="sc">|&gt;</span> </span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(SPECIES <span class="sc">==</span> <span class="st">"BLUE-BLACK GROSBEAK"</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">"F"</span>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="do">#### DATASET 2 ####</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>dataset2 <span class="ot">&lt;-</span> birds2 <span class="sc">|&gt;</span> </span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(SPECIES, sex, BILL.LENGTH) <span class="sc">|&gt;</span> </span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(SPECIES <span class="sc">==</span> <span class="st">"BAND-TAILED BARBTHROAT"</span> <span class="sc">&amp;</span> sex <span class="sc">==</span> <span class="st">"U"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
 <section id="transforming-data-1" class="level3" data-number="7.4.2">
 <h3 data-number="7.4.2" class="anchored" data-anchor-id="transforming-data-1"><span class="header-section-number">7.4.2</span> Transforming Data</h3>
-<p>Using the below newly created data object, <strong>perform all the same steps as you did for the bird data above</strong>. Start with a log transformation.</p>
+<p>Using the below newly created data object, <strong>perform all the same steps as you did for the bird data above</strong>. Then, try to transform the data and repeat the above steps to see if a transformation achieves normality with the data. Use the log transformation (<code>log1p</code>; <span class="math inline">\(ln(x+1)\)</span>), the square transformation (<code>x^2</code>; <span class="math inline">\(x^2\)</span>), and the square root transformation (<code>sqrt(x)</code>; <span class="math inline">\(\sqrt(x)\)</span>).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>hourly.jobs.homework <span class="ot">&lt;-</span> jobs<span class="sc">$</span>vacancies_offering_an_hourly_wage[<span class="dv">200</span><span class="sc">:</span><span class="dv">300</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>hourly.jobs.homework <span class="ot">&lt;-</span> jobs<span class="sc">$</span>vacancies_offering_an_hourly_wage[<span class="dv">200</span><span class="sc">:</span><span class="dv">300</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><em>Note</em> that <code>hourly.jobs.homework</code> is already a numeric vector, so you can just run <code>mean(hourly.jobs.homework)</code>.</p>
 </section>

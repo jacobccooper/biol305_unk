@@ -649,11 +649,11 @@ print(paste(round(xbar, 2),
 
 ## Homework: Normal distributions Part 1
 
-Submit one `html` file, as created in *RStudio*, with you answers to the following questions. For maximum clarity, create headings to separate your problems. (Remember, a header can be invoked by placing '`#`' in front of a line of text. For example: the header here is written as `# Homework: Chapter 8`).
+Submit one `html` file, as created in *RStudio*, with you answers to the following questions. For maximum clarity, create headings to separate your problems. (Remember, a header can be invoked by placing '`#`' in front of a line of text. For example: the header here is written as `# Homework: Normal Distributions Part 1`).
 
 ### $Z$ to $p$
 
-For each of the following, report the corresponding $p$ value for the $z$ score. List exactly as displayed, keeping in mind that it defaults to "looking left" (`lower.tail = TRUE`).
+For each of the following, report the corresponding $p$ value for the $z$ score. Round all *p* to two digits if $p \ge 0.01$, round to three digits if $0.01 > p \ge 0.001$, round to four digits if $0.001 > p \ge 0.0001$, and for all $p < 0.0001$ report as $p < 0.0001$. **NOTE** `pnorm` defaults to `lower.tail = TRUE`, and thus always shows the $p$ value "looking left". (*Hint*: $p$ can never be equal to 1, so if the value is 1 report $p > 0.99$).
 
 A.  2.3
 B.  6.4
@@ -663,7 +663,7 @@ E.  0.3
 
 ### $P$ to $z$
 
-For the following, report the corresponding $z$ score for the stated $p$ value. For this question, assume every value is "looking left" (`lower.tail = T`).
+For the following, report the corresponding $z$ score for the stated $p$ value. Remember, all $z$ scores should be rounded to *two* decimal places. For this question, assume every value is "looking left" (`lower.tail = T`).
 
 A.  0.96
 B.  0.23
@@ -674,7 +674,7 @@ F.  0.62
 
 ### Confidence intervals
 
-For the following scenarios, calculate the confidence interval for the mean.
+For the following scenarios, calculate the confidence interval for the mean. Please calculate this "by hand" (i.e., writing out the equation yourself) and verify your answers using the function `confidence_interval`.
 
 A.  $\bar{x} = 7.6$, $\sigma = 1.3$, $n = 5$, $CI = 99\%$
 B.  $\bar{x} = -4.9$, $\sigma = 0.7$, $n = 6$, $CI = 95\%$

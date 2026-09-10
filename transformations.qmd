@@ -191,19 +191,75 @@ This homework assignment is designed to help you become more familiar with manip
 
 ### Analyzing data
 
-Using the `bird` dataset above, pick two other species of birds and do the following:
+For each of the following small datasets, perform each of the following steps:
+
+```{r, echo = F, eval = F}
+summary(as.factor(birds$SPECIES))
+
+normality_tester <- function(x){
+  #birds2 <- birds2[which(birds2$sex == sex),]
+  bill.depth <- x$BILL.LENGTH
+  wing <- x$WING
+  tail.bird <- x$TAIL
+  
+  print(x)
+  print("Bill length")
+  print(shapiro.test(bill.depth))
+  print("Log")
+  print(shapiro.test(log1p(bill.depth)))
+  print("Square")
+  print(shapiro.test(bill.depth^2))
+  print("Square root")
+  print(shapiro.test(sqrt(bill.depth)))
+  
+  print("WING")
+  print(shapiro.test(wing))
+  print("Log")
+  print(shapiro.test(log1p(wing)))
+  print("Square")
+  print(shapiro.test(wing^2))
+  print("Square root")
+  print(shapiro.test(sqrt(wing)))
+  
+  print("TAIL")
+  print(shapiro.test(tail.bird))
+  print("Log")
+  print(shapiro.test(log1p(tail.bird)))
+  print("Square")
+  print(shapiro.test(tail.bird^2))
+  print("Square root")
+  print(shapiro.test(sqrt(tail.bird)))
+}
+```
 
 1.  Provide information on the mean, median, mode, kurtosis, and skewness.
 2.  Create a histogram of the data.
 3.  Run a `shapiro.test` on the data.
-4.  Determine if the data are normally distributed. If the data are normally distributed, you are done - go to the next species. **Provide at least three pieces of evidence.**
-5.  **If the data appear normal except for excessive skew, do a log transformation *only*. Otherwise, try *at least* two transformations to see if data are made normal.** Transformations to try include $x^2$, $log(x+1)$, $\sqrt{x}$.
-6.  For each transformation, show a histogram, skewness, kurtosis, and a `shapiro.test`.
-7.  Provide an assessment if the transformation achieves normality or not, citing *three* pieces of evidence.
+4.  Determine if the data are normally distributed. Provide at least three pieces of evidence for why you think the data are normally distributed.
+
+Datasets (note each one will have only one column of data to be analyzed):
+
+```{r}
+birds |> 
+  select(SPECIES, sex, WING, BILL.LENGTH, TAIL) |> 
+  filter(SPECIES == "BAND-TAILED BARBTHROAT" | SPECIES == "BLUE-BLACK GROSBEAK") |> 
+  na.omit() -> 
+  birds2
+
+#### DATASET 1 ####
+dataset1 <- birds2 |> 
+  select(SPECIES, sex, WING) |> 
+  filter(SPECIES == "BLUE-BLACK GROSBEAK" & sex == "F")
+
+#### DATASET 2 ####
+dataset2 <- birds2 |> 
+  select(SPECIES, sex, BILL.LENGTH) |> 
+  filter(SPECIES == "BAND-TAILED BARBTHROAT" & sex == "U")
+```
 
 ### Transforming Data
 
-Using the below newly created data object, **perform all the same steps as you did for the bird data above**. Start with a log transformation.
+Using the below newly created data object, **perform all the same steps as you did for the bird data above**. Then, try to transform the data and repeat the above steps to see if a transformation achieves normality with the data. Use the log transformation (`log1p`; $ln(x+1)$), the square transformation (`x^2`; $x^2$), and the square root transformation (`sqrt(x)`; $\sqrt(x)$).
 
 ```{r}
 hourly.jobs.homework <- jobs$vacancies_offering_an_hourly_wage[200:300]

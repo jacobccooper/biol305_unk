@@ -17,45 +17,45 @@ As a reminder, we are following the rounding rules of the *Auk* and *Condor* (no
 
 Specifically, these rules are as follows:
 
--   **No naked decimals** (except for caliber)**:**
+- **No naked decimals** (except for caliber)**:**
 
-    -   Preface all decimals with a leading zero; $0.002$ is correct, $.002$ is incorrect.
+  - Preface all decimals with a leading zero; $0.002$ is correct, $.002$ is incorrect.
 
-    -   For caliber, such as with weapons, never have a leading zero; ex., .45 bullet.
+  - For caliber, such as with weapons, never have a leading zero; ex., .45 bullet.
 
--   **Use the same number of decimals as the original data or the precision of the instrument:**
+- **Use the same number of decimals as the original data or the precision of the instrument:**
 
-    -   Ex., if precision is $0.01$, then all values should be rounded to hundredths.
+  - Ex., if precision is $0.01$, then all values should be rounded to hundredths.
 
--   **Use the same number of decimals for values and uncertainties:**
+- **Use the same number of decimals for values and uncertainties:**
 
-    -   Ex., $45 \pm 4$, $45.2 \pm 3.8$.
+  - Ex., $45 \pm 4$, $45.2 \pm 3.8$.
 
--   **Round percentages to whole numbers\* (or to one decimal):**
+- **Round percentages to whole numbers\* (or to one decimal):**
 
-    -   For this class, can round to one decimal, but in the referenced publications *always* round to whole number. You will never miss points for rounding percentage to a whole number.
+  - For this class, can round to one decimal, but in the referenced publications *always* round to whole number. You will never miss points for rounding percentage to a whole number.
 
--   **All test statistics should be rounded to two (2) decimal places:**
+- **All test statistics should be rounded to two (2) decimal places:**
 
-    -   $F$, $t$, $p$, $\tau$, $\chi^2$, etc. should all be rounded to two decimal places.
+  - $F$, $t$, $p$, $\tau$, $\chi^2$, etc. should all be rounded to two decimal places.
 
--   **All test statistics should show *degrees of freedom*:**
+- **All test statistics should show *degrees of freedom*:**
 
-    -   For values with *one* degree of freedom, list like $t_{(9)}=1.56$.
+  - For values with *one* degree of freedom, list like $t_{(9)}=1.56$.
 
-    -   For values with multiple, list them; for ANOVA, put the degrees of freedom for Sum of Squares Between before degrees of freedom for Degrees of Error Within, like $F_{(5,43)}=5.23$.
+  - For values with multiple, list them; for ANOVA, put the degrees of freedom for Sum of Squares Between before degrees of freedom for Degrees of Error Within, like $F_{(5,43)}=5.23$.
 
--   **Round *P*-values as follows:**
+- **Round *P*-values as follows:**
 
-    -   $P \ge 0.01$: round to ***two*** decimal places like $P = 0.24$.
+  - $P \ge 0.01$: round to ***two*** decimal places like $P = 0.24$.
 
-    -   $0.01 > P \ge 0.001$: round to ***three*** decimal places like $P = 0.005$.
+  - $0.01 > P \ge 0.001$: round to ***three*** decimal places like $P = 0.005$.
 
-    -   $0.001 > P \ge 0.0001$: round to ***four*** decimal places like $P = 0.0007$.
+  - $0.001 > P \ge 0.0001$: round to ***four*** decimal places like $P = 0.0007$.
 
-    -   $P < 0.0001$: list *exactly* as $P < 0.0001$.
+  - $P < 0.0001$: list *exactly* as $P < 0.0001$.
 
-        -   **DO NOT** list without spaces, or as $P<.0001$
+    - **DO NOT** list without spaces, or as $P<.0001$
 
 ## Plaintext formatting
 
@@ -65,19 +65,19 @@ For equations, put `$` on either side of the equation being typed. For example:
 
 `$4$` becomes $4$ and `$pi$` becomes $\pi$.
 
--   Subscripts: `$Z_{34}$` becomes $Z_{34}$
+- Subscripts: `$Z_{34}$` becomes $Z_{34}$
 
--   Superscripts: `$Z^2$` becomes $Z^2$
+- Superscripts: `$Z^2$` becomes $Z^2$
 
--   Fractions: `$\frac{1}{2}$` becomes $\frac{1}{2}$
+- Fractions: `$\frac{1}{2}$` becomes $\frac{1}{2}$
 
--   Common letters and commands:
+- Common letters and commands:
 
-    -   $\alpha$: `\alpha`
+  - $\alpha$: `\alpha`
 
-    -   $\beta$: `\beta`
+  - $\beta$: `\beta`
 
-    -   $\sigma$: `\sigma`
+  - $\sigma$: `\sigma`
 
 ### In-line code
 
@@ -102,40 +102,40 @@ Commands are given as Windows & Linux / Mac.
 
 ### The basics
 
--   Save your file with `CTRL` + `S` / ⌘ + `S`
+- Save your file with `CTRL` + `S` / ⌘ + `S`
 
--   Undo your last action with `CTRL` + `Z` / ⌘ + `Z`
+- Undo your last action with `CTRL` + `Z` / ⌘ + `Z`
 
--   Cut text with `CTRL` + `X` / ⌘ + `X`
+- Cut text with `CTRL` + `X` / ⌘ + `X`
 
--   Copy text with `CTRL` + `C` / ⌘ + `C`
+- Copy text with `CTRL` + `C` / ⌘ + `C`
 
--   Paste text with `CTRL` + `V` / ⌘ + `V`
+- Paste text with `CTRL` + `V` / ⌘ + `V`
 
--   Select all text in a document with `CTRL` + `A` / ⌘ + `A`
+- Select all text in a document with `CTRL` + `A` / ⌘ + `A`
 
 ### Code basics
 
--   A code chunk can be inserted using `CTRL` + `SHIFT` + `I` / ⌘ + `shift` + `I`
+- A code chunk can be inserted using `CTRL` + `SHIFT` + `I` / ⌘ + `shift` + `I`
 
--   Run a line of code with `CTRL` + `ENTER` / ⌘ + `return`
+- Run a line of code with `CTRL` + `ENTER` / ⌘ + `return`
 
--   Run a code chunk with `CTRL` + `SHIFT` + `ENTER` / ⌘ + `shift` + `return`
+- Run a code chunk with `CTRL` + `SHIFT` + `ENTER` / ⌘ + `shift` + `return`
 
--   Run all code in the document above where you were `CTRL` + `SHIFT` + `ALT` +`P` / ⌘ + `shift` + ⌥ + `P`
+- Run all code in the document above where you were `CTRL` + `SHIFT` + `ALT` +`P` / ⌘ + `shift` + ⌥ + `P`
 
--   Run all code with `CTRL` + `ALT` + `R` / ⌘ + ⌥ + `R`
+- Run all code with `CTRL` + `ALT` + `R` / ⌘ + ⌥ + `R`
 
 ### Code formatting
 
--   `<-` - save a value as an object. On Mac, the keyboard shortcut is ⌥ + `-`. Windows can be formatted so that the shortcut is `ALT` + `-`.
+- `<-` - save a value as an object. On Mac, the keyboard shortcut is ⌥ + `-`. Windows can be formatted so that the shortcut is `ALT` + `-`.
 
 ```{r}
 x <- 10
 x
 ```
 
--   `|>` - "pipe" a command or output into another command. You can use the shortcut `CTRL`+`SHIFT`+`M` / \^ + `SHIFT` + `M`.
+- `|>` - "pipe" a command or output into another command. You can use the shortcut `CTRL`+`SHIFT`+`M` / \^ + `SHIFT` + `M`.
 
 ```{r}
 # make repeatable
@@ -151,7 +151,7 @@ x |>
   round(2)
 ```
 
--   `->` - save a value as an object at the end of a pipeline
+- `->` - save a value as an object at the end of a pipeline
 
 ```{r}
 # same pipeline as previous, but more sequential
@@ -168,7 +168,7 @@ rnorm(20) |>
 x
 ```
 
--   `c` - concatenate, place two values together
+- `c` - concatenate, place two values together
 
 ```{r}
 x <- c(10,11)
@@ -188,43 +188,43 @@ These are as follows:
 x <- 1:10
 ```
 
--   `>`: greater than
+- `>`: greater than
 
 ```{r}
 x[x > 5]
 ```
 
--   `<`: less that
+- `<`: less that
 
 ```{r}
 x[x < 5]
 ```
 
--   `>=`: greater than or equal to
+- `>=`: greater than or equal to
 
 ```{r}
 x[x >= 5]
 ```
 
--   `<=`: less than or equal to
+- `<=`: less than or equal to
 
 ```{r}
 x[x <= 5]
 ```
 
--   `==`: is equal to
+- `==`: is equal to
 
 ```{r}
 x[x == 5]
 ```
 
--   `|`: or
+- `|`: or
 
 ```{r}
 x[x < 3 | x > 7]
 ```
 
--   `&`: and
+- `&`: and
 
 ```{r}
 x[x > 3 & x < 7]
@@ -245,7 +245,7 @@ set.seed(8675309)
 x <- rnorm(1000)
 ```
 
--   `mean` - get the mean / average of a set of data
+- `mean` - get the mean / average of a set of data
 
 ```{r}
 mean(x)

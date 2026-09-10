@@ -11,23 +11,23 @@ Here, we are going to go through a work through with our first set of data. This
 
 Refer to the previous section to create a new document. Name it `LastName_first_analysis.rmd`, with `LastName` replaced by your surname. Save this document in your assignments folder, and make sure it will `knit` as an `html` document.
 
--   You should *always* have your last name in your file name when you submit documents in this class.
+- You should *always* have your last name in your file name when you submit documents in this class.
 
 ## Working with data
 
 Throughout this course, we are going to have to work with datasets that are from our book or other sources. Here, we are going to work through an example dataset.
 
--   First, we need to install *libraries*. A ***library*** is a collated, pre-existing batch of code that is designed to assist with data analysis or to perform specific functions. These libraries make life a lot easier, and create short commands for completing relatively complex tasks.
+- First, we need to install *libraries*. A ***library*** is a collated, pre-existing batch of code that is designed to assist with data analysis or to perform specific functions. These libraries make life a lot easier, and create short commands for completing relatively complex tasks.
 
 ### Libraries
 
 In this class, there is one major library that you will need *almost every week*! **Even if I don't declare these libraries, you should load them in your documents**.
 
--   Libraries are declared at the very beginning of the document
+- Libraries are declared at the very beginning of the document
 
--   Libraries *must* be in a code chunk at the top of the document or else they will not be loaded before the code requiring them, preventing your document from being `knit`.
+- Libraries *must* be in a code chunk at the top of the document or else they will not be loaded before the code requiring them, preventing your document from being `knit`.
 
-    -   Make sure you read your error codes - many times it will say that your command is not found, and that often means your library is not loaded. That, or you misspelled something.
+  - Make sure you read your error codes - many times it will say that your command is not found, and that often means your library is not loaded. That, or you misspelled something.
 
 1.  `tidyverse`: this package is actually a [group of packages](https://www.tidyverse.org/) designed to help with data analysis, management, and visualization.
 2.  `UNKstats`: this package was specifically designed for this class, and includes many helper functions for calculating specific statistics.
@@ -52,7 +52,7 @@ remotes::install_github("CalebRother/UNKstats")
 update.packages()
 ```
 
--   After packages are installed, we will need to load them into our *R* environment. While we only need to do `install.packages` ***once*** on our machine, **we need to load libraries *every time we restart the program!***
+- After packages are installed, we will need to load them into our *R* environment. While we only need to do `install.packages` ***once*** on our machine, **we need to load libraries *every time we restart the program!***
 
 **NOTE: The following is required in EVERY DOCUMENT that uses the `tidyverse` or `UNKstats` commands!**
 
@@ -72,9 +72,9 @@ You should have an output like the above. What this means is:
 
 To clarify the *conflicts*, pretend that you can only know one definition of a word at a time, in this case, the word "cola".
 
--   **English**: Cola is a type of soda pop or soft drink.
+- **English**: Cola is a type of soda pop or soft drink.
 
--   **Spanish**: Cola refers to a line or a tail.
+- **Spanish**: Cola refers to a line or a tail.
 
 While we can figure out which definition is being used based on context, *R* can't. It will always use the most recent definition, such that it may interpret something as "Mi perro movió la *refresco*" or "I bought a *tail* from the vending machine". To avoid this confusion in *R*, we specify which "cola" we are referring to. In the above, this would look like "Mi perro movió la `español::cola`" and "I bought a `english::cola` from the vending machine".
 
@@ -113,12 +113,12 @@ summary(ranges)
 
 As seen above, we now have information for the following statistics for each variable:
 
--   `Min` = minimum
--   `1st Qu.` = 1st quartile
--   `Median` = middle of the dataset
--   `Mean` = average of the dataset
--   `3rd Qu.` = 3rd quartile
--   `Max.` = maximum
+- `Min` = minimum
+- `1st Qu.` = 1st quartile
+- `Median` = middle of the dataset
+- `Mean` = average of the dataset
+- `3rd Qu.` = 3rd quartile
+- `Max.` = maximum
 
 We can also calculate some of these statistics manually to see if we are doing everything correctly. It is easiest to do this by using predefined functions in *R* (code others have written to perform a particular task) or to create our own functions in *R*. We will do both to determine the average of `combined_current_km2`.
 
@@ -126,9 +126,9 @@ We can also calculate some of these statistics manually to see if we are doing e
 
 First, we need to select only the column of interest. In *R*, we have two ways of subsetting data to get a particular column.
 
--   `var[rows,cols]` is a way to look at a particular object (`var` in this case) and choose a specific combination of `row` number and `column` number (`col`). This is great if you know a specific index, but it is better to use a specific name.
--   `var[rows,"cols"]` is a way to do the above but by using a specific column name, like `combined_current_km2`.
--   `var$colname` is a way to call the specific column name directly from the dataset.
+- `var[rows,cols]` is a way to look at a particular object (`var` in this case) and choose a specific combination of `row` number and `column` number (`col`). This is great if you know a specific index, but it is better to use a specific name.
+- `var[rows,"cols"]` is a way to do the above but by using a specific column name, like `combined_current_km2`.
+- `var$colname` is a way to call the specific column name directly from the dataset.
 
 ```{r}
 # using R functions
@@ -215,7 +215,7 @@ head(ranges$combined_plus_one)
 1.  Create an *RMarkdown document* that will save as an `.html`.
 2.  Load the data, as shown here, and print the summary statistics in the document.
 3.  Calculate the value of `combined_current_km2` divided by `2050_combined_km2` and print the results.
-    -   *Hint*: you can divide and multiply objects in *R*, like `a + b`, `a/b`, etc.
+    - *Hint*: you can divide and multiply objects in *R*, like `a + b`, `a/b`, etc.
 4.  `knit` your results, with your name(s) and date, as an HTML document.
 
 Let me know if you have any issues.

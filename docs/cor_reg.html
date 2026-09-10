@@ -373,11 +373,11 @@ window.Quarto = {
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.6
+✔ dplyr     1.2.1     ✔ readr     2.2.0
 ✔ forcats   1.0.1     ✔ stringr   1.6.0
-✔ ggplot2   4.0.1     ✔ tibble    3.3.0
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.2.0     
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
@@ -454,16 +454,14 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(y, x) <span class="sc">|&gt;</span> </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.11</code></pre>
+<pre><code>[1] -0.6</code></pre>
 </div>
 </div>
 </section>
 <section id="pearsons" class="level3" data-number="14.2.2">
 <h3 data-number="14.2.2" class="anchored" data-anchor-id="pearsons"><span class="header-section-number">14.2.2</span> Pearson’s</h3>
 <p>Pearson’s correlation coefficient is our value for <em>parametric tests</em>. We often denote our correlation coefficient as <span class="math inline">\(r\)</span> and not <span class="math inline">\(\rho\)</span> for this particular test. It is calculated as follows:</p>
-<p><span class="math display">\[
-r = \frac{\Sigma xy - (\frac{\Sigma x \Sigma y}{n})}{\sqrt{(\Sigma x^2 - \frac{(\Sigma x)^2}{n}})(\Sigma y^2 - \frac{(\Sigma y)^2}{n})}
-\]</span></p>
+<p><span class="math display">\[r = \frac{\Sigma xy - (\frac{\Sigma x \Sigma y}{n})}{\sqrt{(\Sigma x^2 - \frac{(\Sigma x)^2}{n}})(\Sigma y^2 - \frac{(\Sigma y)^2}{n})}\]</span></p>
 <p>where <span class="math inline">\(x\)</span> is variable 1, <span class="math inline">\(y\)</span> is variable 2, and <span class="math inline">\(n\)</span> is the total number of data point pairs.</p>
 <p>In this class, we will be using <em>R</em> to calculate <span class="math inline">\(r\)</span>, which is done using the command <code>cor</code>. To ensure we are using the correct method, we need to set <code>method = "pearson"</code>.</p>
 <div class="cell">
@@ -752,7 +750,7 @@ F-statistic: 37.04 on 1 and 13 DF,  p-value: 3.867e-05</code></pre>
 </blockquote>
 <p>For this particular problem, we are interested in whether the time until the snowman’s head explodes (<code>duration</code>) is correlated with the average monthly temperature for a given year (<code>tre200m0</code>), the total sunshine duration hours (<code>sre000m0</code>), and the total monthly precipitation (<code>rre150m0</code>).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>sechselaeuten <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-12-02/sechselaeuten.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>sechselaeuten <span class="ot">&lt;-</span> sechselaeuten <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-12-02/sechselaeuten.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="answers-to-this-problem-are-as-follows" class="level4" data-number="14.4.1.1">
 <h4 data-number="14.4.1.1" class="anchored" data-anchor-id="answers-to-this-problem-are-as-follows"><span class="header-section-number">14.4.1.1</span> Answers to this problem are as follows:</h4>
@@ -815,9 +813,7 @@ F-statistic: 37.04 on 1 and 13 DF,  p-value: 3.867e-05</code></pre>
 <h4 data-number="14.4.3.1" class="anchored" data-anchor-id="perform-the-correlation-tests"><span class="header-section-number">14.4.3.1</span> 3.1: Perform the correlation tests</h4>
 <p><em>Note</em> that there is a fast way to plot all correlations… See if you can figure it out.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2025</span>, <span class="at">week =</span> <span class="dv">13</span>)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>pokemon_df <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>pokemon_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>pokemon_df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-04-01/pokemon_df.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><em>NOTE:</em> this will involve multiple pairwise comparisons. Values for <span class="math inline">\(r\)</span> are as follows:</p>
 <div class="cell">
@@ -855,9 +851,7 @@ special_attack 0.48   0.36    0.31           1.00</code></pre>
 <h3 data-number="14.4.4" class="anchored" data-anchor-id="q4-pixar-films"><span class="header-section-number">14.4.4</span> Q4: Pixar films</h3>
 <p>You often check <em>Rotten Tomatoes</em> to see if a movie is worth watching or not, but you are aware that the <em>Rotten Tomatoes</em> score is from movie critics who review the movie. However, there are other sources like <em>Metacritic</em> that seem to source their reviews from other places. You want to see how related these different review systems are for Pixar films.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2025</span>, <span class="at">week =</span> <span class="dv">10</span>)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>public_response <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>public_response</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>public_response <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-03-11/public_response.csv'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>A few possible results:</p>
 <ul>
@@ -1037,23 +1031,20 @@ special_attack 0.48   0.36    0.31           1.00</code></pre>
 </ul></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2020</span>, <span class="at">week =</span> <span class="dv">36</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>fertilizer <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2020/2020-09-01/cereal_crop_yield_vs_fertilizer_application.csv'</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Entity <span class="sc">==</span> <span class="st">"United States"</span> <span class="sc">|</span> Entity <span class="sc">==</span> <span class="st">"Canada"</span> <span class="sc">|</span> Entity <span class="sc">==</span> <span class="st">"Mexico"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>---- Compiling #TidyTuesday Information for 2020-09-01 ----
---- There are 5 files available ---
+<pre><code>Rows: 11965 Columns: 5
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): Entity, Code
+dbl (3): Year, Cereal yield (tonnes per hectare), Nitrogen fertilizer use (k...
 
-
-── Downloading files ───────────────────────────────────────────────────────────
-
-  1 of 5: "arable_land_pin.csv"
-  2 of 5: "cereal_crop_yield_vs_fertilizer_application.csv"
-  3 of 5: "cereal_yields_vs_tractor_inputs_in_agriculture.csv"
-  4 of 5: "key_crop_yields.csv"
-  5 of 5: "land_use_vs_yield_change_in_cereal_production.csv"</code></pre>
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>fertilizer <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>cereal_crop_yield_vs_fertilizer_application <span class="sc">|&gt;</span> <span class="fu">na.omit</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Entity <span class="sc">==</span> <span class="st">"United States"</span> <span class="sc">|</span> Entity <span class="sc">==</span> <span class="st">"Canada"</span> <span class="sc">|</span> Entity <span class="sc">==</span> <span class="st">"Mexico"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stderr">

@@ -29,12 +29,25 @@ The distribution that we commonly refer to as a $t$-distribution is also sometim
 
 For all of the examples on this page, we will be using a dataset on the morphology of canine teeth for identification of predators killing livestock [@Courtenay2019].
 
+You must first download the data from this link and save them to your computer: [DOWNLOAD LINK](https://figshare.com/ndownloader/files/15070175).
+
+After saving to your computer, you will read them in using a code like the following (*adjusted for YOUR machine!*):
+
 ```{r,echo=FALSE,message=FALSE}
 library(tidyverse)
 ```
 
-```{r,message = FALSE}
-canines <- read_csv("https://figshare.com/ndownloader/files/15070175")
+```{r, eval = F}
+# Mac / Linux
+canines <- read_csv("~/Folder/Path/To/Measurements.csv")
+
+# Windows
+filepath <- r'C:\Users\yourname\folder\path\Measurements.csv'
+canines <- read_csv(filepath)
+```
+
+```{r,message = FALSE, echo=FALSE}
+canines <- read_csv("~/OneDrive - University of Nebraska/UNK/Classes/BIOL 305/Assignments/t-test/Measurements.csv")
 ```
 
 We want to set up some of these columns as "factors" to make it easier to process and parse in *R*. We will look at the column `OA` for these examples. Unfortunately, it is unclear what exactly `OA` stands for since this paper is not published at the present time.
@@ -55,9 +68,7 @@ summary(canines)
 
 For these scenarios where we are testing a single sample mean from one or more samples we use a $t$-distributions. A $t$-distribution is a specially altered normal distribution that has been adjusted to account for the number of individuals being sampled. Specifically, a $t$-distributions with infinite degrees of freedom is the same as a normal distribution, and our degrees of freedom help create a more platykurtic distribution to account for error and uncertainty. The distribution can be calculated as follows:
 
-$$
-t = \frac{\Gamma(\frac{v+1}{2})}{\sqrt{\pi \nu}\Gamma(\frac{\nu}{2})}(1+\frac{t^2}{\nu})^{-\frac{(v+1)}{2}}
-$$
+$$t = \frac{\Gamma(\frac{v+1}{2})}{\sqrt{\pi \nu}\Gamma(\frac{\nu}{2})}(1+\frac{t^2}{\nu})^{-\frac{(v+1)}{2}}$$
 
 These $t$-distributions can be visualized as follows:
 
@@ -75,13 +86,13 @@ When asked about hypotheses, remember the above as the statistical hypotheses th
 
 In *R*, we have the following functions to help with $t$ distributions:
 
--   `dt`: density function of a $t$-distribution
+- `dt`: density function of a $t$-distribution
 
--   `pt`: finding our $p$ value from a specific $t$ in a $t$-distribution
+- `pt`: finding our $p$ value from a specific $t$ in a $t$-distribution
 
--   `qt`: finding a particular $t$ from a specific $p$ in a $t$-distribution
+- `qt`: finding a particular $t$ from a specific $p$ in a $t$-distribution
 
--   `rt`: random values from a $t$-distribution
+- `rt`: random values from a $t$-distribution
 
 All of the above arguments required the degrees of freedom to be declared. Unlike the normal distribution functions, these can not be adjusted for your data; tests must be performed using `t.test`.
 
@@ -89,35 +100,27 @@ All of the above arguments required the degrees of freedom to be declared. Unlik
 
 We have three major types of $t$-tests:
 
--   **One-sample** $t$**-tests**: a single sample is being compared to a value, or *vice versa.*
+- **One-sample** $t$**-tests**: a single sample is being compared to a value, or *vice versa.*
 
--   **Two-sample** $t$**-tests**: two samples are being compared to one another to see if they come from the same population.
+- **Two-sample** $t$**-tests**: two samples are being compared to one another to see if they come from the same population.
 
--   **Paired** $t$**-tests**: before-and-after measurements of the same individuals are being compared. This is necessary to account for a repeat in the individuals being measured, and different potential baselines at initiation. In this case, we are looking to see if the difference between before and after is equal to zero.
+- **Paired** $t$**-tests**: before-and-after measurements of the same individuals are being compared. This is necessary to account for a repeat in the individuals being measured, and different potential baselines at initiation. In this case, we are looking to see if the difference between before and after is equal to zero.
 
 We also have what we call a "true" $t$-test and "Welch's" $t$-test. The formula for a "true" $t$ is as follows:
 
-$$
-t = \frac{\bar{x}_1 - \bar{x}_2}{s_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}
-$$
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{s_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}$$
 
 Where $s_p$ is based on the "pooled variance" between the samples. This can be calculated as follows:
 
-$$
-s_p = \sqrt{\frac{(n_1-1)(s_1^2)+(n_2-1)(s_2^2)}{n_1+n_2 -2}}
-$$
+$$s_p = \sqrt{\frac{(n_1-1)(s_1^2)+(n_2-1)(s_2^2)}{n_1+n_2 -2}}$$
 
 Whereas the equation for a "Welch's" $t$ is:
 
-$$
-t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}
-$$
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}$$
 
 Welch's $t$ also varies with respect to the degrees of freedom, calculated by:
 
-$$
-df = \frac{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}{\frac{(\frac{s_1^2}{n_1})^2}{n_1-1}+\frac{(\frac{s_2^2}{n_2})^2}{n_2-1}}
-$$
+$$df = \frac{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}{\frac{(\frac{s_1^2}{n_1})^2}{n_1-1}+\frac{(\frac{s_2^2}{n_2})^2}{n_2-1}}$$
 
 **OK, so why the difference?**
 
@@ -129,9 +132,9 @@ Because of this, some argue that "Welch's" should be the default $t$-test, and *
 
 **If you choose to do a Student's *t*-test, you must do the following:**
 
--   Download the `car` library
+- Download the `car` library
 
--   Use the `leveneTest` function to see if variances are equal between populations
+- Use the `leveneTest` function to see if variances are equal between populations
 
 We do not cover this in depth here, but be aware of this difference. For more information, see @ruxton_unequal_2006.
 
@@ -229,13 +232,9 @@ For this test, we would perform the following procedures to figure out our stati
 
 The equations for these statistics are as follows, where $R$ represents the sum of the ranks for that sample:
 
-$$
-U_1 = n_1n_2+\frac{n_1(n_1+1)}{2}-R_1
-$$
+$$U_1 = n_1n_2+\frac{n_1(n_1+1)}{2}-R_1$$
 
-$$
-U_2 = n_1n_2 + \frac{n_2(n_2+1)}{2} - R_2
-$$
+$$U_2 = n_1n_2 + \frac{n_2(n_2+1)}{2} - R_2$$
 
 In *R*, this looks like so:
 
@@ -262,9 +261,7 @@ wilcox.test(t1, t2, paired = TRUE)
 
 In $t$ tests, we are looking at the difference between the means. Oftentimes, we are looking at a confidence interval for the difference between these means. This can be determined by:
 
-$$
-(\bar{x}_1-\bar{x}_2) \pm t_{crit}\sqrt{\frac{s_p^2}{n_1}+\frac{s_p^2}{n_2}}
-$$
+$$(\bar{x}_1-\bar{x}_2) \pm t_{crit}\sqrt{\frac{s_p^2}{n_1}+\frac{s_p^2}{n_2}}$$
 
 This is very similar to the CI we calculated with the $Z$ statistic. **Remember** that we can use the following function to find our desired $t$, which requires degrees of freedom to work:
 
@@ -297,15 +294,15 @@ These are the test scores of 12 students on a quiz. The quiz was out of 100 poin
 quiz_scores <- c(75, 82, 68, 90, 73, 85, 77, 79, 88, 91, 83, 80)  
 ```
 
--   State the **null and alternative hypotheses**. (2 pts)
+- State the **null and alternative hypotheses**. (2 pts)
 
--   Are these data normal? (2 pts)
+- Are these data normal? (2 pts)
 
--   Is the mean score significantly different from the expected result? (2 pts)
+- Is the mean score significantly different from the expected result? (2 pts)
 
--   Did the students do better or worse than expected, if there is a difference? (2 pts)
+- Did the students do better or worse than expected, if there is a difference? (2 pts)
 
--   If applicable, repeat the above steps for a *one-tailed test*. How does a one-tailed test change the results?
+- If applicable, repeat the above steps for a *one-tailed test*. How does a one-tailed test change the results?
 
 ### **Question 2:**
 
@@ -316,15 +313,15 @@ study_hours <- c(0.5, 3.0, 2.5, 4.5, 3.0, 1.5, 2.0, 3.5, 6, 1.0)
 
 ```
 
--   State the **null and alternative hypotheses**. (2 pts)
+- State the **null and alternative hypotheses**. (2 pts)
 
--   Are these data normal? (2 pts)
+- Are these data normal? (2 pts)
 
--   Do students spend the expected amount of time studying per week? (2 pts)
+- Do students spend the expected amount of time studying per week? (2 pts)
 
--   Do students spend more or less time studying per week, if there is a difference? (2 pts)
+- Do students spend more or less time studying per week, if there is a difference? (2 pts)
 
--   If applicable, perform the above as a *one-tailed test* to see if students study *less* than expected. How does this change the results?
+- If applicable, perform the above as a *one-tailed test* to see if students study *less* than expected. How does this change the results?
 
 ### **Question 3:**
 
@@ -334,35 +331,35 @@ The following dataset records the reaction times of people who have had less tha
 reaction_times <- sleepstudy$Reaction
 ```
 
--   State the **null and alternative hypotheses**. (2 pts)
+- State the **null and alternative hypotheses**. (2 pts)
 
--   Are these data normal? (2 pts)
+- Are these data normal? (2 pts)
 
--   Is the mean score significantly different from the expected result? (2 pts)
+- Is the mean score significantly different from the expected result? (2 pts)
 
--   Are the people in the dataset slower or faster than average, if there is a difference? What might be the reason for this? (2 pts)
+- Are the people in the dataset slower or faster than average, if there is a difference? What might be the reason for this? (2 pts)
 
--   If applicable, perform the above as a *one-tailed test* to see if reactions times are *faster* or *slower* than expected. How does this change the results?
+- If applicable, perform the above as a *one-tailed test* to see if reactions times are *faster* or *slower* than expected. How does this change the results?
 
 ### **Question 4:**
 
-Whole milk is expected to be around 3.25% fat. Researchers from Florida wanted to determine if this was the case and used two methods to measure the fat percentage in the milk they tested. Using the enzymatic method (\$triglyceride), determine if the fat percentage of this milk was significantly different from the 3.25% expected.
+Tuition is a major factor for most students when picking a university. You are curious whether UNK is a good deal so far as Nebraska schools are concerned; to make the comparison fair, you decide to compare the total in-state costs for all Nebraska schools offering 4-year degrees.
 
-```{r}
-milk <- read.csv("https://users.stat.ufl.edu/~winner/data/milkfat_measure.csv")
-milk_fats <- milk$triglyceride
+```{r, message=FALSE}
+tuition <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2020/2020-03-10/tuition_cost.csv") |> 
+  filter(state == "Nebraska" & degree_length == "4 Year")
 
-milk_fats
-
+unk <- tuition[18,]
+other_tuition <- tuition[-18,]
 ```
 
--   State the **null and alternative hypotheses**.(2 pts)
+- State the **null and alternative hypotheses**.(2 pts)
 
--   Is the mean score significantly different from the expected result? (4 pts)
+- Is the mean score significantly different from the expected result? (4 pts)
 
--   Is the milk fattier or leaner than expected, if there is a difference? (2 pts)
+- Is the tuition at UNK less than the average cost of a four-year degree in Nebraska? (2 pts)
 
--   If applicable, perform the above as a *one-tailed test* to see if fat content is *lower* than expected. How does this change the results?
+- Now, perform the above as a one-tailed test (if you did a two-tailed) or as a two-tailed test (if you did a one-tailed). Does your answer change? Does your question or hypothesis change? Explain.
 
 ### **Question 5:**
 
@@ -372,13 +369,13 @@ Galaxies are rapidly moving away from us at various speeds. Previous studies had
 head(galaxies)
 ```
 
--   State the **null and alternative hypotheses**. (2 pts)
+- State the **null and alternative hypotheses**. (2 pts)
 
--   Is the mean score significantly different from the expected result? (4 pts)
+- Is the mean score significantly different from the expected result? (4 pts)
 
--   Are the galaxies moving away faster or slower, if there is a difference? (2 pts)
+- Are the galaxies moving away faster or slower, if there is a difference? (2 pts)
 
--   If applicable, perform the above as a *one-tailed test* that you feel is most appropriate. Compare these results to your previous results.
+- If applicable, perform the above as a *one-tailed test* that you feel is most appropriate. Compare these results to your previous results.
 
 ## Homework: Two-sample means testing
 
@@ -398,17 +395,17 @@ dog_data <- cbind(owner_name, owner_sight) |>
   as.data.frame()
 ```
 
--   What is the goal of this study?
+- What is the goal of this study?
 
--   What are the null and alternative hypotheses for this study? Make sure your hypotheses reflect whether this is a one-tailed or a two-tailed test, whichever is most appropriate for the situation. *You will not be reminded about tails on future questions*.
+- What are the null and alternative hypotheses for this study? Make sure your hypotheses reflect whether this is a one-tailed or a two-tailed test, whichever is most appropriate for the situation. *You will not be reminded about tails on future questions*.
 
--   Perform the appropriate test for this dataset. Don't forget to check for normality and do the other necessary steps; *you will not be reminded to do this on future questions*.
+- Perform the appropriate test for this dataset. Don't forget to check for normality and do the other necessary steps; *you will not be reminded to do this on future questions*.
 
--   State your conclusion for this study.
+- State your conclusion for this study.
 
 ### Question 2: The maximum airspeed velocity of a swallow
 
-Inspired by *Monty Python and the Holy Grail*, you decide to compare the maximum airspeed velocity of African and European swallows, namely, the European Red-rumped Swallow *Cecropis rufula* African Red-rumped Swallow *Cecropis melanocrissus* to see if they differ in some way. You measure one group of each of these swallows and get the following dataset:
+Inspired by [*Monty Python and the Holy Grail*](https://www.youtube.com/watch?v=liIlW-ovx0Y), you decide to compare the maximum airspeed velocity of African and European swallows, namely, the European Red-rumped Swallow *Cecropis rufula* African Red-rumped Swallow *Cecropis melanocrissus* to see if they differ in some way. You measure one group of each of these swallows and get the following dataset:
 
 ```{r}
 rufula <- c(68.6,71.7,69.9,74.9,70.2,64.9,70.8,74.2,67.1,70.8,75.0,70.7)
@@ -418,13 +415,13 @@ swallows <- cbind(rufula, melanocrissus) |>
   as.data.frame()
 ```
 
--   What is the goal of this study?
+- What is the goal of this study?
 
--   What are the null and alternative hypotheses for this test? Write them mathematically or as sentences, whichever is easiest for you.
+- What are the null and alternative hypotheses for this test? Write them mathematically or as sentences, whichever is easiest for you.
 
--   Perform the appropriate test for the dataset.
+- Perform the appropriate test for the dataset.
 
--   State your conclusion for this study.
+- State your conclusion for this study.
 
 ### Question 3: Heart rate and salsa
 
@@ -445,11 +442,11 @@ peppers <- cbind(jalapeño, habanero) |> as.data.frame()
 
 You are interested in seeing if the petal width of *Iris versicolor* is different than that of *Iris virginica*. **Note:** for this problem, you will have to:
 
--   Isolate the species of interest
+- Isolate the species of interest
 
--   Isolate the variables of interest
+- Isolate the variables of interest
 
--   Perform the relevant test
+- Perform the relevant test
 
 The dataset is available in base R:
 
@@ -457,13 +454,13 @@ The dataset is available in base R:
 head(iris)
 ```
 
--   What is the goal of this study?
+- What is the goal of this study?
 
--   What are the hypotheses of this study?
+- What are the hypotheses of this study?
 
--   Perform the relevant test for assessing the hypotheses.
+- Perform the relevant test for assessing the hypotheses.
 
--   Write out your conclusion for the test.
+- Write out your conclusion for the test.
 
 ### Question 5: Bacteria counts
 
@@ -481,13 +478,13 @@ media_B <- c(12,12,12,12,11,11,11,13,12,11,
              16,17,16,20,16,15,19,16,18,18)
 ```
 
--   What is the goal for this study?
+- What is the goal for this study?
 
--   What are the hypotheses for this study?
+- What are the hypotheses for this study?
 
--   Perform the relevant test for assessing the hypotheses.
+- Perform the relevant test for assessing the hypotheses.
 
--   Write out your conclusion for the test.
+- Write out your conclusion for the test.
 
 ### Question 6: Flint, Michigan
 
@@ -498,8 +495,8 @@ The code below will section off actual data from the lead water crisis in Flint,
 ```{r}
 library(tidytuesdayR)
 
-tuesdata <- tidytuesdayR::tt_load('2025-11-04')
-flint_mdeq <- tuesdata$flint_mdeq |> 
+tuesdata <- flint_mdeq <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-11-04/flint_mdeq.csv')
+flint_mdeq <- tuesdata |> 
   dplyr::select(-notes) |> 
   na.omit() |> 
   dplyr::select(-lead2)
@@ -508,18 +505,18 @@ group1 <- flint_mdeq[1:20,]
 group2 <- flint_mdeq[21:40,]
 ```
 
--   What is the goal of the analysis above?
+- What is the goal of the analysis above?
 
--   State the hypotheses for the analysis above.
+- State the hypotheses for the analysis above.
 
--   Perform the appropriate test.
+- Perform the appropriate test.
 
--   State a conclusion for the test.
+- State a conclusion for the test.
 
 [According to the EPA](https://www.epa.gov/ground-water-and-drinking-water/basic-information-about-lead-drinking-water), if more than 10% of tap water samples exceed the lead action level of 15 parts per billion, then further actions must be taken to mitigate and help control the lead, as well as to educate the public.
 
--   What is the percent of samples in the `flint_mdeq` that are above the 15 parts per billion threshold?
+- What is the percent of samples in the `flint_mdeq` that are above the 15 parts per billion threshold?
 
--   What is the average lead level in the town?
+- What is the average lead level in the town?
 
--   Is the average lead level below the 15 parts per billion threshold? State a null and alternative hypothesis for this test, and then perform the relative hypothesis.
+- Is the average lead level below the 15 parts per billion threshold? State a null and alternative hypothesis for this test, and then perform the relative hypothesis.

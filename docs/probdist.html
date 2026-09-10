@@ -336,6 +336,7 @@ window.Quarto = {
   <li><a href="#problem-7" id="toc-problem-7" class="nav-link" data-scroll-target="#problem-7"><span class="header-section-number">9.6.7</span> Problem 7</a></li>
   <li><a href="#problem-8" id="toc-problem-8" class="nav-link" data-scroll-target="#problem-8"><span class="header-section-number">9.6.8</span> Problem 8</a></li>
   <li><a href="#problem-9" id="toc-problem-9" class="nav-link" data-scroll-target="#problem-9"><span class="header-section-number">9.6.9</span> Problem 9</a></li>
+  <li><a href="#answers" id="toc-answers" class="nav-link" data-scroll-target="#answers"><span class="header-section-number">9.6.10</span> Answers</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -383,9 +384,7 @@ window.Quarto = {
 <section id="binomial-distribution" class="level2" data-number="9.3">
 <h2 data-number="9.3" class="anchored" data-anchor-id="binomial-distribution"><span class="header-section-number">9.3</span> Binomial distribution</h2>
 <p>A <em>binomial distribution</em> is one in which only two outcomes are possible - often coded as <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span> and usually representing failure and success, respectively. The binomial is described by the following function:</p>
-<p><span class="math display">\[
-p(x)=\binom{n}{x}p^{x}(1-p)^{n-x}
-\]</span></p>
+<p><span class="math display">\[p(x)=\binom{n}{x}p^{x}(1-p)^{n-x}\]</span></p>
 <p>where <span class="math inline">\(n =\)</span> number of trials, <span class="math inline">\(x =\)</span> the number of successes, and <span class="math inline">\(p =\)</span> the probability of a success under random conditions.</p>
 <p>In <em>R</em>, the binomial distribution is represented by the following functions:</p>
 <ul>
@@ -565,9 +564,7 @@ attr(,"conf.level")
 <section id="poisson-distribution" class="level2" data-number="9.4">
 <h2 data-number="9.4" class="anchored" data-anchor-id="poisson-distribution"><span class="header-section-number">9.4</span> Poisson distribution</h2>
 <p>The <em>Poisson distribution</em> is used to reflect random count data. Specifically, the Poisson is used to determine if success events are <em>overdispersed</em> (<em>i.e.</em>, regularly spaced), <em>random</em>, or <em>underdispersed</em> (i.e., <em>clustered</em>). The Poisson introduces the variable <em>lambda</em> (<span class="math inline">\(\lambda\)</span>) which represents the mean (<span class="math inline">\(\mu\)</span>) and the variance (<span class="math inline">\(\sigma^2\)</span>), which are equal in a Poisson distribution. A Poisson distribution is described by the following function:</p>
-<p><span class="math display">\[
-p(x)=\frac{\lambda^{x}e^{-\lambda}}{x!}
-\]</span></p>
+<p><span class="math display">\[p(x)=\frac{\lambda^{x}e^{-\lambda}}{x!}\]</span></p>
 <p>The Poisson is represented by the following functions in <em>R</em> which closely resemble the functions for the normal and binomial distributions:</p>
 <ul>
 <li><p><code>dpois</code>: the log density function</p></li>
@@ -687,8 +684,8 @@ Cumulative probability for Poisson distributions
 </section>
 <section id="homework" class="level2" data-number="9.6">
 <h2 data-number="9.6" class="anchored" data-anchor-id="homework"><span class="header-section-number">9.6</span> Homework</h2>
-<p>Remember - your homework must be completed in an <code>rmarkdown</code> document submitted as an <code>html</code> file.</p>
-<p>For each question, you must determine whether a binomial or a Poisson distribution is most appropriate. (Provide justification on your document for why you chose the distribution you did). After picking the correct distribution, answer the statistical question posed.</p>
+<p>For each question, you must determine whether a <em>binomial</em> or a <em>Poisson</em> distribution is most appropriate. (Provide justification on your document for why you chose the distribution you did). After picking the correct distribution, answer the statistical question posed.</p>
+<p><strong>Answers are provided at the end to help guide you, but you will be graded on whether you show your work!</strong></p>
 <p>Some of the inspiration for these problems is drawn from <a href="https://www.statology.org/binomial-distribution-real-life-examples/">Statology</a>.</p>
 <section id="problem-1" class="level3" data-number="9.6.1">
 <h3 data-number="9.6.1" class="anchored" data-anchor-id="problem-1"><span class="header-section-number">9.6.1</span> Problem 1</h3>
@@ -696,7 +693,7 @@ Cumulative probability for Poisson distributions
 </section>
 <section id="problem-2" class="level3" data-number="9.6.2">
 <h3 data-number="9.6.2" class="anchored" data-anchor-id="problem-2"><span class="header-section-number">9.6.2</span> Problem 2</h3>
-<p>Whooping Cranes <em>Grus americanus</em> are some of the most endangered birds in North America, with only 557 birds in the population that migrates through Nebraska. Conversely, approximately 736,000 Sandhill Cranes <em>Antigone canadensis</em> migrate through Nebraska. Assuming that census counts of flocks of 5000 cranes have the expected average ratio of cranes, what are the odds of finding a crane flock with two or more Whooping Cranes?</p>
+<p>Whooping Cranes <em>Grus americanus</em> are some of the most endangered birds in North America, with only 557 birds in the population that migrates through Nebraska. Conversely, approximately 736,000 Sandhill Cranes <em>Antigone canadensis</em> migrate through Nebraska. Assuming that census counts of flocks of 5000 cranes have the expected average ratio of cranes, what are the odds of finding a crane flock with 5 or more Whooping Cranes?</p>
 </section>
 <section id="problem-3" class="level3" data-number="9.6.3">
 <h3 data-number="9.6.3" class="anchored" data-anchor-id="problem-3"><span class="header-section-number">9.6.3</span> Problem 3</h3>
@@ -712,11 +709,11 @@ Cumulative probability for Poisson distributions
 </section>
 <section id="problem-6" class="level3" data-number="9.6.6">
 <h3 data-number="9.6.6" class="anchored" data-anchor-id="problem-6"><span class="header-section-number">9.6.6</span> Problem 6</h3>
-<p>There are approximately 3 severe storm warnings per 16 week semester at UNK. What are the odds of having a semester with no severe storm warnings?</p>
+<p>Down on your luck, you decide to look for some four-leaf clovers. You notice that you seem to find 1 four-leaf clover out of every 5,000 that you check (based on <a href="https://www.rd.com/article/four-leaf-clover/">Reader’s Digest article</a>). What are the odds of checking 2,500 clovers and finding <em>any</em> clovers? (Round to the first decimal place with a non-zero integer).</p>
 </section>
 <section id="problem-7" class="level3" data-number="9.6.7">
 <h3 data-number="9.6.7" class="anchored" data-anchor-id="problem-7"><span class="header-section-number">9.6.7</span> Problem 7</h3>
-<p>You are giving mice an experimental treatment that is designed to change their fur color. In a trial of 500 mice, 15 had their fur change color. Using this precedent, are the odds of having 6 mice have their fur change color in another trial of 500 individuals?</p>
+<p>You are giving mice an experimental treatment that is designed to change their fur color. In a trial of 500 mice, 15 had their fur change color. Using this precedent, are the odds of having 8 mice have their fur change color in another trial of 500 individuals?</p>
 </section>
 <section id="problem-8" class="level3" data-number="9.6.8">
 <h3 data-number="9.6.8" class="anchored" data-anchor-id="problem-8"><span class="header-section-number">9.6.8</span> Problem 8</h3>
@@ -725,6 +722,25 @@ Cumulative probability for Poisson distributions
 <section id="problem-9" class="level3" data-number="9.6.9">
 <h3 data-number="9.6.9" class="anchored" data-anchor-id="problem-9"><span class="header-section-number">9.6.9</span> Problem 9</h3>
 <p>Dr.&nbsp;Cooper once caught his mom shaking sodas and putting them back at the shelves at a gas station while they were traveling. Assuming his mom was able to shake 10% of the sodas before getting caught, what are the odds of getting three or more shaken sodas if you buy 20 sodas?</p>
+</section>
+<section id="answers" class="level3" data-number="9.6.10">
+<h3 data-number="9.6.10" class="anchored" data-anchor-id="answers"><span class="header-section-number">9.6.10</span> Answers</h3>
+<details>
+<summary>
+Answers to previous questions.
+</summary>
+<ol type="1">
+<li>The probability is 0.08.</li>
+<li>The probability is 0.33.</li>
+<li>The probability is 0.06.</li>
+<li>The probability is 0.07. (NOTE: some variation depending on exact calculator).</li>
+<li>The probability is 0.16.</li>
+<li>The probability is 0.0004.</li>
+<li>The probability is 0.02.</li>
+<li>The probability is 0.90.</li>
+<li>The probability is 0.32.</li>
+</ol>
+</details>
 
 
 </section>

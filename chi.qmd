@@ -13,19 +13,17 @@ library(tidyverse)
 
 $\chi^2$-squared (pronounced "*kai*", and spelled "*chi*") is a distribution used to understand if count data between different categories matches our expectation. For example, if we are looking at students in the class and comparing major vs. number of books read, we would expect *no association*, however we may find an association for a major such as English which required reading more literature. The $\chi^2$ introduces a new term *degrees of freedom* ($df$) which reflects the number of individuals in the study. For many tests, $df$ are needed to reflect how a distribution changes with respect the number of individuals (and amount of variation possible) within a dataset. The equation for the $\chi^2$ is as follows, with the $\chi^2$ being a special case of the *gamma* ($\gamma$ or $\Gamma$) distribution that is affected by the $df$, which is defined as the number of rows minus one multiplied by the number of columns minus one $df = (rows-1)(cols-1)$:
 
-$$
-f_n(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^\frac{n}{2-1}e^\frac{-x}{2}
-$$
+$$f_n(x)=\frac{1}{2^{\frac{n}{2}}\Gamma(\frac{n}{2})}x^\frac{n}{2-1}e^\frac{-x}{2}$$
 
 The $\chi^2$-squared distribution is also represented by the following functions, which perform the same things as the previous outlined equivalents for Poisson and binomial:
 
--   `dchisq`
+- `dchisq`
 
--   `pchisq`
+- `pchisq`
 
--   `qchisq`
+- `qchisq`
 
--   `rchisq`
+- `rchisq`
 
 We can view these probabilities as well:
 
@@ -44,17 +42,15 @@ plot(x,y,type="l")
 
 We evaluate $\chi^2$ tests by calculating a $\chi^2$ value based on our data and comparing it to an expected $\chi^2$ distribution. This *test statistic* can be evaluated by looking at a $\chi^2$ table or by using *R*. **Note** that you need to know the degrees of freedom in order to properly evaluate a $\chi^2$ test. We calculate our test statistic as follows:
 
-$$
-\chi^2=\Sigma\frac{(o-e)^2}{e}
-$$
+$$\chi^2=\Sigma\frac{(o-e)^2}{e}$$
 
 where $e =$ the number of expected individuals and $o =$ the number of observed individuals in each category. Since we are squaring these values, we will only have positive values, and thus this will **always be a one-tailed test**.
 
 There are multiple types of $\chi^2$ test, including the following we will cover here:
 
--   $\chi^2$ Goodness-of-fit test
+- $\chi^2$ Goodness-of-fit test
 
--   $\chi^2$ test of independence
+- $\chi^2$ test of independence
 
 ### $\chi^2$ goodness-of-fit test
 
@@ -224,9 +220,7 @@ chi_matrix |>
 
 Alternatively, we can calculate this using *expected counts*. For many situations, we don't know what the baseline probability *should* be, so we calculate the expected counts based on what we do know. Expected counts are calculated as follows:
 
-$$
-Exp(x)=\frac{\Sigma(row_x)\cdot\Sigma(col_x)}{N}
-$$
+$$Exp(x)=\frac{\Sigma(row_x)\cdot\Sigma(col_x)}{N}$$
 
 where $N$ is the sum of all individuals in the table. For the above example, this would look like this:
 
@@ -314,9 +308,7 @@ $\chi^2$ tests don't work in scenarios where we have very small count sizes, suc
 
 Where row totals are $a+b$ and $c + d$ and column totals are $a + c$ and $b + d$, and $n = a + b + c + d$. We can calculate $p$ as follows:
 
-$$
-p = \frac{(a+b)!(c+d)!(a+c)!(b+d)!}{a!b!c!d!n!}
-$$
+$$p = \frac{(a+b)!(c+d)!(a+c)!(b+d)!}{a!b!c!d!n!}$$
 
 In *R*, we can use the command `fisher.test` to perform these calculations. For example, we have the following contingency table, looking at the number of undergrads and graduate students in introductory and graduate level statistics courses:
 
@@ -340,7 +332,7 @@ In this situation, $p = 0.05$ when rounded, so we would fail to reject but note 
 
 ## Homework: $\chi^2$ tests
 
-**For all homework problems, assume $\alpha = 0.05$.
+\*\*For all homework problems, assume $\alpha = 0.05$.
 
 ### La Selva Bird Counts
 
@@ -358,19 +350,19 @@ The researchers are curious about the following questions; use $\chi^2$ tests to
 
 1.  Is each species equally likely to be encountered across years (`NYears`)?
 
--   state a null and alternative hypothesis for this scenario
+- state a null and alternative hypothesis for this scenario
 
--   Perform the appropriate $\chi^2$ test
+- Perform the appropriate $\chi^2$ test
 
--   Interpret the test, stating your conclusions and listing the test statistics and the $p$ value
+- Interpret the test, stating your conclusions and listing the test statistics and the $p$ value
 
 2.  Does each species have an equal high count (`MaxN`)?
 
--   state a null and alternative hypothesis for this scenario
+- state a null and alternative hypothesis for this scenario
 
--   Perform the appropriate $\chi^2$ test
+- Perform the appropriate $\chi^2$ test
 
--   Interpret the test, stating your conclusions and listing the test statistics and the $p$ value
+- Interpret the test, stating your conclusions and listing the test statistics and the $p$ value
 
 ### Bicycle counts: Time of day
 
@@ -403,29 +395,29 @@ march_31 <- bicycles |>
   filter(hour(Date) > 7 & hour(Date) < 18)
 ```
 
-1. Are bicycle counts the same for each hour in Eastbound traffic?
+1.  Are bicycle counts the same for each hour in Eastbound traffic?
 
--   state a null and alternative hypothesis for this scenario
+- state a null and alternative hypothesis for this scenario
 
--   Perform the appropriate $\chi^2$ test
+- Perform the appropriate $\chi^2$ test
 
--   Interpret the test, stating your conclusions and listing the test statistics and the $p$ value
+- Interpret the test, stating your conclusions and listing the test statistics and the $p$ value
 
-2. Are bicycle counts the same for each hour in Westbound traffic?
+2.  Are bicycle counts the same for each hour in Westbound traffic?
 
--   state a null and alternative hypothesis for this scenario
+- state a null and alternative hypothesis for this scenario
 
--   Perform the appropriate $\chi^2$ test
+- Perform the appropriate $\chi^2$ test
 
--   Interpret the test, stating your conclusions and listing the test statistics and the $p$ value
+- Interpret the test, stating your conclusions and listing the test statistics and the $p$ value
 
-3. Are bicycle counts the same per hour for comparing eastbound to westbound traffic?
+3.  Are bicycle counts the same per hour for comparing eastbound to westbound traffic?
 
--   state a null and alternative hypothesis for this scenario
+- state a null and alternative hypothesis for this scenario
 
--   Perform the appropriate $\chi^2$ test
+- Perform the appropriate $\chi^2$ test
 
--   Interpret the test, stating your conclusions and listing the test statistics and the $p$ value
+- Interpret the test, stating your conclusions and listing the test statistics and the $p$ value
 
 ### Bicycles: Date
 
@@ -454,10 +446,10 @@ date_compare_data <- march_31 |>
 
 ```
 
-1. Are the counts the same per hour between dates for eastbound traffic?
+1.  Are the counts the same per hour between dates for eastbound traffic?
 
--   state a null and alternative hypothesis for this scenario
+- state a null and alternative hypothesis for this scenario
 
--   Perform the appropriate $\chi^2$ test
+- Perform the appropriate $\chi^2$ test
 
--   Interpret the test, stating your conclusions and listing the test statistics and the $p$ value
+- Interpret the test, stating your conclusions and listing the test statistics and the $p$ value

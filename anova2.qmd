@@ -274,17 +274,17 @@ This homework requires you to install `tidytuesdayR`.
 **For each question**:
 
 1.  State your null and alternative hypotheses
-    -   There will be a hypothesis for *each thing* being tested - primary hypothesis, secondary hypothesis (or blocking variable), and interaction *if tested*
+    - There will be a hypothesis for *each thing* being tested - primary hypothesis, secondary hypothesis (or blocking variable), and interaction *if tested*
 2.  Justify what type of ANOVA you think this is and why
-    -   Randomized Block / Factorial ANOVA (`run_oneway` with blocking indicated)
-    -   Interactive ANOVA (`run_twoway`)
-    -   Two-way ANOVA (`run_twoway`)
-    -   Repeated Measures ANOVA
+    - Randomized Block / Factorial ANOVA (`run_oneway` with blocking indicated)
+    - Interactive ANOVA (`run_twoway`)
+    - Two-way ANOVA (`run_twoway`)
+    - Repeated Measures ANOVA
 3.  Test for normality relative to the primary hypothesis *only*. Do not transform problems that tell you to ignore normality requirements.
 4.  Perform the appropriate ANOVA
 5.  Interpret the results and provide a conclusion
-    -   Focus on your *primary hypothesis*, and then address your secondary hypothesis if needed
-    -   If there is an interaction, focus on the interaction
+    - Focus on your *primary hypothesis*, and then address your secondary hypothesis if needed
+    - If there is an interaction, focus on the interaction
 6.  If there are any additional questions within the problem, be sure to address them
 
 ### Question 1: Stat-y Spice
@@ -293,11 +293,11 @@ You and your friends are jamming out to the *Spice Girls*, like you do every Tue
 
 Load the following table, where:
 
--   Release year = `album_release_year`
+- Release year = `album_release_year`
 
--   Major or minor key = `mode_name`
+- Major or minor key = `mode_name`
 
--   Danceability = `danceability`
+- Danceability = `danceability`
 
 ```{r, message = F, eval = F}
 tuesdata <- tidytuesdayR::tt_load(2021, week = 51)
@@ -326,11 +326,11 @@ You and your study group are binge-watching the TV show [*Alone*](https://www.hi
 
 **Do not transform these data - perform as is.**
 
--   Gender of participant = `gender`
+- Gender of participant = `gender`
 
--   Country of origin = `country`
+- Country of origin = `country`
 
--   Length of time lasted = `days_lasted`
+- Length of time lasted = `days_lasted`
 
 ```{r, message = F, eval = F}
 tuesdata <- tidytuesdayR::tt_load(2023, week = 4)
@@ -477,8 +477,8 @@ There is an effect of sex ($F_{1,360} = 583.65$), urbanicity ($F_{3,360} = 8.68$
 
 Using datasets from `tidytuesdayR` ([viewable here](https://github.com/rfordatascience/tidytuesday)) or a different dataset of your choosing, create your own two-way ANOVA homework problem.
 
--   You are allowed to work with others, but you *must* say who you worked with if you do. Please keep group sizes ≤ 4.
+- You are allowed to work with others, but you *must* say who you worked with if you do. Please keep group sizes ≤ 4.
 
--   Your problem *must* include a worked through "key" showing how the homework problem should be done based on the prompt.
+- Your problem *must* include a worked through "key" showing how the homework problem should be done based on the prompt.
 
--   I want you to do a *good faith effort* at this problem; if you get stuck or cannot figure out how to get a problem to work, show which datasets you tried to use and where you might get homework data in the future if these don't work.
+- I want you to do a *good faith effort* at this problem; if you get stuck or cannot figure out how to get a problem to work, show which datasets you tried to use and where you might get homework data in the future if these don't work.

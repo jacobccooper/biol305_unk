@@ -5,27 +5,27 @@ author: "University of Nebraska at Kearney Biology"
 
 Now that we have installed *RStudio*, we will need to create an *RMarkdown* document that we can use for answering questions and turning in assignments. These documents will also be used for appendices and other materials in future publications you create - *RStudio* can easily knit documents into `.pdf`, `.docx` (i.e., "Word" documents), and `.html`. In this class, we will use almost exclusively `.html` documents, as these are the most compatible with *Canvas*.
 
--   **Quick note:** Mac keyboards differ from Windows keyboards in that they have more keys; as such, shortcuts will differ!
+- **Quick note:** Mac keyboards differ from Windows keyboards in that they have more keys; as such, shortcuts will differ!
 
 <!-- -->
 
--   For both operating systems, I will list keys that have to be pushed together with a "+" between them. (If you need to push the "+" key, I will offset it like `+` so; for example, pushing CONTROL and PLUS on Windows at the same time makes a window's font bigger; I would write this as `CTRL` + `+`).
+- For both operating systems, I will list keys that have to be pushed together with a "+" between them. (If you need to push the "+" key, I will offset it like `+` so; for example, pushing CONTROL and PLUS on Windows at the same time makes a window's font bigger; I would write this as `CTRL` + `+`).
 
--   If you need to hit a single key that differs between operating systems, I will always list the Windows/Linux key first and the Mac key second; for example, `Enter`/`return` for inserting a new line.
+- If you need to hit a single key that differs between operating systems, I will always list the Windows/Linux key first and the Mac key second; for example, `Enter`/`return` for inserting a new line.
 
 #### Windows/Linux keys
 
--   `CTRL`: Control
+- `CTRL`: Control
 
--   `ALT`: Alt
+- `ALT`: Alt
 
 #### Mac keys
 
--   ⌘: Command
+- ⌘: Command
 
--   ⌥: Option
+- ⌥: Option
 
--   \^: Control
+- \^: Control
 
 ## Creating an *RMarkdown* document
 
@@ -47,25 +47,25 @@ After entering a title and your name and selecting `document` in the left hand m
 
 In the image above, we can see what a "default" *RMarkdown* script looks like after creating the file. At the top of the document, between all of the dashes, we have the `yaml` header that tells *R* what kind of document will be created, who the author is, and what the date is for the document (by default, this is `r Sys.Date()`, which just prints the data on which the code was run). In this class, we will be saving documents as `html` as they are the easiest documents to create and save. These documents will include all of your code, text, and even any plots you may create!
 
--   **The first thing you should do is save your document**. Since this is a "first go", feel free to save it as `test.rmd` or something to that effect, ***but save the document in the folder you want to use for assignments!***
+- **The first thing you should do is save your document**. Since this is a "first go", feel free to save it as `test.rmd` or something to that effect, ***but save the document in the folder you want to use for assignments!***
 
--   After the document is saved, you can hit the `knit` button at the top of the screen and see what happens. It should create a document in the same location as your saved file that is an `html` format.
+- After the document is saved, you can hit the `knit` button at the top of the screen and see what happens. It should create a document in the same location as your saved file that is an `html` format.
 
--   A new document will appear in a pop up window as well. The information in this document will be the default text loaded above.
+- A new document will appear in a pop up window as well. The information in this document will be the default text loaded above.
 
--   After running the document once, delete all text below the `---` at the bottom of the `yaml` header so we can create our own document.
+- After running the document once, delete all text below the `---` at the bottom of the `yaml` header so we can create our own document.
 
 #### Writing text
 
 Plain text in your *RStudio* window will be rendered as plain text in the final document. (i.e., whatever you type normally will become "normal text" in the finished document).
 
--   **Important shortcut:** An important shortcut is the "double click". Write a word, any word (like `potato`) in your document. If you double click, it will select the whole word. If you have a word or sentence selected, you can hit `"`, `(`, `[`, `{`, or `*` and *RStudio* will automatically put the closing equivalent of the symbol at the end of your selection.
+- **Important shortcut:** An important shortcut is the "double click". Write a word, any word (like `potato`) in your document. If you double click, it will select the whole word. If you have a word or sentence selected, you can hit `"`, `(`, `[`, `{`, or `*` and *RStudio* will automatically put the closing equivalent of the symbol at the end of your selection.
 
--   **Headers:** Lines preceded with `#` will become headers; the number of `#` determines the level of the header, with `#` being main headers, `##` being a second level header, and `###` being a third level header, etc.
+- **Headers:** Lines preceded with `#` will become headers; the number of `#` determines the level of the header, with `#` being main headers, `##` being a second level header, and `###` being a third level header, etc.
 
--   **Formatting:** Words can be italicized by putting an asterisk on each side of the word (`*italic*`) and bold by putting two asterisks on each side (`**bold**`).
+- **Formatting:** Words can be italicized by putting an asterisk on each side of the word (`*italic*`) and bold by putting two asterisks on each side (`**bold**`).
 
--   **Hyperlinks:** URLs are also supported, with `<>` on each side of a URL making it clickable. To turn a word into a hyperlink, type `[words to show](https://target_URL.com)`. It is important that the words are in brackets and the URL is in parentheses, or it will not format correctly.
+- **Hyperlinks:** URLs are also supported, with `<>` on each side of a URL making it clickable. To turn a word into a hyperlink, type `[words to show](https://target_URL.com)`. It is important that the words are in brackets and the URL is in parentheses, or it will not format correctly.
 
 ### Coding
 
@@ -79,25 +79,25 @@ We will create an example set of text, and then insert a code chunk to see how t
 
 #### Test text and chunks
 
--   Type `This is a test of the *Rmarkdown* code.` as plaintext in your document.
+- Type `This is a test of the *Rmarkdown* code.` as plaintext in your document.
 
--   Hit `Enter` twice.
+- Hit `Enter` twice.
 
--   Insert a code chunk by using the correct shortcut:
+- Insert a code chunk by using the correct shortcut:
 
-    -   **Windows/Linux:** `CTRL` + `ALT` + `I`
+  - **Windows/Linux:** `CTRL` + `ALT` + `I`
 
-    -   **Mac:** ⌘ + ⌥ + `I`
+  - **Mac:** ⌘ + ⌥ + `I`
 
--   Push the down arrow until you are between the sets of hashes in the code chunk.
+- Push the down arrow until you are between the sets of hashes in the code chunk.
 
--   Type `print("hello world")`
+- Type `print("hello world")`
 
-    -   `print`: a command that returns a `string` of characters. A string is any set of characters that should be read together as a single object or line.
+  - `print`: a command that returns a `string` of characters. A string is any set of characters that should be read together as a single object or line.
 
-    -   `"hello world"`: placing the letters inside quotes `"` tells *R* that these are *character data* that should be read as a `string`.
+  - `"hello world"`: placing the letters inside quotes `"` tells *R* that these are *character data* that should be read as a `string`.
 
-    -   The full command should return an output of `"hello world"`.
+  - The full command should return an output of `"hello world"`.
 
 ![Text to type in your *Rmarkdown* document.](images/test_text.png)
 
@@ -107,37 +107,37 @@ After typing this into the document, hit `knit` near the top of the upper left w
 
 We can see now that the `HTML` document has the `yaml` header at the top of the document for the title of the document, the author's name, the date on which the code was run. The plain text we used has been printed, and the greyed-out box with color coded *R* code is followed by the output we expected.
 
--   Let's try something a little more complex. Create a new code chunk and type the following:
+- Let's try something a little more complex. Create a new code chunk and type the following:
 
-    -   *NOTE*: Mac users can use ⌥ + `-` to automatically insert `<-`, saving a lot of time. Unfortunately, there is no equivalent shortcut for Windows.
+  - *NOTE*: Mac users can use ⌥ + `-` to automatically insert `<-`, saving a lot of time. Unfortunately, there is no equivalent shortcut for Windows.
 
-    -   We are avoiding using `=` to create objects as this can lead to issues in saving objects to *R*'s memory in some cases and can lead to confusion between objects and parts of functions.
+  - We are avoiding using `=` to create objects as this can lead to issues in saving objects to *R*'s memory in some cases and can lead to confusion between objects and parts of functions.
 
 ```{r}
 x <- 1:10
 ```
 
--   `x`: putting a plain letter, character, or word in *R* asks it to refer to something in its memory. If it does not exist in its memory, it can be created by using something like `<-`. When we define a set of characters as numbers or as something else, we are creating an `object`.
+- `x`: putting a plain letter, character, or word in *R* asks it to refer to something in its memory. If it does not exist in its memory, it can be created by using something like `<-`. When we define a set of characters as numbers or as something else, we are creating an `object`.
 
--   `1:10`: this will print all whole integers between the listed numbers, inclusive of those numbers. In this case, `1:10` is the same as `c(1,2,3,4,5,6,7,8,9,10)`, where `c` *concatenates* and puts together the numbers in a single `string`.
+- `1:10`: this will print all whole integers between the listed numbers, inclusive of those numbers. In this case, `1:10` is the same as `c(1,2,3,4,5,6,7,8,9,10)`, where `c` *concatenates* and puts together the numbers in a single `string`.
 
--   Run your code by placing your cursor on the same line as `x <- 1:10` and pressing `CTRL` + `Enter` / ⌘ + `return`.
+- Run your code by placing your cursor on the same line as `x <- 1:10` and pressing `CTRL` + `Enter` / ⌘ + `return`.
 
--   After running, you will see the following appear in your top right window, showing you that `x` was saved:
+- After running, you will see the following appear in your top right window, showing you that `x` was saved:
 
 ![The object x now being saved to the environment, as a set of ten integers.](images/clipboard-4025383944.png){width="489"}
 
--   Hit `Enter` / `return` to create a new line within the code chunk. Type the letter `x` and hit `CTRL` + `Enter` / ⌘ + `return`. You should see the following:
+- Hit `Enter` / `return` to create a new line within the code chunk. Type the letter `x` and hit `CTRL` + `Enter` / ⌘ + `return`. You should see the following:
 
 ```{r}
 x
 ```
 
--   Create a new object, `y`, that is the square of `x`, as follows:
+- Create a new object, `y`, that is the square of `x`, as follows:
 
-    -   `^`: this is the "power" symbol; thus, `x^2` is $x^2$, `x^3` is $x^3$, etc.
+  - `^`: this is the "power" symbol; thus, `x^2` is $x^2$, `x^3` is $x^3$, etc.
 
-    -   Don't forget to use `CTRL` + `Enter` / ⌘ + `return` to run the line of code.
+  - Don't forget to use `CTRL` + `Enter` / ⌘ + `return` to run the line of code.
 
 ```{r}
 y <- x^2
@@ -153,7 +153,7 @@ We can now print `y`, just as we did for `x`, to see what the object contains in
 y
 ```
 
--   *Note* that you can multiply objects together as well. When we have strings, the strings will be multiplied together. Try the following:
+- *Note* that you can multiply objects together as well. When we have strings, the strings will be multiplied together. Try the following:
 
 ```{r}
 x*y
@@ -163,7 +163,7 @@ x*y
 y-x
 ```
 
--   **Note:** Since I didn't "store" this value as a variable in *R* using `<-`, the value is not in the environment.
+- **Note:** Since I didn't "store" this value as a variable in *R* using `<-`, the value is not in the environment.
 
 #### Taking notes
 
@@ -187,7 +187,7 @@ You are *highly encouraged* to add notes to your code, both to help others under
 
 Now, let's try creating a plot. This is easy in *R*, as we just use the command `plot`. At minimum, we must define an `x` variable and a `y` variable for the command `plot`. It will calculate and make everything else automatically.
 
--   **Note:** Within commands, we must use `=`.
+- **Note:** Within commands, we must use `=`.
 
 Type and run the following:
 
@@ -211,19 +211,19 @@ plot(x = x, # specify x values
 
 *RStudio* has lots of keyboard shortcuts that will make your life easier. You will be a lot faster if you rely on these shortcuts. I outline some here, but see the [Glossary](https://jacobccooper.github.io/biol305_unk/glossary.html).
 
--   Use arrow keys to move around your document
+- Use arrow keys to move around your document
 
--   Highlight code by holding `shift` and pushing the arrow keys
+- Highlight code by holding `shift` and pushing the arrow keys
 
--   Copy text using `CTRL` + `C` / ⌘ + `C`
+- Copy text using `CTRL` + `C` / ⌘ + `C`
 
--   Paste text using `CTRL` + `V` / ⌘ + `V`
+- Paste text using `CTRL` + `V` / ⌘ + `V`
 
--   Cut text using `CTRL` + `X` / ⌘ + `X`
+- Cut text using `CTRL` + `X` / ⌘ + `X`
 
--   Undo last edit or mistake using `CTRL` + `Z` / ⌘ + `Z`
+- Undo last edit or mistake using `CTRL` + `Z` / ⌘ + `Z`
 
--   Save your document using `CTRL` + `S` / ⌘ + `S`
+- Save your document using `CTRL` + `S` / ⌘ + `S`
 
 These shortcuts are worth learning; they will greatly increase the speed at which you get things done.
 
@@ -231,10 +231,10 @@ These shortcuts are worth learning; they will greatly increase the speed at whic
 
 *RStudio* allows for "tab-completing" while typing code. Tab-completing is a way of typing the first part of a command, variable name, or file name and hitting "tab" to show all options with that spelling. You should use tab completing because it:
 
--   reduces spelling mistakes
--   reduces filepath mistakes
--   increases the speed at which you code
--   provides help with specific functions
+- reduces spelling mistakes
+- reduces filepath mistakes
+- increases the speed at which you code
+- provides help with specific functions
 
 ### Help
 

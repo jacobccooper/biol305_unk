@@ -57,26 +57,26 @@ x
 
 1.  Why type of data are each of the variables (i.e., `fish ID` and `length`) – nominal, ordinal, interval, or ratio? Provide your answer along with a brief justification.
 2.  Calculate the following for the `length` variable, rounding to the appropriate number of significant digits in all answers. Be sure to provide a written description of your answers as well as the code output.
-    -   Mean
-    -   Median
-    -   Mode
-    -   Q1
-    -   Q2
-    -   IQR
-    -   Variance
-    -   Standard deviation
-    -   Standard error
-    -   Coefficient of variation
+    - Mean
+    - Median
+    - Mode
+    - Q1
+    - Q2
+    - IQR
+    - Variance
+    - Standard deviation
+    - Standard error
+    - Coefficient of variation
 3.  Calculate skewness and kurtosis for the `length` data. Provide an interpretation of these values.
 4.  Create and compute the following for the `length` data:
-    -   Frequency histogram
-    -   Cumulative frequency plot
-    -   Shapiro-Wilkes test
-    -   Using the above, provide an interpretation of whether data are normally distributed, and be sure to justify your answer
+    - Frequency histogram
+    - Cumulative frequency plot
+    - Shapiro-Wilkes test
+    - Using the above, provide an interpretation of whether data are normally distributed, and be sure to justify your answer
 5.  Let's say the mean and standard deviation of `length` across *all* populations of this minnow are $\mu = 85.00$ and $\sigma = 4.50$.
-    -   State the null and alternative hypotheses for this scenario.
-    -   Run the appropriate $Z$-test and report the $p$-value.
-    -   State the final conclusion of whether or not you *support* or *reject* the null hypothesis. **Assume** $\alpha = 0.05$. Justify your answer.
+    - State the null and alternative hypotheses for this scenario.
+    - Run the appropriate $Z$-test and report the $p$-value.
+    - State the final conclusion of whether or not you *support* or *reject* the null hypothesis. **Assume** $\alpha = 0.05$. Justify your answer.
 
 *Be sure to answer all questions in full sentences!*
 
@@ -103,25 +103,25 @@ head(time_on_canvas)
 
 1.  What type of data are each of these variables (i.e., student ID \[`student`\] and time spent in hours \[`time.hrs`\]) – nominal, ordinal, interval, or ratio? Provide your answer along with a brief justification.
 2.  Calculate the following for the `time.hrs` variable, rounding to the appropriate number of significant digits in all answers. Be sure to provide a written description of your answers as well as the code output.
-    -   Mean
-    -   Median
-    -   Mode
-    -   Q1
-    -   Q2
-    -   IQR
-    -   Variance
-    -   Standard deviation
-    -   Standard error
-    -   Coefficient of variation
+    - Mean
+    - Median
+    - Mode
+    - Q1
+    - Q2
+    - IQR
+    - Variance
+    - Standard deviation
+    - Standard error
+    - Coefficient of variation
 3.  Calculate skewness and kurtosis for the `length` data. Provide an interpretation of these values.
 4.  Create and compute the following for the `length` data:
-    -   Frequency histogram
-    -   Cumulative frequency plot
-    -   Shapiro-Wilkes test
-    -   Using the above, provide an interpretation of whether data are normally distributed, and be sure to justify your answer
+    - Frequency histogram
+    - Cumulative frequency plot
+    - Shapiro-Wilkes test
+    - Using the above, provide an interpretation of whether data are normally distributed, and be sure to justify your answer
 5.  Let's say Canvas has been tracking users across all of the classes ever put in their software platform. This includes many universities and many classes across all of those schools. The mean and standard deviation from this population-level dataset are $\mu = 12.22$ and $\sigma = 2.10$. You personally spend 15.45 hours on Canvas for one of your UNK classes. Is the number of hours you spent expected or not expected based on this information from the larger Canvas population? **Assume** $\alpha = 0.05$. For this scenario, be sure to do the following:
-    -   State the null and alternative hypotheses
-    -   Run the appropriate $Z$-test and report the $p$-value
-    -   State the final conclusion of whether you *support* or *reject* the null hypothesis – be sure to support your answer!
-    -   Calculate the 95% confidence interval around the population mean
+    - State the null and alternative hypotheses
+    - Run the appropriate $Z$-test and report the $p$-value
+    - State the final conclusion of whether you *support* or *reject* the null hypothesis – be sure to support your answer!
+    - Calculate the 95% confidence interval around the population mean
 6.  **Optional:** Repeat steps 4 and 5 after performing a natural log transformation on the `time.hrs` data (use the command `log1p`). Don't forget to back-transform your confidence intervals using `expm1`.
