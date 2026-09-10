@@ -1,0 +1,58 @@
+---
+title: "R Troubleshooting"
+author: "Dr. Melissa Wuellner"
+format: html
+editor: visual
+---
+
+*Generated with assistance from AI; Edited by Jacob C. Cooper*
+
+# Overview
+
+The most common reason an R Markdown (Rmd) document fails to knit when bringing in an external file is **an incorrect file path or working directory issue**. When you knit a document, the code runs in a clean, separate environment with a different default working directory than your interactive R session in the console. Examples of errors: \[[1](https://rmd4sci.njtierney.com/common-problems-with-rmarkdown-and-some-solutions), [2](https://www.reddit.com/r/RStudio/comments/1f2cob2/rmarkdown_cant_find_file_when_knitting/), [3](https://www.tloux.com/uris/common-error-messages.html#:~:text=No%20Such%20File%20or%20Directory%20You%20get,directory%20isn't%20what%20you%20think%20it%20is.)\]
+
+# Here are the primary reasons and solutions:
+
+## Working Directory Mismatch
+
+**When you knit, R Markdown automatically sets the working directory to the directory where the file is located by default. If your data file is in a different folder (e.g., in a subfolder), the simple file name used in the console will not work when knitting.**
+
+- **Solution:** Use relative paths or a full path to the file.
+
+  - R Studio will, by default, pull from the folder in which your file is saved.
+
+    - Call a file by typing quotes and starting to type your file name. Remember—tab complete is your friend!
+
+  - Full filepaths can also be used for other files
+
+    - Filepaths in Mac and Linux should look like `~/Documents/.../file.csv`
+
+    - Filepaths in Windows should look like `C:\\Users\\Andrie\\R\\win-library\\`
+
+      - Windows filepaths often require a double backslash, not a single forward slash
+
+## Code/Data Not in the `rmd` File
+
+**R Markdown knitting runs in a completely isolated session and does not have access to objects, data frames, or loaded libraries from your interactive console environment.**
+
+- **Solution:** Ensure all necessary code, including loading packages (e.g., `tidyverse`) and the full data import code, is present in the R Markdown document's code chunks.
+
+  - These aren't always listed on assignments, this is up to you to check!
+
+## Special characters or spaces in file names
+
+**File names or folder paths with spaces, commas, or special characters can sometimes cause issues, particularly with certain output formats like PDF.**
+
+- **Solution:** Rename your files and folders to use underscores (`_`) instead of spaces () or hyphens (`-`), and avoid special characters (e.g., `#`.
+
+## General Debugging Steps
+
+**If you are still experiencing issues, follow these steps to debug the error:**
+
+- **Restart R and Run All Chunks:** In RStudio, use the menu option to **Session -\> Restart R** and then click the green play button to **Run All Chunks** (or use the "Run all chunks below" function to isolate the error). This simulates the clean environment used during knitting.
+
+- Always check for the line where the error occurred.
+
+- **Check the Error Message:** The error message in the R Markdown console will often point to the exact line of code that failed and may give a clue, such as "function not found" when a library is not loaded or "file not found" when a filepath is incorrect.
+
+By addressing the file path and ensuring all code is self-contained within the document, you should be able to resolve most knitting errors related to external files.

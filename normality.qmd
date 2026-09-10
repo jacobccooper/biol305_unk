@@ -5,6 +5,8 @@ format: html
 editor: visual
 ---
 
+Quick note: for this page and many others, I will be using the `tidytuesdayR` package to get datasets. You can use the package or the URLs to get the data; here, I am using the URLs.
+
 ## Normal distributions
 
 ```{r,echo=F,error=FALSE,warning=FALSE,message=FALSE}
@@ -28,39 +30,44 @@ Standard normal distributions have a mean, median, and mode that are *equal*. Th
 
 <summary>An example of naturally occurring normal distributions</summary>
 
-In order to see an example of the normal distribution in nature, we are going to examine the BeeWalk survey database from the island of Great Britain [@Comont2020]. We are not interested in the bee data at present, however, but in the climatic data from when the surveys were performed.
+In order to see an example of the normal distribution in nature, we are going to examine the air temperatures as [recorded during oceanic seabird surveys](https://github.com/rfordatascience/tidytuesday/blob/main/data/2026/2026-04-14/readme.md).
 
 ```{r}
-beewalk <- read_csv("https://figshare.com/ndownloader/files/44726902")
+# download the data from the URL
+ships <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-04-14/ships.csv')
+
+# isolate air temperatures
+air_temps <- ships$air_temperature |> 
+  # ensure numeric format
+  as.numeric()
 ```
 
-Note that this is another massive dataset - $306,550$ rows of data!
+Note that this is another massive dataset - $12,310$ data points!
 
-The dataset has the following columns:
+The original dataset has multiple columns, but the steps above have isolated the temperature data for us.
 
-```{r}
-colnames(beewalk)
-```
-
-We are specifically interested in `temperature` to determine weather conditions. Let's see what the mean of this variable is.
+Let's see what the mean of this variable is.
 
 ```{r}
-mean(beewalk$temperature)
+mean(air_temps)
 ```
 
 Hmmm... we are getting an `NA` value, indicating that not every cell has data recorded. Let's view `summary`.
 
 ```{r}
-summary(beewalk$temperature)
+summary(air_temps)
 ```
 
-As we can see, $16,151$ rows do not have temperature recorded! We want to remove these `NA` rows, which we can do by using using `na.omit`.
+As we can see, $11,274$ rows do not have temperature recorded! We want to remove these `NA` rows, which we can do by using using `na.omit`.
 
 ```{r}
-beewalk$temperature |>
+air_temps |>
+  # remove missing data
   na.omit() |>
+  #get the mean
   mean() |>
-  round(2) # don't forget to round!
+  # don't forget to round!
+  round(2) 
 ```
 
 Now we can record the mean.
@@ -68,20 +75,20 @@ Now we can record the mean.
 Let's visualize these data using a histogram. *Note* I do not use `na.omit` as the `hist` function automatically performs this data-cleaning step!
 
 ```{r}
-hist(beewalk$temperature,breaks = 5)
+hist(air_temps,breaks = 5)
 ```
 
 Even with only five breaks, we can see an interesting, normal-esque distribution in the data. Let's refine the bin number.
 
 ```{r}
-hist(beewalk$temperature,breaks = 40)
+hist(air_temps,breaks = 40)
 ```
 
 With forty breaks, the pattern becomes even more clear. Let's see what a *standard normal distribution* around these data would look like.
 
 ```{r}
 # save temperature vector without NA values
-temps <- beewalk$temperature |> na.omit()
+temps <- air_temps |> na.omit()
 ```
 
 ```{r}
@@ -108,13 +115,13 @@ library(moments)
 skewness(temps)
 ```
 
-Data do not have any significant skew.
+Data do not have any significant skew. **Remember** - we say it is a *significant skew* if the value if the skew is \> 1 or \< -1.
 
 ```{r}
 kurtosis(temps)-3
 ```
 
-Data do not show any significant kurtosis.
+The data do show a significant kurtosis (more than 1 away from zero after our -3 adjustment). The positive value means the data are *leptokurtic*.
 
 </details>
 
@@ -343,9 +350,7 @@ Exactly as we calculated, we see that our $p < \alpha$ and thus we do not see an
 
 When we are trying to compare our data to a normal distribution, we need to calculate a $Z$ score for us to perform the comparison. A $Z$ score is essentially a measurement of the number of standard deviations we are away from the mean on a standard normal distribution. The equation for a $Z$ score is:
 
-$$
-Z = \frac{\bar{x}-\mu}{\frac{\sigma}{\sqrt{n}}}
-$$
+$$Z = \frac{\bar{x}-\mu}{\frac{\sigma}{\sqrt{n}}}$$
 
 Where $\bar{x}$ is either a sample mean or a sample value, $\mu$ is the population mean, $\sigma$ is the population standard deviation and $n$ is the number of individuals in your sample ($1$ if comparing to a single value)
 
@@ -599,14 +604,12 @@ Specifically, if the tails of the distribution, our $\alpha$, are $0.05$, then w
 
 We will cover several different ways to calculate confidence intervals, but for normal distributions, we use the following equation, with the $0.95$ confidence interval shown as an example:
 
-$$
-CI=\bar{x} \pm Z_{1-\frac{\alpha}{2}}\cdot \frac{\sigma}{\sqrt{n}}
-$$
+$$CI=\bar{x} \pm Z_{1-\frac{\alpha}{2}}\cdot \frac{\sigma}{\sqrt{n}}$$
 
 This interval gives us an idea of where the mean should lie. For example, if we are looking at the aforementioned `beewalk` temperature data, we can calulate a $0.95$ confidence interval around the mean.
 
 ```{r}
-temps <- na.omit(beewalk$temperature)
+temps <- na.omit(air_temps)
 
 xbar <- mean(temps)
 n <- length(temps)
