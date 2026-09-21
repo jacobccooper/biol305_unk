@@ -28,6 +28,8 @@ library(tidyverse)
 library(UNKstats)
 ```
 
+Later on in the tutorial, we will also use the `Outlier` command from the `DescTools` package. That will have to be installed and then loaded using library as well.
+
 ***REMEMBER***: An *R* package must be installed before it can be used with the command `install.packages` or via the *RStudio* interface.
 
 <hr>
@@ -731,7 +733,7 @@ mean(nebraskans) |>
 
 - coefficient of variation - `cv()` function defined above
 
-- standard error - `sd()`
+- standard error - `se()`
 
 - whether there are any "outliers" - `Outliers()`
 
