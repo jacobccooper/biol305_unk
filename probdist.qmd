@@ -352,7 +352,7 @@ dbinom(x = 5, size = 200, 0.03)
 
 ### Problem 6
 
-Down on your luck, you decide to look for some four-leaf clovers. You notice that you seem to find 1 four-leaf clover out of every 5,000 that you check (based on [Reader's Digest article](https://www.rd.com/article/four-leaf-clover/)). What are the odds of checking 2,500 clovers and finding *any* clovers? (Round to the first decimal place with a non-zero integer).
+Down on your luck, you decide to look for some four-leaf clovers. You notice that you seem to find 1 four-leaf clover out of every 5,000 that you check (based on [Reader's Digest article](https://www.rd.com/article/four-leaf-clover/)). What are the odds of checking 2,500 clovers and finding *any* four-leaf clovers? (Round to the first decimal place with a non-zero integer).
 
 ```{r, echo = F, eval = F}
 1-dpois(x = c(0), lambda = 1/2500)

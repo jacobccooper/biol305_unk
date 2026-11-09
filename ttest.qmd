@@ -438,6 +438,12 @@ jalapeño <- c(109.1,111.7,118.6,111.1,100.5,118.7,117.5,
 peppers <- cbind(jalapeño, habanero) |> as.data.frame()
 ```
 
+- What is the research question?
+
+- What are your hypotheses?
+
+- What is your conclusion?
+
 ### Question 4: Iris
 
 You are interested in seeing if the petal width of *Iris versicolor* is different than that of *Iris virginica*. **Note:** for this problem, you will have to:
