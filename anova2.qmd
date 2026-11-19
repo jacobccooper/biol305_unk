@@ -300,9 +300,7 @@ Load the following table, where:
 - Danceability = `danceability`
 
 ```{r, message = F, eval = F}
-tuesdata <- tidytuesdayR::tt_load(2021, week = 51)
-
-studio_album_tracks <- tuesdata$studio_album_tracks
+studio_album_tracks <- studio_album_tracks <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2021/2021-12-14/studio_album_tracks.csv')
 ```
 
 ```{r, eval = F, results = F, echo = F}
@@ -322,9 +320,7 @@ You answer should find that there is an effect of year ($F_{2,25} = 4.42$, $p = 
 
 You and your study group are binge-watching the TV show [*Alone*](https://www.history.com/shows/alone) while studying for your history final (it is on the *History* channel, so it has to help somehow, right?). One of your buddies says that the show is inherently unfair, because men are better at survival techniques than women are. This rubs you the wrong way, so you want to see if there is any merit to his claims. You decide to analyze the number of days people are able to last in the show, divided by gender. You also realize that there are cultural differences between countries, so you want to account for any error due to cultural background when you perform your test.
 
-*NOTE:* if you cannot transform this to normal, just run the test on the data "as is".
-
-**Do not transform these data - perform as is.**
+**Do not transform these data - perform as is for the purposes of this assignment.**
 
 - Gender of participant = `gender`
 
@@ -333,10 +329,7 @@ You and your study group are binge-watching the TV show [*Alone*](https://www.hi
 - Length of time lasted = `days_lasted`
 
 ```{r, message = F, eval = F}
-tuesdata <- tidytuesdayR::tt_load(2023, week = 4)
-
-alone <- tuesdata$survivalists|> 
-  filter(country == "United States" | country == "Canada")
+alone <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2023/2023-01-24/survivalists.csv')
 ```
 
 ```{r, echo = F, eval = F}
@@ -364,7 +357,7 @@ aov2$plot
 
 ```
 
-There is not a significant effect of gender or country, with $p = 0.09$ for both.
+There is not a significant effect of gender or country, with one $p = 0.31$ and another $p = 0.06$.
 
 ### Question 3: Penguins (not of Madagascar)
 
@@ -384,8 +377,21 @@ penguins |>
 penguins <- penguins |> 
   mutate(log_bill = log1p(bill_len))
 
-aov <- run_twoway(data = penguins, dv = "log_bill", factor_a = "species", factor_b = "sex",
-                  include_interaction = T, which_factor = "species:sex")
+aov <- run_twoway(data = penguins, 
+                  dv = "log_bill", 
+                  factor_a = "species", 
+                  factor_b = "sex",
+                  include_interaction = T, 
+                  which_factor = "species:sex")
+
+aov$anova_table
+
+aov <- run_twoway(data = penguins, 
+                  dv = "log_bill", 
+                  factor_a = "species", 
+                  factor_b = "sex",
+                  include_interaction = F, 
+                  which_factor = "species:sex")
 
 aov$anova_table
 ```
@@ -471,11 +477,11 @@ res_pretrial <- run_twoway(
 res_pretrial$plot
 ```
 
-There is an effect of sex ($F_{1,360} = 583.65$), urbanicity ($F_{3,360} = 8.68$), and the interaction between the two ($F_{3,360} = 6.05$). All $p < 0.001$.
+There is an effect of sex ($F_{1,360} = 583.65$), urbanicity ($F_{3,360} = 8.68$), and the interaction between the two ($F_{3,360} = 6.05$). All $p < 0.0001$.
 
 ### Question 6: Your turn!
 
-Using datasets from `tidytuesdayR` ([viewable here](https://github.com/rfordatascience/tidytuesday)) or a different dataset of your choosing, create your own two-way ANOVA homework problem.
+Using datasets from `tidytuesdayR` ([viewable here](https://github.com/rfordatascience/tidytuesday)) or a different dataset of your choosing (such as from Zenodo), create your own two-way ANOVA homework problem.
 
 - You are allowed to work with others, but you *must* say who you worked with if you do. Please keep group sizes ≤ 4.
 
